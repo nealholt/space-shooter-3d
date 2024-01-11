@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://calhate8yj1wh"]
+
+[ext_resource type="Script" path="res://Scripts/Guns/gun.gd" id="1_c3s1i"]
+
+[node name="Gun" type="Node3D"]
+script = ExtResource("1_c3s1i")
+
+[node name="FiringRateTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="BurstTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="FiringRateTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="BurstTimer" to="." method="_on_burst_timer_timeout"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuu8wfwoj2nbe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fsau2"]
+albedo_color = Color(0.160784, 1, 0.141176, 1)
+emission_enabled = true
+emission = Color(0.160784, 1, 0.141176, 1)
+emission_energy_multiplier = 8.0
+disable_receive_shadows = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yirot"]
+material = SubResource("StandardMaterial3D_fsau2")
+radius = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 0.00366516, -0.999993, 0, 0.999993, 0.00366516, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_yirot")

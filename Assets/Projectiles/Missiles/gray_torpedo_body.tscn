@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8xwbrmhu8ybu"]
+
+[ext_resource type="PackedScene" uid="uid://ux6ivcx1ovdp" path="res://Assets/Particles/booster_particles.tscn" id="1_hysmg"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fjlpl"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_inaim"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_v3mny"]
+bottom_radius = 0.1
+height = 1.0
+
+[node name="GrayTorpedo" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_fjlpl")
+
+[node name="BoosterParticles" parent="." instance=ExtResource("1_hysmg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="Nose" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("SphereMesh_inaim")
+skeleton = NodePath("../..")
+
+[node name="Tail" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+mesh = SubResource("CylinderMesh_v3mny")

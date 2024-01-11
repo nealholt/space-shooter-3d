@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bobitrhkbf3c3"]
+
+[ext_resource type="Script" path="res://Levels/Level03/level3.gd" id="1_6hmdn"]
+[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="1_omxdw"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/NPCs/Fighter/fighter_npc.tscn" id="2_6b8c8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_guvq5"]
+sky_top_color = Color(0.627451, 0.360784, 0.509804, 1)
+sky_horizon_color = Color(0.656863, 0.642157, 0.671569, 1)
+ground_bottom_color = Color(0, 0.207843, 0.176471, 1)
+ground_horizon_color = Color(0.656863, 0.642157, 0.671569, 1)
+
+[sub_resource type="Sky" id="Sky_434m5"]
+sky_material = SubResource("ProceduralSkyMaterial_guvq5")
+
+[sub_resource type="Environment" id="Environment_eupmo"]
+background_mode = 2
+sky = SubResource("Sky_434m5")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_6hmdn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_eupmo")
+
+[node name="Player" parent="." groups=["blue team"] instance=ExtResource("1_omxdw")]
+
+[node name="FighterNPC" parent="." instance=ExtResource("2_6b8c8")]
+transform = Transform3D(-4.37114e-08, -4.37114e-08, 1, 4.37114e-08, 1, 4.37114e-08, -1, 4.37114e-08, -4.37114e-08, 21.8443, 0, -24.2523)
+team = "blue team"
+speed = 1000.0
+
+[node name="FighterNPC2" parent="." instance=ExtResource("2_6b8c8")]
+transform = Transform3D(0.0654031, 4.07589e-08, -0.997859, 4.37114e-08, 1, 4.37114e-08, 0.997859, -4.64767e-08, 0.0654031, -8.37419, 0, -25.5714)
+team = "red team"
+speed = 1000.0

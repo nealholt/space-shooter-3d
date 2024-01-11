@@ -1,0 +1,235 @@
+[gd_scene load_steps=30 format=3 uid="uid://juku72fh3dl0"]
+
+[ext_resource type="Script" path="res://NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
+[ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Guns/gun.tscn" id="2_icaxw"]
+[ext_resource type="PackedScene" uid="uid://d3pdq381luwwg" path="res://components/PopPlayer/pop_player.tscn" id="2_s1yd2"]
+[ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://components/HitFeedback/hit_feedback.tscn" id="3_qm2p0"]
+[ext_resource type="PackedScene" uid="uid://cuu8wfwoj2nbe" path="res://Assets/Projectiles/Bullets/green_laser_bolt.tscn" id="4_q1pys"]
+[ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://components/Health/health_component.tscn" id="5_1xytm"]
+[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://components/HitBox/hit_box_component.tscn" id="6_ne5o5"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_machine.gd" id="7_ubn4s"]
+[ext_resource type="Script" path="res://NPCs/Fighter/movement_profile.gd" id="8_0niio"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state.gd" id="9_qoupp"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_loop.gd" id="10_v8r3o"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_seek.gd" id="12_08g68"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_lockon.gd" id="13_xpko8"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_flee.gd" id="14_ok8jx"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_corkscrew.gd" id="15_bumm3"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_wave.gd" id="16_er3u2"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_jink.gd" id="17_3ou27"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_goto.gd" id="18_j6vej"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1ll1"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_bqmib"]
+material = SubResource("StandardMaterial3D_j1ll1")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_petp8"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.0146517, 0.470697, 0.470697, 0.0735213, 0.352957, 0.47061, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.0146517, 0.470697, -0.470697, 0.5, -0.5, 0.5, -0.0146517, 0.470697, 0.470697, 0.0146517, 0.470697, -0.470697)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ofpqn"]
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.2
+color = Color(1, 0.141176, 0.533333, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sixkw"]
+albedo_color = Color(1, 0.729412, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7sr36"]
+material = SubResource("StandardMaterial3D_sixkw")
+
+[sub_resource type="GDScript" id="GDScript_cosw5"]
+script/source = "extends Area3D
+
+# Bullets and missiles and really any projectiles inherit
+# from this class.
+
+@export var rotation_speed: float = 2.0 # Used for projectiles that seek
+@export var speed:float = 50.0
+@export var damage:float = 50.0
+@export var time_out:float = 2.0 #seconds
+var shooter #Who shot this projectile
+var target # Used for projectiles that seek
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	$Timer.start(time_out)
+
+func set_data(dat:ShootData) -> void:
+	# Point the projectile in the given direction
+	global_transform = dat.transform
+	# Tell the projectile who shot it
+	shooter = dat.shooter
+	# This next line used to be used to make projectile speed
+	# scale with shooter velocity.
+	speed += dat.speed
+	# Give the projectile a target
+	target = dat.target
+	# For now, set my mask and layers to be those of the shooter
+	#print()
+	for i in range(1,4):
+		set_collision_layer_value(i, shooter.get_collision_layer_value(i))
+		set_collision_mask_value(i, shooter.get_collision_mask_value(i))
+		#print(\"Layer %s\" % shooter.get_collision_layer_value(i))
+		#print(\"Mask %s\" % shooter.get_collision_mask_value(i))
+	#set_collision_mask_value(1, shooter.get_collision_mask_value(1))
+	#set_collision_mask_value(2, shooter.get_collision_mask_value(2))
+	#print(shooter.get_collision_mask_value(1))
+	#print(shooter.get_collision_mask_value(2))
+	#print()
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	transform.origin -= transform.basis.z * speed * delta
+	# Avoid trying to face queue freed targets
+	if is_instance_valid(target):
+		transform = Global.interp_face_target(self, target.global_position, rotation_speed*delta)
+
+func damage_and_die(body):
+	#print(\"bullet entered body\")
+	#https://www.youtube.com/watch?v=LuUjqHU-wBw
+	if body.is_in_group(\"damageable\"):
+		#print(\"dealt damage\")
+		body.damage(damage)
+		#Delete bullets that strike a body
+		queue_free()
+
+func _on_timer_timeout() -> void:
+	queue_free()
+
+func _on_body_entered(body: Node3D) -> void:
+	damage_and_die(body)
+
+func _on_area_entered(area: Area3D) -> void:
+	damage_and_die(area)
+"
+
+[sub_resource type="PackedScene" id="PackedScene_0vrc7"]
+_bundled = {
+"conn_count": 3,
+"conns": PackedInt32Array(0, 0, 8, 7, 2, 0, 0, 0, 0, 10, 9, 2, 0, 0, 1, 0, 12, 11, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("Projectile", "collision_layer", "collision_mask", "script", "Area3D", "Timer", "one_shot", "_on_area_entered", "area_entered", "_on_body_entered", "body_entered", "_on_timer_timeout", "timeout"),
+"node_count": 2,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 4, 0, -1, 3, 1, 0, 2, 0, 3, 1, 0, 0, 0, 5, 5, -1, 1, 6, 2, 0),
+"variants": [0, SubResource("GDScript_cosw5"), true],
+"version": 3
+}
+
+[sub_resource type="GDScript" id="GDScript_y82o0"]
+script/source = "extends Projectile
+# Inherits from projectile.
+
+func _on_timer_timeout() -> void:
+	queue_free()
+
+func _on_body_entered(body: Node3D) -> void:
+	damage_and_die(body)
+
+func _on_area_entered(area: Area3D) -> void:
+	damage_and_die(area)
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6uvsk"]
+radius = 0.1
+height = 1.5
+
+[sub_resource type="PackedScene" id="PackedScene_qm0tw"]
+_bundled = {
+"base_scene": 0,
+"conn_count": 1,
+"conns": PackedInt32Array(1, 0, 15, 14, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("bullet", "script", "rotation_speed", "speed", "damage", "Timer2", "wait_time", "one_shot", "autostart", "Timer", "MeshInstance3D", "CollisionShape3D", "transform", "shape", "_on_timer_timeout", "timeout"),
+"node_count": 4,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 2147483647, 0, -1, 4, 1, 1, 2, 2, 3, 3, 4, 4, 0, 0, 0, 9, 262149, -1, 3, 6, 5, 7, 6, 8, 6, 0, 0, 0, 2147483647, 524298, 7, 0, 0, 0, 0, 11, 786443, -1, 2, 12, 8, 13, 9, 0),
+"variants": [SubResource("PackedScene_0vrc7"), SubResource("GDScript_y82o0"), 0.0, 150.0, 1.0, 1.5, true, ExtResource("4_q1pys"), Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0), SubResource("CapsuleShape3D_6uvsk")],
+"version": 3
+}
+
+[node name="FighterNPC" type="CharacterBody3D" groups=["enemy"]]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
+collision_layer = 2
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_hmqk0")
+pop_player = ExtResource("2_s1yd2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-07, 8.74228e-08, -1, 1.31134e-07, 0, 0, 0)
+mesh = SubResource("PrismMesh_bqmib")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-07, 8.74228e-08, -1, 1.31134e-07, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_petp8")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 50
+lifetime = 10.0
+process_material = SubResource("ParticleProcessMaterial_ofpqn")
+draw_pass_1 = SubResource("BoxMesh_7sr36")
+
+[node name="Gun" parent="." instance=ExtResource("2_icaxw")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bullet = SubResource("PackedScene_qm0tw")
+
+[node name="HitFeedback" parent="." instance=ExtResource("3_qm2p0")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_1xytm")]
+max_health = 20
+
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_ne5o5")]
+collision_layer = 2
+collision_mask = 5
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBoxComponent"]
+transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-07, 8.74228e-08, -1, 1.31134e-07, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_petp8")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("movement_profile", "initial_state")]
+script = ExtResource("7_ubn4s")
+movement_profile = NodePath("MovementProfile")
+initial_state = NodePath("Seek")
+
+[node name="MovementProfile" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
+script = ExtResource("8_0niio")
+npc = NodePath("../..")
+
+[node name="Stop" type="Node" parent="StateMachine"]
+script = ExtResource("9_qoupp")
+
+[node name="Loop" type="Node" parent="StateMachine"]
+script = ExtResource("10_v8r3o")
+
+[node name="Seek" type="Node" parent="StateMachine"]
+script = ExtResource("12_08g68")
+
+[node name="LockOn" type="Node" parent="StateMachine"]
+script = ExtResource("13_xpko8")
+
+[node name="Flee" type="Node" parent="StateMachine"]
+script = ExtResource("14_ok8jx")
+
+[node name="Corkscrew" type="Node" parent="StateMachine"]
+script = ExtResource("15_bumm3")
+
+[node name="Wave" type="Node" parent="StateMachine"]
+script = ExtResource("16_er3u2")
+
+[node name="Jink" type="Node" parent="StateMachine"]
+script = ExtResource("17_3ou27")
+
+[node name="GoTo" type="Node" parent="StateMachine"]
+script = ExtResource("18_j6vej")
+
+[node name="DebugLabel" type="Label3D" parent="."]
+billboard = 1
+fixed_size = true
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]

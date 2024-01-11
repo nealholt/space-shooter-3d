@@ -1,0 +1,155 @@
+[gd_scene load_steps=24 format=3 uid="uid://8dxylurtfwp1"]
+
+[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_rf46g"]
+[ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="2_2p718"]
+[ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles/Bullet/bullet.tscn" id="3_08jv5"]
+[ext_resource type="PackedScene" uid="uid://0vowmbagxl3n" path="res://Scenes/Projectiles/Missile/missile.tscn" id="5_qw0hj"]
+[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_8otd8"]
+[ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="7_vhcpa"]
+[ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Assets/SoundEffects/lowFrequency_explosion_001.ogg" id="8_klb2b"]
+[ext_resource type="AudioStream" uid="uid://cvrvs2a12nuqr" path="res://Assets/SoundEffects/whoosh_medium_001.ogg" id="9_ktweb"]
+[ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="10_shexg"]
+[ext_resource type="PackedScene" uid="uid://drm4t5i6exnhc" path="res://Assets/Guns/gatling_gun.tscn" id="11_kbwk7"]
+[ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Assets/Ships/fighter_chassis_diamond.tscn" id="12_a77x5"]
+[ext_resource type="Script" path="res://Scripts/Player/missile_lock.gd" id="12_hjk6b"]
+[ext_resource type="Texture2D" uid="uid://wtd3a0xuq1ka" path="res://Assets/Images/crosshair051.png" id="12_ppqib"]
+[ext_resource type="Texture2D" uid="uid://de4d0mo0rnf5o" path="res://Assets/Images/crosshair052.png" id="13_x7e68"]
+[ext_resource type="AudioStream" uid="uid://cgwsk2ovf5fgt" path="res://Assets/SoundEffects/missile/acquiring_lock.wav" id="15_malfx"]
+[ext_resource type="AudioStream" uid="uid://d1rurti8e68f7" path="res://Assets/SoundEffects/missile/missile_lock.wav" id="16_5hu7g"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vnt6v"]
+radius = 3.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wtdqg"]
+radius = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h6vuq"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="Curve" id="Curve_iin8p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mw0gy"]
+curve = SubResource("Curve_iin8p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wcp7w"]
+direction = Vector3(0, 0, -1)
+spread = 15.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_mw0gy")
+
+[sub_resource type="BoxMesh" id="BoxMesh_1jycr"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Player" type="CharacterBody3D"]
+collision_mask = 6
+script = ExtResource("1_rf46g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8)
+shape = SubResource("SphereShape3D_vnt6v")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.576121, -3.13105)
+
+[node name="MissileLauncher" parent="." instance=ExtResource("2_2p718")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.485568, -0.915313)
+bullet = ExtResource("5_qw0hj")
+fire_rate = 0.3
+
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_8otd8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.5)
+collision_mask = 6
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBoxComponent"]
+shape = SubResource("SphereShape3D_vnt6v")
+
+[node name="HealthComponent" parent="." instance=ExtResource("7_vhcpa")]
+max_health = 1000
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="GotHitAudio" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("8_klb2b")
+
+[node name="NearMissAudio" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("9_ktweb")
+
+[node name="NearMissDetector" type="Area3D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NearMissDetector"]
+shape = SubResource("SphereShape3D_wtdqg")
+
+[node name="Contrail" parent="." instance=ExtResource("10_shexg")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+_startColor = Color(0.537255, 0.152941, 1, 1)
+_endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
+
+[node name="GunGroup" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145516, 0.398813, -3.53764)
+
+[node name="Gun" parent="GunGroup" instance=ExtResource("2_2p718")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.24, -2.4)
+bullet = ExtResource("3_08jv5")
+fire_rate = 1.2
+burst_total = 6
+burst_rate = 12.0
+spread_deg = 3.0
+
+[node name="GatlingGun" parent="GunGroup" instance=ExtResource("11_kbwk7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.4, -0.4)
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="GunGroup"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.24, -1.4)
+material_override = SubResource("StandardMaterial3D_h6vuq")
+emitting = false
+amount = 30
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+visibility_aabb = AABB(-4, -4, -4.18506, 8, 8, 8)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_wcp7w")
+draw_pass_1 = SubResource("BoxMesh_1jycr")
+
+[node name="FighterChassisDiamond" parent="." instance=ExtResource("12_a77x5")]
+
+[node name="MissileLockGroup" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("12_hjk6b")
+camera = NodePath("../Camera3D")
+use_lerp = true
+
+[node name="AcquiringTargetReticle" type="TextureRect" parent="MissileLockGroup"]
+modulate = Color(1, 0.290196, 0.152941, 1)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("12_ppqib")
+
+[node name="TargetLockReticle" type="TextureRect" parent="MissileLockGroup"]
+modulate = Color(0, 1, 0, 1)
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("13_x7e68")
+
+[node name="SeekingAudio" type="AudioStreamPlayer" parent="MissileLockGroup"]
+stream = ExtResource("15_malfx")
+
+[node name="LockedAudio" type="AudioStreamPlayer" parent="MissileLockGroup"]
+stream = ExtResource("16_5hu7g")
+
+[node name="AudioTimer" type="Timer" parent="MissileLockGroup"]
+one_shot = true
+
+[connection signal="area_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_area_entered"]
+[connection signal="body_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_body_entered"]
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="area_exited" from="NearMissDetector" to="." method="_on_near_miss_detector_area_exited"]
+[connection signal="timeout" from="MissileLockGroup/AudioTimer" to="MissileLockGroup" method="_on_audio_timer_timeout"]

@@ -1,0 +1,98 @@
+[gd_scene load_steps=8 format=3 uid="uid://drm4t5i6exnhc"]
+
+[ext_resource type="Material" uid="uid://r575donrt7pe" path="res://Assets/Materials/ship_metal.tres" id="1_gys08"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iclm8"]
+albedo_color = Color(0.756863, 0.588235, 0.678431, 1)
+metallic = 1.0
+roughness = 0.4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xk6we"]
+material = SubResource("StandardMaterial3D_iclm8")
+top_radius = 0.05
+bottom_radius = 0.05
+
+[sub_resource type="TorusMesh" id="TorusMesh_xe43a"]
+material = ExtResource("1_gys08")
+inner_radius = 0.1
+outer_radius = 0.2
+
+[sub_resource type="Animation" id="Animation_rrafk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ehqcn"]
+resource_name = "rotate"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 6.28319)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b4hp1"]
+_data = {
+"RESET": SubResource("Animation_rrafk"),
+"rotate": SubResource("Animation_ehqcn")
+}
+
+[node name="GatlingGun" type="Node3D"]
+
+[node name="Barrel1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.15, 0)
+mesh = SubResource("CylinderMesh_xk6we")
+
+[node name="Barrel4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.168049, 0)
+mesh = SubResource("CylinderMesh_xk6we")
+
+[node name="Barrel2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.145, 0.076, 0)
+mesh = SubResource("CylinderMesh_xk6we")
+
+[node name="Barrel5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.126666, -0.0849328, 0)
+mesh = SubResource("CylinderMesh_xk6we")
+
+[node name="Barrel3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.138, 0.082, 0)
+mesh = SubResource("CylinderMesh_xk6we")
+
+[node name="Barrel6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.138, -0.0687472, 0)
+mesh = SubResource("CylinderMesh_xk6we")
+
+[node name="Ring1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.183425)
+mesh = SubResource("TorusMesh_xe43a")
+
+[node name="Ring2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.821106)
+mesh = SubResource("TorusMesh_xe43a")
+
+[node name="Ring3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.473068)
+mesh = SubResource("TorusMesh_xe43a")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b4hp1")
+}

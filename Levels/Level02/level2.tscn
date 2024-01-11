@@ -1,0 +1,175 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfiwadbmgx3up"]
+
+[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="3_5rasv"]
+[ext_resource type="PackedScene" uid="uid://brec5vmygtijo" path="res://Scenes/orb.tscn" id="7_yxjtr"]
+
+[sub_resource type="GDScript" id="GDScript_ulixo"]
+script/source = "extends Node
+
+# Needed for turning off player controls when game is over
+@onready var player: CharacterBody3D = $Player
+
+const ORB_COUNT:int = 16
+var dead_orb_count := 0
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	# Hide mouse cursor
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	# Connect the destroyed signal of the orb to the ui
+	var orbs = get_tree().get_nodes_in_group(\"orb\")
+	for orb in orbs:
+		orb.destroyed.connect(orb_died)
+
+func orb_died() -> void:
+	dead_orb_count += 1
+	#print(\"orb died: %s\" % dead_orb_count)
+	#Go back to main menu once all orbs are destroyed
+	if dead_orb_count >= ORB_COUNT:
+		Global.main_scene.to_main_menu()
+"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3w27u"]
+sky_top_color = Color(0.623529, 0.301961, 0.639216, 1)
+sky_horizon_color = Color(0.663725, 0.620588, 0.737255, 1)
+ground_bottom_color = Color(0.0313726, 0.180392, 0.309804, 1)
+ground_horizon_color = Color(0.663725, 0.620588, 0.737255, 1)
+
+[sub_resource type="Sky" id="Sky_um5eh"]
+sky_material = SubResource("ProceduralSkyMaterial_3w27u")
+
+[sub_resource type="Environment" id="Environment_285v5"]
+background_mode = 2
+sky = SubResource("Sky_um5eh")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node" type="Node"]
+script = SubResource("GDScript_ulixo")
+
+[node name="Setting" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Setting"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 12, 0)
+light_color = Color(1, 1, 0.745098, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Setting"]
+environment = SubResource("Environment_285v5")
+
+[node name="Player" parent="." instance=ExtResource("3_5rasv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50.397, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4268, 71.8786, -108.676)
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(30, 30, 30)
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+use_collision = true
+collision_layer = 4
+collision_mask = 0
+size = Vector3(500, 10, 500)
+
+[node name="Building1" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -110.074, 50, -81.0877)
+use_collision = true
+size = Vector3(20, 100, 20)
+
+[node name="Building2" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88.0979, 50, -4.53397)
+use_collision = true
+size = Vector3(63.9531, 100, 20)
+
+[node name="Building3" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -104.347, 50, -130.305)
+use_collision = true
+size = Vector3(63.9531, 100, 20)
+
+[node name="Building4" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -187.038, 50, -87.2107)
+use_collision = true
+size = Vector3(40, 100, 150)
+
+[node name="Building5" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 163.816, 50, 122.677)
+use_collision = true
+size = Vector3(20, 100, 20)
+
+[node name="Building9" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 239.288, 50, 104.528)
+use_collision = true
+size = Vector3(20, 100, 175.609)
+
+[node name="Building10" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 158.78, 112.516, 118.81)
+use_collision = true
+size = Vector3(175, 20, 175)
+
+[node name="Building6" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 135.158, 50, 199.231)
+use_collision = true
+size = Vector3(231.142, 100, 20)
+
+[node name="Building7" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 169.543, 50, 73.46)
+use_collision = true
+size = Vector3(63.9531, 100, 20)
+
+[node name="Building8" type="CSGBox3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.8528, 50, 164.167)
+use_collision = true
+size = Vector3(40, 100, 49.4751)
+
+[node name="OrbOrganizer" type="Node" parent="."]
+
+[node name="Orb" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 11.1917, 71.8786, -123.983)
+
+[node name="Orb2" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 108.314, 71.8786, 160.474)
+
+[node name="Orb3" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 190.249, 2.92939, 160.474)
+
+[node name="Orb4" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 211.075, 71.2348, 90.0709)
+
+[node name="Orb5" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 159.629, 3.19859, -123.983)
+
+[node name="Orb6" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 138.886, 3.19859, -168.45)
+
+[node name="Orb7" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 184.256, 3.19859, -164.032)
+
+[node name="Orb8" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -118.287, 35.5529, -4.67925)
+
+[node name="Orb9" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -139.03, 62.182, -49.1457)
+
+[node name="Orb10" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -93.66, 35.5529, -44.7279)
+
+[node name="Orb11" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -139.03, 62.182, -121.166)
+
+[node name="Orb12" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -111.825, 95.7376, -82.0041)
+
+[node name="Orb13" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 24.6039, 169.802, 45.1033)
+
+[node name="Orb14" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 3.86089, 169.802, 0.636871)
+
+[node name="Orb15" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 49.2309, 202.131, 5.05472)
+
+[node name="Orb16" parent="OrbOrganizer" instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 143.357, 98.8829, 136.363)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://0vowmbagxl3n"]
+
+[ext_resource type="PackedScene" uid="uid://2xg68vs2c6h4" path="res://Scenes/Projectiles/projectile.tscn" id="1_8xy2w"]
+[ext_resource type="PackedScene" uid="uid://b8xwbrmhu8ybu" path="res://Assets/Projectiles/Missiles/gray_torpedo_body.tscn" id="2_kvpuk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d4e6x"]
+
+[node name="Missile" instance=ExtResource("1_8xy2w")]
+rotation_speed = 2.0
+speed = 100.0
+damage = 50.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+shape = SubResource("SphereShape3D_d4e6x")
+
+[node name="MissileBody" parent="." index="2" instance=ExtResource("2_kvpuk")]

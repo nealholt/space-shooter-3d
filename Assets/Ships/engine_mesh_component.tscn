@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnelcvgwycqmo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tpt6b"]
+albedo_color = Color(0.384314, 0.054902, 0.568627, 1)
+metallic = 0.81
+roughness = 0.35
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1b8j0"]
+material = SubResource("StandardMaterial3D_tpt6b")
+top_radius = 0.3
+height = 0.2
+radial_segments = 8
+rings = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmew7"]
+albedo_color = Color(0.921569, 0.498039, 0.231373, 1)
+emission_enabled = true
+emission = Color(0.717647, 0.611765, 0, 1)
+emission_energy_multiplier = 6.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7tida"]
+material = SubResource("StandardMaterial3D_nmew7")
+top_radius = 0.4
+bottom_radius = 0.4
+height = 0.1
+radial_segments = 8
+rings = 2
+
+[node name="EngineMeshComponent" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_1b8j0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.15)
+mesh = SubResource("CylinderMesh_7tida")

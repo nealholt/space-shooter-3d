@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3 uid="uid://b8ln3rpl1ayn6"]
+
+[ext_resource type="Material" uid="uid://r575donrt7pe" path="res://Assets/Materials/ship_metal.tres" id="1_4gun6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bhcna"]
+material = ExtResource("1_4gun6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmyvm"]
+albedo_color = Color(0.584314, 0.278431, 0.619608, 1)
+metallic = 1.0
+roughness = 0.66
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kcd14"]
+material = SubResource("StandardMaterial3D_lmyvm")
+top_radius = 0.0
+bottom_radius = 0.7
+height = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1tyof"]
+albedo_color = Color(0.603922, 0.207843, 0.423529, 1)
+metallic = 1.0
+roughness = 0.7
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gadeb"]
+material = SubResource("StandardMaterial3D_1tyof")
+radius = 0.6
+height = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5y2jb"]
+albedo_color = Color(0.231373, 0.227451, 0.819608, 1)
+metallic = 1.0
+roughness = 0.7
+
+[sub_resource type="PrismMesh" id="PrismMesh_tbak1"]
+material = SubResource("StandardMaterial3D_5y2jb")
+left_to_right = 0.0
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r5qki"]
+albedo_color = Color(0.231373, 0.227451, 0.819608, 1)
+metallic = 1.0
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_g8tq4"]
+material = SubResource("StandardMaterial3D_r5qki")
+size = Vector3(1, 0.5, 1)
+
+[node name="FighterChassisDiamond" type="Node3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Hull" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.53553, 0, 3.53553, 0, 0.5, 0, -3.53553, 0, 3.53553, 0, 0, 0)
+mesh = SubResource("BoxMesh_bhcna")
+
+[node name="Hull2" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.53553, 0, 3.53553, 0, 1, 0, -3.53553, 0, 3.53553, 0, 0, -4.5)
+mesh = SubResource("BoxMesh_bhcna")
+
+[node name="Engine" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 0, -3.6)
+mesh = SubResource("CylinderMesh_kcd14")
+
+[node name="Bulge1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.27893, 0, 0)
+mesh = SubResource("CapsuleMesh_gadeb")
+
+[node name="Bulge2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.279, 0, 0)
+mesh = SubResource("CapsuleMesh_gadeb")
+
+[node name="Cockpit" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 0.5)
+mesh = SubResource("PrismMesh_tbak1")
+
+[node name="Cockpit2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.5, 2.5)
+mesh = SubResource("PrismMesh_tbak1")
+
+[node name="CockpitMid" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5)
+mesh = SubResource("BoxMesh_g8tq4")

@@ -1,0 +1,134 @@
+[gd_scene load_steps=25 format=3 uid="uid://juku72fh3dl0"]
+
+[ext_resource type="Script" path="res://NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
+[ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Guns/gun.tscn" id="2_icaxw"]
+[ext_resource type="PackedScene" uid="uid://d3pdq381luwwg" path="res://components/PopPlayer/pop_player.tscn" id="2_s1yd2"]
+[ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://components/HitFeedback/hit_feedback.tscn" id="3_qm2p0"]
+[ext_resource type="PackedScene" uid="uid://caucochuu86wj" path="res://Projectiles/Bullet/bullet.tscn" id="4_37ypl"]
+[ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://components/Health/health_component.tscn" id="5_1xytm"]
+[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://components/HitBox/hit_box_component.tscn" id="6_ne5o5"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_machine.gd" id="7_ubn4s"]
+[ext_resource type="Script" path="res://NPCs/Fighter/movement_profile.gd" id="8_0niio"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state.gd" id="9_qoupp"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_loop.gd" id="10_v8r3o"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_seek.gd" id="12_08g68"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_lockon.gd" id="13_xpko8"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_flee.gd" id="14_ok8jx"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_corkscrew.gd" id="15_bumm3"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_wave.gd" id="16_er3u2"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_jink.gd" id="17_3ou27"]
+[ext_resource type="Script" path="res://NPCs/Fighter/state_goto.gd" id="18_j6vej"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1ll1"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_bqmib"]
+material = SubResource("StandardMaterial3D_j1ll1")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_petp8"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.0146517, 0.470697, 0.470697, 0.0735213, 0.352957, 0.47061, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.0146517, 0.470697, -0.470697, 0.5, -0.5, 0.5, -0.0146517, 0.470697, 0.470697, 0.0146517, 0.470697, -0.470697)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ofpqn"]
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.2
+color = Color(1, 0.141176, 0.533333, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sixkw"]
+albedo_color = Color(1, 0.729412, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7sr36"]
+material = SubResource("StandardMaterial3D_sixkw")
+
+[node name="FighterNPC" type="CharacterBody3D" groups=["enemy"]]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
+collision_layer = 2
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_hmqk0")
+team = null
+speed = null
+pitch_amt = null
+roll_amt = null
+yaw_amt = null
+acceleration = null
+lerp_str = null
+too_close = null
+too_far = null
+rotation_speed = null
+pop_player = ExtResource("2_s1yd2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-07, 8.74228e-08, -1, 1.31134e-07, 0, 0, 0)
+mesh = SubResource("PrismMesh_bqmib")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-07, 8.74228e-08, -1, 1.31134e-07, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_petp8")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 50
+lifetime = 10.0
+process_material = SubResource("ParticleProcessMaterial_ofpqn")
+draw_pass_1 = SubResource("BoxMesh_7sr36")
+
+[node name="Gun" parent="." instance=ExtResource("2_icaxw")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bullet = ExtResource("4_37ypl")
+
+[node name="HitFeedback" parent="." instance=ExtResource("3_qm2p0")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_1xytm")]
+max_health = 20
+
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_ne5o5")]
+collision_layer = 2
+collision_mask = 5
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBoxComponent"]
+transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-07, 8.74228e-08, -1, 1.31134e-07, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_petp8")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("movement_profile", "initial_state")]
+script = ExtResource("7_ubn4s")
+movement_profile = NodePath("MovementProfile")
+initial_state = NodePath("Seek")
+
+[node name="MovementProfile" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
+script = ExtResource("8_0niio")
+npc = NodePath("../..")
+
+[node name="Stop" type="Node" parent="StateMachine"]
+script = ExtResource("9_qoupp")
+
+[node name="Loop" type="Node" parent="StateMachine"]
+script = ExtResource("10_v8r3o")
+
+[node name="Seek" type="Node" parent="StateMachine"]
+script = ExtResource("12_08g68")
+
+[node name="LockOn" type="Node" parent="StateMachine"]
+script = ExtResource("13_xpko8")
+
+[node name="Flee" type="Node" parent="StateMachine"]
+script = ExtResource("14_ok8jx")
+
+[node name="Corkscrew" type="Node" parent="StateMachine"]
+script = ExtResource("15_bumm3")
+
+[node name="Wave" type="Node" parent="StateMachine"]
+script = ExtResource("16_er3u2")
+
+[node name="Jink" type="Node" parent="StateMachine"]
+script = ExtResource("17_3ou27")
+
+[node name="GoTo" type="Node" parent="StateMachine"]
+script = ExtResource("18_j6vej")
+
+[node name="DebugLabel" type="Label3D" parent="."]
+billboard = 1
+fixed_size = true
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]
