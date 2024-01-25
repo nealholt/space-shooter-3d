@@ -145,6 +145,6 @@ left_stick_down={
 
 [layer_names]
 
-3d_physics/layer_1="BlueTeam"
-3d_physics/layer_2="RedTeam"
-3d_physics/layer_3="World"
+3d_physics/layer_1="bodies"
+3d_physics/layer_2="bullets"
+3d_physics/layer_3="near_miss"

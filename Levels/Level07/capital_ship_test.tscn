@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwts5v3tvcwab"]
+
+[ext_resource type="Script" path="res://Scripts/team_setup.gd" id="1_5h06f"]
+[ext_resource type="PackedScene" uid="uid://dp3w08p8gkd3p" path="res://Scenes/capital_ship_frigate.tscn" id="2_jciow"]
+[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="3_gy535"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sg63n"]
+sky_top_color = Color(0.215686, 0.0235294, 0.490196, 1)
+sky_horizon_color = Color(0.565686, 0.531373, 0.701961, 1)
+ground_bottom_color = Color(0.0470588, 0.101961, 0.317647, 1)
+ground_horizon_color = Color(0.565686, 0.531373, 0.701961, 1)
+
+[sub_resource type="Sky" id="Sky_jjo5w"]
+sky_material = SubResource("ProceduralSkyMaterial_sg63n")
+
+[sub_resource type="Environment" id="Environment_tss5r"]
+background_mode = 2
+sky = SubResource("Sky_jjo5w")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="CapitalShipTest" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tss5r")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(0.462745, 0.592157, 0.431373, 1)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="RedTeam" type="Node3D" parent="."]
+script = ExtResource("1_5h06f")
+
+[node name="CapitalShipTest1" parent="RedTeam" instance=ExtResource("2_jciow")]
+
+[node name="BlueTeam" type="Node3D" parent="."]
+script = ExtResource("1_5h06f")
+team = "blue team"
+
+[node name="Player" parent="BlueTeam" instance=ExtResource("3_gy535")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -502.457)

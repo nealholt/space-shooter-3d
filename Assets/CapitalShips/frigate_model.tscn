@@ -1,0 +1,131 @@
+[gd_scene load_steps=13 format=3 uid="uid://bh2v67l31a2lg"]
+
+[ext_resource type="Material" uid="uid://ddae1ji8rllcb" path="res://Assets/CapitalShips/radiator_material.tres" id="1_lc758"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fmurg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pl03b"]
+size = Vector3(30, 30, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7j53j"]
+albedo_color = Color(1, 0.219608, 0.517647, 1)
+emission_enabled = true
+emission = Color(0.941176, 0.0627451, 0.482353, 1)
+emission_energy_multiplier = 10.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_fte7e"]
+material = SubResource("StandardMaterial3D_7j53j")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lmaaa"]
+top_radius = 5.0
+bottom_radius = 5.0
+height = 40.0
+radial_segments = 32
+
+[sub_resource type="SphereMesh" id="SphereMesh_sfog1"]
+material = ExtResource("1_lc758")
+
+[sub_resource type="SphereMesh" id="SphereMesh_w0ds6"]
+material = ExtResource("1_lc758")
+
+[sub_resource type="SphereMesh" id="SphereMesh_bistv"]
+material = ExtResource("1_lc758")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_085hw"]
+top_radius = 5.0
+bottom_radius = 20.0
+height = 30.0
+radial_segments = 16
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8h1bd"]
+radius = 15.0
+height = 100.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_oqffc"]
+size = Vector3(20, 20, 20)
+
+[node name="FrigateModel" type="Node3D"]
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(75, 0, 0, 0, -3.27835e-06, -75, 0, 75, -3.27835e-06, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_fmurg")
+
+[node name="ReactorShieldLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -37, 0)
+mesh = SubResource("BoxMesh_pl03b")
+
+[node name="ReactorShieldRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -37, 0)
+mesh = SubResource("BoxMesh_pl03b")
+
+[node name="Reactor" type="MeshInstance3D" parent="."]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, -30, 0)
+mesh = SubResource("SphereMesh_fte7e")
+
+[node name="StrutLeft1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -46, -23, -48)
+mesh = SubResource("CylinderMesh_lmaaa")
+
+[node name="Radiator1" type="MeshInstance3D" parent="StrutLeft1"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -20, 0)
+mesh = SubResource("SphereMesh_sfog1")
+
+[node name="StrutLeft2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -46, -23, 0)
+mesh = SubResource("CylinderMesh_lmaaa")
+
+[node name="Radiator2" type="MeshInstance3D" parent="StrutLeft2"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -20, 0)
+mesh = SubResource("SphereMesh_w0ds6")
+
+[node name="StrutLeft3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -46, -23, 48)
+mesh = SubResource("CylinderMesh_lmaaa")
+
+[node name="Radiator3" type="MeshInstance3D" parent="StrutLeft3"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -20, 0)
+mesh = SubResource("SphereMesh_bistv")
+
+[node name="StrutRight1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 46, -23, -48)
+mesh = SubResource("CylinderMesh_lmaaa")
+
+[node name="Radiator4" type="MeshInstance3D" parent="StrutRight1"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -20, 0)
+mesh = SubResource("SphereMesh_sfog1")
+
+[node name="StrutRight2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 46, -23, 0)
+mesh = SubResource("CylinderMesh_lmaaa")
+
+[node name="Radiator5" type="MeshInstance3D" parent="StrutRight2"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -20, 0)
+mesh = SubResource("SphereMesh_w0ds6")
+
+[node name="StrutRight3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 46, -23, 48)
+mesh = SubResource("CylinderMesh_lmaaa")
+
+[node name="Radiator6" type="MeshInstance3D" parent="StrutRight3"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -20, 0)
+mesh = SubResource("SphereMesh_bistv")
+
+[node name="EngineLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -18, 0, 80)
+mesh = SubResource("CylinderMesh_085hw")
+
+[node name="EngineRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 18, 0, 80)
+mesh = SubResource("CylinderMesh_085hw")
+
+[node name="ColorMe" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 32, 20, 0)
+mesh = SubResource("CapsuleMesh_8h1bd")
+
+[node name="ColorMe2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -32, 20, 0)
+mesh = SubResource("CapsuleMesh_8h1bd")
+
+[node name="Bridge" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, -70)
+mesh = SubResource("BoxMesh_oqffc")

@@ -9,7 +9,7 @@ cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
-[node name="Contrail" type="MeshInstance3D"]
+[node name="Contrail" type="MeshInstance3D" groups=["team property"]]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_qt4ul")
 script = ExtResource("1_wcw5u")

@@ -6,8 +6,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_d4e6x"]
 
 [node name="Missile" instance=ExtResource("1_8xy2w")]
-rotation_speed = 2.0
-speed = 100.0
+speed = 200.0
 damage = 50.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]

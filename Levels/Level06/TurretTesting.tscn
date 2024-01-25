@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://da5y8fkeokhyx"]
+
+[ext_resource type="Script" path="res://Levels/Level06/TestCam.gd" id="1_qvatm"]
+[ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_hpnlp"]
+[ext_resource type="PackedScene" uid="uid://yaq7cc3oqfp2" path="res://Scenes/turret.tscn" id="5_hshpx"]
+[ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="5_yx087"]
+[ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles/Bullet/bullet.tscn" id="7_uojmj"]
+[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="8_weoc8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gyuqi"]
+sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)
+sky_horizon_color = Color(0.533333, 0.662745, 0.735294, 1)
+ground_bottom_color = Color(0, 0.215686, 0.101961, 1)
+ground_horizon_color = Color(0.533333, 0.662745, 0.735294, 1)
+
+[sub_resource type="Sky" id="Sky_c1gdl"]
+sky_material = SubResource("ProceduralSkyMaterial_gyuqi")
+
+[sub_resource type="Environment" id="Environment_g7lfc"]
+background_mode = 2
+sky = SubResource("Sky_c1gdl")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="RedTeam_TurretComplete_TurretModel_Body_Head_Turret2#Gun2" parent="." instance=ExtResource("5_yx087")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.7, 0)
+bullet = ExtResource("7_uojmj")
+
+[node name="RedTeam_TurretComplete_TurretModel_Body_Head_Turret1#Gun" parent="." instance=ExtResource("5_yx087")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.7, 0)
+bullet = ExtResource("7_uojmj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(1, 1, 0.745098, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g7lfc")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999552, 0.009135, 0.0285123, -0.0103141, 0.999086, 0.0414846, -0.0281072, -0.0417601, 0.998732, 3.43069, 2.72001, -1.75286)
+script = ExtResource("1_qvatm")
+
+[node name="RedTeam" type="Node3D" parent="."]
+script = ExtResource("2_hpnlp")
+
+[node name="TurretComplete" parent="RedTeam" instance=ExtResource("5_hshpx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -275.663)
+
+[node name="BlueTeam" type="Node3D" parent="."]
+script = ExtResource("2_hpnlp")
+team = "blue team"
+
+[node name="Player" parent="BlueTeam" instance=ExtResource("8_weoc8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12444, 0, 32.266)
+
+[editable path="RedTeam/TurretComplete"]
+[editable path="RedTeam/TurretComplete/TurretModel"]

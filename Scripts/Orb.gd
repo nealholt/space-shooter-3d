@@ -5,9 +5,6 @@ signal destroyed
 # Sound to be played on death. Self-freeing.
 @export var pop_player: PackedScene
 
-# The following code is duplicated in Enemy
-@onready var hit_feedback: Node = $HitFeedback
-
 const MAX_COORD: int = 200
 
 func position_randomly():
@@ -20,15 +17,6 @@ func position_randomly():
 	var random_z =  randi() % int(coord_range[1]- coord_range[0]) + 1 + coord_range[0]
 
 	global_position = Vector3(random_x, random_y, random_z)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-
-
-func _on_health_component_health_lost() -> void:
-	hit_feedback.hit()
 
 
 func _on_health_component_died() -> void:

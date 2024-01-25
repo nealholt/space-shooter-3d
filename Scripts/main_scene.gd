@@ -70,3 +70,9 @@ func _on_load_4_pressed() -> void:
 
 func _on_load_5_pressed() -> void:
 	load_level("Level05/level_05")
+
+func _on_load_6_pressed() -> void:
+	load_level("Level06/TurretTesting")
+
+func _on_load_7_pressed() -> void:
+	load_level("Level07/capital_ship_test")

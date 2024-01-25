@@ -14,6 +14,9 @@ var firing: bool = false
 @export var burst_rate:float = 1.0 # Shots in a burst per second
 var burst_count:int = 0 # For tracking how many shots in the burst have been fired
 var can_burst: bool = true
+# This variable is used so the player doesn't hear its own
+# bullets whizzing past its head.
+@export var turn_off_near_miss: bool = false
 
 # Later in the code I convert spread_deg to radians
 # and cut it in half so that the spread total is spread_deg
@@ -34,20 +37,19 @@ var bullet_speed:float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	firing_rate_timer.start(1.0/fire_rate)
-	burst_timer.start(1.0/burst_rate)
 	# Ask bullets for their range
 	var b:Projectile = bullet.instantiate()
 	range_sqd = b.get_range()
 	range_sqd = range_sqd*range_sqd
 	bullet_speed = b.speed
+	b.queue_free()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if firing and can_burst:
 		# Start countdown to next burst
-		burst_timer.start()
+		burst_timer.start(1.0/burst_rate)
 		burst_count += 1 # Count this burst
 		can_burst = false # Wait until next burst
 		# Create and fire the bullet
@@ -73,13 +75,20 @@ func _process(_delta):
 			# Reset can_burst to true so that it doesn't
 			# interfere with the firing rate
 			can_burst = true
+		# Check if this is a bullet that should not make a
+		# whiffing noise. Currently only player bullets
+		# should not self-whiff
+		if turn_off_near_miss:
+			b.set_collision_layer_value(3, false)
 
-# Returns true if successful, useful for animations and sounds
+# Returns true if successful. The return is useful for
+# animations and sounds
 func shoot(shoot_data:ShootData) -> bool:
 	if can_shoot:
 		can_shoot = false
 		firing = true
-		firing_rate_timer.start()
+		can_burst = true
+		firing_rate_timer.start(1.0/fire_rate)
 		data = shoot_data
 		return true
 	return false

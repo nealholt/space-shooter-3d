@@ -33,7 +33,7 @@ var friction_std: float = 0.99
 #forward motion
 var impulse_std: float = 70.0
 var impulse_accel: float = 100.0
-var impulse_brake: float = 40.0
+var impulse_brake: float = 0.0 #40.0 #TODO TESTING
 var impulse_lerp: float =  0.2
 
 var impulse := impulse_std
@@ -102,4 +102,16 @@ func move(mover, delta:float) -> void:
 	var new_dir = -mover.transform.basis.z * impulse * delta
 	# Apply friction on a per unit time basis
 	mover.velocity = mover.velocity * (1-friction*delta) + new_dir
-	mover.move_and_slide()
+	# Move, collide, and bounce off
+	# Resources used:
+	# https://docs.godotengine.org/en/stable/tutorials/physics/using_character_body_2d.html
+	var collision :KinematicCollision3D = mover.move_and_collide(mover.velocity * delta)
+	if collision:
+		mover.velocity = mover.velocity.bounce(collision.get_normal())
+		# Apply an impulse and a torqur to whatever we hit.
+		# Except don't really because you should check that
+		# we hit a rigid body, otherwise this throws an error.
+		# https://docs.godotengine.org/en/stable/classes/class_rigidbody2d.html#class-rigidbody2d-method-apply-central-impulse
+		# https://www.youtube.com/watch?v=SJuScDavstM
+		#collision.get_collider().apply_central_impulse(-collision.get_normal()*100)
+		#collision.get_collider().apply_torque_impulse(mover.transform.basis.y)

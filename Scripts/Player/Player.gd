@@ -10,9 +10,12 @@ extends CharacterBody3D
 @onready var missile_lock: MissileLock = $MissileLockGroup
 
 # Currently targeted ship or capital ship component
-# For now it's got to be an NPC
-var targeted:FighterNPC
+var targeted:Node3D
 
+# For the following I have been using "ballistic_move3" for a
+# while. It is is the ONLY one with move_and_collide
+# implemented. You WILL need to add that in if you ever
+# switch movement schemes.
 var flight_mode: int = 2
 var ballistic_move1:BallisticMovement1 = BallisticMovement1.new()
 var ballistic_move2:BallisticMovement2 = BallisticMovement2.new()
@@ -122,18 +125,22 @@ func change_pov() -> void:
 # For ex, this makes a noise upon collision with an enemy,
 # but that doesn't actually do damage.
 func _on_hit_box_component_area_entered(_area: Area3D) -> void:
+	#print('hitbox area entered')
 	got_hit_audio.play()
 func _on_hit_box_component_body_entered(_body: Node3D) -> void:
+	#print('hitbox body entered')
 	got_hit_audio.play()
-
+# THIS is the noise that gets played when we take damage
+func _on_health_component_health_lost() -> void:
+	got_hit_audio.play()
 
 func _on_near_miss_detector_area_exited(area: Area3D) -> void:
 	# Play audio for enemy bullet near misses!
 	if area is Projectile:
 		near_miss_audio.global_position = area.global_position
 		near_miss_audio.play()
-		
 
 func _on_health_component_died() -> void:
 	# Load main scene if player dies
 	Global.main_scene.to_main_menu()
+

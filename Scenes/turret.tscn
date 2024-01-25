@@ -1,0 +1,64 @@
+[gd_scene load_steps=12 format=3 uid="uid://yaq7cc3oqfp2"]
+
+[ext_resource type="Script" path="res://Scripts/Turret/Turret.gd" id="1_cbt5p"]
+[ext_resource type="PackedScene" uid="uid://deuokls15ey84" path="res://Assets/turret_model.tscn" id="2_xuhpe"]
+[ext_resource type="Script" path="res://Scripts/Turret/TurretAim.gd" id="3_mxjoc"]
+[ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="4_r7edd"]
+[ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles/Bullet/bullet.tscn" id="5_gg3ek"]
+[ext_resource type="Script" path="res://Scripts/target_selector.gd" id="6_cy7vo"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="7_ycwys"]
+[ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="8_qikae"]
+[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="9_b5qkf"]
+[ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="10_4os1p"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g6fsi"]
+radius = 1.0
+
+[node name="TurretComplete" type="Node3D" groups=["team property"]]
+script = ExtResource("1_cbt5p")
+
+[node name="TurretModel" parent="." node_paths=PackedStringArray("body", "head") instance=ExtResource("2_xuhpe")]
+script = ExtResource("3_mxjoc")
+elevation_speed_deg = 15.0
+rotation_speed_deg = 15.0
+body = NodePath("Body")
+head = NodePath("Body/Head")
+
+[node name="Gun" parent="TurretModel/Body/Head/Barrel1" index="0" instance=ExtResource("4_r7edd")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0)
+bullet = ExtResource("5_gg3ek")
+burst_total = 5
+burst_rate = 20.0
+spread_deg = 10.0
+
+[node name="Gun2" parent="TurretModel/Body/Head/Barrel2" index="0" instance=ExtResource("4_r7edd")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0)
+bullet = ExtResource("5_gg3ek")
+burst_total = 5
+burst_rate = 20.0
+spread_deg = 10.0
+
+[node name="LookIndicator" parent="TurretModel/Body/Head" index="2"]
+visible = true
+
+[node name="TargetSelector" type="Node" parent="TurretModel/Body/Head" index="3" groups=["team property"]]
+script = ExtResource("6_cy7vo")
+
+[node name="TargetReticles" parent="." instance=ExtResource("7_ycwys")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("8_qikae")]
+
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_b5qkf")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
+shape = SubResource("SphereShape3D_g6fsi")
+
+[node name="HitFeedback" parent="." instance=ExtResource("10_4os1p")]
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]
+
+[editable path="TurretModel"]

@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://deuokls15ey84"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sieiy"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_juoko"]
+radius = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wen8r"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sqay7"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f4ypi"]
+albedo_color = Color(0.878431, 0, 0.901961, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3o1a3"]
+material = SubResource("StandardMaterial3D_f4ypi")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 50.0
+
+[node name="Turret" type="Node3D"]
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("BoxMesh_sieiy")
+
+[node name="ColorMe" type="MeshInstance3D" parent="Body" groups=["team property"]]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("CapsuleMesh_juoko")
+
+[node name="Head" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="Barrel1" type="MeshInstance3D" parent="Body/Head"]
+transform = Transform3D(1, 0, 0, 0, -4.37722e-08, -1, 0, 1, -4.37722e-08, -0.5, 0, 0.6)
+mesh = SubResource("CylinderMesh_wen8r")
+skeleton = NodePath("../../..")
+
+[node name="Barrel2" type="MeshInstance3D" parent="Body/Head"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, 0, 0.6)
+mesh = SubResource("CylinderMesh_sqay7")
+skeleton = NodePath("../../..")
+
+[node name="LookIndicator" type="MeshInstance3D" parent="Body/Head"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 25)
+visible = false
+mesh = SubResource("CylinderMesh_3o1a3")

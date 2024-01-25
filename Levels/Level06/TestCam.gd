@@ -8,4 +8,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass #look_at($"../Target".global_position)
+	#look_at($"../Target".global_position)
+	#look_at($"../FighterNPC".global_position)
+	#look_at($"../Player".global_position)
+	pass

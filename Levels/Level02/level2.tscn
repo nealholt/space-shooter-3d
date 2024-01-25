@@ -63,15 +63,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50.397, 0)
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4268, 71.8786, -108.676)
 use_collision = true
-collision_layer = 4
-collision_mask = 0
+collision_layer = 3
+collision_mask = 2
 size = Vector3(30, 30, 30)
 
 [node name="Floor" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
 use_collision = true
-collision_layer = 4
-collision_mask = 0
+collision_layer = 3
+collision_mask = 2
 size = Vector3(500, 10, 500)
 
 [node name="Building1" type="CSGBox3D" parent="Floor"]

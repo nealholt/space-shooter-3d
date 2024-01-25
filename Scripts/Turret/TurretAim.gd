@@ -10,28 +10,24 @@ extends Node3D
 # This was a life saver:
 # https://math.stackexchange.com/questions/728481/3d-projection-onto-a-plane
 
- # TESTING
-@onready var projection_indicator: Node3D = $"../projection_indicator"
-@onready var elevation_projection: Node3D = $"../elevation_projection"
-
-# movement
+# movement speeds and constraints in degrees
 @export var elevation_speed_deg: float = 5
 @export var rotation_speed_deg: float = 5
-# constraints
 @export var min_elevation_deg: float = 0
 @export var max_elevation_deg: float = 60
 
-# parts
+# Turret parts
 @export var body: Node3D # Component to be rotated
 @export var head: Node3D # Component to be elevated
-@export var target: Node3D
-# movement
+
+# movement speeds and constraints in radians
 @onready var elevation_speed: float = deg_to_rad(elevation_speed_deg)
 @onready var rotation_speed: float = deg_to_rad(rotation_speed_deg)
 @onready var min_elevation: float = deg_to_rad(min_elevation_deg)
 @onready var max_elevation: float = deg_to_rad(max_elevation_deg)
-# target calculation
-var current_target: Vector3
+
+var target_pos: Vector3 = Vector3.ZERO
+
 # states
 var active: bool = true
 
@@ -40,19 +36,12 @@ func _ready() -> void:
 	# test if got head and body
 	if head == null or body == null:
 		active = false
-	# test if got valid target
-	if target == null: # or not "linear_velocity" in target:
-		active = false
 
 
 func _physics_process(delta: float) -> void:
-	# if not active do nothing
-	if not active:
-		return
-	# update target location
-	current_target = target.global_position
-	# move
-	rotate_and_elevate(delta)
+	# if active and with target, then move
+	if active and target_pos != Vector3.ZERO:
+		rotate_and_elevate(delta)
 
 
 func rotate_and_elevate(delta: float) -> void:
@@ -64,11 +53,10 @@ func rotate_and_elevate(delta: float) -> void:
 	var plane_norm:Vector3 = body.global_basis.y
 	# projected is the vector indicating how far above/below
 	# the target point is from our plane
-	var projected:Vector3 = (current_target.dot(plane_norm) / plane_norm.dot(plane_norm)) * plane_norm
+	var projected:Vector3 = (target_pos.dot(plane_norm) / plane_norm.dot(plane_norm)) * plane_norm
 	# by subtracting projected from target, we get the projected point.
 	# This is the point to rotate the turret toward
-	var rotation_targ:Vector3 = current_target - projected
-	projection_indicator.global_position = rotation_targ
+	var rotation_targ:Vector3 = target_pos - projected
 	
 	# Get the desired rotation
 	# Get the angle to projected point
@@ -76,7 +64,7 @@ func rotate_and_elevate(delta: float) -> void:
 	# Transform target to body local space. This is useful to
 	# know if we should rotate left or right because angle_to
 	# always returns a positive value.
-	var local_target:Vector3 = body.to_local(target.global_position)
+	var local_target:Vector3 = body.to_local(target_pos)
 	
 	# Rotate toward it
 	# Calculate step size and direction. If we need to rotate
@@ -95,11 +83,10 @@ func rotate_and_elevate(delta: float) -> void:
 	plane_norm = head.global_basis.x
 	# projected is the vector indicating how far above/below
 	# the target point is from our plane
-	projected = (current_target.dot(plane_norm) / plane_norm.dot(plane_norm)) * plane_norm
+	projected = (target_pos.dot(plane_norm) / plane_norm.dot(plane_norm)) * plane_norm
 	# by subtracting projected from target, we get the projected point.
 	# This is the point to rotate the turret toward
-	var elevation_targ:Vector3 = current_target - projected
-	elevation_projection.global_position = elevation_targ
+	var elevation_targ:Vector3 = target_pos - projected
 	
 	# Get the desired rotation
 	# Get the angle to projected point
@@ -107,7 +94,7 @@ func rotate_and_elevate(delta: float) -> void:
 	
 	# Elevate toward it
 	# One more negative sign because pitching up is negative
-	var elevation_sign:float = -sign(head.to_local(target.global_position).y)
+	var elevation_sign:float = -sign(head.to_local(target_pos).y)
 	var final_x:float = elevation_sign * min(elevation_speed * delta, x_angle)
 	#print(rad_to_deg(final_x))
 	# elevate head
@@ -119,3 +106,4 @@ func rotate_and_elevate(delta: float) -> void:
 		head.rotation.x,
 		-max_elevation, min_elevation
 	)
+

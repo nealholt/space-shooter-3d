@@ -30,42 +30,58 @@ offset_bottom = 85.0
 [node name="Load1" type="Button" parent="Menu"]
 layout_mode = 0
 offset_left = 436.0
-offset_top = 99.0
+offset_top = 21.0
 offset_right = 570.0
-offset_bottom = 130.0
+offset_bottom = 52.0
 text = "Load 1: Balloons"
 
 [node name="Load2" type="Button" parent="Menu"]
 layout_mode = 0
 offset_left = 433.0
-offset_top = 160.0
+offset_top = 82.0
 offset_right = 680.0
-offset_bottom = 191.0
+offset_bottom = 113.0
 text = "Load 2: Balloons and Obstacles"
 
 [node name="Load3" type="Button" parent="Menu"]
 layout_mode = 0
 offset_left = 440.0
-offset_top = 234.0
+offset_top = 156.0
 offset_right = 551.0
-offset_bottom = 265.0
+offset_bottom = 187.0
 text = "Load 3: 1 vs 1"
 
 [node name="Load4" type="Button" parent="Menu"]
 layout_mode = 0
 offset_left = 366.0
-offset_top = 292.0
+offset_top = 214.0
 offset_right = 622.0
-offset_bottom = 323.0
+offset_bottom = 245.0
 text = "Load 4: NPC vs Stationary target"
 
 [node name="Load5" type="Button" parent="Menu"]
 layout_mode = 0
 offset_left = 428.0
-offset_top = 376.0
+offset_top = 298.0
 offset_right = 585.0
-offset_bottom = 407.0
+offset_bottom = 329.0
 text = "Load 5: Red vs Blue"
+
+[node name="Load6" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 436.0
+offset_top = 369.0
+offset_right = 589.0
+offset_bottom = 400.0
+text = "Load 6: Turret Test"
+
+[node name="Load7" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 409.0
+offset_top = 460.0
+offset_right = 605.0
+offset_bottom = 491.0
+text = "Load 7: Capital Ship Test"
 
 [node name="Main3D" type="Node3D" parent="."]
 
@@ -74,3 +90,5 @@ text = "Load 5: Red vs Blue"
 [connection signal="pressed" from="Menu/Load3" to="." method="_on_load_3_pressed"]
 [connection signal="pressed" from="Menu/Load4" to="." method="_on_load_4_pressed"]
 [connection signal="pressed" from="Menu/Load5" to="." method="_on_load_5_pressed"]
+[connection signal="pressed" from="Menu/Load6" to="." method="_on_load_6_pressed"]
+[connection signal="pressed" from="Menu/Load7" to="." method="_on_load_7_pressed"]

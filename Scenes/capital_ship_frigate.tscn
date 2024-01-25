@@ -1,0 +1,207 @@
+[gd_scene load_steps=22 format=3 uid="uid://dp3w08p8gkd3p"]
+
+[ext_resource type="PackedScene" uid="uid://bh2v67l31a2lg" path="res://Assets/CapitalShips/frigate_model.tscn" id="1_ukj0d"]
+[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="2_ffelx"]
+[ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_ac6d0"]
+[ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="4_320jg"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4an4i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0hrgw"]
+size = Vector3(30, 30, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_45crj"]
+size = Vector3(30, 30, 100)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mdcux"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_886au"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_oqfmh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7yrfv"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d63m2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mhyku"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2kirm"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dmlp4"]
+points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607, 0.498884, 0.169713, 0.559144, 0.464172, 0.231051, -0.803591, 0.320455, 0.40741, 0.651043, -0.243523, -0.482789, 0.594843, 0.0822132, -0.362868, -0.682312, 0.289697, 0.469044, -0.654529, -0.0662713, -0.127444, 0.842701, -0.338103, -0.393435, -0.683942, -0.244717, 0.438255, 0.623309, 0.200849, 0.0841477, 0.977454, 0.114795, -0.0682023, -0.976458, -0.12927, 0.20055, -0.563129, -0.451454, -0.185527, 0.595453, -0.453475, -0.273363, 0.592268, 0.407754, -0.00693649, -0.476823, 0.49966, 0.375821, -0.588614, 0.316955, 0.111579, 0.563059, -0.481177, -0.41725, 0.527866, -0.270497, -0.484546, -0.596972, -0.0665097, -0.279747, 0.908561, 0.0533361, -0.250197, -0.880712, 0.205319, 0.263647, -0.902771, -0.127394, 0.293368, 0.871526, -0.157196, 0.373412, -0.526319, -0.328246, 0.499663, 0.476641, -0.00688856, 0.0531056, 0.875001, 0.324703, -0.154543, -0.590854, 0.465879, -0.0972799, -0.782358, -0.398188, -0.387649, -0.498171, 0.31565, -0.30068, -0.587995, -0.388901)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0qa2v"]
+height = 40.0
+radius = 5.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nej24"]
+size = Vector3(20, 20, 20)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1rq3q"]
+points = PackedVector3Array(1.78103, -13.7584, 19.025, -1.82803, -14.6998, -19.4863, -4.87383, -14.7009, -18.881, -3.52812, 14.0294, -4.11288, 19.4855, -14.6963, -1.82342, -19.4855, -14.6963, 1.82342, 1.17146, 13.9892, 5.27238, 4.10134, 13.4005, -4.10054, -14.053, -14.7449, 14.0502, 14.4641, -14.5472, 13.2606, 13.2592, -14.5471, -14.4649, -14.053, -14.7449, -14.0502, -5.27629, 13.4005, 2.34211, 5.27331, 13.9889, 1.16754, -7.8392, -14.5596, 18.0939, -17.5911, -12.9806, -7.03433, 18.0913, -14.5546, 7.83877, 7.83964, -14.5534, -18.09, 7.83964, -14.5534, 18.09, 1.17146, 13.9892, -5.27238, 18.0913, -14.5546, -7.83877, -2.34327, 13.4045, 5.27316, -18.0913, -14.5546, 7.83877, -5.27513, 13.984, -1.1708, 4.10134, 13.4005, 4.10054, -1.82803, -14.6998, 19.4863, -7.03915, -11.8064, -17.003, 5.27331, 13.9889, -1.16754, 19.4855, -14.6963, 1.82342, 1.82433, -14.7007, -19.4875, -19.4855, -14.6963, -1.82342, -1.17146, 13.9892, -5.27238)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pjnlb"]
+points = PackedVector3Array(1.78103, -13.7584, 19.025, -1.82803, -14.6998, -19.4863, -4.87383, -14.7009, -18.881, -3.52812, 14.0294, -4.11288, 19.4855, -14.6963, -1.82342, -19.4855, -14.6963, 1.82342, 1.17146, 13.9892, 5.27238, 4.10134, 13.4005, -4.10054, -14.053, -14.7449, 14.0502, 14.4641, -14.5472, 13.2606, 13.2592, -14.5471, -14.4649, -14.053, -14.7449, -14.0502, -5.27629, 13.4005, 2.34211, 5.27331, 13.9889, 1.16754, -7.8392, -14.5596, 18.0939, -17.5911, -12.9806, -7.03433, 18.0913, -14.5546, 7.83877, 7.83964, -14.5534, -18.09, 7.83964, -14.5534, 18.09, 1.17146, 13.9892, -5.27238, 18.0913, -14.5546, -7.83877, -2.34327, 13.4045, 5.27316, -18.0913, -14.5546, 7.83877, -5.27513, 13.984, -1.1708, 4.10134, 13.4005, 4.10054, -1.82803, -14.6998, 19.4863, -7.03915, -11.8064, -17.003, 5.27331, 13.9889, -1.16754, 19.4855, -14.6963, 1.82342, 1.82433, -14.7007, -19.4875, -19.4855, -14.6963, -1.82342, -1.17146, 13.9892, -5.27238)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wfxmv"]
+points = PackedVector3Array(13.3531, 38.3381, -5.81685, -14.5743, -38.0898, -1.38084, -14.5635, -38.0617, 1.54136, 13.423, -40.0167, -4.36465, 2.97894, 36.2532, 14.5857, -7.14273, 37.56, -12.9249, 8.82055, -37.8787, 11.7362, 1.54136, -38.0617, -14.5635, -13.0263, 39.303, 5.90378, -7.1389, -36.0927, 13.0768, 13.316, 38.2312, 5.96201, -5.99236, -48.5929, 1.59581, 7.26899, 37.3911, -12.8665, 4.62039, 48.4408, 4.62039, -9.8376, -35.4112, -11.2551, -14.3006, 35.9373, -4.23069, -7.13889, 36.0927, 13.0768, 14.5857, -36.2532, 2.97894, -1.43465, 48.6102, -5.99453, 9.9498, -33.8317, -11.2019, -2.8224, -36.3162, 14.611, 4.62039, -48.4408, 4.62039, -2.92604, -46.6442, -8.94863, -12.4167, -31.9261, 8.40823, 1.54136, 38.0617, -14.5635, 11.2721, 33.5662, 9.87234, -7.42321, 46.5216, 6.08319, -4.23069, -35.9373, -14.3006, 14.611, 36.3162, -2.8224, -10.3868, 44.8469, -4.4028, 6.08319, -46.5216, -7.42321, -4.39135, -44.7323, 10.5188)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w81vi"]
+points = PackedVector3Array(13.3531, 38.3381, -5.81685, -14.5743, -38.0898, -1.38084, -14.5635, -38.0617, 1.54136, 13.423, -40.0167, -4.36465, 2.97894, 36.2532, 14.5857, -7.14273, 37.56, -12.9249, 8.82055, -37.8787, 11.7362, 1.54136, -38.0617, -14.5635, -13.0263, 39.303, 5.90378, -7.1389, -36.0927, 13.0768, 13.316, 38.2312, 5.96201, -5.99236, -48.5929, 1.59581, 7.26899, 37.3911, -12.8665, 4.62039, 48.4408, 4.62039, -9.8376, -35.4112, -11.2551, -14.3006, 35.9373, -4.23069, -7.13889, 36.0927, 13.0768, 14.5857, -36.2532, 2.97894, -1.43465, 48.6102, -5.99453, 9.9498, -33.8317, -11.2019, -2.8224, -36.3162, 14.611, 4.62039, -48.4408, 4.62039, -2.92604, -46.6442, -8.94863, -12.4167, -31.9261, 8.40823, 1.54136, 38.0617, -14.5635, 11.2721, 33.5662, 9.87234, -7.42321, 46.5216, 6.08319, -4.23069, -35.9373, -14.3006, 14.611, 36.3162, -2.8224, -10.3868, 44.8469, -4.4028, 6.08319, -46.5216, -7.42321, -4.39135, -44.7323, 10.5188)
+
+[node name="CapitalShipFrigate" type="CharacterBody3D"]
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+
+[node name="FrigateModel" parent="." instance=ExtResource("1_ukj0d")]
+
+[node name="Body" parent="FrigateModel" index="0"]
+mesh = SubResource("CapsuleMesh_4an4i")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="FrigateModel/ReactorShieldLeft" index="0"]
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/ReactorShieldLeft/CharacterBody3D"]
+shape = SubResource("BoxShape3D_0hrgw")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="FrigateModel/ReactorShieldRight" index="0"]
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/ReactorShieldRight/CharacterBody3D"]
+shape = SubResource("BoxShape3D_45crj")
+
+[node name="HitBoxComponent" parent="FrigateModel/Reactor" index="0" node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("2_ffelx")]
+health_component = NodePath("../HealthComponent")
+hit_feedback = NodePath("../HitFeedback")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/Reactor/HitBoxComponent"]
+shape = SubResource("SphereShape3D_mdcux")
+
+[node name="HealthComponent" parent="FrigateModel/Reactor" index="1" instance=ExtResource("3_ac6d0")]
+
+[node name="HitFeedback" parent="FrigateModel/Reactor" index="2" instance=ExtResource("4_320jg")]
+
+[node name="HitBoxComponent" parent="FrigateModel/StrutLeft1/Radiator1" index="0" node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("2_ffelx")]
+health_component = NodePath("../HealthComponent")
+hit_feedback = NodePath("../HitFeedback")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/StrutLeft1/Radiator1/HitBoxComponent"]
+shape = SubResource("SphereShape3D_886au")
+
+[node name="HealthComponent" parent="FrigateModel/StrutLeft1/Radiator1" index="1" instance=ExtResource("3_ac6d0")]
+
+[node name="HitFeedback" parent="FrigateModel/StrutLeft1/Radiator1" index="2" instance=ExtResource("4_320jg")]
+
+[node name="HitBoxComponent" parent="FrigateModel/StrutLeft2/Radiator2" index="0" node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("2_ffelx")]
+health_component = NodePath("../HealthComponent")
+hit_feedback = NodePath("../HitFeedback")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/StrutLeft2/Radiator2/HitBoxComponent"]
+shape = SubResource("SphereShape3D_oqfmh")
+
+[node name="HealthComponent" parent="FrigateModel/StrutLeft2/Radiator2" index="1" instance=ExtResource("3_ac6d0")]
+
+[node name="HitFeedback" parent="FrigateModel/StrutLeft2/Radiator2" index="2" instance=ExtResource("4_320jg")]
+
+[node name="HitBoxComponent" parent="FrigateModel/StrutLeft3/Radiator3" index="0" node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("2_ffelx")]
+health_component = NodePath("../HealthComponent")
+hit_feedback = NodePath("../HitFeedback")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/StrutLeft3/Radiator3/HitBoxComponent"]
+shape = SubResource("SphereShape3D_7yrfv")
+
+[node name="HealthComponent" parent="FrigateModel/StrutLeft3/Radiator3" index="1" instance=ExtResource("3_ac6d0")]
+
+[node name="HitFeedback" parent="FrigateModel/StrutLeft3/Radiator3" index="2" instance=ExtResource("4_320jg")]
+
+[node name="HitBoxComponent" parent="FrigateModel/StrutRight1/Radiator4" index="0" node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("2_ffelx")]
+health_component = NodePath("../HealthComponent")
+hit_feedback = NodePath("../HitFeedback")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/StrutRight1/Radiator4/HitBoxComponent"]
+shape = SubResource("SphereShape3D_d63m2")
+
+[node name="HealthComponent" parent="FrigateModel/StrutRight1/Radiator4" index="1" instance=ExtResource("3_ac6d0")]
+
+[node name="HitFeedback" parent="FrigateModel/StrutRight1/Radiator4" index="2" instance=ExtResource("4_320jg")]
+
+[node name="HitBoxComponent" parent="FrigateModel/StrutRight2/Radiator5" index="0" node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("2_ffelx")]
+health_component = NodePath("../HealthComponent")
+hit_feedback = NodePath("../HitFeedback")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/StrutRight2/Radiator5/HitBoxComponent"]
+shape = SubResource("SphereShape3D_mhyku")
+
+[node name="HealthComponent" parent="FrigateModel/StrutRight2/Radiator5" index="1" instance=ExtResource("3_ac6d0")]
+
+[node name="HitFeedback" parent="FrigateModel/StrutRight2/Radiator5" index="2" instance=ExtResource("4_320jg")]
+
+[node name="HitBoxComponent" parent="FrigateModel/StrutRight3/Radiator6" index="0" node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("2_ffelx")]
+health_component = NodePath("../HealthComponent")
+hit_feedback = NodePath("../HitFeedback")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/StrutRight3/Radiator6/HitBoxComponent"]
+shape = SubResource("SphereShape3D_2kirm")
+
+[node name="HealthComponent" parent="FrigateModel/StrutRight3/Radiator6" index="1" instance=ExtResource("3_ac6d0")]
+
+[node name="HitFeedback" parent="FrigateModel/StrutRight3/Radiator6" index="2" instance=ExtResource("4_320jg")]
+
+[node name="ColorMe" parent="FrigateModel" index="12" groups=["team property"]]
+
+[node name="ColorMe2" parent="FrigateModel" index="13" groups=["team property"]]
+
+[node name="CollisionShapeBody" type="CollisionShape3D" parent="."]
+transform = Transform3D(75, 0, 0, 0, -3.27835e-06, -75, 0, 75, -3.27835e-06, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_dmlp4")
+
+[node name="CollisionShapeStrutLeft1" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -46, -23, -48)
+shape = SubResource("CylinderShape3D_0qa2v")
+
+[node name="CollisionShapeStrutLeft2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -46, -23, 0)
+shape = SubResource("CylinderShape3D_0qa2v")
+
+[node name="CollisionShapeStrutLeft3" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -46, -23, 48)
+shape = SubResource("CylinderShape3D_0qa2v")
+
+[node name="CollisionShapeStrutRight1" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 46, -23, -48)
+shape = SubResource("CylinderShape3D_0qa2v")
+
+[node name="CollisionShapeStrutRight2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 46, -23, 0)
+shape = SubResource("CylinderShape3D_0qa2v")
+
+[node name="CollisionShapeStrutRight3" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 46, -23, 48)
+shape = SubResource("CylinderShape3D_0qa2v")
+
+[node name="CollisionShapeBridge" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, -70)
+shape = SubResource("BoxShape3D_nej24")
+
+[node name="CollisionShapeEngineLeft" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -18, 0, 80)
+shape = SubResource("ConvexPolygonShape3D_1rq3q")
+
+[node name="CollisionShapeEngineRight" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 18, 0, 80)
+shape = SubResource("ConvexPolygonShape3D_pjnlb")
+
+[node name="CollisionShapeColorMe" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 32, 20, 0)
+shape = SubResource("ConvexPolygonShape3D_wfxmv")
+
+[node name="CollisionShapeColorMe2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -32, 20, 0)
+shape = SubResource("ConvexPolygonShape3D_w81vi")
+
+[editable path="FrigateModel"]

@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/Projectiles/projectile.gd" id="1_y78aq"]
 
 [node name="Projectile" type="Area3D"]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_y78aq")
 
 [node name="Timer" type="Timer" parent="."]

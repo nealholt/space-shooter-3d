@@ -1,5 +1,5 @@
 extends Node3D
-
+class_name TargetReticles
 # This uses images from the kenney crosshair pack
 # https://kenney.nl/assets/crosshair-pack
 
@@ -87,7 +87,9 @@ func _ready():
 
 func _process(_delta):
 	hide_all() # Reset all to hidden
-	if !Global.targeting_hud_on:
+	if!is_instance_valid(camera):
+		camera = get_viewport().get_camera_3d()
+	if !Global.targeting_hud_on or !is_instance_valid(camera):
 		return
 	# If the camera can see the target reticle Node3D...
 	if camera.is_position_in_frustum(global_position):
