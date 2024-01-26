@@ -33,7 +33,7 @@ var seeking:bool = false
 var locked:bool = false
 
 # Speed at which reticle approaches target when use_lerp
-# is false measured in onscreen pixels per second
+# is false measured in onscreen pixels per second (I think)
 @export var speed:float = 250.0
 
 # Whether to lerp reticle to target or use move_toward
@@ -116,8 +116,11 @@ func _process(delta: float) -> void:
 func start_seeking(targ:Node3D) -> void:
 	target = targ
 	var target_onscreen:Vector2 = camera.unproject_position(target.global_position)
-	# Make reticle approach the target from the far side of center screen
-	reticle_position = Vector2(DisplayServer.screen_get_size()/2) - target_onscreen
+	# Make reticle approach the target from the far side of
+	# center screen relative to the target's on-screen position.
+	# First, get the position of the target as if 0,0 was center screen
+	reticle_position = (DisplayServer.window_get_size()/2.0) - target_onscreen
+	# Then adjust that position to the far side of center.
 	reticle_position = distance_multiplier*reticle_position + target_onscreen
 	seeking = true
 	# Don't beep immediately. Don't show immediately and
