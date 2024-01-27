@@ -17,6 +17,7 @@ var target:Node3D
 
 const target_close_up_dist:=-30.0
 
+var look_at_target : bool = false
 
 func _physics_process(_delta: float) -> void:
 	if state == CameraState.FLYBY:
@@ -31,6 +32,21 @@ func _physics_process(_delta: float) -> void:
 			view_target_from_player()
 		else:
 			first_person()
+	# Look at target
+	if look_at_target and state == CameraState.FIRSTPERSON and is_instance_valid(target):
+		first_person_camera.look_at(target.global_position, Global.player.global_transform.basis.y)
+	else:
+		# Return to facing forward, or at least way far forward of
+		# the node of the player.
+		#print(first_person_camera.global_transform.basis.z)
+		#print(first_person_camera.transform.basis.z)
+		first_person_camera.look_at(first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0, Global.player.global_transform.basis.y)
+
+
+func turn_on_look() -> void:
+	look_at_target = true
+	if is_instance_valid(Global.player.targeted):
+		target = Global.player.targeted
 
 
 # Transition to first person camera

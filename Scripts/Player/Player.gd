@@ -99,6 +99,7 @@ func change_pov() -> void:
 	# Right thumb stick pressed in
 	if Input.is_action_just_pressed("POV_standard"):
 		camera_group.first_person()
+		camera_group.turn_on_look()
 	# Target view. Look towards the target, but from the far
 	# side of the player so the player can turn to face target.
 	# D-Pad up
@@ -119,6 +120,9 @@ func change_pov() -> void:
 	# D-Pad left
 	elif Input.is_action_just_pressed("POV_flyby"):
 		camera_group.flyby_camera()
+	elif Input.is_action_just_released("POV_standard"):
+		camera_group.look_at_target = false
+
 
 # Since we're listening for the hitbox getting hit, this doesn't
 # actually make a noise based on damage and it isn't.

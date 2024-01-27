@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=32 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_rf46g"]
 [ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="2_2p718"]
@@ -52,6 +52,25 @@ scale_curve = SubResource("CurveTexture_mw0gy")
 
 [sub_resource type="BoxMesh" id="BoxMesh_1jycr"]
 size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyjhj"]
+albedo_color = Color(0.282353, 0.282353, 0.282353, 1)
+metallic = 0.51
+roughness = 0.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tbbj7"]
+material = SubResource("StandardMaterial3D_jyjhj")
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.7
+radial_segments = 16
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_s2gsa"]
+material = SubResource("StandardMaterial3D_jyjhj")
+top_radius = 0.01
+bottom_radius = 0.01
+height = 0.35
+radial_segments = 16
 
 [node name="Player" type="CharacterBody3D" groups=["team property"]]
 motion_mode = 1
@@ -138,6 +157,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.7, -8)
 [node name="EngineMeshComponent4" parent="FighterChassisDiamond" instance=ExtResource("12_e20ac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.7, -8)
 
+[node name="Cockpit3" type="Node3D" parent="FighterChassisDiamond"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.72759e-07, 0.6, 3.12)
+
+[node name="LeftStrut" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+transform = Transform3D(1, 0, 0, 0, 0.867297, -0.497792, 0, 0.497792, 0.867297, -0.17, -0.0907253, -0.0148683)
+mesh = SubResource("CylinderMesh_tbbj7")
+
+[node name="RightStrut" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+transform = Transform3D(1, 0, 0, 0, 0.867297, -0.497792, 0, 0.497792, 0.867297, 0.17, -0.0907253, -0.0148683)
+mesh = SubResource("CylinderMesh_tbbj7")
+
+[node name="CrossBar" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.207488, 0.157279)
+mesh = SubResource("CylinderMesh_s2gsa")
+
+[node name="LeftStrutBack" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+transform = Transform3D(1, 0, 0, 0, -0.125299, -0.992119, 0, 0.992119, -0.125299, -0.17, 0.160132, 0.513052)
+mesh = SubResource("CylinderMesh_tbbj7")
+
+[node name="RightStrutBack" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+transform = Transform3D(1, 0, 0, 0, -0.125299, -0.992119, 0, 0.992119, -0.125299, 0.17, 0.16, 0.513)
+mesh = SubResource("CylinderMesh_tbbj7")
+
 [node name="MissileLockGroup" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
 script = ExtResource("12_hjk6b")
 camera = NodePath("../CameraGroup/FirstPersonCamera")
@@ -174,7 +216,7 @@ stream = ExtResource("18_piaxr")
 script = ExtResource("19_342x2")
 
 [node name="FirstPersonCamera" type="Camera3D" parent="CameraGroup"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -3.12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -2.9)
 current = true
 
 [node name="RearUnderCamera" type="Camera3D" parent="CameraGroup"]
