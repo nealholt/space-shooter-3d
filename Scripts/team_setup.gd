@@ -37,7 +37,8 @@ func _ready() -> void:
 		var needs_team_properties:bool = child.is_in_group("team property")
 		var did_set:bool = true
 		
-		# Currently only FighterNPC is in group "team member".
+		# Currently only FighterNPC and TurretComplete are
+		# in group "team member".
 		# You can't use child.name because "FighterNPC" is
 		# the name and when you have duplicates, then there's
 		# FighterNPC2, FighterNPC3, etcetera, which would
@@ -53,8 +54,6 @@ func _ready() -> void:
 		# "match" is akin to "switch"
 		# https://docs.godotengine.org/en/latest/tutorials/scripting/gdscript/gdscript_basics.html#match
 		match child.name:
-			"TurretComplete":
-				child.add_to_group(team)
 			"TargetSelector":
 				child.target_group = enemy
 			"Contrail":

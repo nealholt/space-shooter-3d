@@ -13,7 +13,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_g6fsi"]
 radius = 1.0
 
-[node name="TurretComplete" type="Node3D" groups=["team property"]]
+[node name="TurretComplete" type="Node3D" groups=["team member"]]
 script = ExtResource("1_cbt5p")
 
 [node name="TurretModel" parent="." instance=ExtResource("2_xuhpe")]
@@ -33,9 +33,6 @@ bullet = ExtResource("5_gg3ek")
 burst_total = 5
 burst_rate = 20.0
 spread_deg = 10.0
-
-[node name="LookIndicator" parent="TurretModel/Body/Head" index="2"]
-visible = true
 
 [node name="TargetSelector" type="Node" parent="TurretModel/Body/Head" index="3" groups=["team property"]]
 script = ExtResource("6_cy7vo")
