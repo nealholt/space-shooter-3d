@@ -42,7 +42,7 @@ func Physics_Update(delta:float) -> void:
 	var my_pos:Vector3 = motion.npc.global_position
 	var pos:Vector3 = motion.npc.target_pos
 	#var dist:float = motion.npc.distance_to_target
-	var basis = motion.npc.transform.basis
+	var basis = motion.npc.global_transform.basis
 	# Get the x angle to target
 	# This is the side to side. Ideally yaw would handle this
 	# but I think it looks better if we pitch and roll.

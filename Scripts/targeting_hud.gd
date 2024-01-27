@@ -29,7 +29,7 @@ func _draw() -> void:
 	# Loop over targets
 	for target in targets:
 		# Get angle to target
-		angle_deg = rad_to_deg(Global.get_angle_to_target(pov.global_position, target.global_position, -pov.transform.basis.z))
+		angle_deg = rad_to_deg(Global.get_angle_to_target(pov.global_position, target.global_position, -pov.global_transform.basis.z))
 		# if angle is less than vision_angle degrees
 		if angle_deg < vision_angle:
 			#Get on screen position of the target

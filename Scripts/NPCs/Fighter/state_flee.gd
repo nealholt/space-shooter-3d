@@ -25,7 +25,7 @@ func Physics_Update(delta:float) -> void:
 	var my_pos:Vector3 = motion.npc.global_position
 	var pos:Vector3 = motion.npc.target_pos
 	var dist_sqd:float = motion.npc.distance_to_target_sqd
-	var basis = motion.npc.transform.basis
+	var basis = motion.npc.global_transform.basis
 	
 	# Get the y angle to target
 	var y_angle:float = Global.get_angle_to_target(my_pos, pos, basis.y)

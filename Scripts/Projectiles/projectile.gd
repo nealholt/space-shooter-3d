@@ -50,7 +50,7 @@ func _process(delta: float) -> void:
 		# Face the point in local space that is our current
 		# position adjusted in the direction of the new
 		# velocity
-		look_at(transform.origin + velocity, transform.basis.y)
+		look_at(transform.origin + velocity, global_transform.basis.y)
 	# Move forward
 	global_position += velocity * delta
 

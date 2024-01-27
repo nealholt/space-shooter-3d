@@ -41,7 +41,7 @@ func Physics_Update(delta:float) -> void:
 	var my_pos:Vector3 = motion.npc.global_position
 	var pos:Vector3 = motion.npc.target_pos
 	var dist_sqd:float = motion.npc.distance_to_target_sqd
-	var basis = motion.npc.transform.basis
+	var basis = motion.npc.global_transform.basis
 
 	# Let's make lerp on target a function of
 	# distance. Snapping to the target at long
