@@ -18,6 +18,7 @@ var target:Node3D
 const target_close_up_dist:=-30.0
 
 var look_at_target : bool = false
+@export var look_speed : float = 60.0
 
 func _physics_process(_delta: float) -> void:
 	if state == CameraState.FLYBY:
@@ -35,10 +36,26 @@ func _physics_process(_delta: float) -> void:
 	# Look at target with first-person cam
 	if look_at_target and state == CameraState.FIRSTPERSON and is_instance_valid(target):
 		first_person_camera.look_at(target.global_position, Global.player.global_transform.basis.y)
+		
+		#first_person_camera.rotation = lerp(first_person_camera.rotation, first_person_camera.get_angle_to(target.global_position),look_speed)
+		#first_person_camera.rotation = lerp_angle(from, to, weight)
+		#first_person_camera.rotation.y=lerp_angle(first_person_camera.rotation.y,atan2(target.global_position.x,target.global_position.z),look_speed*delta)
+		#first_person_camera.rotation.z=lerp(first_person_camera.rotation.z,atan2(-target.global_position.x,-target.global_position.y),look_speed*delta)
+		#first_person_camera.rotation.x=lerp(first_person_camera.rotation.x,atan2(-target.global_position.y,-target.global_position.z),look_speed*delta)
+		#print(first_person_camera.global_position.direction_to(target.global_position))
+		#first_person_camera.global_transform.basis.z = lerp(first_person_camera.global_transform.basis.z, -first_person_camera.global_position.direction_to(target.global_position), look_speed*delta)
+		#first_person_camera.global_transform.basis.z = lerp(first_person_camera.global_transform.basis.z, -first_person_camera.get_angle_to(target.global_position), look_speed*delta)
+		#first_person_camera.transform = Global.interp_face_target(first_person_camera, target.global_position, look_speed*delta)
+		
 	else:
 		# Return to facing forward, or at least way far
 		# forward of the nose of the player.
 		first_person_camera.look_at(first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0, Global.player.global_transform.basis.y)
+		
+		#first_person_camera.transform = Global.interp_face_target(first_person_camera, first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0, look_speed*delta)
+		#var new_transform = first_person_camera.transform.looking_at(first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0, Global.player.global_transform.basis.y)
+		#first_person_camera.transform = first_person_camera.transform.interpolate_with(new_transform, look_speed*delta)
+
 
 
 # Turn on looking at player's target

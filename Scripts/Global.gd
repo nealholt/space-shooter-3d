@@ -61,7 +61,7 @@ func get_angle_to_target(seeker_pos:Vector3, target_pos:Vector3, facing_dir:Vect
 
 # This is just a helper function to organize interpolated
 # turning toward target.
-# I'm pretty sure this is just used in Missile and Enemy
+# I'm pretty sure this is just used in Enemy
 # If delta is zero then no change will be made.
 # If delta is one then seeker will snap to face target.
 # If delta is 0.5 the seeker will cover half the angle
@@ -75,7 +75,7 @@ func interp_face_target(seeker:Node3D, target:Vector3, delta:float) -> Transform
 	#https://kidscancode.org/godot_recipes/4.x/3d/rotate_interpolate/index.html
 	#I use transform.basis.y as relative "up" rather than Vector3.UP
 	#So the object doesn't roll over when the target crosses past high noon
-	var new_transform = seeker.transform.looking_at(target,seeker.transform.basis.y)
+	var new_transform = seeker.transform.looking_at(target,seeker.global_transform.basis.y)
 	return seeker.transform.interpolate_with(new_transform, delta)
 
 
