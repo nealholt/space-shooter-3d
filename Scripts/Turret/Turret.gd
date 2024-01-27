@@ -18,9 +18,9 @@ func _physics_process(_delta: float) -> void:
 	# Shoot if within angle limit
 	#print()
 	#print(head.global_position)
-	#print(turret_model.target_pos)
-	#print(head.global_transform.basis.z)
-	#print(Global.get_angle_to_target(head.global_position,turret_model.target_pos, head.global_transform.basis.z))
+	#print(round(turret_model.target_pos))
+	#print(round(head.global_transform.basis.z))
+	#print(round(rad_to_deg(Global.get_angle_to_target(head.global_position,turret_model.target_pos, head.global_transform.basis.z))))
 	#print(angle_to_shoot)
 	if Global.get_angle_to_target(head.global_position,turret_model.target_pos, head.global_transform.basis.z) < angle_to_shoot:
 		var bullet_data:ShootData = ShootData.new()

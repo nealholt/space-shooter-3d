@@ -1,10 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://da5y8fkeokhyx"]
+[gd_scene load_steps=8 format=3 uid="uid://da5y8fkeokhyx"]
 
 [ext_resource type="Script" path="res://Levels/Level06/TestCam.gd" id="1_qvatm"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_hpnlp"]
 [ext_resource type="PackedScene" uid="uid://yaq7cc3oqfp2" path="res://Scenes/turret.tscn" id="5_hshpx"]
-[ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="5_yx087"]
-[ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles/Bullet/bullet.tscn" id="7_uojmj"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="8_weoc8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gyuqi"]
@@ -23,16 +21,6 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Node3D" type="Node3D"]
-
-[node name="RedTeam_TurretComplete_TurretModel_Body_Head_Turret2#Gun2" parent="." instance=ExtResource("5_yx087")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.7, 0)
-bullet = ExtResource("7_uojmj")
-
-[node name="RedTeam_TurretComplete_TurretModel_Body_Head_Turret1#Gun" parent="." instance=ExtResource("5_yx087")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.7, 0)
-bullet = ExtResource("7_uojmj")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)

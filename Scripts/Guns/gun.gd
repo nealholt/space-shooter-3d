@@ -66,8 +66,9 @@ func _process(_delta):
 		# in half so that a 10 degree spread is truly 10 degrees
 		# not plus or minus 10 degrees, which is a 20 degree spread.
 		var spread:float = deg_to_rad(spread_deg/2.0)
-		b.transform.basis = b.transform.basis.rotated(Vector3.UP, rng.randf_range(-spread, spread))
-		b.transform.basis = b.transform.basis.rotated(Vector3.RIGHT, rng.randf_range(-spread, spread))
+		b.rotate_x(rng.randf_range(-spread, spread))
+		b.rotate_y(rng.randf_range(-spread, spread))
+		b.reset_velocity()
 		# Check if we're done firing this burst
 		if burst_total <= burst_count:
 			firing = false
