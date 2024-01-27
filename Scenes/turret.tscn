@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://yaq7cc3oqfp2"]
+[gd_scene load_steps=11 format=3 uid="uid://yaq7cc3oqfp2"]
 
 [ext_resource type="Script" path="res://Scripts/Turret/Turret.gd" id="1_cbt5p"]
 [ext_resource type="PackedScene" uid="uid://deuokls15ey84" path="res://Assets/turret_model.tscn" id="2_xuhpe"]
-[ext_resource type="Script" path="res://Scripts/Turret/TurretAim.gd" id="3_mxjoc"]
 [ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="4_r7edd"]
 [ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles/Bullet/bullet.tscn" id="5_gg3ek"]
 [ext_resource type="Script" path="res://Scripts/target_selector.gd" id="6_cy7vo"]
@@ -17,12 +16,7 @@ radius = 1.0
 [node name="TurretComplete" type="Node3D" groups=["team property"]]
 script = ExtResource("1_cbt5p")
 
-[node name="TurretModel" parent="." node_paths=PackedStringArray("body", "head") instance=ExtResource("2_xuhpe")]
-script = ExtResource("3_mxjoc")
-elevation_speed_deg = 15.0
-rotation_speed_deg = 15.0
-body = NodePath("Body")
-head = NodePath("Body/Head")
+[node name="TurretModel" parent="." instance=ExtResource("2_xuhpe")]
 
 [node name="Gun" parent="TurretModel/Body/Head/Barrel1" index="0" instance=ExtResource("4_r7edd")]
 unique_name_in_owner = true
