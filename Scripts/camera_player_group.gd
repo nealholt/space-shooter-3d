@@ -32,17 +32,16 @@ func _physics_process(_delta: float) -> void:
 			view_target_from_player()
 		else:
 			first_person()
-	# Look at target
+	# Look at target with first-person cam
 	if look_at_target and state == CameraState.FIRSTPERSON and is_instance_valid(target):
 		first_person_camera.look_at(target.global_position, Global.player.global_transform.basis.y)
 	else:
-		# Return to facing forward, or at least way far forward of
-		# the node of the player.
-		#print(first_person_camera.global_transform.basis.z)
-		#print(first_person_camera.transform.basis.z)
+		# Return to facing forward, or at least way far
+		# forward of the nose of the player.
 		first_person_camera.look_at(first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0, Global.player.global_transform.basis.y)
 
 
+# Turn on looking at player's target
 func turn_on_look() -> void:
 	look_at_target = true
 	if is_instance_valid(Global.player.targeted):

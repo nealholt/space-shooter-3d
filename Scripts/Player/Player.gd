@@ -96,7 +96,9 @@ func shoot_missile(quick_launch:bool) -> void:
 
 
 func change_pov() -> void:
-	# Right thumb stick pressed in
+	# Right thumb stick pressed in. Switch to first person
+	# and as long as right stick is held in, look at
+	# current target.
 	if Input.is_action_just_pressed("POV_standard"):
 		camera_group.first_person()
 		camera_group.turn_on_look()
@@ -120,6 +122,7 @@ func change_pov() -> void:
 	# D-Pad left
 	elif Input.is_action_just_pressed("POV_flyby"):
 		camera_group.flyby_camera()
+	# Turn off target look when right thumbstick is released
 	elif Input.is_action_just_released("POV_standard"):
 		camera_group.look_at_target = false
 
