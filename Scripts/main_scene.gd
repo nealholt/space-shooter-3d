@@ -22,6 +22,7 @@ func _process(_delta):
 	if Global.player and is_instance_valid(Global.player):
 		$HUD/Demo.text = "Velocity: %.0f" % Global.player.velocity.length()
 		$HUD/Demo.text += "\nHealth: %.d" % Global.player.health_component.health
+		$HUD/Demo.text += "\nFPS: %d" % Engine.get_frames_per_second()
 	# Exit on escape key and controller left menu button
 	if Input.is_action_just_pressed('exit'):
 		get_tree().quit()

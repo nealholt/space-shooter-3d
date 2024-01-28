@@ -148,3 +148,4 @@ left_stick_down={
 3d_physics/layer_1="bodies"
 3d_physics/layer_2="bullets"
 3d_physics/layer_3="near_miss"
+3d_physics/layer_4="shields"

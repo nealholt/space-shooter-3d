@@ -1,6 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cj8oysen3h0g8"]
+[gd_scene load_steps=12 format=3 uid="uid://cj8oysen3h0g8"]
 
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="1_op4gw"]
+[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="2_4u7md"]
+[ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_hyt20"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oit57"]
 sky_top_color = Color(1, 0.984314, 0.388235, 1)
@@ -17,7 +19,11 @@ sky = SubResource("Sky_q52wb")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_l5q2i"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kw00b"]
+albedo_color = Color(0.278431, 0.243137, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_478a4"]
+material = SubResource("StandardMaterial3D_kw00b")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b11nt"]
 render_priority = 0
@@ -25,11 +31,7 @@ shader = ExtResource("1_op4gw")
 
 [sub_resource type="SphereMesh" id="SphereMesh_n464a"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kw00b"]
-albedo_color = Color(0.278431, 0.243137, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_478a4"]
-material = SubResource("StandardMaterial3D_kw00b")
+[sub_resource type="SphereShape3D" id="SphereShape3D_0x6dj"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -45,16 +47,23 @@ environment = SubResource("Environment_k0sv6")
 [node name="ShieldHaver" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.12312)
 
-[node name="Shield" type="Area3D" parent="ShieldHaver"]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ShieldHaver"]
+transform = Transform3D(0.5, -0.5, 0.707107, 0.707107, 0.707107, 0, -0.5, 0.5, 0.707107, 0, 0, 0)
+mesh = SubResource("BoxMesh_478a4")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ShieldHaver/Shield"]
-shape = SubResource("SphereShape3D_l5q2i")
+[node name="Shield" type="Node3D" parent="ShieldHaver"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
 [node name="FresnelAura" type="MeshInstance3D" parent="ShieldHaver/Shield"]
 material_override = SubResource("ShaderMaterial_b11nt")
 mesh = SubResource("SphereMesh_n464a")
+skeleton = NodePath("")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ShieldHaver"]
-transform = Transform3D(0.5, -0.5, 0.707107, 0.707107, 0.707107, 0, -0.5, 0.5, 0.707107, 0, 0, 0)
-mesh = SubResource("BoxMesh_478a4")
+[node name="HitBoxComponent" parent="ShieldHaver/Shield" node_paths=PackedStringArray("health_component") instance=ExtResource("2_4u7md")]
+collision_layer = 8
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShieldHaver/Shield/HitBoxComponent"]
+shape = SubResource("SphereShape3D_0x6dj")
+
+[node name="HealthComponent" parent="ShieldHaver/Shield" instance=ExtResource("3_hyt20")]
