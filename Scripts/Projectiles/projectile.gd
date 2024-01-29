@@ -11,12 +11,13 @@ class_name Projectile
 var shooter #Who shot this projectile
 var target # Used for projectiles that seek
 
-var velocity := Vector3.ZERO
+var velocity : Vector3
 var acceleration := Vector3.ZERO #non zero probably only for missiles
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#print("bullet created")
+	velocity = -global_transform.basis.z * speed
 	$Timer.start(time_out)
 
 func set_data(dat:ShootData) -> void:
