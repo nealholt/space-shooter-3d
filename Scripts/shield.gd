@@ -13,9 +13,12 @@ func _process(_delta: float) -> void:
 
 
 func _on_hit_box_component_area_entered(area: Area3D) -> void:
-	print('hit')
+	#print('hit')
 	# https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088252#questions/21003762
 	var spark = sparks.instantiate()
 	add_child(spark)
 	spark.global_position = area.global_position
+	#spark.global_transform.basis.z = -area.global_transform.basis.z
 	spark.global_transform = area.global_transform
+	#spark.rotate_y(deg_to_rad(-90))
+	#spark.rotate_x(deg_to_rad(90))

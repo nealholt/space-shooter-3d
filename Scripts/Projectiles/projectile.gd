@@ -17,6 +17,9 @@ var acceleration := Vector3.ZERO #non zero probably only for missiles
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#print("bullet created")
+	# Give the bullet a default velocity so that you
+	# can put it in scenes and let it fly into a target.
+	# I first used this for testing out the shield bubble.
 	velocity = -global_transform.basis.z * speed
 	$Timer.start(time_out)
 

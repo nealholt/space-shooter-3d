@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles/Bullet/bullet.tscn" id="6_ay6cs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oit57"]
-sky_top_color = Color(1, 0.984314, 0.388235, 1)
-sky_horizon_color = Color(0.8, 0.788235, 0.630392, 1)
+sky_top_color = Color(0.160784, 0.117647, 0.388235, 1)
+sky_horizon_color = Color(0.211765, 0.878431, 0.909804, 1)
 ground_bottom_color = Color(0.2, 0.168627, 0.133333, 1)
 ground_horizon_color = Color(0.8, 0.788235, 0.630392, 1)
 
@@ -78,7 +78,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326245, 0, 10.8496)
 speed = 5.0
 time_out = 40.0
 
+[node name="Bullet2" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -37.9641)
+speed = 5.0
+time_out = 40.0
+
+[node name="Bullet3" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.7821, 0)
+speed = 5.0
+time_out = 40.0
+
+[node name="Bullet4" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 18.1145, 0, 0)
+speed = 5.0
+time_out = 40.0
+
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.122968, 0.0095166, 0.992365, 0.0233476, 0.99965, -0.0124795, -0.992136, 0.0247039, 0.122703, 8.64423, 0.369464, 4.46867)
+transform = Transform3D(0.125042, 0.239061, 0.96292, -0.00554554, 0.97069, -0.24027, -0.992136, 0.0247039, 0.122703, 14.5633, 0.369464, 4.46867)
 
 [connection signal="area_entered" from="ShieldHaver/Shield/HitBoxComponent" to="ShieldHaver/Shield" method="_on_hit_box_component_area_entered"]
