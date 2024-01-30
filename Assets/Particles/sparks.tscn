@@ -72,6 +72,7 @@ _data = {
 }
 
 [node name="Sparks" type="GPUParticles3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 top_level = true
 material_override = SubResource("StandardMaterial3D_lvnn5")
 cast_shadow = 0

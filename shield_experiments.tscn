@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://cj8oysen3h0g8"]
+[gd_scene load_steps=14 format=3 uid="uid://cj8oysen3h0g8"]
 
 [ext_resource type="Script" path="res://Scripts/shield.gd" id="1_e0n5q"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="1_op4gw"]
-[ext_resource type="PackedScene" uid="uid://ctylowk0dxhp3" path="res://Assets/Particles/sparks.tscn" id="2_3y4pb"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="2_4u7md"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_hyt20"]
 [ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles/Bullet/bullet.tscn" id="6_ay6cs"]
@@ -28,11 +27,12 @@ albedo_color = Color(0.278431, 0.243137, 1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_478a4"]
 material = SubResource("StandardMaterial3D_kw00b")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b11nt"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_51wj8"]
 render_priority = 0
 shader = ExtResource("1_op4gw")
 
 [sub_resource type="SphereMesh" id="SphereMesh_n464a"]
+material = SubResource("ShaderMaterial_51wj8")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0x6dj"]
 
@@ -54,16 +54,13 @@ mesh = SubResource("BoxMesh_478a4")
 [node name="Shield" type="Node3D" parent="ShieldHaver"]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 script = ExtResource("1_e0n5q")
-sparks = ExtResource("2_3y4pb")
 
 [node name="FresnelAura" type="MeshInstance3D" parent="ShieldHaver/Shield"]
-material_override = SubResource("ShaderMaterial_b11nt")
 mesh = SubResource("SphereMesh_n464a")
 skeleton = NodePath("")
 
 [node name="HitBoxComponent" parent="ShieldHaver/Shield" node_paths=PackedStringArray("health_component") instance=ExtResource("2_4u7md")]
 collision_layer = 8
-collision_mask = 8
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ShieldHaver/Shield/HitBoxComponent"]
@@ -75,25 +72,29 @@ shape = SubResource("SphereShape3D_0x6dj")
 
 [node name="Bullet" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326245, 0, 10.8496)
+collision_layer = 12
 speed = 5.0
 time_out = 40.0
 
 [node name="Bullet2" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -37.9641)
+collision_layer = 12
 speed = 5.0
 time_out = 40.0
 
 [node name="Bullet3" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.7821, 0)
+collision_layer = 12
 speed = 5.0
 time_out = 40.0
 
 [node name="Bullet4" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 18.1145, 0, 0)
+collision_layer = 12
 speed = 5.0
 time_out = 40.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.125042, 0.239061, 0.96292, -0.00554554, 0.97069, -0.24027, -0.992136, 0.0247039, 0.122703, 14.5633, 0.369464, 4.46867)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12.7172, 0, 0)
 
-[connection signal="area_entered" from="ShieldHaver/Shield/HitBoxComponent" to="ShieldHaver/Shield" method="_on_hit_box_component_area_entered"]
+[connection signal="health_lost" from="ShieldHaver/Shield/HealthComponent" to="ShieldHaver/Shield" method="_on_health_component_health_lost"]

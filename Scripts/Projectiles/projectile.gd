@@ -4,6 +4,8 @@ class_name Projectile
 # Bullets and missiles and really any projectiles inherit
 # from this class.
 
+@export var sparks : PackedScene
+
 @export var steer_force: float = 50.0 # Used for projectiles that seek
 @export var speed:float = 1000.0
 @export var damage:float = 1.0
@@ -93,8 +95,21 @@ func damage_and_die(body):
 	if body.is_in_group("damageable"):
 		#print("dealt damage")
 		body.damage(damage)
+	
+	# Make a spark
+	# https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088252#questions/21003762
+	var spark = sparks.instantiate()
+	get_tree().get_root().add_child(spark)
+	spark.global_position = global_position
+	#spark.global_transform.basis.z = -area.global_transform.basis.z
+	#spark.global_transform = area.global_transform
+	spark.transform = transform
+	#spark.rotate_y(deg_to_rad(-90))
+	#spark.rotate_x(deg_to_rad(90))
+	
 	#Delete bullets that strike a body
-	queue_free()
+	Callable(queue_free).call_deferred()
+
 
 func _on_timer_timeout() -> void:
 	#print('bullet timed out')
