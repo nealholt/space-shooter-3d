@@ -45,12 +45,12 @@ func on_child_transition(state, new_state_name):
 		$GoTo.too_close_sqd = 1000.0**2
 	
 	if state != current_state:
-		print('in state machine state != current_state')
+		#print('in state machine state != current_state')
 		return
 	
 	var new_state = states.get(new_state_name.to_lower())
 	if !new_state:
-		print('in state machine !new_state')
+		#print('in state machine !new_state')
 		return
 	
 	if current_state:

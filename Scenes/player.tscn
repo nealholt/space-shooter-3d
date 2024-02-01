@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=33 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_rf46g"]
 [ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="2_2p718"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://dr6bn0u22ke7d" path="res://Assets/SoundEffects/missile/launch.wav" id="17_5165r"]
 [ext_resource type="AudioStream" uid="uid://dwo2npq3c18sx" path="res://Assets/SoundEffects/missile/quick_launch.wav" id="18_piaxr"]
 [ext_resource type="Script" path="res://Scripts/camera_player_group.gd" id="19_342x2"]
+[ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="21_5ow11"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7tg00"]
 
@@ -224,6 +225,9 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.3, -
 
 [node name="FreeCamera" type="Camera3D" parent="CameraGroup"]
 top_level = true
+
+[node name="Shield" parent="." instance=ExtResource("21_5ow11")]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [connection signal="area_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_area_entered"]
 [connection signal="body_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_body_entered"]

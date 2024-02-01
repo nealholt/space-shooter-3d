@@ -89,7 +89,7 @@ func _on_health_component_health_lost() -> void:
 	# Force a switch into evasion state
 	$StateMachine.go_evasive()
 	# Play hit sound
-	print('hit on hull')
+	#print('hit on hull')
 
 
 func _on_health_component_died() -> void:

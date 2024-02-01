@@ -16,6 +16,10 @@ var target # Used for projectiles that seek
 var velocity : Vector3
 var acceleration := Vector3.ZERO #non zero probably only for missiles
 
+# This is a list of bodies and areas to ignore.
+# Currently it is used for shields.
+var ignore_list : Array = Array()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#print("bullet created")
@@ -91,6 +95,26 @@ func seek() -> Vector3:
 
 
 func damage_and_die(body):
+	# In order to fire from within a shield, we need
+	# to ignore immediate collisions. So if any
+	# bullet collides with another object in the first
+	# 2/100ths of a second, ignore that collision and
+	# add the collided object to an ignore list.
+	# 2/100ths was found through testing to be a good
+	# cut off.
+	if $Timer.wait_time - $Timer.time_left <= 0.02:
+		ignore_list.push_back(body)
+		return
+	
+	# Testing
+	#print($Timer.wait_time - $Timer.time_left)
+	
+	# Check for bodies that should be ignored.
+	# This is for firing from within a shield.
+	# Bullets should pass out of shields, but not
+	# enter the shield.
+	if ignore_list.has(body):
+		return
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
 	if body.is_in_group("damageable"):
 		#print("dealt damage")
