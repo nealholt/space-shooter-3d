@@ -3,7 +3,7 @@
 [sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_6fgoh"]
 default_input_values = [2, false, 3, 2.0]
 
-[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_qnejd"]
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_pbrrv"]
 constant = Color(0, 0.643137, 0.780392, 1)
 
 [resource]
@@ -31,9 +31,9 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-298.695, 102.126)
+graph_offset = Vector2(-323.045, 75.8126)
 nodes/fragment/2/node = SubResource("VisualShaderNodeFresnel_6fgoh")
 nodes/fragment/2/position = Vector2(-140, 200)
-nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_qnejd")
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_pbrrv")
 nodes/fragment/3/position = Vector2(-91.4933, 410.264)
 nodes/fragment/connections = PackedInt32Array(2, 0, 0, 1, 3, 0, 0, 0, 3, 0, 0, 5)

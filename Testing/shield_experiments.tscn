@@ -1,9 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://cj8oysen3h0g8"]
+[gd_scene load_steps=8 format=3 uid="uid://cj8oysen3h0g8"]
 
-[ext_resource type="Script" path="res://Scripts/shield.gd" id="1_e0n5q"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="1_op4gw"]
-[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="2_4u7md"]
-[ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_hyt20"]
+[ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="1_8h41v"]
 [ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles/Bullet/bullet.tscn" id="6_ay6cs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oit57"]
@@ -27,15 +24,6 @@ albedo_color = Color(0.278431, 0.243137, 1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_478a4"]
 material = SubResource("StandardMaterial3D_kw00b")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_51wj8"]
-render_priority = 0
-shader = ExtResource("1_op4gw")
-
-[sub_resource type="SphereMesh" id="SphereMesh_n464a"]
-material = SubResource("ShaderMaterial_51wj8")
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_0x6dj"]
-
 [node name="Node3D" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -51,22 +39,7 @@ environment = SubResource("Environment_k0sv6")
 transform = Transform3D(0.5, -0.5, 0.707107, 0.707107, 0.707107, 0, -0.5, 0.5, 0.707107, 0, 0, 0)
 mesh = SubResource("BoxMesh_478a4")
 
-[node name="Shield" type="Node3D" parent="ShieldHaver"]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
-script = ExtResource("1_e0n5q")
-
-[node name="FresnelAura" type="MeshInstance3D" parent="ShieldHaver/Shield"]
-mesh = SubResource("SphereMesh_n464a")
-skeleton = NodePath("")
-
-[node name="HitBoxComponent" parent="ShieldHaver/Shield" node_paths=PackedStringArray("health_component") instance=ExtResource("2_4u7md")]
-collision_layer = 8
-health_component = NodePath("../HealthComponent")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ShieldHaver/Shield/HitBoxComponent"]
-shape = SubResource("SphereShape3D_0x6dj")
-
-[node name="HealthComponent" parent="ShieldHaver/Shield" instance=ExtResource("3_hyt20")]
+[node name="Shield" parent="ShieldHaver" instance=ExtResource("1_8h41v")]
 
 [node name="BulletGroup" type="Node3D" parent="."]
 
@@ -96,5 +69,3 @@ time_out = 40.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12.7172, 0, 0)
-
-[connection signal="health_lost" from="ShieldHaver/Shield/HealthComponent" to="ShieldHaver/Shield" method="_on_health_component_health_lost"]
