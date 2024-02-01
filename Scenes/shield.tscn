@@ -15,7 +15,6 @@ material = SubResource("ShaderMaterial_51wj8")
 [sub_resource type="SphereShape3D" id="SphereShape3D_0x6dj"]
 
 [node name="Shield" type="Node3D"]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 script = ExtResource("1_xlxvf")
 
 [node name="FresnelAura" type="MeshInstance3D" parent="."]
@@ -24,11 +23,12 @@ skeleton = NodePath("")
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_6jkow")]
 collision_layer = 8
-health_component = NodePath("")
+health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
 shape = SubResource("SphereShape3D_0x6dj")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_t4iu0")]
 
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=26 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
 [ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="2_icaxw"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="20_a8xhu"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="21_guuve"]
 [ext_resource type="Script" path="res://Scripts/target_selector.gd" id="22_4r1yh"]
+[ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="23_fxr37"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rh3fl"]
 
@@ -104,6 +105,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 
 [node name="TargetSelector" type="Node" parent="." groups=["team property"]]
 script = ExtResource("22_4r1yh")
+
+[node name="Shield" parent="." instance=ExtResource("23_fxr37")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]

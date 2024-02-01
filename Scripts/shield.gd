@@ -38,5 +38,9 @@ func _on_health_component_health_lost() -> void:
 	#print(shader_ref.get_shader_parameter("power"))
 	#print(shader_ref.get_shader_parameter("Alpha"))
 	
-	#print('testing')
+	print('testing: hit on shield')
 	pass # Replace with function body.
+
+
+func _on_health_component_died() -> void:
+	queue_free()
