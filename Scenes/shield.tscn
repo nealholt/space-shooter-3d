@@ -21,7 +21,7 @@ script = ExtResource("1_xlxvf")
 mesh = SubResource("SphereMesh_n464a")
 skeleton = NodePath("")
 
-[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_6jkow")]
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["shield"] instance=ExtResource("3_6jkow")]
 collision_layer = 8
 health_component = NodePath("../HealthComponent")
 
