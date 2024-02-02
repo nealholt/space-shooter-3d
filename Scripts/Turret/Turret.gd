@@ -60,11 +60,6 @@ func _physics_process(delta: float) -> void:
 		gun_2.shoot(bullet_data)
 
 
-# This function is duplicated in FighterNPC script
-func set_targeted(value:bool) -> void:
-	$TargetReticles.is_targeted = value
-
-
 func _on_health_component_health_lost() -> void:
 	hit_feedback.hit()
 

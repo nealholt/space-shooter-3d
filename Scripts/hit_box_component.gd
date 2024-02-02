@@ -11,3 +11,8 @@ func damage(amount:int):
 		health_component.health -= amount
 	if hit_feedback:
 		hit_feedback.hit()
+
+
+# This is called when the player targets this hitbox component
+func set_targeted(value:bool) -> void:
+	$TargetReticles.is_targeted = value

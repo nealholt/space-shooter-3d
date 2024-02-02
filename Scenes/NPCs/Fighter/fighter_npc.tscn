@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=25 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
 [ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="2_icaxw"]
@@ -20,7 +20,6 @@
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_goto.gd" id="18_j6vej"]
 [ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/fighter_chassis_ring.tscn" id="19_x2ba7"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="20_a8xhu"]
-[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="21_guuve"]
 [ext_resource type="Script" path="res://Scripts/target_selector.gd" id="22_4r1yh"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="23_fxr37"]
 
@@ -29,7 +28,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_ydoww"]
 radius = 3.0
 
-[node name="FighterNPC" type="CharacterBody3D" groups=["team member"]]
+[node name="FighterNPC" type="CharacterBody3D"]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
 motion_mode = 1
 script = ExtResource("1_hmqk0")
@@ -100,8 +99,6 @@ fixed_size = true
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1)
 
 [node name="Contrail" parent="." instance=ExtResource("20_a8xhu")]
-
-[node name="TargetReticles" parent="." instance=ExtResource("21_guuve")]
 
 [node name="TargetSelector" type="Node" parent="." groups=["team property"]]
 script = ExtResource("22_4r1yh")

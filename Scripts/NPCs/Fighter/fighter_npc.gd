@@ -101,7 +101,3 @@ func _on_health_component_died() -> void:
 	# Wait until the end of the frame to execute queue_free
 	Callable(queue_free).call_deferred()
 
-
-# This function is dubplicated in TurretComplete script
-func set_targeted(value:bool) -> void:
-	$TargetReticles.is_targeted = value
