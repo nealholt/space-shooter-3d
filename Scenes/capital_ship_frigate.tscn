@@ -1,5 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://dp3w08p8gkd3p"]
+[gd_scene load_steps=27 format=3 uid="uid://dp3w08p8gkd3p"]
 
+[ext_resource type="Script" path="res://Scripts/capital_ship_frigate.gd" id="1_nf210"]
 [ext_resource type="PackedScene" uid="uid://bh2v67l31a2lg" path="res://Assets/CapitalShips/frigate_model.tscn" id="1_ukj0d"]
 [ext_resource type="PackedScene" uid="uid://yaq7cc3oqfp2" path="res://Scenes/turret.tscn" id="2_3hybn"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="2_ffelx"]
@@ -50,10 +51,72 @@ points = PackedVector3Array(13.3531, 38.3381, -5.81685, -14.5743, -38.0898, -1.3
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w81vi"]
 points = PackedVector3Array(13.3531, 38.3381, -5.81685, -14.5743, -38.0898, -1.38084, -14.5635, -38.0617, 1.54136, 13.423, -40.0167, -4.36465, 2.97894, 36.2532, 14.5857, -7.14273, 37.56, -12.9249, 8.82055, -37.8787, 11.7362, 1.54136, -38.0617, -14.5635, -13.0263, 39.303, 5.90378, -7.1389, -36.0927, 13.0768, 13.316, 38.2312, 5.96201, -5.99236, -48.5929, 1.59581, 7.26899, 37.3911, -12.8665, 4.62039, 48.4408, 4.62039, -9.8376, -35.4112, -11.2551, -14.3006, 35.9373, -4.23069, -7.13889, 36.0927, 13.0768, 14.5857, -36.2532, 2.97894, -1.43465, 48.6102, -5.99453, 9.9498, -33.8317, -11.2019, -2.8224, -36.3162, 14.611, 4.62039, -48.4408, 4.62039, -2.92604, -46.6442, -8.94863, -12.4167, -31.9261, 8.40823, 1.54136, 38.0617, -14.5635, 11.2721, 33.5662, 9.87234, -7.42321, 46.5216, 6.08319, -4.23069, -35.9373, -14.3006, 14.611, 36.3162, -2.8224, -10.3868, 44.8469, -4.4028, 6.08319, -46.5216, -7.42321, -4.39135, -44.7323, 10.5188)
 
+[sub_resource type="Animation" id="Animation_ltsdl"]
+resource_name = "OpenReactorShield"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FrigateModel/ReactorShieldLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-15, -37, 0), Vector3(-37, -37, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FrigateModel/ReactorShieldRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(15, -37, 0), Vector3(37, -37, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3iay6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FrigateModel/ReactorShieldLeft:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-15, -37, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FrigateModel/ReactorShieldRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(15, -37, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vnrft"]
+_data = {
+"OpenReactorShield": SubResource("Animation_ltsdl"),
+"RESET": SubResource("Animation_3iay6")
+}
+
 [node name="CapitalShipFrigate" type="CharacterBody3D"]
 collision_layer = 3
 collision_mask = 3
 motion_mode = 1
+script = ExtResource("1_nf210")
 
 [node name="FrigateModel" parent="." instance=ExtResource("1_ukj0d")]
 
@@ -233,5 +296,18 @@ transform = Transform3D(4.37114e-08, 1, -8.74228e-08, 1, -4.37114e-08, 0, -3.821
 
 [node name="TurretComplete5" parent="Turrets" instance=ExtResource("2_3hybn")]
 transform = Transform3D(4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, -3.82137e-15, 8.74228e-08, -1, -37, 0, 0)
+
+[node name="ReactorOpenAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vnrft")
+}
+
+[connection signal="died" from="FrigateModel/Reactor/HealthComponent" to="." method="_on_reactor_died"]
+[connection signal="died" from="FrigateModel/StrutLeft1/Radiator1/HealthComponent" to="." method="_on_radiator1_died"]
+[connection signal="died" from="FrigateModel/StrutLeft2/Radiator2/HealthComponent" to="." method="_on_radiator2_died"]
+[connection signal="died" from="FrigateModel/StrutLeft3/Radiator3/HealthComponent" to="." method="_on_radiator3_died"]
+[connection signal="died" from="FrigateModel/StrutRight1/Radiator4/HealthComponent" to="." method="_on_radiator4_died"]
+[connection signal="died" from="FrigateModel/StrutRight2/Radiator5/HealthComponent" to="." method="_on_radiator5_died"]
+[connection signal="died" from="FrigateModel/StrutRight3/Radiator6/HealthComponent" to="." method="_on_radiator6_died"]
 
 [editable path="FrigateModel"]
