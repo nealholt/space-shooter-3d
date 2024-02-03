@@ -18,7 +18,7 @@ var target:Node3D
 const target_close_up_dist:=-30.0
 
 var look_at_target : bool = false
-@export var look_speed : float = 60.0
+@export var look_speed : float = 59.0
 
 func _physics_process(_delta: float) -> void:
 	if state == CameraState.FLYBY:
@@ -37,6 +37,11 @@ func _physics_process(_delta: float) -> void:
 	if look_at_target and state == CameraState.FIRSTPERSON and is_instance_valid(target):
 		first_person_camera.look_at(target.global_position, Global.player.global_transform.basis.y)
 		
+		# Here's where I tried it using the code copied from 
+		# Global.interp_face_target. Doesn't work.
+		#var new_transform = first_person_camera.transform.looking_at(target.global_position,first_person_camera.global_transform.basis.y)
+		#first_person_camera.transform = first_person_camera.transform.interpolate_with(new_transform, delta*look_speed)
+		
 		#first_person_camera.rotation = lerp(first_person_camera.rotation, first_person_camera.get_angle_to(target.global_position),look_speed)
 		#first_person_camera.rotation = lerp_angle(from, to, weight)
 		#first_person_camera.rotation.y=lerp_angle(first_person_camera.rotation.y,atan2(target.global_position.x,target.global_position.z),look_speed*delta)
@@ -51,6 +56,12 @@ func _physics_process(_delta: float) -> void:
 		# Return to facing forward, or at least way far
 		# forward of the nose of the player.
 		first_person_camera.look_at(first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0, Global.player.global_transform.basis.y)
+		
+		# Here's where I tried it using the code copied from 
+		# Global.interp_face_target but with the player's up
+		# as the "look"s up. Doesn't work.
+		#var new_transform = first_person_camera.transform.looking_at(first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0, Global.player.global_transform.basis.y)
+		#first_person_camera.transform = first_person_camera.transform.interpolate_with(new_transform, delta*look_speed)
 		
 		#first_person_camera.transform = Global.interp_face_target(first_person_camera, first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0, look_speed*delta)
 		#var new_transform = first_person_camera.transform.looking_at(first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0, Global.player.global_transform.basis.y)
