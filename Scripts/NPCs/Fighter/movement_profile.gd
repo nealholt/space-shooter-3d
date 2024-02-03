@@ -34,6 +34,12 @@ var goal_roll:float
 # function.
 var new_transform
 
+# Hopefully this variable will replace new_transform
+# so that enemies turn more gracefully toward their
+# target rather than snapping straight to a new
+# transform.
+var acceleration : Vector3
+
 # Use this to enable the NPC to indicate
 # (based on getting shot) that it wants to change
 # state. Evasion can't be interrupted because
@@ -47,3 +53,4 @@ func reset() -> void:
 	goal_roll = 0.0
 	new_transform = null
 	can_interrupt_state = true
+	acceleration = Vector3.ZERO

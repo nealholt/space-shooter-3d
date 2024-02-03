@@ -50,6 +50,14 @@ func Physics_Update(delta:float) -> void:
 	var weight : float = clamp(interp_factor * dist_sqd * delta, 0.0,1.0)
 	motion.new_transform = Global.interp_face_target(motion.npc, pos, weight)
 	
+	# New way
+	# This code is duplicated in projectile.gd, state_lockon.gd, and state_goto.gd
+	# Calculate the desired velocity, normalized and then
+	# multiplied by speed.
+	var desired : Vector3 = (pos-my_pos).normalized() * motion.npc.speed
+	# Return an adjustment to velocity based on the steer force.
+	motion.acceleration = (desired - motion.npc.velocity).normalized()
+	
 	# Slow down a little on approach to target
 	motion.goal_speed = clamp(dist_sqd/speed_scaling_sqd, speed_min, 1.0)
 	

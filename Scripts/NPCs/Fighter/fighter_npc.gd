@@ -56,6 +56,20 @@ func _physics_process(delta):
 	# snap to given transform or lerp to desired turning amount
 	if profile.new_transform:
 		transform = profile.new_transform
+	# Testing new way
+	#if profile.acceleration != Vector3.ZERO:
+		## You should use pitch, yaw, or roll to modify the
+		## acceleration so I chose pitch arbitrarily.
+		## This takes the place of steer_force used in 
+		## projectile.gd
+		##print()
+		##print(velocity)
+		##print(profile.acceleration)
+		##print($StateMachine.current_state)
+		#velocity += profile.acceleration * pitch_amt * delta
+		#current_speed = lerp(current_speed, profile.goal_speed * speed, acceleration*delta)
+		## Need to have ship looking at the new direction
+		#look_at(global_position + velocity)
 	else:
 		# Lerp toward desired settings
 		pitch_str = lerp(pitch_str, profile.goal_pitch * pitch_amt, lerp_str*delta)
@@ -68,8 +82,9 @@ func _physics_process(delta):
 		transform.basis = transform.basis.rotated(transform.basis.z, roll_str * delta)
 		# Yaw
 		transform.basis = transform.basis.rotated(transform.basis.y, yaw_str * delta)
-	# Move straight ahead
+		# Update velocity
 	velocity = -transform.basis.z * current_speed * delta
+	# Move straight ahead
 	move_and_slide()
 	# Move, collide, and bounce off
 	# Resources used:
