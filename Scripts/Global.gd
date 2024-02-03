@@ -52,10 +52,12 @@ func get_angle_to_target(seeker_pos:Vector3, target_pos:Vector3, facing_dir:Vect
 	# to see if target is to the left or right.
 	# Return value guaranteed to be between 0 and pi
 	var dir_to = seeker_pos.direction_to(target_pos)
-	# Normalizing does not seem to be necessary at
-	# all, but I'll leave this here in case
-	#facing_dir = facing_dir.normalized()
-	#dir_to = dir_to.normalized()
+	# Normalizing IS necessary under certain circumstances,
+	# which do occur. Having the next two lines commented
+	# was what was making the turret fire even when it
+	# wasn't facing the player.
+	facing_dir = facing_dir.normalized()
+	dir_to = dir_to.normalized()
 	return acos(facing_dir.dot(dir_to))
 
 
