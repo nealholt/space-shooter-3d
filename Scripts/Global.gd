@@ -5,7 +5,7 @@ extends Node
 # This is a location for anything we want to be globally accessible.
 
 var main_scene: MainScene
-var player: CharacterBody3D
+var player: CharacterBody3D #TODO Where is this set? I think it might be unused and null!
 # For now I'm globally turning off the hud when in
 # camera views other than first person.
 var targeting_hud_on:bool = true

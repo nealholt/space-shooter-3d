@@ -60,7 +60,7 @@ func on_child_transition(state, new_state_name):
 	
 	current_state = new_state
 	# TESTING DEBUGGING
-	$"../DebugLabel".text = new_state_name
+	#$"../DebugLabel".text = new_state_name
 	
 
 func go_evasive() -> void:

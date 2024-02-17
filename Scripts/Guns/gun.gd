@@ -35,6 +35,13 @@ var range_sqd:float
 # ease of communicating this info up the tree.
 var bullet_speed:float
 
+@export var fire_sound: AudioStream
+@export var reload_sound: AudioStream
+# sound players to be created in _ready()
+var fire_sound_player: AudioStreamPlayer3D
+var reload_sound_player: AudioStreamPlayer3D
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Ask bullets for their range
@@ -43,11 +50,22 @@ func _ready():
 	range_sqd = range_sqd*range_sqd
 	bullet_speed = b.speed
 	b.queue_free()
+	# create fire audio stream
+	fire_sound_player = AudioStreamPlayer3D.new()
+	fire_sound_player.stream = fire_sound
+	fire_sound_player.volume_db = -10.0 #quieter
+	add_child(fire_sound_player)
+	# create reload audio stream
+	reload_sound_player = AudioStreamPlayer3D.new()
+	reload_sound_player.stream = reload_sound
+	reload_sound_player.volume_db = -10.0 #quieter
+	add_child(reload_sound_player)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if firing and can_burst:
+		fire_sound_player.playing = true
 		# Start countdown to next burst
 		burst_timer.start(1.0/burst_rate)
 		burst_count += 1 # Count this burst
@@ -71,6 +89,8 @@ func _process(_delta):
 		b.reset_velocity()
 		# Check if we're done firing this burst
 		if burst_total <= burst_count:
+			fire_sound_player.playing = false
+			reload_sound_player.play()
 			firing = false
 			burst_count = 0 # Reset burst count
 			# Reset can_burst to true so that it doesn't
@@ -81,6 +101,7 @@ func _process(_delta):
 		# should not self-whiff
 		if turn_off_near_miss:
 			b.set_collision_layer_value(3, false)
+
 
 # Returns true if successful. The return is useful for
 # animations and sounds
@@ -93,6 +114,7 @@ func shoot(shoot_data:ShootData) -> bool:
 		data = shoot_data
 		return true
 	return false
+
 
 #firing_rate_timer serves as cooldown between shots
 func _on_timer_timeout():

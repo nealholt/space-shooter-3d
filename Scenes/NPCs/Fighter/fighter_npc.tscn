@@ -92,6 +92,7 @@ script = ExtResource("17_3ou27")
 script = ExtResource("18_j6vej")
 
 [node name="DebugLabel" type="Label3D" parent="."]
+visible = false
 billboard = 1
 fixed_size = true
 

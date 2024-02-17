@@ -108,7 +108,7 @@ func move(mover, delta:float) -> void:
 	var collision :KinematicCollision3D = mover.move_and_collide(mover.velocity * delta)
 	if collision:
 		mover.velocity = mover.velocity.bounce(collision.get_normal())
-		# Apply an impulse and a torqur to whatever we hit.
+		# Apply an impulse and a torque to whatever we hit.
 		# Except don't really because you should check that
 		# we hit a rigid body, otherwise this throws an error.
 		# https://docs.godotengine.org/en/stable/classes/class_rigidbody2d.html#class-rigidbody2d-method-apply-central-impulse
