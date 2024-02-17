@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://cw48yj3xo71eo"]
+
+[ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/ParticleImages/star_04.png" id="1_g0vao"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l56mc"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.534314, 0.534314, 0.534314, 1)
+sky_energy_multiplier = 0.2
+ground_bottom_color = Color(0.137255, 0.137255, 0.137255, 1)
+ground_horizon_color = Color(0.534314, 0.534314, 0.534314, 1)
+
+[sub_resource type="Sky" id="Sky_q0k4n"]
+sky_material = SubResource("ProceduralSkyMaterial_l56mc")
+
+[sub_resource type="Environment" id="Environment_nih68"]
+background_mode = 2
+sky = SubResource("Sky_q0k4n")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46d27"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_g0vao")
+
+[sub_resource type="Curve" id="Curve_q0lff"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_3v3hb"]
+max_value = 5.0
+_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_c26l3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_e2srq"]
+curve_x = SubResource("Curve_q0lff")
+curve_y = SubResource("Curve_3v3hb")
+curve_z = SubResource("Curve_c26l3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6agb2"]
+particle_flag_align_y = true
+emission_shape = 1
+emission_sphere_radius = 0.2
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_curve = SubResource("CurveXYZTexture_e2srq")
+color = Color(5, 2, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_u36mk"]
+
+[node name="explosion_experiment" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nih68")
+
+[node name="Explosion00" type="Node3D" parent="."]
+
+[node name="Sparks" type="GPUParticles3D" parent="Explosion00"]
+material_override = SubResource("StandardMaterial3D_46d27")
+emitting = false
+amount = 20
+lifetime = 0.6
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_6agb2")
+draw_pass_1 = SubResource("QuadMesh_u36mk")
