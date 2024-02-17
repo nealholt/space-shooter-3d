@@ -58,7 +58,7 @@ func _ready():
 	# create reload audio stream
 	reload_sound_player = AudioStreamPlayer3D.new()
 	reload_sound_player.stream = reload_sound
-	reload_sound_player.volume_db = -10.0 #quieter
+	reload_sound_player.volume_db = -20.0 #quieter
 	add_child(reload_sound_player)
 
 

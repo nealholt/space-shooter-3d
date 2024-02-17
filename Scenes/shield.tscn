@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cruqo01kbn3ab"]
+[gd_scene load_steps=9 format=3 uid="uid://cruqo01kbn3ab"]
 
 [ext_resource type="Script" path="res://Scripts/shield.gd" id="1_xlxvf"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_1831n"]
+[ext_resource type="PackedScene" uid="uid://d3pdq381luwwg" path="res://Scenes/pop_player.tscn" id="2_2807u"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="3_6jkow"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="4_t4iu0"]
 
@@ -16,6 +17,7 @@ material = SubResource("ShaderMaterial_51wj8")
 
 [node name="Shield" type="Node3D"]
 script = ExtResource("1_xlxvf")
+pop_player = ExtResource("2_2807u")
 
 [node name="FresnelAura" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_n464a")

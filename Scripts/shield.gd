@@ -4,6 +4,9 @@ extends Node3D
 # Create a VisualShaderNodeFloatParameter
 #var float_param := VisualShaderNodeFloatParameter.new()
 
+# Sound to be played on death. Self-freeing.
+@export var pop_player: PackedScene
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# I tried the following based on this:
@@ -43,4 +46,9 @@ func _on_health_component_health_lost() -> void:
 
 
 func _on_health_component_died() -> void:
-	queue_free()
+	# Create self-freeing audio to play pop sound
+	var on_death_sound = pop_player.instantiate()
+	get_tree().get_root().add_child(on_death_sound)
+	on_death_sound.play_then_delete(global_position)
+	# Wait until the end of the frame to execute queue_free
+	Callable(queue_free).call_deferred()
