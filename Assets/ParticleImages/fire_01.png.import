@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://doe5cj2wsyysc"
-path.s3tc="res://.godot/imported/spark_01.png-70a6b41f5a0724dae4693b50f38cafee.s3tc.ctex"
+uid="uid://cqxy5k2dm2wt8"
+path.s3tc="res://.godot/imported/fire_01.png-b5b733a0367ad80fe88e92a1c14145ff.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/ParticleImages/spark_01.png"
-dest_files=["res://.godot/imported/spark_01.png-70a6b41f5a0724dae4693b50f38cafee.s3tc.ctex"]
+source_file="res://Assets/ParticleImages/fire_01.png"
+dest_files=["res://.godot/imported/fire_01.png-b5b733a0367ad80fe88e92a1c14145ff.s3tc.ctex"]
 
 [params]
 

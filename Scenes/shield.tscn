@@ -9,6 +9,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_51wj8"]
 render_priority = 0
 shader = ExtResource("2_1831n")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_n464a"]
 material = SubResource("ShaderMaterial_51wj8")

@@ -1,8 +1,15 @@
 extends Node3D
 
-@onready var shader_ref : VisualShader = $FresnelAura.mesh.surface_get_material(0).shader
-# Create a VisualShaderNodeFloatParameter
-#var float_param := VisualShaderNodeFloatParameter.new()
+@onready var shader_ref : ShaderMaterial = $FresnelAura.mesh.surface_get_material(0)
+var fresnel_power_current := 2.0
+var fresnel_power_default := 2.0
+var fresnel_power_when_struck := 0.05
+var fresnel_power_lerp_speed := 30.0
+
+var fresnel_emission_current := 1.0
+var fresnel_emission_default := 1.0
+var fresnel_emission_when_struck := 100.0
+var fresnel_emission_lerp_speed := 10.0
 
 # Sound to be played on death. Self-freeing.
 @export var pop_player: PackedScene
@@ -25,24 +32,19 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-
+func _physics_process(delta: float) -> void:
+	# Drift fresnel parameters back toward default after being struck
+	fresnel_power_current = lerp(fresnel_power_current, fresnel_power_default, delta * fresnel_power_lerp_speed)
+	fresnel_emission_current = lerp(fresnel_emission_current, fresnel_emission_default, delta * fresnel_emission_lerp_speed)
+	# https://forum.godotengine.org/t/how-to-access-change-visualshader-uniform-variables-from-within-a-script/19668
+	shader_ref.set("shader_parameter/FresnelPower", fresnel_power_current)
+	shader_ref.set("shader_parameter/EmissionStrength", fresnel_emission_current)
 
 
 func _on_health_component_health_lost() -> void:
-	#shader_ref.get_shader_param("AlphaKnob")
-	#shader_ref.set_shader_parameter("ColorConstant", Color.RED)
-	#shader_ref.set_shader_parameter("Fresnel/power", 0.2)
-	
-	#print()
-	#print(shader_ref.get_shader_parameter("ColorConstant"))
-	#print(shader_ref.get_shader_parameter("Fresnel"))
-	#print(shader_ref.get_shader_parameter("power"))
-	#print(shader_ref.get_shader_parameter("Alpha"))
-	
-	#print('testing: hit on shield')
-	pass # Replace with function body.
+	# Dramatically alter shield opacity and emission when struck
+	fresnel_power_current = fresnel_power_when_struck
+	fresnel_emission_current = fresnel_emission_when_struck
 
 
 func _on_health_component_died() -> void:
