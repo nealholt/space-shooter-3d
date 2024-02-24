@@ -29,3 +29,7 @@ var health: int:
 func _ready():
 	health = max_health
 
+
+func set_max_health(h:int) -> void:
+	max_health = h
+	health = h

@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var max_health := 10
+
 @onready var shader_ref : ShaderMaterial = $FresnelAura.mesh.surface_get_material(0)
 var fresnel_power_current := 2.0
 var fresnel_power_default := 2.0
@@ -16,19 +18,7 @@ var fresnel_emission_lerp_speed := 10.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# I tried the following based on this:
-	# https://gamedevacademy.org/visualshadernodefloatparameter-in-godot-complete-guide/
-	# but a bunch of the functions it gave don't exist.
-	## Set a default value for the parameter
-	#float_param.default_value = 0.5
-	## Give it a name so we can identify it later
-	#float_param.parameter_name = "transparency"
-	## To make the transparency effective, we connect the parameter's output to the shader's alpha
-	##var output_node = shader_ref.get_graph_node(VisualShader.TYPE_FRAGMENT)
-	#var output_node = shader_ref.get_node(VisualShader.TYPE_FRAGMENT, VisualShader.NODE_ID_OUTPUT)
-	#shader_ref.connect_nodes(VisualShader.TYPE_FRAGMENT, float_param.get_instance_id(), float_param.get_output_port_index("value"), output_node.get_instance_id(), output_node.get_input_port_index("alpha"))
-	pass
-
+	$HealthComponent.set_max_health(max_health)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
