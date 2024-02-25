@@ -41,6 +41,7 @@ mesh = SubResource("BoxMesh_478a4")
 
 [node name="Shield" parent="ShieldHaver" instance=ExtResource("1_8h41v")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+max_health = 2
 
 [node name="BulletGroup" type="Node3D" parent="."]
 

@@ -14,6 +14,21 @@ var targeting_hud_on:bool = true
 # Control-Shift-f to search for anywhere text is found
 
 
+# Tell all children of given node to start emitting.
+# This seems like a reasonable way to trigger
+# particle effects that are children of a Node3D
+# This function returns the longest particle
+# lifetime in case the caller needs to queue_free
+# afterward
+func all_emit(node:Node3D) -> float:
+	var max_lifetime := 0.0
+	for n in node.get_children():
+		n.set_emitting(true)
+		if n.lifetime > max_lifetime:
+			max_lifetime = n.lifetime
+	return max_lifetime
+
+
 # Get the member of the given group who is nearest to
 # the center of the looker's view.
 # This is initially used by seeking missiles and

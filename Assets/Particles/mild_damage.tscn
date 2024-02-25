@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk37kibucmpd0"]
+
+[ext_resource type="Shader" uid="uid://f1k01v3aocxo" path="res://Assets/Shaders/FireShader.tres" id="1_q8wva"]
+[ext_resource type="Texture2D" uid="uid://dj56rpx4qmqh7" path="res://Assets/ParticleImages/flame_03.png" id="2_t4108"]
+[ext_resource type="Material" uid="uid://c5bww2oms7d84" path="res://Assets/Particles/fire_particle_process_material.tres" id="3_qcsm0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fhde2"]
+render_priority = 0
+shader = ExtResource("1_q8wva")
+shader_parameter/MainTexture = ExtResource("2_t4108")
+
+[sub_resource type="QuadMesh" id="QuadMesh_y86dh"]
+
+[node name="MildDamage" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_fhde2")
+emitting = false
+amount = 32
+lifetime = 2.0
+randomness = 0.1
+fixed_fps = 60
+process_material = ExtResource("3_qcsm0")
+draw_pass_1 = SubResource("QuadMesh_y86dh")

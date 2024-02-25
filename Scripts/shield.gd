@@ -16,6 +16,7 @@ var fresnel_emission_lerp_speed := 10.0
 # Sound to be played on death. Self-freeing.
 @export var pop_player: PackedScene
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$HealthComponent.set_max_health(max_health)
@@ -42,5 +43,17 @@ func _on_health_component_died() -> void:
 	var on_death_sound = pop_player.instantiate()
 	get_tree().get_root().add_child(on_death_sound)
 	on_death_sound.play_then_delete(global_position)
-	# Wait until the end of the frame to execute queue_free
-	Callable(queue_free).call_deferred()
+	# Disable further collisions and hide aura
+	# Without set_deferred there's a "Function blocked
+	# during in/out signal" error.
+	set_deferred("$HitBoxComponent.monitoring", false)
+	set_deferred("$HitBoxComponent.monitorable", false)
+	$FresnelAura.visible = false
+	# Start the fireworks!
+	var lifetime := Global.all_emit($ShieldExplosion)
+	# Wait for the particles to complete then queue free
+	$DeathTimer.start(lifetime)
+
+
+func _on_death_timer_timeout() -> void:
+	queue_free()
