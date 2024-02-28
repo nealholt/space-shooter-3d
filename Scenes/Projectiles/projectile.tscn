@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://2xg68vs2c6h4"]
+[gd_scene load_steps=4 format=3 uid="uid://2xg68vs2c6h4"]
 
 [ext_resource type="Script" path="res://Scripts/Projectiles/projectile.gd" id="1_y78aq"]
-[ext_resource type="PackedScene" uid="uid://ctylowk0dxhp3" path="res://Assets/Particles/sparks.tscn" id="2_ocd6w"]
+[ext_resource type="PackedScene" uid="uid://domnb1m51i30x" path="res://Assets/Particles/ship_strike.tscn" id="2_254i2"]
+[ext_resource type="PackedScene" uid="uid://loiql7x3ow62" path="res://Assets/Particles/shield_strike.tscn" id="3_hv8gk"]
 
 [node name="Projectile" type="Area3D"]
 collision_layer = 4
 collision_mask = 10
 script = ExtResource("1_y78aq")
-sparks = ExtResource("2_ocd6w")
+sparks = ExtResource("2_254i2")
+shieldSparks = ExtResource("3_hv8gk")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

@@ -18,7 +18,7 @@ material = SubResource("ShaderMaterial_51wj8")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0x6dj"]
 
-[node name="Shield" type="Node3D"]
+[node name="Shield" type="Node3D" groups=["shield"]]
 script = ExtResource("1_xlxvf")
 pop_player = ExtResource("2_2807u")
 

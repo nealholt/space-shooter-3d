@@ -4,7 +4,9 @@ class_name Projectile
 # Bullets and missiles and really any projectiles inherit
 # from this class.
 
+# Different spark effects depending on what gets hit
 @export var sparks : PackedScene
+@export var shieldSparks : PackedScene
 
 @export var steer_force: float = 50.0 # Used for projectiles that seek
 @export var speed:float = 1000.0
@@ -111,7 +113,11 @@ func damage_and_die(body):
 	
 	# Make a spark
 	# https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088252#questions/21003762
-	var spark = sparks.instantiate()
+	var spark = null
+	if body.is_in_group("shield"):
+		spark = shieldSparks.instantiate()
+	else:
+		spark = sparks.instantiate()
 	get_tree().get_root().add_child(spark)
 	spark.global_position = global_position
 	#spark.global_transform.basis.z = -area.global_transform.basis.z

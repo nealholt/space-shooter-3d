@@ -1,4 +1,5 @@
 extends Node3D
+class_name Shield
 
 @export var max_health := 10
 

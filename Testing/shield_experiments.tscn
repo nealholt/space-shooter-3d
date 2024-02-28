@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cj8oysen3h0g8"]
+[gd_scene load_steps=9 format=3 uid="uid://cj8oysen3h0g8"]
 
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="1_8h41v"]
+[ext_resource type="PackedScene" uid="uid://ctylowk0dxhp3" path="res://Assets/Particles/sparks.tscn" id="3_ok2ml"]
 [ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles/Bullet/bullet.tscn" id="6_ay6cs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oit57"]
@@ -48,24 +49,32 @@ max_health = 2
 [node name="Bullet" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326245, 0, 10.8496)
 collision_layer = 12
+sparks = ExtResource("3_ok2ml")
+shieldSparks = null
 speed = 5.0
 time_out = 40.0
 
 [node name="Bullet2" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -37.9641)
 collision_layer = 12
+sparks = ExtResource("3_ok2ml")
+shieldSparks = null
 speed = 5.0
 time_out = 40.0
 
 [node name="Bullet3" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.7821, 0)
 collision_layer = 12
+sparks = ExtResource("3_ok2ml")
+shieldSparks = null
 speed = 5.0
 time_out = 40.0
 
 [node name="Bullet4" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 18.1145, 0, 0)
 collision_layer = 12
+sparks = ExtResource("3_ok2ml")
+shieldSparks = null
 speed = 5.0
 time_out = 40.0
 
