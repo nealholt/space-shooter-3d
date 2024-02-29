@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://loiql7x3ow62"]
+[gd_scene load_steps=23 format=3 uid="uid://loiql7x3ow62"]
 
+[ext_resource type="Script" path="res://Scripts/temporary_particle.gd" id="1_j65xv"]
 [ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/ParticleImages/star_04.png" id="1_xdx7c"]
 [ext_resource type="Material" uid="uid://covsu58qwnqru" path="res://Assets/Materials/flare00.tres" id="2_l105u"]
 
@@ -104,6 +105,7 @@ color_ramp = SubResource("GradientTexture1D_sxp0e")
 [sub_resource type="QuadMesh" id="QuadMesh_pnf0b"]
 
 [node name="ShieldStrike" type="Node3D"]
+script = ExtResource("1_j65xv")
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_46d27")

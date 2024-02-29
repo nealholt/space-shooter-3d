@@ -1,6 +1,8 @@
 extends Node3D
 class_name Shield
 
+@export var explosion : PackedScene
+
 @export var max_health := 10
 
 @onready var shader_ref : ShaderMaterial = $FresnelAura.mesh.surface_get_material(0)
@@ -51,10 +53,9 @@ func _on_health_component_died() -> void:
 	set_deferred("$HitBoxComponent.monitorable", false)
 	$FresnelAura.visible = false
 	# Start the fireworks!
-	var lifetime := Global.all_emit($ShieldExplosion)
-	# Wait for the particles to complete then queue free
-	$DeathTimer.start(lifetime)
+	var shieldExplosion = explosion.instantiate()
+	get_tree().get_root().add_child(shieldExplosion)
+	shieldExplosion.global_position = global_position
+	# Delete self at the end of the frame
+	Callable(queue_free).call_deferred()
 
-
-func _on_death_timer_timeout() -> void:
-	queue_free()

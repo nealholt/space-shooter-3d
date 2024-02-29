@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cw48yj3xo71eo"]
+[gd_scene load_steps=12 format=3 uid="uid://cw48yj3xo71eo"]
 
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="1_yopvc"]
 [ext_resource type="PackedScene" uid="uid://loiql7x3ow62" path="res://Assets/Particles/shield_strike.tscn" id="2_80mk7"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d3erdmulqy1l2" path="res://Assets/Particles/major_damage.tscn" id="5_myym3"]
 [ext_resource type="PackedScene" uid="uid://b70y8labc000a" path="res://Assets/Particles/major_damage_line_sparks.tscn" id="6_3r4sn"]
 [ext_resource type="PackedScene" uid="uid://domnb1m51i30x" path="res://Assets/Particles/ship_strike.tscn" id="7_7cpyc"]
+[ext_resource type="PackedScene" uid="uid://ctylowk0dxhp3" path="res://Assets/Particles/sparks.tscn" id="8_1pclb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l56mc"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -47,3 +48,8 @@ environment = SubResource("Environment_nih68")
 [node name="MajorDamageLineSparks" parent="." instance=ExtResource("6_3r4sn")]
 
 [node name="ShipStrike" parent="." instance=ExtResource("7_7cpyc")]
+
+[node name="OriginalSparks" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.07554, 0, 0)
+
+[node name="Sparks" parent="OriginalSparks" instance=ExtResource("8_1pclb")]

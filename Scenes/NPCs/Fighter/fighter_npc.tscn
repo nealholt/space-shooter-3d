@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=29 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
 [ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="2_icaxw"]
+[ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
 [ext_resource type="PackedScene" uid="uid://d3pdq381luwwg" path="res://Scenes/pop_player.tscn" id="2_s1yd2"]
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="3_qm2p0"]
 [ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles/Bullet/bullet.tscn" id="4_f5xpu"]
@@ -22,6 +23,9 @@
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="20_a8xhu"]
 [ext_resource type="Script" path="res://Scripts/target_selector.gd" id="22_4r1yh"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="23_fxr37"]
+[ext_resource type="PackedScene" uid="uid://d3erdmulqy1l2" path="res://Assets/Particles/major_damage.tscn" id="24_a0vwa"]
+[ext_resource type="PackedScene" uid="uid://b70y8labc000a" path="res://Assets/Particles/major_damage_line_sparks.tscn" id="25_ij4bf"]
+[ext_resource type="PackedScene" uid="uid://dk37kibucmpd0" path="res://Assets/Particles/mild_damage.tscn" id="26_mibdx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rh3fl"]
 
@@ -32,6 +36,7 @@ radius = 3.0
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
 motion_mode = 1
 script = ExtResource("1_hmqk0")
+deathExplosion = ExtResource("2_l8ark")
 pop_player = ExtResource("2_s1yd2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -106,6 +111,14 @@ script = ExtResource("22_4r1yh")
 
 [node name="Shield" parent="." instance=ExtResource("23_fxr37")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="DamageEmitters" type="Node3D" parent="."]
+
+[node name="MajorDamage" parent="DamageEmitters" instance=ExtResource("24_a0vwa")]
+
+[node name="MajorDamageLineSparks" parent="DamageEmitters" instance=ExtResource("25_ij4bf")]
+
+[node name="MildDamage" parent="DamageEmitters" instance=ExtResource("26_mibdx")]
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]

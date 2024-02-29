@@ -1,6 +1,7 @@
-[gd_scene load_steps=58 format=3 uid="uid://d3erdmulqy1l2"]
+[gd_scene load_steps=59 format=3 uid="uid://d3erdmulqy1l2"]
 
 [ext_resource type="Texture2D" uid="uid://pa25y2mrbjiq" path="res://Assets/ParticleImages/spark_03.png" id="1_bck12"]
+[ext_resource type="Script" path="res://Scripts/emission_controller.gd" id="1_qqwqp"]
 [ext_resource type="Texture2D" uid="uid://cqxy5k2dm2wt8" path="res://Assets/ParticleImages/fire_01.png" id="2_2isrm"]
 [ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/ParticleImages/star_04.png" id="3_5rw88"]
 
@@ -548,6 +549,7 @@ color = Color(5, 3, 0, 1)
 color_ramp = SubResource("GradientTexture1D_mwcw3")
 
 [node name="MajorDamage" type="Node3D"]
+script = ExtResource("1_qqwqp")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00743157, 0.043999, 0.0143549)

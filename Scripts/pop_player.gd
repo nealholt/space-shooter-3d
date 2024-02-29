@@ -1,7 +1,7 @@
 extends Node3D
 
 # NOTE: There's likely a better way to do this
-# with the animation player:
+# with the animation player or tweens or something:
 # Self deleting nodes with animation player instead of timer and script:
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088252#questions
 

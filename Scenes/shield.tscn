@@ -20,6 +20,7 @@ material = SubResource("ShaderMaterial_51wj8")
 
 [node name="Shield" type="Node3D" groups=["shield"]]
 script = ExtResource("1_xlxvf")
+explosion = ExtResource("6_din6m")
 pop_player = ExtResource("2_2807u")
 
 [node name="FresnelAura" type="MeshInstance3D" parent="."]
@@ -34,11 +35,5 @@ shape = SubResource("SphereShape3D_0x6dj")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_t4iu0")]
 
-[node name="ShieldExplosion" parent="." instance=ExtResource("6_din6m")]
-
-[node name="DeathTimer" type="Timer" parent="."]
-one_shot = true
-
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]
-[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

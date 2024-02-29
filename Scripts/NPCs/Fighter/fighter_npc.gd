@@ -3,6 +3,8 @@ class_name FighterNPC
 
 signal destroyed
 
+@export var deathExplosion : PackedScene
+
 @onready var target_selector: Node = $TargetSelector
 
 # Modifiers for movement amount
@@ -103,8 +105,11 @@ func _physics_process(delta):
 func _on_health_component_health_lost() -> void:
 	# Force a switch into evasion state
 	$StateMachine.go_evasive()
-	# Play hit sound
 	#print('hit on hull')
+	# Trail smoke and sparks when damaged
+	var percent_health = $HealthComponent.get_percent_health()
+	if percent_health < 0.8:
+		$DamageEmitters/MajorDamage.start_emitting()
 
 
 func _on_health_component_died() -> void:
@@ -113,6 +118,10 @@ func _on_health_component_died() -> void:
 	var on_death_sound = pop_player.instantiate()
 	get_tree().get_root().add_child(on_death_sound)
 	on_death_sound.play_then_delete(global_position)
+	# Explode
+	var explosion = deathExplosion.instantiate()
+	get_tree().get_root().add_child(explosion)
+	explosion.global_position = global_position
 	# Wait until the end of the frame to execute queue_free
 	Callable(queue_free).call_deferred()
 

@@ -1,13 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://domnb1m51i30x"]
+[gd_scene load_steps=13 format=3 uid="uid://domnb1m51i30x"]
 
 [ext_resource type="Texture2D" uid="uid://cgs2blq7xbju4" path="res://Assets/ParticleImages/trace_01.png" id="1_0cdd1"]
+[ext_resource type="Script" path="res://Scripts/temporary_particle.gd" id="1_sdbwv"]
 [ext_resource type="Texture2D" uid="uid://ce6i4w30wrek0" path="res://Assets/ParticleImages/star_09.png" id="2_weuwo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvud0"]
 transparency = 1
+cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("1_0cdd1")
+disable_receive_shadows = true
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -28,8 +31,7 @@ spread = 5.0
 initial_velocity_min = 2.0
 initial_velocity_max = 4.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.0
-scale_max = 0.5
+scale_max = 4.0
 scale_curve = SubResource("CurveTexture_pxohv")
 color = Color(2, 1, 1, 1)
 
@@ -59,8 +61,7 @@ emission_sphere_radius = 0.2
 angle_min = -180.0
 angle_max = 180.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.0
-scale_max = 0.3
+scale_min = 0.5
 scale_curve = SubResource("CurveTexture_w8r38")
 color = Color(3, 2, 1, 1)
 turbulence_noise_strength = 0.0
@@ -68,12 +69,15 @@ turbulence_noise_scale = 0.0
 turbulence_noise_speed = Vector3(5, 0, 0)
 
 [node name="ShipStrike" type="Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+script = ExtResource("1_sdbwv")
 
 [node name="Straight" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_kvud0")
+cast_shadow = 0
 emitting = false
 amount = 30
-lifetime = 0.4
+lifetime = 0.8
 one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_cvldn")
