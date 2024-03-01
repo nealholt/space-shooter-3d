@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5aj0hxrmxrbg"]
+
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/NPCs/Fighter/fighter_npc.tscn" id="1_w5e31"]
+[ext_resource type="Script" path="res://Testing/bullet_spawner_testing.gd" id="2_xar6i"]
+[ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles/Bullet/bullet.tscn" id="3_8rcco"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4sl8m"]
+sky_top_color = Color(0.00784314, 0.0862745, 0.211765, 1)
+sky_horizon_color = Color(0.523529, 0.521569, 0.60098, 1)
+ground_bottom_color = Color(0.0862745, 0, 0.192157, 1)
+ground_horizon_color = Color(0.523529, 0.521569, 0.60098, 1)
+
+[sub_resource type="Sky" id="Sky_vq8a6"]
+sky_material = SubResource("ProceduralSkyMaterial_4sl8m")
+
+[sub_resource type="Environment" id="Environment_qunys"]
+background_mode = 2
+sky = SubResource("Sky_vq8a6")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="DamageEffectsScene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qunys")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(1, 1, 0.745098, 1)
+shadow_enabled = true
+
+[node name="FighterNPC" parent="." instance=ExtResource("1_w5e31")]
+
+[node name="Camera3D" type="Camera3D" parent="FighterNPC"]
+transform = Transform3D(7.89686e-15, 0.707107, -0.707107, 1.81058e-08, 0.707107, 0.707107, 1, -1.28028e-08, -1.28028e-08, -20.3812, 16.6919, 7.29624e-07)
+
+[node name="Node3D" type="Node3D" parent="FighterNPC"]
+transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 10, -10)
+script = ExtResource("2_xar6i")
+bullet = ExtResource("3_8rcco")
