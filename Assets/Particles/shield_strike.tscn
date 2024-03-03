@@ -36,8 +36,8 @@ initial_velocity_min = 20.0
 initial_velocity_max = 20.0
 gravity = Vector3(0, 0, 0)
 attractor_interaction_enabled = false
-scale_min = 0.2
-scale_max = 0.5
+scale_min = 2.0
+scale_max = 5.0
 scale_curve = SubResource("CurveXYZTexture_ph4ma")
 color = Color(0, 1, 3, 1)
 turbulence_initial_displacement_min = -81.1
@@ -54,8 +54,8 @@ curve = SubResource("Curve_65dte")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pqjbm"]
 gravity = Vector3(0, 0, 0)
-scale_min = 8.0
-scale_max = 8.0
+scale_min = 80.0
+scale_max = 80.0
 scale_curve = SubResource("CurveTexture_anuys")
 color = Color(0, 1, 0.5, 1)
 
@@ -92,12 +92,13 @@ curve = SubResource("Curve_ep4m6")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ywo5y"]
 lifetime_randomness = 1.0
 emission_shape = 1
-emission_sphere_radius = 0.7
+emission_sphere_radius = 8.0
 spread = 180.0
 initial_velocity_min = 0.5
 initial_velocity_max = 2.0
 gravity = Vector3(0, 0, 0)
-scale_max = 3.0
+scale_min = 10.0
+scale_max = 30.0
 scale_curve = SubResource("CurveTexture_si3e7")
 color = Color(0, 2, 2, 1)
 color_ramp = SubResource("GradientTexture1D_sxp0e")
