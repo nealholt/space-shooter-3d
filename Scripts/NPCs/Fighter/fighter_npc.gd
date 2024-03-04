@@ -104,7 +104,7 @@ func _physics_process(delta):
 
 func _on_health_component_health_lost() -> void:
 	# Force a switch into evasion state
-	$StateMachine.go_evasive()
+	#$StateMachine.go_evasive()
 	#print('hit on hull')
 	# Trail smoke and sparks when damaged
 	var percent_health = $HealthComponent.get_percent_health()

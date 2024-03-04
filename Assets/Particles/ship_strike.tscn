@@ -57,11 +57,11 @@ curve = SubResource("Curve_kjye7")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ao36t"]
 emission_shape = 1
-emission_sphere_radius = 0.2
+emission_sphere_radius = 1.0
 angle_min = -180.0
 angle_max = 180.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.5
+scale_max = 2.0
 scale_curve = SubResource("CurveTexture_w8r38")
 color = Color(3, 2, 1, 1)
 turbulence_noise_strength = 0.0
@@ -69,7 +69,7 @@ turbulence_noise_scale = 0.0
 turbulence_noise_speed = Vector3(5, 0, 0)
 
 [node name="ShipStrike" type="Node3D"]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, 0, 0, 0)
 script = ExtResource("1_sdbwv")
 
 [node name="Straight" type="GPUParticles3D" parent="."]

@@ -63,7 +63,7 @@ shape = SubResource("SphereShape3D_ydoww")
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("movement_profile", "initial_state")]
 script = ExtResource("7_ubn4s")
 movement_profile = NodePath("MovementProfile")
-initial_state = NodePath("Seek")
+initial_state = NodePath("Stop")
 
 [node name="MovementProfile" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
 script = ExtResource("8_0niio")
@@ -111,7 +111,7 @@ script = ExtResource("22_4r1yh")
 
 [node name="Shield" parent="." instance=ExtResource("23_fxr37")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
-max_health = 2
+max_health = 1
 
 [node name="DamageEmitters" type="Node3D" parent="."]
 
