@@ -54,7 +54,9 @@ func _on_health_component_died() -> void:
 	$FresnelAura.visible = false
 	# Start the fireworks!
 	var shieldExplosion = explosion.instantiate()
-	get_tree().get_root().add_child(shieldExplosion)
+	# Add the explosion as a child of shield's parent
+	# so it sticks with the ship.
+	get_parent().add_child(shieldExplosion)
 	shieldExplosion.global_position = global_position
 	# Delete self at the end of the frame
 	Callable(queue_free).call_deferred()

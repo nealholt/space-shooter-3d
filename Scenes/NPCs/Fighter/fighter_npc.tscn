@@ -111,6 +111,7 @@ script = ExtResource("22_4r1yh")
 
 [node name="Shield" parent="." instance=ExtResource("23_fxr37")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+max_health = 2
 
 [node name="DamageEmitters" type="Node3D" parent="."]
 
