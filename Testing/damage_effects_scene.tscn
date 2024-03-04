@@ -32,7 +32,7 @@ shadow_enabled = true
 [node name="FighterNPC" parent="." instance=ExtResource("1_w5e31")]
 
 [node name="Camera3D" type="Camera3D" parent="FighterNPC"]
-transform = Transform3D(7.89686e-15, 0.707107, -0.707107, 1.81058e-08, 0.707107, 0.707107, 1, -1.28028e-08, -1.28028e-08, -20.3812, 16.6919, 7.29624e-07)
+transform = Transform3D(7.89686e-15, 0.707107, -0.707107, 1.81058e-08, 0.707107, 0.707107, 1, -1.28028e-08, -1.28028e-08, -10, 10, 0)
 
 [node name="Node3D" type="Node3D" parent="FighterNPC"]
 transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 10, -10)

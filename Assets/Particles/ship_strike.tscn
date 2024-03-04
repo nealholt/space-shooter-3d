@@ -25,13 +25,14 @@ point_count = 3
 curve = SubResource("Curve_04b6a")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cvldn"]
-angle_min = 90.0
-angle_max = 90.0
-spread = 5.0
-initial_velocity_min = 2.0
-initial_velocity_max = 4.0
+angle_min = 130.0
+angle_max = 130.0
+direction = Vector3(0, 0, 1)
+spread = 10.0
+initial_velocity_min = 4.0
+initial_velocity_max = 10.0
 gravity = Vector3(0, 0, 0)
-scale_max = 4.0
+scale_max = 3.0
 scale_curve = SubResource("CurveTexture_pxohv")
 color = Color(2, 1, 1, 1)
 
@@ -57,7 +58,7 @@ curve = SubResource("Curve_kjye7")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ao36t"]
 emission_shape = 1
-emission_sphere_radius = 1.0
+emission_sphere_radius = 2.0
 angle_min = -180.0
 angle_max = 180.0
 gravity = Vector3(0, 0, 0)
@@ -69,7 +70,7 @@ turbulence_noise_scale = 0.0
 turbulence_noise_speed = Vector3(5, 0, 0)
 
 [node name="ShipStrike" type="Node3D"]
-transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, 0, 0, 0)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 script = ExtResource("1_sdbwv")
 
 [node name="Straight" type="GPUParticles3D" parent="."]
@@ -77,9 +78,10 @@ material_override = SubResource("StandardMaterial3D_kvud0")
 cast_shadow = 0
 emitting = false
 amount = 30
-lifetime = 0.8
+lifetime = 0.7
 one_shot = true
-explosiveness = 0.8
+explosiveness = 1.0
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_cvldn")
 draw_pass_1 = SubResource("QuadMesh_u3p24")
 
@@ -89,5 +91,6 @@ emitting = false
 lifetime = 0.3
 one_shot = true
 explosiveness = 0.8
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_ao36t")
 draw_pass_1 = SubResource("QuadMesh_u3p24")

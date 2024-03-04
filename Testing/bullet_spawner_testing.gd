@@ -12,5 +12,5 @@ func _process(_delta: float) -> void:
 		var b = bullet.instantiate()
 		get_tree().get_root().add_child(b)
 		data.transform = global_transform
-		b.speed = 200.0 # Slow it down
+		b.speed = 100.0 # Slow it down
 		b.set_data(data)
