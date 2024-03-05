@@ -51,7 +51,7 @@ fire_rate = 8.0
 [node name="HitFeedback" parent="." instance=ExtResource("3_qm2p0")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_1xytm")]
-max_health = 5
+max_health = 20
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("6_ne5o5")]
 health_component = NodePath("../HealthComponent")
@@ -111,7 +111,6 @@ script = ExtResource("22_4r1yh")
 
 [node name="Shield" parent="." instance=ExtResource("23_fxr37")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
-max_health = 1
 
 [node name="DamageEmitters" type="Node3D" parent="."]
 
