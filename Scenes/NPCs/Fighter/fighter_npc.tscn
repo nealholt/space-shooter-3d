@@ -51,7 +51,7 @@ fire_rate = 8.0
 [node name="HitFeedback" parent="." instance=ExtResource("3_qm2p0")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_1xytm")]
-max_health = 20
+max_health = 5
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("6_ne5o5")]
 health_component = NodePath("../HealthComponent")
@@ -63,7 +63,7 @@ shape = SubResource("SphereShape3D_ydoww")
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("movement_profile", "initial_state")]
 script = ExtResource("7_ubn4s")
 movement_profile = NodePath("MovementProfile")
-initial_state = NodePath("Stop")
+initial_state = NodePath("Seek")
 
 [node name="MovementProfile" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
 script = ExtResource("8_0niio")

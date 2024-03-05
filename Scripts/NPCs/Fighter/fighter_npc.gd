@@ -104,18 +104,24 @@ func _physics_process(delta):
 
 func _on_health_component_health_lost() -> void:
 	# Force a switch into evasion state
-	#$StateMachine.go_evasive()
+	$StateMachine.go_evasive()
 	#print('hit on hull')
 	# Trail smoke and sparks when damaged
 	var percent_health = $HealthComponent.get_percent_health()
-	if percent_health < 0.8:
-		$DamageEmitters/MildDamage.start_emitting()
-	elif percent_health < 0.5:
-		$DamageEmitters/MajorDamageLineSparks.start_emitting()
+	print(percent_health)
+	if percent_health < 0.25:
 		$DamageEmitters/MildDamage.stop_emitting()
-	elif percent_health < 0.25:
-		$DamageEmitters/MajorDamage.start_emitting()
 		$DamageEmitters/MajorDamageLineSparks.stop_emitting()
+		$DamageEmitters/MajorDamage.start_emitting()
+	elif percent_health < 0.5:
+		$DamageEmitters/MildDamage.stop_emitting()
+		$DamageEmitters/MajorDamageLineSparks.start_emitting()
+		$DamageEmitters/MajorDamage.stop_emitting()
+	elif percent_health < 0.8:
+		$DamageEmitters/MildDamage.start_emitting()
+		$DamageEmitters/MajorDamageLineSparks.stop_emitting()
+		$DamageEmitters/MajorDamage.stop_emitting()
+
 
 func _on_health_component_died() -> void:
 	destroyed.emit()

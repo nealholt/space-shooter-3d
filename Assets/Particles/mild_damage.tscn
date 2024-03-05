@@ -19,7 +19,6 @@ script = ExtResource("1_m4oen")
 material_override = SubResource("ShaderMaterial_fhde2")
 emitting = false
 amount = 32
-lifetime = 2.0
 randomness = 0.1
 fixed_fps = 60
 process_material = ExtResource("3_qcsm0")
