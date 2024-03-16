@@ -35,6 +35,7 @@ func _physics_process(_delta: float) -> void:
 			first_person()
 	# Look at target with first-person cam
 	if look_at_target and state == CameraState.FIRSTPERSON and is_instance_valid(target):
+		#rotate_and_elevate(delta, $Body, $Body/Head, target.global_position)
 		first_person_camera.look_at(target.global_position, Global.player.global_transform.basis.y)
 		
 		# Here's where I tried it using the code copied from 
@@ -55,6 +56,8 @@ func _physics_process(_delta: float) -> void:
 	else:
 		# Return to facing forward, or at least way far
 		# forward of the nose of the player.
+		#var temp_targ_pos : Vector3 = first_person_camera.global_position + Global.player.global_transform.basis.z*10000.0
+		#rotate_and_elevate(delta, $Body, $Body/Head, temp_targ_pos)
 		first_person_camera.look_at(first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0, Global.player.global_transform.basis.y)
 		
 		# Here's where I tried it using the code copied from 
@@ -66,6 +69,80 @@ func _physics_process(_delta: float) -> void:
 		#first_person_camera.transform = Global.interp_face_target(first_person_camera, first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0, look_speed*delta)
 		#var new_transform = first_person_camera.transform.looking_at(first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0, Global.player.global_transform.basis.y)
 		#first_person_camera.transform = first_person_camera.transform.interpolate_with(new_transform, look_speed*delta)
+
+
+
+# The following is duplicated in turret.gd
+# I was trying to smooth out target look, but
+# this didn't work.
+func rotate_and_elevate(delta: float, body:Node3D, head:Node3D, target_pos:Vector3) -> void:
+	var rotation_speed : float = 5.0
+	var elevation_speed : float = 5.0
+	var min_elevation: float = deg_to_rad(0.0)
+	var max_elevation: float = deg_to_rad(60.0)
+	# Project the target onto the XZ plane of the turret.
+	# This works even if the turret is rotated!
+	# Project current_target onto the plane perpendicular to body.global_basis.y
+	# https://math.stackexchange.com/questions/728481/3d-projection-onto-a-plane
+	# plane_norm is the vector our plane is perpendicular to
+	var plane_norm:Vector3 = body.global_basis.y
+	# projected is the vector indicating how far above/below
+	# the target point is from our plane
+	var projected:Vector3 = (target_pos.dot(plane_norm) / plane_norm.dot(plane_norm)) * plane_norm
+	# by subtracting projected from target, we get the projected point.
+	# This is the point to rotate the turret toward
+	var rotation_targ:Vector3 = target_pos - projected
+	
+	# Get the desired rotation
+	# Get the angle to projected point
+	var y_angle:float = body.global_basis.z.angle_to(rotation_targ)
+	# Transform target to body local space. This is useful to
+	# know if we should rotate left or right because angle_to
+	# always returns a positive value.
+	var local_target:Vector3 = body.to_local(target_pos)
+	
+	# Rotate toward it
+	# Calculate step size and direction. If we need to rotate
+	# less than out max rotation, then snap to desired angle
+	# using the min function
+	var final_y:float = sign(local_target.x) * min(rotation_speed * delta, y_angle)
+	# rotate body
+	body.rotate_y(final_y)
+	
+	# Rotation is complete, not we elevate
+	# Project the target onto the ZY plane of the turret.
+	# This works even if the turret is rotated!
+	# Project current_target onto the plane perpendicular to head.global_basis.y
+	# https://math.stackexchange.com/questions/728481/3d-projection-onto-a-plane
+	# plane_norm is the vector our plane is perpendicular to
+	plane_norm = head.global_basis.x
+	# projected is the vector indicating how far above/below
+	# the target point is from our plane
+	projected = (target_pos.dot(plane_norm) / plane_norm.dot(plane_norm)) * plane_norm
+	# by subtracting projected from target, we get the projected point.
+	# This is the point to rotate the turret toward
+	var elevation_targ:Vector3 = target_pos - projected
+	
+	# Get the desired rotation
+	# Get the angle to projected point
+	var x_angle:float = head.global_basis.z.angle_to(elevation_targ)
+	
+	# Elevate toward it
+	# One more negative sign because pitching up is negative
+	var elevation_sign:float = -sign(head.to_local(target_pos).y)
+	var final_x:float = elevation_sign * min(elevation_speed * delta, x_angle)
+	#print(rad_to_deg(final_x))
+	# elevate head
+	head.rotate_x(final_x)
+	# Clamp elevation within limits
+	# Reverse and negate max and min because up is negative and
+	# down is positive
+	head.rotation.x = clamp(
+		head.rotation.x,
+		-max_elevation, min_elevation
+	)
+
+
 
 
 

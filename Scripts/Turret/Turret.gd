@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 		rotate_and_elevate(delta)
 	
 	# Shoot if within angle limit
-	print()
+	#print()
 	#print(head.global_position)
 	#print(round(target_pos))
 	#print(round(head.global_transform.basis.z))
