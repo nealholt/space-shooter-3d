@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 	
 	# if active and with target, then move the turret
 	if active and target_pos != Vector3.ZERO:
-		rotate_and_elevate(delta)
+		rotate_and_elevate(delta, target_pos)
 	
 	# Shoot if within angle limit
 	#print()
@@ -80,66 +80,70 @@ func _on_health_component_died() -> void:
 # was parallel to the ground.
 # This was a life saver:
 # https://math.stackexchange.com/questions/728481/3d-projection-onto-a-plane
-func rotate_and_elevate(delta: float) -> void:
-	# Project the target onto the XZ plane of the turret.
-	# This works even if the turret is rotated!
-	# Project current_target onto the plane perpendicular to body.global_basis.y
-	# https://math.stackexchange.com/questions/728481/3d-projection-onto-a-plane
-	# plane_norm is the vector our plane is perpendicular to
-	var plane_norm:Vector3 = body.global_basis.y
-	# projected is the vector indicating how far above/below
-	# the target point is from our plane
-	var projected:Vector3 = (target_pos.dot(plane_norm) / plane_norm.dot(plane_norm)) * plane_norm
-	# by subtracting projected from target, we get the projected point.
-	# This is the point to rotate the turret toward
-	var rotation_targ:Vector3 = target_pos - projected
+func rotate_and_elevate(delta: float, current_target:Vector3) -> void:
+	# Project the target onto the XZ plane of the turret
+	# but first adjust by the global position because
+	# the global basis is purely orientation, not position.
+	var rotation_targ:Vector3 = get_projected(current_target - body.global_position, body.global_basis.y)
+	# But! You also need to account for changes in position,
+	# so add back in the global position adjustment.
+	rotation_targ = rotation_targ + body.global_position
+
+	# Get the angle from the body's facing direction (z)
+	# to the projected point. Since the point is projected
+	# onto the plane, this should be the angle the body
+	# should rotate to face along only one axis.
+	var y_angle:float = Global.get_angle_to_target(body.global_position, rotation_targ, body.global_basis.z)
 	
-	# Get the desired rotation
-	# Get the angle to projected point
-	var y_angle:float = body.global_basis.z.angle_to(rotation_targ)
-	# Transform target to body local space. This is useful to
-	# know if we should rotate left or right because angle_to
-	# always returns a positive value.
-	var local_target:Vector3 = body.to_local(target_pos)
-	
-	# Rotate toward it
-	# Calculate step size and direction. If we need to rotate
-	# less than out max rotation, then snap to desired angle
-	# using the min function
-	var final_y:float = sign(local_target.x) * min(rotation_speed * delta, y_angle)
-	# rotate body
+	# Rotate toward target
+	# Calculate sign to rotate left or right.
+	var rotation_sign:float = sign(body.to_local(current_target).x)
+	# Calculate step size and direction. Use min to avoid
+	# over-rotating. Just snap to the desired angle if it's
+	# less than what we would rotate this frame.
+	var final_y:float = rotation_sign * min(rotation_speed * delta, y_angle)
 	body.rotate_y(final_y)
 	
-	# Rotation is complete, not we elevate
-	# Project the target onto the ZY plane of the turret.
-	# This works even if the turret is rotated!
-	# Project current_target onto the plane perpendicular to head.global_basis.y
-	# https://math.stackexchange.com/questions/728481/3d-projection-onto-a-plane
-	# plane_norm is the vector our plane is perpendicular to
-	plane_norm = head.global_basis.x
-	# projected is the vector indicating how far above/below
-	# the target point is from our plane
-	projected = (target_pos.dot(plane_norm) / plane_norm.dot(plane_norm)) * plane_norm
-	# by subtracting projected from target, we get the projected point.
-	# This is the point to rotate the turret toward
-	var elevation_targ:Vector3 = target_pos - projected
+	# Rotation is complete, now we elevate.
+	# Project the target onto the ZY plane of the head
+	# but first adjust by the global position because
+	# the global basis is purely orientation, not position.
+	var elevation_targ:Vector3 = get_projected(current_target - head.global_position, head.global_basis.x)
+	# But! You also need to account for changes in position,
+	# so add back in the global position adjustment.
+	elevation_targ = elevation_targ + head.global_position
 	
-	# Get the desired rotation
-	# Get the angle to projected point
-	var x_angle:float = head.global_basis.z.angle_to(elevation_targ)
+	# Get the angle from the head's facing direction (z)
+	# to the projected point. Since the point is projected
+	# onto the plane, this should be the angle the head
+	# should rotate to face along only one axis.
+	var x_angle:float = Global.get_angle_to_target(head.global_position, elevation_targ, head.global_basis.z)
 	
-	# Elevate toward it
-	# One more negative sign because pitching up is negative
-	var elevation_sign:float = -sign(head.to_local(target_pos).y)
+	# Elevate toward target.
+	# Calculate sign to elevate up or down.
+	# There's an extra negative sign because pitching up is negative.
+	var elevation_sign:float = -sign(head.to_local(current_target).y)
+	# Calculate step size and direction. Use min to avoid
+	# over-rotating. Just snap to the desired angle if it's
+	# less than what we would rotate this frame.
 	var final_x:float = elevation_sign * min(elevation_speed * delta, x_angle)
-	#print(rad_to_deg(final_x))
-	# elevate head
 	head.rotate_x(final_x)
-	# Clamp elevation within limits
+	# Clamp elevation within limits.
 	# Reverse and negate max and min because up is negative and
-	# down is positive
+	# down is positive.
 	head.rotation.x = clamp(
 		head.rotation.x,
 		-max_elevation, min_elevation
 	)
 
+
+func get_projected(pos:Vector3, normal:Vector3) -> Vector3:
+	# Project position "pos" onto the plane with the given normal vector.
+	# https://math.stackexchange.com/questions/728481/3d-projection-onto-a-plane
+	# "projected" is the vector indicating how far above/below
+	# the target is from the plane of rotation.
+	normal = normal.normalized()
+	var projection:Vector3 = (pos.dot(normal) / normal.dot(normal)) * normal
+	# By subtracting projection from position, we get the
+	# projected point.
+	return pos - projection

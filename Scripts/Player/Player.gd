@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@onready var camera: Camera3D = $CameraGroup/FirstPersonCamera
+@onready var camera: Camera3D = $CameraGroup/Body/Head/FirstPersonCamera
 @onready var camera_group: Node3D = $CameraGroup
 
 @onready var got_hit_audio: AudioStreamPlayer3D = $Sounds/GotHitAudio

@@ -187,7 +187,7 @@ mesh = SubResource("CylinderMesh_tbbj7")
 
 [node name="MissileLockGroup" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
 script = ExtResource("12_hjk6b")
-camera = NodePath("../CameraGroup/FirstPersonCamera")
+camera = NodePath("../CameraGroup/Body/Head/FirstPersonCamera")
 use_lerp = true
 
 [node name="AcquiringTargetReticle" type="TextureRect" parent="MissileLockGroup"]
@@ -220,15 +220,20 @@ stream = ExtResource("18_piaxr")
 [node name="CameraGroup" type="Node3D" parent="."]
 script = ExtResource("19_342x2")
 
-[node name="FirstPersonCamera" type="Camera3D" parent="CameraGroup"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -2.9)
-current = true
-
 [node name="RearUnderCamera" type="Camera3D" parent="CameraGroup"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.3, -1.17356, -5.5)
 
 [node name="FreeCamera" type="Camera3D" parent="CameraGroup"]
 top_level = true
+
+[node name="Body" type="Node3D" parent="CameraGroup"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.6, -2.9)
+
+[node name="Head" type="Node3D" parent="CameraGroup/Body"]
+
+[node name="FirstPersonCamera" type="Camera3D" parent="CameraGroup/Body/Head"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+current = true
 
 [node name="Shield" parent="." instance=ExtResource("21_5ow11")]
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
