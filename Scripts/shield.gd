@@ -60,4 +60,3 @@ func _on_health_component_died() -> void:
 	shieldExplosion.global_position = global_position
 	# Delete self at the end of the frame
 	Callable(queue_free).call_deferred()
-

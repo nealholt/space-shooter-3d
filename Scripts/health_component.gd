@@ -37,4 +37,3 @@ func set_max_health(h:int) -> void:
 
 func get_percent_health() -> float:
 	return float(health)/float(max_health)
-

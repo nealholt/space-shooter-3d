@@ -231,4 +231,3 @@ func get_projected(pos:Vector3, normal:Vector3) -> Vector3:
 	# By subtracting projection from position, we get the
 	# projected point.
 	return pos - projection
-

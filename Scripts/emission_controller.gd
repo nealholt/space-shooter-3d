@@ -7,4 +7,3 @@ func start_emitting() -> void:
 func stop_emitting() -> void:
 	for n in get_children():
 		n.set_emitting(false)
-

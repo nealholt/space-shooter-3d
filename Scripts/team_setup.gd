@@ -92,4 +92,3 @@ func get_all_children(node) -> Array:
 		if N.get_child_count() > 0:
 			nodes.append_array(get_all_children(N))
 	return nodes
-

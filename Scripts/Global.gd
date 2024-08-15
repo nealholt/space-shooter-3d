@@ -233,4 +233,3 @@ func get_intercept(shooter_pos:Vector3,
 	if bullet_speed > target_velocity.length():
 		time = (b+sqrt(b*b+4*a*c)) / (2*a)
 	return target_position+time*target_velocity
-

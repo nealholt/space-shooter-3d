@@ -150,4 +150,3 @@ func _on_near_miss_detector_area_exited(area: Area3D) -> void:
 func _on_health_component_died() -> void:
 	# Load main scene if player dies
 	Global.main_scene.to_main_menu()
-

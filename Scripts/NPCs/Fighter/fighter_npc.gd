@@ -135,4 +135,3 @@ func _on_health_component_died() -> void:
 	explosion.global_position = global_position
 	# Wait until the end of the frame to execute queue_free
 	Callable(queue_free).call_deferred()
-

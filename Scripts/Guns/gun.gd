@@ -123,4 +123,3 @@ func _on_timer_timeout():
 
 func _on_burst_timer_timeout() -> void:
 	can_burst = true
-
