@@ -1,6 +1,11 @@
 extends Node3D
 class_name Shield
 
+# NOTE: Under the FresnelAura mesh, under Resource,
+# I set "Local to Scene" to "On"
+# Otherwise, damaging one shield causes ALL
+# shields to flicker.
+
 @export var explosion : PackedScene
 
 @export var max_health := 10
@@ -33,6 +38,12 @@ func _physics_process(delta: float) -> void:
 	# https://forum.godotengine.org/t/how-to-access-change-visualshader-uniform-variables-from-within-a-script/19668
 	shader_ref.set("shader_parameter/FresnelPower", fresnel_power_current)
 	shader_ref.set("shader_parameter/EmissionStrength", fresnel_emission_current)
+	# There's also this
+	# https://www.reddit.com/r/godot/comments/1f6q09q/when_one_energy_shield_gets_hit_every_shield/
+	# But my solution was to go under the FresnelAura mesh,
+	# under Resource, and set "Local to Scene" to "On"
+	# Otherwise, changing the above parameters on one shield
+	# changes it on ALL shields.
 
 
 func _on_health_component_health_lost() -> void:

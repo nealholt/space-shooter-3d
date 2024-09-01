@@ -33,7 +33,7 @@ var friction_std: float = 0.99
 #forward motion
 var impulse_std: float = 70.0
 var impulse_accel: float = 100.0
-var impulse_brake: float = 40.0
+var impulse_brake: float = 0.0
 var impulse_lerp: float =  0.2
 
 var impulse := impulse_std
