@@ -14,7 +14,7 @@ class_name TargetReticles
 #   -doubled size of offscreen reticle from 64 to 128 under Control->Layout->Transform
 #   -added third reticle at a distance and export variable for the distance limit
 #   -Added code to set reticle based on distance to camera
-#   -TODO Attempted to dynamically size and transparency the reticles
+#   -(Did I ever get this working?) Attempted to dynamically size and transparency the reticles
 #   -Added code and image for a special reticle when targeted
 # see "Scale reticle size and transparency with distance" below, but
 # couldn't get it working.

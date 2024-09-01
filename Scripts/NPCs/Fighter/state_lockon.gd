@@ -1,6 +1,5 @@
 extends State
 
-#TODO weapons free flag not implemented, might not be wanted
 # Interpolate on target lead location and set
 # weapons free. Gradually increase interpolate
 # weight over the course of X seconds from 0 to 1.

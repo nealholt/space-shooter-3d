@@ -1,7 +1,8 @@
 extends State
 
-# TODO This is working great but could be tweaked further.
-# would a mild yaw make it more accurate. probably you should use this.
+# This is working great but could be tweaked further.
+# would a mild yaw make it more accurate. probably
+# you should use some yaw.
 
 # Decelerate to medium speed. Roll and pitch to face
 # target. Fade in the roll pitch amount.
@@ -15,7 +16,7 @@ extends State
 const close_enough_angle:float = deg_to_rad(5)
 
 # Angle at which to start scaling down pitch amount
-#TODO this may be undesirable. I'm turning it off for
+# This may be undesirable. I'm turning it off for
 # now by setting it to zero.
 const pitch_threshold_angle:float = deg_to_rad(0)
 

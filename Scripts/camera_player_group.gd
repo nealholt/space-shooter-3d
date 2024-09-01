@@ -39,7 +39,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		# Return to facing forward, or at least way far
 		# forward of the nose of the player.
-		# TODO fix this next bit and just have a Node3D attached to the player straight ahead
+		# Alternatively, maybe I should have a Node3D
+		# attached to the player straight ahead that the
+		# camera looks at instead.
 		var temp_targ_pos : Vector3 = first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0
 		$turret_motion_component.rotate_and_elevate($Body, $Body/Head, delta, temp_targ_pos)
 
