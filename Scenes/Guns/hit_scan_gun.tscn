@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cogvk4lixkgwr"]
+
+[ext_resource type="Script" path="res://Scripts/Guns/hit_scan_gun.gd" id="1_ksxwb"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vd0wx"]
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+damping_min = 30.0
+damping_max = 100.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l0m8l"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 6.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_0fete"]
+material = SubResource("StandardMaterial3D_l0m8l")
+
+[node name="HitScanGun" type="Node3D" node_paths=PackedStringArray("muzzle_flash")]
+script = ExtResource("1_ksxwb")
+muzzle_flash = NodePath("MuzzleFlash")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="."]
+amount = 15
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_vd0wx")
+draw_pass_1 = SubResource("SphereMesh_0fete")

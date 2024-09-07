@@ -2,17 +2,22 @@ extends Node3D
 
 @export var bullet: PackedScene # What sort of bullet to fire
 
-@export var fire_rate:= 1.0 # Shots per second. Really this is bursts per second
-@onready var firing_rate_timer: Timer = $FiringRateTimer # For bullet firing rate
+# Shots per second. Really this is bursts per second
+@export var fire_rate:= 1.0
+# For bullet firing rate:
+@onready var firing_rate_timer: Timer = $FiringRateTimer
 var can_shoot: bool = true # For bullet firing rate
 
-#True if the gun has received the signal to fire
+#True if the gun has received command to fire
 var firing: bool = false
 
 @onready var burst_timer: Timer = $BurstTimer
-@export var burst_total:int = 1 # How many consecutive shots are fired when trigger is pulled
-@export var burst_rate:float = 1.0 # Shots in a burst per second
-var burst_count:int = 0 # For tracking how many shots in the burst have been fired
+# How many consecutive shots are fired when trigger is pulled
+@export var burst_total:int = 1
+# Shots in a burst per second:
+@export var burst_rate:float = 1.0
+# For tracking how many shots in the burst have been fired
+var burst_count:int = 0
 var can_burst: bool = true
 # This variable is used so the player doesn't hear its own
 # bullets whizzing past its head.
@@ -29,7 +34,8 @@ var rng = RandomNumberGenerator.new() #For spreading the bullets
 # and who the shooter is
 var data:ShootData
 
-# Squared range of the gun based on bullet speed and bullet duration
+# Squared range of the gun based on bullet speed
+# and bullet duration
 var range_sqd:float
 # Copy of bullet speed value from the bullet itself for
 # ease of communicating this info up the tree.
@@ -49,7 +55,7 @@ func _ready():
 	range_sqd = b.get_range()
 	range_sqd = range_sqd*range_sqd
 	bullet_speed = b.speed
-	b.queue_free()
+	b.queue_free() #Then delete this bullet
 	# create fire audio stream
 	fire_sound_player = AudioStreamPlayer3D.new()
 	fire_sound_player.stream = fire_sound
@@ -62,7 +68,8 @@ func _ready():
 	add_child(reload_sound_player)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# Called every frame. 'delta' is the elapsed time
+# since the previous frame.
 func _process(_delta):
 	if firing and can_burst:
 		fire_sound_player.playing = true
