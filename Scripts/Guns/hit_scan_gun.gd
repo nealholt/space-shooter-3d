@@ -20,7 +20,9 @@ var firing: bool = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if firing:
-		muzzle_flash.restart()
+		firing = false
+		if muzzle_flash:
+			muzzle_flash.restart()
 		cooldown_timer.start(1.0/fire_rate)
 		# Print multiple strings with tabs inbetween
 		var collider = ray_cast_3d.get_collider()
@@ -39,9 +41,12 @@ func _process(_delta: float) -> void:
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088242#questions
 # Returns true if successful. The return is useful for
 # animations and sounds
-func shoot(_shoot_data:ShootData) -> bool:
+func shoot(_shoot_data:ShootData) -> void:
 	if cooldown_timer.is_stopped():
 		firing = true
+		$LaserMesh.visible = true
+		$LaserVisualTimer.start()
 		#data = shoot_data
-		return true
-	return false
+
+func _on_laser_visual_timer_timeout() -> void:
+	$LaserMesh.visible = false

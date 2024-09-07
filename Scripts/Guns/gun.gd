@@ -2,6 +2,7 @@ extends Node3D
 
 @export var bullet: PackedScene # What sort of bullet to fire
 
+@export var damage:float = 1.0
 # Shots per second. Really this is bursts per second
 @export var fire_rate:= 1.0
 # For bullet firing rate:
@@ -87,6 +88,7 @@ func _process(_delta):
 		# Pass the bullet the data about the shooter,
 		# initial velocity, etcetera
 		b.set_data(data)
+		b.damage = damage
 		# Randomize angle that bullet comes out. I'm cutting it
 		# in half so that a 10 degree spread is truly 10 degrees
 		# not plus or minus 10 degrees, which is a 20 degree spread.

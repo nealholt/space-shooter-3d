@@ -1,37 +1,35 @@
-[gd_scene load_steps=5 format=3 uid="uid://cogvk4lixkgwr"]
+[gd_scene load_steps=4 format=3 uid="uid://cogvk4lixkgwr"]
 
 [ext_resource type="Script" path="res://Scripts/Guns/hit_scan_gun.gd" id="1_ksxwb"]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vd0wx"]
-spread = 15.0
-initial_velocity_min = 100.0
-initial_velocity_max = 300.0
-gravity = Vector3(0, 0, 0)
-damping_min = 30.0
-damping_max = 100.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l0m8l"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xnkam"]
 emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 6.0
+emission = Color(0, 28.648, 0, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_0fete"]
-material = SubResource("StandardMaterial3D_l0m8l")
+[sub_resource type="CylinderMesh" id="CylinderMesh_hiy2a"]
+material = SubResource("StandardMaterial3D_xnkam")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 800.0
 
-[node name="HitScanGun" type="Node3D" node_paths=PackedStringArray("muzzle_flash")]
+[node name="HitScanGun" type="Node3D"]
 script = ExtResource("1_ksxwb")
-muzzle_flash = NodePath("MuzzleFlash")
 
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1000)
+collision_mask = 10
+collide_with_areas = true
 
-[node name="MuzzleFlash" type="GPUParticles3D" parent="."]
-emitting = false
-amount = 30
-lifetime = 0.2
+[node name="LaserMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -400)
+visible = false
+mesh = SubResource("CylinderMesh_hiy2a")
+
+[node name="LaserVisualTimer" type="Timer" parent="."]
+wait_time = 0.1
 one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_vd0wx")
-draw_pass_1 = SubResource("SphereMesh_0fete")
+
+[connection signal="timeout" from="LaserVisualTimer" to="." method="_on_laser_visual_timer_timeout"]

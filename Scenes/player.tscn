@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=37 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_rf46g"]
 [ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="2_2p718"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Assets/Ships/engine_mesh_component.tscn" id="12_e20ac"]
 [ext_resource type="Script" path="res://Scripts/Player/missile_lock.gd" id="12_hjk6b"]
 [ext_resource type="Texture2D" uid="uid://wtd3a0xuq1ka" path="res://Assets/Images/crosshair051.png" id="12_ppqib"]
+[ext_resource type="PackedScene" uid="uid://cogvk4lixkgwr" path="res://Scenes/Guns/hit_scan_gun.tscn" id="13_428na"]
 [ext_resource type="Texture2D" uid="uid://de4d0mo0rnf5o" path="res://Assets/Images/crosshair052.png" id="13_x7e68"]
 [ext_resource type="AudioStream" uid="uid://cgwsk2ovf5fgt" path="res://Assets/SoundEffects/missile/acquiring_lock.wav" id="15_malfx"]
 [ext_resource type="AudioStream" uid="uid://d1rurti8e68f7" path="res://Assets/SoundEffects/missile/missile_lock.wav" id="16_5hu7g"]
@@ -120,10 +121,9 @@ _startColor = Color(0.537255, 0.152941, 1, 1)
 _endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
 
 [node name="GunGroup" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145516, 0.398813, -3.53764)
 
 [node name="GatlingGun" parent="GunGroup" node_paths=PackedStringArray("gun_animation", "muzzle_flash") instance=ExtResource("2_2p718")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.24, -2.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6302, 0.148885, -5.47273)
 bullet = ExtResource("3_08jv5")
 fire_rate = 1.2
 burst_total = 6
@@ -150,6 +150,10 @@ visibility_aabb = AABB(-4, -4, -4.18506, 8, 8, 8)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_wcp7w")
 draw_pass_1 = SubResource("BoxMesh_1jycr")
+
+[node name="HitScanGun" parent="GunGroup" instance=ExtResource("13_428na")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69716, -0.0310197, -4.40908)
+weapon_damage = 1
 
 [node name="FighterChassisDiamond" parent="." instance=ExtResource("12_a77x5")]
 
