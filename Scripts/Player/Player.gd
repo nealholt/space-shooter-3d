@@ -53,10 +53,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("right_trigger"):
 		var bullet_data:ShootData = ShootData.new()
 		bullet_data.shooter = self
-		var did_shoot:bool = $GunGroup/Gun.shoot(bullet_data)
-		if did_shoot:
-			$GunGroup/GatlingGun/AnimationPlayer.play("rotate")
-			$GunGroup/MuzzleFlash.restart()
+		$GunGroup/GatlingGun.shoot(bullet_data)
 	# Target most centered enemy and begin missile lock
 	if Input.is_action_just_pressed("right_shoulder"):
 		# Unset previous target if any

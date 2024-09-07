@@ -6,7 +6,6 @@ extends Node3D
 @export var fire_rate:= 1.0
 # For bullet firing rate:
 @onready var firing_rate_timer: Timer = $FiringRateTimer
-var can_shoot: bool = true # For bullet firing rate
 
 #True if the gun has received command to fire
 var firing: bool = false
@@ -18,7 +17,6 @@ var firing: bool = false
 @export var burst_rate:float = 1.0
 # For tracking how many shots in the burst have been fired
 var burst_count:int = 0
-var can_burst: bool = true
 # This variable is used so the player doesn't hear its own
 # bullets whizzing past its head.
 @export var turn_off_near_miss: bool = false
@@ -47,6 +45,9 @@ var bullet_speed:float
 var fire_sound_player: AudioStreamPlayer3D
 var reload_sound_player: AudioStreamPlayer3D
 
+# Gun animation, for example, rotation of the gatling gun
+@export var gun_animation : AnimationPlayer
+@export var muzzle_flash : GPUParticles3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -71,12 +72,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time
 # since the previous frame.
 func _process(_delta):
-	if firing and can_burst:
+	if firing and $BurstTimer.is_stopped():
 		fire_sound_player.playing = true
 		# Start countdown to next burst
 		burst_timer.start(1.0/burst_rate)
 		burst_count += 1 # Count this burst
-		can_burst = false # Wait until next burst
 		# Create and fire the bullet
 		var b = bullet.instantiate()
 		# Add bullet to root node otherwise queue free
@@ -102,7 +102,7 @@ func _process(_delta):
 			burst_count = 0 # Reset burst count
 			# Reset can_burst to true so that it doesn't
 			# interfere with the firing rate
-			can_burst = true
+			$BurstTimer.stop()
 		# Check if this is a bullet that should not make a
 		# whiffing noise. Currently only player bullets
 		# should not self-whiff
@@ -112,21 +112,15 @@ func _process(_delta):
 
 # Returns true if successful. The return is useful for
 # animations and sounds
-func shoot(shoot_data:ShootData) -> bool:
-	if can_shoot:
-		can_shoot = false
+func shoot(shoot_data:ShootData) -> void:
+	if $FiringRateTimer.is_stopped():
+		# Animate 'em if you got 'em
+		if gun_animation:
+			gun_animation.play("rotate")
+		if muzzle_flash:
+			muzzle_flash.restart()
+		# Set up booleans for firing the gun
+		# as soon as possible.
 		firing = true
-		can_burst = true
 		firing_rate_timer.start(1.0/fire_rate)
 		data = shoot_data
-		return true
-	return false
-
-
-#firing_rate_timer serves as cooldown between shots
-func _on_timer_timeout():
-	can_shoot = true
-
-
-func _on_burst_timer_timeout() -> void:
-	can_burst = true

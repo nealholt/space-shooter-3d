@@ -11,6 +11,3 @@ one_shot = true
 
 [node name="BurstTimer" type="Timer" parent="."]
 one_shot = true
-
-[connection signal="timeout" from="FiringRateTimer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="BurstTimer" to="." method="_on_burst_timer_timeout"]

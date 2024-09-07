@@ -9,37 +9,39 @@ extends Node3D
 @export var muzzle_flash:GPUParticles3D
 # GPU particles to spawn on point of impact:
 @export var sparks:PackedScene
-# Whether this weapon is semiauto or automatic:
-@export var automatic:bool
 
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
 
+#True if the gun has received command to fire
+var firing: bool = false
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if automatic:
-		if Input.is_action_pressed("fire"):
-			if cooldown_timer.is_stopped():
-				shoot()
-	else: # Semiautomatic
-		if Input.is_action_just_pressed("fire"):
-			if cooldown_timer.is_stopped():
-				shoot()
+func _process(_delta: float) -> void:
+	if firing:
+		muzzle_flash.restart()
+		cooldown_timer.start(1.0/fire_rate)
+		# Print multiple strings with tabs inbetween
+		var collider = ray_cast_3d.get_collider()
+		#printt('weapon fired', collider)
+		if ray_cast_3d.is_colliding():
+			if collider.is_in_group("damageable"):
+				#print("dealt damage")
+				collider.damage(weapon_damage)
+			# Spawn sparks on location of hit
+			if sparks:
+				var spark = sparks.instantiate()
+				add_child(spark)
+				spark.global_position = ray_cast_3d.get_collision_point()
 
 
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088242#questions
-func shoot() -> void:
-	muzzle_flash.restart()
-	cooldown_timer.start(1.0/fire_rate)
-	# Print multiple strings with tabs inbetween
-	var collider = ray_cast_3d.get_collider()
-	#printt('weapon fired', collider)
-	if ray_cast_3d.is_colliding():
-		if collider.is_in_group("damageable"):
-			#print("dealt damage")
-			collider.damage(weapon_damage)
-		# Spawn sparks on location of hit
-		var spark = sparks.instantiate()
-		add_child(spark)
-		spark.global_position = ray_cast_3d.get_collision_point()
+# Returns true if successful. The return is useful for
+# animations and sounds
+func shoot(_shoot_data:ShootData) -> bool:
+	if cooldown_timer.is_stopped():
+		firing = true
+		#data = shoot_data
+		return true
+	return false

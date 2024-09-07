@@ -122,7 +122,7 @@ _endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
 [node name="GunGroup" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145516, 0.398813, -3.53764)
 
-[node name="Gun" parent="GunGroup" instance=ExtResource("2_2p718")]
+[node name="GatlingGun" parent="GunGroup" node_paths=PackedStringArray("gun_animation", "muzzle_flash") instance=ExtResource("2_2p718")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.24, -2.4)
 bullet = ExtResource("3_08jv5")
 fire_rate = 1.2
@@ -132,12 +132,14 @@ turn_off_near_miss = true
 spread_deg = 3.0
 fire_sound = ExtResource("10_kkvfe")
 reload_sound = ExtResource("11_kqrrq")
+gun_animation = NodePath("GatlingGunModel/AnimationPlayer")
+muzzle_flash = NodePath("MuzzleFlash")
 
-[node name="GatlingGun" parent="GunGroup" instance=ExtResource("11_kbwk7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.4, -0.4)
+[node name="GatlingGunModel" parent="GunGroup/GatlingGun" instance=ExtResource("11_kbwk7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16, 2)
 
-[node name="MuzzleFlash" type="GPUParticles3D" parent="GunGroup"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.24, -1.4)
+[node name="MuzzleFlash" type="GPUParticles3D" parent="GunGroup/GatlingGun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 material_override = SubResource("StandardMaterial3D_h6vuq")
 emitting = false
 amount = 30
@@ -251,3 +253,5 @@ transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]
 [connection signal="area_exited" from="NearMissDetector" to="." method="_on_near_miss_detector_area_exited"]
 [connection signal="timeout" from="MissileLockGroup/AudioTimer" to="MissileLockGroup" method="_on_audio_timer_timeout"]
+
+[editable path="GunGroup/GatlingGun/GatlingGunModel"]
