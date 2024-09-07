@@ -26,6 +26,7 @@ collide_with_areas = true
 [node name="LaserMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -400)
 visible = false
+cast_shadow = 0
 mesh = SubResource("CylinderMesh_hiy2a")
 
 [node name="LaserVisualTimer" type="Timer" parent="."]

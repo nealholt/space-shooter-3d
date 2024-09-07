@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=38 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_rf46g"]
 [ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="2_2p718"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_8otd8"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="7_vhcpa"]
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Assets/SoundEffects/lowFrequency_explosion_001.ogg" id="8_klb2b"]
+[ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="9_1xly7"]
 [ext_resource type="AudioStream" uid="uid://cvrvs2a12nuqr" path="res://Assets/SoundEffects/whoosh_medium_001.ogg" id="9_ktweb"]
 [ext_resource type="AudioStream" uid="uid://ci04qcsgn8w7q" path="res://Assets/SoundEffects/clean-machine-gun-burst-98224.ogg" id="10_kkvfe"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="10_shexg"]
@@ -120,9 +121,11 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 _startColor = Color(0.537255, 0.152941, 1, 1)
 _endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
 
-[node name="GunGroup" type="Node3D" parent="."]
+[node name="WeaponHandler" parent="." node_paths=PackedStringArray("weapon1", "weapon2") instance=ExtResource("9_1xly7")]
+weapon1 = NodePath("GatlingGun")
+weapon2 = NodePath("HitScanGun")
 
-[node name="GatlingGun" parent="GunGroup" node_paths=PackedStringArray("gun_animation", "muzzle_flash") instance=ExtResource("2_2p718")]
+[node name="GatlingGun" parent="WeaponHandler" node_paths=PackedStringArray("gun_animation", "muzzle_flash") instance=ExtResource("2_2p718")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6302, 0.148885, -5.47273)
 bullet = ExtResource("3_08jv5")
 fire_rate = 1.2
@@ -135,10 +138,10 @@ reload_sound = ExtResource("11_kqrrq")
 gun_animation = NodePath("GatlingGunModel/AnimationPlayer")
 muzzle_flash = NodePath("MuzzleFlash")
 
-[node name="GatlingGunModel" parent="GunGroup/GatlingGun" instance=ExtResource("11_kbwk7")]
+[node name="GatlingGunModel" parent="WeaponHandler/GatlingGun" instance=ExtResource("11_kbwk7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.16, 2)
 
-[node name="MuzzleFlash" type="GPUParticles3D" parent="GunGroup/GatlingGun"]
+[node name="MuzzleFlash" type="GPUParticles3D" parent="WeaponHandler/GatlingGun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 material_override = SubResource("StandardMaterial3D_h6vuq")
 emitting = false
@@ -151,7 +154,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_wcp7w")
 draw_pass_1 = SubResource("BoxMesh_1jycr")
 
-[node name="HitScanGun" parent="GunGroup" instance=ExtResource("13_428na")]
+[node name="HitScanGun" parent="WeaponHandler" instance=ExtResource("13_428na")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69716, -0.0310197, -4.40908)
 weapon_damage = 1
 
@@ -258,4 +261,4 @@ transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 [connection signal="area_exited" from="NearMissDetector" to="." method="_on_near_miss_detector_area_exited"]
 [connection signal="timeout" from="MissileLockGroup/AudioTimer" to="MissileLockGroup" method="_on_audio_timer_timeout"]
 
-[editable path="GunGroup/GatlingGun/GatlingGunModel"]
+[editable path="WeaponHandler/GatlingGun/GatlingGunModel"]
