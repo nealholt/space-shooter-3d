@@ -12,6 +12,7 @@ extends Node3D
 
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var ray_cast_3d: RayCast3D = $RayCast3D
+@onready var laser_mesh: MeshInstance3D = $Node/Head/LaserMesh
 
 #True if the gun has received command to fire
 var firing: bool = false
@@ -36,6 +37,32 @@ func _process(_delta: float) -> void:
 				var spark = sparks.instantiate()
 				add_child(spark)
 				spark.global_position = ray_cast_3d.get_collision_point()
+		position_laser(ray_cast_3d)
+
+
+func position_laser(ray:RayCast3D) -> void:
+	# The idea here is to put the Head node at
+	# the position and orientation of the gun,
+	# but the interleaving generic Node disconnects
+	# its children from the movement of the parent
+	# (Inspired by this post:
+	# https://www.reddit.com/r/godot/comments/ml7bhk/how_to_make_a_child_position_independent_from/
+	# )
+	# I wanted this so that the laser lingers in space
+	# where it was fired, rather than firing and
+	# continuing to move with the ship.
+	$Node/Head.global_position = global_position
+	$Node/Head.global_transform = global_transform
+	# Change laser mesh length and position relative to Head
+	# so the laser doesn't appear to pass through what it hits
+	if ray.is_colliding():
+		var length = global_position.distance_to(ray_cast_3d.get_collision_point())
+		laser_mesh.position.z = -length/2
+		laser_mesh.mesh.set_height(length)
+	else:
+		# Default position and length:
+		laser_mesh.position.z = -500
+		laser_mesh.mesh.set_height(1000)
 
 
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088242#questions
@@ -44,10 +71,4 @@ func _process(_delta: float) -> void:
 func shoot(_shoot_data:ShootData) -> void:
 	if cooldown_timer.is_stopped():
 		firing = true
-		$LaserMesh.visible = true
-		$LaserMesh/AnimationPlayer.play("FadeOut")
-		#$LaserVisualTimer.start()
-		#data = shoot_data
-
-func _on_laser_visual_timer_timeout() -> void:
-	$LaserMesh.visible = false
+		$Node/Head/LaserMesh/AnimationPlayer.play("FadeOut")

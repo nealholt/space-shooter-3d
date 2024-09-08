@@ -12,7 +12,7 @@ disable_receive_shadows = true
 material = SubResource("StandardMaterial3D_xnkam")
 top_radius = 0.1
 bottom_radius = 0.1
-height = 800.0
+height = 1000.0
 
 [sub_resource type="Animation" id="Animation_nnov1"]
 resource_name = "FadeOut"
@@ -86,19 +86,18 @@ target_position = Vector3(0, 0, -1000)
 collision_mask = 10
 collide_with_areas = true
 
-[node name="LaserMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -400)
+[node name="Node" type="Node" parent="."]
+
+[node name="Head" type="Node3D" parent="Node"]
+
+[node name="LaserMesh" type="MeshInstance3D" parent="Node/Head"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -500)
 visible = false
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_hiy2a")
+skeleton = NodePath("../../..")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LaserMesh"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node/Head/LaserMesh"]
 libraries = {
 "": SubResource("AnimationLibrary_swh51")
 }
-
-[node name="LaserVisualTimer" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-
-[connection signal="timeout" from="LaserVisualTimer" to="." method="_on_laser_visual_timer_timeout"]
