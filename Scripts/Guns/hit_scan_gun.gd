@@ -45,7 +45,8 @@ func shoot(_shoot_data:ShootData) -> void:
 	if cooldown_timer.is_stopped():
 		firing = true
 		$LaserMesh.visible = true
-		$LaserVisualTimer.start()
+		$LaserMesh/AnimationPlayer.play("FadeOut")
+		#$LaserVisualTimer.start()
 		#data = shoot_data
 
 func _on_laser_visual_timer_timeout() -> void:

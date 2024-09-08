@@ -1,16 +1,79 @@
-[gd_scene load_steps=4 format=3 uid="uid://cogvk4lixkgwr"]
+[gd_scene load_steps=7 format=3 uid="uid://cogvk4lixkgwr"]
 
 [ext_resource type="Script" path="res://Scripts/Guns/hit_scan_gun.gd" id="1_ksxwb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xnkam"]
+transparency = 1
 emission_enabled = true
 emission = Color(0, 28.648, 0, 1)
+disable_receive_shadows = true
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_hiy2a"]
 material = SubResource("StandardMaterial3D_xnkam")
 top_radius = 0.1
 bottom_radius = 0.1
 height = 800.0
+
+[sub_resource type="Animation" id="Animation_nnov1"]
+resource_name = "FadeOut"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.135), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_vxv36"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_swh51"]
+_data = {
+"FadeOut": SubResource("Animation_nnov1"),
+"RESET": SubResource("Animation_vxv36")
+}
 
 [node name="HitScanGun" type="Node3D"]
 script = ExtResource("1_ksxwb")
@@ -28,6 +91,11 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 visible = false
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_hiy2a")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LaserMesh"]
+libraries = {
+"": SubResource("AnimationLibrary_swh51")
+}
 
 [node name="LaserVisualTimer" type="Timer" parent="."]
 wait_time = 0.1
