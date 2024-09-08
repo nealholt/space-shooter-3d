@@ -44,21 +44,21 @@ func move(mover, delta:float) -> void:
 	var roll_modifier: float = roll_std
 	var yaw_modifier: float = yaw_std
 	#Brake
-	if Input.is_action_pressed("b_button"):
+	if Input.is_action_pressed("brake"):
 		speed -= acceleration*delta
 		speed = clamp(speed, 0.0, max_speed)
 		pitch_modifier = pitch_brake
 		roll_modifier = roll_brake
 		yaw_modifier = yaw_brake
 	#Accelerate
-	elif Input.is_action_pressed("a_button"):
+	elif Input.is_action_pressed("accelerate"):
 		speed += acceleration*delta
 		speed = clamp(speed, 0.0, max_speed)
 		pitch_modifier = pitch_accel
 		roll_modifier = roll_accel
 		yaw_modifier = yaw_accel
 	#Drift
-	elif Input.is_action_pressed("left_shoulder"):
+	elif Input.is_action_pressed("drift"):
 		pitch_modifier = pitch_drift
 		roll_modifier = roll_drift
 		yaw_modifier = yaw_drift
@@ -84,8 +84,7 @@ func move(mover, delta:float) -> void:
 
 	#This does work to make drift happen, but it's janky as hell
 	#because the change in direction is instantaneous.
-	#Drift when left_trigger is held
-	if !Input.is_action_pressed("left_shoulder"):
+	#Drift when left_shoulder is held
+	if !Input.is_action_pressed("drift"):
 		mover.velocity = -mover.transform.basis.z * speed * delta
 	mover.move_and_slide()
-

@@ -65,21 +65,21 @@ func move(mover, delta:float) -> void:
 	var roll_modifier: float = roll_std
 	var yaw_modifier: float = yaw_std
 	#Accelerating
-	if Input.is_action_pressed("a_button"):
+	if Input.is_action_pressed("accelerate"):
 		impulse = lerp(impulse, impulse_accel, impulse_lerp*delta)
 		friction = lerp(friction, friction_accel, friction_lerp*delta)
 		pitch_modifier = pitch_accel
 		roll_modifier = roll_accel
 		yaw_modifier = yaw_accel
 	#Brake
-	elif Input.is_action_pressed("b_button"):
+	elif Input.is_action_pressed("brake"):
 		impulse = lerp(impulse, impulse_brake, impulse_lerp*delta)
 		friction = lerp(friction, friction_brake, friction_lerp*delta)
 		pitch_modifier = pitch_brake
 		roll_modifier = roll_brake
 		yaw_modifier = yaw_brake
 	#Drift
-	elif Input.is_action_pressed("left_shoulder"):
+	elif Input.is_action_pressed("drift"):
 		#Drifting immediately drops impulse and friction to zero
 		impulse = impulse_drift
 		friction = friction_drift

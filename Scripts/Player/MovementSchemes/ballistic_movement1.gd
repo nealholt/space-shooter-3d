@@ -40,11 +40,11 @@ func move(mover, delta:float) -> void:
 	var roll_modifier: float = roll_std
 	var yaw_modifier: float = yaw_std
 	#Brake
-	if Input.is_action_pressed("b_button"):
+	if Input.is_action_pressed("brake"):
 		impulse = 0.0
 		friction = 0.8 #More friction
 	#Drift
-	elif Input.is_action_pressed("left_shoulder"):
+	elif Input.is_action_pressed("drift"):
 		impulse = 0.0
 		friction = 0.0
 

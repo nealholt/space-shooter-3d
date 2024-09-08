@@ -4,8 +4,8 @@ extends Node3D
 # weapon from the FPS tutorial here:
 # https://www.udemy.com/course/complete-godot-3d/
 
-@export var fire_rate := 14.0 # number of times to fire per second
-@export var weapon_damage := 15
+@export var fire_rate := 5.0 # number of times to fire per second
+@export var weapon_damage := 1
 @export var muzzle_flash:GPUParticles3D
 # GPU particles to spawn on point of impact:
 @export var sparks:PackedScene
@@ -31,7 +31,7 @@ func _process(_delta: float) -> void:
 		if ray_cast_3d.is_colliding():
 			if collider.is_in_group("damageable"):
 				#print("dealt damage")
-				collider.damage(weapon_damage)
+				collider.damage(1)
 			# Spawn sparks on location of hit
 			if sparks:
 				var spark = sparks.instantiate()

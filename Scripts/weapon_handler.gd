@@ -17,7 +17,7 @@ func _unhandled_input(_event: InputEvent) -> void:
 	#elif event.is_action_pressed("weapon2"):
 		#equip(weapon2)
 	#if event.is_action_pressed("next_weapon"):
-	if Input.is_action_just_pressed("left_trigger"):
+	if Input.is_action_just_pressed("switch_weapons"):
 		change_weapon(1)
 	#elif event.is_action_pressed("previous_weapon"):
 		#change_weapon(-1)

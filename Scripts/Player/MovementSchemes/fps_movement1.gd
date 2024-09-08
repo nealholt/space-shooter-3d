@@ -77,7 +77,7 @@ func move(mover, delta:float) -> void:
 		roll_modifier = roll_accel
 		yaw_modifier = yaw_accel
 	#Drift
-	elif Input.is_action_pressed("left_shoulder"):
+	elif Input.is_action_pressed("drift"):
 		pitch_modifier = pitch_drift
 		roll_modifier = roll_drift
 		yaw_modifier = yaw_drift
@@ -104,9 +104,8 @@ func move(mover, delta:float) -> void:
 
 	#This does work to make drift happen, but it's janky as hell
 	#because the change in direction is instantaneous.
-	if !Input.is_action_pressed("left_shoulder"):
+	if !Input.is_action_pressed("drift"):
 		mover.velocity = -mover.transform.basis.z * speed * delta + \
 			mover.transform.basis.x * strafing_horiz * delta
 
 	mover.move_and_slide()
-

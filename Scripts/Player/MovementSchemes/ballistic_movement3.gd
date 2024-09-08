@@ -46,7 +46,7 @@ func move(mover, delta:float) -> void:
 	var yaw_modifier: float = 1.0
 	
 	#Brake
-	if Input.is_action_pressed("b_button"):
+	if Input.is_action_pressed("brake"):
 		#impulse = lerp(impulse, impulse_brake, impulse_lerp*delta)
 		impulse = impulse_brake
 		# Sharper turning while braking
@@ -54,7 +54,7 @@ func move(mover, delta:float) -> void:
 		roll_modifier = 1.5
 		yaw_modifier = 1.5
 	#Accelerate
-	elif Input.is_action_pressed("a_button"):
+	elif Input.is_action_pressed("accelerate"):
 		#impulse = lerp(impulse, impulse_accel, impulse_lerp*delta)
 		impulse = impulse_accel
 		# Reduced maneuverability while accelerating
@@ -62,7 +62,7 @@ func move(mover, delta:float) -> void:
 		roll_modifier = 0.9
 		yaw_modifier = 0.9
 	#Drift
-	elif Input.is_action_pressed("left_shoulder"):
+	elif Input.is_action_pressed("drift"):
 		# I like that drift snaps straight to zero impulse and friction
 		impulse = 0.0
 		friction = 0.0
