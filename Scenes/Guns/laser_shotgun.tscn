@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://8man27xjxi5h"]
+
+[ext_resource type="Script" path="res://Scripts/Guns/laser_shotgun.gd" id="1_j6dff"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vitgd"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 200.0
+
+[node name="laser_shotgun" type="Node3D"]
+script = ExtResource("1_j6dff")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -100)
+mesh = SubResource("CylinderMesh_vitgd")
+
+[node name="Raycasts" type="Node3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="Raycasts"]
+target_position = Vector3(0, 0, -200)
+collision_mask = 10
+collide_with_areas = true
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true

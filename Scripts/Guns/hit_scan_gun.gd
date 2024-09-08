@@ -25,8 +25,8 @@ func _process(_delta: float) -> void:
 		if muzzle_flash:
 			muzzle_flash.restart()
 		cooldown_timer.start(1.0/fire_rate)
-		# Print multiple strings with tabs inbetween
 		var collider = ray_cast_3d.get_collider()
+		# Print multiple strings with tabs inbetween
 		#printt('weapon fired', collider)
 		if ray_cast_3d.is_colliding():
 			if collider.is_in_group("damageable"):
