@@ -11,13 +11,13 @@ var current_weapon: Node3D
 func _ready() -> void:
 	equip(weapon1)
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	#if event.is_action_pressed("weapon1"):
 		#equip(weapon1)
 	#elif event.is_action_pressed("weapon2"):
 		#equip(weapon2)
 	#if event.is_action_pressed("next_weapon"):
-	if event.is_action_pressed("left_trigger"):
+	if Input.is_action_just_pressed("left_trigger"):
 		change_weapon(1)
 	#elif event.is_action_pressed("previous_weapon"):
 		#change_weapon(-1)

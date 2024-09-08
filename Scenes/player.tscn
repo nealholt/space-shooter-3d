@@ -155,7 +155,7 @@ process_material = SubResource("ParticleProcessMaterial_wcp7w")
 draw_pass_1 = SubResource("BoxMesh_1jycr")
 
 [node name="HitScanGun" parent="WeaponHandler" instance=ExtResource("13_428na")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69716, -0.0310197, -4.40908)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69716, -0.0310197, -3.35438)
 weapon_damage = 1
 
 [node name="FighterChassisDiamond" parent="." instance=ExtResource("12_a77x5")]
