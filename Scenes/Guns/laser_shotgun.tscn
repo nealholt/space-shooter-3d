@@ -11,14 +11,49 @@ height = 200.0
 script = ExtResource("1_j6dff")
 
 [node name="Visuals" type="Node3D" parent="."]
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -100)
 mesh = SubResource("CylinderMesh_vitgd")
 
 [node name="Raycasts" type="Node3D" parent="."]
 
 [node name="RayCast3D" type="RayCast3D" parent="Raycasts"]
+target_position = Vector3(0, 0, -200)
+collision_mask = 10
+collide_with_areas = true
+
+[node name="RayCast3D2" type="RayCast3D" parent="Raycasts"]
+target_position = Vector3(0, 0, -200)
+collision_mask = 10
+collide_with_areas = true
+
+[node name="RayCast3D3" type="RayCast3D" parent="Raycasts"]
+target_position = Vector3(0, 0, -200)
+collision_mask = 10
+collide_with_areas = true
+
+[node name="RayCast3D4" type="RayCast3D" parent="Raycasts"]
+target_position = Vector3(0, 0, -200)
+collision_mask = 10
+collide_with_areas = true
+
+[node name="RayCast3D5" type="RayCast3D" parent="Raycasts"]
+target_position = Vector3(0, 0, -200)
+collision_mask = 10
+collide_with_areas = true
+
+[node name="RayCast3D6" type="RayCast3D" parent="Raycasts"]
+target_position = Vector3(0, 0, -200)
+collision_mask = 10
+collide_with_areas = true
+
+[node name="RayCast3D7" type="RayCast3D" parent="Raycasts"]
+target_position = Vector3(0, 0, -200)
+collision_mask = 10
+collide_with_areas = true
+
+[node name="RayCast3D8" type="RayCast3D" parent="Raycasts"]
 target_position = Vector3(0, 0, -200)
 collision_mask = 10
 collide_with_areas = true

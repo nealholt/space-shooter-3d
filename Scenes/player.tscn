@@ -160,6 +160,7 @@ draw_pass_1 = SubResource("BoxMesh_1jycr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69716, -0.0310197, -3.35438)
 
 [node name="laser_shotgun" parent="WeaponHandler" instance=ExtResource("15_ufo67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.45689)
 
 [node name="FighterChassisDiamond" parent="." instance=ExtResource("12_a77x5")]
 

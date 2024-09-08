@@ -4,9 +4,9 @@ extends Node3D
 # (by which I mean a hitscan shotgun)
 # like house of the dying sun's blunderbuss
 
-@export var spread := 20.0 # +/- this many degrees
-@export var fire_rate := 3.0 # number of times to fire per second
-@export var bullets := 1 #TODO change to 8 # number of bullets per shot
+@export var spread := 5.0 # +/- this many degrees
+@export var fire_rate := 5.0 # number of times to fire per second
+@export var bullets := 8 # number of bullets per shot
 @export var weapon_damage := 1
 @export var muzzle_flash:GPUParticles3D
 # GPU particles to spawn on point of impact:
@@ -28,12 +28,12 @@ func _process(_delta: float) -> void:
 		# Loop through all the raycasts
 		# and meshinstances.
 		var ray:RayCast3D
-		var beam:MeshInstance3D
+		#var beam:MeshInstance3D
 		var collider
 		for i in range(bullets):
 			ray = $Raycasts.get_child(i)
 			ray.rotation_degrees = Vector3(
-					90+randf_range(-spread,spread),
+					randf_range(-spread,spread),
 					randf_range(-spread,spread),
 					0.0)
 			collider = ray.get_collider()
@@ -48,8 +48,20 @@ func _process(_delta: float) -> void:
 					spark.global_position = ray.get_collision_point()
 			# Whether or not there is a collision,
 			# position and draw the "laser"
-			beam = $Visuals.get_child(i)
-			beam.rotation_degrees = ray.rotation_degrees
+			#beam = $Visuals.get_child(i)
+			#beam.rotation_degrees = ray.rotation_degrees
+			#beam.rotation_degrees.x += 90
+			# When the raycast rotates, it rotates from
+			# its starting point. But when a mesh rotates,
+			# it rotates from its middle, so then we need
+			# to move it forward along its new z direction
+			# by half of its length
+			#print()
+			#print(beam.global_position)
+			#beam.global_position = global_position # Reset
+			#beam.global_position -= beam.global_transform.basis.z * beam.mesh.get_height()
+			#print(beam.global_position)
+			#beam.position.z = -beam.mesh.get_height()
 
 
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088242#questions
