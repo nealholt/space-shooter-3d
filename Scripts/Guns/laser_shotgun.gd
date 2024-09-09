@@ -48,7 +48,6 @@ func _process(_delta: float) -> void:
 		# and BulletBits.
 		var ray:RayCast3D
 		var bulletbit:BulletBit
-		var collider
 		for i in range(bullets):
 			# Use the ith ray and bullet
 			bulletbit = $Visuals.get_child(i)
@@ -58,31 +57,19 @@ func _process(_delta: float) -> void:
 					randf_range(-spread,spread),
 					randf_range(-spread,spread),
 					0.0)
-			# Get collider. This MUST be done
-			# before checking is_colliding.
-			collider = ray.get_collider()
+			# The following if has not yet been used or tested
 			if ray.is_colliding():
 				# Spawn sparks on location of hit
 				if sparks:
 					var spark = sparks.instantiate()
 					add_child(spark)
 					spark.global_position = ray.get_collision_point()
-				# $Visuals is a plain node so that bullet
-				# bits don't move with the shooter.
-				# set_up tells the bullet bit where to start,
-				# where to end, and activates it so it rushes
-				# to its target.
-				bulletbit.set_up(global_position, ray.get_collision_point(), collider)
-				#print()
-				#print('did collide')
-				#print(ray.rotation_degrees)
-				#print(ray.get_collision_point())
-			else:
-				bulletbit.set_up(global_position, global_position+ray.global_transform.basis.z * ray.target_position.z, null)
-				#print()
-				#print('no collision')
-				#print(ray.rotation_degrees)
-				#print(global_position+ray.global_transform.basis.z * ray.target_position.z)
+			# $Visuals is a plain node so that bullet
+			# bits don't move with the shooter.
+			# set_up tells the bullet bit where to start,
+			# where to end, and activates it so it rushes
+			# to its target.
+			bulletbit.set_up(global_position, ray)
 
 
 func shoot(_shoot_data:ShootData) -> void:
