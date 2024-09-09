@@ -1,20 +1,28 @@
 [gd_scene load_steps=3 format=3 uid="uid://8man27xjxi5h"]
 
 [ext_resource type="Script" path="res://Scripts/Guns/laser_shotgun.gd" id="1_j6dff"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_vitgd"]
-top_radius = 0.05
-bottom_radius = 0.05
-height = 200.0
+[ext_resource type="PackedScene" uid="uid://cv61niulto7ro" path="res://Scenes/bullet_bits.tscn" id="2_cuaw4"]
 
 [node name="laser_shotgun" type="Node3D"]
 script = ExtResource("1_j6dff")
 
-[node name="Visuals" type="Node3D" parent="."]
-visible = false
+[node name="Visuals" type="Node" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Visuals"]
-mesh = SubResource("CylinderMesh_vitgd")
+[node name="BulletBits" parent="Visuals" instance=ExtResource("2_cuaw4")]
+
+[node name="BulletBits2" parent="Visuals" instance=ExtResource("2_cuaw4")]
+
+[node name="BulletBits3" parent="Visuals" instance=ExtResource("2_cuaw4")]
+
+[node name="BulletBits4" parent="Visuals" instance=ExtResource("2_cuaw4")]
+
+[node name="BulletBits5" parent="Visuals" instance=ExtResource("2_cuaw4")]
+
+[node name="BulletBits6" parent="Visuals" instance=ExtResource("2_cuaw4")]
+
+[node name="BulletBits7" parent="Visuals" instance=ExtResource("2_cuaw4")]
+
+[node name="BulletBits8" parent="Visuals" instance=ExtResource("2_cuaw4")]
 
 [node name="Raycasts" type="Node3D" parent="."]
 

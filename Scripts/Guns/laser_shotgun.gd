@@ -4,13 +4,32 @@ extends Node3D
 # (by which I mean a hitscan shotgun)
 # like house of the dying sun's blunderbuss
 
-@export var spread := 5.0 # +/- this many degrees
-@export var fire_rate := 5.0 # number of times to fire per second
-@export var bullets := 8 # number of bullets per shot
-@export var weapon_damage := 1
-@export var muzzle_flash:GPUParticles3D
+# Damage is dealt in the bulletbits so that
+# it looks a little more realistic. The bulletbits
+# should never miss and will deal damage when
+# they reach the target. There is some travel time
+# even though the hit is determined by raycast
+# in this script.
+
+# Visuals is a Node, not a Node3D because I don't
+# want the bulletbits to inherit position and
+# direction information. If they did, then they
+# would move when the ship moves and that would be
+# no good.
+
+# +/- this many degrees:
+@export var spread := 5.0
+# number of times to fire per second:
+@export var fire_rate := 5.0
+# number of bullets per shot.
+# Warning: if you change this to a larget
+# number, you will need to put more bullet bits
+# and raycasts as children of the Visuals and
+# Raycasts nodes.
+@export var bullets := 8
+@export var muzzle_flash:GPUParticles3D # Not currently in use
 # GPU particles to spawn on point of impact:
-@export var sparks:PackedScene
+@export var sparks:PackedScene # Not currently in use
 
 @onready var cooldown_timer: Timer = $CooldownTimer
 
@@ -26,42 +45,36 @@ func _process(_delta: float) -> void:
 			muzzle_flash.restart()
 		cooldown_timer.start(1.0/fire_rate)
 		# Loop through all the raycasts
-		# and meshinstances.
+		# and BulletBits.
 		var ray:RayCast3D
-		#var beam:MeshInstance3D
+		var bulletbit:BulletBit
 		var collider
 		for i in range(bullets):
+			# Use the ith ray and bullet
+			bulletbit = $Visuals.get_child(i)
 			ray = $Raycasts.get_child(i)
+			# Rotate the ray a random amount
 			ray.rotation_degrees = Vector3(
 					randf_range(-spread,spread),
 					randf_range(-spread,spread),
 					0.0)
+			# Get collider. This MUST be done
+			# before checking is_colliding.
 			collider = ray.get_collider()
 			if ray.is_colliding():
-				if collider.is_in_group("damageable"):
-					#print("dealt damage")
-					collider.damage(1)
 				# Spawn sparks on location of hit
 				if sparks:
 					var spark = sparks.instantiate()
 					add_child(spark)
 					spark.global_position = ray.get_collision_point()
-			# Whether or not there is a collision,
-			# position and draw the "laser"
-			#beam = $Visuals.get_child(i)
-			#beam.rotation_degrees = ray.rotation_degrees
-			#beam.rotation_degrees.x += 90
-			# When the raycast rotates, it rotates from
-			# its starting point. But when a mesh rotates,
-			# it rotates from its middle, so then we need
-			# to move it forward along its new z direction
-			# by half of its length
-			#print()
-			#print(beam.global_position)
-			#beam.global_position = global_position # Reset
-			#beam.global_position -= beam.global_transform.basis.z * beam.mesh.get_height()
-			#print(beam.global_position)
-			#beam.position.z = -beam.mesh.get_height()
+				# $Visuals is a plain node so that bullet
+				# bits don't move with the shooter.
+				# set_up tells the bullet bit where to start,
+				# where to end, and activates it so it rushes
+				# to its target.
+				bulletbit.set_up(global_position, ray.get_collision_point(), collider)
+			else:
+				bulletbit.set_up(global_position, global_position+ray.global_transform.basis.z * ray.target_position.z, null)
 
 
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088242#questions

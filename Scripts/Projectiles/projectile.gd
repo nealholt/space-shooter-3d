@@ -50,7 +50,7 @@ func get_range() -> float:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# Avoid turning toward invalid targets.
 	# Having a non-null target indicates that this is
 	# a seeking projectile.
