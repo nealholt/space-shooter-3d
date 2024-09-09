@@ -9,12 +9,9 @@ class_name BulletBit
 # laser shotgun.
 
 @onready var bullet_hole_decal = preload("res://Assets/Decals/bullet_hole.tscn")
-@export var speed:float = 100.0 #TODO 400.0
-var speed_sqd:float = speed*speed
+@export var speed:float = 500.0
 var target : Vector3
-var ray : RayCast3D
-var time_to_target:float
-
+var collision_normal:Vector3 # For orienting decal
 var damagee # Thing to deal damage to.
 # I'm moving damage dealing from laser_shotgun
 # into here so that damage is dealt on pseudo
@@ -24,7 +21,7 @@ func _ready() -> void:
 	set_physics_process(false)
 	$MeshInstance3D.visible = false
 
-func set_up(start:Vector3, raycast:RayCast3D) -> void:
+func set_up(start:Vector3, end:Vector3, collision_norm:Vector3, victim:Node3D) -> void:
 	# This if should trigger if the bulletbit is fired
 	# again before reaching previous target.
 	if $MeshInstance3D.visible and damagee != null:
@@ -42,26 +39,25 @@ func set_up(start:Vector3, raycast:RayCast3D) -> void:
 		# and just spawn and queue free new bulletbits
 		# the same as every other bullet instead of
 		# reusing them.
-		printerr('set_up called on BulletBit before previous target was dealt damage')
-	ray = raycast
-	damagee = ray.get_collider()
+		#printerr('set_up called on BulletBit before previous target was dealt damage')
+		stop() # I went with solution 1
 	set_physics_process(true)
 	$MeshInstance3D.visible = true
 	global_position = start
+	target = end
+	collision_normal = collision_norm
+	damagee = victim
+	look_at(target, Vector3.UP) # Orient toward target
+	# Calculate time out so it looks like the bullet
+	# disappears at impact point
+	var dist = global_position.distance_to(target)
+	$Timer.start(dist/speed)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	update_target()
-	# Check this condition otherwise there are
-	# errors when using look_at because the bullet
-	# is occasionally too close to its target.
-	# https://forum.godotengine.org/t/process-node-origin-and-target-are-in-the-same-position-look-at-failed-godot-4-version/4357/2
-	# Also stop if within 10000th of a second of reaching target
-	if global_position.is_equal_approx(target) or time_to_target < 0.0001:
-		stop()
-	else:
-		look_at(target, Vector3.UP)
-		global_position -= transform.basis.z * delta * speed
+	# Move toward target
+	global_position -= transform.basis.z * delta * speed
 
 func stop() -> void:
 	# Shutdown further movement
@@ -73,7 +69,7 @@ func stop() -> void:
 		stick_decal()
 		if damagee.is_in_group("damageable"):
 			damagee.damage(1)
-	damagee = null
+		damagee = null
 
 # Source:
 # https://www.youtube.com/watch?v=8vFOOglWW3w
@@ -84,25 +80,13 @@ func stick_decal() -> void:
 	# weird scaling if attaching as a child of a scaled
 	# node.
 	get_tree().root.add_child(decal)
-	#decal.global_position = ray.get_collision_point()
+	# Position and orient the decal
 	decal.global_position = target
-	var collision_normal = ray.get_collision_normal()
 	if collision_normal == Vector3.DOWN:
 		decal.rotation_degrees.x = 90
 	else:
 		decal.look_at(global_position - collision_normal, Vector3(0,1,0))
 
-func update_target() -> void:
-	# For some reason I have to keep updating this
-	# otherwise the bullets fly to and the decals
-	# stick at outdated points, literally the previous
-	# location of the raycast. I cannot figure out
-	# why so this is my fix.
-	if ray.is_colliding():
-		target = ray.get_collision_point()
-	else:
-		target = global_position+ray.global_transform.basis.z * ray.target_position.z
-	# Calculate time out so it looks like the bullet
-	# disappears at impact point
-	var dist = global_position.distance_squared_to(target)
-	time_to_target = dist/speed_sqd
+
+func _on_timer_timeout() -> void:
+	stop()

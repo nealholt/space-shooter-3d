@@ -14,8 +14,8 @@ extends Node3D
 # Visuals is a Node, not a Node3D because I don't
 # want the bulletbits to inherit position and
 # direction information. If they did, then they
-# would move when the ship moves and that would be
-# no good.
+# would move when the shooter moves and that would
+# be no good.
 
 # +/- this many degrees:
 @export var spread := 5.0
@@ -36,6 +36,24 @@ extends Node3D
 #True if the gun has received command to fire
 var firing: bool = false
 
+
+func _ready() -> void:
+	# Pre rotate all the raycasts. For unknown
+	# reasons, if you don't do this, the first
+	# shot will all be clustered in a straight
+	# line EVEN THOUGH I later rotate before
+	# getting collision points. Just do it here
+	# and don't worry about it. It's way too
+	# much headache to track down whatever the
+	# issue is. Chalk it up to some aspect of
+	# raycasts I don't understand.
+	var ray:RayCast3D
+	for i in range(bullets):
+		ray = $Raycasts.get_child(i)
+		ray.rotation_degrees = Vector3(
+				randf_range(-spread,spread),
+				randf_range(-spread,spread),
+				0.0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -64,12 +82,12 @@ func _process(_delta: float) -> void:
 					var spark = sparks.instantiate()
 					add_child(spark)
 					spark.global_position = ray.get_collision_point()
-			# $Visuals is a plain node so that bullet
-			# bits don't move with the shooter.
-			# set_up tells the bullet bit where to start,
-			# where to end, and activates it so it rushes
-			# to its target.
-			bulletbit.set_up(global_position, ray)
+				# set_up tells the bullet bit where to start,
+				# where to end, and activates it so it rushes
+				# to its target.
+				bulletbit.set_up(global_position, ray.get_collision_point(), ray.get_collision_normal(), ray.get_collider())
+			else:
+				bulletbit.set_up(global_position, global_position+ray.global_transform.basis.z * ray.target_position.z, ray.get_collision_normal(), null)
 
 
 func shoot(_shoot_data:ShootData) -> void:
