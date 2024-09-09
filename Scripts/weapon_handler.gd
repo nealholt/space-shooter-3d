@@ -6,9 +6,10 @@ extends Node3D
 @export var weapon1: Node3D
 @export var weapon2: Node3D
 @export var weapon3: Node3D
+@export var weapon4: Node3D
 
 var index = 0
-const weapon_count = 3
+const weapon_count = 4
 
 var current_weapon: Node3D
 

@@ -50,7 +50,7 @@ func _physics_process(delta):
 	change_pov()
 	
 	# Trigger pulled. Try to shoot.
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_pressed("shoot"):
 		var bullet_data:ShootData = ShootData.new()
 		bullet_data.shooter = self
 		$WeaponHandler.shoot(bullet_data)

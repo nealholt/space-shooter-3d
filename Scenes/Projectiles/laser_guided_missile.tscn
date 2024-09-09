@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d34632kvmjrnm"]
+
+[ext_resource type="PackedScene" uid="uid://0vowmbagxl3n" path="res://Scenes/Projectiles/Missile/missile.tscn" id="1_d6b0f"]
+
+[node name="LaserGuidedMissile" instance=ExtResource("1_d6b0f")]
+steer_force = 300.0
+damage = 1.0
+time_out = 4.0
+laser_guided = true

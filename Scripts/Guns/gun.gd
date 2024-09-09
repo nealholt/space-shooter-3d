@@ -124,3 +124,6 @@ func shoot(shoot_data:ShootData) -> void:
 		firing = true
 		firing_rate_timer.start(1.0/fire_rate)
 		data = shoot_data
+		# Add the raycast to the shoot_data for
+		# reference by laser-guided projectiles
+		data.ray = $RayCast3D

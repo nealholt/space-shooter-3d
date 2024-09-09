@@ -11,3 +11,8 @@ one_shot = true
 
 [node name="BurstTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1000)
+collision_mask = 10
+collide_with_areas = true

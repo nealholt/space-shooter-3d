@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=40 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_rf46g"]
 [ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="2_2p718"]
@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://cgwsk2ovf5fgt" path="res://Assets/SoundEffects/missile/acquiring_lock.wav" id="15_malfx"]
 [ext_resource type="PackedScene" uid="uid://8man27xjxi5h" path="res://Scenes/Guns/laser_shotgun.tscn" id="15_ufo67"]
 [ext_resource type="AudioStream" uid="uid://d1rurti8e68f7" path="res://Assets/SoundEffects/missile/missile_lock.wav" id="16_5hu7g"]
+[ext_resource type="PackedScene" uid="uid://d34632kvmjrnm" path="res://Scenes/Projectiles/laser_guided_missile.tscn" id="16_jijx6"]
 [ext_resource type="AudioStream" uid="uid://dr6bn0u22ke7d" path="res://Assets/SoundEffects/missile/launch.wav" id="17_5165r"]
 [ext_resource type="AudioStream" uid="uid://dwo2npq3c18sx" path="res://Assets/SoundEffects/missile/quick_launch.wav" id="18_piaxr"]
 [ext_resource type="Script" path="res://Scripts/camera_player_group.gd" id="19_342x2"]
@@ -89,6 +90,7 @@ shape = SubResource("SphereShape3D_7tg00")
 [node name="MissileLauncher" parent="." instance=ExtResource("2_2p718")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.5)
 bullet = ExtResource("5_qw0hj")
+damage = 50.0
 fire_rate = 0.3
 turn_off_near_miss = true
 
@@ -122,10 +124,11 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 _startColor = Color(0.537255, 0.152941, 1, 1)
 _endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
 
-[node name="WeaponHandler" parent="." node_paths=PackedStringArray("weapon1", "weapon2", "weapon3") instance=ExtResource("9_1xly7")]
+[node name="WeaponHandler" parent="." node_paths=PackedStringArray("weapon1", "weapon2", "weapon3", "weapon4") instance=ExtResource("9_1xly7")]
 weapon1 = NodePath("GatlingGun")
 weapon2 = NodePath("HitScanGun")
 weapon3 = NodePath("laser_shotgun")
+weapon4 = NodePath("LaserGuidedLauncher")
 
 [node name="GatlingGun" parent="WeaponHandler" node_paths=PackedStringArray("gun_animation", "muzzle_flash") instance=ExtResource("2_2p718")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6302, 0.148885, -5.47273)
@@ -161,6 +164,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69716, -0.0310197, -3.35438
 
 [node name="laser_shotgun" parent="WeaponHandler" instance=ExtResource("15_ufo67")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.45689)
+
+[node name="LaserGuidedLauncher" parent="WeaponHandler" instance=ExtResource("2_2p718")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.95206)
+bullet = ExtResource("16_jijx6")
+fire_rate = 5.0
+turn_off_near_miss = true
 
 [node name="FighterChassisDiamond" parent="." instance=ExtResource("12_a77x5")]
 
