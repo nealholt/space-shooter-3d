@@ -112,8 +112,6 @@ func _process(_delta):
 			b.set_collision_layer_value(3, false)
 
 
-# Returns true if successful. The return is useful for
-# animations and sounds
 func shoot(shoot_data:ShootData) -> void:
 	if $FiringRateTimer.is_stopped():
 		# Animate 'em if you got 'em

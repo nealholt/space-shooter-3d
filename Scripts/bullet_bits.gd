@@ -21,6 +21,24 @@ func _ready() -> void:
 	$MeshInstance3D.visible = false
 
 func set_up(start:Vector3, end:Vector3, victim) -> void:
+	# This if should trigger if the bulletbit is fired
+	# again before reaching previous target.
+	if $MeshInstance3D.visible and damagee != null:
+		# This is possible because bulletbits don't damage
+		# their target until they reach it. Solutions include:
+		# 1. just deal the damage here and don't worry
+		# that the bullet bits are getting recalled to
+		# another shot.
+		# 2. Fire rate low enough and bullet bit speed high
+		# enough that this can't happen.
+		# 3. Two or more sets of bullet bits that are
+		# alternately used by the gun so one set can be
+		# enroute to target when the next one fires.
+		# 4. Cut this premature optimization bullshit
+		# and just spawn and queue free new bulletbits
+		# the same as every other bullet instead of
+		# reusing them.
+		printerr('set_up called on BulletBit before previous target was dealt damage')
 	damagee = victim
 	set_physics_process(true)
 	$MeshInstance3D.visible = true
@@ -39,7 +57,9 @@ func _physics_process(delta: float) -> void:
 	# to its target.
 	# https://forum.godotengine.org/t/process-node-origin-and-target-are-in-the-same-position-look-at-failed-godot-4-version/4357/2
 	if global_position.is_equal_approx(target):
-		stop()
+		# This triggers the _on_timer_timeout function
+		# which calls stop()
+		$Timer.stop()
 	else:
 		look_at(target, Vector3.UP)
 		global_position -= transform.basis.z * delta * speed
@@ -48,10 +68,11 @@ func _on_timer_timeout() -> void:
 	stop()
 
 func stop() -> void:
+	# Shutdown further movement
 	set_physics_process(false)
+	# Go invisible
 	$MeshInstance3D.visible = false
-	if damagee != null:
-		# If can deal damage, do so
-		if damagee.is_in_group("damageable"):
-			damagee.damage(1)
-		damagee = null
+	# Damage target if there is one
+	if damagee != null and damagee.is_in_group("damageable"):
+		damagee.damage(1)
+	damagee = null

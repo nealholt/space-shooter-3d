@@ -73,13 +73,17 @@ func _process(_delta: float) -> void:
 				# where to end, and activates it so it rushes
 				# to its target.
 				bulletbit.set_up(global_position, ray.get_collision_point(), collider)
+				#print()
+				#print('did collide')
+				#print(ray.rotation_degrees)
+				#print(ray.get_collision_point())
 			else:
 				bulletbit.set_up(global_position, global_position+ray.global_transform.basis.z * ray.target_position.z, null)
+				#print()
+				#print('no collision')
+				#print(ray.rotation_degrees)
+				#print(global_position+ray.global_transform.basis.z * ray.target_position.z)
 
 
-# https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088242#questions
-# Returns true if successful. The return is useful for
-# animations and sounds
 func shoot(_shoot_data:ShootData) -> void:
-	if cooldown_timer.is_stopped():
-		firing = true
+	firing = cooldown_timer.is_stopped()

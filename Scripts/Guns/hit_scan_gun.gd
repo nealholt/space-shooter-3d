@@ -65,9 +65,6 @@ func position_laser(ray:RayCast3D) -> void:
 		laser_mesh.mesh.set_height(1000)
 
 
-# https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088242#questions
-# Returns true if successful. The return is useful for
-# animations and sounds
 func shoot(_shoot_data:ShootData) -> void:
 	if cooldown_timer.is_stopped():
 		firing = true
