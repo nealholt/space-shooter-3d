@@ -17,32 +17,7 @@ var damagee # Thing to deal damage to.
 # into here so that damage is dealt on pseudo
 # impact rather than instantaneously
 
-func _ready() -> void:
-	set_physics_process(false)
-	$MeshInstance3D.visible = false
-
 func set_up(start:Vector3, end:Vector3, collision_norm:Vector3, victim:Node3D) -> void:
-	# This if should trigger if the bulletbit is fired
-	# again before reaching previous target.
-	if $MeshInstance3D.visible and damagee != null:
-		# This is possible because bulletbits don't damage
-		# their target until they reach it. Solutions include:
-		# 1. just deal the damage here and don't worry
-		# that the bullet bits are getting recalled to
-		# another shot.
-		# 2. Fire rate low enough and bullet bit speed high
-		# enough that this can't happen.
-		# 3. Two or more sets of bullet bits that are
-		# alternately used by the gun so one set can be
-		# enroute to target when the next one fires.
-		# 4. Cut this premature optimization bullshit
-		# and just spawn and queue free new bulletbits
-		# the same as every other bullet instead of
-		# reusing them.
-		#printerr('set_up called on BulletBit before previous target was dealt damage')
-		stop() # I went with solution 1
-	set_physics_process(true)
-	$MeshInstance3D.visible = true
 	global_position = start
 	target = end
 	collision_normal = collision_norm
@@ -53,23 +28,19 @@ func set_up(start:Vector3, end:Vector3, collision_norm:Vector3, victim:Node3D) -
 	var dist = global_position.distance_to(target)
 	$Timer.start(dist/speed)
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	# Move toward target
 	global_position -= transform.basis.z * delta * speed
 
 func stop() -> void:
-	# Shutdown further movement
-	set_physics_process(false)
-	# Go invisible
-	$MeshInstance3D.visible = false
 	# Damage target if there is one
 	if damagee != null:
 		stick_decal()
 		if damagee.is_in_group("damageable"):
 			damagee.damage(1)
 		damagee = null
+	queue_free()
 
 # Source:
 # https://www.youtube.com/watch?v=8vFOOglWW3w

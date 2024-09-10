@@ -30,6 +30,12 @@ extends Node3D
 # GPU particles to spawn on point of impact:
 @export var sparks:PackedScene # Not currently in use
 
+# Bullet bits are part animation, part actual damage
+# dealer. However, it's predetermined when they get
+# created whether they hit their target or not based
+# on the raycasts in the laser shotgun
+@export var bullet_bit_scene:PackedScene
+
 @onready var cooldown_timer: Timer = $CooldownTimer
 
 #True if the gun has received command to fire
@@ -37,18 +43,9 @@ var firing: bool = false
 
 
 func _ready() -> void:
-	# Pre rotate all the raycasts. For unknown
-	# reasons, if you don't do this, the first
-	# shot will all be clustered in a straight
-	# line EVEN THOUGH I later rotate before
-	# getting collision points. Just do it here
-	# and don't worry about it. It's way too
-	# much headache to track down whatever the
-	# issue is. Chalk it up to some aspect of
-	# raycasts I don't understand.
+	# Create all the necessary raycasts
 	var ray:RayCast3D
 	for i in range(bullets):
-		# Create all the necessary raycasts
 		ray = RayCast3D.new()
 		$Raycasts.add_child(ray)
 		ray.collide_with_areas = true
@@ -58,7 +55,15 @@ func _ready() -> void:
 		# Enable collision masks 2, 4
 		ray.set_collision_mask_value(2,true)
 		ray.set_collision_mask_value(4,true)
-		#ray = $Raycasts.get_child(i) #TODO this is the old way
+		# Pre rotate all the raycasts. For unknown
+		# reasons, if you don't do this, the first
+		# shot will all be clustered in a straight
+		# line EVEN THOUGH I later rotate before
+		# getting collision points. Just do it here
+		# and don't worry about it. It's way too
+		# much headache to track down whatever the
+		# issue is. Chalk it up to some aspect of
+		# raycasts I don't understand.
 		ray.rotation_degrees = Vector3(
 				randf_range(-spread,spread),
 				randf_range(-spread,spread),
@@ -76,8 +81,10 @@ func _process(_delta: float) -> void:
 		var ray:RayCast3D
 		var bulletbit:BulletBit
 		for i in range(bullets):
-			# Use the ith ray and bullet
-			bulletbit = $Visuals.get_child(i)
+			# Create a bullet
+			bulletbit = bullet_bit_scene.instantiate()
+			get_tree().get_root().add_child(bulletbit)
+			# Access ith raycast
 			ray = $Raycasts.get_child(i)
 			# Rotate the ray a random amount
 			ray.rotation_degrees = Vector3(

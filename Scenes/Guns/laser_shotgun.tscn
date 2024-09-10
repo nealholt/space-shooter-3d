@@ -5,24 +5,7 @@
 
 [node name="laser_shotgun" type="Node3D"]
 script = ExtResource("1_j6dff")
-
-[node name="Visuals" type="Node" parent="."]
-
-[node name="BulletBits" parent="Visuals" instance=ExtResource("2_cuaw4")]
-
-[node name="BulletBits2" parent="Visuals" instance=ExtResource("2_cuaw4")]
-
-[node name="BulletBits3" parent="Visuals" instance=ExtResource("2_cuaw4")]
-
-[node name="BulletBits4" parent="Visuals" instance=ExtResource("2_cuaw4")]
-
-[node name="BulletBits5" parent="Visuals" instance=ExtResource("2_cuaw4")]
-
-[node name="BulletBits6" parent="Visuals" instance=ExtResource("2_cuaw4")]
-
-[node name="BulletBits7" parent="Visuals" instance=ExtResource("2_cuaw4")]
-
-[node name="BulletBits8" parent="Visuals" instance=ExtResource("2_cuaw4")]
+bullet_bit_scene = ExtResource("2_cuaw4")
 
 [node name="Raycasts" type="Node3D" parent="."]
 

@@ -22,7 +22,7 @@ var acceleration := Vector3.ZERO #non zero probably only for missiles
 
 # If set to true, just look at target and move toward
 # it. Don't try to emulate physics at all.
-@export var use_simple_seek:bool = false #TODO
+@export var use_simple_seek:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -60,23 +60,6 @@ func get_range() -> float:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	#TODO
-	## Update target if laser guided
-	#if laser_guided and ray.is_colliding():
-		#target = ray.get_collider()
-	#
-	## Avoid turning toward invalid targets.
-	## Having a non-null target indicates that this is
-	## a seeking projectile.
-	#if is_instance_valid(target):
-		## Acceleration should be zero unless this is a seeking missile
-		#acceleration = seek()
-		## Adjust velocity based on acceleration
-		#velocity += acceleration * delta
-		## Face the point in local space that is our current
-		## position adjusted in the direction of the new
-		## velocity
-		#look_at(transform.origin + velocity, global_transform.basis.y)
 	if use_simple_seek:
 		simple_seek()
 	else:
@@ -147,19 +130,7 @@ func get_target_pos() -> Vector3:
 # https://www.youtube.com/watch?v=cgVNu5-7f0w&ab_channel=IndieQuest
 # to make it work in 3d
 func get_velocity_adjustment() -> Vector3:
-	## Make sure target has a velocity attribute, otherwise
-	## use zero velocity.
-	#var targ_vel = Vector3.ZERO
-	#if "velocity" in target:
-		#targ_vel = target.velocity
-	## Lead the target by getting the position where we
-	## can intercept it from the current position at speed.
-	#var target_pos := Global.get_intercept(
-			#global_position,
-			#speed,
-			#target.global_position,
-			#targ_vel)
-	var target_pos := get_target_pos() #TODO
+	var target_pos := get_target_pos()
 	# Calculate the desired velocity, normalized and then
 	# multiplied by speed.
 	var desired : Vector3 = (target_pos - global_position).normalized() * speed
@@ -177,9 +148,6 @@ func damage_and_die(body):
 	# cut off.
 	if $Timer.wait_time - $Timer.time_left <= 0.02 and body.get_groups().has("shield"):
 		return
-	
-	# Testing
-	#print($Timer.wait_time - $Timer.time_left)
 	
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
 	if body.is_in_group("damageable"):
