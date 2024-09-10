@@ -50,6 +50,11 @@ var reload_sound_player: AudioStreamPlayer3D
 @export var gun_animation : AnimationPlayer
 @export var muzzle_flash : GPUParticles3D
 
+# Only guns that actually use a raycast3d should
+# have one, such as guns that fire laser guided
+# munitions.
+@export var ray : RayCast3D
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Ask bullets for their range
@@ -126,4 +131,4 @@ func shoot(shoot_data:ShootData) -> void:
 		data = shoot_data
 		# Add the raycast to the shoot_data for
 		# reference by laser-guided projectiles
-		data.ray = $RayCast3D
+		data.ray = ray

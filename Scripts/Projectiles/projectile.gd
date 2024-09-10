@@ -48,6 +48,9 @@ func set_data(dat:ShootData) -> void:
 	# Keep reference to targeting laser
 	if laser_guided:
 		ray = dat.ray
+		# error checking
+		if ray == null:
+			printerr('All guns that fire laser guided projectiles, should have an attached RayCast3D')
 
 
 func reset_velocity() -> void:

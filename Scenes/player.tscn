@@ -165,11 +165,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69716, -0.0310197, -3.35438
 [node name="laser_shotgun" parent="WeaponHandler" instance=ExtResource("15_ufo67")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.45689)
 
-[node name="LaserGuidedLauncher" parent="WeaponHandler" instance=ExtResource("2_2p718")]
+[node name="LaserGuidedLauncher" parent="WeaponHandler" node_paths=PackedStringArray("ray") instance=ExtResource("2_2p718")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.95206)
 bullet = ExtResource("16_jijx6")
 fire_rate = 5.0
 turn_off_near_miss = true
+ray = NodePath("RayCast3D")
+
+[node name="RayCast3D" type="RayCast3D" parent="WeaponHandler/LaserGuidedLauncher"]
+target_position = Vector3(0, 0, -1000)
+collision_mask = 10
+collide_with_areas = true
 
 [node name="FighterChassisDiamond" parent="." instance=ExtResource("12_a77x5")]
 
