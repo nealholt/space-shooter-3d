@@ -22,11 +22,10 @@ extends Node3D
 # number of times to fire per second:
 @export var fire_rate := 5.0
 # number of bullets per shot.
-# Warning: if you change this to a larget
-# number, you will need to put more bullet bits
-# and raycasts as children of the Visuals and
-# Raycasts nodes.
 @export var bullets := 8
+# Range of this weapon
+@export var gun_range:float = 300.0
+
 @export var muzzle_flash:GPUParticles3D # Not currently in use
 # GPU particles to spawn on point of impact:
 @export var sparks:PackedScene # Not currently in use
@@ -49,7 +48,17 @@ func _ready() -> void:
 	# raycasts I don't understand.
 	var ray:RayCast3D
 	for i in range(bullets):
-		ray = $Raycasts.get_child(i)
+		# Create all the necessary raycasts
+		ray = RayCast3D.new()
+		$Raycasts.add_child(ray)
+		ray.collide_with_areas = true
+		ray.target_position = Vector3(0,0,-gun_range)
+		# Disable collision mask 1
+		ray.set_collision_mask_value(1,false)
+		# Enable collision masks 2, 4
+		ray.set_collision_mask_value(2,true)
+		ray.set_collision_mask_value(4,true)
+		#ray = $Raycasts.get_child(i) #TODO this is the old way
 		ray.rotation_degrees = Vector3(
 				randf_range(-spread,spread),
 				randf_range(-spread,spread),

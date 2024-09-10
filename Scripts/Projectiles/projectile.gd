@@ -115,18 +115,12 @@ func physics_seek(delta:float) -> void:
 # Returns target position or, if able, intercept
 func get_target_pos() -> Vector3:
 	# Update target if laser guided
-	print()
-	print(laser_guided)
 	if laser_guided:
 		# Get colliding object
 		target = ray.get_collider()
 		# If there is not colliding object
 		# return the endpoint of the ray
-		print('laser')
-		print(target)
 		if target == null:
-			print('returning')
-			print(ray.global_position+ray.global_transform.basis.z * ray.target_position.z)
 			#return ray.global_position+ray.global_transform.basis.z * ray.target_position.z
 			return global_position+ray.global_transform.basis.z * ray.target_position.z
 	# Check if there is a target, otherwise return origin
