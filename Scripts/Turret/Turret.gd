@@ -54,13 +54,10 @@ func _physics_process(delta: float) -> void:
 	#print(round(rad_to_deg(Global.get_angle_to_target(body.global_position,target_pos, body.global_transform.basis.z))))
 	#print(round(rad_to_deg(body.global_basis.z.angle_to(target_pos))))
 	if Global.get_angle_to_target(head.global_position,target_pos, head.global_transform.basis.z) < angle_to_shoot:
-		var bullet_data:ShootData = ShootData.new()
 		# You need to pass in some "shooter" with the right collision
 		# masks and layers set. The hitbox was the best option.
-		#print('shooting')
-		bullet_data.shooter = $HitBoxComponent
-		gun.shoot(bullet_data)
-		gun_2.shoot(bullet_data)
+		gun.shoot($HitBoxComponent)
+		gun_2.shoot($HitBoxComponent)
 
 
 func _on_health_component_health_lost() -> void:

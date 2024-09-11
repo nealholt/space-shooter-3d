@@ -52,14 +52,10 @@ func _physics_process(delta):
 	# Trigger pulled. Try to shoot.
 	if $WeaponHandler.is_automatic():
 		if Input.is_action_pressed("shoot"):
-			var bullet_data:ShootData = ShootData.new()
-			bullet_data.shooter = self
-			$WeaponHandler.shoot(bullet_data)
+			$WeaponHandler.shoot(self)
 	else: # Semiautomatic
 		if Input.is_action_just_pressed("shoot"):
-			var bullet_data:ShootData = ShootData.new()
-			bullet_data.shooter = self
-			$WeaponHandler.shoot(bullet_data)
+			$WeaponHandler.shoot(self)
 	
 	# Target most centered enemy and begin missile lock
 	if Input.is_action_just_pressed("right_shoulder"):
@@ -91,12 +87,7 @@ func _physics_process(delta):
 # better in some way.
 func shoot_missile(quick_launch:bool) -> void:
 	# Send a missile after the target
-	var bullet_data:ShootData = ShootData.new()
-	# Identify target with smallest angle to
-	bullet_data.target = targeted
-	bullet_data.shooter = self
-	bullet_data.super_powered = quick_launch
-	$MissileLauncher.shoot(bullet_data)
+	$MissileLauncher.shoot(self, targeted, quick_launch)
 
 
 func change_pov() -> void:

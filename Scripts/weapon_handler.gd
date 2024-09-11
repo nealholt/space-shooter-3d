@@ -31,8 +31,8 @@ func change_weapon() -> void:
 	index = wrapi(index+1, 0, get_child_count())
 	equip(get_child(index))
 
-func shoot(shoot_data:ShootData) -> void:
-	current_weapon.shoot(shoot_data)
+func shoot(shooter:Node3D) -> void:
+	current_weapon.shoot(shooter)
 
 func is_automatic() -> bool:
 	return current_weapon.automatic

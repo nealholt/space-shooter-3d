@@ -97,9 +97,7 @@ func _physics_process(delta):
 	
 	# Shoot at player if within distance and angle
 	if distance_to_target_sqd < $Gun.range_sqd && Global.get_angle_to_target(self.global_position,target_pos, -global_transform.basis.z) < shooting_angle:
-		var bullet_data:ShootData = ShootData.new()
-		bullet_data.shooter = self
-		$Gun.shoot(bullet_data)
+		$Gun.shoot(self)
 
 
 func _on_health_component_health_lost() -> void:

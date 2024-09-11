@@ -1,4 +1,5 @@
 extends Node3D
+class_name Gun
 
 # What sort of bullet to fire:
 @export var bullet: PackedScene
@@ -80,34 +81,46 @@ func _ready():
 # since the previous frame.
 func _process(_delta):
 	if firing:
-		fire_sound_player.playing = true
-		# Create and fire the bullet
-		var b = bullet.instantiate()
-		# Add bullet to root node otherwise queue free
-		# on shooter will queue free the bullet
-		get_tree().get_root().add_child(b)
-		# Fire from the position of the gun
-		data.transform = global_transform
-		data.damage = damage
-		data.spread_deg = spread_deg
-		# Add the raycast to the shoot_data for
-		# reference by laser-guided projectiles
-		data.ray = ray
-		# Pass the bullet the data about the shooter,
-		# initial velocity, etcetera
-		b.set_data(data)
-		firing = false
+		shoot_actual()
 
 
-func shoot(shoot_data:ShootData) -> void:
-	if $FiringRateTimer.is_stopped():
-		# Animate 'em if you got 'em
-		if gun_animation:
-			gun_animation.play("rotate")
-		if muzzle_flash:
-			muzzle_flash.restart()
+func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
+	if firing_rate_timer.is_stopped():
 		# Set up booleans for firing the gun
 		# as soon as possible.
 		firing = true
 		firing_rate_timer.start(1.0/fire_rate)
-		data = shoot_data
+		setup_shoot_data(shooter,target,powered_up)
+
+
+func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
+	data = ShootData.new()
+	data.shooter = shooter
+	# Fire from the position of the gun
+	data.transform = global_transform
+	data.damage = damage
+	data.spread_deg = spread_deg
+	# Add the raycast to the shoot_data for
+	# reference by laser-guided projectiles
+	data.ray = ray
+	data.target = target
+	data.super_powered = powered_up
+
+
+func shoot_actual() -> void:
+	# Animate 'em if you got 'em
+	if gun_animation:
+		gun_animation.play("gun_animation")
+	if muzzle_flash:
+		muzzle_flash.restart()
+	if fire_sound_player:
+		fire_sound_player.playing = true
+	# Create and fire the bullet
+	var b = bullet.instantiate()
+	# Add bullet to root node otherwise queue free
+	# on shooter will queue free the bullet
+	get_tree().get_root().add_child(b)
+	# Pass the bullet the data about the shooter,
+	# initial velocity, etcetera
+	b.set_data(data)
+	firing = false

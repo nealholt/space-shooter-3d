@@ -33,7 +33,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_ehqcn"]
-resource_name = "rotate"
+resource_name = "gun_animation"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -51,7 +51,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b4hp1"]
 _data = {
 "RESET": SubResource("Animation_rrafk"),
-"rotate": SubResource("Animation_ehqcn")
+"gun_animation": SubResource("Animation_ehqcn")
 }
 
 [node name="GatlingGun" type="Node3D"]
