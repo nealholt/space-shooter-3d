@@ -101,7 +101,7 @@ func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
 	data = ShootData.new()
 	data.shooter = shooter
 	# Fire from the position of the gun
-	data.transform = global_transform
+	data.gun = self
 	data.damage = damage
 	data.spread_deg = spread_deg
 	# Add the raycast to the shoot_data for

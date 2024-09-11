@@ -5,7 +5,7 @@ class_name ShootData
 # https://www.youtube.com/watch?v=y3faMdIb2II&t=125s
 
 var target:Node3D # Used for seeking missiles
-var transform:Transform3D # Points the shot in the direction the shooter wants
+var gun:Gun # For use positioning and orienting the bullet
 var shooter # Identifies shooter for kill attribution
 var super_powered:bool # True, for example, if a missile is quick launched
 var ray:RayCast3D # Used for laser-guided bullets
