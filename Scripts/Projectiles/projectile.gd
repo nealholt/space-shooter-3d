@@ -10,7 +10,7 @@ class_name Projectile
 
 @export var steer_force: float = 50.0 # Used for projectiles that seek
 @export var speed:float = 1000.0
-@export var damage:float = 1.0
+var damage:float
 @export var time_out:float = 2.0 #seconds
 @export var laser_guided:bool = false
 var ray:RayCast3D # For use by laser-guided projectiles
@@ -34,6 +34,7 @@ func _ready() -> void:
 	$Timer.start(time_out)
 
 func set_data(dat:ShootData) -> void:
+	damage = dat.damage
 	# 'Super powered' doubles turn rate and 10xs damage
 	if dat.super_powered:
 		steer_force *= 2.0
@@ -41,6 +42,12 @@ func set_data(dat:ShootData) -> void:
 	# Point the projectile in the given direction
 	global_transform = dat.transform
 	velocity = -dat.transform.basis.z * speed
+	# Randomize angle that bullet comes out. I'm cutting it
+	# in half so that a 10 degree spread is truly 10 degrees
+	# not plus or minus 10 degrees, which is a 20 degree spread.
+	var spread:float = deg_to_rad(dat.spread_deg/2.0)
+	rotate_x(randf_range(-spread, spread))
+	rotate_y(randf_range(-spread, spread))
 	# Give the projectile a target
 	target = dat.target
 	# Tell the projectile who shot it
@@ -51,6 +58,11 @@ func set_data(dat:ShootData) -> void:
 		# error checking
 		if ray == null:
 			printerr('All guns that fire laser guided projectiles, should have an attached RayCast3D')
+	# Check if this is a bullet that should not make a
+	# whiffing noise. Currently only player bullets
+	# should not self-whiff
+	if dat.turn_off_near_miss:
+		set_collision_layer_value(3, false)
 
 
 func reset_velocity() -> void:
