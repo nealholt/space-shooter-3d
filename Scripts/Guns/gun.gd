@@ -89,8 +89,12 @@ func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
 		# Set up booleans for firing the gun
 		# as soon as possible.
 		firing = true
-		firing_rate_timer.start(1.0/fire_rate)
+		restart_timer()
 		setup_shoot_data(shooter,target,powered_up)
+
+
+func restart_timer() -> void:
+	firing_rate_timer.start(1.0/fire_rate)
 
 
 func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
@@ -105,6 +109,7 @@ func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
 	data.ray = ray
 	data.target = target
 	data.super_powered = powered_up
+	data.turn_off_near_miss = turn_off_near_miss
 
 
 func shoot_actual() -> void:

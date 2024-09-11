@@ -9,5 +9,4 @@ burst_total = 1
 burst_rate = 1.0
 
 [node name="BurstTimer" type="Timer" parent="." index="1"]
-wait_time = 0.2
 one_shot = true

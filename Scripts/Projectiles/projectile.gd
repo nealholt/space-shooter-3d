@@ -40,7 +40,11 @@ func set_data(dat:ShootData) -> void:
 		steer_force *= 2.0
 		damage *= 10.0
 	# Point the projectile in the given direction
+	print() #TODO TESTING
+	print(global_position) #TODO TESTING
 	global_transform = dat.transform
+	print(global_position) #TODO TESTING
+	# Set velocity
 	velocity = -dat.transform.basis.z * speed
 	# Randomize angle that bullet comes out. I'm cutting it
 	# in half so that a 10 degree spread is truly 10 degrees
@@ -48,6 +52,8 @@ func set_data(dat:ShootData) -> void:
 	var spread:float = deg_to_rad(dat.spread_deg/2.0)
 	rotate_x(randf_range(-spread, spread))
 	rotate_y(randf_range(-spread, spread))
+	# Set velocity, but global this time!
+	velocity = -global_transform.basis.z * speed
 	# Give the projectile a target
 	target = dat.target
 	# Tell the projectile who shot it
