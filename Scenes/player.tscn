@@ -124,11 +124,7 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 _startColor = Color(0.537255, 0.152941, 1, 1)
 _endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
 
-[node name="WeaponHandler" parent="." node_paths=PackedStringArray("weapon1", "weapon2", "weapon3", "weapon4") instance=ExtResource("9_1xly7")]
-weapon1 = NodePath("GatlingGun")
-weapon2 = NodePath("HitScanGun")
-weapon3 = NodePath("laser_shotgun")
-weapon4 = NodePath("LaserGuidedLauncher")
+[node name="WeaponHandler" parent="." instance=ExtResource("9_1xly7")]
 
 [node name="GatlingGun" parent="WeaponHandler" node_paths=PackedStringArray("gun_animation", "muzzle_flash") instance=ExtResource("2_2p718")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6302, 0.148885, -5.47273)
