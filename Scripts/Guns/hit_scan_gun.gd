@@ -17,6 +17,11 @@ extends Node3D
 #True if the gun has received command to fire
 var firing: bool = false
 
+# Whether gun is automatic or not. If true then
+# holding the shoot button will fire this weapon.
+# If false, then this weapon will only fire when
+# shoot is first pressed.
+@export var automatic:bool = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

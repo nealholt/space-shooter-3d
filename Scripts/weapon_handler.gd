@@ -39,3 +39,6 @@ func change_weapon() -> void:
 
 func shoot(shoot_data:ShootData) -> void:
 	current_weapon.shoot(shoot_data)
+
+func is_automatic() -> bool:
+	return current_weapon.automatic

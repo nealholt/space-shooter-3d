@@ -41,6 +41,12 @@ extends Node3D
 #True if the gun has received command to fire
 var firing: bool = false
 
+# Whether gun is automatic or not. If true then
+# holding the shoot button will fire this weapon.
+# If false, then this weapon will only fire when
+# shoot is first pressed.
+@export var automatic:bool = true
+
 
 func _ready() -> void:
 	# Create all the necessary raycasts

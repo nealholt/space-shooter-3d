@@ -50,10 +50,17 @@ func _physics_process(delta):
 	change_pov()
 	
 	# Trigger pulled. Try to shoot.
-	if Input.is_action_pressed("shoot"):
-		var bullet_data:ShootData = ShootData.new()
-		bullet_data.shooter = self
-		$WeaponHandler.shoot(bullet_data)
+	if $WeaponHandler.is_automatic():
+		if Input.is_action_pressed("shoot"):
+			var bullet_data:ShootData = ShootData.new()
+			bullet_data.shooter = self
+			$WeaponHandler.shoot(bullet_data)
+	else: # Semiautomatic
+		if Input.is_action_just_pressed("shoot"):
+			var bullet_data:ShootData = ShootData.new()
+			bullet_data.shooter = self
+			$WeaponHandler.shoot(bullet_data)
+	
 	# Target most centered enemy and begin missile lock
 	if Input.is_action_just_pressed("right_shoulder"):
 		# Unset previous target if any
