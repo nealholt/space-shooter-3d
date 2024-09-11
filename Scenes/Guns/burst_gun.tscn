@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://calhate8yj1wh"]
+
+[ext_resource type="Script" path="res://Scripts/Guns/burst_gun.gd" id="1_c3s1i"]
+
+[node name="BursterGun" type="Node3D"]
+script = ExtResource("1_c3s1i")
+
+[node name="FiringRateTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="BurstTimer" type="Timer" parent="."]
+one_shot = true

@@ -1,7 +1,7 @@
 [gd_scene load_steps=40 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_rf46g"]
-[ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="2_2p718"]
+[ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
 [ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles/Bullet/bullet.tscn" id="3_08jv5"]
 [ext_resource type="PackedScene" uid="uid://0vowmbagxl3n" path="res://Scenes/Projectiles/Missile/missile.tscn" id="5_qw0hj"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_8otd8"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
-[ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/gun.tscn" id="2_icaxw"]
+[ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/burst_gun.tscn" id="2_icaxw"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
 [ext_resource type="PackedScene" uid="uid://d3pdq381luwwg" path="res://Scenes/pop_player.tscn" id="2_s1yd2"]
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="3_qm2p0"]
