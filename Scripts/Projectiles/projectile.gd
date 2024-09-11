@@ -68,10 +68,6 @@ func set_data(dat:ShootData) -> void:
 		set_collision_layer_value(3, false)
 
 
-func reset_velocity() -> void:
-	velocity = -global_transform.basis.z * speed
-
-
 func get_range() -> float:
 	return speed * time_out
 

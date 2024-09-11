@@ -42,8 +42,10 @@ func shoot_actual() -> void:
 		# Refresh the shootdata otherwise every bullet
 		# fired in the burst will be fired from the
 		# same position
-		setup_shoot_data(data.shooter, data.target, data.super_powered)
+		#setup_shoot_data(data.shooter, data.target, data.super_powered)
+		# Does not seem necessary, so I'm commenting it for now
 	# Restart FiringRateTimer so it's the time
 	# between bursts, but doesn't count the time
 	# during a burst.
-	restart_timer()
+	#restart_timer()
+	# Does not seem necessary, so I'm commenting it for now

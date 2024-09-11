@@ -86,6 +86,13 @@ func _process(_delta):
 
 func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
 	if firing_rate_timer.is_stopped():
+		# Animate 'em if you got 'em
+		if gun_animation:
+			gun_animation.play("gun_animation")
+		if muzzle_flash:
+			muzzle_flash.restart()
+		if fire_sound_player:
+			fire_sound_player.playing = true
 		# Set up booleans for firing the gun
 		# as soon as possible.
 		firing = true
@@ -113,13 +120,6 @@ func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
 
 
 func shoot_actual() -> void:
-	# Animate 'em if you got 'em
-	if gun_animation:
-		gun_animation.play("gun_animation")
-	if muzzle_flash:
-		muzzle_flash.restart()
-	if fire_sound_player:
-		fire_sound_player.playing = true
 	# Create and fire the bullet
 	var b = bullet.instantiate()
 	# Add bullet to root node otherwise queue free
