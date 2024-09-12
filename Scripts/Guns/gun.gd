@@ -59,22 +59,25 @@ var reload_sound_player: AudioStreamPlayer3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Ask bullets for their range
-	var b:Projectile = bullet.instantiate()
-	range_sqd = b.get_range()
-	range_sqd = range_sqd*range_sqd
-	bullet_speed = b.speed
-	b.queue_free() #Then delete this bullet
+	# Ask bullet for its range
+	if bullet:
+		var b:Projectile = bullet.instantiate()
+		range_sqd = b.get_range()
+		range_sqd = range_sqd*range_sqd
+		bullet_speed = b.speed
+		b.queue_free() #Then delete this bullet
 	# create fire audio stream
-	fire_sound_player = AudioStreamPlayer3D.new()
-	fire_sound_player.stream = fire_sound
-	fire_sound_player.volume_db = -10.0 #quieter
-	add_child(fire_sound_player)
+	if fire_sound:
+		fire_sound_player = AudioStreamPlayer3D.new()
+		fire_sound_player.stream = fire_sound
+		fire_sound_player.volume_db = -10.0 #quieter
+		add_child(fire_sound_player)
 	# create reload audio stream
-	reload_sound_player = AudioStreamPlayer3D.new()
-	reload_sound_player.stream = reload_sound
-	reload_sound_player.volume_db = -20.0 #quieter
-	add_child(reload_sound_player)
+	if reload_sound:
+		reload_sound_player = AudioStreamPlayer3D.new()
+		reload_sound_player.stream = reload_sound
+		reload_sound_player.volume_db = -20.0 #quieter
+		add_child(reload_sound_player)
 
 
 # Called every frame. 'delta' is the elapsed time

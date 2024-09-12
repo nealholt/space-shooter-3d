@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=37 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_rf46g"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
@@ -17,13 +17,14 @@
 [ext_resource type="Script" path="res://Scripts/Player/missile_lock.gd" id="12_hjk6b"]
 [ext_resource type="AudioStream" uid="uid://bjvh6ui8ln1fd" path="res://Assets/SoundEffects/industrial-mechanic-using-rattle-gun-compressed-air-socket-wrench-9944.ogg" id="12_ig3m3"]
 [ext_resource type="Texture2D" uid="uid://wtd3a0xuq1ka" path="res://Assets/Images/crosshair051.png" id="12_ppqib"]
-[ext_resource type="PackedScene" uid="uid://cogvk4lixkgwr" path="res://Scenes/Guns/hit_scan_gun.tscn" id="13_428na"]
+[ext_resource type="PackedScene" uid="uid://ddoyejlbh51s5" path="res://Scenes/Guns/hit_scan_gun.tscn" id="13_428na"]
 [ext_resource type="Texture2D" uid="uid://de4d0mo0rnf5o" path="res://Assets/Images/crosshair052.png" id="13_x7e68"]
 [ext_resource type="PackedScene" uid="uid://58nrpfbay3lf" path="res://Assets/Particles/muzzle_flash.tscn" id="14_4ajg4"]
 [ext_resource type="AudioStream" uid="uid://cgwsk2ovf5fgt" path="res://Assets/SoundEffects/missile/acquiring_lock.wav" id="15_malfx"]
 [ext_resource type="PackedScene" uid="uid://8man27xjxi5h" path="res://Scenes/Guns/laser_shotgun.tscn" id="15_ufo67"]
 [ext_resource type="AudioStream" uid="uid://d1rurti8e68f7" path="res://Assets/SoundEffects/missile/missile_lock.wav" id="16_5hu7g"]
 [ext_resource type="PackedScene" uid="uid://d34632kvmjrnm" path="res://Scenes/Projectiles/laser_guided_missile.tscn" id="16_jijx6"]
+[ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Assets/Guns/laser_beam.tscn" id="16_y2utm"]
 [ext_resource type="AudioStream" uid="uid://dr6bn0u22ke7d" path="res://Assets/SoundEffects/missile/launch.wav" id="17_5165r"]
 [ext_resource type="AudioStream" uid="uid://dwo2npq3c18sx" path="res://Assets/SoundEffects/missile/quick_launch.wav" id="18_piaxr"]
 [ext_resource type="Script" path="res://Scripts/camera_player_group.gd" id="19_342x2"]
@@ -122,8 +123,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.132, 4.328)
 [node name="MuzzleFlash" parent="WeaponHandler/GatlingGun" instance=ExtResource("14_4ajg4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
-[node name="HitScanGun" parent="WeaponHandler" instance=ExtResource("13_428na")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69716, -0.0310197, -3.35438)
+[node name="HitScanGun" parent="WeaponHandler" node_paths=PackedStringArray("laser_mesh", "laser_mesh_pivot", "gun_animation", "ray") instance=ExtResource("13_428na")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14718, 0, -2.39168)
+laser_mesh = NodePath("Node/Head/LaserMesh")
+laser_mesh_pivot = NodePath("Node/Head")
+fire_rate = 5.0
+turn_off_near_miss = true
+gun_animation = NodePath("Node/Head/LaserMesh/AnimationPlayer")
+ray = NodePath("RayCast3D")
+
+[node name="RayCast3D" type="RayCast3D" parent="WeaponHandler/HitScanGun"]
+target_position = Vector3(0, 0, -1000)
+collision_mask = 10
+collide_with_areas = true
+
+[node name="Node" parent="WeaponHandler/HitScanGun" instance=ExtResource("16_y2utm")]
+
+[node name="LaserMesh" parent="WeaponHandler/HitScanGun/Node/Head" index="0"]
+visible = false
 
 [node name="laser_shotgun" parent="WeaponHandler" instance=ExtResource("15_ufo67")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.45689)
@@ -244,3 +261,4 @@ transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 [connection signal="timeout" from="MissileLockGroup/AudioTimer" to="MissileLockGroup" method="_on_audio_timer_timeout"]
 
 [editable path="WeaponHandler/GatlingGun/GunModel"]
+[editable path="WeaponHandler/HitScanGun/Node"]
