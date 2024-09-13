@@ -15,6 +15,7 @@ class_name HitScanGun
 
 # Override parent class's shoot_actual
 func shoot_actual() -> void:
+	firing = false
 	var collider = ray.get_collider()
 	if ray.is_colliding():
 		if collider.is_in_group("damageable"):

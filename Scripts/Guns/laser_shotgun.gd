@@ -59,32 +59,31 @@ func _ready() -> void:
 
 # Override parent class's shoot_actual
 func shoot_actual() -> void:
-	if firing:
-		firing = false
-		# Loop through all the raycasts
-		# and BulletBits.
-		var bulletbit:BulletBit
-		for i in range(bullets):
-			# Create a bullet
-			bulletbit = bullet.instantiate()
-			get_tree().get_root().add_child(bulletbit)
-			# Access ith raycast
-			ray = $RayCastGroup.get_child(i)
-			# Rotate the ray a random amount
-			ray.rotation_degrees = Vector3(
-					randf_range(-spread_deg,spread_deg),
-					randf_range(-spread_deg,spread_deg),
-					0.0)
-			# The following if has not yet been used or tested
-			if ray.is_colliding():
-				# Spawn sparks on location of hit
-				if sparks:
-					var spark = sparks.instantiate()
-					add_child(spark)
-					spark.global_position = ray.get_collision_point()
-				# set_up tells the bullet bit where to start,
-				# where to end, and activates it so it rushes
-				# to its target.
-				bulletbit.set_up(global_position, ray.get_collision_point(), ray.get_collision_normal(), ray.get_collider())
-			else:
-				bulletbit.set_up(global_position, global_position+ray.global_transform.basis.z * ray.target_position.z, ray.get_collision_normal(), null)
+	firing = false
+	# Loop through all the raycasts
+	# and BulletBits.
+	var bulletbit:BulletBit
+	for i in range(bullets):
+		# Create a bullet
+		bulletbit = bullet.instantiate()
+		get_tree().get_root().add_child(bulletbit)
+		# Access ith raycast
+		ray = $RayCastGroup.get_child(i)
+		# Rotate the ray a random amount
+		ray.rotation_degrees = Vector3(
+				randf_range(-spread_deg,spread_deg),
+				randf_range(-spread_deg,spread_deg),
+				0.0)
+		# The following if has not yet been used or tested
+		if ray.is_colliding():
+			# Spawn sparks on location of hit
+			if sparks:
+				var spark = sparks.instantiate()
+				add_child(spark)
+				spark.global_position = ray.get_collision_point()
+			# set_up tells the bullet bit where to start,
+			# where to end, and activates it so it rushes
+			# to its target.
+			bulletbit.set_up(global_position, ray.get_collision_point(), ray.get_collision_normal(), ray.get_collider())
+		else:
+			bulletbit.set_up(global_position, global_position+ray.global_transform.basis.z * ray.target_position.z, ray.get_collision_normal(), null)

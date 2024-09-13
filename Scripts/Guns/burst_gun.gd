@@ -25,9 +25,11 @@ func shoot_actual() -> void:
 	# Check if we're done firing this burst
 	if burst_total <= burst_count:
 		# Cut off firing sound
-		fire_sound_player.playing = false
-		# Play reload sound
-		reload_sound_player.play()
+		if fire_sound_player:
+			fire_sound_player.playing = false
+		if reload_sound_player:
+			# Play reload sound
+			reload_sound_player.play()
 		# Stop firing
 		firing = false
 		burst_count = 0 # Reset burst count
