@@ -1,13 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://8man27xjxi5h"]
+[gd_scene load_steps=3 format=3 uid="uid://dup57p4ygajr1"]
 
 [ext_resource type="Script" path="res://Scripts/Guns/laser_shotgun.gd" id="1_j6dff"]
-[ext_resource type="PackedScene" uid="uid://cv61niulto7ro" path="res://Scenes/bullet_bits.tscn" id="2_cuaw4"]
+[ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="1_ppvyh"]
 
-[node name="laser_shotgun" type="Node3D"]
+[node name="LaserShotgun" instance=ExtResource("1_ppvyh")]
 script = ExtResource("1_j6dff")
-bullet_bit_scene = ExtResource("2_cuaw4")
+bullets = 8
+gun_range = 300.0
+sparks = null
 
-[node name="Raycasts" type="Node3D" parent="."]
-
-[node name="CooldownTimer" type="Timer" parent="."]
-one_shot = true
+[node name="RayCastGroup" type="Node3D" parent="." index="1"]
