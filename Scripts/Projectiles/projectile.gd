@@ -171,17 +171,18 @@ func damage_and_die(body):
 	# Make a spark
 	# https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088252#questions/21003762
 	var spark = null
-	if body.is_in_group("shield"):
+	if body.is_in_group("shield") and shieldSparks:
 		spark = shieldSparks.instantiate()
-	else:
+	elif sparks:
 		spark = sparks.instantiate()
-	get_tree().get_root().add_child(spark)
-	spark.global_position = global_position
-	#spark.global_transform.basis.z = -area.global_transform.basis.z
-	#spark.global_transform = area.global_transform
-	spark.transform = transform
-	#spark.rotate_y(deg_to_rad(-90))
-	#spark.rotate_x(deg_to_rad(90))
+	if spark:
+		get_tree().get_root().add_child(spark)
+		spark.global_position = global_position
+		#spark.global_transform.basis.z = -area.global_transform.basis.z
+		#spark.global_transform = area.global_transform
+		spark.transform = transform
+		#spark.rotate_y(deg_to_rad(-90))
+		#spark.rotate_x(deg_to_rad(90))
 	
 	#Delete bullets that strike a body
 	Callable(queue_free).call_deferred()

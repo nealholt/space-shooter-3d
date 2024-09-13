@@ -22,7 +22,7 @@ func get_center_most_from_group(group:String,looker):
 	# Identify target with smallest angle to
 	var targets = get_tree().get_nodes_in_group(group)
 	var most_centered # This is a target-type variable
-	var smallest_angle_to := 7.0 # Start off with anything over 2pi
+	var smallest_angle_to := 7.0 # Start off with any upper limit over 2pi
 	var temp_angle_to : float
 	for target in targets:
 		temp_angle_to = Global.get_angle_to_target(looker.global_position, target.global_position, -looker.global_transform.basis.z)

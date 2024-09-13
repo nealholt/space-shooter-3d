@@ -8,7 +8,6 @@
 [node name="Missile" instance=ExtResource("1_8xy2w")]
 steer_force = 150.0
 speed = 200.0
-damage = 50.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
 shape = SubResource("SphereShape3D_d4e6x")
