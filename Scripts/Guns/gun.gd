@@ -132,3 +132,33 @@ func shoot_actual() -> void:
 	# initial velocity, etcetera
 	b.set_data(data)
 	firing = false
+
+
+# Called by weapon handler when switching to a
+# different weapon
+func deactivate() -> void:
+	#visible = false
+	set_process(false)
+	if gun_animation:
+		gun_animation.stop()
+	# Don't stop the muzzle flash. Let it play out.
+	# But... it doesn't play out, then it plays
+	# when you switch back to it. That's not ideal.
+	# HOWEVER, if you leave visible to true
+	# (see top of this function) then it all works
+	# out fine.
+	#if muzzle_flash:
+	#	muzzle_flash.emitting = false
+	# Don't stop the reload sound. Let it play out.
+	#if reload_sound_player:
+	#	reload_sound_player.playing = false
+	if fire_sound_player:
+		fire_sound_player.playing = false
+	firing = false
+
+
+# Called by weapon handler when switching to
+# this weapon
+func activate() -> void:
+	visible = true
+	set_process(true)

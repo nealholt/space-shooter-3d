@@ -20,11 +20,12 @@ func equip(active_weapon:Node3D) -> void:
 	current_weapon = active_weapon
 	for child in get_children():
 		if child == active_weapon:
-			child.visible = true
-			child.set_process(true)
+			# Precondition: child is a Gun
+			child.activate()
 		else:
-			child.visible = false
-			child.set_process(false)
+			# Precondition: child is a Gun
+			child.deactivate()
+
 
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/41204700#questions
 func change_weapon() -> void:

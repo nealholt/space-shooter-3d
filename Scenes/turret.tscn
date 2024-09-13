@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Turret/Turret.gd" id="1_cbt5p"]
 [ext_resource type="PackedScene" uid="uid://deuokls15ey84" path="res://Assets/turret_model.tscn" id="2_xuhpe"]
-[ext_resource type="PackedScene" uid="uid://calhate8yj1wh" path="res://Scenes/Guns/burst_gun.tscn" id="4_r7edd"]
+[ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="4_r7edd"]
 [ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles/Bullet/bullet.tscn" id="5_gg3ek"]
 [ext_resource type="Script" path="res://Scripts/target_selector.gd" id="6_cy7vo"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="8_qikae"]
@@ -20,20 +20,19 @@ script = ExtResource("1_cbt5p")
 
 [node name="TurretModel" parent="." instance=ExtResource("2_xuhpe")]
 
-[node name="Gun" parent="TurretModel/Body/Head/Barrel1" index="0" instance=ExtResource("4_r7edd")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0)
-bullet = ExtResource("5_gg3ek")
 burst_total = 5
 burst_rate = 20.0
+bullet = ExtResource("5_gg3ek")
 spread_deg = 10.0
 
-[node name="Gun2" parent="TurretModel/Body/Head/Barrel2" index="0" instance=ExtResource("4_r7edd")]
+[node name="BurstGun2" parent="TurretModel/Body/Head/Barrel2" index="0" instance=ExtResource("4_r7edd")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0)
-bullet = ExtResource("5_gg3ek")
 burst_total = 5
 burst_rate = 20.0
+bullet = ExtResource("5_gg3ek")
 spread_deg = 10.0
 
 [node name="TargetSelector" type="Node" parent="TurretModel/Body/Head" index="3" groups=["team property"]]

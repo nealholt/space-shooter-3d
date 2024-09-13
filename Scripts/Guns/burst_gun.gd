@@ -51,3 +51,11 @@ func shoot_actual() -> void:
 	# during a burst.
 	#restart_timer()
 	# Does not seem necessary, so I'm commenting it for now
+
+# Override parent class's function
+func deactivate() -> void:
+	super.deactivate()
+	burst_count = 0 # Reset burst count
+	# Reset can_burst to true so that it doesn't
+	# interfere with the firing rate
+	burst_timer.stop()

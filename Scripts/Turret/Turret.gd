@@ -18,8 +18,8 @@ var target_pos: Vector3 = Vector3.ZERO
 var active: bool = true
 
 @onready var target_selector: Node = $TurretModel/Body/Head/TargetSelector
-@onready var gun: Node3D = %Gun
-@onready var gun_2: Node3D = %Gun2
+@onready var gun: BurstGun = %BurstGun
+@onready var gun_2: BurstGun = %BurstGun2
 @onready var head: Node3D = $TurretModel/Body/Head
 @onready var body: Node3D = $TurretModel/Body
 @onready var hit_feedback: Node3D = $HitFeedback

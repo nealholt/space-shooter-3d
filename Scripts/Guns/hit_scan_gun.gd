@@ -52,3 +52,9 @@ func position_laser() -> void:
 		# Default position and length:
 		laser_mesh.position.z = -500
 		laser_mesh.mesh.set_height(1000)
+
+
+# Override parent class's function
+func deactivate() -> void:
+	super.deactivate()
+	laser_mesh.visible = false
