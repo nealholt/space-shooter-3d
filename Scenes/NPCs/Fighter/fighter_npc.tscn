@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d3pdq381luwwg" path="res://Scenes/pop_player.tscn" id="2_s1yd2"]
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="3_qm2p0"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="4_57m73"]
-[ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles/Bullet/bullet.tscn" id="4_f5xpu"]
+[ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles_backup/Bullet/bullet.tscn" id="4_f5xpu"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="5_1xytm"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_ne5o5"]
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_machine.gd" id="7_ubn4s"]

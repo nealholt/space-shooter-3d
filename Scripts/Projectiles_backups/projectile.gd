@@ -1,35 +1,38 @@
-extends Node3D
-class_name Projectile
+extends Area3D
+#class_name Projectile
 
-# Bullets and missiles and all projectiles inherit
+# Bullets and missiles and really any projectiles inherit
 # from this class.
-
-@export var speed:float = 1000.0
-var velocity : Vector3
-
-@export var damage:float = 1.0
-@export var time_out:float = 2.0 #seconds
-
-# Data on shooter and target:
-var data:ShootData
 
 # Different spark effects depending on what gets hit
 @export var sparks : PackedScene
 @export var shieldSparks : PackedScene
-# Bullet hole decal
-@export var bullet_hole_decal : PackedScene
 
+@export var steer_force: float = 50.0 # Used for projectiles that seek
+@export var speed:float = 1000.0
+var damage:float
+@export var time_out:float = 2.0 #seconds
+@export var laser_guided:bool = false
+var ray:RayCast3D # For use by laser-guided projectiles
+var shooter #Who shot this projectile
+var target # Used for projectiles that seek
 
+var velocity : Vector3
+var acceleration := Vector3.ZERO #non zero probably only for missiles
+
+# If set to true, just look at target and move toward
+# it. Don't try to emulate physics at all.
+@export var use_simple_seek:bool = false
+
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#print("bullet created")
-	# Give the bullet a default velocity.
-	# Useful for testing even if the velocity
-	# is updated each frame
+	# Give the bullet a default velocity so that you
+	# can put it in scenes and let it fly into a target.
+	# I first used this for testing out the shield bubble.
 	velocity = -global_transform.basis.z * speed
 	$Timer.start(time_out)
 
-
-#TODO LEFT OFF HERE
 func set_data(dat:ShootData) -> void:
 	damage = dat.damage
 	# 'Super powered' doubles turn rate and 10xs damage

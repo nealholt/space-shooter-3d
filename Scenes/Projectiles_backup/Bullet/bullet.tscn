@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://blnui57aja4f3"]
 
-[ext_resource type="PackedScene" uid="uid://2xg68vs2c6h4" path="res://Scenes/Projectiles/projectile.tscn" id="1_66vb0"]
+[ext_resource type="PackedScene" uid="uid://2xg68vs2c6h4" path="res://Scenes/Projectiles_backup/projectile.tscn" id="1_66vb0"]
 [ext_resource type="PackedScene" uid="uid://cuu8wfwoj2nbe" path="res://Assets/Projectiles/Bullets/green_laser_bolt.tscn" id="3_cgugs"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0f867"]
