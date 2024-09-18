@@ -138,7 +138,7 @@ func _on_health_component_health_lost() -> void:
 
 func _on_near_miss_detector_area_exited(area: Area3D) -> void:
 	# Play audio for enemy bullet near misses!
-	if area is Projectile:
+	if area.is_in_group("bullet"): # is Projectile:
 		near_miss_audio.global_position = area.global_position
 		near_miss_audio.play()
 

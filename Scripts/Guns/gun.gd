@@ -61,7 +61,7 @@ var reload_sound_player: AudioStreamPlayer3D
 func _ready():
 	# Ask bullet for its range
 	if bullet:
-		var b:Projectile = bullet.instantiate()
+		var b = bullet.instantiate()
 		range_sqd = b.get_range()
 		range_sqd = range_sqd*range_sqd
 		bullet_speed = b.speed

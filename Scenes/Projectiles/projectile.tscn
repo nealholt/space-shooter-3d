@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Projectiles/projectile.gd" id="1_y78aq"]
 
-[node name="Projectile" type="Node3D"]
+[node name="Projectile" type="Node3D" groups=["bullet"]]
 script = ExtResource("1_y78aq")
 
 [node name="Timer" type="Timer" parent="."]
