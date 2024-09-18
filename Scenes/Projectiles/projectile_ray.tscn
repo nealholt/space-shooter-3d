@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://caody2m8xh0b6"]
+
+[ext_resource type="PackedScene" uid="uid://bosxindk1alsp" path="res://Scenes/Projectiles/projectile.tscn" id="1_s006r"]
+[ext_resource type="Script" path="res://Scripts/Projectiles/projectile_ray.gd" id="2_e7gw1"]
+
+[node name="ProjectileRay" instance=ExtResource("1_s006r")]
+script = ExtResource("2_e7gw1")
+
+[node name="RayCast3D" type="RayCast3D" parent="." index="1"]
+target_position = Vector3(0, 0, -1)
+collision_mask = 10
+hit_back_faces = false
+collide_with_areas = true

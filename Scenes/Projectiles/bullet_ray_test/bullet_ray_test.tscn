@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://6aihaxnn6c6p"]
+
+[ext_resource type="PackedScene" uid="uid://caody2m8xh0b6" path="res://Scenes/Projectiles/projectile_ray.tscn" id="1_8o1e8"]
+[ext_resource type="PackedScene" uid="uid://cuu8wfwoj2nbe" path="res://Assets/Projectiles/Bullets/green_laser_bolt.tscn" id="2_3fccp"]
+
+[node name="ProjectileRay" instance=ExtResource("1_8o1e8")]
+
+[node name="MeshInstance3D" parent="." index="2" instance=ExtResource("2_3fccp")]

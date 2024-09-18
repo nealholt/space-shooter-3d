@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_rf46g"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
-[ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles_backup/Bullet/bullet.tscn" id="3_08jv5"]
 [ext_resource type="PackedScene" uid="uid://0vowmbagxl3n" path="res://Scenes/Projectiles_backup/Missile/missile.tscn" id="5_qw0hj"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_8otd8"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="7_vhcpa"]
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Assets/SoundEffects/lowFrequency_explosion_001.ogg" id="8_klb2b"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="9_1xly7"]
 [ext_resource type="AudioStream" uid="uid://cvrvs2a12nuqr" path="res://Assets/SoundEffects/whoosh_medium_001.ogg" id="9_ktweb"]
+[ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_test/bullet_ray_test.tscn" id="10_iwjd3"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="10_shexg"]
 [ext_resource type="PackedScene" uid="uid://6g1nyw0o6lqw" path="res://Scenes/Projectiles_backup/auto_seeking_missile.tscn" id="11_a8ss5"]
 [ext_resource type="AudioStream" uid="uid://ci04qcsgn8w7q" path="res://Assets/SoundEffects/clean-machine-gun-burst-98224.ogg" id="11_itcpr"]
@@ -107,17 +107,11 @@ _endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
 
 [node name="WeaponHandler" parent="." instance=ExtResource("9_1xly7")]
 
-[node name="AutoSeekingMissileLauncher" parent="WeaponHandler" instance=ExtResource("19_yfprc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.33626)
-bullet = ExtResource("11_a8ss5")
-fire_rate = 3.0
-turn_off_near_miss = true
-
 [node name="GatlingGun" parent="WeaponHandler" node_paths=PackedStringArray("gun_animation", "muzzle_flash") instance=ExtResource("2_2p718")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63, 0.14, -8)
 burst_total = 6
 burst_rate = 12.0
-bullet = ExtResource("3_08jv5")
+bullet = ExtResource("10_iwjd3")
 fire_rate = 1.2
 turn_off_near_miss = true
 spread_deg = 3.0
@@ -131,6 +125,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.132, 4.328)
 
 [node name="MuzzleFlash" parent="WeaponHandler/GatlingGun" instance=ExtResource("14_4ajg4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="AutoSeekingMissileLauncher" parent="WeaponHandler" instance=ExtResource("19_yfprc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.33626)
+bullet = ExtResource("11_a8ss5")
+fire_rate = 3.0
+turn_off_near_miss = true
 
 [node name="HitScanGun" parent="WeaponHandler" node_paths=PackedStringArray("laser_mesh", "laser_mesh_pivot", "gun_animation", "ray") instance=ExtResource("13_428na")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14718, 0, -2.39168)
