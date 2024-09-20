@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuuitp4vmj5j4"]
+
+[ext_resource type="PackedScene" uid="uid://bosxindk1alsp" path="res://Scenes/Projectiles/projectile.tscn" id="1_hkchq"]
+[ext_resource type="Script" path="res://Scripts/Projectiles/projectile_area.gd" id="2_f3glk"]
+
+[node name="ProjectileArea" instance=ExtResource("1_hkchq")]
+script = ExtResource("2_f3glk")
+
+[node name="Area3D" type="Area3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]

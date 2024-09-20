@@ -19,17 +19,18 @@ var data:ShootData
 # Bullet hole decal
 @export var bullet_hole_decal : PackedScene
 
-# Every bullet has this number of frames during which
+# Every bullet has this amount of time during which
 # the bullet will permanently ignore any shields it
 # collides with during those frames. This allows
 # bullets that are fired from within shields to
 # ignore the shield.
-# 2 frames suffices because collisions are only
-# detected when an area is entered.
-# Why doesn't 1 suffice? Don't know. But 2 seemed
-# to be the magic number.
+# About 2/100ths of a second suffices because
+# collisions are only detected when an area is
+# entered.
+# Why doesn't 1/100th or less suffice? Don't know.
+# But 2/100ths seemed to be the magic number.
 # This may need altered for raycast bullets.
-var shield_grace_frames:int = 2
+var shield_grace_period:float = 1.0/50.0
 
 
 func _ready() -> void:
@@ -73,8 +74,7 @@ func _physics_process(delta: float) -> void:
 func damage_and_die(body):
 	# In order to fire from within a shield, we need
 	# to ignore immediate collisions.
-	if 0 < shield_grace_frames and body.get_groups().has("shield"):
-		shield_grace_frames -= 1
+	if body.get_groups().has("shield") and $Timer.wait_time - $Timer.time_left <= shield_grace_period:
 		return
 	# Damage what was hit
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
@@ -98,6 +98,27 @@ func damage_and_die(body):
 		#spark.rotate_x(deg_to_rad(90))
 	#Delete bullets that strike a body
 	Callable(queue_free).call_deferred()
+
+
+# Source:
+# https://www.youtube.com/watch?v=8vFOOglWW3w
+func stick_decal(collided_with:Node3D, collision_normal:Vector3) -> void:
+	print('sticking1')
+	if bullet_hole_decal:
+		print('sticking2')
+		#Stick a decal on the target or on whatever was hit
+		var decal = bullet_hole_decal.instantiate()
+		# Parent decal to root, otherwise there can be
+		# weird scaling if attaching as a child of a scaled
+		# node.
+		get_tree().root.add_child(decal)
+		# Position and orient the decal
+		decal.global_position = collided_with.global_position
+		if collision_normal == Vector3.DOWN:
+			decal.rotation_degrees.x = 90
+		else:
+			decal.look_at(global_position - collision_normal, Vector3(0,1,0))
+			print('sticking3')
 
 
 func _on_timer_timeout() -> void:

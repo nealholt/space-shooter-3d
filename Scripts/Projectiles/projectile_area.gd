@@ -1,0 +1,2 @@
+extends Projectile
+class_name ProjectileArea
