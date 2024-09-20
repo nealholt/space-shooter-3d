@@ -102,10 +102,8 @@ func damage_and_die(body):
 
 # Source:
 # https://www.youtube.com/watch?v=8vFOOglWW3w
-func stick_decal(collided_with:Node3D, collision_normal:Vector3) -> void:
-	print('sticking1')
+func stick_decal(collision_point:Vector3, collision_normal:Vector3) -> void:
 	if bullet_hole_decal:
-		print('sticking2')
 		#Stick a decal on the target or on whatever was hit
 		var decal = bullet_hole_decal.instantiate()
 		# Parent decal to root, otherwise there can be
@@ -113,12 +111,14 @@ func stick_decal(collided_with:Node3D, collision_normal:Vector3) -> void:
 		# node.
 		get_tree().root.add_child(decal)
 		# Position and orient the decal
-		decal.global_position = collided_with.global_position
+		decal.global_position = collision_point
+		# https://forum.godotengine.org/t/up-vector-and-direction-between-node-origin-and-target-are-aligned-look-at-failed/20575/2
 		if collision_normal == Vector3.DOWN:
 			decal.rotation_degrees.x = 90
+		elif collision_normal == Vector3.UP:
+			decal.rotation_degrees.x = -90
 		else:
 			decal.look_at(global_position - collision_normal, Vector3(0,1,0))
-			print('sticking3')
 
 
 func _on_timer_timeout() -> void:

@@ -11,7 +11,7 @@ func _physics_process(delta: float) -> void:
 	# Check for and handle collisions.
 	if ray.is_colliding():
 		# Stick on a decal before damaging and dying
-		stick_decal(ray.get_collider(), ray.get_collision_normal())
+		stick_decal(ray.get_collision_point(), ray.get_collision_normal())
 		damage_and_die(ray.get_collider())
 	else:
 		# Move forward
