@@ -55,11 +55,11 @@ func set_data(dat:ShootData) -> void:
 	# Set velocity
 	velocity = -transform.basis.z * speed
 	# Randomize angle that bullet comes out. I'm cutting
-	# spread in half so that a 10 degree spread is truly
-	# 10 degrees, not plus or minus 10 degrees.
+	# spread in half so that a 10 degree spread is
+	# 10 degrees total, not plus or minus 10 degrees.
 	var spread:float = deg_to_rad(dat.spread_deg/2.0)
-	rotate_x(randf_range(-spread, spread))
-	rotate_y(randf_range(-spread, spread))
+	transform.basis = transform.basis.rotated(transform.basis.x, randf_range(-spread, spread))
+	transform.basis = transform.basis.rotated(transform.basis.y, randf_range(-spread, spread))
 	# Set velocity, but global this time!
 	velocity = -global_transform.basis.z * speed
 
@@ -75,6 +75,11 @@ func _physics_process(delta: float) -> void:
 
 
 func damage_and_die(body):
+	# Null instance can occur when body dies
+	# from another source of damage while this
+	# projectile is still trying to damage it.
+	if !body:
+		return
 	# In order to fire from within a shield, we need
 	# to ignore immediate collisions.
 	if body.get_groups().has("shield") and $Timer.wait_time - $Timer.time_left <= shield_grace_period:
