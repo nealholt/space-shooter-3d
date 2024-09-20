@@ -1,6 +1,7 @@
 extends Gun
 class_name BurstGun
 
+# Fire a burst over a short period of time.
 @onready var burst_timer: Timer = $BurstTimer
 # How many consecutive shots are fired when trigger is pulled
 @export var burst_total:int = 1

@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dgfgr1a12mn0l" path="res://Assets/Decals/bullet_hole.tscn" id="4_ywcms"]
 
 [node name="ProjectileRay" instance=ExtResource("1_8o1e8")]
-speed = 100.0
 sparks = ExtResource("2_rfdoh")
 shieldSparks = ExtResource("3_p2h8n")
 bullet_hole_decal = ExtResource("4_ywcms")

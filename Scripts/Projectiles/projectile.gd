@@ -30,7 +30,10 @@ var data:ShootData
 # Why doesn't 1/100th or less suffice? Don't know.
 # But 2/100ths seemed to be the magic number.
 # This may need altered for raycast bullets.
-var shield_grace_period:float = 2.0 #1.0/50.0
+var shield_grace_period:float = 1.0/50.0
+# NOTE: For raycasts with the "Hit From Inside"
+# checkbox deselected, shield_grace_period is
+# not even needed.
 
 
 func _ready() -> void:
@@ -75,7 +78,6 @@ func damage_and_die(body):
 	# In order to fire from within a shield, we need
 	# to ignore immediate collisions.
 	if body.get_groups().has("shield") and $Timer.wait_time - $Timer.time_left <= shield_grace_period:
-		print('returning')
 		return
 	# Damage what was hit
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw

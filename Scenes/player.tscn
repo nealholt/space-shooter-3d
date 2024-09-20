@@ -108,22 +108,24 @@ _endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
 [node name="WeaponHandler" parent="." instance=ExtResource("9_1xly7")]
 
 [node name="GatlingGun" parent="WeaponHandler" node_paths=PackedStringArray("gun_animation", "muzzle_flash") instance=ExtResource("2_2p718")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63, 0.14, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63, 0.14, -2)
+burst_total = 6
 burst_rate = 12.0
 bullet = ExtResource("10_iwjd3")
 fire_rate = 1.2
 turn_off_near_miss = true
-spread_deg = 3.0
+spread_deg = 15.0
+simultaneous_shots = 10
 fire_sound = ExtResource("11_itcpr")
 reload_sound = ExtResource("12_ig3m3")
 gun_animation = NodePath("GunModel/AnimationPlayer")
 muzzle_flash = NodePath("MuzzleFlash")
 
 [node name="GunModel" parent="WeaponHandler/GatlingGun" instance=ExtResource("11_kbwk7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.132, 0.328)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.132, -1.7)
 
 [node name="MuzzleFlash" parent="WeaponHandler/GatlingGun" instance=ExtResource("14_4ajg4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.80335)
 
 [node name="AutoSeekingMissileLauncher" parent="WeaponHandler" instance=ExtResource("19_yfprc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.33626)

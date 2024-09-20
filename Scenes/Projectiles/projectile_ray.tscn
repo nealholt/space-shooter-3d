@@ -9,6 +9,7 @@ script = ExtResource("2_e7gw1")
 [node name="RayCast3D" type="RayCast3D" parent="." index="1"]
 target_position = Vector3(0, 0, -1)
 collision_mask = 10
-hit_from_inside = true
 hit_back_faces = false
 collide_with_areas = true
+debug_shape_custom_color = Color(1, 1, 0, 1)
+debug_shape_thickness = 5

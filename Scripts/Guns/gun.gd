@@ -31,6 +31,9 @@ var firing: bool = false
 # which makes it twice as large.
 @export var spread_deg:float = 0.0 # degrees
 
+# How many bullets to spawn simultaneously
+@export var simultaneous_shots:int = 1
+
 # Struct containing info about how and where to shoot
 # and who the shooter is
 var data:ShootData
@@ -123,14 +126,15 @@ func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
 
 
 func shoot_actual() -> void:
-	# Create and fire the bullet
-	var b = bullet.instantiate()
-	# Add bullet to root node otherwise queue free
-	# on shooter will queue free the bullet
-	get_tree().get_root().add_child(b)
-	# Pass the bullet the data about the shooter,
-	# initial velocity, etcetera
-	b.set_data(data)
+	for i in range(simultaneous_shots):
+		# Create and fire bullet(s)
+		var b = bullet.instantiate()
+		# Add bullet to root node otherwise queue free
+		# on shooter will queue free the bullet
+		get_tree().get_root().add_child(b)
+		# Pass the bullet the data about the shooter,
+		# initial velocity, etcetera
+		b.set_data(data)
 	firing = false
 
 
