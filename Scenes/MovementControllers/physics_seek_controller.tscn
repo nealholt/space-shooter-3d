@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dto664xfw5qbf"]
+
+[ext_resource type="Script" path="res://Scripts/MovementControllers/physics_seek_controller.gd" id="1_54mgj"]
+
+[node name="PhysicsSeekController" type="Node"]
+script = ExtResource("1_54mgj")

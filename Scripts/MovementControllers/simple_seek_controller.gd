@@ -15,7 +15,6 @@ func move_me(body:Node3D, _delta:float) -> void:
 	# Seek target using look_at and constant speed.
 	# Change direction on a dime. No vector addition
 	# or physics.
-	print('targeting ', Time.get_ticks_msec())
 	var target_pos := get_target_pos(body)
 	body.look_at(target_pos, Vector3.UP)
 	body.velocity = -body.transform.basis.z * body.speed

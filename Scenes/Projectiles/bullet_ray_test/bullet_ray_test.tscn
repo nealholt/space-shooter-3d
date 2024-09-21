@@ -5,11 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://domnb1m51i30x" path="res://Assets/Particles/ship_strike.tscn" id="2_rfdoh"]
 [ext_resource type="PackedScene" uid="uid://loiql7x3ow62" path="res://Assets/Particles/shield_strike.tscn" id="3_p2h8n"]
 [ext_resource type="PackedScene" uid="uid://dgfgr1a12mn0l" path="res://Assets/Decals/bullet_hole.tscn" id="4_ywcms"]
-[ext_resource type="PackedScene" uid="uid://bskdtnciill8m" path="res://Scenes/MovementControllers/simple_seek_controller.tscn" id="6_pd74p"]
+[ext_resource type="PackedScene" uid="uid://dto664xfw5qbf" path="res://Scenes/MovementControllers/physics_seek_controller.tscn" id="6_1y0o0"]
 
 [node name="ProjectileRay" node_paths=PackedStringArray("controller") instance=ExtResource("1_8o1e8")]
 speed = 300.0
-controller = NodePath("SimpleSeekController")
+controller = NodePath("PhysicsSeekController")
+time_out = 4.0
 sparks = ExtResource("2_rfdoh")
 shieldSparks = ExtResource("3_p2h8n")
 bullet_hole_decal = ExtResource("4_ywcms")
@@ -20,4 +21,5 @@ autostart = false
 
 [node name="MeshInstance3D" parent="." index="2" instance=ExtResource("2_3fccp")]
 
-[node name="SimpleSeekController" parent="." index="3" instance=ExtResource("6_pd74p")]
+[node name="PhysicsSeekController" parent="." index="3" instance=ExtResource("6_1y0o0")]
+steer_force = 500.0
