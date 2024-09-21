@@ -5,6 +5,7 @@
 
 [node name="ProjectileRay" instance=ExtResource("1_s006r")]
 script = ExtResource("2_e7gw1")
+does_ricochet = true
 
 [node name="RayCast3D" type="RayCast3D" parent="." index="1"]
 target_position = Vector3(0, 0, -1)

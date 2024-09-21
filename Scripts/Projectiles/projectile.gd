@@ -74,38 +74,45 @@ func _physics_process(delta: float) -> void:
 	global_position += velocity * delta
 
 
-func damage_and_die(body):
+func damage_and_die(body, collision_point=null):
+	# Damage what was hit
+	#https://www.youtube.com/watch?v=LuUjqHU-wBw
+	if !passes_through(body) and body.is_in_group("damageable"):
+		#print("dealt damage")
+		body.damage(damage)
+	# Make a spark at collision point
+	if collision_point:
+		# https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088252#questions/21003762
+		var spark = null
+		if body.is_in_group("shield") and shieldSparks:
+			spark = shieldSparks.instantiate()
+		elif sparks:
+			spark = sparks.instantiate()
+		if spark:
+			get_tree().get_root().add_child(spark)
+			#spark.global_transform.basis.z = -area.global_transform.basis.z
+			#spark.global_transform = area.global_transform
+			spark.transform = transform
+			#spark.rotate_y(deg_to_rad(-90))
+			#spark.rotate_x(deg_to_rad(90))
+			spark.global_position = collision_point
+	#Delete bullets that strike a body
+	Callable(queue_free).call_deferred()
+
+
+# Returns true if bullet should pass through
+# the body
+func passes_through(body) -> bool:
 	# Null instance can occur when body dies
 	# from another source of damage while this
 	# projectile is still trying to damage it.
 	if !body:
-		return
+		return true
 	# In order to fire from within a shield, we need
 	# to ignore immediate collisions.
 	if body.get_groups().has("shield") and $Timer.wait_time - $Timer.time_left <= shield_grace_period:
-		return
-	# Damage what was hit
-	#https://www.youtube.com/watch?v=LuUjqHU-wBw
-	if body.is_in_group("damageable"):
-		#print("dealt damage")
-		body.damage(damage)
-	# Make a spark
-	# https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088252#questions/21003762
-	var spark = null
-	if body.is_in_group("shield") and shieldSparks:
-		spark = shieldSparks.instantiate()
-	elif sparks:
-		spark = sparks.instantiate()
-	if spark:
-		get_tree().get_root().add_child(spark)
-		spark.global_position = global_position
-		#spark.global_transform.basis.z = -area.global_transform.basis.z
-		#spark.global_transform = area.global_transform
-		spark.transform = transform
-		#spark.rotate_y(deg_to_rad(-90))
-		#spark.rotate_x(deg_to_rad(90))
-	#Delete bullets that strike a body
-	Callable(queue_free).call_deferred()
+		return true
+	return false
 
 
 # Source:
