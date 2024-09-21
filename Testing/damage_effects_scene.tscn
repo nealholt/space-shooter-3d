@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5aj0hxrmxrbg"]
+[gd_scene load_steps=8 format=3 uid="uid://c5aj0hxrmxrbg"]
 
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/NPCs/Fighter/fighter_npc.tscn" id="1_w5e31"]
 [ext_resource type="Script" path="res://Testing/bullet_spawner_testing.gd" id="2_xar6i"]
-[ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles_backup/Bullet/bullet.tscn" id="3_8rcco"]
+[ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="3_08cq6"]
+[ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="3_8rcco"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4sl8m"]
 sky_top_color = Color(0.00784314, 0.0862745, 0.211765, 1)
@@ -37,4 +38,8 @@ transform = Transform3D(7.89686e-15, 0.707107, -0.707107, 1.81058e-08, 0.707107,
 [node name="Node3D" type="Node3D" parent="FighterNPC"]
 transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 10, -10)
 script = ExtResource("2_xar6i")
+
+[node name="Gun" parent="FighterNPC/Node3D" instance=ExtResource("3_08cq6")]
 bullet = ExtResource("3_8rcco")
+fire_rate = 10.0
+automatic = false

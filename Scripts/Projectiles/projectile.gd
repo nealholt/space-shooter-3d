@@ -151,11 +151,16 @@ func stick_decal(collision_point:Vector3, collision_normal:Vector3) -> void:
 		# Position and orient the decal
 		decal.global_position = collision_point
 		# https://forum.godotengine.org/t/up-vector-and-direction-between-node-origin-and-target-are-aligned-look-at-failed/20575/2
-		if collision_normal == Vector3.DOWN:
+		# .is_equal_approx() should be used to compare vectors
+		# because of this issue:
+		# https://forum.godotengine.org/t/comparing-vectors-return-false-even-theyre-same/22474/2
+		# however, the solution given on that webpage
+		# is not ideal.
+		if collision_normal.is_equal_approx(Vector3.DOWN):
 			decal.rotation_degrees.x = 90
-		elif collision_normal == Vector3.UP:
+		elif collision_normal.is_equal_approx(Vector3.UP):
 			decal.rotation_degrees.x = -90
-		elif collision_normal != Vector3.ZERO:
+		elif !collision_normal.is_equal_approx(Vector3.ZERO):
 			decal.look_at(global_position - collision_normal, Vector3(0,1,0))
 
 

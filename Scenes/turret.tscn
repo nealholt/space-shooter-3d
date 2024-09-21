@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Turret/Turret.gd" id="1_cbt5p"]
 [ext_resource type="PackedScene" uid="uid://deuokls15ey84" path="res://Assets/turret_model.tscn" id="2_xuhpe"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="4_r7edd"]
-[ext_resource type="PackedScene" uid="uid://blnui57aja4f3" path="res://Scenes/Projectiles_backup/Bullet/bullet.tscn" id="5_gg3ek"]
+[ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="5_gg3ek"]
 [ext_resource type="Script" path="res://Scripts/target_selector.gd" id="6_cy7vo"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="8_qikae"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="9_b5qkf"]
