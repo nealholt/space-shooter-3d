@@ -6,6 +6,7 @@ class_name Projectile
 
 @export var speed:float = 1000.0
 var velocity : Vector3
+@export var controller:Controller
 
 @export var damage:float = 1.0
 @export var time_out:float = 2.0 #seconds
@@ -33,8 +34,14 @@ var data:ShootData
 var shield_grace_period:float = 1.0/50.0
 # NOTE: For raycasts with the "Hit From Inside"
 # checkbox deselected, shield_grace_period is
-# not even needed.
+# not even needed. However, you don't want
+# raycasts to hit from within any shield once
+# the ray is already inside it.
 
+# Put a bullet image in bread crumb here
+# for testing purposes. I tested ricochet
+# using this.
+#@export var bread_crumb : PackedScene
 
 func _ready() -> void:
 	#print("bullet created")
@@ -62,6 +69,10 @@ func set_data(dat:ShootData) -> void:
 	transform.basis = transform.basis.rotated(transform.basis.y, randf_range(-spread, spread))
 	# Set velocity, but global this time!
 	velocity = -global_transform.basis.z * speed
+	# Set target for seeking munitions
+	if controller:
+		controller.set_target(dat.target)
+
 
 
 func get_range() -> float:
@@ -70,6 +81,18 @@ func get_range() -> float:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	# Was previously used for testing:
+	#var crumb = bread_crumb.instantiate()
+	#get_tree().root.add_child(crumb)
+	#crumb.transform = transform
+	#crumb.transform.basis = transform.basis.rotated(transform.basis.x, PI/2)
+	#crumb.global_position = global_position
+	
+	# Seeker missiles and other bullets might
+	# use one of a number of different controllers
+	# that modify the velocity.
+	if controller:
+		controller.move_me(self, delta)
 	# Move forward
 	global_position += velocity * delta
 

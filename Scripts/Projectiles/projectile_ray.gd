@@ -12,20 +12,8 @@ const MIN_RAY_DISTANCE := 0.1
 
 @export var does_ricochet:bool = true
 
-# Put a bullet image in bread crumb here
-# for testing purposes. I tested ricochet
-# using this.
-#@export var bread_crumb : PackedScene
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	# Was previously used for testing:
-	#var crumb = bread_crumb.instantiate()
-	#get_tree().root.add_child(crumb)
-	#crumb.transform = transform
-	#crumb.transform.basis = transform.basis.rotated(transform.basis.x, PI/2)
-	#crumb.global_position = global_position
-	
 	# Move bullet
 	super._physics_process(delta)
 	# Change ray position and length to extend from

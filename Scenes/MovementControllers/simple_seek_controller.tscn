@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bskdtnciill8m"]
+
+[ext_resource type="Script" path="res://Scripts/MovementControllers/simple_seek_controller.gd" id="1_pp4sw"]
+
+[node name="SimpleSeekController" type="Node"]
+script = ExtResource("1_pp4sw")

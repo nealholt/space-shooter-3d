@@ -52,16 +52,17 @@ func _physics_process(delta):
 	# Trigger pulled. Try to shoot.
 	if $WeaponHandler.is_automatic():
 		if Input.is_action_pressed("shoot"):
-			$WeaponHandler.shoot(self)
+			$WeaponHandler.shoot(self, targeted)
 	else: # Semiautomatic
 		if Input.is_action_just_pressed("shoot"):
-			$WeaponHandler.shoot(self)
+			$WeaponHandler.shoot(self, targeted)
 	
 	# Target most centered enemy and begin missile lock
 	if Input.is_action_just_pressed("right_shoulder"):
 		# Unset previous target if any
 		if is_instance_valid(targeted):
 			targeted.set_targeted(false)
+			targeted = null
 		# Target most central red team fighter
 		targeted = Global.get_center_most_from_group("red team",camera)
 		if is_instance_valid(targeted):
