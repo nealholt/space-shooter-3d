@@ -27,9 +27,9 @@
 [ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Assets/Guns/laser_beam.tscn" id="16_y2utm"]
 [ext_resource type="AudioStream" uid="uid://dr6bn0u22ke7d" path="res://Assets/SoundEffects/missile/launch.wav" id="17_5165r"]
 [ext_resource type="AudioStream" uid="uid://dwo2npq3c18sx" path="res://Assets/SoundEffects/missile/quick_launch.wav" id="18_piaxr"]
-[ext_resource type="PackedScene" uid="uid://cv61niulto7ro" path="res://Scenes/bullet_bits.tscn" id="18_x4xa5"]
 [ext_resource type="Script" path="res://Scripts/camera_player_group.gd" id="19_342x2"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="19_yfprc"]
+[ext_resource type="PackedScene" uid="uid://cbyb5ysj3umaf" path="res://Scenes/Projectiles/shotgun_pellet.tscn" id="20_de7w0"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="21_5ow11"]
 [ext_resource type="PackedScene" uid="uid://bxdfmqb6p8cw6" path="res://Scenes/Projectiles/laser_guided_missile.tscn" id="21_uelja"]
 [ext_resource type="PackedScene" uid="uid://ymilutrw63dv" path="res://Scenes/turret_motion_component.tscn" id="23_vcsfn"]
@@ -152,7 +152,7 @@ collide_with_areas = true
 visible = false
 
 [node name="LaserShotgun" parent="WeaponHandler" instance=ExtResource("15_ufo67")]
-bullet = ExtResource("18_x4xa5")
+bullet = ExtResource("20_de7w0")
 fire_rate = 3.0
 turn_off_near_miss = true
 spread_deg = 5.0

@@ -26,9 +26,6 @@ class_name LaserShotgun
 # Range of this weapon
 @export var gun_range:float = 300.0
 
-# GPU particles to spawn on point of impact:
-@export var sparks:PackedScene # Not currently in use
-
 
 func _ready() -> void:
 	# Create all the necessary raycasts
@@ -62,11 +59,8 @@ func shoot_actual() -> void:
 	firing = false
 	# Loop through all the raycasts
 	# and BulletBits.
-	var bulletbit:BulletBit
+	var pellet:ShotgunPellet
 	for i in range(bullets):
-		# Create a bullet
-		bulletbit = bullet.instantiate()
-		get_tree().get_root().add_child(bulletbit)
 		# Access ith raycast
 		ray = $RayCastGroup.get_child(i)
 		# Rotate the ray a random amount
@@ -74,16 +68,14 @@ func shoot_actual() -> void:
 				randf_range(-spread_deg,spread_deg),
 				randf_range(-spread_deg,spread_deg),
 				0.0)
-		# The following if has not yet been used or tested
+		# Create a bullet
+		pellet = bullet.instantiate()
+		get_tree().get_root().add_child(pellet)
+		pellet.set_data(data)
 		if ray.is_colliding():
-			# Spawn sparks on location of hit
-			if sparks:
-				var spark = sparks.instantiate()
-				add_child(spark)
-				spark.global_position = ray.get_collision_point()
-			# set_up tells the bullet bit where to start,
+			# set_up tells the pellet where to start,
 			# where to end, and activates it so it rushes
 			# to its target.
-			bulletbit.set_up(global_position, ray.get_collision_point(), ray.get_collision_normal(), ray.get_collider())
+			pellet.set_up(global_position, ray.get_collision_point(), ray.get_collision_normal(), ray.get_collider())
 		else:
-			bulletbit.set_up(global_position, global_position+ray.global_transform.basis.z * ray.target_position.z, ray.get_collision_normal(), null)
+			pellet.set_up(global_position, global_position+ray.global_transform.basis.z * ray.target_position.z, ray.get_collision_normal(), null)
