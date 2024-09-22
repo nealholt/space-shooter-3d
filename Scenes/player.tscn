@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://cvrvs2a12nuqr" path="res://Assets/SoundEffects/whoosh_medium_001.ogg" id="9_ktweb"]
 [ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="10_pdsdm"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="10_shexg"]
-[ext_resource type="PackedScene" uid="uid://6g1nyw0o6lqw" path="res://Scenes/Projectiles_backup/auto_seeking_missile.tscn" id="11_a8ss5"]
+[ext_resource type="PackedScene" uid="uid://djj4vi4d1fq2m" path="res://Scenes/Projectiles/auto_seeking_missile.tscn" id="11_a8ss5"]
 [ext_resource type="AudioStream" uid="uid://ci04qcsgn8w7q" path="res://Assets/SoundEffects/clean-machine-gun-burst-98224.ogg" id="11_itcpr"]
 [ext_resource type="PackedScene" uid="uid://drm4t5i6exnhc" path="res://Assets/Guns/gatling_gun.tscn" id="11_kbwk7"]
 [ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Assets/Ships/fighter_chassis_diamond.tscn" id="12_a77x5"]
