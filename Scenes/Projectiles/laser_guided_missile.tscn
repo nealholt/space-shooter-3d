@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxdfmqb6p8cw6"]
+
+[ext_resource type="PackedScene" uid="uid://djj4vi4d1fq2m" path="res://Scenes/Projectiles/auto_seeking_missile.tscn" id="1_0ry7o"]
+
+[node name="ProjectileRay" instance=ExtResource("1_0ry7o")]
+
+[node name="PhysicsSeekController" parent="." index="3"]
+is_laser_guided = true

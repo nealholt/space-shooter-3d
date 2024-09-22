@@ -8,13 +8,12 @@ var acceleration := Vector3.ZERO
 
 # Override parent class
 func move_me(body:Node3D, delta:float) -> void:
-	# Check if there is a target, if not, do nothing
-	if !is_instance_valid(target):
+	# Check if there is a target or guidance laser,
+	# if not, do nothing.
+	if !is_instance_valid(target) and !is_laser_guided:
 		return
 	# Seek target using acceleration and vector
 	# addition to make it feel "physics-y"
-	
-	# Avoid turning toward invalid targets.
 	
 	# Acceleration should be zero unless this is a seeking missile
 	acceleration = get_velocity_adjustment(body)

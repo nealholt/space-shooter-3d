@@ -70,8 +70,8 @@ func set_data(dat:ShootData) -> void:
 	# Set velocity, but global this time!
 	velocity = -global_transform.basis.z * speed
 	# Set target for seeking munitions
-	if controller and is_instance_valid(dat.target):
-		controller.set_target(dat.target)
+	if controller:
+		controller.set_data(dat)
 
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=40 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_rf46g"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" path="res://Scripts/camera_player_group.gd" id="19_342x2"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="19_yfprc"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="21_5ow11"]
+[ext_resource type="PackedScene" uid="uid://bxdfmqb6p8cw6" path="res://Scenes/Projectiles/laser_guided_missile.tscn" id="21_uelja"]
 [ext_resource type="PackedScene" uid="uid://ymilutrw63dv" path="res://Scenes/turret_motion_component.tscn" id="23_vcsfn"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7tg00"]
@@ -158,6 +159,7 @@ spread_deg = 5.0
 
 [node name="LaserGuidedLauncher" parent="WeaponHandler" node_paths=PackedStringArray("ray") instance=ExtResource("19_yfprc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.40851)
+bullet = ExtResource("21_uelja")
 fire_rate = 5.0
 turn_off_near_miss = true
 ray = NodePath("RayCast3D")
