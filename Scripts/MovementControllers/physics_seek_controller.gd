@@ -7,6 +7,14 @@ var acceleration := Vector3.ZERO
 
 
 # Override parent class
+func set_data(shoot_data:ShootData) -> void:
+	super.set_data(shoot_data)
+	# 'Super powered' doubles turn rate and 10xs damage
+	if shoot_data.super_powered:
+		steer_force *= 2.0
+
+
+# Override parent class
 func move_me(body:Node3D, delta:float) -> void:
 	# Check if there is a target or guidance laser,
 	# if not, do nothing.

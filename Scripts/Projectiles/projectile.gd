@@ -65,10 +65,19 @@ func set_data(dat:ShootData) -> void:
 	# spread in half so that a 10 degree spread is
 	# 10 degrees total, not plus or minus 10 degrees.
 	var spread:float = deg_to_rad(dat.spread_deg/2.0)
+	# I'm not sure why .normalized() is needed here
+	# and it concerns me that I either need it
+	# everywhere that this sort of rotation is performed
+	# or that something is going uniquely wrong
+	# such that the bases are not normalized (but should be)
 	transform.basis = transform.basis.rotated(transform.basis.x.normalized(), randf_range(-spread, spread))
 	transform.basis = transform.basis.rotated(transform.basis.y.normalized(), randf_range(-spread, spread))
 	# Set velocity, but global this time!
 	velocity = -global_transform.basis.z * speed
+	# 'Super powered' doubles turn rate (which is done
+	# in the controller) and 10xs damage
+	if dat.super_powered:
+		damage *= 10.0
 	# Set target for seeking munitions
 	if controller:
 		controller.set_data(dat)

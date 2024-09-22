@@ -38,6 +38,16 @@ func _physics_process(delta: float) -> void:
 			damage_and_die(body, ray.get_collision_point())
 
 
+# Override parent class
+func set_data(dat:ShootData) -> void:
+	super.set_data(dat)
+	# Check if this is a bullet that should not make a
+	# whiffing noise. Currently only player bullets
+	# should not self-whiff
+	if dat.turn_off_near_miss:
+		ray.set_collision_mask_value(3, false)
+
+
 # Source at 6:30 here:
 # https://www.youtube.com/watch?v=joMBVo_ZwKI
 # It seems that the second ricochet is glitchy,
