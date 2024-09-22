@@ -65,8 +65,8 @@ func set_data(dat:ShootData) -> void:
 	# spread in half so that a 10 degree spread is
 	# 10 degrees total, not plus or minus 10 degrees.
 	var spread:float = deg_to_rad(dat.spread_deg/2.0)
-	transform.basis = transform.basis.rotated(transform.basis.x, randf_range(-spread, spread))
-	transform.basis = transform.basis.rotated(transform.basis.y, randf_range(-spread, spread))
+	transform.basis = transform.basis.rotated(transform.basis.x.normalized(), randf_range(-spread, spread))
+	transform.basis = transform.basis.rotated(transform.basis.y.normalized(), randf_range(-spread, spread))
 	# Set velocity, but global this time!
 	velocity = -global_transform.basis.z * speed
 	# Set target for seeking munitions
@@ -85,7 +85,7 @@ func _physics_process(delta: float) -> void:
 	#var crumb = bread_crumb.instantiate()
 	#get_tree().root.add_child(crumb)
 	#crumb.transform = transform
-	#crumb.transform.basis = transform.basis.rotated(transform.basis.x, PI/2)
+	#crumb.transform.basis = transform.basis.rotated(transform.basis.x.normalized(), PI/2)
 	#crumb.global_position = global_position
 	
 	# Seeker missiles and other bullets might
