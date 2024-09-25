@@ -73,7 +73,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.5)
 bullet = ExtResource("3_crlbv")
 damage = 50.0
 fire_rate = 0.3
-turn_off_near_miss = true
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_8otd8")]
 health_component = NodePath("../HealthComponent")
@@ -113,7 +112,6 @@ burst_total = 6
 burst_rate = 12.0
 bullet = ExtResource("10_pdsdm")
 fire_rate = 1.2
-turn_off_near_miss = true
 spread_deg = 3.0
 fire_sound = ExtResource("11_itcpr")
 reload_sound = ExtResource("12_ig3m3")
@@ -130,14 +128,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.80335)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.33626)
 bullet = ExtResource("11_a8ss5")
 fire_rate = 3.0
-turn_off_near_miss = true
 
 [node name="HitScanGun" parent="WeaponHandler" node_paths=PackedStringArray("laser_mesh", "laser_mesh_pivot", "gun_animation", "ray") instance=ExtResource("13_428na")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14718, 0, -2.39168)
 laser_mesh = NodePath("Node/Head/LaserMesh")
 laser_mesh_pivot = NodePath("Node/Head")
 fire_rate = 5.0
-turn_off_near_miss = true
 gun_animation = NodePath("Node/Head/LaserMesh/AnimationPlayer")
 ray = NodePath("RayCast3D")
 
@@ -154,14 +150,12 @@ visible = false
 [node name="LaserShotgun" parent="WeaponHandler" instance=ExtResource("15_ufo67")]
 bullet = ExtResource("20_de7w0")
 fire_rate = 3.0
-turn_off_near_miss = true
 spread_deg = 5.0
 
 [node name="LaserGuidedLauncher" parent="WeaponHandler" node_paths=PackedStringArray("ray") instance=ExtResource("19_yfprc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.40851)
 bullet = ExtResource("21_uelja")
 fire_rate = 5.0
-turn_off_near_miss = true
 ray = NodePath("RayCast3D")
 
 [node name="RayCast3D" type="RayCast3D" parent="WeaponHandler/LaserGuidedLauncher"]

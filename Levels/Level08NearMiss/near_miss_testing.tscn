@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://jw5871doy4ch"]
+
+[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="1_ba5yk"]
+[ext_resource type="Script" path="res://Testing/bullet_spawner_testing.gd" id="2_00mhe"]
+[ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="3_fyqj6"]
+[ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="4_8kbhe"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vaoif"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_1ol1g"]
+sky_material = SubResource("ProceduralSkyMaterial_vaoif")
+
+[sub_resource type="Environment" id="Environment_jia05"]
+background_mode = 2
+sky = SubResource("Sky_1ol1g")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="NearMissTesting" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jia05")
+
+[node name="Player" parent="." instance=ExtResource("1_ba5yk")]
+
+[node name="GunNode3D" type="Node3D" parent="."]
+script = ExtResource("2_00mhe")
+
+[node name="Gun" parent="GunNode3D" instance=ExtResource("3_fyqj6")]
+bullet = ExtResource("4_8kbhe")

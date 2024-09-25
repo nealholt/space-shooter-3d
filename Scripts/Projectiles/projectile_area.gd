@@ -8,8 +8,7 @@ func set_data(dat:ShootData) -> void:
 	# Check if this is a bullet that should not make a
 	# whiffing noise. Currently only player bullets
 	# should not self-whiff
-	if dat.turn_off_near_miss:
-		$Area3D.set_collision_layer_value(3, false)
+	$Area3D.set_collision_mask_value(3, dat.use_near_miss)
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	damage_and_die(area)

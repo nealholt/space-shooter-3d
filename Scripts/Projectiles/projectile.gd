@@ -185,7 +185,7 @@ func stick_decal(collision_point:Vector3, collision_normal:Vector3) -> void:
 
 # Start near miss sound upon entering a near miss Area3D
 func start_near_miss_audio() -> void:
-	if !data.turn_off_near_miss:
+	if data.use_near_miss:
 		# If it doesn't exist yet, create it
 		if !near_miss_audio:
 			near_miss_audio = AudioStreamPlayer3D.new()

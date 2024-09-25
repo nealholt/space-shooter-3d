@@ -83,6 +83,14 @@ offset_right = 605.0
 offset_bottom = 491.0
 text = "Load 7: Capital Ship Test"
 
+[node name="Load8NearMissSound" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 724.0
+offset_top = 17.0
+offset_right = 906.0
+offset_bottom = 48.0
+text = "Load 8: Near Miss Test"
+
 [node name="Main3D" type="Node3D" parent="."]
 
 [connection signal="pressed" from="Menu/Load1" to="." method="_on_load_1_pressed"]
@@ -92,3 +100,4 @@ text = "Load 7: Capital Ship Test"
 [connection signal="pressed" from="Menu/Load5" to="." method="_on_load_5_pressed"]
 [connection signal="pressed" from="Menu/Load6" to="." method="_on_load_6_pressed"]
 [connection signal="pressed" from="Menu/Load7" to="." method="_on_load_7_pressed"]
+[connection signal="pressed" from="Menu/Load8NearMissSound" to="." method="_on_load_8_near_miss_sound_pressed"]

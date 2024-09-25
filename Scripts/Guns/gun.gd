@@ -23,7 +23,7 @@ var firing: bool = false
 
 # This variable is used so the player doesn't hear
 # their own bullets whizzing past their head.
-@export var turn_off_near_miss: bool = false
+@export var use_near_miss: bool = true
 
 # Later in the code I convert spread_deg to radians
 # and cut it in half so that the spread total is
@@ -122,7 +122,7 @@ func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
 	data.ray = ray
 	data.target = target
 	data.super_powered = powered_up
-	data.turn_off_near_miss = turn_off_near_miss
+	data.use_near_miss = use_near_miss
 
 
 func shoot_actual() -> void:

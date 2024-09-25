@@ -59,8 +59,7 @@ func set_data(dat:ShootData) -> void:
 	# Check if this is a bullet that should not make a
 	# whiffing noise. Currently only player bullets
 	# should not self-whiff
-	if dat.turn_off_near_miss:
-		ray.set_collision_mask_value(3, false)
+	ray.set_collision_mask_value(3, dat.use_near_miss)
 
 
 # Source at 6:30 here:

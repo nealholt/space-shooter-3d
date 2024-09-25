@@ -12,5 +12,5 @@ var ray:RayCast3D # Used for laser-guided bullets
 var damage:float = 1.0
 # This variable is used so the player doesn't hear
 # their own bullets whizzing past their head:
-var turn_off_near_miss:bool
+var use_near_miss:bool
 var spread_deg:float # Bullet spread in degrees
