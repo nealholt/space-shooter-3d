@@ -160,6 +160,8 @@ func deactivate() -> void:
 	if fire_sound_player:
 		fire_sound_player.playing = false
 	firing = false
+	if ray:
+		ray.enabled = false
 
 
 # Called by weapon handler when switching to
@@ -167,3 +169,5 @@ func deactivate() -> void:
 func activate() -> void:
 	visible = true
 	set_process(true)
+	if ray:
+		ray.enabled = true

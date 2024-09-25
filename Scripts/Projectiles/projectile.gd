@@ -114,11 +114,8 @@ func _physics_process(delta: float) -> void:
 func damage_and_die(body, collision_point=null):
 	# Damage what was hit
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
-	print()
-	print(passes_through(body))
-	print(body.is_in_group("damageable"))
 	if !passes_through(body) and body.is_in_group("damageable"):
-		print("dealt damage")
+		#print("dealt damage")
 		body.damage(damage)
 	# Make a spark at collision point
 	if collision_point:
@@ -153,8 +150,6 @@ func passes_through(body) -> bool:
 		return true
 	# In order to fire from within a shield, we need
 	# to ignore immediate collisions.
-	print($Timer.wait_time)
-	print($Timer.time_left)
 	if body.is_in_group("shield") and $Timer.wait_time - $Timer.time_left <= shield_grace_period:
 		return true
 	return false

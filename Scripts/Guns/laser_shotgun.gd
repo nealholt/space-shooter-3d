@@ -32,6 +32,11 @@ func _ready() -> void:
 	for i in range(bullets):
 		ray = RayCast3D.new()
 		$RayCastGroup.add_child(ray)
+		# Disable the ray for efficiency. Otherwise the
+		# ray checks for collisions on every physics
+		# update. Instead, only check for collisions
+		# when the gun fires using force_raycast_update
+		ray.enabled = false
 		ray.collide_with_areas = true
 		ray.target_position = Vector3(0,0,-gun_range)
 		# Disable collision mask 1
@@ -68,6 +73,7 @@ func shoot_actual() -> void:
 				randf_range(-spread_deg,spread_deg),
 				randf_range(-spread_deg,spread_deg),
 				0.0)
+		ray.force_raycast_update() # Check for collisions
 		# Create a bullet
 		pellet = bullet.instantiate()
 		# Add to main_3d, not root, otherwise the added

@@ -13,9 +13,20 @@ class_name HitScanGun
 @export var laser_mesh: MeshInstance3D
 @export var laser_mesh_pivot: Node3D
 
+func _ready():
+	super._ready()
+	if !ray:
+		printerr('This gun requires an attached RayCast3D child that is connect to the ray export variable.')
+	# Disable the ray for efficiency. Otherwise the
+	# ray checks for collisions on every physics
+	# update. Instead, only check for collisions
+	# when the gun fires using force_raycast_update
+	ray.enabled = false
+
 # Override parent class's shoot_actual
 func shoot_actual() -> void:
 	firing = false
+	ray.force_raycast_update() # Check for collisions
 	var collider = ray.get_collider()
 	if ray.is_colliding():
 		if collider.is_in_group("damageable"):

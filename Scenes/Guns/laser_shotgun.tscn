@@ -7,6 +7,5 @@
 script = ExtResource("1_j6dff")
 bullets = 8
 gun_range = 300.0
-sparks = null
 
 [node name="RayCastGroup" type="Node3D" parent="." index="1"]

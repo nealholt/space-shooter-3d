@@ -164,6 +164,7 @@ use_near_miss = false
 ray = NodePath("RayCast3D")
 
 [node name="RayCast3D" type="RayCast3D" parent="WeaponHandler/LaserGuidedLauncher"]
+enabled = false
 target_position = Vector3(0, 0, -1000)
 collision_mask = 10
 collide_with_areas = true
