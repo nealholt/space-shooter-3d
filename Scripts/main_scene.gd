@@ -42,7 +42,9 @@ func unload_level() -> void:
 	if(is_instance_valid(level_instance)):
 		level_instance.queue_free()
 	level_instance = null
-
+	# Queue free every child of main_3d
+	for c in main_3d.get_children():
+		c.queue_free()
 
 
 func load_level(level_name:String) -> void:

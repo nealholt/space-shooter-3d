@@ -125,11 +125,17 @@ func _on_health_component_died() -> void:
 	destroyed.emit()
 	# Create self-freeing audio to play pop sound
 	var on_death_sound = pop_player.instantiate()
-	get_tree().get_root().add_child(on_death_sound)
+	# Add to main_3d, not root, otherwise the added
+	# node might not be properly cleared when
+	# transitioning to a new scene.
+	Global.main_scene.main_3d.add_child(on_death_sound)
 	on_death_sound.play_then_delete(global_position)
 	# Explode
 	var explosion = deathExplosion.instantiate()
-	get_tree().get_root().add_child(explosion)
+	# Add to main_3d, not root, otherwise the added
+	# node might not be properly cleared when
+	# transitioning to a new scene.
+	Global.main_scene.main_3d.add_child(explosion)
 	explosion.global_position = global_position
 	# Wait until the end of the frame to execute queue_free
 	Callable(queue_free).call_deferred()

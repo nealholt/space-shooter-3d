@@ -24,7 +24,10 @@ func shoot_actual() -> void:
 		# Spawn sparks on location of hit
 		if sparks:
 			var spark = sparks.instantiate()
-			get_tree().get_root().add_child(spark)
+			# Add to main_3d, not root, otherwise the added
+			# node might not be properly cleared when
+			# transitioning to a new scene.
+			Global.main_scene.main_3d.add_child(spark)
 			spark.global_position = ray.get_collision_point()
 	position_laser()
 

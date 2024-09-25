@@ -29,12 +29,22 @@ func move_me(body:Node3D, _delta:float) -> void:
 # or, if able, target intercept based on target velocity.
 func get_target_pos(body:Node3D) -> Vector3:
 	if is_laser_guided:
+		# This if fixes an error that can otherwise
+		# occur when a seeking missile is still live
+		# and we try to switch from one level to another.
+		if !is_instance_valid(data.ray):
+			return Vector3.ZERO
 		if data.ray.is_colliding():
 			return data.ray.get_collision_point()
 		else: # If there is not colliding object
 			# return the endpoint of the ray
 			return data.ray.global_position+data.ray.global_transform.basis.z * data.ray.target_position.z
 			#global_position+ray.global_transform.basis.z * ray.target_position.z
+	# This if fixes an error that can otherwise
+	# occur when a seeking missile is still live
+	# and we try to switch from one level to another.
+	if !target:
+		return Vector3.ZERO
 	# Calculate and return target intercept
 	# Make sure target has a velocity attribute, otherwise
 	# use zero velocity.

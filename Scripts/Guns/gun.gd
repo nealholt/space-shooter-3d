@@ -129,9 +129,10 @@ func shoot_actual() -> void:
 	for i in range(simultaneous_shots):
 		# Create and fire bullet(s)
 		var b = bullet.instantiate()
-		# Add bullet to root node otherwise queue free
-		# on shooter will queue free the bullet
-		get_tree().get_root().add_child(b)
+		# Add to main_3d, not root, otherwise the added
+		# node might not be properly cleared when
+		# transitioning to a new scene.
+		Global.main_scene.main_3d.add_child(b)
 		# Pass the bullet the data about the shooter,
 		# initial velocity, etcetera
 		b.set_data(data)

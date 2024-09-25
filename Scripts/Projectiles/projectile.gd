@@ -20,6 +20,8 @@ var data:ShootData
 # Bullet hole decal
 @export var bullet_hole_decal : PackedScene
 
+var near_miss_audio: AudioStreamPlayer3D
+
 # Every bullet has this amount of time during which
 # the bullet will permanently ignore any shields it
 # collides with during those frames. This allows
@@ -83,7 +85,6 @@ func set_data(dat:ShootData) -> void:
 		controller.set_data(dat)
 
 
-
 func get_range() -> float:
 	return speed * time_out
 
@@ -92,7 +93,10 @@ func get_range() -> float:
 func _physics_process(delta: float) -> void:
 	# Was previously used for testing:
 	#var crumb = bread_crumb.instantiate()
-	#get_tree().root.add_child(crumb)
+	# Add to main_3d, not root, otherwise the added
+	# node might not be properly cleared when
+	# transitioning to a new scene.
+	#Global.main_scene.main_3d.add_child(crumb)
 	#crumb.transform = transform
 	#crumb.transform.basis = transform.basis.rotated(transform.basis.x.normalized(), PI/2)
 	#crumb.global_position = global_position
@@ -121,7 +125,10 @@ func damage_and_die(body, collision_point=null):
 		elif sparks:
 			spark = sparks.instantiate()
 		if spark:
-			get_tree().get_root().add_child(spark)
+			# Add to main_3d, not root, otherwise the added
+			# node might not be properly cleared when
+			# transitioning to a new scene.
+			Global.main_scene.main_3d.add_child(spark)
 			#spark.global_transform.basis.z = -area.global_transform.basis.z
 			#spark.global_transform = area.global_transform
 			spark.transform = transform
@@ -142,7 +149,7 @@ func passes_through(body) -> bool:
 		return true
 	# In order to fire from within a shield, we need
 	# to ignore immediate collisions.
-	if body.get_groups().has("shield") and $Timer.wait_time - $Timer.time_left <= shield_grace_period:
+	if body.is_in_group("shield") and $Timer.wait_time - $Timer.time_left <= shield_grace_period:
 		return true
 	return false
 
@@ -156,7 +163,10 @@ func stick_decal(collision_point:Vector3, collision_normal:Vector3) -> void:
 		# Parent decal to root, otherwise there can be
 		# weird scaling if attaching as a child of a scaled
 		# node.
-		get_tree().root.add_child(decal)
+		# Add to main_3d, not root, otherwise the added
+		# node might not be properly cleared when
+		# transitioning to a new scene.
+		Global.main_scene.main_3d.add_child(decal)
 		# Position and orient the decal
 		decal.global_position = collision_point
 		# https://forum.godotengine.org/t/up-vector-and-direction-between-node-origin-and-target-are-aligned-look-at-failed/20575/2
@@ -171,6 +181,22 @@ func stick_decal(collision_point:Vector3, collision_normal:Vector3) -> void:
 			decal.rotation_degrees.x = -90
 		elif !collision_normal.is_equal_approx(Vector3.ZERO):
 			decal.look_at(global_position - collision_normal, Vector3(0,1,0))
+
+
+# Start near miss sound upon entering a near miss Area3D
+func start_near_miss_audio() -> void:
+	if !data.turn_off_near_miss:
+		# If it doesn't exist yet, create it
+		if !near_miss_audio:
+			near_miss_audio = AudioStreamPlayer3D.new()
+			var audiostream = load("res://Assets/SoundEffects/whoosh_medium_001.ogg")
+			near_miss_audio.set_stream(audiostream)
+		near_miss_audio.play()
+
+# Stop near miss sound when striking an object
+func stop_near_miss_audio() -> void:
+	if near_miss_audio:
+		near_miss_audio.stop()
 
 
 func _on_timer_timeout() -> void:

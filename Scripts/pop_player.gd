@@ -14,7 +14,7 @@ extends Node3D
 # Intended for use as follows:
 #   @export var pop_player: PackedScene
 #   var on_death_sound = pop_player.instantiate()
-#   get_tree().get_root().add_child(on_death_sound)
+#   Global.main_scene.main_3d.add_child(on_death_sound)
 #   on_death_sound.play_then_delete(global_position)
 #   queue_free()
 # await keyword introduced here: https://www.youtube.com/watch?v=zumZ2Y9mPNQ
