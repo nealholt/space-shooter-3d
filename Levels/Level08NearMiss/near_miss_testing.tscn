@@ -29,8 +29,15 @@ environment = SubResource("Environment_jia05")
 
 [node name="Player" parent="." instance=ExtResource("1_ba5yk")]
 
-[node name="GunNode3D" type="Node3D" parent="."]
+[node name="GunNode3D" type="Node3D" parent="Player"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.85873, 0, -22.578)
 script = ExtResource("2_00mhe")
 
-[node name="Gun" parent="GunNode3D" instance=ExtResource("3_fyqj6")]
+[node name="Gun" parent="Player/GunNode3D" instance=ExtResource("3_fyqj6")]
 bullet = ExtResource("4_8kbhe")
+fire_rate = 20.0
+automatic = false
+
+[editable path="Player"]
+[editable path="Player/WeaponHandler/GatlingGun/GunModel"]
+[editable path="Player/WeaponHandler/HitScanGun/Node"]

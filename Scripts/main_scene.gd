@@ -81,4 +81,4 @@ func _on_load_7_pressed() -> void:
 	load_level("Level07/capital_ship_test")
 
 func _on_load_8_near_miss_sound_pressed() -> void:
-	load_level("Level08NearMiss/near_miss_testing.tscn")
+	load_level("Level08NearMiss/near_miss_testing")

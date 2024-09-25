@@ -29,6 +29,8 @@ func _physics_process(delta: float) -> void:
 	# Check for and handle collisions.
 	if ray.is_colliding():
 		var body := ray.get_collider()
+		if !is_instance_valid(body):
+			return
 		# If we hit a near-miss detector
 		if body.is_in_group("near-miss detector"):
 			start_near_miss_audio()
@@ -49,7 +51,9 @@ func _physics_process(delta: float) -> void:
 			ricochet(delta)
 		else: # or deal damage
 			# Stick on a decal before damaging and dying
-			stick_decal(ray.get_collision_point(), ray.get_collision_normal())
+			# Don't stick decals on shields
+			if !body.is_in_group("shield"):
+				stick_decal(ray.get_collision_point(), ray.get_collision_normal())
 			damage_and_die(body, ray.get_collision_point())
 
 
