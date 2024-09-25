@@ -4,7 +4,6 @@ extends CharacterBody3D
 @onready var camera_group: Node3D = $CameraGroup
 
 @onready var got_hit_audio: AudioStreamPlayer3D = $Sounds/GotHitAudio
-@onready var near_miss_audio: AudioStreamPlayer3D = $Sounds/NearMissAudio
 # The health_component is currently only used by the HUD in the main scene
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var missile_lock: MissileLock = $MissileLockGroup
@@ -136,12 +135,6 @@ func _on_hit_box_component_body_entered(_body: Node3D) -> void:
 # THIS is the noise that gets played when we take damage
 func _on_health_component_health_lost() -> void:
 	got_hit_audio.play()
-
-func _on_near_miss_detector_area_exited(area: Area3D) -> void:
-	# Play audio for enemy bullet near misses!
-	if area.is_in_group("bullet"): # is Projectile:
-		near_miss_audio.global_position = area.global_position
-		near_miss_audio.play()
 
 func _on_health_component_died() -> void:
 	# Load main scene if player dies

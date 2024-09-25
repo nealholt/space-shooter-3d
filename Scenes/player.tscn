@@ -92,9 +92,9 @@ stream = ExtResource("8_klb2b")
 stream = ExtResource("9_ktweb")
 
 [node name="NearMissDetector" type="Area3D" parent="." groups=["near-miss detector"]]
-collision_layer = 0
-collision_mask = 4
-monitorable = false
+collision_layer = 4
+collision_mask = 0
+monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NearMissDetector"]
 shape = SubResource("SphereShape3D_wtdqg")
@@ -268,7 +268,6 @@ transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 [connection signal="body_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_body_entered"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]
-[connection signal="area_exited" from="NearMissDetector" to="." method="_on_near_miss_detector_area_exited"]
 [connection signal="timeout" from="MissileLockGroup/AudioTimer" to="MissileLockGroup" method="_on_audio_timer_timeout"]
 
 [editable path="WeaponHandler/GatlingGun/GunModel"]

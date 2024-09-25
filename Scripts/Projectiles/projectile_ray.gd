@@ -33,6 +33,7 @@ func _physics_process(delta: float) -> void:
 			return
 		# If we hit a near-miss detector
 		if body.is_in_group("near-miss detector"):
+			print(body)
 			start_near_miss_audio()
 			# https://forum.godotengine.org/t/possible-to-detect-multiple-collisions-with-raycast2d/27326/2
 			# Add body to ray's exception list. This way
@@ -42,9 +43,11 @@ func _physics_process(delta: float) -> void:
 			ray.force_raycast_update()
 			# If it's still colliding...
 			if ray.is_colliding():
+				print('still colliding')
 				# ...get the new collider
 				body = ray.get_collider()
 			else: # Otherwise return
+				print('no longer colliding')
 				return
 		# Ricochet
 		if does_ricochet and !passes_through(body) and !body.is_in_group("damageable"):
@@ -55,6 +58,7 @@ func _physics_process(delta: float) -> void:
 			if !body.is_in_group("shield"):
 				stick_decal(ray.get_collision_point(), ray.get_collision_normal())
 			damage_and_die(body, ray.get_collision_point())
+
 
 
 # Override parent class
