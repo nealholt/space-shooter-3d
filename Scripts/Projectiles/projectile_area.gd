@@ -11,8 +11,10 @@ func set_data(dat:ShootData) -> void:
 	$Area3D.set_collision_mask_value(3, dat.use_near_miss)
 
 func _on_area_3d_area_entered(area: Area3D) -> void:
-	damage_and_die(area)
+	if (data.collision_exception1 and data.collision_exception1 != area) or (data.collision_exception2 and data.collision_exception2 != area):
+		damage_and_die(area)
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	damage_and_die(body)
+	if (data.collision_exception1 and data.collision_exception1 != body) or (data.collision_exception2 and data.collision_exception2 != body):
+		damage_and_die(body)
