@@ -60,6 +60,15 @@ var reload_sound_player: AudioStreamPlayer3D
 # munitions.
 @export var ray : RayCast3D
 
+# Objects to ignore collisions with. All bullets
+# fired by this gun will ignore collisions with
+# objects in this array.
+# I could not get this to work as an Array, so now
+# it's just two items explicitly.
+@export var collision_exception1 : Area3D
+@export var collision_exception2 : Area3D
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Ask bullet for its range
@@ -123,6 +132,10 @@ func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
 	data.target = target
 	data.super_powered = powered_up
 	data.use_near_miss = use_near_miss
+	if is_instance_valid(collision_exception1):
+		data.collision_exception1 = collision_exception1
+	if is_instance_valid(collision_exception2):
+		data.collision_exception2 = collision_exception2
 
 
 func shoot_actual() -> void:

@@ -14,3 +14,5 @@ var damage:float = 1.0
 # their own bullets whizzing past their head:
 var use_near_miss:bool
 var spread_deg:float # Bullet spread in degrees
+var collision_exception1:Area3D # Area3d to ignore collisions with
+var collision_exception2:Area3D

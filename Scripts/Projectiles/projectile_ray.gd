@@ -65,6 +65,11 @@ func set_data(dat:ShootData) -> void:
 	# whiffing noise. Currently only player bullets
 	# should not self-whiff
 	ray.set_collision_mask_value(3, dat.use_near_miss)
+	# Ignore collision with bodies in exclusion list
+	if dat.collision_exception1:
+		ray.add_exception(dat.collision_exception1)
+	if dat.collision_exception2:
+		ray.add_exception(dat.collision_exception2)
 
 
 # Source at 6:30 here:

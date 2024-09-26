@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=32 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" path="res://Scripts/target_selector.gd" id="22_4r1yh"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="23_fxr37"]
 [ext_resource type="PackedScene" uid="uid://d3erdmulqy1l2" path="res://Assets/Particles/major_damage.tscn" id="24_a0vwa"]
+[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="24_ovt4a"]
 [ext_resource type="PackedScene" uid="uid://b70y8labc000a" path="res://Assets/Particles/major_damage_line_sparks.tscn" id="25_ij4bf"]
 [ext_resource type="PackedScene" uid="uid://dk37kibucmpd0" path="res://Assets/Particles/mild_damage.tscn" id="26_mibdx"]
 
@@ -31,6 +32,17 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ydoww"]
 radius = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6dy1g"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("24_ovt4a")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_6a830"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_6dy1g")
 
 [node name="FighterNPC" type="CharacterBody3D"]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
@@ -43,10 +55,12 @@ pop_player = ExtResource("2_s1yd2")
 transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-07, 8.74228e-08, -1, 1.31134e-07, 0, 0, 0)
 shape = SubResource("SphereShape3D_rh3fl")
 
-[node name="Gun" parent="." instance=ExtResource("4_57m73")]
+[node name="Gun" parent="." node_paths=PackedStringArray("collision_exception1", "collision_exception2") instance=ExtResource("4_57m73")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2)
 bullet = ExtResource("4_f5xpu")
 fire_rate = 8.0
+collision_exception1 = NodePath("../HitBoxComponent")
+collision_exception2 = NodePath("../Shield/HitBoxComponent")
 
 [node name="HitFeedback" parent="." instance=ExtResource("3_qm2p0")]
 
@@ -112,6 +126,9 @@ script = ExtResource("22_4r1yh")
 [node name="Shield" parent="." instance=ExtResource("23_fxr37")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
+[node name="FresnelAura" parent="Shield" index="0"]
+mesh = SubResource("SphereMesh_6a830")
+
 [node name="DamageEmitters" type="Node3D" parent="."]
 
 [node name="MajorDamage" parent="DamageEmitters" instance=ExtResource("24_a0vwa")]
@@ -122,3 +139,5 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]
+
+[editable path="Shield"]
