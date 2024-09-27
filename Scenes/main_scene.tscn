@@ -91,6 +91,30 @@ offset_right = 906.0
 offset_bottom = 48.0
 text = "Load 8: Near Miss Test"
 
+[node name="Load9Shield" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 740.0
+offset_top = 69.0
+offset_right = 892.0
+offset_bottom = 100.0
+text = "Load 9: Shield Test"
+
+[node name="Load11DamageEffects" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 734.0
+offset_top = 161.0
+offset_right = 967.0
+offset_bottom = 192.0
+text = "Load 11: Damage Effects Test"
+
+[node name="Load12CollisionExperiment" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 725.0
+offset_top = 232.0
+offset_right = 961.0
+offset_bottom = 263.0
+text = "Load 12: Collision Experiment"
+
 [node name="Main3D" type="Node3D" parent="."]
 
 [connection signal="pressed" from="Menu/Load1" to="." method="_on_load_1_pressed"]
@@ -101,3 +125,6 @@ text = "Load 8: Near Miss Test"
 [connection signal="pressed" from="Menu/Load6" to="." method="_on_load_6_pressed"]
 [connection signal="pressed" from="Menu/Load7" to="." method="_on_load_7_pressed"]
 [connection signal="pressed" from="Menu/Load8NearMissSound" to="." method="_on_load_8_near_miss_sound_pressed"]
+[connection signal="pressed" from="Menu/Load9Shield" to="." method="_on_load_9_shield_pressed"]
+[connection signal="pressed" from="Menu/Load11DamageEffects" to="." method="_on_load_11_damage_effects_pressed"]
+[connection signal="pressed" from="Menu/Load12CollisionExperiment" to="." method="_on_load_12_collision_experiment_pressed"]

@@ -112,6 +112,10 @@ func _physics_process(delta: float) -> void:
 
 
 func damage_and_die(body, collision_point=null):
+	#print()
+	#print('damage_and_die called')
+	#print(passes_through(body))
+	#print(body.is_in_group("damageable"))
 	# Damage what was hit
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
 	if !passes_through(body) and body.is_in_group("damageable"):

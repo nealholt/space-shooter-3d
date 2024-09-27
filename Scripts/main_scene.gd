@@ -82,3 +82,14 @@ func _on_load_7_pressed() -> void:
 
 func _on_load_8_near_miss_sound_pressed() -> void:
 	load_level("Level08NearMiss/near_miss_testing")
+
+func _on_load_9_shield_pressed() -> void:
+	load_level("Level09ShieldTest/shield_experiments")
+
+
+
+func _on_load_11_damage_effects_pressed() -> void:
+	load_level("Level11DamageEffectTest/damage_effects_scene")
+
+func _on_load_12_collision_experiment_pressed() -> void:
+	load_level("Level12CollisionTest/collision_experiments")

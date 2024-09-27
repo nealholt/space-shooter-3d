@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c5aj0hxrmxrbg"]
 
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/NPCs/Fighter/fighter_npc.tscn" id="1_w5e31"]
-[ext_resource type="Script" path="res://Testing/bullet_spawner_testing.gd" id="2_xar6i"]
+[ext_resource type="Script" path="res://Levels/Level08NearMiss/bullet_spawner_testing.gd" id="2_xar6i"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="3_08cq6"]
 [ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="3_8rcco"]
 
@@ -36,7 +36,7 @@ shadow_enabled = true
 transform = Transform3D(7.89686e-15, 0.707107, -0.707107, 1.81058e-08, 0.707107, 0.707107, 1, -1.28028e-08, -1.28028e-08, -20, 20, 0)
 
 [node name="Node3D" type="Node3D" parent="FighterNPC"]
-transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 10, -10)
+transform = Transform3D(1, 1.35106e-15, -2.20165e-15, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 50, -52)
 script = ExtResource("2_xar6i")
 
 [node name="Gun" parent="FighterNPC/Node3D" instance=ExtResource("3_08cq6")]
