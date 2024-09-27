@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Assets/SoundEffects/lowFrequency_explosion_001.ogg" id="8_klb2b"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="9_1xly7"]
 [ext_resource type="AudioStream" uid="uid://cvrvs2a12nuqr" path="res://Assets/SoundEffects/whoosh_medium_001.ogg" id="9_ktweb"]
-[ext_resource type="PackedScene" uid="uid://dhe4jb3jefc7e" path="res://Scenes/Projectiles/bullet_area_basic.tscn" id="10_guhsg"]
+[ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="10_pdsdm"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="10_shexg"]
 [ext_resource type="PackedScene" uid="uid://djj4vi4d1fq2m" path="res://Scenes/Projectiles/auto_seeking_missile.tscn" id="11_a8ss5"]
 [ext_resource type="AudioStream" uid="uid://ci04qcsgn8w7q" path="res://Assets/SoundEffects/clean-machine-gun-burst-98224.ogg" id="11_itcpr"]
@@ -113,10 +113,11 @@ _endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
 [node name="WeaponHandler" parent="." instance=ExtResource("9_1xly7")]
 
 [node name="GatlingGun" parent="WeaponHandler" node_paths=PackedStringArray("gun_animation", "muzzle_flash", "collision_exception1", "collision_exception2") instance=ExtResource("2_2p718")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63, 0.14, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63, 0.14, -5)
 burst_total = 6
 burst_rate = 12.0
-bullet = ExtResource("10_guhsg")
+bullet = ExtResource("10_pdsdm")
+bullet_speed = 600.0
 fire_rate = 1.2
 use_near_miss = false
 spread_deg = 3.0
@@ -128,10 +129,10 @@ collision_exception1 = NodePath("../../HitBoxComponent")
 collision_exception2 = NodePath("../../Shield/HitBoxComponent")
 
 [node name="GunModel" parent="WeaponHandler/GatlingGun" instance=ExtResource("11_kbwk7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.132, -1.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.132, 1.3)
 
 [node name="MuzzleFlash" parent="WeaponHandler/GatlingGun" instance=ExtResource("14_4ajg4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.80335)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.185093)
 
 [node name="AutoSeekingMissileLauncher" parent="WeaponHandler" node_paths=PackedStringArray("collision_exception1", "collision_exception2") instance=ExtResource("19_yfprc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.33626)

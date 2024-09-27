@@ -6,7 +6,7 @@ class_name ProjectileRay
 # Raycast bullets in Godot 4 by ImmersiveRPG
 # https://www.youtube.com/watch?v=joMBVo_ZwKI
 
-const MIN_RAY_DISTANCE := 0.1
+const MIN_RAY_DISTANCE := 1.0
 
 @onready var ray:RayCast3D = $RayCast3D
 
