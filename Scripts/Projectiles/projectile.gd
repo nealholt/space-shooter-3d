@@ -4,12 +4,12 @@ class_name Projectile
 # Bullets and missiles and all projectiles inherit
 # from this class.
 
-@export var speed:float = 1000.0
+var speed:float = 1000.0
 var velocity : Vector3
 @export var controller:Controller
 
-@export var damage:float = 1.0
-@export var time_out:float = 2.0 #seconds
+var damage:float = 1.0
+var time_out:float = 2.0 #seconds
 
 # Data on shooter and target:
 var data:ShootData
@@ -46,7 +46,6 @@ var shield_grace_period:float = 1.0/50.0
 #@export var bread_crumb : PackedScene
 
 func _ready() -> void:
-	#print("bullet created")
 	# Give the bullet a default velocity.
 	# Useful for testing even if the velocity
 	# is updated each frame
@@ -60,6 +59,8 @@ func _ready() -> void:
 func set_data(dat:ShootData) -> void:
 	data = dat
 	damage = dat.damage
+	speed = dat.bullet_speed
+	time_out = dat.bullet_timeout
 	# Point the projectile in the given direction
 	global_transform = dat.gun.global_transform
 	# Set velocity
@@ -84,10 +85,9 @@ func set_data(dat:ShootData) -> void:
 	# Set target for seeking munitions
 	if controller:
 		controller.set_data(dat)
-
-
-func get_range() -> float:
-	return speed * time_out
+	# Set velocity and set / reset timer
+	velocity = -global_transform.basis.z * speed
+	$Timer.start(time_out)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

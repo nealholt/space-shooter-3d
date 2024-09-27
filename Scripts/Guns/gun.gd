@@ -5,6 +5,8 @@ class_name Gun
 @export var bullet: PackedScene
 
 @export var damage:float = 1.0
+@export var bullet_speed:float = 1000.0
+@export var bullet_timeout:float = 2.0
 
 @export var fire_rate:= 1.0 # Shots per second
 @onready var firing_rate_timer: Timer = $FiringRateTimer
@@ -41,9 +43,6 @@ var data:ShootData
 # Squared range of the gun based on bullet speed
 # and bullet duration
 var range_sqd:float
-# Copy of bullet speed value from the bullet itself
-#  for ease of communicating this info up the tree.
-var bullet_speed:float
 
 @export var fire_sound: AudioStream
 @export var reload_sound: AudioStream
@@ -71,13 +70,8 @@ var reload_sound_player: AudioStreamPlayer3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Ask bullet for its range
-	if bullet:
-		var b = bullet.instantiate()
-		range_sqd = b.get_range()
-		range_sqd = range_sqd*range_sqd
-		bullet_speed = b.speed
-		b.queue_free() #Then delete this bullet
+	# Calculate bullet range
+	range_sqd = bullet_speed*bullet_timeout
 	# create fire audio stream
 	if fire_sound:
 		fire_sound_player = AudioStreamPlayer3D.new()
@@ -125,6 +119,8 @@ func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
 	# Fire from the position of the gun
 	data.gun = self
 	data.damage = damage
+	data.bullet_speed = bullet_speed
+	data.bullet_timeout = bullet_timeout
 	data.spread_deg = spread_deg
 	# Add the raycast to the shoot_data for
 	# reference by laser-guided projectiles

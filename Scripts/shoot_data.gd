@@ -10,6 +10,8 @@ var shooter # Identifies shooter for kill attribution
 var super_powered:bool # True, for example, if a missile is quick launched
 var ray:RayCast3D # Used for laser-guided bullets
 var damage:float = 1.0
+var bullet_speed:float
+var bullet_timeout:float
 # This variable is used so the player doesn't hear
 # their own bullets whizzing past their head:
 var use_near_miss:bool

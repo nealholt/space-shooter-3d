@@ -136,6 +136,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.80335)
 [node name="AutoSeekingMissileLauncher" parent="WeaponHandler" node_paths=PackedStringArray("collision_exception1", "collision_exception2") instance=ExtResource("19_yfprc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.33626)
 bullet = ExtResource("11_a8ss5")
+bullet_speed = 150.0
+bullet_timeout = 3.0
 fire_rate = 3.0
 use_near_miss = false
 collision_exception1 = NodePath("../../HitBoxComponent")
@@ -164,6 +166,7 @@ visible = false
 
 [node name="LaserShotgun" parent="WeaponHandler" node_paths=PackedStringArray("collision_exception1", "collision_exception2") instance=ExtResource("15_ufo67")]
 bullet = ExtResource("20_de7w0")
+bullet_speed = 500.0
 fire_rate = 3.0
 use_near_miss = false
 spread_deg = 5.0
@@ -173,6 +176,8 @@ collision_exception2 = NodePath("../../Shield/HitBoxComponent")
 [node name="LaserGuidedLauncher" parent="WeaponHandler" node_paths=PackedStringArray("ray", "collision_exception1", "collision_exception2") instance=ExtResource("19_yfprc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.40851)
 bullet = ExtResource("21_uelja")
+bullet_speed = 200.0
+bullet_timeout = 5.0
 fire_rate = 5.0
 use_near_miss = false
 ray = NodePath("RayCast3D")
