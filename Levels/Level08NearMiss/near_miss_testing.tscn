@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://jw5871doy4ch"]
+[gd_scene load_steps=11 format=3 uid="uid://jw5871doy4ch"]
 
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="1_ba5yk"]
 [ext_resource type="Script" path="res://Testing/bullet_spawner_testing.gd" id="2_00mhe"]
+[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_wmf1n"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="3_fyqj6"]
 [ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="4_8kbhe"]
 
@@ -18,6 +19,17 @@ sky = SubResource("Sky_1ol1g")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_685wi"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_wmf1n")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_vns14"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_685wi")
+
 [node name="NearMissTesting" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -28,6 +40,9 @@ shadow_enabled = true
 environment = SubResource("Environment_jia05")
 
 [node name="Player" parent="." instance=ExtResource("1_ba5yk")]
+
+[node name="FresnelAura" parent="Player/Shield" index="0"]
+mesh = SubResource("SphereMesh_vns14")
 
 [node name="GunNode3D" type="Node3D" parent="Player"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.85873, 0, -177.052)
@@ -41,3 +56,4 @@ automatic = false
 [editable path="Player"]
 [editable path="Player/WeaponHandler/GatlingGun/GunModel"]
 [editable path="Player/WeaponHandler/HitScanGun/Node"]
+[editable path="Player/Shield"]

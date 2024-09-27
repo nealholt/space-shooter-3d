@@ -58,6 +58,11 @@ func first_person() -> void:
 	state = CameraState.FIRSTPERSON
 	first_person_camera.make_current()
 	Global.targeting_hud_on = true
+	# Turn off near miss detectors for all but this camera.
+	# Could we instead have just one near miss detector
+	# and reparent it to the current camera?
+	shutdown_near_miss()
+	$Body/Head/FirstPersonCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 # Transition to rear underbelly camera
@@ -65,6 +70,11 @@ func rear_camera() -> void:
 	state = CameraState.REAR
 	rear_under_camera.make_current()
 	Global.targeting_hud_on = false
+	# Turn off near miss detectors for all but this camera.
+	# Could we instead have just one near miss detector
+	# and reparent it to the current camera?
+	shutdown_near_miss()
+	$RearUnderCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 # Transition to fly-by cinematic camera
@@ -78,6 +88,11 @@ func flyby_camera() -> void:
 		Global.player.transform.basis.x*rng.randf_range(-20.0,20.0)
 	free_camera.look_at(global_position, Vector3.UP)
 	Global.targeting_hud_on = false
+	# Turn off near miss detectors for all but this camera.
+	# Could we instead have just one near miss detector
+	# and reparent it to the current camera?
+	shutdown_near_miss()
+	$FreeCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 # Transition to target closeup camera
@@ -88,6 +103,11 @@ func target_closeup_camera() -> void:
 		free_camera.make_current()
 		view_target_close()
 		Global.targeting_hud_on = false
+		# Turn off near miss detectors for all but this camera.
+		# Could we instead have just one near miss detector
+		# and reparent it to the current camera?
+		shutdown_near_miss()
+		$FreeCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 # Transition to target view camera.
@@ -100,6 +120,11 @@ func target_camera() -> void:
 		free_camera.make_current()
 		view_target_from_player()
 		Global.targeting_hud_on = false
+		# Turn off near miss detectors for all but this camera.
+		# Could we instead have just one near miss detector
+		# and reparent it to the current camera?
+		shutdown_near_miss()
+		$FreeCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 # Pre: target is valid
@@ -123,3 +148,9 @@ func view_target_from_player() -> void:
 	free_camera.global_position = global_position + \
 		free_camera.transform.basis.z*10 + \
 		Vector3.UP*5
+
+
+func shutdown_near_miss() -> void:
+	$RearUnderCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_DISABLED
+	$FreeCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_DISABLED
+	$Body/Head/FirstPersonCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_DISABLED
