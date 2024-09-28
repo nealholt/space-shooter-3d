@@ -27,8 +27,8 @@ func _ready():
 func shoot_actual() -> void:
 	firing = false
 	ray.force_raycast_update() # Check for collisions
-	var collider = ray.get_collider()
 	if ray.is_colliding():
+		var collider = ray.get_collider()
 		if collider.is_in_group("damageable"):
 			#print("dealt damage")
 			collider.damage(1)

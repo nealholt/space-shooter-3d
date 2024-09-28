@@ -21,15 +21,13 @@ class_name LaserShotgun
 # created whether they hit their target or not based
 # on the raycasts in the laser shotgun
 
-# number of bullets per shot.
-@export var bullets := 8
 # Range of this weapon
 @export var gun_range:float = 300.0
 
 
 func _ready() -> void:
 	# Create all the necessary raycasts
-	for i in range(bullets):
+	for i in range(simultaneous_shots):
 		ray = RayCast3D.new()
 		$RayCastGroup.add_child(ray)
 		# Disable the ray for efficiency. Otherwise the
@@ -65,7 +63,7 @@ func shoot_actual() -> void:
 	# Loop through all the raycasts
 	# and BulletBits.
 	var pellet:ShotgunPellet
-	for i in range(bullets):
+	for i in range(simultaneous_shots):
 		# Access ith raycast
 		ray = $RayCastGroup.get_child(i)
 		# Rotate the ray a random amount

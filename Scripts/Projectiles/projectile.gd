@@ -45,6 +45,7 @@ var shield_grace_period:float = 1.0/50.0
 # using this.
 #@export var bread_crumb : PackedScene
 
+
 func _ready() -> void:
 	# Give the bullet a default velocity.
 	# Useful for testing even if the velocity
@@ -140,6 +141,7 @@ func damage_and_die(body, collision_point=null):
 			#spark.rotate_y(deg_to_rad(-90))
 			#spark.rotate_x(deg_to_rad(90))
 			spark.global_position = collision_point
+	stop_near_miss_audio()
 	#Delete bullets that strike a body
 	Callable(queue_free).call_deferred()
 

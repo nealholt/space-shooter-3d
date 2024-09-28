@@ -58,6 +58,7 @@ shape = SubResource("SphereShape3D_rh3fl")
 [node name="Gun" parent="." node_paths=PackedStringArray("collision_exception1", "collision_exception2") instance=ExtResource("4_57m73")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2)
 bullet = ExtResource("4_f5xpu")
+bullet_speed = 600.0
 fire_rate = 8.0
 collision_exception1 = NodePath("../HitBoxComponent")
 collision_exception2 = NodePath("../Shield/HitBoxComponent")

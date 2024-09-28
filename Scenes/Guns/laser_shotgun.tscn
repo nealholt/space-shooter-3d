@@ -5,7 +5,6 @@
 
 [node name="LaserShotgun" instance=ExtResource("1_ppvyh")]
 script = ExtResource("1_j6dff")
-bullets = 8
 gun_range = 300.0
 
 [node name="RayCastGroup" type="Node3D" parent="." index="1"]
