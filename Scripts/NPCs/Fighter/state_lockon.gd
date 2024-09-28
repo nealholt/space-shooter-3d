@@ -36,24 +36,21 @@ func Enter() -> void:
 # This function should be called on each
 # physics update frame.
 func Physics_Update(delta:float) -> void:
-	# Get npc and target info
-	var my_pos:Vector3 = motion.npc.global_position
-	var pos:Vector3 = motion.npc.target_pos
-	var dist_sqd:float = motion.npc.distance_to_target_sqd
-	var basis = motion.npc.global_transform.basis
-
+	# Update npc and target info
+	update_data()
+	
 	# Let's make lerp on target a function of
 	# distance. Snapping to the target at long
 	# range won't be as janky as snapping at
 	# short range.
 	var weight : float = clamp(interp_factor * dist_sqd * delta, 0.0,1.0)
-	motion.new_transform = Global.interp_face_target(motion.npc, pos, weight)
+	motion.new_transform = Global.interp_face_target(motion.npc, target_pos, weight)
 	
 	# New way
-	# This code is duplicated in projectile.gd, state_lockon.gd, and state_goto.gd
+	# This code is duplicated in physics_seek_controller.gd.
 	# Calculate the desired velocity, normalized and then
 	# multiplied by speed.
-	var desired : Vector3 = (pos-my_pos).normalized() * motion.npc.speed
+	var desired : Vector3 = (target_pos-my_pos).normalized() * motion.npc.speed
 	# Return an adjustment to velocity based on the steer force.
 	motion.acceleration = (desired - motion.npc.velocity).normalized()
 	
@@ -65,7 +62,7 @@ func Physics_Update(delta:float) -> void:
 	if dist_sqd < too_close_sqd:
 		#print('transitioning from lockon to flee')
 		Transitioned.emit(self,"flee")
-	var z_angle:float = Global.get_angle_to_target(my_pos, pos, -basis.z)
+	var z_angle:float = Global.get_angle_to_target(my_pos, target_pos, -basis.z)
 	# If target exited the envelope, seek.
 	if envelope < z_angle:
 		#print('transitioning from lockon to seek')

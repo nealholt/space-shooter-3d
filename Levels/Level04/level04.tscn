@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bofjsmexbmkkv"]
+[gd_scene load_steps=13 format=3 uid="uid://bofjsmexbmkkv"]
 
 [ext_resource type="PackedScene" uid="uid://n1jx2afgefnt" path="res://Scenes/spectator.tscn" id="1_jd547"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_0liob"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/NPCs/Fighter/fighter_npc.tscn" id="3_vdt0h"]
 [ext_resource type="PackedScene" uid="uid://brec5vmygtijo" path="res://Scenes/orb.tscn" id="4_syabc"]
+[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_d02va"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1crdq"]
 sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)
@@ -19,6 +20,28 @@ background_mode = 2
 sky = SubResource("Sky_bgqgu")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0i13u"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_d02va")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_k2fkl"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_0i13u")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_njs2f"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_d02va")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_q31v4"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_njs2f")
 
 [node name="Level04" type="Node3D"]
 
@@ -38,9 +61,29 @@ script = ExtResource("2_0liob")
 [node name="FighterNPC" parent="RedTeam" instance=ExtResource("3_vdt0h")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, 1, 4.37114e-08, 1, 4.37114e-08, -1, 4.37114e-08, -4.37114e-08, 27, 0, 0)
 
+[node name="DebugLabel" parent="RedTeam/FighterNPC" index="6"]
+visible = true
+
+[node name="FresnelAura" parent="RedTeam/FighterNPC/Shield" index="0"]
+mesh = SubResource("SphereMesh_k2fkl")
+
 [node name="BlueTeam" type="Node3D" parent="."]
 script = ExtResource("2_0liob")
 team = "blue team"
 
 [node name="Orb" parent="BlueTeam" instance=ExtResource("4_syabc")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -29, 0, -34)
+
+[node name="FighterNPC" parent="BlueTeam" instance=ExtResource("3_vdt0h")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -55.1692, 0, -156.585)
+
+[node name="StateMachine" parent="BlueTeam/FighterNPC" index="5" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Stop")
+
+[node name="FresnelAura" parent="BlueTeam/FighterNPC/Shield" index="0"]
+mesh = SubResource("SphereMesh_q31v4")
+
+[editable path="RedTeam/FighterNPC"]
+[editable path="RedTeam/FighterNPC/Shield"]
+[editable path="BlueTeam/FighterNPC"]
+[editable path="BlueTeam/FighterNPC/Shield"]

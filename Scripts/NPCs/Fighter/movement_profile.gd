@@ -5,7 +5,7 @@ class_name MovementProfile
 # can go through preset motions such as an
 # evasion sequence.
 
-# In fact, all the states will modify this intermediate
+# All the states will modify this intermediate
 # class and the FighterNPC will check the settings
 # here on each frame and obey the given directions.
 # This design was suggested in the last section of

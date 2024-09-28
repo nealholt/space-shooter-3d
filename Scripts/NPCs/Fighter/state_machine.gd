@@ -1,5 +1,10 @@
 extends Node
 class_name StateMachine
+
+# This script handles basic transitioning between states
+# and an extreme check that sends the ship toward the
+# origin if the ship goes way out of bounds.
+
 # Source:
 # https://www.youtube.com/watch?v=ow_Lum-Agbs&t=300s
 
@@ -17,10 +22,10 @@ var current_state : State
 var states : Dictionary = {}
 
 func _ready() -> void:
-	#print('In StateMachine _ready adding children:') # TESTING
+	#print('In StateMachine _ready adding children:')
 	for child in get_children():
 		if child is State:
-			#print(child.name.to_lower()) # TESTING
+			#print(child.name.to_lower())
 			states[child.name.to_lower()] = child
 			child.Transitioned.connect(on_child_transition)
 			child.motion = movement_profile
@@ -59,8 +64,9 @@ func on_child_transition(state, new_state_name):
 	new_state.Enter()
 	
 	current_state = new_state
-	# TESTING DEBUGGING
-	#$"../DebugLabel".text = new_state_name
+	
+	if $"../DebugLabel".visible:
+		$"../DebugLabel".text = new_state_name
 	
 
 func go_evasive() -> void:

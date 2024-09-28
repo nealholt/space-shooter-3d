@@ -22,6 +22,13 @@ var time_limit:float
 # This is just 90 degrees in radians for efficiency/readability
 const ninety_degrees:float = PI/2.0
 
+# Store npc and target info
+var my_pos:Vector3
+var target_pos:Vector3
+var dist_sqd:float
+var basis
+
+
 func _on_ready() -> void:
 	random.randomize()
 
@@ -58,3 +65,9 @@ func choose_random_evasion() -> void:
 			Transitioned.emit(self, 'wave')
 		else:
 			Transitioned.emit(self, 'corkscrew')
+
+func update_data() -> void:
+	my_pos = motion.npc.global_position
+	target_pos = motion.npc.target_pos
+	dist_sqd = motion.npc.distance_to_target_sqd
+	basis = motion.npc.global_transform.basis
