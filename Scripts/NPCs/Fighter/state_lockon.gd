@@ -62,7 +62,6 @@ func Physics_Update(delta:float) -> void:
 	if dist_sqd < too_close_sqd:
 		#print('transitioning from lockon to flee')
 		Transitioned.emit(self,"flee")
-	var z_angle:float = Global.get_angle_to_target(my_pos, target_pos, -basis.z)
 	# If target exited the envelope, seek.
 	if envelope < z_angle:
 		#print('transitioning from lockon to seek')

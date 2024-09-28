@@ -31,6 +31,14 @@ var basis
 var x_angle:float
 var y_angle:float
 var z_angle:float
+# Booleans for target position relative to npc
+var target_is_ahead:bool
+var target_is_above:bool
+var target_is_right:bool
+# Magnitude in indicated direction, in radians
+var amt_ahead_behind:float # zero is max ahead. pi (180) is max behind
+var amt_above_below:float # zero is inbetween. pi/2 (90) is max above or below
+var amt_right_left:float # zero is inbetween. pi/2 (90) is max right or left
 
 func _on_ready() -> void:
 	random.randomize()
@@ -78,23 +86,11 @@ func update_data() -> void:
 	y_angle = Global.get_angle_to_target(my_pos, target_pos, basis.y)
 	z_angle = Global.get_angle_to_target(my_pos, target_pos, -basis.z)
 	x_angle = Global.get_angle_to_target(my_pos, target_pos, basis.x)
-	if $"../../DebugLabel".visible:
-		var temp_str:String = "\ntarget:\n"
-		if abs(y_angle) < PI/2:
-			temp_str += "above"
-		else:
-			temp_str += "below"
-		temp_str += " %0.2f\n" % rad_to_deg(y_angle)
-		if abs(x_angle) < PI/2:
-			temp_str += "right"
-		else:
-			temp_str += "left"
-		temp_str += " %0.2f\n" % rad_to_deg(x_angle)
-		if abs(z_angle) < PI/2:
-			temp_str += "ahead"
-		else:
-			temp_str += "behind"
-		temp_str += " %0.2f\n" % rad_to_deg(z_angle)
-		$"../../DebugLabel".text = temp_str
-		print(temp_str)
-	
+	# Simpler angles to target
+	target_is_ahead = abs(z_angle) < PI/2
+	target_is_above = abs(y_angle) < PI/2
+	target_is_right = abs(x_angle) < PI/2
+	# Get magnitude in the direction in radians
+	amt_ahead_behind = z_angle # 0 is dead ahead. pi is directly behind
+	amt_above_below = abs(PI/2 - abs(y_angle)) # pi/2 is directly above or below. 0 is inbetween
+	amt_right_left = abs(PI/2 - abs(x_angle)) # pi/2 is directly right or left. 0 is inbetween
