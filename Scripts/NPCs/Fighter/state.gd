@@ -27,7 +27,10 @@ var my_pos:Vector3
 var target_pos:Vector3
 var dist_sqd:float
 var basis
-
+# Angles to target in radians
+var x_angle:float
+var y_angle:float
+var z_angle:float
 
 func _on_ready() -> void:
 	random.randomize()
@@ -71,3 +74,27 @@ func update_data() -> void:
 	target_pos = motion.npc.target_pos
 	dist_sqd = motion.npc.distance_to_target_sqd
 	basis = motion.npc.global_transform.basis
+	# Calculate angles to target in radians
+	y_angle = Global.get_angle_to_target(my_pos, target_pos, basis.y)
+	z_angle = Global.get_angle_to_target(my_pos, target_pos, -basis.z)
+	x_angle = Global.get_angle_to_target(my_pos, target_pos, basis.x)
+	if $"../../DebugLabel".visible:
+		var temp_str:String = "\ntarget:\n"
+		if abs(y_angle) < PI/2:
+			temp_str += "above"
+		else:
+			temp_str += "below"
+		temp_str += " %0.2f\n" % rad_to_deg(y_angle)
+		if abs(x_angle) < PI/2:
+			temp_str += "right"
+		else:
+			temp_str += "left"
+		temp_str += " %0.2f\n" % rad_to_deg(x_angle)
+		if abs(z_angle) < PI/2:
+			temp_str += "ahead"
+		else:
+			temp_str += "behind"
+		temp_str += " %0.2f\n" % rad_to_deg(z_angle)
+		$"../../DebugLabel".text = temp_str
+		print(temp_str)
+	

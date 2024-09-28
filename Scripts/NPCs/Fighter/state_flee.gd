@@ -24,26 +24,16 @@ func Physics_Update(delta:float) -> void:
 	# Update npc and target info
 	update_data()
 	
-	# Get the y angle to target
-	var y_angle:float = Global.get_angle_to_target(my_pos, target_pos, basis.y)
-	# Get the z angle to target
-	var z_angle:float = Global.get_angle_to_target(my_pos, target_pos, -basis.z)
 	# Determine pitch
 	# y_angle of zero is directly above.
 	# Angle between -90 and 90 means the target
 	# is somewhere above and we should pitch down.
 	# Otherwise pitch up. Opposite of seek.
 	# Pitch away from target
-	print('y_angle in flee')
-	print(rad_to_deg(y_angle))
 	if y_angle < ninety_degrees:
 		motion.goal_pitch = abs(PI - z_angle)
 	else:
 		motion.goal_pitch = -abs(PI - z_angle)
-	
-	if $"../../DebugLabel".visible:
-		$"../../DebugLabel".text = "Flee: %0.2f" % rad_to_deg(motion.goal_pitch)
-		print("Flee: %0.2f" % rad_to_deg(motion.goal_pitch))
 	
 	# Check for state exit
 	if dist_sqd > distance_limit_sqd:

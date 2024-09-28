@@ -45,10 +45,10 @@ func Enter() -> void:
 func Physics_Update(delta:float) -> void:
 	# Update npc and target info
 	update_data()
-	# Get the x angle to target
-	# This is the side to side. Ideally yaw would handle this
+	
+	# x_angle is the side to side. Ideally yaw would handle this
 	# but I think it looks better if we pitch and roll.
-	var x_angle:float = Global.get_angle_to_target(my_pos, target_pos, basis.x)
+	
 	# Determine roll
 	# x_angle of zero is directly to our right.
 	# Angle between -90 and 90 means the target
@@ -60,21 +60,17 @@ func Physics_Update(delta:float) -> void:
 	motion.goal_roll = sin(x_angle-ninety_degrees) # but this also maps 0 to pi (180) onto -1 to 1 and I think it has a better curve
 	#Don't begin the pitch until most of the roll is completed.
 	if abs(motion.goal_roll) < pitch_begins:
-		# Get the y angle to target
-		var y_angle:float = Global.get_angle_to_target(my_pos, target_pos, basis.y)
 		# Determine pitch
 		# y_angle of zero is directly above.
 		# Angle between -90 and 90 means the target
 		# is somewhere above and we should pitch up.
 		# Otherwise pitch down.
-		print('y_angle in seek (degrees)')
-		print(round(rad_to_deg(y_angle)))
+		#print('y_angle in seek (degrees)')
+		#print(round(rad_to_deg(y_angle)))
 		if y_angle < 90:
 			motion.goal_pitch = 1.0
 		else:
 			motion.goal_pitch = -1.0
-	# Get the z angle to target
-	var z_angle:float = Global.get_angle_to_target(my_pos, target_pos, -basis.z)
 	# If the angle is under threshold, start reducing the pitch.
 	if z_angle < pitch_threshold_angle:
 		motion.goal_pitch *= abs(z_angle)/pitch_threshold_angle
