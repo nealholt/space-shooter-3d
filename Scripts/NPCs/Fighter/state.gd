@@ -94,3 +94,23 @@ func update_data() -> void:
 	amt_ahead_behind = z_angle # 0 is dead ahead. pi is directly behind
 	amt_above_below = abs(PI/2 - abs(y_angle)) # pi/2 is directly above or below. 0 is inbetween
 	amt_right_left = abs(PI/2 - abs(x_angle)) # pi/2 is directly right or left. 0 is inbetween
+	# Display debugging info if the label is visible
+	if $"../../DebugLabel".visible:
+		var temp_str:String = "\ntarget:\n"
+		if target_is_above:
+			temp_str += "above %0.2f degrees %0.2f\n" % [(90-rad_to_deg(y_angle)),rad_to_deg(amt_above_below)]
+		else:
+			temp_str += "below %0.2f degrees %0.2f\n" % [(rad_to_deg(y_angle)-90),rad_to_deg(amt_above_below)]
+		if target_is_right:
+			temp_str += "right %0.2f degrees %0.2f\n" % [(90-rad_to_deg(x_angle)),rad_to_deg(amt_right_left)]
+		else:
+			temp_str += "left %0.2f degrees %0.2f\n" % [(rad_to_deg(x_angle)-90),rad_to_deg(amt_right_left)]
+		if target_is_ahead:
+			temp_str += "ahead"
+		else:
+			temp_str += "behind"
+		temp_str += " %0.2f\n" % rad_to_deg(z_angle)
+		temp_str += "At distance %d" % round(sqrt(dist_sqd))
+		$"../../DebugLabel".text = temp_str
+		print(temp_str)
+	

@@ -79,49 +79,7 @@ func _physics_process(delta):
 	global_position.distance_squared_to(targeted.global_position) > missile_lock.missile_range_sqd \
 	or !camera.is_position_in_frustum(targeted.global_position)):
 		missile_lock.stop_seeking()
-	
-	#TODO LEFT OFF HERE
-	todo_testing()
 
-
-
-#TODO LEFT OFF HERE
-func todo_testing() -> void:
-	if !targeted:
-		return
-	var my_pos = global_position
-	var target_pos = targeted.global_position
-	var dist_sqd = my_pos.distance_to(targeted.global_position)
-	var my_basis = global_transform.basis
-	# Calculate angles to target in radians
-	var y_angle = Global.get_angle_to_target(my_pos, target_pos, my_basis.y)
-	var z_angle = Global.get_angle_to_target(my_pos, target_pos, -my_basis.z)
-	var x_angle = Global.get_angle_to_target(my_pos, target_pos, my_basis.x)
-	# Simpler angles to target
-	var target_is_ahead = abs(z_angle) < PI/2
-	var target_is_above = abs(y_angle) < PI/2
-	var target_is_right = abs(x_angle) < PI/2
-	
-	# Get magnitude in the direction in radians
-	var amt_above_below = abs(PI/2 - abs(y_angle))
-	var amt_right_left = abs(PI/2 - abs(x_angle))
-	
-	var temp_str:String = "\ntarget:\n"
-	if target_is_above:
-		temp_str += "above %0.2f degrees %0.2f\n" % [(90-rad_to_deg(y_angle)),rad_to_deg(amt_above_below)]
-	else:
-		temp_str += "below %0.2f degrees %0.2f\n" % [(rad_to_deg(y_angle)-90),rad_to_deg(amt_above_below)]
-	if target_is_right:
-		temp_str += "right %0.2f degrees %0.2f\n" % [(90-rad_to_deg(x_angle)),rad_to_deg(amt_right_left)]
-	else:
-		temp_str += "left %0.2f degrees %0.2f\n" % [(rad_to_deg(x_angle)-90),rad_to_deg(amt_right_left)]
-	if target_is_ahead:
-		temp_str += "ahead"
-	else:
-		temp_str += "behind"
-	temp_str += " %0.2f\n" % rad_to_deg(z_angle)
-	temp_str += "At distance %d" % round(sqrt(dist_sqd))
-	print(temp_str)
 
 
 # quick_launch is true if the player released the missile
