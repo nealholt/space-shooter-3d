@@ -46,7 +46,14 @@ var acceleration : Vector3
 # it's already evasive.
 var can_interrupt_state:bool = true
 
+# Object containing data to orient on target.
+# Is updated by the npc. Is accessed by the
+# states.
+var orientation_data:TargetOrientationData
+
+
 func reset() -> void:
+	orientation_data = TargetOrientationData.new()
 	goal_speed = 0.0
 	goal_pitch = 0.0
 	goal_yaw = 0.0

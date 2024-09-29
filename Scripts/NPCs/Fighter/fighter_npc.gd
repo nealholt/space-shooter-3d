@@ -5,7 +5,7 @@ signal destroyed
 
 @export var deathExplosion : PackedScene
 
-@onready var target_selector: Node = $TargetSelector
+@onready var target_selector:TargetSelector = $TargetSelector
 
 # Modifiers for movement amount
 @export var speed: float = 40.0*60.0 # 40.0 meters per second
@@ -40,20 +40,22 @@ var current_speed: float = 0.0
 @export var pop_player: PackedScene
 @onready var profile: MovementProfile = $StateMachine/MovementProfile
 
-# Keep track of target position and distance to target
-# and update these every frame
-var target_pos:Vector3
-var distance_to_target_sqd:float
+var team_affiliation:String
+
+
+func _ready() -> void:
+	target_selector.setup(self, team_affiliation)
 
 
 func _physics_process(delta):
-	# Update position (ahead of the target if its moving)
-	# and distance to target. This will automatically
-	# update select a new target if current target has
-	# been destroyed.
-	target_pos = target_selector.get_lead($Gun.bullet_speed)
-	distance_to_target_sqd = target_selector.get_distance_to_target()
-	
+	# Get target from the target selector
+	var target = target_selector.get_target()
+	# Update profile.orientation_data
+	if target:
+		profile.orientation_data.update_data(global_position,
+			$Gun.bullet_speed, target, global_transform.basis)
+	# Update state here. Don't want it to be outdated.
+	$StateMachine.Physics_Update(delta)
 	# Move
 	# snap to given transform or lerp to desired turning amount
 	if profile.new_transform:
@@ -95,8 +97,8 @@ func _physics_process(delta):
 	#if collision:
 	#	velocity = velocity.bounce(collision.get_normal())
 	
-	# Shoot at player if within distance and angle
-	if distance_to_target_sqd < $Gun.range_sqd && Global.get_angle_to_target(self.global_position,target_pos, -global_transform.basis.z) < shooting_angle:
+	# Shoot at target if within distance and angle
+	if profile.orientation_data.dist_sqd < $Gun.range_sqd && Global.get_angle_to_target(global_position,target.global_position, -global_transform.basis.z) < shooting_angle:
 		$Gun.shoot(self)
 
 

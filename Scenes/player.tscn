@@ -84,6 +84,7 @@ shape = SubResource("SphereShape3D_7tg00")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.5)
 bullet = ExtResource("3_crlbv")
 damage = 50.0
+bullet_speed = 200.0
 fire_rate = 0.3
 collision_exception1 = NodePath("../HitBoxComponent")
 collision_exception2 = NodePath("../Shield/HitBoxComponent")

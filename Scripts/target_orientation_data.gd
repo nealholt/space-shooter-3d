@@ -13,7 +13,7 @@ var intercept:Vector3
 # Squared distance between the two positions
 var dist_sqd:float
 # Matrix of basis vectors of the thing orienting toward the target
-var basis
+var basis:Basis
 # Angles to target in radians
 var x_angle:float
 var y_angle:float
@@ -31,13 +31,14 @@ var amt_right_left:float # zero is inbetween. pi/2 (90) is max right or left
 # speed is bullet speed even if calculating a ship's intercept
 # (unless the ship is intercepting for some reason other than
 # shooting the target)
-func update_data(pos:Vector3, speed:float,
-				other_pos:Vector3, velocity:Vector3,
-				global_transform_basis:Vector3) -> void:
+func update_data(pos:Vector3, speed:float, target,
+				global_transform_basis:Basis) -> void:
 	my_pos = pos
 	my_speed = speed
-	target_pos = other_pos
-	target_velocity = velocity
+	target_pos = target.global_position
+	target_velocity = Vector3.ZERO
+	if "velocity" in target:
+		target_velocity = target.velocity
 	basis = global_transform_basis
 	# Calculate intercept
 	var targ_vel : Vector3

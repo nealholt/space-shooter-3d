@@ -1,4 +1,5 @@
 extends Node3D
+class_name Turret
 
 # movement speeds and constraints in degrees
 @export var elevation_speed_deg: float = 5
@@ -28,21 +29,30 @@ var active: bool = true
 @export var angle_to_shoot_deg : float = 5
 var angle_to_shoot : float = deg_to_rad(angle_to_shoot_deg)
 
+var team_affiliation:String
+var orientation_data:TargetOrientationData
+
 
 func _ready() -> void:
 	# test if got head and body
 	if head == null or body == null:
 		active = false
+	target_selector.setup(self, team_affiliation)
+	orientation_data = TargetOrientationData.new()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	# Update the turret_model's position to target
-	target_pos = target_selector.get_lead(gun.bullet_speed)
+	# Get target from the target selector
+	var target = target_selector.get_target()
+	# Update profile.orientation_data
+	if target:
+		orientation_data.update_data(global_position,
+			gun.bullet_speed, target, global_transform.basis)
 	
 	# if active and with target, then move the turret
-	if active and target_pos != Vector3.ZERO:
-		$turret_motion_component.rotate_and_elevate(body, head, delta, target_pos)
+	if active and orientation_data.target_pos != Vector3.ZERO:
+		$turret_motion_component.rotate_and_elevate(body, head, delta, orientation_data.target_pos)
 	
 	# Shoot if within angle limit
 	#print()
@@ -53,7 +63,7 @@ func _physics_process(delta: float) -> void:
 	#print(angle_to_shoot)
 	#print(round(rad_to_deg(Global.get_angle_to_target(body.global_position,target_pos, body.global_transform.basis.z))))
 	#print(round(rad_to_deg(body.global_basis.z.angle_to(target_pos))))
-	if Global.get_angle_to_target(head.global_position,target_pos, head.global_transform.basis.z) < angle_to_shoot:
+	if Global.get_angle_to_target(head.global_position, orientation_data.target_pos, head.global_transform.basis.z) < angle_to_shoot:
 		# You need to pass in some "shooter" with the right collision
 		# masks and layers set. The hitbox was the best option.
 		gun.shoot($HitBoxComponent)

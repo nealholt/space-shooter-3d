@@ -21,25 +21,23 @@ func Enter() -> void:
 # This function should be called on each
 # physics update frame.
 func Physics_Update(delta:float) -> void:
-	# Update npc and target info
-	update_data()
-	
-	# Determine pitch
-	# y_angle of zero is directly above.
-	# Angle between -90 and 90 means the target
-	# is somewhere above and we should pitch down.
-	# Otherwise pitch up. Opposite of seek.
-	# Pitch away from target
-	if y_angle < ninety_degrees:
-		motion.goal_pitch = abs(PI - z_angle)
-	else:
-		motion.goal_pitch = -abs(PI - z_angle)
-	
-	# Check for state exit
-	if dist_sqd > distance_limit_sqd:
-		#print('transitioning from flee to seek')
-		Transitioned.emit(self,"seek")
-	elapsed_time += delta
-	if elapsed_time > time_limit:
-		#print('ERROR should not occur in state_flee')
-		choose_random_evasion()
+	pass #TODO
+	## Determine pitch
+	## y_angle of zero is directly above.
+	## Angle between -90 and 90 means the target
+	## is somewhere above and we should pitch down.
+	## Otherwise pitch up. Opposite of seek.
+	## Pitch away from target
+	#if y_angle < ninety_degrees:
+		#motion.goal_pitch = abs(PI - z_angle)
+	#else:
+		#motion.goal_pitch = -abs(PI - z_angle)
+	#
+	## Check for state exit
+	#if dist_sqd > distance_limit_sqd:
+		##print('transitioning from flee to seek')
+		#Transitioned.emit(self,"seek")
+	#elapsed_time += delta
+	#if elapsed_time > time_limit:
+		##print('ERROR should not occur in state_flee')
+		#choose_random_evasion()

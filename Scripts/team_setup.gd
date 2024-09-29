@@ -37,6 +37,10 @@ func _ready() -> void:
 		var needs_team_properties:bool = child.is_in_group("team property")
 		var did_set:bool = true
 		
+		# Tell fighter NPCs and turrets what team they're on
+		if "team_affiliation" in child:
+			child.team_affiliation = team
+		
 		# Currently only FighterNPC and TurretComplete are
 		# in group "team member".
 		# You can't use child.name because "FighterNPC" is

@@ -48,15 +48,11 @@ func get_target_pos(body:Node3D) -> Vector3:
 	# Calculate and return target intercept
 	# Make sure target has a velocity attribute, otherwise
 	# use target position.
-	var targ_vel : Vector3
 	if "velocity" in target:
-		targ_vel = target.velocity
+		# Lead the target by getting the position where we
+		# can intercept it from the current position at speed.
+		return Global.get_intercept(
+			body.global_position, body.speed,
+			target.global_position, target.velocity)
 	else:
 		return target.global_position
-	# Lead the target by getting the position where we
-	# can intercept it from the current position at speed.
-	return Global.get_intercept(
-			body.global_position,
-			body.speed,
-			target.global_position,
-			targ_vel)

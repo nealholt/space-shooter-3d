@@ -7,13 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://dto664xfw5qbf" path="res://Scenes/MovementControllers/physics_seek_controller.tscn" id="5_m3n6r"]
 
 [node name="ProjectileRay" node_paths=PackedStringArray("controller") instance=ExtResource("1_0lyqn")]
-speed = 200.0
 controller = NodePath("PhysicsSeekController")
-time_out = 4.0
 sparks = ExtResource("2_qofc8")
 shieldSparks = ExtResource("3_h6e4k")
 
 [node name="GrayTorpedo" parent="." index="2" instance=ExtResource("4_4eh70")]
 
 [node name="PhysicsSeekController" parent="." index="3" instance=ExtResource("5_m3n6r")]
-steer_force = 150.0
+steer_force = 200.0
