@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=31 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state.gd" id="9_qoupp"]
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_loop.gd" id="10_v8r3o"]
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_seek.gd" id="12_08g68"]
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_lockon.gd" id="13_xpko8"]
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_flee.gd" id="14_ok8jx"]
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_corkscrew.gd" id="15_bumm3"]
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_wave.gd" id="16_er3u2"]
@@ -92,9 +91,6 @@ script = ExtResource("10_v8r3o")
 
 [node name="Seek" type="Node" parent="StateMachine"]
 script = ExtResource("12_08g68")
-
-[node name="LockOn" type="Node" parent="StateMachine"]
-script = ExtResource("13_xpko8")
 
 [node name="Flee" type="Node" parent="StateMachine"]
 script = ExtResource("14_ok8jx")

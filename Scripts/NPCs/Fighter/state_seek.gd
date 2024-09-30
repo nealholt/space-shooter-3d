@@ -46,11 +46,6 @@ func Physics_Update(delta:float) -> void:
 	# Pitch toward target.
 	pitch_target_ahead()
 	
-	## Check for state exit. Transition to lockon
-	## when the angle is low enough.
-	#if motion.orientation_data.amt_ahead_behind < close_enough_angle:
-		##print('transitioning from seek to lockon')
-		#Transitioned.emit(self,"lockon")
 	# Transition to flee if too close
 	if motion.orientation_data.dist_sqd < too_close_sqd:
 		Transitioned.emit(self,"flee")
