@@ -8,11 +8,6 @@ class_name StateMachine
 # Source:
 # https://www.youtube.com/watch?v=ow_Lum-Agbs&t=300s
 
-# If any npc moves beyond square root of distance_limit_sqd
-# then they should be forced into the goto state
-# with destination set as origin.
-var distance_limit_sqd := 100000.0**2 # 100,000^2
-
 # Reference to an intermediate script through which
 # states and the npc moved by the state can communicate.
 @export var movement_profile : MovementProfile
@@ -38,13 +33,6 @@ func Physics_Update(delta: float) -> void:
 		current_state.Physics_Update(delta)
 
 func on_child_transition(state, new_state_name):
-	# Check if npc is beyond distance limit from origin
-	if movement_profile.npc.global_position.distance_squared_to(Vector3.ZERO) > distance_limit_sqd:
-		# Force NPC to goto origin
-		new_state_name = "goto"
-		$GoTo.destination = Vector3.ZERO
-		$GoTo.too_close_sqd = 1000.0**2
-	
 	if state != current_state:
 		#print('in state machine state != current_state')
 		return

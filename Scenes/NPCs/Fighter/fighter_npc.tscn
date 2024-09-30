@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=30 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
@@ -17,7 +17,6 @@
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_corkscrew.gd" id="15_bumm3"]
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_wave.gd" id="16_er3u2"]
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_jink.gd" id="17_3ou27"]
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_goto.gd" id="18_j6vej"]
 [ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/fighter_chassis_ring.tscn" id="19_x2ba7"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="20_a8xhu"]
 [ext_resource type="Script" path="res://Scripts/target_selector.gd" id="22_4r1yh"]
@@ -103,9 +102,6 @@ script = ExtResource("16_er3u2")
 
 [node name="Jink" type="Node" parent="StateMachine"]
 script = ExtResource("17_3ou27")
-
-[node name="GoTo" type="Node" parent="StateMachine"]
-script = ExtResource("18_j6vej")
 
 [node name="DebugLabel" type="Label3D" parent="."]
 visible = false
