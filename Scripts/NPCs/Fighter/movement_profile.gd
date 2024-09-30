@@ -28,16 +28,7 @@ var goal_pitch:float
 var goal_yaw:float
 var goal_roll:float
 
-# The NPC will adopt this transform unless it is null
-# The type is Transform3D but you can't declare that
-# then set it to null as I want to do in the reset
-# function.
-var new_transform
-
-# Hopefully this variable will replace new_transform
-# so that enemies turn more gracefully toward their
-# target rather than snapping straight to a new
-# transform.
+# Add this to npc velocity
 var acceleration : Vector3
 
 # Use this to enable the NPC to indicate
@@ -61,6 +52,5 @@ func reset() -> void:
 	goal_pitch = 0.0
 	goal_yaw = 0.0
 	goal_roll = 0.0
-	new_transform = null
 	can_interrupt_state = true
 	acceleration = Vector3.ZERO

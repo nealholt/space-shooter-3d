@@ -57,36 +57,18 @@ func _physics_process(delta):
 	# Update state here. Don't want it to be outdated.
 	$StateMachine.Physics_Update(delta)
 	# Move
-	# snap to given transform or lerp to desired turning amount
-	if profile.new_transform:
-		transform = profile.new_transform
-	# Testing new way
-	#if profile.acceleration != Vector3.ZERO:
-		## You should use pitch, yaw, or roll to modify the
-		## acceleration so I chose pitch arbitrarily.
-		## This takes the place of steer_force used in 
-		## projectile.gd
-		##print()
-		##print(velocity)
-		##print(profile.acceleration)
-		##print($StateMachine.current_state)
-		#velocity += profile.acceleration * pitch_amt * delta
-		#current_speed = lerp(current_speed, profile.goal_speed * speed, acceleration*delta)
-		## Need to have ship looking at the new direction
-		#look_at(global_position + velocity)
-	else:
-		# Lerp toward desired settings
-		pitch_str = lerp(pitch_str, profile.goal_pitch * pitch_amt, lerp_str*delta)
-		roll_str = lerp(roll_str, profile.goal_roll * roll_amt, lerp_str*delta)
-		yaw_str = lerp(yaw_str, profile.goal_yaw * yaw_amt, lerp_str*delta)
-		current_speed = lerp(current_speed, profile.goal_speed * speed, acceleration*delta)
-		# Pitch
-		transform.basis = transform.basis.rotated(transform.basis.x, pitch_str * delta)
-		# Roll
-		transform.basis = transform.basis.rotated(transform.basis.z, roll_str * delta)
-		# Yaw
-		transform.basis = transform.basis.rotated(transform.basis.y, yaw_str * delta)
-		# Update velocity
+	# Lerp toward desired settings
+	pitch_str = lerp(pitch_str, profile.goal_pitch * pitch_amt, lerp_str*delta)
+	roll_str = lerp(roll_str, profile.goal_roll * roll_amt, lerp_str*delta)
+	yaw_str = lerp(yaw_str, profile.goal_yaw * yaw_amt, lerp_str*delta)
+	current_speed = lerp(current_speed, profile.goal_speed * speed, acceleration*delta)
+	# Pitch
+	transform.basis = transform.basis.rotated(transform.basis.x, pitch_str * delta)
+	# Roll
+	transform.basis = transform.basis.rotated(transform.basis.z, roll_str * delta)
+	# Yaw
+	transform.basis = transform.basis.rotated(transform.basis.y, yaw_str * delta)
+	# Update velocity
 	velocity = -transform.basis.z * current_speed * delta
 	# Move straight ahead
 	move_and_slide()
@@ -100,16 +82,16 @@ func _physics_process(delta):
 	# Shoot at target if within distance and angle
 	if profile.orientation_data.dist_sqd < $Gun.range_sqd && Global.get_angle_to_target(global_position,target.global_position, -global_transform.basis.z) < shooting_angle:
 		$Gun.shoot(self)
-	else:
-		print('\tnot firing because:')
-		if profile.orientation_data.dist_sqd >= $Gun.range_sqd:
-			print('out of range')
-			print(profile.orientation_data.dist_sqd)
-			print($Gun.range_sqd)
-		if Global.get_angle_to_target(global_position,target.global_position, -global_transform.basis.z) >= shooting_angle:
-			print('angle too wide')
-			print(Global.get_angle_to_target(global_position,target.global_position, -global_transform.basis.z))
-			print(shooting_angle)
+	#else:
+		#print('\tnot firing because:')
+		#if profile.orientation_data.dist_sqd >= $Gun.range_sqd:
+			#print('out of range')
+			#print(profile.orientation_data.dist_sqd)
+			#print($Gun.range_sqd)
+		#if Global.get_angle_to_target(global_position,target.global_position, -global_transform.basis.z) >= shooting_angle:
+			#print('angle too wide')
+			#print(Global.get_angle_to_target(global_position,target.global_position, -global_transform.basis.z))
+			#print(shooting_angle)
 
 
 func _on_health_component_health_lost() -> void:

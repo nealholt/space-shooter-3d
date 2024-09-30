@@ -9,7 +9,7 @@ signal Transitioned
 
 # Reference to an intermediate script through which
 # states and the npc moved by the state can communicate.
-var motion : MovementProfile
+@onready var motion : MovementProfile
 
 # Random number generator
 var random := RandomNumberGenerator.new()
