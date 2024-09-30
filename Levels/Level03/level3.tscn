@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bobitrhkbf3c3"]
+[gd_scene load_steps=11 format=3 uid="uid://bobitrhkbf3c3"]
 
 [ext_resource type="Script" path="res://Levels/Level03/level3.gd" id="1_6hmdn"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="1_omxdw"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/NPCs/Fighter/fighter_npc.tscn" id="2_6b8c8"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_i6ru0"]
+[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="4_w1ktu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_guvq5"]
 sky_top_color = Color(0.627451, 0.360784, 0.509804, 1)
@@ -19,6 +20,17 @@ background_mode = 2
 sky = SubResource("Sky_434m5")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v5t0g"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_w1ktu")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_7nlpc"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_v5t0g")
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_6hmdn")
@@ -37,8 +49,17 @@ script = ExtResource("2_i6ru0")
 transform = Transform3D(0.0654031, 4.07589e-08, -0.997859, 4.37114e-08, 1, 4.37114e-08, 0.997859, -4.64767e-08, 0.0654031, -8.37419, 0, -25.5714)
 speed = 1000.0
 
+[node name="DebugLabel" parent="RedTeam/FighterNPC2" index="6"]
+visible = true
+
+[node name="FresnelAura" parent="RedTeam/FighterNPC2/Shield" index="0"]
+mesh = SubResource("SphereMesh_7nlpc")
+
 [node name="BlueTeam" type="Node3D" parent="."]
 script = ExtResource("2_i6ru0")
 team = "blue team"
 
 [node name="Player" parent="BlueTeam" instance=ExtResource("1_omxdw")]
+
+[editable path="RedTeam/FighterNPC2"]
+[editable path="RedTeam/FighterNPC2/Shield"]

@@ -19,13 +19,12 @@ var max_speed := 1.0
 # executed at the start of the state,
 # any set up that needs performed.
 func Enter() -> void:
-	motion.reset()
+	super.Enter()
 	# Set  speed
 	motion.goal_speed = random.randf_range(min_speed,max_speed)
 	# Disable interrupt
 	motion.can_interrupt_state = false
 	# Time for this state to run
-	elapsed_time = 0.0
 	time_limit = random.randf_range(min_jink_duration,max_jink_duration)
 	# Motion for this state
 	if random.randi()%2 == 0:
@@ -34,6 +33,7 @@ func Enter() -> void:
 		motion.goal_roll = -1.0
 	# Select maximum number of waves
 	jink_limit = random.randi()%(jink_limit_max-jink_limit_min) + jink_limit_min
+
 
 # This function should be called on each
 # physics update frame.

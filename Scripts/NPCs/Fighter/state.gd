@@ -48,6 +48,7 @@ func _on_ready() -> void:
 # any set up that needs performed.
 func Enter() -> void:
 	motion.reset()
+	elapsed_time = 0.0
 
 # This function should contain code to be
 # executed at the end of the state,
@@ -76,3 +77,42 @@ func choose_random_evasion() -> void:
 			Transitioned.emit(self, 'wave')
 		else:
 			Transitioned.emit(self, 'corkscrew')
+
+
+# Roll to get target above us.
+func roll_target_above() -> void:
+	if motion.orientation_data.target_is_right:
+		motion.goal_roll = -1.0
+	else:
+		motion.goal_roll = 1.0
+	# If we are within 3 degrees of perfect,
+	# then reduce the roll so as to not oscillate.
+	# I sure would love a better way of doing this.
+	if rad_to_deg(motion.orientation_data.amt_right_left) < 3.0:
+		motion.goal_pitch = motion.goal_roll/10.0
+
+
+# Pitch to get target ahead
+func pitch_target_ahead() -> void:
+	if motion.orientation_data.target_is_above:
+		motion.goal_pitch = 1.0
+	else:
+		motion.goal_pitch = -1.0
+	# If we are within 3 degrees of perfect,
+	# then reduce the pitch so as to not oscillate.
+	# I sure would love a better way of doing this.
+	if rad_to_deg(motion.orientation_data.amt_above_below) < 3.0:
+		motion.goal_pitch = motion.goal_pitch/10.0
+
+
+# Pitch to get target behind
+func pitch_target_behind() -> void:
+	if motion.orientation_data.target_is_above:
+		motion.goal_pitch = -1.0
+	else:
+		motion.goal_pitch = 1.0
+	# If we are within 3 degrees of perfect,
+	# then reduce the pitch so as to not oscillate.
+	# I sure would love a better way of doing this.
+	if rad_to_deg(motion.orientation_data.amt_above_below) < 3.0:
+		motion.goal_pitch = motion.goal_pitch/10.0

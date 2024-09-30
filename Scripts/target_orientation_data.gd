@@ -26,6 +26,10 @@ var target_is_right:bool
 var amt_ahead_behind:float # zero is max ahead. pi (180) is max behind
 var amt_above_below:float # zero is inbetween. pi/2 (90) is max above or below
 var amt_right_left:float # zero is inbetween. pi/2 (90) is max right or left
+# Percent in indicated direction
+var percent_behind:float
+var percent_above:float
+var percent_right:float
 
 
 # speed is bullet speed even if calculating a ship's intercept
@@ -41,7 +45,6 @@ func update_data(pos:Vector3, speed:float, target,
 		target_velocity = target.velocity
 	basis = global_transform_basis
 	# Calculate intercept
-	var targ_vel : Vector3
 	if target_velocity == Vector3.ZERO:
 		intercept = target_pos
 	else:
@@ -60,6 +63,10 @@ func update_data(pos:Vector3, speed:float, target,
 	amt_ahead_behind = z_angle # 0 is dead ahead. pi is directly behind
 	amt_above_below = abs(PI/2 - abs(y_angle)) # pi/2 is directly above or below. 0 is inbetween
 	amt_right_left = abs(PI/2 - abs(x_angle)) # pi/2 is directly right or left. 0 is inbetween
+	# Get percents in the indicated directions
+	percent_behind = amt_ahead_behind / PI
+	percent_above = amt_above_below / (PI/2)
+	percent_right = amt_right_left / (PI/2)
 
 
 func get_data_string() -> String:
@@ -79,3 +86,7 @@ func get_data_string() -> String:
 	temp_str += " %0.2f\n" % rad_to_deg(z_angle)
 	temp_str += "At distance %d" % round(sqrt(dist_sqd))
 	return temp_str
+
+
+func print_data() -> void:
+	print(get_data_string())

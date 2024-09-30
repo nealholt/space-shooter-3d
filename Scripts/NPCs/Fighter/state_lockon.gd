@@ -29,7 +29,7 @@ var speed_scaling_sqd := 250.0**2 # Squared to keep consistent with distance
 # executed at the start of the state,
 # any set up that needs performed.
 func Enter() -> void:
-	motion.reset()
+	super.Enter()
 	# Set intermediate speed
 	motion.goal_speed = 0.5
 
@@ -43,25 +43,23 @@ func Physics_Update(delta:float) -> void:
 	var weight : float = clamp(interp_factor * motion.orientation_data.dist_sqd * delta, 0.0,1.0)
 	motion.new_transform = Global.interp_face_target(motion.npc, motion.orientation_data.target_pos, weight)
 	
-	# TODO
+	# New way
+	# This code is duplicated in physics_seek_controller.gd.
+	# Calculate the desired velocity, normalized and then
+	# multiplied by speed.
+	var desired : Vector3 = (motion.orientation_data.target_pos-motion.orientation_data.my_pos).normalized() * motion.orientation_data.my_speed
+	# Return an adjustment to velocity based on the steer force.
+	motion.acceleration = (desired - motion.npc.velocity).normalized()
 	
-	## New way
-	## This code is duplicated in physics_seek_controller.gd.
-	## Calculate the desired velocity, normalized and then
-	## multiplied by speed.
-	#var desired : Vector3 = (target_pos-my_pos).normalized() * motion.npc.speed
-	## Return an adjustment to velocity based on the steer force.
-	#motion.acceleration = (desired - motion.npc.velocity).normalized()
-	#
-	## Slow down a little on approach to target
-	#motion.goal_speed = clamp(dist_sqd/speed_scaling_sqd, speed_min, 1.0)
-	#
-	## Exit this state
-	## If too close, flee away before coming in for another pass.
-	#if dist_sqd < too_close_sqd:
-		##print('transitioning from lockon to flee')
-		#Transitioned.emit(self,"flee")
-	## If target exited the envelope, seek.
-	#if envelope < z_angle:
-		##print('transitioning from lockon to seek')
-		#Transitioned.emit(self,"seek")
+	# Slow down a little on approach to target
+	motion.goal_speed = clamp(motion.orientation_data.dist_sqd/speed_scaling_sqd, speed_min, 1.0)
+	
+	# Exit this state
+	# If too close, flee away before coming in for another pass.
+	if motion.orientation_data.dist_sqd < too_close_sqd:
+		#print('transitioning from lockon to flee')
+		Transitioned.emit(self,"flee")
+	# If target exited the envelope, seek.
+	if envelope < motion.orientation_data.amt_ahead_behind:
+		#print('transitioning from lockon to seek')
+		Transitioned.emit(self,"seek")

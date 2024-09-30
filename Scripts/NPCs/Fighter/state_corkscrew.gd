@@ -1,17 +1,17 @@
 extends State
 # Transition to this state with a random chance when taking fire.
 
+
 # This function should contain code to be
 # executed at the start of the state,
 # any set up that needs performed.
 func Enter() -> void:
-	motion.reset()
+	super.Enter()
 	# Set highest speed
 	motion.goal_speed = 1.0
 	# Disable interrupt
 	motion.can_interrupt_state = false
 	# Time for this state to run
-	elapsed_time = 0.0
 	time_limit = 8.0
 	# Motion for this state
 	if random.randi()%2 == 0:
@@ -22,6 +22,7 @@ func Enter() -> void:
 		motion.goal_roll = 1.0
 	else:
 		motion.goal_roll = -1.0
+
 
 # This function should be called on each
 # physics update frame.

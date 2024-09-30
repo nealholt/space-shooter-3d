@@ -6,6 +6,6 @@ extends State
 # executed at the start of the state,
 # any set up that needs performed.
 func Enter() -> void:
-	motion.reset()
+	super.Enter()
 	motion.goal_pitch = 0.5
 	motion.goal_speed = 0.5

@@ -3,13 +3,15 @@ extends State
 var destination:Vector3 = Vector3.ZERO
 var too_close_sqd := 1000.0**2 # Squared for efficiency
 
+
 # This function should contain code to be
 # executed at the start of the state,
 # any set up that needs performed.
 func Enter() -> void:
-	motion.reset()
+	super.Enter()
 	# Set  speed
 	motion.goal_speed = 1.0
+
 
 # This function should be called on each
 # physics update frame.

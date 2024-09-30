@@ -52,8 +52,11 @@ var can_interrupt_state:bool = true
 var orientation_data:TargetOrientationData
 
 
-func reset() -> void:
+func _ready() -> void:
 	orientation_data = TargetOrientationData.new()
+
+
+func reset() -> void:
 	goal_speed = 0.0
 	goal_pitch = 0.0
 	goal_yaw = 0.0

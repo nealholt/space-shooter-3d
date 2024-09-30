@@ -13,13 +13,12 @@ var maximum_wave_duration := 3.0 # seconds
 # executed at the start of the state,
 # any set up that needs performed.
 func Enter() -> void:
-	motion.reset()
+	super.Enter()
 	# Set highest speed
 	motion.goal_speed = 1.0
 	# Disable interrupt
 	motion.can_interrupt_state = false
 	# Time for this state to run
-	elapsed_time = 0.0
 	time_limit = random.randf_range(minimum_wave_duration,maximum_wave_duration)
 	# Motion for this state
 	if random.randi()%2 == 0:
@@ -28,6 +27,7 @@ func Enter() -> void:
 		motion.goal_pitch = -1.0
 	# Select maximum number of waves
 	wave_limit = random.randi()%(wave_limit_max-wave_limit_min) + wave_limit_min
+
 
 # This function should be called on each
 # physics update frame.
