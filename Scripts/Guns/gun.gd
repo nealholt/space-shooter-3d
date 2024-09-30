@@ -71,7 +71,7 @@ var reload_sound_player: AudioStreamPlayer3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Calculate bullet range
-	range_sqd = bullet_speed*bullet_timeout
+	range_sqd = (bullet_speed*bullet_timeout)*(bullet_speed*bullet_timeout)
 	# create fire audio stream
 	if fire_sound:
 		fire_sound_player = AudioStreamPlayer3D.new()

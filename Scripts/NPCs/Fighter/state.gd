@@ -88,7 +88,7 @@ func roll_target_above() -> void:
 	# If we are within 3 degrees of perfect,
 	# then reduce the roll so as to not oscillate.
 	# I sure would love a better way of doing this.
-	if rad_to_deg(motion.orientation_data.amt_right_left) < 3.0:
+	if rad_to_deg(motion.orientation_data.amt_right_left) < 5.0:
 		motion.goal_pitch = motion.goal_roll/10.0
 
 
@@ -101,7 +101,7 @@ func pitch_target_ahead() -> void:
 	# If we are within 3 degrees of perfect,
 	# then reduce the pitch so as to not oscillate.
 	# I sure would love a better way of doing this.
-	if rad_to_deg(motion.orientation_data.amt_above_below) < 3.0:
+	if rad_to_deg(motion.orientation_data.amt_above_below) < 5.0:
 		motion.goal_pitch = motion.goal_pitch/10.0
 
 
@@ -114,5 +114,5 @@ func pitch_target_behind() -> void:
 	# If we are within 3 degrees of perfect,
 	# then reduce the pitch so as to not oscillate.
 	# I sure would love a better way of doing this.
-	if rad_to_deg(motion.orientation_data.amt_above_below) < 3.0:
+	if rad_to_deg(motion.orientation_data.amt_above_below) < 5.0:
 		motion.goal_pitch = motion.goal_pitch/10.0

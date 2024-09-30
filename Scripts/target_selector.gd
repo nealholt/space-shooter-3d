@@ -1,6 +1,7 @@
 extends Node
 class_name TargetSelector
 
+var my_group:String
 # Group from which targets will be selected
 var target_group:String
 # Who is doing the targeting. Targeter targets the target
@@ -11,7 +12,12 @@ var target:Node3D
 
 func setup(npc:Node3D, team_affiliation:String) -> void:
 	targeter = npc
-	target_group = team_affiliation
+	my_group = team_affiliation
+	if my_group == "red_team":
+		target_group = "blue team"
+	else:
+		target_group = "red team"
+
 
 
 func update_target() -> void:

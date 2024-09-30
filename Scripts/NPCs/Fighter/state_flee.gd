@@ -6,7 +6,7 @@ extends State
 # If max_distance reached, transition to seek.
 # If timeout reached, transition to a random evasion.
 
-const distance_limit_sqd:float = 200.0**2 # meters
+const distance_limit_sqd:float = 150.0**2 # meters
 
 # This function should contain code to be
 # executed at the start of the state,

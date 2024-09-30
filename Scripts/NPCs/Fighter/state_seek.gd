@@ -31,7 +31,7 @@ const pitch_begins:float = 0.90
 func Enter() -> void:
 	super.Enter()
 	# Set intermediate speed
-	motion.goal_speed = 0.5
+	motion.goal_speed = 0.7
 	# Set a timelimit for seeking
 	time_limit = 30.0 # seconds
 

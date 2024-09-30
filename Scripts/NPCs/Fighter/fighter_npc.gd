@@ -100,6 +100,16 @@ func _physics_process(delta):
 	# Shoot at target if within distance and angle
 	if profile.orientation_data.dist_sqd < $Gun.range_sqd && Global.get_angle_to_target(global_position,target.global_position, -global_transform.basis.z) < shooting_angle:
 		$Gun.shoot(self)
+	else:
+		print('\tnot firing because:')
+		if profile.orientation_data.dist_sqd >= $Gun.range_sqd:
+			print('out of range')
+			print(profile.orientation_data.dist_sqd)
+			print($Gun.range_sqd)
+		if Global.get_angle_to_target(global_position,target.global_position, -global_transform.basis.z) >= shooting_angle:
+			print('angle too wide')
+			print(Global.get_angle_to_target(global_position,target.global_position, -global_transform.basis.z))
+			print(shooting_angle)
 
 
 func _on_health_component_health_lost() -> void:
