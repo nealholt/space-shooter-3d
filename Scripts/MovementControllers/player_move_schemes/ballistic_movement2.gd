@@ -1,22 +1,8 @@
+extends CharacterBodyControlParent
 class_name BallisticMovement2
 
 # This is where I put code while I'm trying to figure out
 # the right movement style for the game
-
-#Variables for controller inputs
-var pitch_input: float = 0.0
-var roll_input: float = 0.0
-var yaw_input: float = 0.0
-
-#Initial impulse and friction
-var impulse: float = 0.0
-var friction: float = 1.0
-
-#This is the strength of the lerp.
-# 0.01 is incredibly sluggish and floaty
-# Even 0.1 is quite responsive, but a bit gradual
-# 1.0 is no lerp at all. aka immediate snap to target value.
-var lerp_strength: float =  4.8
 
 var impulse_lerp: float =  0.6
 var friction_lerp: float =  2.4
@@ -57,10 +43,16 @@ var friction_accel: float = 0.5
 #forward motion
 var impulse_accel: float = 120.0
 
+
+func _ready() -> void:
+	impulse = 0.0
+	friction = 1.0
+
+
 # This second iteration of ballistic movement lerps
 # impulse and friction, includes acceleration,
 # and modifies turn rate based on drift or braking
-func move(mover, delta:float) -> void:
+func move_and_turn(mover, delta:float) -> void:
 	var pitch_modifier: float = pitch_std
 	var roll_modifier: float = roll_std
 	var yaw_modifier: float = yaw_std
@@ -109,13 +101,4 @@ func move(mover, delta:float) -> void:
 		input_strength*yaw_modifier,
 		lerp_strength*delta)
 	
-	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.z, roll_input*delta)
-	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.x, pitch_input*delta)
-	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.y, yaw_input*delta)
-	#This next line is important so that floating point errors don't accumulate.
-	mover.transform.basis = mover.transform.basis.orthonormalized()
-	#New velocity is old velocity * friction + impulse in current direction
-	var new_dir = -mover.transform.basis.z * impulse * delta
-	#Apply friction on a per unit time basis
-	mover.velocity = mover.velocity * (1-friction*delta) + new_dir
-	mover.move_and_slide()
+	super.move_and_turn(mover, delta)

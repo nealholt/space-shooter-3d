@@ -30,7 +30,12 @@ var pitch_accel: float = 0.6
 var roll_accel: float = 0.4
 var yaw_accel: float = 0.4
 
-func move(mover, delta:float) -> void:
+
+func _ready() -> void:
+	friction = 0
+
+
+func move_and_turn(mover, delta:float) -> void:
 	var pitch_modifier: float = pitch_std
 	var roll_modifier: float = roll_std
 	var yaw_modifier: float = yaw_std
@@ -67,11 +72,7 @@ func move(mover, delta:float) -> void:
 	#This line links roll and yaw.
 	yaw_input = roll_input*yaw_modifier/roll_modifier
 
-	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.z, roll_input*delta)
-	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.x, pitch_input*delta)
-	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.y, yaw_input*delta)
-	#This next line is important so that floating point errors don't accumulate.
-	mover.transform.basis = mover.transform.basis.orthonormalized()
+	turn(mover, delta)
 
 	#This does work to make drift happen, but it's janky as hell
 	#because the change in direction is instantaneous.

@@ -20,7 +20,6 @@ var ballistic_move1:BallisticMovement1 = BallisticMovement1.new()
 var ballistic_move2:BallisticMovement2 = BallisticMovement2.new()
 var ballistic_move3:BallisticMovement3 = BallisticMovement3.new()
 var flight_move1:FlightMovement1 = FlightMovement1.new()
-var fps_move1:FPSMovement1 = FPSMovement1.new()
 
 
 func _ready():
@@ -30,19 +29,17 @@ func _ready():
 
 func _physics_process(delta):
 	if flight_mode == 0:
-		ballistic_move1.move(self,delta)
+		ballistic_move1.move_and_turn(self,delta)
 	elif flight_mode == 1:
-		ballistic_move2.move(self,delta)
+		ballistic_move2.move_and_turn(self,delta)
 	elif flight_mode == 2:
-		ballistic_move3.move(self,delta)
-	elif flight_mode == 3:
-		flight_move1.move(self,delta)
+		ballistic_move3.move_and_turn(self,delta)
 	else:
-		fps_move1.move(self,delta)
-
+		flight_move1.move_and_turn(self,delta)
+	
 	# x to change flight mode
 	if Input.is_action_just_pressed("x_button"):
-		flight_mode = (flight_mode+1) % 5
+		flight_mode = (flight_mode+1) % 4
 		print('Entering flight mode %s' % flight_mode)
 	
 	# Check for D-Pad input to change pov

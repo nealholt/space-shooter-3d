@@ -21,13 +21,17 @@ var impulse: float = 70.0
 var lerp_strength: float =  4.0
 
 
-func move(mover, delta:float) -> void:
+func turn(mover, delta:float) -> void:
 	# Pitch roll and yaw
 	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.z, roll_input*delta)
 	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.x, pitch_input*delta)
 	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.y, yaw_input*delta)
 	# Prevent floating point errors from accumulating. (Not sure if necessary)
 	mover.transform.basis = mover.transform.basis.orthonormalized()
+
+
+func move_and_turn(mover, delta:float) -> void:
+	turn(mover, delta)
 	# New velocity is old velocity * friction + impulse in current direction
 	var new_dir = -mover.transform.basis.z * impulse * delta
 	# Apply friction on a per unit time basis
