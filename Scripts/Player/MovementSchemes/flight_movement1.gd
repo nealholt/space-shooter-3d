@@ -1,18 +1,9 @@
+extends CharacterBodyControlParent
 class_name FlightMovement1
 
 # This is where I put code while I'm trying to figure out
 # the right movement style for the game
 
-#This is the strength of the lerp.
-# 0.01 is incredibly sluggish and floaty
-# Even 0.1 is quite responsive, but a bit gradual
-# 1.0 is no lerp at all. aka immediate snap to target value.
-var lerp_strength: float =  4.8
-
-#Variables for controller inputs
-var pitch_input: float = 0.0
-var roll_input: float = 0.0
-var yaw_input: float = 0.0
 
 #Strength of movements under standard motion
 var pitch_std: float = 1.2
