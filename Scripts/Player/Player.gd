@@ -11,15 +11,8 @@ extends CharacterBody3D
 # Currently targeted ship or capital ship component
 var targeted:Node3D
 
-# For the following I have been using "ballistic_move3" for a
-# while. It is is the ONLY one with move_and_collide
-# implemented. You WILL need to add that in if you ever
-# switch movement schemes.
-var flight_mode: int = 2
-var ballistic_move1:BallisticMovement1 = BallisticMovement1.new()
-var ballistic_move2:BallisticMovement2 = BallisticMovement2.new()
-var ballistic_move3:BallisticMovement3 = BallisticMovement3.new()
-var flight_move1:FlightMovement1 = FlightMovement1.new()
+# Connect a controller
+@export var controller : CharacterBodyControlParent
 
 
 func _ready():
@@ -28,19 +21,7 @@ func _ready():
 
 
 func _physics_process(delta):
-	if flight_mode == 0:
-		ballistic_move1.move_and_turn(self,delta)
-	elif flight_mode == 1:
-		ballistic_move2.move_and_turn(self,delta)
-	elif flight_mode == 2:
-		ballistic_move3.move_and_turn(self,delta)
-	else:
-		flight_move1.move_and_turn(self,delta)
-	
-	# x to change flight mode
-	if Input.is_action_just_pressed("x_button"):
-		flight_mode = (flight_mode+1) % 4
-		print('Entering flight mode %s' % flight_mode)
+	controller.move_and_turn(self,delta)
 	
 	# Check for D-Pad input to change pov
 	change_pov()

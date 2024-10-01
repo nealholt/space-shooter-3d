@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=44 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_rf46g"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://bxdfmqb6p8cw6" path="res://Scenes/Projectiles/laser_guided_missile.tscn" id="21_uelja"]
 [ext_resource type="PackedScene" uid="uid://ymilutrw63dv" path="res://Scenes/turret_motion_component.tscn" id="23_vcsfn"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="34_80okc"]
+[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="35_gd40f"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7tg00"]
 
@@ -73,9 +74,10 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_j4o42")
 
-[node name="Player" type="CharacterBody3D" groups=["team property"]]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("controller") groups=["team property"]]
 motion_mode = 1
 script = ExtResource("1_rf46g")
+controller = NodePath("BallisticMovementV3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_7tg00")
@@ -319,6 +321,8 @@ transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0"]
 mesh = SubResource("SphereMesh_2lbpm")
+
+[node name="BallisticMovementV3" parent="." instance=ExtResource("35_gd40f")]
 
 [connection signal="area_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_area_entered"]
 [connection signal="body_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_body_entered"]
