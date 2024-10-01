@@ -1,0 +1,46 @@
+[gd_scene load_steps=11 format=3 uid="uid://dpv3fsfu1trkj"]
+
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/npc_fighter_state_controller.gd" id="1_bsujv"]
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/movement_profile.gd" id="2_hkqme"]
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state.gd" id="3_4u817"]
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_loop.gd" id="4_8so7c"]
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_seek.gd" id="5_g0pm5"]
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_flee.gd" id="6_dfhat"]
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_corkscrew.gd" id="7_41md1"]
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_wave.gd" id="8_4aecr"]
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_jink.gd" id="9_m06hc"]
+[ext_resource type="Script" path="res://Scripts/target_selector.gd" id="10_kh3qm"]
+
+[node name="NPCFighterStateMachine" type="Node" node_paths=PackedStringArray("movement_profile", "initial_state") groups=["team property"]]
+script = ExtResource("1_bsujv")
+movement_profile = NodePath("MovementProfile")
+initial_state = NodePath("States/Seek")
+
+[node name="MovementProfile" type="Node" parent="."]
+script = ExtResource("2_hkqme")
+
+[node name="States" type="Node" parent="."]
+
+[node name="Stop" type="Node" parent="States"]
+script = ExtResource("3_4u817")
+
+[node name="Loop" type="Node" parent="States"]
+script = ExtResource("4_8so7c")
+
+[node name="Seek" type="Node" parent="States"]
+script = ExtResource("5_g0pm5")
+
+[node name="Flee" type="Node" parent="States"]
+script = ExtResource("6_dfhat")
+
+[node name="Corkscrew" type="Node" parent="States"]
+script = ExtResource("7_41md1")
+
+[node name="Wave" type="Node" parent="States"]
+script = ExtResource("8_4aecr")
+
+[node name="Jink" type="Node" parent="States"]
+script = ExtResource("9_m06hc")
+
+[node name="TargetSelector" type="Node" parent="." groups=["team property"]]
+script = ExtResource("10_kh3qm")

@@ -77,9 +77,6 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -29, 0, -34)
 [node name="FighterNPC" parent="BlueTeam" instance=ExtResource("3_vdt0h")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -55.1692, 0, -156.585)
 
-[node name="StateMachine" parent="BlueTeam/FighterNPC" index="5" node_paths=PackedStringArray("initial_state")]
-initial_state = NodePath("Stop")
-
 [node name="FresnelAura" parent="BlueTeam/FighterNPC/Shield" index="0"]
 mesh = SubResource("SphereMesh_q31v4")
 

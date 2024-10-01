@@ -57,11 +57,6 @@ func Exit() -> void:
 	motion.reset()
 
 # This function should be called on each
-# update frame.
-func Update(_delta:float) -> void:
-	pass
-
-# This function should be called on each
 # physics update frame.
 func Physics_Update(_delta:float) -> void:
 	pass # Replace with function body.

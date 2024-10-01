@@ -5,98 +5,25 @@ signal destroyed
 
 @export var deathExplosion : PackedScene
 
-@onready var target_selector:TargetSelector = $TargetSelector
-
-# Modifiers for movement amount
-@export var speed: float = 40.0*60.0 # 40.0 meters per second
-@export var pitch_amt: float = 0.8
-@export var roll_amt: float = 0.8
-@export var yaw_amt: float = 0.1
-
-# acceleration is lerp strength for speed
-# for now lerp_str is lerp strength for any turning
-@export var acceleration: float = 10.0
-@export var lerp_str: float = 3.0
-
-# Parameters for attack pass movement
-@export var too_close_sqd: float = 30.0**2
-@export var too_far_sqd: float = 200.0**2
-
-# Within this angle of the target, the enemy
-# will start shooting
-var shooting_angle := deg_to_rad(10.0) # degrees (immediately converted to radians)
-# Within this angle of the target, the enemy
-# will snap to face the target
-var snap_to_angle := deg_to_rad(8.0) # degrees (immediately converted to radians)
-
-# Parameters for lerping the amount of roll, pitch,
-# yaw, and speed.
-var pitch_str: float = 0.0
-var roll_str: float = 0.0
-var yaw_str: float = 0.0
-var current_speed: float = 0.0
-
 # Sound to be played on death. Self-freeing.
 @export var pop_player: PackedScene
-@onready var profile: MovementProfile = $StateMachine/MovementProfile
 
-var team_affiliation:String
-
-
-func _ready() -> void:
-	target_selector.setup(self, team_affiliation)
+@export var controller : CharacterBodyControlParent
 
 
 func _physics_process(delta):
-	# Get target from the target selector
-	var target = target_selector.get_target()
-	# Update profile.orientation_data
-	if target:
-		profile.orientation_data.update_data(global_position,
-			$Gun.bullet_speed, target, global_transform.basis)
-	# Update state here. Don't want it to be outdated.
-	$StateMachine.Physics_Update(delta)
-	# Move
-	# Lerp toward desired settings
-	pitch_str = lerp(pitch_str, profile.goal_pitch * pitch_amt, lerp_str*delta)
-	roll_str = lerp(roll_str, profile.goal_roll * roll_amt, lerp_str*delta)
-	yaw_str = lerp(yaw_str, profile.goal_yaw * yaw_amt, lerp_str*delta)
-	current_speed = lerp(current_speed, profile.goal_speed * speed, acceleration*delta)
-	# Pitch
-	transform.basis = transform.basis.rotated(transform.basis.x, pitch_str * delta)
-	# Roll
-	transform.basis = transform.basis.rotated(transform.basis.z, roll_str * delta)
-	# Yaw
-	transform.basis = transform.basis.rotated(transform.basis.y, yaw_str * delta)
-	# Update velocity
-	velocity = -transform.basis.z * current_speed * delta
-	# Move straight ahead
-	move_and_slide()
-	# Move, collide, and bounce off
-	# Resources used:
-	# https://docs.godotengine.org/en/stable/tutorials/physics/using_character_body_2d.html
-	#var collision :KinematicCollision3D = move_and_collide(velocity * delta) #NEW WAY
-	#if collision:
-	#	velocity = velocity.bounce(collision.get_normal())
-	
-	# Shoot at target if within distance and angle
-	if profile.orientation_data.dist_sqd < $Gun.range_sqd && Global.get_angle_to_target(global_position,target.global_position, -global_transform.basis.z) < shooting_angle:
+	controller.move_and_turn(self, delta)
+	if controller.firing:
 		$Gun.shoot(self)
-	#else:
-		#print('\tnot firing because:')
-		#if profile.orientation_data.dist_sqd >= $Gun.range_sqd:
-			#print('out of range')
-			#print(profile.orientation_data.dist_sqd)
-			#print($Gun.range_sqd)
-		#if Global.get_angle_to_target(global_position,target.global_position, -global_transform.basis.z) >= shooting_angle:
-			#print('angle too wide')
-			#print(Global.get_angle_to_target(global_position,target.global_position, -global_transform.basis.z))
-			#print(shooting_angle)
+
+
+func get_current_gun() -> Gun:
+	return $Gun
 
 
 func _on_health_component_health_lost() -> void:
 	# Force a switch into evasion state
-	$StateMachine.go_evasive()
+	controller.go_evasive()
 	#print('hit on hull')
 	# Trail smoke and sparks when damaged
 	var percent_health = $HealthComponent.get_percent_health()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=21 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
@@ -8,18 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="4_f5xpu"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="5_1xytm"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_ne5o5"]
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_machine.gd" id="7_ubn4s"]
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state.gd" id="9_qoupp"]
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/movement_profile.gd" id="10_5o803"]
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_loop.gd" id="10_v8r3o"]
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_seek.gd" id="12_08g68"]
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_flee.gd" id="14_ok8jx"]
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_corkscrew.gd" id="15_bumm3"]
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_wave.gd" id="16_er3u2"]
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_jink.gd" id="17_3ou27"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="9_0cpbp"]
 [ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/fighter_chassis_ring.tscn" id="19_x2ba7"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="20_a8xhu"]
-[ext_resource type="Script" path="res://Scripts/target_selector.gd" id="22_4r1yh"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="23_fxr37"]
 [ext_resource type="PackedScene" uid="uid://d3erdmulqy1l2" path="res://Assets/Particles/major_damage.tscn" id="24_a0vwa"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="24_ovt4a"]
@@ -42,12 +33,13 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_6dy1g")
 
-[node name="FighterNPC" type="CharacterBody3D"]
+[node name="FighterNPC" type="CharacterBody3D" node_paths=PackedStringArray("controller")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
 motion_mode = 1
 script = ExtResource("1_hmqk0")
 deathExplosion = ExtResource("2_l8ark")
 pop_player = ExtResource("2_s1yd2")
+controller = NodePath("NPCFighterStateMachine")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-07, 8.74228e-08, -1, 1.31134e-07, 0, 0, 0)
@@ -73,35 +65,6 @@ hit_feedback = NodePath("../HitFeedback")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBoxComponent"]
 shape = SubResource("SphereShape3D_ydoww")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("movement_profile", "initial_state")]
-script = ExtResource("7_ubn4s")
-movement_profile = NodePath("MovementProfile")
-initial_state = NodePath("Seek")
-
-[node name="MovementProfile" type="Node" parent="StateMachine"]
-script = ExtResource("10_5o803")
-
-[node name="Stop" type="Node" parent="StateMachine"]
-script = ExtResource("9_qoupp")
-
-[node name="Loop" type="Node" parent="StateMachine"]
-script = ExtResource("10_v8r3o")
-
-[node name="Seek" type="Node" parent="StateMachine"]
-script = ExtResource("12_08g68")
-
-[node name="Flee" type="Node" parent="StateMachine"]
-script = ExtResource("14_ok8jx")
-
-[node name="Corkscrew" type="Node" parent="StateMachine"]
-script = ExtResource("15_bumm3")
-
-[node name="Wave" type="Node" parent="StateMachine"]
-script = ExtResource("16_er3u2")
-
-[node name="Jink" type="Node" parent="StateMachine"]
-script = ExtResource("17_3ou27")
-
 [node name="DebugLabel" type="Label3D" parent="."]
 visible = false
 billboard = 1
@@ -111,9 +74,6 @@ fixed_size = true
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1)
 
 [node name="Contrail" parent="." instance=ExtResource("20_a8xhu")]
-
-[node name="TargetSelector" type="Node" parent="." groups=["team property"]]
-script = ExtResource("22_4r1yh")
 
 [node name="Shield" parent="." instance=ExtResource("23_fxr37")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
@@ -128,6 +88,8 @@ mesh = SubResource("SphereMesh_6a830")
 [node name="MajorDamageLineSparks" parent="DamageEmitters" instance=ExtResource("25_ij4bf")]
 
 [node name="MildDamage" parent="DamageEmitters" instance=ExtResource("26_mibdx")]
+
+[node name="NPCFighterStateMachine" parent="." instance=ExtResource("9_0cpbp")]
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]
