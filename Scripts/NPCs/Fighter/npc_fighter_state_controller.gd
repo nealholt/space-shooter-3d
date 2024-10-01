@@ -24,17 +24,10 @@ var enemy_team:String
 @export var shooting_angle := deg_to_rad(10.0) # degrees (immediately converted to radians)
 
 # Modifiers for movement amount
-@export var speed: float = 40.0*60.0 # 40.0 meters per second
+@export var speed: float = 70.0
 @export var pitch_amt: float = 0.8
 @export var roll_amt: float = 0.8
 @export var yaw_amt: float = 0.1
-
-# Parameters for lerping the amount of roll, pitch,
-# yaw, and speed.
-var pitch_str: float = 0.0
-var roll_str: float = 0.0
-var yaw_str: float = 0.0
-var current_speed: float = 0.0
 
 @export var speed_lerp: float = 10.0
 @export var lerp_str: float = 3.0 # for turning
@@ -72,20 +65,14 @@ func move_and_turn(mover, delta:float) -> void:
 		current_state.Physics_Update(delta)
 	# Move
 	# Lerp toward desired settings
-	pitch_str = lerp(pitch_str, movement_profile.goal_pitch * pitch_amt, lerp_str*delta)
-	roll_str = lerp(roll_str, movement_profile.goal_roll * roll_amt, lerp_str*delta)
-	yaw_str = lerp(yaw_str, movement_profile.goal_yaw * yaw_amt, lerp_str*delta)
-	current_speed = lerp(current_speed, movement_profile.goal_speed * speed, speed_lerp*delta)
-	# Pitch
-	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.x, pitch_str * delta)
-	# Roll
-	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.z, roll_str * delta)
-	# Yaw
-	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.y, yaw_str * delta)
-	# Update velocity
-	mover.velocity = -mover.transform.basis.z * current_speed * delta
-	# Move straight ahead
-	mover.move_and_slide()
+	pitch_input = lerp(pitch_input, movement_profile.goal_pitch * pitch_amt, lerp_str*delta)
+	roll_input = lerp(roll_input, movement_profile.goal_roll * roll_amt, lerp_str*delta)
+	yaw_input = lerp(yaw_input, movement_profile.goal_yaw * yaw_amt, lerp_str*delta)
+	impulse = lerp(impulse, movement_profile.goal_speed * speed, speed_lerp*delta)
+	
+	# Call parent class method
+	super.move_and_turn(mover, delta)
+	
 	# Decide whether or not to fire
 	firing = movement_profile.orientation_data.dist_sqd < gun.range_sqd && Global.get_angle_to_target(mover.global_position,target.global_position, -mover.global_transform.basis.z) < shooting_angle
 
