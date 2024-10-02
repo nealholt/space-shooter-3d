@@ -38,9 +38,6 @@ bullet = ExtResource("5_gg3ek")
 spread_deg = 10.0
 collision_exception1 = NodePath("../../../../../HitBoxComponent")
 
-[node name="TargetSelector" type="Node" parent="TurretModel/Body/Head" index="3" groups=["team property"]]
-script = ExtResource("6_cy7vo")
-
 [node name="HealthComponent" parent="." instance=ExtResource("8_qikae")]
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("9_b5qkf")]
@@ -52,6 +49,9 @@ hit_feedback = NodePath("../HitFeedback")
 shape = SubResource("SphereShape3D_g6fsi")
 
 [node name="HitFeedback" parent="." instance=ExtResource("10_4os1p")]
+
+[node name="TargetSelector" type="Node" parent="." groups=["team property"]]
+script = ExtResource("6_cy7vo")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]

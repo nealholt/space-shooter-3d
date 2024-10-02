@@ -18,7 +18,7 @@ var target_pos: Vector3 = Vector3.ZERO
 # states
 var active: bool = true
 
-@onready var target_selector: Node = $TurretModel/Body/Head/TargetSelector
+@onready var target_selector: Node = $TargetSelector
 @onready var gun: BurstGun = %BurstGun
 @onready var gun_2: BurstGun = %BurstGun2
 @onready var head: Node3D = $TurretModel/Body/Head
@@ -29,7 +29,6 @@ var active: bool = true
 @export var angle_to_shoot_deg : float = 5
 var angle_to_shoot : float = deg_to_rad(angle_to_shoot_deg)
 
-var team_affiliation:String
 var orientation_data:TargetOrientationData
 
 
@@ -37,14 +36,13 @@ func _ready() -> void:
 	# test if got head and body
 	if head == null or body == null:
 		active = false
-	target_selector.setup(self, team_affiliation)
 	orientation_data = TargetOrientationData.new()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	# Get target from the target selector
-	var target = target_selector.get_target()
+	var target = target_selector.get_target(self)
 	# Update profile.orientation_data
 	if target:
 		orientation_data.update_data(global_position,
