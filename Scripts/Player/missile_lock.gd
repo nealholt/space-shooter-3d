@@ -4,8 +4,14 @@ class_name MissileLock
 # This uses images from the kenney crosshair pack
 # https://kenney.nl/assets/crosshair-pack
 
+# Gun to fire when launch is triggered
+@export var missile_launcher:Gun
+
 # Squared range within which missile lock can be acquired
 @export var missile_range_sqd:float = 300.0**2
+# Can achieve and maintain missile lock if target is
+# within plus of minus of this angle from center.
+@export var missile_lock_max_angle:float = 35.0 # degrees
 
 # Track time since missile lock acquired
 var time_since_lock:float = 0.0
@@ -13,8 +19,6 @@ var time_since_lock:float = 0.0
 # give the missile more damage or better tracking or something
 @export var quick_launch_interval = 0.1 # seconds
 
-# Camera reference for finding where on screen target appears
-#@export var camera:Camera3D
 # Reference to the target so we can track it
 var target:Node3D
 # TextureRect used for the reticle when still acquiring target
@@ -85,8 +89,34 @@ func _ready() -> void:
 	lock.hide()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+# Ship that this scene is a child of ought to be the
+# targeter. Its target is targeted. This will be called
+# from physics_process with delta as elapsed time.
+func update(targeter:Node3D, delta: float) -> void:
+	# Target most centered enemy and begin missile lock
+	if Input.is_action_just_pressed("right_shoulder"):
+		# Unset previous target if any
+		if is_instance_valid(target):
+			target.set_targeted(false)
+			target = null
+		# Target most central red team fighter
+		target = Global.get_center_most_from_group("red team",self)
+		if is_instance_valid(target):
+			target.set_targeted(true)
+			# Create missile reticle and put it on the screen
+			start_seeking()
+	# Fire missile if lock is acquired
+	if Input.is_action_just_released("right_shoulder"):
+		if locked:
+			missile_launcher.shoot(targeter, target, launch())
+		stop_seeking()
+	# Stop seeking if target no longer valid or out of range or offscreen
+	if seeking and \
+	(!is_instance_valid(target) or \
+	targeter.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
+	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > deg_to_rad(missile_lock_max_angle)):
+		stop_seeking()
+	
 	if !is_instance_valid(target):
 		stop_seeking()
 	else:
@@ -113,8 +143,7 @@ func _process(delta: float) -> void:
 			lock.set_global_position(target_onscreen - lock_offset)
 
 
-func start_seeking(targ:Node3D) -> void:
-	target = targ
+func start_seeking() -> void:
 	var target_onscreen:Vector2 = Global.current_camera.unproject_position(target.global_position)
 	# Make reticle approach the target from the far side of
 	# center screen relative to the target's on-screen position.
