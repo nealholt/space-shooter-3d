@@ -270,8 +270,8 @@ stream = ExtResource("18_piaxr")
 script = ExtResource("19_342x2")
 
 [node name="turret_motion_component" parent="CameraGroup" instance=ExtResource("23_vcsfn")]
-elevation_speed_deg = 50.0
-rotation_speed_deg = 50.0
+elevation_speed_deg = 120.0
+rotation_speed_deg = 120.0
 min_elevation_deg = -10.0
 max_elevation_deg = 80.0
 

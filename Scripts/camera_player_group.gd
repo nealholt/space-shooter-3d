@@ -21,6 +21,37 @@ const target_close_up_dist:=-30.0
 var look_at_target : bool = false
 
 func _physics_process(delta: float) -> void:
+	# Right thumb stick pressed in. Switch to first person
+	# and as long as right stick is held in, look at
+	# current target.
+	if Input.is_action_just_pressed("POV_standard"):
+		first_person()
+		turn_on_look()
+	# Target view. Look towards the target, but from the far
+	# side of the player so the player can turn to face target.
+	# D-Pad up
+	elif Input.is_action_just_pressed("POV_target_look"):
+		target_camera()
+	# Target close up. Launch the camera out toward the target.
+	# D-Pad right
+	elif Input.is_action_just_pressed("POV_target_closeup"):
+		#camera.top_level = true # Don't inherit parent's transform
+		target_closeup_camera()
+	# Fixed underslung rear view showing the belly and tail
+	# of player's ship looking backwards.
+	# D-Pad down
+	elif Input.is_action_just_pressed("POV_rear"):
+		rear_camera()
+	# Cinematic fly-by view. Launch the camera out of ahead
+	# of the player and watch the player fly be.
+	# D-Pad left
+	elif Input.is_action_just_pressed("POV_flyby"):
+		flyby_camera()
+	# Turn off target look when right thumbstick is released
+	elif Input.is_action_just_released("POV_standard"):
+		look_at_target = false
+	
+	# Adjust relevant camera based on the current pov
 	if state == CameraState.FLYBY:
 		free_camera.look_at(global_position, Vector3.UP)
 	elif state == CameraState.TARGETCLOSEUP:

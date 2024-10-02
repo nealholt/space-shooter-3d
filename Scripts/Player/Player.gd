@@ -24,10 +24,8 @@ func _ready():
 
 
 func _physics_process(delta):
+	# Move and turn
 	controller.move_and_turn(self,delta)
-	
-	# Check for D-Pad input to change pov
-	change_pov()
 	
 	# Trigger pulled. Try to shoot.
 	if $WeaponHandler.is_automatic():
@@ -69,38 +67,6 @@ func _physics_process(delta):
 func shoot_missile(quick_launch:bool) -> void:
 	# Send a missile after the target
 	$MissileLauncher.shoot(self, targeted, quick_launch)
-
-
-func change_pov() -> void:
-	# Right thumb stick pressed in. Switch to first person
-	# and as long as right stick is held in, look at
-	# current target.
-	if Input.is_action_just_pressed("POV_standard"):
-		camera_group.first_person()
-		camera_group.turn_on_look()
-	# Target view. Look towards the target, but from the far
-	# side of the player so the player can turn to face target.
-	# D-Pad up
-	elif Input.is_action_just_pressed("POV_target_look"):
-		camera_group.target_camera()
-	# Target close up. Launch the camera out toward the target.
-	# D-Pad right
-	elif Input.is_action_just_pressed("POV_target_closeup"):
-		#camera.top_level = true # Don't inherit parent's transform
-		camera_group.target_closeup_camera()
-	# Fixed underslung rear view showing the belly and tail
-	# of player's ship looking backwards.
-	# D-Pad down
-	elif Input.is_action_just_pressed("POV_rear"):
-		camera_group.rear_camera()
-	# Cinematic fly-by view. Launch the camera out of ahead
-	# of the player and watch the player fly be.
-	# D-Pad left
-	elif Input.is_action_just_pressed("POV_flyby"):
-		camera_group.flyby_camera()
-	# Turn off target look when right thumbstick is released
-	elif Input.is_action_just_released("POV_standard"):
-		camera_group.look_at_target = false
 
 
 # Since we're listening for the hitbox getting hit, this doesn't
