@@ -1,8 +1,9 @@
-[gd_scene load_steps=42 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=36 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_rf46g"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="3_crlbv"]
+[ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/missile_lock_group.tscn" id="4_vmlm7"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_8otd8"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="7_vhcpa"]
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Assets/SoundEffects/lowFrequency_explosion_001.ogg" id="8_klb2b"]
@@ -15,18 +16,11 @@
 [ext_resource type="PackedScene" uid="uid://drm4t5i6exnhc" path="res://Assets/Guns/gatling_gun.tscn" id="11_kbwk7"]
 [ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Assets/Ships/fighter_chassis_diamond.tscn" id="12_a77x5"]
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Assets/Ships/engine_mesh_component.tscn" id="12_e20ac"]
-[ext_resource type="Script" path="res://Scripts/Player/missile_lock.gd" id="12_hjk6b"]
 [ext_resource type="AudioStream" uid="uid://bjvh6ui8ln1fd" path="res://Assets/SoundEffects/industrial-mechanic-using-rattle-gun-compressed-air-socket-wrench-9944.ogg" id="12_ig3m3"]
-[ext_resource type="Texture2D" uid="uid://wtd3a0xuq1ka" path="res://Assets/Images/crosshair051.png" id="12_ppqib"]
 [ext_resource type="PackedScene" uid="uid://ddoyejlbh51s5" path="res://Scenes/Guns/hit_scan_gun.tscn" id="13_428na"]
-[ext_resource type="Texture2D" uid="uid://de4d0mo0rnf5o" path="res://Assets/Images/crosshair052.png" id="13_x7e68"]
 [ext_resource type="PackedScene" uid="uid://58nrpfbay3lf" path="res://Assets/Particles/muzzle_flash.tscn" id="14_4ajg4"]
-[ext_resource type="AudioStream" uid="uid://cgwsk2ovf5fgt" path="res://Assets/SoundEffects/missile/acquiring_lock.wav" id="15_malfx"]
 [ext_resource type="PackedScene" uid="uid://dup57p4ygajr1" path="res://Scenes/Guns/laser_shotgun.tscn" id="15_ufo67"]
-[ext_resource type="AudioStream" uid="uid://d1rurti8e68f7" path="res://Assets/SoundEffects/missile/missile_lock.wav" id="16_5hu7g"]
 [ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Assets/Guns/laser_beam.tscn" id="16_y2utm"]
-[ext_resource type="AudioStream" uid="uid://dr6bn0u22ke7d" path="res://Assets/SoundEffects/missile/launch.wav" id="17_5165r"]
-[ext_resource type="AudioStream" uid="uid://dwo2npq3c18sx" path="res://Assets/SoundEffects/missile/quick_launch.wav" id="18_piaxr"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="19_yfprc"]
 [ext_resource type="PackedScene" uid="uid://cbyb5ysj3umaf" path="res://Scenes/Projectiles/shotgun_pellet.tscn" id="20_de7w0"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="21_5ow11"]
@@ -87,37 +81,8 @@ fire_rate = 0.3
 collision_exception1 = NodePath("../HitBoxComponent")
 collision_exception2 = NodePath("../Shield/HitBoxComponent")
 
-[node name="MissileLockGroup" type="Node3D" parent="." node_paths=PackedStringArray("missile_launcher")]
-script = ExtResource("12_hjk6b")
+[node name="MissileLockGroup" parent="." node_paths=PackedStringArray("missile_launcher") instance=ExtResource("4_vmlm7")]
 missile_launcher = NodePath("../MissileLauncher")
-use_lerp = true
-
-[node name="AcquiringTargetReticle" type="TextureRect" parent="MissileLockGroup"]
-modulate = Color(1, 0.290196, 0.152941, 1)
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("12_ppqib")
-
-[node name="TargetLockReticle" type="TextureRect" parent="MissileLockGroup"]
-modulate = Color(0, 1, 0, 1)
-offset_right = 128.0
-offset_bottom = 128.0
-texture = ExtResource("13_x7e68")
-
-[node name="SeekingAudio" type="AudioStreamPlayer" parent="MissileLockGroup"]
-stream = ExtResource("15_malfx")
-
-[node name="LockedAudio" type="AudioStreamPlayer" parent="MissileLockGroup"]
-stream = ExtResource("16_5hu7g")
-
-[node name="AudioTimer" type="Timer" parent="MissileLockGroup"]
-one_shot = true
-
-[node name="LaunchAudio" type="AudioStreamPlayer" parent="MissileLockGroup"]
-stream = ExtResource("17_5165r")
-
-[node name="QuickLaunchAudio" type="AudioStreamPlayer" parent="MissileLockGroup"]
-stream = ExtResource("18_piaxr")
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_8otd8")]
 health_component = NodePath("../HealthComponent")
@@ -272,7 +237,6 @@ mesh = SubResource("SphereMesh_2lbpm")
 
 [node name="BallisticMovementV3" parent="." instance=ExtResource("35_gd40f")]
 
-[connection signal="timeout" from="MissileLockGroup/AudioTimer" to="MissileLockGroup" method="_on_audio_timer_timeout"]
 [connection signal="area_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_area_entered"]
 [connection signal="body_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_body_entered"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

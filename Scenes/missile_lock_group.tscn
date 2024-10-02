@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://dfni57jntnnk8"]
+
+[ext_resource type="Script" path="res://Scripts/Player/missile_lock.gd" id="1_7e3a4"]
+[ext_resource type="Texture2D" uid="uid://wtd3a0xuq1ka" path="res://Assets/Images/crosshair051.png" id="2_5b5nn"]
+[ext_resource type="Texture2D" uid="uid://de4d0mo0rnf5o" path="res://Assets/Images/crosshair052.png" id="3_bjekp"]
+[ext_resource type="AudioStream" uid="uid://cgwsk2ovf5fgt" path="res://Assets/SoundEffects/missile/acquiring_lock.wav" id="4_xbfs4"]
+[ext_resource type="AudioStream" uid="uid://d1rurti8e68f7" path="res://Assets/SoundEffects/missile/missile_lock.wav" id="5_rkado"]
+[ext_resource type="AudioStream" uid="uid://dr6bn0u22ke7d" path="res://Assets/SoundEffects/missile/launch.wav" id="6_iumxy"]
+[ext_resource type="AudioStream" uid="uid://dwo2npq3c18sx" path="res://Assets/SoundEffects/missile/quick_launch.wav" id="7_grmgi"]
+
+[node name="MissileLockGroup" type="Node3D" node_paths=PackedStringArray("missile_launcher")]
+script = ExtResource("1_7e3a4")
+missile_launcher = NodePath("")
+use_lerp = true
+
+[node name="AcquiringTargetReticle" type="TextureRect" parent="."]
+modulate = Color(1, 0.290196, 0.152941, 1)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_5b5nn")
+
+[node name="TargetLockReticle" type="TextureRect" parent="."]
+modulate = Color(0, 1, 0, 1)
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("3_bjekp")
+
+[node name="SeekingAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_xbfs4")
+
+[node name="LockedAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_rkado")
+
+[node name="AudioTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="LaunchAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_iumxy")
+
+[node name="QuickLaunchAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_grmgi")
+
+[connection signal="timeout" from="AudioTimer" to="." method="_on_audio_timer_timeout"]
