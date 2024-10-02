@@ -5,6 +5,7 @@ extends Node
 # This is a location for anything we want to be globally accessible.
 
 var main_scene: MainScene
+var current_camera : Camera3D
 var player: CharacterBody3D
 # For now I'm globally turning off the hud when in
 # camera views other than first person.

@@ -3,7 +3,7 @@ extends Node3D
 # https://www.reddit.com/r/godot/comments/18w6prn/camera_considerations/
 
 enum CameraState {FIRSTPERSON, REAR, FLYBY, TARGETCLOSEUP, TARGETVIEW}
-var state = CameraState.FIRSTPERSON
+var state : CameraState
 
 # free_camera has top_level set to true. Other cameras
 # are children of the player.
@@ -19,6 +19,12 @@ var target:Node3D
 const target_close_up_dist:=-30.0
 
 var look_at_target : bool = false
+
+
+func _ready() -> void:
+	# Start off in first=person
+	first_person()
+
 
 func _physics_process(delta: float) -> void:
 	# Right thumb stick pressed in. Switch to first person
@@ -88,6 +94,7 @@ func turn_on_look() -> void:
 func first_person() -> void:
 	state = CameraState.FIRSTPERSON
 	first_person_camera.make_current()
+	Global.current_camera = first_person_camera
 	Global.targeting_hud_on = true
 	# Turn off near miss detectors for all but this camera.
 	# Could we instead have just one near miss detector
@@ -100,6 +107,7 @@ func first_person() -> void:
 func rear_camera() -> void:
 	state = CameraState.REAR
 	rear_under_camera.make_current()
+	Global.current_camera = rear_under_camera
 	Global.targeting_hud_on = false
 	# Turn off near miss detectors for all but this camera.
 	# Could we instead have just one near miss detector
@@ -112,6 +120,7 @@ func rear_camera() -> void:
 func flyby_camera() -> void:
 	state = CameraState.FLYBY
 	free_camera.make_current()
+	Global.current_camera = free_camera
 	# Reposition to ahead and off to the side of the player
 	free_camera.global_position = global_position - \
 		Global.player.transform.basis.z*50.0 + \
@@ -132,6 +141,7 @@ func target_closeup_camera() -> void:
 		target = Global.player.targeted
 		state = CameraState.TARGETCLOSEUP
 		free_camera.make_current()
+		Global.current_camera = free_camera
 		view_target_close()
 		Global.targeting_hud_on = false
 		# Turn off near miss detectors for all but this camera.
@@ -149,6 +159,7 @@ func target_camera() -> void:
 		state = CameraState.TARGETVIEW
 		target = Global.player.targeted
 		free_camera.make_current()
+		Global.current_camera = free_camera
 		view_target_from_player()
 		Global.targeting_hud_on = false
 		# Turn off near miss detectors for all but this camera.

@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://cungbhnq1r7av"]
+
+[ext_resource type="Script" path="res://Scripts/camera_player_group.gd" id="1_sad13"]
+[ext_resource type="PackedScene" uid="uid://ymilutrw63dv" path="res://Scenes/turret_motion_component.tscn" id="2_tdt0o"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wtdqg"]
+radius = 15.0
+
+[node name="CameraGroup" type="Node3D"]
+script = ExtResource("1_sad13")
+
+[node name="turret_motion_component" parent="." instance=ExtResource("2_tdt0o")]
+elevation_speed_deg = 120.0
+rotation_speed_deg = 120.0
+min_elevation_deg = -10.0
+max_elevation_deg = 80.0
+
+[node name="RearUnderCamera" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.3, -1.17356, -5.5)
+
+[node name="NearMissDetector" type="Area3D" parent="RearUnderCamera" groups=["near-miss detector"]]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.3, 1.17356, -5.5)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RearUnderCamera/NearMissDetector"]
+shape = SubResource("SphereShape3D_wtdqg")
+
+[node name="FreeCamera" type="Camera3D" parent="."]
+top_level = true
+
+[node name="NearMissDetector" type="Area3D" parent="FreeCamera" groups=["near-miss detector"]]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FreeCamera/NearMissDetector"]
+shape = SubResource("SphereShape3D_wtdqg")
+
+[node name="Body" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.6, -2.9)
+
+[node name="Head" type="Node3D" parent="Body"]
+
+[node name="FirstPersonCamera" type="Camera3D" parent="Body/Head"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+current = true
+
+[node name="NearMissDetector" type="Area3D" parent="Body/Head/FirstPersonCamera" groups=["near-miss detector"]]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, -5.07052e-07, -0.6, 2.9)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Head/FirstPersonCamera/NearMissDetector"]
+shape = SubResource("SphereShape3D_wtdqg")

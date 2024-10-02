@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=42 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_rf46g"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
@@ -27,12 +27,11 @@
 [ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Assets/Guns/laser_beam.tscn" id="16_y2utm"]
 [ext_resource type="AudioStream" uid="uid://dr6bn0u22ke7d" path="res://Assets/SoundEffects/missile/launch.wav" id="17_5165r"]
 [ext_resource type="AudioStream" uid="uid://dwo2npq3c18sx" path="res://Assets/SoundEffects/missile/quick_launch.wav" id="18_piaxr"]
-[ext_resource type="Script" path="res://Scripts/camera_player_group.gd" id="19_342x2"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="19_yfprc"]
 [ext_resource type="PackedScene" uid="uid://cbyb5ysj3umaf" path="res://Scenes/Projectiles/shotgun_pellet.tscn" id="20_de7w0"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="21_5ow11"]
 [ext_resource type="PackedScene" uid="uid://bxdfmqb6p8cw6" path="res://Scenes/Projectiles/laser_guided_missile.tscn" id="21_uelja"]
-[ext_resource type="PackedScene" uid="uid://ymilutrw63dv" path="res://Scenes/turret_motion_component.tscn" id="23_vcsfn"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="31_sqqoi"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="34_80okc"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="35_gd40f"]
 
@@ -59,9 +58,6 @@ top_radius = 0.01
 bottom_radius = 0.01
 height = 0.35
 radial_segments = 16
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_wtdqg"]
-radius = 15.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j4o42"]
 resource_local_to_scene = true
@@ -234,9 +230,8 @@ mesh = SubResource("CylinderMesh_tbbj7")
 transform = Transform3D(1, 0, 0, 0, -0.125299, -0.992119, 0, 0.992119, -0.125299, 0.17, 0.16, 0.513)
 mesh = SubResource("CylinderMesh_tbbj7")
 
-[node name="MissileLockGroup" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
+[node name="MissileLockGroup" type="Node3D" parent="."]
 script = ExtResource("12_hjk6b")
-camera = NodePath("../CameraGroup/Body/Head/FirstPersonCamera")
 use_lerp = true
 
 [node name="AcquiringTargetReticle" type="TextureRect" parent="MissileLockGroup"]
@@ -266,55 +261,7 @@ stream = ExtResource("17_5165r")
 [node name="QuickLaunchAudio" type="AudioStreamPlayer" parent="MissileLockGroup"]
 stream = ExtResource("18_piaxr")
 
-[node name="CameraGroup" type="Node3D" parent="."]
-script = ExtResource("19_342x2")
-
-[node name="turret_motion_component" parent="CameraGroup" instance=ExtResource("23_vcsfn")]
-elevation_speed_deg = 120.0
-rotation_speed_deg = 120.0
-min_elevation_deg = -10.0
-max_elevation_deg = 80.0
-
-[node name="RearUnderCamera" type="Camera3D" parent="CameraGroup"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.3, -1.17356, -5.5)
-
-[node name="NearMissDetector" type="Area3D" parent="CameraGroup/RearUnderCamera" groups=["near-miss detector"]]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.3, 1.17356, -5.5)
-collision_layer = 4
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraGroup/RearUnderCamera/NearMissDetector"]
-shape = SubResource("SphereShape3D_wtdqg")
-
-[node name="FreeCamera" type="Camera3D" parent="CameraGroup"]
-top_level = true
-
-[node name="NearMissDetector" type="Area3D" parent="CameraGroup/FreeCamera" groups=["near-miss detector"]]
-collision_layer = 4
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraGroup/FreeCamera/NearMissDetector"]
-shape = SubResource("SphereShape3D_wtdqg")
-
-[node name="Body" type="Node3D" parent="CameraGroup"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.6, -2.9)
-
-[node name="Head" type="Node3D" parent="CameraGroup/Body"]
-
-[node name="FirstPersonCamera" type="Camera3D" parent="CameraGroup/Body/Head"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-current = true
-
-[node name="NearMissDetector" type="Area3D" parent="CameraGroup/Body/Head/FirstPersonCamera" groups=["near-miss detector"]]
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, -5.07052e-07, -0.6, 2.9)
-collision_layer = 4
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraGroup/Body/Head/FirstPersonCamera/NearMissDetector"]
-shape = SubResource("SphereShape3D_wtdqg")
+[node name="CameraGroup" parent="." instance=ExtResource("31_sqqoi")]
 
 [node name="Shield" parent="." instance=ExtResource("21_5ow11")]
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)

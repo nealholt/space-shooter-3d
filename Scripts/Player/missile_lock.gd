@@ -14,7 +14,7 @@ var time_since_lock:float = 0.0
 @export var quick_launch_interval = 0.1 # seconds
 
 # Camera reference for finding where on screen target appears
-@export var camera:Camera3D
+#@export var camera:Camera3D
 # Reference to the target so we can track it
 var target:Node3D
 # TextureRect used for the reticle when still acquiring target
@@ -90,7 +90,7 @@ func _process(delta: float) -> void:
 	if !is_instance_valid(target):
 		stop_seeking()
 	else:
-		var target_onscreen:Vector2 = camera.unproject_position(target.global_position)
+		var target_onscreen:Vector2 = Global.current_camera.unproject_position(target.global_position)
 		if seeking:
 			# Move reticle either with lerp or move_toward
 			if use_lerp:
@@ -115,7 +115,7 @@ func _process(delta: float) -> void:
 
 func start_seeking(targ:Node3D) -> void:
 	target = targ
-	var target_onscreen:Vector2 = camera.unproject_position(target.global_position)
+	var target_onscreen:Vector2 = Global.current_camera.unproject_position(target.global_position)
 	# Make reticle approach the target from the far side of
 	# center screen relative to the target's on-screen position.
 	# First, get the position of the target as if 0,0 was center screen
