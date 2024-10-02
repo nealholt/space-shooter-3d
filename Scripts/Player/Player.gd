@@ -7,6 +7,9 @@ extends CharacterBody3D
 # The health_component is currently only used by the HUD in the main scene
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var missile_lock: MissileLock = $MissileLockGroup
+# Can achieve and maintain missile lock if target is
+# within plus of minus of this angle from center.
+var missile_lock_max_angle:float = deg_to_rad(35)
 
 # Currently targeted ship or capital ship component
 var targeted:Node3D
@@ -41,7 +44,7 @@ func _physics_process(delta):
 			targeted.set_targeted(false)
 			targeted = null
 		# Target most central red team fighter
-		targeted = Global.get_center_most_from_group("red team",camera)
+		targeted = Global.get_center_most_from_group("red team",self)
 		if is_instance_valid(targeted):
 			targeted.set_targeted(true)
 			# Create missile reticle and put it on the screen
@@ -55,9 +58,8 @@ func _physics_process(delta):
 	if missile_lock.seeking and \
 	(!is_instance_valid(targeted) or \
 	global_position.distance_squared_to(targeted.global_position) > missile_lock.missile_range_sqd \
-	or !camera.is_position_in_frustum(targeted.global_position)):
+	or Global.get_angle_to_target(global_position, targeted.global_position, -global_basis.z) > missile_lock_max_angle):
 		missile_lock.stop_seeking()
-
 
 
 # quick_launch is true if the player released the missile

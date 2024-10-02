@@ -49,6 +49,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.8587
 script = ExtResource("2_00mhe")
 
 [node name="Gun" parent="Player/GunNode3D" instance=ExtResource("3_fyqj6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.273674, 0, 0)
 bullet = ExtResource("5_mmiro")
 bullet_speed = 400.0
 fire_rate = 20.0
