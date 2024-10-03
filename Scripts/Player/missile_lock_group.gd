@@ -107,7 +107,9 @@ func update(targeter:Node3D, delta: float) -> void:
 		if is_instance_valid(target):
 			target.set_targeted(true)
 			# Create missile reticle and put it on the screen
-			start_seeking()
+			# only if another missile is ready to fire
+			if missile_launcher.ready_to_fire():
+				start_seeking()
 	# Fire missile if lock is acquired
 	if Input.is_action_just_released("right_shoulder"):
 		if locked:

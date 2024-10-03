@@ -93,8 +93,12 @@ func _process(_delta):
 		shoot_actual()
 
 
+func ready_to_fire() -> bool:
+	return !firing and firing_rate_timer.is_stopped()
+
+
 func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
-	if firing_rate_timer.is_stopped():
+	if ready_to_fire():
 		# Animate 'em if you got 'em
 		if gun_animation:
 			gun_animation.play("gun_animation")
