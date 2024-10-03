@@ -3,7 +3,7 @@ extends CharacterBody3D
 @onready var got_hit_audio: AudioStreamPlayer3D = $Sounds/GotHitAudio
 # The health_component is currently only used by the HUD in the main scene
 @onready var health_component: HealthComponent = $HealthComponent
-@onready var missile_lock: MissileLock = $MissileLockGroup
+@onready var missile_lock: MissileLockGroup = $MissileLockGroup
 
 # Currently targeted ship or capital ship component
 var targeted:Node3D

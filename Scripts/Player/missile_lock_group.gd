@@ -1,5 +1,5 @@
 extends Node3D
-class_name MissileLock
+class_name MissileLockGroup
 
 # This uses images from the kenney crosshair pack
 # https://kenney.nl/assets/crosshair-pack
@@ -80,6 +80,9 @@ var distance_scaling: = 70.0**2
 var dist_tween_reticles:float
 @onready var audio_timer: Timer = $AudioTimer
 
+var ally_team:String
+var enemy_team:String
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -99,8 +102,8 @@ func update(targeter:Node3D, delta: float) -> void:
 		if is_instance_valid(target):
 			target.set_targeted(false)
 			target = null
-		# Target most central red team fighter
-		target = Global.get_center_most_from_group("red team",self)
+		# Target most central enemy team member
+		target = Global.get_center_most_from_group(enemy_team,targeter)
 		if is_instance_valid(target):
 			target.set_targeted(true)
 			# Create missile reticle and put it on the screen

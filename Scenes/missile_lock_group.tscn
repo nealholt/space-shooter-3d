@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dfni57jntnnk8"]
 
-[ext_resource type="Script" path="res://Scripts/Player/missile_lock.gd" id="1_7e3a4"]
+[ext_resource type="Script" path="res://Scripts/Player/missile_lock_group.gd" id="1_7e3a4"]
 [ext_resource type="Texture2D" uid="uid://wtd3a0xuq1ka" path="res://Assets/Images/crosshair051.png" id="2_5b5nn"]
 [ext_resource type="Texture2D" uid="uid://de4d0mo0rnf5o" path="res://Assets/Images/crosshair052.png" id="3_bjekp"]
 [ext_resource type="AudioStream" uid="uid://cgwsk2ovf5fgt" path="res://Assets/SoundEffects/missile/acquiring_lock.wav" id="4_xbfs4"]
@@ -8,9 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://dr6bn0u22ke7d" path="res://Assets/SoundEffects/missile/launch.wav" id="6_iumxy"]
 [ext_resource type="AudioStream" uid="uid://dwo2npq3c18sx" path="res://Assets/SoundEffects/missile/quick_launch.wav" id="7_grmgi"]
 
-[node name="MissileLockGroup" type="Node3D" node_paths=PackedStringArray("missile_launcher")]
+[node name="MissileLockGroup" type="Node3D" groups=["team property"]]
 script = ExtResource("1_7e3a4")
-missile_launcher = NodePath("")
 use_lerp = true
 
 [node name="AcquiringTargetReticle" type="TextureRect" parent="."]

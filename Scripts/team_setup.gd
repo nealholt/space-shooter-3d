@@ -37,10 +37,6 @@ func _ready() -> void:
 		var needs_team_properties:bool = child.is_in_group("team property")
 		var did_set:bool = true
 		
-		# Tell turrets what team they're on
-		if "team_affiliation" in child:
-			child.team_affiliation = team
-		
 		# Currently only FighterNPC and TurretComplete are
 		# in group "team member".
 		# You can't use child.name because "FighterNPC" is
@@ -58,6 +54,9 @@ func _ready() -> void:
 		# "match" is akin to "switch"
 		# https://docs.godotengine.org/en/latest/tutorials/scripting/gdscript/gdscript_basics.html#match
 		match child.name:
+			"MissileLockGroup":
+				child.ally_team = team
+				child.enemy_team = enemy
 			"NPCFighterStateMachine":
 				child.ally_team = team
 				child.enemy_team = enemy
