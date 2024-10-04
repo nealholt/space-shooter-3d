@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cx70hu47h04kp"]
+[gd_scene load_steps=18 format=3 uid="uid://cx70hu47h04kp"]
 
 [ext_resource type="Material" uid="uid://ck6a2ts7de74c" path="res://Assets/Shaders/material_explosion_cloud.tres" id="1_cfv7g"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_163fu"]
+[ext_resource type="Shader" uid="uid://bee3mywubqp6k" path="res://Assets/Shaders/streak_shader.tres" id="2_7wxkp"]
 
 [sub_resource type="Curve" id="Curve_0j7rd"]
 _data = [Vector2(0.639175, 0.0219779), 0.0, 0.261045, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -47,17 +46,49 @@ alpha_curve = SubResource("CurveTexture_ppovo")
 
 [sub_resource type="SphereMesh" id="SphereMesh_a01sr"]
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u66al"]
+render_priority = 0
+shader = ExtResource("2_7wxkp")
+shader_parameter/streaks_color = Color(4, 0.8, 0.2, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8275, 0, 0)
-material_override = ExtResource("1_cfv7g")
-mesh = SubResource("SphereMesh_163fu")
+[sub_resource type="Curve" id="Curve_0quku"]
+_data = [Vector2(0, 0.499417), 0.0, 1.5243, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mvn3d"]
+curve = SubResource("Curve_0quku")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xut87"]
+particle_flag_align_y = true
+spread = 180.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 7.0
+scale_curve = SubResource("CurveTexture_mvn3d")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_qadt1"]
+size = Vector2(0.25, 1)
+
+[node name="Node3D" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 material_override = ExtResource("1_cfv7g")
+emitting = false
 lifetime = 0.6
 explosiveness = 0.8
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_ev6r4")
 draw_pass_1 = SubResource("SphereMesh_a01sr")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_u66al")
+lifetime = 0.4
+explosiveness = 0.9
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_xut87")
+draw_pass_1 = SubResource("QuadMesh_qadt1")
