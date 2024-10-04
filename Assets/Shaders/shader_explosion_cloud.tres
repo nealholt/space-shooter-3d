@@ -1,13 +1,8 @@
-[gd_resource type="VisualShader" load_steps=29 format=3 uid="uid://d3boh83wpj82x"]
+[gd_resource type="VisualShader" load_steps=36 format=3 uid="uid://d3boh83wpj82x"]
 
 [ext_resource type="Texture2D" uid="uid://d3frksm1nx3pq" path="res://Assets/Textures/explosion_textures/T_PerlinNoise_46_inv.png" id="1_2on7x"]
 [ext_resource type="Texture2D" uid="uid://buljtoy4lxmu4" path="res://Assets/Textures/explosion_textures/T_cloudy_noise_211c.png" id="1_6sn8x"]
-
-[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_gdtah"]
-linked_parent_graph_frame = 12
-parameter_name = "explosion_brightness"
-hint = 1
-default_value_enabled = true
+[ext_resource type="Texture2D" uid="uid://80cja7wbpscy" path="res://Assets/Textures/explosion_textures/T_VFX_Noise_44xainv.png" id="1_tkktk"]
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_hyfso"]
 size = Vector2(604, 581)
@@ -15,9 +10,36 @@ title = "Dark Base Color"
 attached_nodes = PackedInt32Array(2, 3)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_cwdjs"]
-size = Vector2(1084, 1341)
+size = Vector2(1084, 1307)
 title = "Emissive Bright Color"
-attached_nodes = PackedInt32Array(8, 5, 6, 9, 7, 10, 4)
+attached_nodes = PackedInt32Array(8, 5, 6, 9, 7, 4, 18)
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_neuxm"]
+expanded_output_ports = [0]
+linked_parent_graph_frame = 16
+texture = ExtResource("1_tkktk")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_6lfll"]
+linked_parent_graph_frame = 16
+
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_6g0qp"]
+size = Vector2(604, 516)
+title = "Cloud Dissolver"
+attached_nodes = PackedInt32Array(13, 14, 17)
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_nsikj"]
+expanded_output_ports = [0]
+linked_parent_graph_frame = 16
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_l1qv1"]
+expanded_output_ports = [0]
+linked_parent_graph_frame = 12
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_ntmsh"]
+operator = 2
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_n3n81"]
 output_port_for_preview = 0
@@ -25,6 +47,8 @@ expanded_output_ports = [0]
 linked_parent_graph_frame = 11
 texture = ExtResource("1_6sn8x")
 texture_type = 1
+
+[sub_resource type="VisualShaderNodeProximityFade" id="VisualShaderNodeProximityFade_nd0w5"]
 
 [sub_resource type="Gradient" id="Gradient_at5w0"]
 colors = PackedColorArray(0.0271527, 0.0149688, 0.0115614, 1, 0.481462, 0.349253, 0.316961, 1)
@@ -129,8 +153,9 @@ uniform sampler2D tex_vtx_5 : source_color;
 uniform float cloud_jut_intensity = 0.30000001192093;
 uniform sampler2D tex_frg_2 : source_color;
 uniform sampler2D tex_frg_3 : source_color;
+uniform sampler2D tex_frg_13 : source_color;
+uniform sampler2D depth_tex_frg_20 : hint_depth_texture;
 uniform vec4 explosion_color : source_color = vec4(1.000000, 0.300000, 0.100000, 1.000000);
-uniform float explosion_brightness : hint_range(0, 1) = 0;
 uniform sampler2D tex_frg_7 : source_color;
 
 
@@ -198,6 +223,36 @@ void fragment() {
 	vec4 n_out3p0 = texture(tex_frg_3, vec2(n_out2p1));
 
 
+// Input:17
+	vec4 n_out17p0 = COLOR;
+	float n_out17p4 = n_out17p0.a;
+
+
+// Texture2D:13
+	vec4 n_out13p0 = texture(tex_frg_13, UV);
+	float n_out13p1 = n_out13p0.r;
+
+
+// SmoothStep:14
+	float n_in14p1 = 1.00000;
+	float n_out14p0 = smoothstep(n_out17p4, n_in14p1, n_out13p1);
+
+
+	float n_out20p0;
+// ProximityFade:20
+	float n_in20p0 = 1.00000;
+	{
+		float __depth_tex = texture(depth_tex_frg_20, SCREEN_UV).r;
+		vec4 __depth_world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, __depth_tex, 1.0);
+		__depth_world_pos.xyz /= __depth_world_pos.w;
+		n_out20p0 = clamp(1.0 - smoothstep(__depth_world_pos.z + n_in20p0, __depth_world_pos.z, VERTEX.z), 0.0, 1.0);
+	}
+
+
+// FloatOp:19
+	float n_out19p0 = n_out14p0 * n_out20p0;
+
+
 // ColorParameter:4
 	vec4 n_out4p0 = explosion_color;
 
@@ -210,8 +265,9 @@ void fragment() {
 	vec3 n_out5p0 = vec3(n_out4p0.xyz) * vec3(n_out6p0);
 
 
-// FloatParameter:10
-	float n_out10p0 = explosion_brightness;
+// Input:18
+	vec4 n_out18p0 = COLOR;
+	float n_out18p1 = n_out18p0.r;
 
 
 // Texture2D:7
@@ -221,7 +277,7 @@ void fragment() {
 
 // SmoothStep:9
 	float n_in9p1 = 1.00000;
-	float n_out9p0 = smoothstep(n_out10p0, n_in9p1, n_out7p1);
+	float n_out9p0 = smoothstep(n_out18p1, n_in9p1, n_out7p1);
 
 
 // VectorOp:8
@@ -230,12 +286,13 @@ void fragment() {
 
 // Output:0
 	ALBEDO = vec3(n_out3p0.xyz);
+	ALPHA = n_out19p0;
 	EMISSION = n_out8p0;
 
 
 }
 "
-graph_offset = Vector2(-583.356, -5.77905)
+graph_offset = Vector2(-426.601, -45.8478)
 nodes/vertex/0/position = Vector2(760, 140)
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_8s2u0")
 nodes/vertex/2/position = Vector2(75, 180)
@@ -261,9 +318,9 @@ nodes/vertex/12/node = SubResource("VisualShaderNodeVec2Parameter_dyaq2")
 nodes/vertex/12/position = Vector2(-1520, 760)
 nodes/vertex/connections = PackedInt32Array(2, 0, 4, 0, 4, 0, 0, 0, 3, 0, 6, 0, 6, 0, 4, 1, 5, 1, 7, 0, 7, 0, 6, 1, 8, 0, 5, 0, 9, 0, 10, 0, 10, 0, 8, 2, 11, 0, 7, 1, 12, 0, 10, 1)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_n3n81")
-nodes/fragment/2/position = Vector2(-360, 0)
+nodes/fragment/2/position = Vector2(-500, -540)
 nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_oxyh7")
-nodes/fragment/3/position = Vector2(0, 40)
+nodes/fragment/3/position = Vector2(-140, -500)
 nodes/fragment/4/node = SubResource("VisualShaderNodeColorParameter_8ttm7")
 nodes/fragment/4/position = Vector2(-840, 660)
 nodes/fragment/5/node = SubResource("VisualShaderNodeVectorOp_ksj38")
@@ -276,10 +333,22 @@ nodes/fragment/8/node = SubResource("VisualShaderNodeVectorOp_ariqs")
 nodes/fragment/8/position = Vector2(0, 860)
 nodes/fragment/9/node = SubResource("VisualShaderNodeSmoothStep_un1oq")
 nodes/fragment/9/position = Vector2(-300, 1120)
-nodes/fragment/10/node = SubResource("VisualShaderNodeFloatParameter_gdtah")
-nodes/fragment/10/position = Vector2(-740, 1080)
 nodes/fragment/11/node = SubResource("VisualShaderNodeFrame_hyfso")
-nodes/fragment/11/position = Vector2(-400, -40)
+nodes/fragment/11/position = Vector2(-540, -580)
 nodes/fragment/12/node = SubResource("VisualShaderNodeFrame_cwdjs")
 nodes/fragment/12/position = Vector2(-880, 620)
-nodes/fragment/connections = PackedInt32Array(2, 1, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 6, 0, 5, 1, 5, 0, 8, 0, 8, 0, 0, 5, 9, 0, 8, 1, 10, 0, 9, 0, 7, 1, 9, 2)
+nodes/fragment/13/node = SubResource("VisualShaderNodeTexture_neuxm")
+nodes/fragment/13/position = Vector2(-740, 180)
+nodes/fragment/14/node = SubResource("VisualShaderNodeSmoothStep_6lfll")
+nodes/fragment/14/position = Vector2(-380, 240)
+nodes/fragment/16/node = SubResource("VisualShaderNodeFrame_6g0qp")
+nodes/fragment/16/position = Vector2(-780, 40)
+nodes/fragment/17/node = SubResource("VisualShaderNodeInput_nsikj")
+nodes/fragment/17/position = Vector2(-740, 80)
+nodes/fragment/18/node = SubResource("VisualShaderNodeInput_l1qv1")
+nodes/fragment/18/position = Vector2(-760, 1100)
+nodes/fragment/19/node = SubResource("VisualShaderNodeFloatOp_ntmsh")
+nodes/fragment/19/position = Vector2(100, 220)
+nodes/fragment/20/node = SubResource("VisualShaderNodeProximityFade_nd0w5")
+nodes/fragment/20/position = Vector2(-120, 380)
+nodes/fragment/connections = PackedInt32Array(2, 1, 3, 0, 3, 0, 0, 0, 4, 0, 5, 0, 6, 0, 5, 1, 5, 0, 8, 0, 8, 0, 0, 5, 9, 0, 8, 1, 7, 1, 9, 2, 13, 1, 14, 2, 17, 4, 14, 0, 18, 1, 9, 0, 14, 0, 19, 0, 20, 0, 19, 1, 19, 0, 0, 1)
