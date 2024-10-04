@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx70hu47h04kp"]
+
+[ext_resource type="Shader" uid="uid://d3boh83wpj82x" path="res://Assets/Shaders/shader_explosion_cloud.tres" id="1_heci4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u82pc"]
+render_priority = 0
+shader = ExtResource("1_heci4")
+
+[sub_resource type="SphereMesh" id="SphereMesh_163fu"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_u82pc")
+mesh = SubResource("SphereMesh_163fu")
