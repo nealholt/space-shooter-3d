@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cx70hu47h04kp"]
+[gd_scene load_steps=20 format=3 uid="uid://cx70hu47h04kp"]
 
 [ext_resource type="Material" uid="uid://ck6a2ts7de74c" path="res://Assets/Shaders/material_explosion_cloud.tres" id="1_cfv7g"]
 [ext_resource type="Shader" uid="uid://bee3mywubqp6k" path="res://Assets/Shaders/streak_shader.tres" id="2_7wxkp"]
@@ -51,6 +51,14 @@ render_priority = 0
 shader = ExtResource("2_7wxkp")
 shader_parameter/streaks_color = Color(4, 0.8, 0.2, 1)
 
+[sub_resource type="Curve" id="Curve_asb7c"]
+_data = [Vector2(0, 0), 0.0, 1.67613, 0, 0, Vector2(0.997041, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_irgxq"]
+texture_mode = 1
+curve = SubResource("Curve_asb7c")
+
 [sub_resource type="Curve" id="Curve_0quku"]
 _data = [Vector2(0, 0.499417), 0.0, 1.5243, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -67,17 +75,17 @@ gravity = Vector3(0, 0, 0)
 scale_min = 5.0
 scale_max = 7.0
 scale_curve = SubResource("CurveTexture_mvn3d")
+alpha_curve = SubResource("CurveTexture_irgxq")
 hue_variation_min = -1.0
 hue_variation_max = 1.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_qadt1"]
-size = Vector2(0.25, 1)
+size = Vector2(0.25, 1.5)
 
 [node name="Node3D" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 material_override = ExtResource("1_cfv7g")
-emitting = false
 lifetime = 0.6
 explosiveness = 0.8
 fixed_fps = 60
