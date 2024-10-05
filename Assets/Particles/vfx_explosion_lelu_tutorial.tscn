@@ -1,8 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://wvqr1nvfc2u1"]
+[gd_scene load_steps=30 format=3 uid="uid://wvqr1nvfc2u1"]
 
 [ext_resource type="Material" uid="uid://ck6a2ts7de74c" path="res://Assets/Shaders/material_explosion_cloud.tres" id="1_ite73"]
 [ext_resource type="Shader" uid="uid://bee3mywubqp6k" path="res://Assets/Shaders/streak_shader.tres" id="2_3q7cl"]
 [ext_resource type="Texture2D" uid="uid://dr5x7m3c1x4pw" path="res://Assets/Textures/explosion_textures/T_vfx_hit122.jpg" id="3_jxvm6"]
+[ext_resource type="AudioStream" uid="uid://wqqcngisdu7g" path="res://Assets/SoundEffects/explosion_audio_deep.wav" id="4_n4s7i"]
 
 [sub_resource type="Curve" id="Curve_0j7rd"]
 _data = [Vector2(0.639175, 0.0219779), 0.0, 0.261045, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -147,6 +148,18 @@ tracks/4/keys = {
 "method": &"queue_free"
 }]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_tkou0"]
 length = 0.001
@@ -193,6 +206,18 @@ tracks/3/path = NodePath("Flare:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -276,3 +301,6 @@ explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_16r1b")
 draw_pass_1 = SubResource("QuadMesh_bl1ix")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_n4s7i")
