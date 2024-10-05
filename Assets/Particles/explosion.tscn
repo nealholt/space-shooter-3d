@@ -1,6 +1,5 @@
-[gd_scene load_steps=25 format=3 uid="uid://bnfrjatb6prnb"]
+[gd_scene load_steps=24 format=3 uid="uid://bnfrjatb6prnb"]
 
-[ext_resource type="Script" path="res://Scripts/temporary_particle.gd" id="1_7epv7"]
 [ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/ParticleImages/star_04.png" id="1_xbms3"]
 [ext_resource type="Material" uid="uid://covsu58qwnqru" path="res://Assets/Materials/flare00.tres" id="2_ggp7v"]
 
@@ -113,7 +112,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="Explosion" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.37966, 0.936328, 0)
-script = ExtResource("1_7epv7")
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_46d27")

@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://w2dnuhc55w32"]
+[gd_scene load_steps=13 format=3 uid="uid://w2dnuhc55w32"]
 
 [ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/ParticleImages/star_04.png" id="1_eaxiw"]
-[ext_resource type="Script" path="res://Scripts/temporary_particle.gd" id="1_t5r3n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46d27"]
 transparency = 1
@@ -63,7 +62,6 @@ turbulence_initial_displacement_max = 20.0
 [sub_resource type="QuadMesh" id="QuadMesh_u36mk"]
 
 [node name="ShieldExplosion" type="Node3D"]
-script = ExtResource("1_t5r3n")
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_46d27")

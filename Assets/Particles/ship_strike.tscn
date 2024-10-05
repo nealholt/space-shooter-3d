@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://domnb1m51i30x"]
+[gd_scene load_steps=12 format=3 uid="uid://domnb1m51i30x"]
 
 [ext_resource type="Texture2D" uid="uid://cgs2blq7xbju4" path="res://Assets/ParticleImages/trace_01.png" id="1_0cdd1"]
-[ext_resource type="Script" path="res://Scripts/temporary_particle.gd" id="1_sdbwv"]
 [ext_resource type="Texture2D" uid="uid://ce6i4w30wrek0" path="res://Assets/ParticleImages/star_09.png" id="2_weuwo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvud0"]
@@ -71,7 +70,6 @@ turbulence_noise_speed = Vector3(5, 0, 0)
 
 [node name="ShipStrike" type="Node3D"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
-script = ExtResource("1_sdbwv")
 
 [node name="Straight" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_kvud0")
