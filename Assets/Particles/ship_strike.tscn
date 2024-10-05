@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://domnb1m51i30x"]
+[gd_scene load_steps=16 format=3 uid="uid://domnb1m51i30x"]
 
 [ext_resource type="Texture2D" uid="uid://cgs2blq7xbju4" path="res://Assets/ParticleImages/trace_01.png" id="1_0cdd1"]
 [ext_resource type="Texture2D" uid="uid://ce6i4w30wrek0" path="res://Assets/ParticleImages/star_09.png" id="2_weuwo"]
+[ext_resource type="AudioStream" uid="uid://bnvv2m1sdy00w" path="res://Assets/SoundEffects/ship_strike.wav" id="3_mb3w1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvud0"]
 transparency = 1
@@ -108,6 +109,18 @@ tracks/2/keys = {
 "method": &"queue_free"
 }]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_jwvfn"]
 length = 0.001
@@ -130,6 +143,18 @@ tracks/1/path = NodePath("Star:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -172,3 +197,6 @@ libraries = {
 "": SubResource("AnimationLibrary_dnwm4")
 }
 autoplay = "Init"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_mb3w1")
