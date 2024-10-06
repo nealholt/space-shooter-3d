@@ -12,6 +12,8 @@ var yaw_input: float = 0.0
 var friction: float = 0.99
 var impulse: float = 70.0
 
+var ballistic:bool = false # When true, friction goes to zero
+
 #This is the strength of the lerp.
 # 0.01 is incredibly sluggish and floaty
 # Even 0.1 is quite responsive, but a bit gradual
@@ -34,8 +36,12 @@ func move_and_turn(mover, delta:float) -> void:
 	turn(mover, delta)
 	# New velocity is old velocity * friction + impulse in current direction
 	var new_dir = -mover.transform.basis.z * impulse * delta
-	# Apply friction on a per unit time basis
-	mover.velocity = mover.velocity * (1-friction*delta) + new_dir
+	if ballistic:
+		# No friction
+		mover.velocity = mover.velocity + new_dir
+	else:
+		# Apply friction on a per unit time basis
+		mover.velocity = mover.velocity * (1-friction*delta) + new_dir
 	# Move, collide, and bounce off
 	# Resources used:
 	# https://docs.godotengine.org/en/stable/tutorials/physics/using_character_body_2d.html

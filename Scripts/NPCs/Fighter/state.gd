@@ -22,6 +22,8 @@ var time_limit:float
 # This is just 90 degrees in radians for efficiency/readability
 const ninety_degrees:float = PI/2.0
 
+var in_death_animation:bool = false
+
 # Store npc and target info
 var my_pos:Vector3
 var target_pos:Vector3
@@ -39,6 +41,7 @@ var target_is_right:bool
 var amt_ahead_behind:float # zero is max ahead. pi (180) is max behind
 var amt_above_below:float # zero is inbetween. pi/2 (90) is max above or below
 var amt_right_left:float # zero is inbetween. pi/2 (90) is max right or left
+
 
 func _on_ready() -> void:
 	random.randomize()
@@ -61,9 +64,16 @@ func Exit() -> void:
 func Physics_Update(_delta:float) -> void:
 	pass # Replace with function body.
 
+
+func enter_death_animation() -> void:
+	if !in_death_animation:
+		Transitioned.emit(self, 'deathanimation')
+		in_death_animation = true
+
+
 func choose_random_evasion() -> void:
 	# If the current state can be interrupted...
-	if motion.can_interrupt_state:
+	if motion.can_interrupt_state and !in_death_animation:
 		# ...then switch into evasion state.
 		var x := random.randi() % 3
 		if x == 0:

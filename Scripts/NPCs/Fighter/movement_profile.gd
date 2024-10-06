@@ -37,6 +37,12 @@ var acceleration : Vector3
 # it's already evasive.
 var can_interrupt_state:bool = true
 
+# Whether or not the ship is on a ballistic
+# trajectory. This is currently only used
+# for NPC death animation. It sets friction to
+# zero in the controller.
+var ballistic:bool = false
+
 # Object containing data to orient on target.
 # Is updated by the npc. Is accessed by the
 # states.

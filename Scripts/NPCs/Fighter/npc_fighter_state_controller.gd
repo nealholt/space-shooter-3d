@@ -70,11 +70,13 @@ func move_and_turn(mover, delta:float) -> void:
 	yaw_input = lerp(yaw_input, movement_profile.goal_yaw * yaw_amt, lerp_str*delta)
 	impulse = lerp(impulse, movement_profile.goal_speed * speed, speed_lerp*delta)
 	
+	ballistic = movement_profile.ballistic
+	
 	# Call parent class method
 	super.move_and_turn(mover, delta)
 	
 	# Decide whether or not to fire
-	firing = movement_profile.orientation_data.dist_sqd < gun.range_sqd && Global.get_angle_to_target(mover.global_position,target.global_position, -mover.global_transform.basis.z) < shooting_angle
+	firing = target and movement_profile.orientation_data.dist_sqd < gun.range_sqd and Global.get_angle_to_target(mover.global_position,target.global_position, -mover.global_transform.basis.z) < shooting_angle
 
 
 
@@ -101,3 +103,7 @@ func on_child_transition(state, new_state_name):
 
 func go_evasive() -> void:
 	current_state.choose_random_evasion()
+
+
+func enter_death_animation() -> void:
+	current_state.enter_death_animation()
