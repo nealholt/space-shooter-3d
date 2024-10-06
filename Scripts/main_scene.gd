@@ -38,6 +38,10 @@ func to_main_menu() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
+func set_hud_label(text:String) -> void:
+	$HUD/Demo.text = text
+
+
 func unload_level() -> void:
 	if(is_instance_valid(level_instance)):
 		level_instance.queue_free()

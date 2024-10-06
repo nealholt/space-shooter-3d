@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
-[ext_resource type="PackedScene" uid="uid://wvqr1nvfc2u1" path="res://Assets/Particles/vfx_explosion_lelu_tutorial.tscn" id="3_a727p"]
+[ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="3_5mmgf"]
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="3_qm2p0"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="4_57m73"]
 [ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="4_f5xpu"]
@@ -33,13 +33,14 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_6dy1g")
 
-[node name="FighterNPC" type="CharacterBody3D" node_paths=PackedStringArray("controller")]
+[node name="FighterNPC" type="CharacterBody3D" node_paths=PackedStringArray("controller", "health_component")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
 motion_mode = 1
 script = ExtResource("1_hmqk0")
 deathExplosion = ExtResource("2_l8ark")
-finalExplosion = ExtResource("3_a727p")
+finalExplosion = ExtResource("3_5mmgf")
 controller = NodePath("NPCFighterStateMachine")
+health_component = NodePath("HealthComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-07, 8.74228e-08, -1, 1.31134e-07, 0, 0, 0)

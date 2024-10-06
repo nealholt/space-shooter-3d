@@ -8,6 +8,10 @@ signal destroyed
 
 @export var controller : CharacterBodyControlParent
 
+# The following is used for some testing, to display
+# out the npc's health
+@export var health_component:HealthComponent
+
 
 func _physics_process(delta):
 	controller.move_and_turn(self, delta)
@@ -53,7 +57,7 @@ func _on_health_component_died() -> void:
 	controller.enter_death_animation()
 	# Start a timer. Go into death animation
 	# for this duration.
-	$DeathTimer.start(randf_range(0.5, 2.5))
+	$DeathTimer.start(randf_range(1.5, 4.5))
 
 
 func _on_death_timer_timeout() -> void:

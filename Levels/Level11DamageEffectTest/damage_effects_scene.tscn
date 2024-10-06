@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5aj0hxrmxrbg"]
+[gd_scene load_steps=9 format=3 uid="uid://c5aj0hxrmxrbg"]
 
+[ext_resource type="Script" path="res://Levels/Level11DamageEffectTest/test_camera.gd" id="1_ktv67"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/NPCs/Fighter/fighter_npc.tscn" id="1_w5e31"]
 [ext_resource type="Script" path="res://Levels/Level08NearMiss/bullet_spawner_testing.gd" id="2_xar6i"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="3_08cq6"]
@@ -22,6 +23,14 @@ glow_enabled = true
 
 [node name="DamageEffectsScene" type="Node3D"]
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(7.10543e-15, 0.707107, -0.707107, 6.18172e-08, 0.707107, 0.707107, 1, -4.37114e-08, -4.37114e-08, -20, 20, -8.74228e-07)
+script = ExtResource("1_ktv67")
+
+[node name="Timer" type="Timer" parent="Camera3D"]
+wait_time = 3.0
+autostart = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_qunys")
 
@@ -32,14 +41,13 @@ shadow_enabled = true
 
 [node name="FighterNPC" parent="." instance=ExtResource("1_w5e31")]
 
-[node name="Camera3D" type="Camera3D" parent="FighterNPC"]
-transform = Transform3D(7.89686e-15, 0.707107, -0.707107, 1.81058e-08, 0.707107, 0.707107, 1, -1.28028e-08, -1.28028e-08, -20, 20, 0)
-
 [node name="Node3D" type="Node3D" parent="FighterNPC"]
-transform = Transform3D(1, 1.35106e-15, -2.20165e-15, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 50, -52)
+transform = Transform3D(1, 1.35106e-15, -9.30708e-15, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, -2.23373e-07, 44.8898, -52)
 script = ExtResource("2_xar6i")
 
 [node name="Gun" parent="FighterNPC/Node3D" instance=ExtResource("3_08cq6")]
 bullet = ExtResource("3_8rcco")
 fire_rate = 10.0
 automatic = false
+
+[connection signal="timeout" from="Camera3D/Timer" to="Camera3D" method="_on_timer_timeout"]
