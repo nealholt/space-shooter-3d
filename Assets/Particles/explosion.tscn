@@ -311,3 +311,4 @@ autoplay = "Init"
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_ehf7x")
+volume_db = 2.0

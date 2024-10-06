@@ -21,9 +21,6 @@ var fresnel_emission_default := 1.0
 var fresnel_emission_when_struck := 100.0
 var fresnel_emission_lerp_speed := 10.0
 
-# Sound to be played on death. Self-freeing.
-@export var pop_player: PackedScene
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,13 +50,6 @@ func _on_health_component_health_lost() -> void:
 
 
 func _on_health_component_died() -> void:
-	# Create self-freeing audio to play pop sound
-	var on_death_sound = pop_player.instantiate()
-	# Add to main_3d, not root, otherwise the added
-	# node might not be properly cleared when
-	# transitioning to a new scene.
-	Global.main_scene.main_3d.add_child(on_death_sound)
-	on_death_sound.play_then_delete(global_position)
 	# Disable further collisions and hide aura
 	# Without set_deferred there's a "Function blocked
 	# during in/out signal" error.

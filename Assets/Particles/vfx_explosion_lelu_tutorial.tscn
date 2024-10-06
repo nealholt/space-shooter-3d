@@ -304,3 +304,4 @@ draw_pass_1 = SubResource("QuadMesh_bl1ix")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_n4s7i")
+volume_db = 2.0

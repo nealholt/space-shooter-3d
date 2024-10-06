@@ -1,8 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=20 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
-[ext_resource type="PackedScene" uid="uid://d3pdq381luwwg" path="res://Scenes/pop_player.tscn" id="2_s1yd2"]
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="3_qm2p0"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="4_57m73"]
 [ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="4_f5xpu"]
@@ -38,7 +37,6 @@ transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.3
 motion_mode = 1
 script = ExtResource("1_hmqk0")
 deathExplosion = ExtResource("2_l8ark")
-pop_player = ExtResource("2_s1yd2")
 controller = NodePath("NPCFighterStateMachine")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
