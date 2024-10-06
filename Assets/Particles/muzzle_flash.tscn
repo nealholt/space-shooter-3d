@@ -25,7 +25,6 @@ scale_curve = SubResource("CurveTexture_mw0gy")
 size = Vector3(0.1, 0.1, 0.1)
 
 [node name="MuzzleFlash" type="GPUParticles3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.24, -1.4)
 material_override = SubResource("StandardMaterial3D_h6vuq")
 emitting = false
 amount = 30

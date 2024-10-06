@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs8hx275hwfsf"]
+
+[ext_resource type="PackedScene" uid="uid://cuuitp4vmj5j4" path="res://Scenes/Projectiles/projectile_area.tscn" id="1_xv0iy"]
+
+[node name="ProximityFuseBullet" instance=ExtResource("1_xv0iy")]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbpuijlnfgmru"]
+
+[ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="1_5nuix"]
+[ext_resource type="Script" path="res://Scripts/explosion_damage_dealing.gd" id="1_fbhag"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jvc8v"]
+
+[node name="ExplosionDamageDealing" type="Node3D"]
+script = ExtResource("1_fbhag")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_jvc8v")
+
+[node name="Explosion" parent="." instance=ExtResource("1_5nuix")]
+
+[node name="Timer" type="Timer" parent="."]

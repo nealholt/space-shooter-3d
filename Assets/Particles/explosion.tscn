@@ -258,7 +258,6 @@ _data = {
 }
 
 [node name="Explosion" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.37966, 0.936328, 0)
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_46d27")

@@ -560,7 +560,6 @@ process_material = SubResource("ParticleProcessMaterial_1euvu")
 draw_pass_1 = SubResource("QuadMesh_821tw")
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00743157, 0.043999, 0.0143549)
 material_override = SubResource("ShaderMaterial_0c7af")
 emitting = false
 amount = 70
