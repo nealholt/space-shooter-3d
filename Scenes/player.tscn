@@ -9,11 +9,11 @@
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Assets/SoundEffects/lowFrequency_explosion_001.ogg" id="8_klb2b"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="9_1xly7"]
 [ext_resource type="AudioStream" uid="uid://cvrvs2a12nuqr" path="res://Assets/SoundEffects/whoosh_medium_001.ogg" id="9_ktweb"]
-[ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="10_pdsdm"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="10_shexg"]
 [ext_resource type="PackedScene" uid="uid://djj4vi4d1fq2m" path="res://Scenes/Projectiles/auto_seeking_missile.tscn" id="11_a8ss5"]
 [ext_resource type="AudioStream" uid="uid://ci04qcsgn8w7q" path="res://Assets/SoundEffects/clean-machine-gun-burst-98224.ogg" id="11_itcpr"]
 [ext_resource type="PackedScene" uid="uid://drm4t5i6exnhc" path="res://Assets/Guns/gatling_gun.tscn" id="11_kbwk7"]
+[ext_resource type="PackedScene" uid="uid://cs8hx275hwfsf" path="res://Scenes/Projectiles/proximity_fuse_bullet.tscn" id="11_yl8fu"]
 [ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Assets/Ships/fighter_chassis_diamond.tscn" id="12_a77x5"]
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Assets/Ships/engine_mesh_component.tscn" id="12_e20ac"]
 [ext_resource type="AudioStream" uid="uid://bjvh6ui8ln1fd" path="res://Assets/SoundEffects/industrial-mechanic-using-rattle-gun-compressed-air-socket-wrench-9944.ogg" id="12_ig3m3"]
@@ -112,7 +112,7 @@ _endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63, 0.14, -5)
 burst_total = 6
 burst_rate = 12.0
-bullet = ExtResource("10_pdsdm")
+bullet = ExtResource("11_yl8fu")
 bullet_speed = 600.0
 fire_rate = 1.2
 use_near_miss = false

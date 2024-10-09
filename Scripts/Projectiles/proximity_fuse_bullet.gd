@@ -4,7 +4,7 @@ extends ProjectileArea
 
 
 # Override
-func damage_and_die(body, collision_point=null):
+func damage_and_die(_body, _collision_point=null):
 	# Add an explosion to main_3d and properly
 	# queue free this ship
 	var explosion = damaging_explosion.instantiate()

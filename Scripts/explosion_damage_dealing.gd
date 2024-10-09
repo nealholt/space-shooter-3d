@@ -9,7 +9,7 @@ var damage_amt:float = 1
 # damage OR after two runs through _process.
 var delete_me:bool = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !delete_me:
 		# Add an explosion to main_3d and properly
 		# queue free this ship
