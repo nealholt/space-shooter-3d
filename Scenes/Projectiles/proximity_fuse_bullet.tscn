@@ -1,8 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://cs8hx275hwfsf"]
+[gd_scene load_steps=7 format=3 uid="uid://cs8hx275hwfsf"]
 
 [ext_resource type="PackedScene" uid="uid://cuuitp4vmj5j4" path="res://Scenes/Projectiles/projectile_area.tscn" id="1_xv0iy"]
 [ext_resource type="Script" path="res://Scripts/Projectiles/proximity_fuse_bullet.gd" id="2_vvwix"]
+[ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Assets/Ships/fighter_chassis_diamond.tscn" id="3_bw8rh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bdq6x"]
+albedo_color = Color(1, 0, 0.5, 1)
+emission_enabled = true
+emission = Color(20, 0, 0, 1)
+disable_receive_shadows = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h3xsq"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_sp3t6"]
+material = SubResource("StandardMaterial3D_h3xsq")
 
 [node name="ProximityFuseBullet" instance=ExtResource("1_xv0iy")]
 script = ExtResource("2_vvwix")
 damaging_explosion = null
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
+layers = 262145
+material_override = SubResource("StandardMaterial3D_bdq6x")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_sp3t6")
+
+[node name="FighterChassisDiamond" parent="." index="3" instance=ExtResource("3_bw8rh")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.21681)

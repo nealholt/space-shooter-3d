@@ -1,0 +1,132 @@
+[gd_scene load_steps=14 format=3 uid="uid://dry7yodrwl18u"]
+
+[ext_resource type="Material" uid="uid://ck6a2ts7de74c" path="res://Assets/Shaders/material_explosion_cloud.tres" id="1_iyipg"]
+[ext_resource type="AudioStream" uid="uid://bf7kbki88ftmw" path="res://Assets/SoundEffects/flak_explosion.wav" id="2_kbmoq"]
+
+[sub_resource type="Curve" id="Curve_0j7rd"]
+_data = [Vector2(0.639175, 0.0219779), 0.0, 0.261045, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ppovo"]
+texture_mode = 1
+curve = SubResource("Curve_0j7rd")
+
+[sub_resource type="Gradient" id="Gradient_r3bmj"]
+offsets = PackedFloat32Array(0.246988, 0.481928)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_euust"]
+gradient = SubResource("Gradient_r3bmj")
+
+[sub_resource type="Curve" id="Curve_u3hpf"]
+_data = [Vector2(0.00207469, 0.310758), 0.0, 2.26848, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yy71g"]
+curve = SubResource("Curve_u3hpf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ev6r4"]
+gravity = Vector3(0, 0, 0)
+scale_min = 1.7
+scale_max = 1.8
+scale_curve = SubResource("CurveTexture_yy71g")
+color_ramp = SubResource("GradientTexture1D_euust")
+alpha_curve = SubResource("CurveTexture_ppovo")
+
+[sub_resource type="SphereMesh" id="SphereMesh_a01sr"]
+
+[sub_resource type="Animation" id="Animation_u6se1"]
+resource_name = "Init"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VFX_SmokeClouds:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_tkou0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VFX_SmokeClouds:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i0xkb"]
+_data = {
+"Init": SubResource("Animation_u6se1"),
+"RESET": SubResource("Animation_tkou0")
+}
+
+[node name="VFX_Flak_Explosion" type="Node3D"]
+
+[node name="VFX_SmokeClouds" type="GPUParticles3D" parent="."]
+material_override = ExtResource("1_iyipg")
+emitting = false
+amount = 1
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.8
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_ev6r4")
+draw_pass_1 = SubResource("SphereMesh_a01sr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i0xkb")
+}
+autoplay = "Init"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_kbmoq")
+volume_db = -10.0
