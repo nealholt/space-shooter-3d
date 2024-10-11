@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Turret/Turret.gd" id="1_cbt5p"]
 [ext_resource type="PackedScene" uid="uid://deuokls15ey84" path="res://Assets/turret_model.tscn" id="2_xuhpe"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="4_r7edd"]
-[ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="5_gg3ek"]
+[ext_resource type="PackedScene" uid="uid://bcs6gvltbhd48" path="res://Scenes/Projectiles/timed_fuse_bullet.tscn" id="5_o3bo7"]
 [ext_resource type="Script" path="res://Scripts/target_selector.gd" id="6_cy7vo"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="8_qikae"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="9_b5qkf"]
@@ -25,7 +25,8 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0)
 burst_total = 5
 burst_rate = 20.0
-bullet = ExtResource("5_gg3ek")
+bullet = ExtResource("5_o3bo7")
+bullet_speed = 200.0
 spread_deg = 10.0
 collision_exception1 = NodePath("../../../../../HitBoxComponent")
 
@@ -34,7 +35,8 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0)
 burst_total = 5
 burst_rate = 20.0
-bullet = ExtResource("5_gg3ek")
+bullet = ExtResource("5_o3bo7")
+bullet_speed = 200.0
 spread_deg = 10.0
 collision_exception1 = NodePath("../../../../../HitBoxComponent")
 

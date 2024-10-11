@@ -1,9 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcs6gvltbhd48"]
+[gd_scene load_steps=5 format=3 uid="uid://bcs6gvltbhd48"]
 
 [ext_resource type="PackedScene" uid="uid://caody2m8xh0b6" path="res://Scenes/Projectiles/projectile_ray.tscn" id="1_crmv3"]
 [ext_resource type="Script" path="res://Scripts/Projectiles/timed_fuse_bullet.gd" id="2_7x58s"]
 [ext_resource type="PackedScene" uid="uid://dbpuijlnfgmru" path="res://Scenes/explosion_damage_dealing.tscn" id="3_rvjog"]
 
+[sub_resource type="SphereMesh" id="SphereMesh_3juk2"]
+
 [node name="TimedFuseBullet" instance=ExtResource("1_crmv3")]
 script = ExtResource("2_7x58s")
 damaging_explosion = ExtResource("3_rvjog")
+default_timeout = 2.0
+target_range_plus_minus = 0.3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
+mesh = SubResource("SphereMesh_3juk2")

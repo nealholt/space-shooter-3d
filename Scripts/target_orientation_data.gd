@@ -1,5 +1,6 @@
 class_name TargetOrientationData
 
+var target:Node3D
 # Global position of the thing orienting toward the target
 var my_pos:Vector3
 # Speed the mover is moving at
@@ -35,14 +36,15 @@ var percent_right:float
 # speed is bullet speed even if calculating a ship's intercept
 # (unless the ship is intercepting for some reason other than
 # shooting the target)
-func update_data(pos:Vector3, speed:float, target,
+func update_data(pos:Vector3, speed:float, t,
 				global_transform_basis:Basis) -> void:
 	my_pos = pos
 	my_speed = speed
-	target_pos = target.global_position
+	target = t
+	target_pos = t.global_position
 	target_velocity = Vector3.ZERO
-	if "velocity" in target:
-		target_velocity = target.velocity
+	if "velocity" in t:
+		target_velocity = t.velocity
 	basis = global_transform_basis
 	# Calculate intercept
 	if target_velocity == Vector3.ZERO:
