@@ -38,7 +38,7 @@ script = ExtResource("1_qvatm")
 script = ExtResource("2_hpnlp")
 
 [node name="TurretComplete" parent="RedTeam" instance=ExtResource("5_hshpx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -275.663)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -300)
 elevation_speed_deg = 20.0
 rotation_speed_deg = 20.0
 
@@ -47,7 +47,7 @@ script = ExtResource("2_hpnlp")
 team = "blue team"
 
 [node name="Player" parent="BlueTeam" instance=ExtResource("8_weoc8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.12444, 0, 32.266)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 600)
 
 [editable path="RedTeam/TurretComplete"]
 [editable path="RedTeam/TurretComplete/TurretModel"]

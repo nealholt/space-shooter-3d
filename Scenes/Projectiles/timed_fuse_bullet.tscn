@@ -9,8 +9,7 @@
 [node name="TimedFuseBullet" instance=ExtResource("1_crmv3")]
 script = ExtResource("2_7x58s")
 damaging_explosion = ExtResource("3_rvjog")
-default_timeout = 2.0
-target_range_plus_minus = 0.3
+target_range_plus_minus = 0.1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
 mesh = SubResource("SphereMesh_3juk2")
