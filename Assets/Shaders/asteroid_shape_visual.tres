@@ -28,6 +28,7 @@ normalize = false
 noise = SubResource("FastNoiseLite_n6qv4")
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_otdl4"]
+expanded_output_ports = [0]
 texture = SubResource("NoiseTexture2D_uuvx2")
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_8s2u0"]
@@ -101,7 +102,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-507.08, 287.726)
+graph_offset = Vector2(-563.754, 109.934)
 nodes/vertex/0/position = Vector2(760, 140)
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_8s2u0")
 nodes/vertex/2/position = Vector2(75, 180)
