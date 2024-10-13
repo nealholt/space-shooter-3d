@@ -99,6 +99,14 @@ offset_right = 892.0
 offset_bottom = 100.0
 text = "Load 9: Shield Test"
 
+[node name="Load10Asteroids" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 741.0
+offset_top = 119.0
+offset_right = 891.0
+offset_bottom = 150.0
+text = "Load 10: Asteroids"
+
 [node name="Load11DamageEffects" type="Button" parent="Menu"]
 layout_mode = 0
 offset_left = 734.0
@@ -126,5 +134,6 @@ text = "Load 12: Collision Experiment"
 [connection signal="pressed" from="Menu/Load7" to="." method="_on_load_7_pressed"]
 [connection signal="pressed" from="Menu/Load8NearMissSound" to="." method="_on_load_8_near_miss_sound_pressed"]
 [connection signal="pressed" from="Menu/Load9Shield" to="." method="_on_load_9_shield_pressed"]
+[connection signal="pressed" from="Menu/Load10Asteroids" to="." method="_on_load_10_asteroids_pressed"]
 [connection signal="pressed" from="Menu/Load11DamageEffects" to="." method="_on_load_11_damage_effects_pressed"]
 [connection signal="pressed" from="Menu/Load12CollisionExperiment" to="." method="_on_load_12_collision_experiment_pressed"]

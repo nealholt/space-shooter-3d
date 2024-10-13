@@ -6,3 +6,5 @@
 render_priority = 0
 shader = ExtResource("1_5klg4")
 shader_parameter/jut_intensity = 1.0
+shader_parameter/ColorParameter = Color(0.145098, 0.094118, 0.101961, 1)
+shader_parameter/jut_intensity2 = 1.0

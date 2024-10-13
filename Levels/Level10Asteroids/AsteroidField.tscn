@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwtyyrj0kw84u"]
+
+[ext_resource type="PackedScene" uid="uid://dc6ljj4ueibm1" path="res://Scenes/asteroid.tscn" id="1_88b2k"]
+[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="1_u6taa"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hwd7p"]
+sky_top_color = Color(0.0509646, 0.0629226, 0.533014, 1)
+sky_horizon_color = Color(0.512741, 0.515731, 0.633253, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.512741, 0.515731, 0.633253, 1)
+
+[sub_resource type="Sky" id="Sky_5hn4x"]
+sky_material = SubResource("ProceduralSkyMaterial_hwd7p")
+
+[sub_resource type="Environment" id="Environment_uxj80"]
+background_mode = 2
+sky = SubResource("Sky_5hn4x")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.992546, 0.0663749, -0.102208, 0, 0.838671, 0.544639, 0.121869, 0.540579, -0.832419, 0, 0, 0)
+light_color = Color(0.980052, 0.923478, 0.766185, 1)
+shadow_enabled = true
+directional_shadow_max_distance = 2000.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_uxj80")
+
+[node name="AsteroidGroup" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -616.892)
+
+[node name="Asteroid" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 177.044)
+size = 10.0
+
+[node name="Asteroid2" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.1077, 297.07, -102.263)
+size = 10.0
+
+[node name="Asteroid3" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.8008, -187.862, -160.59)
+size = 10.0
+
+[node name="Asteroid4" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 146.061, 27.4633, -352.809)
+size = 10.0
+
+[node name="Asteroid5" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -105.948, -96.1194, -1046.28)
+size = 10.0
+
+[node name="Asteroid6" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -805.229, 0, -1484.17)
+size = 10.0
+
+[node name="Asteroid7" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 596.478, 0, -555.852)
+size = 10.0
+
+[node name="Asteroid8" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -880.551, -177.016, -294.442)
+size = 10.0
+
+[node name="Player" parent="." instance=ExtResource("1_u6taa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 32.1929)

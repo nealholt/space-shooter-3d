@@ -5,8 +5,8 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_k5ug5"]
 noise_type = 2
-seed = 23
-frequency = 0.0069
+seed = 14
+frequency = 0.003
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fjgdf"]
 noise = SubResource("FastNoiseLite_k5ug5")
@@ -22,14 +22,16 @@ noise = SubResource("FastNoiseLite_drfqw")
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_ltv1f")
-shader_parameter/jut_intensity = 30.0
+shader_parameter/jut_intensity = 20.0
 shader_parameter/ColorParameter = Color(0.145098, 0.094118, 0.101961, 1)
-shader_parameter/jut_intensity2 = 30.0
+shader_parameter/jut_intensity2 = 1.0
 shader_parameter/NoiseParam = SubResource("NoiseTexture2D_fjgdf")
 shader_parameter/NoiseParam2 = SubResource("NoiseTexture2D_4f8eo")
 
 [sub_resource type="SphereMesh" id="SphereMesh_fhfpi"]
 material = SubResource("ShaderMaterial_tofte")
+radius = 60.0
+height = 120.0
 radial_segments = 16
 rings = 8
 
