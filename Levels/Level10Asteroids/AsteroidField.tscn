@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwtyyrj0kw84u"]
+[gd_scene load_steps=6 format=3 uid="uid://dwtyyrj0kw84u"]
 
+[ext_resource type="PackedScene" uid="uid://dc6ljj4ueibm1" path="res://Scenes/asteroid.tscn" id="1_88b2k"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="1_u6taa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hwd7p"]
@@ -29,10 +30,11 @@ directional_shadow_max_distance = 2000.0
 environment = SubResource("Environment_uxj80")
 
 [node name="AsteroidGroup" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -616.892)
+
+[node name="Asteroid" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
 
 [node name="Player" parent="." instance=ExtResource("1_u6taa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 417.343)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 213.638)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.5967)
