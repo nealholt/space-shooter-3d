@@ -1,17 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://dc6ljj4ueibm1"]
+[gd_scene load_steps=9 format=3 uid="uid://dc6ljj4ueibm1"]
 
 [ext_resource type="Script" path="res://Scripts/asteroid.gd" id="1_2mwx3"]
 [ext_resource type="Shader" uid="uid://baoxqhpg8g04l" path="res://Assets/Shaders/asteroid_shape_visual.tres" id="1_ltv1f"]
-[ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Assets/Ships/fighter_chassis_diamond.tscn" id="2_bku2m"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_k5ug5"]
+noise_type = 2
+seed = 23
+frequency = 0.0069
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fjgdf"]
+noise = SubResource("FastNoiseLite_k5ug5")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_drfqw"]
+noise_type = 2
+frequency = 0.0045
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4f8eo"]
+noise = SubResource("FastNoiseLite_drfqw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tofte"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_ltv1f")
-shader_parameter/jut_intensity = 100.0
+shader_parameter/jut_intensity = 30.0
+shader_parameter/ColorParameter = Color(0.145098, 0.094118, 0.101961, 1)
+shader_parameter/jut_intensity2 = 30.0
+shader_parameter/NoiseParam = SubResource("NoiseTexture2D_fjgdf")
+shader_parameter/NoiseParam2 = SubResource("NoiseTexture2D_4f8eo")
 
 [sub_resource type="SphereMesh" id="SphereMesh_fhfpi"]
-resource_local_to_scene = true
 material = SubResource("ShaderMaterial_tofte")
 radial_segments = 16
 rings = 8
@@ -20,14 +37,5 @@ rings = 8
 script = ExtResource("1_2mwx3")
 
 [node name="Sphere" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.81382, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.81382, 0, -100.696)
 mesh = SubResource("SphereMesh_fhfpi")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.246443, 1.16942, -4.38942)
-
-[node name="FighterChassisDiamond" parent="." instance=ExtResource("2_bku2m")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 28.6188)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.48154, 0, -0.876424, 0, 1, 0, 0.876424, 0, 0.48154, -31.542, 0, 30.8738)

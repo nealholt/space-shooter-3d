@@ -23,6 +23,8 @@ subdivide_depth = 8
 render_priority = 0
 shader = ExtResource("1_6f3tn")
 shader_parameter/jut_intensity = 6.0
+shader_parameter/ColorParameter = Color(0.145098, 0.094118, 0.101961, 1)
+shader_parameter/jut_intensity2 = 1.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_fhfpi"]
 material = SubResource("ShaderMaterial_tofte")
@@ -33,6 +35,8 @@ rings = 16
 render_priority = 0
 shader = ExtResource("1_6f3tn")
 shader_parameter/jut_intensity = 1.0
+shader_parameter/ColorParameter = Color(0.145098, 0.094118, 0.101961, 1)
+shader_parameter/jut_intensity2 = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_w41uh"]
 material = SubResource("ShaderMaterial_bk5lr")
@@ -44,6 +48,8 @@ subdivide_depth = 8
 render_priority = 0
 shader = ExtResource("1_6f3tn")
 shader_parameter/jut_intensity = 1.0
+shader_parameter/ColorParameter = Color(0.145098, 0.094118, 0.101961, 1)
+shader_parameter/jut_intensity2 = 1.0
 
 [sub_resource type="PrismMesh" id="PrismMesh_4cevt"]
 material = SubResource("ShaderMaterial_lb0st")
@@ -55,6 +61,8 @@ subdivide_depth = 8
 render_priority = 0
 shader = ExtResource("1_6f3tn")
 shader_parameter/jut_intensity = 1.0
+shader_parameter/ColorParameter = Color(0.145098, 0.094118, 0.101961, 1)
+shader_parameter/jut_intensity2 = 1.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_3pot2"]
 material = SubResource("ShaderMaterial_7dov5")
