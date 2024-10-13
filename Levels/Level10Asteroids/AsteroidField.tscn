@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwtyyrj0kw84u"]
+[gd_scene load_steps=5 format=3 uid="uid://dwtyyrj0kw84u"]
 
-[ext_resource type="PackedScene" uid="uid://dc6ljj4ueibm1" path="res://Scenes/asteroid.tscn" id="1_88b2k"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="1_u6taa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hwd7p"]
@@ -32,37 +31,12 @@ environment = SubResource("Environment_uxj80")
 [node name="AsteroidGroup" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -616.892)
 
-[node name="Asteroid" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 177.044)
-size = 10.0
-
-[node name="Asteroid2" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.1077, 297.07, -102.263)
-size = 10.0
-
-[node name="Asteroid3" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.8008, -187.862, -160.59)
-size = 10.0
-
-[node name="Asteroid4" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 146.061, 27.4633, -352.809)
-size = 10.0
-
-[node name="Asteroid5" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -105.948, -96.1194, -1046.28)
-size = 10.0
-
-[node name="Asteroid6" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -805.229, 0, -1484.17)
-size = 10.0
-
-[node name="Asteroid7" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 596.478, 0, -555.852)
-size = 10.0
-
-[node name="Asteroid8" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -880.551, -177.016, -294.442)
-size = 10.0
-
 [node name="Player" parent="." instance=ExtResource("1_u6taa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 32.1929)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 417.343)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.5967)
+light_energy = 16.0
+spot_range = 300.0
+spot_attenuation = 0.25
+spot_angle_attenuation = 5.46416
