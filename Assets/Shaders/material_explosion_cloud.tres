@@ -1,10 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ck6a2ts7de74c"]
 
-[ext_resource type="Shader" uid="uid://d3boh83wpj82x" path="res://Assets/Shaders/shader_explosion_cloud.tres" id="1_fjjy1"]
+[ext_resource type="Shader" uid="uid://baoxqhpg8g04l" path="res://Assets/Shaders/asteroid_shape_visual.tres" id="1_5klg4"]
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_fjjy1")
-shader_parameter/cloud_roll_speed = Vector2(0.7, 0.7)
-shader_parameter/cloud_jut_intensity = 0.3
-shader_parameter/explosion_color = Color(1, 0.3, 0.1, 1)
+shader = ExtResource("1_5klg4")
+shader_parameter/jut_intensity = 1.0

@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://80cja7wbpscy" path="res://Assets/Textures/explosion_textures/T_VFX_Noise_44xainv.png" id="1_tkktk"]
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_hyfso"]
-size = Vector2(604, 158)
+size = Vector2(604, 581)
 title = "Dark Base Color"
 attached_nodes = PackedInt32Array(2, 3)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_cwdjs"]
-size = Vector2(1084, 878)
+size = Vector2(1084, 1341)
 title = "Emissive Bright Color"
 attached_nodes = PackedInt32Array(8, 5, 6, 9, 7, 4, 18)
 
@@ -24,7 +24,7 @@ texture_type = 1
 linked_parent_graph_frame = 16
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_6g0qp"]
-size = Vector2(604, 278)
+size = Vector2(604, 516)
 title = "Cloud Dissolver"
 attached_nodes = PackedInt32Array(13, 14, 17)
 
