@@ -59,6 +59,7 @@ var offscreen_reticle_offset:Vector2
 var viewport_center:Vector2
 var max_reticle_position:Vector2
 
+
 var is_targeted:bool:
 	set(value):
 		is_targeted = value

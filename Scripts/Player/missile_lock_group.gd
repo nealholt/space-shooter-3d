@@ -103,56 +103,67 @@ func _ready() -> void:
 func update(targeter:Node3D, delta: float) -> void:
 	# Target most centered enemy and begin missile lock
 	if Input.is_action_just_pressed("right_shoulder"):
-		# Unset previous target if any
-		if is_instance_valid(target):
-			target.set_targeted(false)
-			target = null
-		# Target most central enemy team member
-		target = Global.get_center_most_from_group(enemy_team,targeter)
-		if is_instance_valid(target):
-			target.set_targeted(true)
-			# Create missile reticle and put it on the screen
-			# only if another missile is ready to fire
-			if missile_launcher.ready_to_fire():
-				start_seeking()
+		attempt_to_start_seeking(targeter)
 	# Fire missile if lock is acquired
 	if Input.is_action_just_released("right_shoulder"):
-		if locked:
-			launch(targeter, target)
-		stop_seeking()
-	# Stop seeking if target no longer valid or out of range or offscreen
-	if seeking and \
-	(!is_instance_valid(target) or \
-	targeter.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
+		attempt_to_fire_missile(targeter)
+	
+	# If the target is invalid, stop seeking (if we were)
+	# and do nothing further in this function
+	if !is_instance_valid(target):
+		if seeking:
+			stop_seeking()
+	# Also stop seeking if target is out of range or offscreen
+	elif seeking and \
+	(targeter.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
 	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > deg_to_rad(missile_lock_max_angle)):
 		stop_seeking()
-	
-	if !is_instance_valid(target):
-		stop_seeking()
+	# Otherwise target is valid and we're either seeking
 	else:
 		# Get onscreen position of target
 		var target_onscreen:Vector2 = Global.current_camera.unproject_position(target.global_position)
 		if seeking:
-			# Move reticle either with lerp or move_toward
-			if use_lerp:
-				lerp_weight += delta/lerp_modifier
-				reticle_position = lerp(reticle_position, target_onscreen, lerp_weight)
-			else:
-				reticle_position = reticle_position.move_toward(target_onscreen, delta*speed)
-			# "acquiring" is the reticle. Position it on screen
-			acquiring.set_global_position(reticle_position - acquiring_offset)
-			# Check if lock acquired
-			dist_tween_reticles = target_onscreen.distance_squared_to(reticle_position)
-			#print(int(sqrt(dist_tween_reticles)))
-			if dist_tween_reticles < lock_dist_sqd:
-				acquiring.hide()
-				lock.show()
-				locked = true
-				locked_audio.play()
-				time_since_lock -= delta
+			# Move reticle into position and, if it's
+			# close enough, acquire lock
+			continue_seeking(delta, target_onscreen)
+		# It seems like this should be an elif,
+		# but there's a messy little one frame
+		# flicker between the reticles if you
+		# make it an elid, so don't!
 		if locked:
 			time_since_lock += delta
 			lock.set_global_position(target_onscreen - lock_offset)
+
+
+# Try to begin seeking target as long as
+# there exists a valid target and the
+# missile launcher is cooled down and ready.
+# If no target currently exists, the centermost
+# from targeter's perspective will be sought.
+func attempt_to_start_seeking(targeter:Node3D) -> void:
+	# Unset previous target if any
+	if is_instance_valid(target):
+		target.set_targeted(false)
+		target = null
+	# Target most central enemy team member
+	target = Global.get_center_most_from_group(enemy_team,targeter)
+	# If target is valid and missile is off cooldown,
+	# tell target that missile lock is being sought on
+	# it and start the seeking audio and visual
+	if is_instance_valid(target):
+		# set_targeted is called on a hitbox component
+		# and merely modulates the reticle color
+		target.set_targeted(true)
+		# Create missile reticle and put it on the screen
+		# only if another missile is ready to fire
+		if missile_launcher.ready_to_fire():
+			start_seeking()
+
+
+func attempt_to_fire_missile(targeter:Node3D) -> void:
+	if locked:
+		launch(targeter)
+	stop_seeking()
 
 
 func start_seeking() -> void:
@@ -170,6 +181,33 @@ func start_seeking() -> void:
 	# you're just retargeting. I moved acquiring.show() to
 	# the timeout of the audio timer.
 	audio_timer.start(repeat_tone_max_time)
+
+
+# Move reticle into position and, if it's close enough,
+# acquire lock
+func continue_seeking(delta:float, target_onscreen:Vector2) -> void:
+	# Move reticle either with lerp or move_toward
+	if use_lerp:
+		lerp_weight += delta/lerp_modifier
+		reticle_position = lerp(reticle_position, target_onscreen, lerp_weight)
+	else:
+		reticle_position = reticle_position.move_toward(target_onscreen, delta*speed)
+	# "acquiring" is the reticle. Position it on screen
+	acquiring.set_global_position(reticle_position - acquiring_offset)
+	# Check if lock acquired
+	dist_tween_reticles = target_onscreen.distance_squared_to(reticle_position)
+	#print(int(sqrt(dist_tween_reticles)))
+	if dist_tween_reticles < lock_dist_sqd:
+		acquire_lock()
+		# Subract delta here because we're
+		# about to add delta in the "if locked"
+		#in the update function, but we
+		# don't want to actually count this
+		# delta time (on this frame where we
+		# only just acquired lock) as time
+		# since lock. So this cancels out
+		# the addition of delta in update.
+		time_since_lock -= delta
 
 
 # Scale the audio delay with distance to target.
@@ -190,13 +228,21 @@ func stop_seeking() -> void:
 
 
 # Fire the missiles!
-func launch(targeter:Node3D, target:Node3D) -> void:
+func launch(targeter:Node3D) -> void:
 	var is_quick_launch:bool = time_since_lock <= quick_launch_interval
 	if is_quick_launch:
 		quick_launch_audio.play()
 	else:
 		launch_audio.play()
 	missile_launcher.shoot(targeter, target, is_quick_launch)
+
+
+func acquire_lock() -> void:
+	acquiring.hide()
+	lock.show()
+	locked = true
+	locked_audio.play()
+	seeking = false
 
 
 # Replay the seeking audio

@@ -6,6 +6,7 @@ class_name HitBoxComponent
 @export var health_component:HealthComponent
 @export var hit_feedback:HitFeedback
 
+
 func damage(amount:int):
 	if health_component:
 		health_component.health -= amount
