@@ -15,13 +15,15 @@ class_name MissileLockGroup
 
 # Track time since missile lock acquired
 var time_since_lock:float = 0.0
-# Then if missile is fired within specific interval,
-# give the missile more damage or better tracking or something
+# Then if missile is fired within this interval,
+# give the missile more damage or better
+# tracking or something
 @export var quick_launch_interval = 0.1 # seconds
 
 # Reference to the target so we can track it
 var target:Node3D
-# TextureRect used for the reticle when still acquiring target
+# TextureRect used for the reticle when still
+# acquiring target
 @onready var acquiring: TextureRect = $AcquiringTargetReticle
 # Half the width of the acquiring TextureRect to display it centered
 var acquiring_offset:Vector2
@@ -50,11 +52,13 @@ var locked:bool = false
 # lerp_weight accumulates over time until it's at 100 percent
 var lerp_weight:float = 0.0
 
-# Distance multiplier for how far to start the acquiring
-# reticle away from its target
+# Distance multiplier for how far from onscreen position
+# of target to put the reticle when it's first shown
+# on screen.
 @export var distance_multiplier:float = 3.0
 
-# Squared distance at which to transition into the locked state
+# Squared distance at which to transition
+# into the locked state
 @export var lock_dist_sqd:float = 6.0
 
 # Both missile lock audio clips were created here:
@@ -80,6 +84,7 @@ var distance_scaling: = 70.0**2
 var dist_tween_reticles:float
 @onready var audio_timer: Timer = $AudioTimer
 
+# The following two variables get set by team_setup.gd
 var ally_team:String
 var enemy_team:String
 
@@ -93,8 +98,8 @@ func _ready() -> void:
 
 
 # Ship that this scene is a child of ought to be the
-# targeter. Its target is targeted. This will be called
-# from physics_process with delta as elapsed time.
+# targeter. This function will be called from
+# physics_process with delta as elapsed time.
 func update(targeter:Node3D, delta: float) -> void:
 	# Target most centered enemy and begin missile lock
 	if Input.is_action_just_pressed("right_shoulder"):
@@ -113,7 +118,7 @@ func update(targeter:Node3D, delta: float) -> void:
 	# Fire missile if lock is acquired
 	if Input.is_action_just_released("right_shoulder"):
 		if locked:
-			missile_launcher.shoot(targeter, target, launch())
+			launch(targeter, target)
 		stop_seeking()
 	# Stop seeking if target no longer valid or out of range or offscreen
 	if seeking and \
@@ -125,6 +130,7 @@ func update(targeter:Node3D, delta: float) -> void:
 	if !is_instance_valid(target):
 		stop_seeking()
 	else:
+		# Get onscreen position of target
 		var target_onscreen:Vector2 = Global.current_camera.unproject_position(target.global_position)
 		if seeking:
 			# Move reticle either with lerp or move_toward
@@ -133,6 +139,7 @@ func update(targeter:Node3D, delta: float) -> void:
 				reticle_position = lerp(reticle_position, target_onscreen, lerp_weight)
 			else:
 				reticle_position = reticle_position.move_toward(target_onscreen, delta*speed)
+			# "acquiring" is the reticle. Position it on screen
 			acquiring.set_global_position(reticle_position - acquiring_offset)
 			# Check if lock acquired
 			dist_tween_reticles = target_onscreen.distance_squared_to(reticle_position)
@@ -162,10 +169,6 @@ func start_seeking() -> void:
 	# The beep and flicker of the reticle are annoying when
 	# you're just retargeting. I moved acquiring.show() to
 	# the timeout of the audio timer.
-	#acquiring.set_global_position(reticle_position - acquiring_offset)
-	#acquiring.show()
-	#seeking_audio.play()
-	#dist_tween_reticles = target_onscreen.distance_squared_to(reticle_position)
 	audio_timer.start(repeat_tone_max_time)
 
 
@@ -186,14 +189,14 @@ func stop_seeking() -> void:
 	time_since_lock = 0.0
 
 
-# Returns true if this was a quick launch
-func launch() -> bool:
-	if time_since_lock <= quick_launch_interval:
+# Fire the missiles!
+func launch(targeter:Node3D, target:Node3D) -> void:
+	var is_quick_launch:bool = time_since_lock <= quick_launch_interval
+	if is_quick_launch:
 		quick_launch_audio.play()
-		return true
 	else:
 		launch_audio.play()
-		return false
+	missile_launcher.shoot(targeter, target, is_quick_launch)
 
 
 # Replay the seeking audio

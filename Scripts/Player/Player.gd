@@ -31,7 +31,8 @@ func _physics_process(delta):
 	
 	if missile_lock:
 		missile_lock.update(self, delta)
-		# Without this next line of code, autoseeking missile breaks
+		# Without this next line of code, autoseeking missile
+		# won't work.
 		targeted = missile_lock.target
 
 
