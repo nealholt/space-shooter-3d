@@ -22,6 +22,11 @@ var ballistic:bool = false # When true, friction goes to zero
 # so typically 1/60th of this value
 var lerp_strength: float =  4.0
 
+# The following two variables get set by team_setup.gd
+var ally_team:String
+var enemy_team:String
+
+
 
 func turn(mover, delta:float) -> void:
 	# Pitch roll and yaw

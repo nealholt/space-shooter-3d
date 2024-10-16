@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Scripts/MovementControllers/player_move_schemes/ballistic_movement3.gd" id="1_nn7bi"]
 
-[node name="BallisticMovementV3" type="Node"]
+[node name="BallisticMovementV3" type="Node" groups=["team property"]]
 script = ExtResource("1_nn7bi")

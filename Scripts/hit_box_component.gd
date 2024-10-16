@@ -14,6 +14,13 @@ func damage(amount:int):
 		hit_feedback.hit()
 
 
-# This is called when the player targets this hitbox component
-func set_targeted(value:bool) -> void:
-	$TargetReticles.is_targeted = value
+# This is called when the player targets this hitbox
+# component. However, in the future, I'd like it to
+# be more flexible, so now I'm passing in the
+# targeter so we can check if it's the player.
+func set_targeted(targeter:Node3D, value:bool) -> void:
+	if Global.player == targeter:
+		$TargetReticles.is_targeted = value
+	# In the future this should also signal to the
+	# object that owns this hitbox that it is
+	# being targeted

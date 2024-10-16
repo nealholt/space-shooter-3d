@@ -106,3 +106,17 @@ func shoot(shooter, delta:float) -> void:
 		# Without this next line of code, autoseeking missile
 		# won't work.
 		shooter.targeted = shooter.missile_lock.target
+
+
+func select_target(targeter:Node3D) -> void:
+	if Input.is_action_just_pressed("right_shoulder"):
+		# Target most central enemy team member
+		var target = Global.get_center_most_from_group(enemy_team,targeter)
+		# If target is valid and missile is off cooldown,
+		# tell target that missile lock is being sought on
+		# it and start the seeking audio and visual
+		if is_instance_valid(target):
+			# set_targeted is called on a hitbox component
+			# and merely modulates the reticle color (for now)
+			target.set_targeted(targeter, true)
+			targeter.targeted = target

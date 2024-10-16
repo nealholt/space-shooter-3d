@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Scripts/MovementControllers/character_body_controller_parent.gd" id="1_ho7ga"]
 
-[node name="character_body_controller_parent" type="Node"]
+[node name="character_body_controller_parent" type="Node" groups=["team property"]]
 script = ExtResource("1_ho7ga")

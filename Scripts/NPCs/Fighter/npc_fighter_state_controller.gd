@@ -16,9 +16,6 @@ class_name NPCFighterStateMachine
 var current_state : State
 var states : Dictionary = {}
 
-var ally_team:String
-var enemy_team:String
-
 # Within this angle of the target, the enemy
 # will start shooting
 @export var shooting_angle := deg_to_rad(10.0) # degrees (immediately converted to radians)

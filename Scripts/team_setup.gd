@@ -54,10 +54,13 @@ func _ready() -> void:
 		# "match" is akin to "switch"
 		# https://docs.godotengine.org/en/latest/tutorials/scripting/gdscript/gdscript_basics.html#match
 		match child.name:
-			"MissileLockGroup":
+			"BallisticMovementV3":
 				child.ally_team = team
 				child.enemy_team = enemy
-			"NPCFighterStateMachine":
+			"CharacterBodyControlParent":
+				child.ally_team = team
+				child.enemy_team = enemy
+			"MissileLockGroup":
 				child.ally_team = team
 				child.enemy_team = enemy
 			"TargetSelector":

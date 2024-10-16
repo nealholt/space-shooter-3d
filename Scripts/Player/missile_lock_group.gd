@@ -136,17 +136,25 @@ func update(targeter:Node3D, delta: float) -> void:
 func attempt_to_start_seeking(targeter:Node3D) -> void:
 	# Unset previous target if any
 	if is_instance_valid(target):
-		target.set_targeted(false)
+		target.set_targeted(targeter, false)
 		target = null
-	# Target most central enemy team member
-	target = Global.get_center_most_from_group(enemy_team,targeter)
+	# If targeter already has a target, use it
+	if "targeted" in targeter:
+		target = targeter.targeted
+	else:
+		# Target most central enemy team member
+		target = Global.get_center_most_from_group(enemy_team,targeter)
 	# If target is valid and missile is off cooldown,
 	# tell target that missile lock is being sought on
 	# it and start the seeking audio and visual
 	if is_instance_valid(target):
 		# set_targeted is called on a hitbox component
-		# and merely modulates the reticle color
-		target.set_targeted(true)
+		# and merely modulates the reticle color (for now)
+		# In the future, you might want to do
+		# this differently. Currently, this is also
+		# called in the player's controller, but is
+		# not otherwise called by NPCs
+		target.set_targeted(targeter, true)
 		# Create missile reticle and put it on the screen
 		# only if another missile is ready to fire
 		if missile_launcher.ready_to_fire():
