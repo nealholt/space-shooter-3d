@@ -4,6 +4,26 @@ class_name MissileLockGroup
 # This uses images from the kenney crosshair pack
 # https://kenney.nl/assets/crosshair-pack
 
+# If this is true, then this missile lock group
+# is intended for npc use only. It will not
+# use any targeting reticles or audio, and
+# it will never depend on the camera.
+# Instead, the missile lock will have a timer
+# that counts down to lock and the timer
+# can go slower or faster depending on the npc's
+# angle to target. Lock can still be broken
+# by target leaving range missile_range_sqd
+# or by angle to target exceeding missile_lock_max_angle
+@export var npc_missile_lock:bool = false
+# Time in seconds needed to acquire lock
+var lock_timeout:float = 4.0
+# Used to count down time to lock
+var lock_timer:float = 0.0
+# angle within which lock timer goes twice as fast
+var faster_lock_angle:float = 5.0 # degrees
+# angle beyond which which lock timer increases rather than decreases
+var slower_lock_angle:float = 25.0 # degrees
+
 # Gun to fire when launch is triggered
 @export var missile_launcher:Gun
 
@@ -95,12 +115,21 @@ func _ready() -> void:
 	acquiring.hide()
 	lock_offset = lock.size/2.0
 	lock.hide()
+	# If this is an NPC missile lock group, then
+	# queue free all children of this node.
+	# They aren't needed.
+	if npc_missile_lock:
+		for c in get_children():
+			c.queue_free()
 
 
 # Ship that this scene is a child of ought to be the
 # targeter. This function will be called from
 # physics_process with delta as elapsed time.
 func update(targeter:Node3D, delta: float) -> void:
+	# NPCs attempt to start seeking at all times
+	if npc_missile_lock and !seeking:
+		attempt_to_start_seeking(targeter)
 	# If the target is invalid, stop seeking (if we were)
 	# and do nothing further in this function
 	if !is_instance_valid(target):
@@ -112,20 +141,39 @@ func update(targeter:Node3D, delta: float) -> void:
 	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > deg_to_rad(missile_lock_max_angle)):
 		stop_seeking()
 	# Otherwise target is valid and we're either seeking
+	# or locked.
 	else:
-		# Get onscreen position of target
-		var target_onscreen:Vector2 = Global.current_camera.unproject_position(target.global_position)
-		if seeking:
-			# Move reticle into position and, if it's
-			# close enough, acquire lock
-			continue_seeking(delta, target_onscreen)
-		# It seems like this should be an elif,
-		# but there's a messy little one frame
-		# flicker between the reticles if you
-		# make it an elid, so don't!
-		if locked:
-			time_since_lock += delta
-			lock.set_global_position(target_onscreen - lock_offset)
+		if npc_missile_lock:
+			if seeking:
+				pass #TODO LEFT OFF HERE
+			if locked:
+				attempt_to_fire_missile(targeter)
+		else: # Player missile lock behavior follows
+			# Get onscreen position of target
+			var target_onscreen:Vector2 = Global.current_camera.unproject_position(target.global_position)
+			if seeking:
+				# Move reticle into position and, if it's
+				# close enough, acquire lock
+				continue_seeking(delta, target_onscreen)
+			# It seems like this should be an elif,
+			# but there's a messy little one frame
+			# flicker between the reticles if you
+			# make it an elid, so don't!
+			if locked:
+				time_since_lock += delta
+				lock.set_global_position(target_onscreen - lock_offset)
+
+
+func npc_seeking_update(delta:float) -> void:
+	pass #TODO
+	## Time in seconds needed to acquire lock
+	#var lock_timeout:float = 4.0
+	## Used to count down time to lock
+	#var lock_timer:float = 0.0
+	## angle within which lock timer goes twice as fast
+	#var faster_lock_angle:float = 5.0 # degrees
+	## angle beyond which which lock timer increases rather than decreases
+	#var slower_lock_angle:float = 25.0 # degrees
 
 
 # Try to begin seeking target as long as
