@@ -228,9 +228,9 @@ shape = SubResource("SphereShape3D_2kirm")
 
 [node name="HitFeedback" parent="FrigateModel/StrutRight3/Radiator6" index="2" instance=ExtResource("4_320jg")]
 
-[node name="ColorMe" parent="FrigateModel" index="12" groups=["team property"]]
+[node name="ColorMe" parent="FrigateModel" index="12" groups=["team color"]]
 
-[node name="ColorMe2" parent="FrigateModel" index="13" groups=["team property"]]
+[node name="ColorMe2" parent="FrigateModel" index="13" groups=["team color"]]
 
 [node name="CollisionShapeBody" type="CollisionShape3D" parent="."]
 transform = Transform3D(75, 0, 0, 0, -3.27835e-06, -75, 0, 75, -3.27835e-06, 0, 0, 0)

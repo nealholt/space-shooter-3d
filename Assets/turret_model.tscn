@@ -31,7 +31,7 @@ height = 50.0
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("BoxMesh_sieiy")
 
-[node name="ColorMe" type="MeshInstance3D" parent="Body" groups=["team property"]]
+[node name="ColorMe" type="MeshInstance3D" parent="Body" groups=["team color"]]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.4, 0)
 mesh = SubResource("CapsuleMesh_juoko")
 

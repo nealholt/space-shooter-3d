@@ -23,6 +23,12 @@ Global="*res://Scripts/Global.gd"
 
 window/size/borderless=true
 
+[global_group]
+
+"team color"=""
+damageable=""
+"team member"=""
+
 [input]
 
 brake={

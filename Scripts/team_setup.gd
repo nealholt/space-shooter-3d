@@ -26,18 +26,7 @@ func set_team_properties(parent_node) -> void:
 	# Set teams and team colors of all
 	# relevant nodes that are encountered.
 	for child in children:
-		# Sadly the following if-else is brittle as fuck.
-		# There's no way to access the class name
-		# directly. Class names are only used for typing.
-		# You can learn more by uncommenting the following if
-		# https://github.com/godotengine/godot/issues/21789
-		#if(child.name.begins_with("FighterNPC")):
-			#print()
-			#print(child.name) # could be FighterNPC or FighterNPC2 3 4 5
-			#print(child.is_class("CharacterBody3D")) # true
-			#print(child.is_class("FighterNPC")) # false
-		
-		# Currently only FighterNPC, Player, and
+		# Currently only Orb, FighterNPC, Player, and
 		# TurretComplete are in group "team member".
 		# You can't use child.name because "FighterNPC" is
 		# the name and when you have duplicates, then there's
@@ -46,8 +35,13 @@ func set_team_properties(parent_node) -> void:
 		# child.name == "FighterNPC"
 		if child.is_in_group("team member"):
 			child.add_to_group(team)
-		elif child.is_in_group("orb"):
-			child.add_to_group(team)
+		
+		if child.is_in_group("team color"):
+			var newMaterial = StandardMaterial3D.new()
+			# Set color of new material
+			newMaterial.albedo_color = color
+			# Assign new material to material overrride
+			child.material_override = newMaterial
 		
 		# Set team properties. Everything with
 		# a variable named ally_team and enemy_team
@@ -57,40 +51,11 @@ func set_team_properties(parent_node) -> void:
 		if "enemy_team" in child:
 			child.enemy_team = enemy
 		
-		# This is error checking to make sure that anything
-		# that needs a team property, gets one set.
-		# Everything that needs a team property should be put
-		# in the group "team property"
-		var needs_team_properties:bool = child.is_in_group("team property")
-		var did_set:bool = true
+		if child is TargetReticles:
+			child.set_color(color)
 		
-		# The following will break if a subcomponent
-		# name gets changed, but for now, I think this
-		# is still a pretty good solution.
-		# "match" is akin to "switch"
-		# https://docs.godotengine.org/en/latest/tutorials/scripting/gdscript/gdscript_basics.html#match
-		match child.name:
-			"Contrail":
-				child._startColor = color
-			"TargetReticles":
-				child.set_color(color)
-			"ColorMe":
-				var newMaterial = StandardMaterial3D.new()
-				# Set color of new material
-				newMaterial.albedo_color = color
-				# Assign new material to material overrride
-				child.material_override = newMaterial
-			"ColorMe2":
-				var newMaterial = StandardMaterial3D.new()
-				# Set color of new material
-				newMaterial.albedo_color = color
-				# Assign new material to material overrride
-				child.material_override = newMaterial
-			_: # Default case
-				did_set = false
-		# Error checking
-		if needs_team_properties != did_set:
-			printerr("Error in team_setup.gd: "+str(child.name)+" should have had a team property set and didn't or should not have and did. "+str(needs_team_properties)+" "+str(did_set))
+		if child is Trail3D: # Contrail
+			child._startColor = color
 
 
 # Source:
