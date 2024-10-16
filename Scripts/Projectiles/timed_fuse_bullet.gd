@@ -13,7 +13,7 @@ func set_data(dat:ShootData) -> void:
 	# If there is a target, assess distance to
 	# target and set timer to start with a semi-random
 	# time that will cause an explosion near the target
-	if dat.target:
+	if dat.target and is_instance_valid(dat.target):
 		# Get distance to target intercept
 		var intercept:Vector3 = Global.get_intercept(
 					global_position, speed,

@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dr6bn0u22ke7d" path="res://Assets/SoundEffects/missile/launch.wav" id="6_iumxy"]
 [ext_resource type="AudioStream" uid="uid://dwo2npq3c18sx" path="res://Assets/SoundEffects/missile/quick_launch.wav" id="7_grmgi"]
 
-[node name="MissileLockGroup" type="Node3D" groups=["team property"]]
+[node name="MissileLockGroup" type="Node3D"]
 script = ExtResource("1_7e3a4")
 use_lerp = true
 

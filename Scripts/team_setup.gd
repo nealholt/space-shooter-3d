@@ -37,8 +37,8 @@ func _ready() -> void:
 		var needs_team_properties:bool = child.is_in_group("team property")
 		var did_set:bool = true
 		
-		# Currently only FighterNPC and TurretComplete are
-		# in group "team member".
+		# Currently only FighterNPC, Player, and
+		# TurretComplete are in group "team member".
 		# You can't use child.name because "FighterNPC" is
 		# the name and when you have duplicates, then there's
 		# FighterNPC2, FighterNPC3, etcetera, which would
@@ -48,21 +48,28 @@ func _ready() -> void:
 			child.add_to_group(team)
 		elif child.is_in_group("orb"):
 			child.add_to_group(team)
+		
+		# Set team properties
+		if "ally_team" in child:
+			child.ally_team = team
+		if "enemy_team" in child:
+			child.enemy_team = enemy
+		
 		# The following will break if a subcomponent
 		# name gets changed, but for now, I think this
 		# is still a pretty good solution.
 		# "match" is akin to "switch"
 		# https://docs.godotengine.org/en/latest/tutorials/scripting/gdscript/gdscript_basics.html#match
 		match child.name:
-			"BallisticMovementV3":
-				child.ally_team = team
-				child.enemy_team = enemy
-			"CharacterBodyControlParent":
-				child.ally_team = team
-				child.enemy_team = enemy
-			"MissileLockGroup":
-				child.ally_team = team
-				child.enemy_team = enemy
+			#"BallisticMovementV3":
+				#child.ally_team = team
+				#child.enemy_team = enemy
+			#"CharacterBodyControlParent":
+				#child.ally_team = team
+				#child.enemy_team = enemy
+			#"MissileLockGroup":
+				#child.ally_team = team
+				#child.enemy_team = enemy
 			"TargetSelector":
 				child.my_group = team
 				child.target_group = enemy
@@ -82,8 +89,6 @@ func _ready() -> void:
 				newMaterial.albedo_color = color
 				# Assign new material to material overrride
 				child.material_override = newMaterial
-			"Player":
-				child.add_to_group(team)
 			_: # Default case
 				did_set = false
 		# Error checking
