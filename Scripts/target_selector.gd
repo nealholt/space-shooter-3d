@@ -1,9 +1,9 @@
 extends Node
 class_name TargetSelector
 
-var my_group:String
+var ally_team:String
 # Group from which targets will be selected
-var target_group:String
+var enemy_team:String
 # current target
 var target:Node3D
 
@@ -11,7 +11,7 @@ var target:Node3D
 func update_target(targeter:Node3D) -> void:
 	# Keep it simple for now
 	# Set target to be centermost in view from group
-	target = Global.get_center_most_from_group(target_group,targeter)
+	target = Global.get_center_most_from_group(enemy_team,targeter)
 
 
 func get_target(targeter:Node3D) -> Node3D:

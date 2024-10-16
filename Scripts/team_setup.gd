@@ -5,17 +5,24 @@ extends Node3D
 # team colors and groups for opposing teams.
 
 @export var team : String = "red team"
+var color:Color = Color.RED
+var enemy:String = "blue team"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Set up team color
-	var color:Color = Color.RED
-	var enemy:String = "blue team"
 	if team == "blue team":
 		color = Color.BLUE
 		enemy = "red team"
+	# Set team properties for all children of self
+	# and all their children and children's children,
+	# and so on
+	set_team_properties(self)
+
+
+func set_team_properties(parent_node) -> void:
 	# Loop through all children and their children
-	var children:Array = get_all_children(self)
+	var children:Array = get_all_children(parent_node)
 	# Set teams and team colors of all
 	# relevant nodes that are encountered.
 	for child in children:
@@ -30,13 +37,6 @@ func _ready() -> void:
 			#print(child.is_class("CharacterBody3D")) # true
 			#print(child.is_class("FighterNPC")) # false
 		
-		# This is error checking to make sure that anything
-		# that needs a team property, gets one set.
-		# Everything that needs a team property should be put
-		# in the group "team property"
-		var needs_team_properties:bool = child.is_in_group("team property")
-		var did_set:bool = true
-		
 		# Currently only FighterNPC, Player, and
 		# TurretComplete are in group "team member".
 		# You can't use child.name because "FighterNPC" is
@@ -49,11 +49,20 @@ func _ready() -> void:
 		elif child.is_in_group("orb"):
 			child.add_to_group(team)
 		
-		# Set team properties
+		# Set team properties. Everything with
+		# a variable named ally_team and enemy_team
+		# will get those variables set to these strings!
 		if "ally_team" in child:
 			child.ally_team = team
 		if "enemy_team" in child:
 			child.enemy_team = enemy
+		
+		# This is error checking to make sure that anything
+		# that needs a team property, gets one set.
+		# Everything that needs a team property should be put
+		# in the group "team property"
+		var needs_team_properties:bool = child.is_in_group("team property")
+		var did_set:bool = true
 		
 		# The following will break if a subcomponent
 		# name gets changed, but for now, I think this
@@ -61,18 +70,6 @@ func _ready() -> void:
 		# "match" is akin to "switch"
 		# https://docs.godotengine.org/en/latest/tutorials/scripting/gdscript/gdscript_basics.html#match
 		match child.name:
-			#"BallisticMovementV3":
-				#child.ally_team = team
-				#child.enemy_team = enemy
-			#"CharacterBodyControlParent":
-				#child.ally_team = team
-				#child.enemy_team = enemy
-			#"MissileLockGroup":
-				#child.ally_team = team
-				#child.enemy_team = enemy
-			"TargetSelector":
-				child.my_group = team
-				child.target_group = enemy
 			"Contrail":
 				child._startColor = color
 			"TargetReticles":

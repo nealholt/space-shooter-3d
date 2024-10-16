@@ -52,7 +52,7 @@ shape = SubResource("SphereShape3D_g6fsi")
 
 [node name="HitFeedback" parent="." instance=ExtResource("10_4os1p")]
 
-[node name="TargetSelector" type="Node" parent="." groups=["team property"]]
+[node name="TargetSelector" type="Node" parent="."]
 script = ExtResource("6_cy7vo")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

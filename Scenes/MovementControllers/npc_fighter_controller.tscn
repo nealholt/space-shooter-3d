@@ -46,5 +46,5 @@ script = ExtResource("9_m06hc")
 [node name="DeathAnimation" type="Node" parent="States"]
 script = ExtResource("10_cp4qn")
 
-[node name="TargetSelector" type="Node" parent="." groups=["team property"]]
+[node name="TargetSelector" type="Node" parent="."]
 script = ExtResource("10_kh3qm")
