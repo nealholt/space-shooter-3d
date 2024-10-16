@@ -4,6 +4,7 @@ extends CharacterBody3D
 # The health_component is currently only used by the HUD in the main scene
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var missile_lock: MissileLockGroup = $MissileLockGroup
+@onready var weapon_handler:WeaponHandler = $WeaponHandler
 
 # Currently targeted ship or capital ship component
 var targeted:Node3D
@@ -20,20 +21,8 @@ func _ready():
 func _physics_process(delta):
 	# Move and turn
 	controller.move_and_turn(self,delta)
-	
-	# Trigger pulled. Try to shoot.
-	if $WeaponHandler.is_automatic():
-		if Input.is_action_pressed("shoot"):
-			$WeaponHandler.shoot(self, targeted)
-	else: # Semiautomatic
-		if Input.is_action_just_pressed("shoot"):
-			$WeaponHandler.shoot(self, targeted)
-	
-	if missile_lock:
-		missile_lock.update(self, delta)
-		# Without this next line of code, autoseeking missile
-		# won't work.
-		targeted = missile_lock.target
+	# Handle shooting of guns and missiles
+	controller.shoot(self, delta)
 
 
 # Since we're listening for the hitbox getting hit, this doesn't

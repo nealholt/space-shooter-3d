@@ -101,13 +101,6 @@ func _ready() -> void:
 # targeter. This function will be called from
 # physics_process with delta as elapsed time.
 func update(targeter:Node3D, delta: float) -> void:
-	# Target most centered enemy and begin missile lock
-	if Input.is_action_just_pressed("right_shoulder"):
-		attempt_to_start_seeking(targeter)
-	# Fire missile if lock is acquired
-	if Input.is_action_just_released("right_shoulder"):
-		attempt_to_fire_missile(targeter)
-	
 	# If the target is invalid, stop seeking (if we were)
 	# and do nothing further in this function
 	if !is_instance_valid(target):
@@ -160,6 +153,7 @@ func attempt_to_start_seeking(targeter:Node3D) -> void:
 			start_seeking()
 
 
+# Fire missile if lock is acquired
 func attempt_to_fire_missile(targeter:Node3D) -> void:
 	if locked:
 		launch(targeter)

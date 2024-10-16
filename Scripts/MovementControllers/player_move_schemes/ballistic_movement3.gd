@@ -84,3 +84,25 @@ func move_and_turn(mover, delta:float) -> void:
 		lerp_strength*delta)
 	
 	super.move_and_turn(mover, delta)
+
+
+func shoot(shooter, delta:float) -> void:
+	# Trigger pulled. Try to shoot.
+	if shooter.weapon_handler.is_automatic():
+		if Input.is_action_pressed("shoot"):
+			shooter.weapon_handler.shoot(shooter, shooter.targeted)
+	else: # Semiautomatic
+		if Input.is_action_just_pressed("shoot"):
+			shooter.weapon_handler.shoot(shooter, shooter.targeted)
+	
+	if shooter.missile_lock:
+		# Target most centered enemy and begin missile lock
+		if Input.is_action_just_pressed("right_shoulder"):
+			shooter.missile_lock.attempt_to_start_seeking(shooter)
+		# Fire missile if lock is acquired
+		if Input.is_action_just_released("right_shoulder"):
+			shooter.missile_lock.attempt_to_fire_missile(shooter)
+		shooter.missile_lock.update(shooter, delta)
+		# Without this next line of code, autoseeking missile
+		# won't work.
+		shooter.targeted = shooter.missile_lock.target
