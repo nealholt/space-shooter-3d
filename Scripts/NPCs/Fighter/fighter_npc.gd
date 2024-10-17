@@ -12,12 +12,15 @@ signal destroyed
 # out the npc's health
 @export var health_component:HealthComponent
 
+@export var missile_lock:MissileLockGroup
+
 
 func _physics_process(delta):
 	controller.move_and_turn(self, delta)
-	if controller.firing:
-		$Gun.shoot(self)
-
+	#if controller.firing:
+	#	$Gun.shoot(self)
+	if missile_lock:
+		missile_lock.update(self, delta)
 
 func get_current_gun() -> Gun:
 	return $Gun

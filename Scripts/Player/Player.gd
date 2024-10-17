@@ -44,3 +44,7 @@ func _on_health_component_health_lost() -> void:
 func _on_health_component_died() -> void:
 	# Load main scene if player dies
 	Global.main_scene.to_main_menu()
+
+
+func set_targeted(_targeter:FighterNPC, _is_npc:bool) -> void:
+	pass

@@ -103,9 +103,10 @@ func shoot(shooter, delta:float) -> void:
 		if Input.is_action_just_released("right_shoulder"):
 			shooter.missile_lock.attempt_to_fire_missile(shooter)
 		shooter.missile_lock.update(shooter, delta)
-		# Without this next line of code, autoseeking missile
+		# Without this next code, autoseeking missile
 		# won't work.
-		shooter.targeted = shooter.missile_lock.target
+		if is_instance_valid(shooter.missile_lock.target):
+			shooter.targeted = shooter.missile_lock.target
 
 
 func select_target(targeter:Node3D) -> void:

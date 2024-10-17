@@ -145,8 +145,10 @@ func update(targeter:Node3D, delta: float) -> void:
 	else:
 		if npc_missile_lock:
 			if seeking:
+				print('TODO seeking %.1f' % lock_timer)
 				npc_seeking_update(targeter, delta)
 			if locked:
+				print('TODO lock acquired. FIRING')
 				attempt_to_fire_missile(targeter)
 		else: # Player missile lock behavior follows
 			# Get onscreen position of target
@@ -223,6 +225,14 @@ func attempt_to_fire_missile(targeter:Node3D) -> void:
 
 
 func start_seeking() -> void:
+	seeking = true
+	if npc_missile_lock:
+		print('TODO seeking has begun')
+		# Reset lock_timer.
+		lock_timer = lock_timeout
+		return
+	# Otherwise run the code for a player,
+	# which includes audio and visuals.
 	var target_onscreen:Vector2 = Global.current_camera.unproject_position(target.global_position)
 	# Make reticle approach the target from the far side of
 	# center screen relative to the target's on-screen position.
@@ -230,17 +240,12 @@ func start_seeking() -> void:
 	reticle_position = (DisplayServer.window_get_size()/2.0) - target_onscreen
 	# Then adjust that position to the far side of center.
 	reticle_position = distance_multiplier*reticle_position + target_onscreen
-	seeking = true
 	# Don't beep immediately. Don't show immediately and
 	# give max delay audio delay.
 	# The beep and flicker of the reticle are annoying when
 	# you're just retargeting. I moved acquiring.show() to
 	# the timeout of the audio timer.
 	audio_timer.start(repeat_tone_max_time)
-	# Reset lock_timer. This is currently only
-	# used by NPCs
-	lock_timer = lock_timeout
-
 
 
 # Move reticle into position and, if it's close enough,
@@ -279,22 +284,27 @@ func get_audio_delay() -> float:
 func stop_seeking() -> void:
 	seeking = false
 	locked = false
-	acquiring.hide()
-	lock.hide()
-	lerp_weight = 0.0
-	seeking_audio.stop()
-	locked_audio.stop()
 	time_since_lock = 0.0
+	if !npc_missile_lock:
+		acquiring.hide()
+		lock.hide()
+		lerp_weight = 0.0
+		seeking_audio.stop()
+		locked_audio.stop()
 
 
 # Fire the missiles!
 func launch(targeter:Node3D) -> void:
+	# Determine if this is a quick launch
 	var is_quick_launch:bool = time_since_lock <= quick_launch_interval
-	if is_quick_launch:
-		quick_launch_audio.play()
-	else:
-		launch_audio.play()
-	missile_launcher.shoot(targeter, target, is_quick_launch)
+	# If the is not an npc missile lock then play audio
+	if !npc_missile_lock:
+		if is_quick_launch:
+			quick_launch_audio.play()
+		else:
+			launch_audio.play()
+	# Fire zee missile! (For now, don't let npcs use quick launch)
+	missile_launcher.shoot(targeter, target, is_quick_launch and !npc_missile_lock)
 
 
 func acquire_lock() -> void:

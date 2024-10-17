@@ -1,14 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=22 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
 [ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="3_5mmgf"]
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="3_qm2p0"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="4_57m73"]
-[ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="4_f5xpu"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="5_1xytm"]
+[ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="5_70fr4"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_ne5o5"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="9_0cpbp"]
+[ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/missile_lock_group.tscn" id="17_563f5"]
 [ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/fighter_chassis_ring.tscn" id="19_x2ba7"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="20_a8xhu"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="23_fxr37"]
@@ -33,7 +34,7 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_6dy1g")
 
-[node name="FighterNPC" type="CharacterBody3D" node_paths=PackedStringArray("controller", "health_component")]
+[node name="FighterNPC" type="CharacterBody3D" node_paths=PackedStringArray("controller", "health_component", "missile_lock")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
 motion_mode = 1
 script = ExtResource("1_hmqk0")
@@ -41,6 +42,7 @@ deathExplosion = ExtResource("2_l8ark")
 finalExplosion = ExtResource("3_5mmgf")
 controller = NodePath("NPCFighterStateMachine")
 health_component = NodePath("HealthComponent")
+missile_lock = NodePath("MissileLockGroup")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-07, 8.74228e-08, -1, 1.31134e-07, 0, 0, 0)
@@ -48,8 +50,9 @@ shape = SubResource("SphereShape3D_rh3fl")
 
 [node name="Gun" parent="." node_paths=PackedStringArray("collision_exception1", "collision_exception2") instance=ExtResource("4_57m73")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2)
-bullet = ExtResource("4_f5xpu")
-bullet_speed = 600.0
+bullet = ExtResource("5_70fr4")
+bullet_speed = 150.0
+bullet_timeout = 5.0
 fire_rate = 8.0
 collision_exception1 = NodePath("../HitBoxComponent")
 collision_exception2 = NodePath("../Shield/HitBoxComponent")
@@ -94,6 +97,10 @@ mesh = SubResource("SphereMesh_6a830")
 
 [node name="DeathTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="MissileLockGroup" parent="." node_paths=PackedStringArray("missile_launcher") instance=ExtResource("17_563f5")]
+npc_missile_lock = true
+missile_launcher = NodePath("../Gun")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]
