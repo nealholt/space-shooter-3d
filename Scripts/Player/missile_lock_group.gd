@@ -16,7 +16,7 @@ class_name MissileLockGroup
 # or by angle to target exceeding missile_lock_max_angle
 @export var npc_missile_lock:bool = false
 # Time in seconds needed to acquire lock
-var lock_timeout:float = 4.0
+const lock_timeout:float = 4.0
 # Used to count down time to lock
 var lock_timer:float = 0.0
 # angle within which lock timer goes twice as fast
@@ -145,7 +145,7 @@ func update(targeter:Node3D, delta: float) -> void:
 	else:
 		if npc_missile_lock:
 			if seeking:
-				pass #TODO LEFT OFF HERE
+				npc_seeking_update(targeter, delta)
 			if locked:
 				attempt_to_fire_missile(targeter)
 		else: # Player missile lock behavior follows
@@ -164,16 +164,22 @@ func update(targeter:Node3D, delta: float) -> void:
 				lock.set_global_position(target_onscreen - lock_offset)
 
 
-func npc_seeking_update(delta:float) -> void:
-	pass #TODO
-	## Time in seconds needed to acquire lock
-	#var lock_timeout:float = 4.0
-	## Used to count down time to lock
-	#var lock_timer:float = 0.0
-	## angle within which lock timer goes twice as fast
-	#var faster_lock_angle:float = 5.0 # degrees
-	## angle beyond which which lock timer increases rather than decreases
-	#var slower_lock_angle:float = 25.0 # degrees
+func npc_seeking_update(targeter:Node3D, delta:float) -> void:
+	var angle_to:float = rad_to_deg(Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z))
+	if angle_to < faster_lock_angle:
+		# lock timer goes twice as fast
+		lock_timer -= 2.0*delta
+	elif slower_lock_angle < angle_to:
+		# lock timer increases rather than decreases
+		# up to the lock_timeout amount
+		lock_timer = min(lock_timer+delta, lock_timeout)
+	else:
+		# Normal amount of time passes
+		lock_timer -= delta
+	# Check for lock on
+	if lock_timer < 0.0:
+		locked = true
+		seeking = false
 
 
 # Try to begin seeking target as long as
@@ -231,6 +237,10 @@ func start_seeking() -> void:
 	# you're just retargeting. I moved acquiring.show() to
 	# the timeout of the audio timer.
 	audio_timer.start(repeat_tone_max_time)
+	# Reset lock_timer. This is currently only
+	# used by NPCs
+	lock_timer = lock_timeout
+
 
 
 # Move reticle into position and, if it's close enough,
