@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp4m6n403qink"]
+
+[ext_resource type="Script" path="res://Scripts/aim_assist.gd" id="1_fldk8"]
+
+[node name="AimAssist" type="Node"]
+script = ExtResource("1_fldk8")
+angle_assist_limit = null
