@@ -33,8 +33,8 @@ func get_center_most_from_group(group:String,looker):
 	return most_centered
 
 
-# I'm pretty sure this is just used in Player, FighterNPC,
-# and now Turret.
+# I'm pretty sure this is just used in Player,
+# FighterNPC, Turret, and aim assist.
 func get_angle_to_target(seeker_pos:Vector3, target_pos:Vector3, facing_dir:Vector3) -> float:
 	# Pre: target_pos is a Vector3 representing x,y,z
 	# coordinates in space.
