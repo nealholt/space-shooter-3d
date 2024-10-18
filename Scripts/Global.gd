@@ -223,14 +223,24 @@ func interp_face_target(seeker:Node3D, target:Vector3, delta:float) -> Transform
 # t = ((b+sqrt(b^2+4*a*c))/(2*a))
 func get_intercept(shooter_pos:Vector3,
 					bullet_speed:float,
-					target_position:Vector3,
-					target_velocity:Vector3) -> Vector3:
+					target:Node3D) -> Vector3:
+	# Determine target velocity
+	var target_velocity:Vector3 = Vector3.ZERO
+	if "velocity" in target:
+		target_velocity = target.velocity
+	# Begin calculating intercept
+	var target_position:Vector3 = target.global_position
+	# It's really easy if the target is not moving
+	var target_speed:float = target_velocity.length()
+	if target_speed == 0.0:
+		return target_position
+	# For real, calculate intercept now
 	var a:float = bullet_speed*bullet_speed - target_velocity.dot(target_velocity)
 	var b:float = 2*target_velocity.dot(target_position-shooter_pos)
 	var c:float = (target_position-shooter_pos).dot(target_position-shooter_pos)
 	# Protect against divide by zero and/or imaginary results
 	# which occur when bullet speed is slower than target speed
 	var time:float = 0.0
-	if bullet_speed > target_velocity.length():
+	if bullet_speed > target_speed:
 		time = (b+sqrt(b*b+4*a*c)) / (2*a)
 	return target_position+time*target_velocity

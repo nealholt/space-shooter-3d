@@ -20,9 +20,8 @@ extends Node
 
 func use_aim_assist(shooter:Node3D, target:Node3D,
 					bullet_speed:float) -> bool:
-	var intercept:Vector3 = global.get_intercept(
+	var intercept:Vector3 = Global.get_intercept(
 					shooter.global_position,
 					bullet_speed,
-					target.global_position,
-					#target_velocity:Vector3) -> Vector3:
+					target)
 	return true

@@ -17,8 +17,7 @@ func set_data(dat:ShootData) -> void:
 		# Get distance to target intercept
 		var intercept:Vector3 = Global.get_intercept(
 					global_position, speed,
-					dat.target.global_position,
-					dat.target.velocity)
+					dat.target)
 		var dist := global_position.distance_to(intercept)
 		# I have no ducking clue why speed needs multiplied
 		# by 2, but I gathered data by manually adjusting

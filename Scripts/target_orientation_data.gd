@@ -47,10 +47,7 @@ func update_data(pos:Vector3, speed:float, t,
 		target_velocity = t.velocity
 	basis = global_transform_basis
 	# Calculate intercept
-	if target_velocity == Vector3.ZERO:
-		intercept = target_pos
-	else:
-		intercept = Global.get_intercept(my_pos, my_speed, target_pos, target_velocity)
+	intercept = Global.get_intercept(my_pos, my_speed, target)
 	# Calculate distance and angles relative to intercept
 	dist_sqd = my_pos.distance_squared_to(intercept)
 	# Calculate angles to target in radians

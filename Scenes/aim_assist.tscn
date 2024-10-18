@@ -4,4 +4,3 @@
 
 [node name="AimAssist" type="Node"]
 script = ExtResource("1_fldk8")
-angle_assist_limit = null
