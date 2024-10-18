@@ -46,5 +46,18 @@ func _on_health_component_died() -> void:
 	Global.main_scene.to_main_menu()
 
 
+# This is called by NPC's missile lock group on
+# the player. Is there a better way?
 func set_targeted(_targeter:FighterNPC, _is_npc:bool) -> void:
 	pass
+
+# These are called by the missile lock group when
+# targeter is seeking lock on this player,
+# loses lock, or acquires lock. Could be useful
+# for communicating with the player.
+func seeking_lock(_targeter:Node3D) -> void:
+	pass #print('enemy is seeking lock')
+func lost_lock(_targeter:Node3D) -> void:
+	pass #print('enemy lost lock')
+func lock_acquired(_targeter:Node3D) -> void:
+	pass #print('enemy acquired lock')

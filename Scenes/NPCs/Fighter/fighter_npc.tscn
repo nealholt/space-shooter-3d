@@ -108,7 +108,7 @@ fire_rate = 0.033
 [node name="MissileLockGroup" parent="." node_paths=PackedStringArray("missile_launcher") instance=ExtResource("17_563f5")]
 npc_missile_lock = true
 missile_launcher = NodePath("../MissileLauncher")
-missile_range_sqd = 1e+06
+missile_range = 1000.0
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]

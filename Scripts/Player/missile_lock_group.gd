@@ -27,8 +27,11 @@ var slower_lock_angle:float = 25.0 # degrees
 # Gun to fire when launch is triggered
 @export var missile_launcher:Gun
 
+# range within which missile lock can be acquired.
+# Will be used to calculate missile_range_sqd
+@export var missile_range:float = 300.0
 # Squared range within which missile lock can be acquired
-@export var missile_range_sqd:float = 300.0**2
+var missile_range_sqd:float
 # Can achieve and maintain missile lock if target is
 # within plus of minus of this angle from center.
 @export var missile_lock_max_angle:float = 35.0 # degrees
@@ -111,6 +114,7 @@ var enemy_team:String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	missile_range_sqd = missile_range*missile_range
 	acquiring_offset = acquiring.size/2.0
 	acquiring.hide()
 	lock_offset = lock.size/2.0
@@ -145,6 +149,7 @@ func update(targeter:Node3D, delta: float) -> void:
 	(targeter.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
 	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > deg_to_rad(missile_lock_max_angle)):
 		stop_seeking()
+		target.lost_lock(targeter)
 	# Otherwise target is valid and we're either seeking
 	# or locked.
 	else:
@@ -159,7 +164,7 @@ func update(targeter:Node3D, delta: float) -> void:
 			if seeking:
 				# Move reticle into position and, if it's
 				# close enough, acquire lock
-				continue_seeking(delta, target_onscreen)
+				continue_seeking(delta, target_onscreen, targeter)
 			# It seems like this should be an elif,
 			# but there's a messy little one frame
 			# flicker between the reticles if you
@@ -185,6 +190,7 @@ func npc_seeking_update(targeter:Node3D, delta:float) -> void:
 	if lock_timer < 0.0:
 		locked = true
 		seeking = false
+		target.lock_acquired(targeter)
 
 
 # Try to begin seeking target as long as
@@ -194,8 +200,10 @@ func npc_seeking_update(targeter:Node3D, delta:float) -> void:
 # from targeter's perspective will be sought.
 func attempt_to_start_seeking(targeter:Node3D) -> void:
 	# Unset previous target if any
+	var old_target = null
 	if is_instance_valid(target):
 		target.set_targeted(targeter, false)
+		old_target = target
 		target = null
 	# If targeter already has a target, use it
 	if "targeted" in targeter:
@@ -207,6 +215,11 @@ func attempt_to_start_seeking(targeter:Node3D) -> void:
 	# tell target that missile lock is being sought on
 	# it and start the seeking audio and visual
 	if is_instance_valid(target):
+		# If there was an old target and it's not
+		# the same as the new target, then tell
+		# old target that it's no longer locked on to
+		if old_target and old_target != target:
+			old_target.lost_lock(targeter)
 		# set_targeted is called on a hitbox component
 		# and merely modulates the reticle color (for now)
 		# In the future, you might want to do
@@ -218,6 +231,7 @@ func attempt_to_start_seeking(targeter:Node3D) -> void:
 		# only if another missile is ready to fire
 		if missile_launcher.ready_to_fire():
 			start_seeking()
+			target.seeking_lock(targeter)
 
 
 # Fire missile if lock is acquired
@@ -252,7 +266,7 @@ func start_seeking() -> void:
 
 # Move reticle into position and, if it's close enough,
 # acquire lock
-func continue_seeking(delta:float, target_onscreen:Vector2) -> void:
+func continue_seeking(delta:float, target_onscreen:Vector2, targeter:Node3D) -> void:
 	# Move reticle either with lerp or move_toward
 	if use_lerp:
 		lerp_weight += delta/lerp_modifier
@@ -266,6 +280,7 @@ func continue_seeking(delta:float, target_onscreen:Vector2) -> void:
 	#print(int(sqrt(dist_tween_reticles)))
 	if dist_tween_reticles < lock_dist_sqd:
 		acquire_lock()
+		target.lock_acquired(targeter)
 		# Subract delta here because we're
 		# about to add delta in the "if locked"
 		#in the update function, but we

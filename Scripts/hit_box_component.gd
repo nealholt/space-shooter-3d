@@ -24,3 +24,13 @@ func set_targeted(targeter:Node3D, value:bool) -> void:
 	# In the future this should also signal to the
 	# object that owns this hitbox that it is
 	# being targeted
+
+# These are called by the missile lock group when
+# targeter is seeking lock on this hitbox,
+# loses lock, or acquires lock.
+func seeking_lock(_targeter:Node3D) -> void:
+	pass
+func lost_lock(_targeter:Node3D) -> void:
+	pass
+func lock_acquired(_targeter:Node3D) -> void:
+	pass
