@@ -121,6 +121,11 @@ func _ready() -> void:
 	if npc_missile_lock:
 		for c in get_children():
 			c.queue_free()
+	# Sanity check
+	if get_parent() is FighterNPC and !npc_missile_lock:
+		printerr('Missile lock group parent is FighterNPC but npc_missile_lock is false!')
+	if get_parent() is not FighterNPC and npc_missile_lock:
+		printerr('Missile lock group parent is NOT FighterNPC but npc_missile_lock is true!')
 
 
 # Ship that this scene is a child of ought to be the
@@ -145,10 +150,8 @@ func update(targeter:Node3D, delta: float) -> void:
 	else:
 		if npc_missile_lock:
 			if seeking:
-				print('TODO seeking %.1f' % lock_timer)
 				npc_seeking_update(targeter, delta)
 			if locked:
-				print('TODO lock acquired. FIRING')
 				attempt_to_fire_missile(targeter)
 		else: # Player missile lock behavior follows
 			# Get onscreen position of target
@@ -227,7 +230,6 @@ func attempt_to_fire_missile(targeter:Node3D) -> void:
 func start_seeking() -> void:
 	seeking = true
 	if npc_missile_lock:
-		print('TODO seeking has begun')
 		# Reset lock_timer.
 		lock_timer = lock_timeout
 		return

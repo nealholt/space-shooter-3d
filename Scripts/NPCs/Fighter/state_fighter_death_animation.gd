@@ -7,8 +7,10 @@ func Enter() -> void:
 	super.Enter()
 	# Go ballistic. No "air" friction.
 	motion.ballistic = true
-	# Set highest speed
-	motion.goal_speed = 1.0
+	# Zero speed because ballistic turns off
+	# friction and the extra speed makes it
+	# go too fast.
+	motion.goal_speed = 0.0
 	# Disable interrupt
 	motion.can_interrupt_state = false
 	# Time for this state to run.

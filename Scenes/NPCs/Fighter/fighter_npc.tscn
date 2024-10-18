@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=23 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="3_qm2p0"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="4_57m73"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="5_1xytm"]
+[ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="5_6ou5s"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="5_70fr4"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_ne5o5"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="9_0cpbp"]
@@ -50,9 +51,8 @@ shape = SubResource("SphereShape3D_rh3fl")
 
 [node name="Gun" parent="." node_paths=PackedStringArray("collision_exception1", "collision_exception2") instance=ExtResource("4_57m73")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2)
-bullet = ExtResource("5_70fr4")
-bullet_speed = 150.0
-bullet_timeout = 5.0
+bullet = ExtResource("5_6ou5s")
+bullet_speed = 600.0
 fire_rate = 8.0
 collision_exception1 = NodePath("../HitBoxComponent")
 collision_exception2 = NodePath("../Shield/HitBoxComponent")
@@ -98,9 +98,17 @@ mesh = SubResource("SphereMesh_6a830")
 [node name="DeathTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="MissileLauncher" parent="." instance=ExtResource("4_57m73")]
+bullet = ExtResource("5_70fr4")
+damage = 10.0
+bullet_speed = 150.0
+bullet_timeout = 5.0
+fire_rate = 0.033
+
 [node name="MissileLockGroup" parent="." node_paths=PackedStringArray("missile_launcher") instance=ExtResource("17_563f5")]
 npc_missile_lock = true
-missile_launcher = NodePath("../Gun")
+missile_launcher = NodePath("../MissileLauncher")
+missile_range_sqd = 1e+06
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]
