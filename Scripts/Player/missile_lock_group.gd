@@ -238,6 +238,8 @@ func attempt_to_start_seeking(targeter:Node3D) -> void:
 func attempt_to_fire_missile(targeter:Node3D) -> void:
 	if locked:
 		launch(targeter)
+		# Tell the target that it's got a missile inbound
+		target.missile_inbound(targeter)
 	stop_seeking()
 
 

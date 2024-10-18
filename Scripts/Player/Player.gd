@@ -61,3 +61,5 @@ func lost_lock(_targeter:Node3D) -> void:
 	pass #print('enemy lost lock')
 func lock_acquired(_targeter:Node3D) -> void:
 	pass #print('enemy acquired lock')
+func missile_inbound(_targeter:Node3D) -> void:
+	pass
