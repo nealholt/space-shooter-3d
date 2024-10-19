@@ -64,8 +64,6 @@ func set_data(dat:ShootData) -> void:
 	time_out = dat.bullet_timeout
 	# Point the projectile in the given direction
 	global_transform = dat.gun.global_transform
-	# Set velocity
-	velocity = -transform.basis.z * speed
 	# Randomize angle that bullet comes out. I'm cutting
 	# spread in half so that a 10 degree spread is
 	# 10 degrees total, not plus or minus 10 degrees.
@@ -77,7 +75,7 @@ func set_data(dat:ShootData) -> void:
 	# such that the bases are not normalized (but should be)
 	transform.basis = transform.basis.rotated(transform.basis.x.normalized(), randf_range(-spread, spread))
 	transform.basis = transform.basis.rotated(transform.basis.y.normalized(), randf_range(-spread, spread))
-	# Set velocity, but global this time!
+	# Set velocity
 	velocity = -global_transform.basis.z * speed
 	# 'Super powered' doubles turn rate (which is done
 	# in the controller) and 10xs damage
@@ -86,8 +84,7 @@ func set_data(dat:ShootData) -> void:
 	# Set target for seeking munitions
 	if controller:
 		controller.set_data(dat)
-	# Set velocity and set / reset timer
-	velocity = -global_transform.basis.z * speed
+	# Set / reset timer
 	$Timer.start(time_out)
 
 

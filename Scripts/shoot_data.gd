@@ -18,3 +18,7 @@ var use_near_miss:bool
 var spread_deg:float # Bullet spread in degrees
 var collision_exception1:Area3D # Area3d to ignore collisions with
 var collision_exception2:Area3D
+# If aim_assist is not zero, then bullets should
+# adjust to face this location, it will be the
+# intercept returned by aim_assist.gd
+var aim_assist:bool = false

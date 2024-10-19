@@ -1,4 +1,5 @@
 extends Node
+class_name AimAssist
 
 # The idea is that this node will identify whether
 # a ship (or turret) has aim assist, and will
