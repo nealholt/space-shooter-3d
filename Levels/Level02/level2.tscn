@@ -123,6 +123,22 @@ size = Vector3(40, 100, 49.4751)
 [node name="RedTeam" type="Node3D" parent="."]
 script = ExtResource("1_nau7t")
 
+[node name="Shield" parent="RedTeam" instance=ExtResource("3_6nm7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.9984, -310.259)
+max_health = 100
+
+[node name="Shield2" parent="RedTeam" instance=ExtResource("3_6nm7s")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7.21336, 32.9984, -310.259)
+max_health = 100
+
+[node name="Shield3" parent="RedTeam" instance=ExtResource("3_6nm7s")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 17.8579, 32.9984, -310.259)
+max_health = 100
+
+[node name="Shield4" parent="RedTeam" instance=ExtResource("3_6nm7s")]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 48.5387, 32.9984, -310.259)
+max_health = 100
+
 [node name="Orb" parent="RedTeam" instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 11.1917, 71.8786, -123.983)
 
@@ -170,24 +186,6 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 49.2309, 202.131, 5.05472)
 
 [node name="Orb16" parent="RedTeam" instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 143.357, 98.8829, 136.363)
-
-[node name="ShieldGroup" type="Node3D" parent="."]
-
-[node name="Shield" parent="ShieldGroup" instance=ExtResource("3_6nm7s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.9984, -310.259)
-max_health = 100
-
-[node name="Shield2" parent="ShieldGroup" instance=ExtResource("3_6nm7s")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7.21336, 32.9984, -310.259)
-max_health = 100
-
-[node name="Shield3" parent="ShieldGroup" instance=ExtResource("3_6nm7s")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 17.8579, 32.9984, -310.259)
-max_health = 100
-
-[node name="Shield4" parent="ShieldGroup" instance=ExtResource("3_6nm7s")]
-transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 48.5387, 32.9984, -310.259)
-max_health = 100
 
 [node name="BlueTeam" type="Node3D" parent="."]
 script = ExtResource("1_nau7t")

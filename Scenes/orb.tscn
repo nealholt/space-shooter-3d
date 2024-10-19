@@ -13,7 +13,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gsmaa"]
 albedo_color = Color(1, 1, 0, 1)
 
-[node name="Orb" type="StaticBody3D" groups=["team member"]]
+[node name="Orb" type="StaticBody3D"]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 disable_mode = 1
 collision_mask = 0
