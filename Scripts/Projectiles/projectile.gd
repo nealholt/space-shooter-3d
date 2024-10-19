@@ -62,19 +62,27 @@ func set_data(dat:ShootData) -> void:
 	damage = dat.damage
 	speed = dat.bullet_speed
 	time_out = dat.bullet_timeout
-	# Point the projectile in the given direction
+	# Point the projectile in the direction faced
+	# by the gun and give the bullet the global
+	# position of the gun
 	global_transform = dat.gun.global_transform
-	# Randomize angle that bullet comes out. I'm cutting
-	# spread in half so that a 10 degree spread is
-	# 10 degrees total, not plus or minus 10 degrees.
-	var spread:float = deg_to_rad(dat.spread_deg/2.0)
-	# I'm not sure why .normalized() is needed here
-	# and it concerns me that I either need it
-	# everywhere that this sort of rotation is performed
-	# or that something is going uniquely wrong
-	# such that the bases are not normalized (but should be)
-	transform.basis = transform.basis.rotated(transform.basis.x.normalized(), randf_range(-spread, spread))
-	transform.basis = transform.basis.rotated(transform.basis.y.normalized(), randf_range(-spread, spread))
+	# Reorient on target intercept if aim assist is on
+	if dat.aim_assist and dat.target:
+		var intercept:Vector3 = Global.get_intercept(
+			global_position, speed, dat.target)
+		look_at(intercept, Vector3.UP)
+	else:
+		# Randomize angle that bullet comes out. I'm cutting
+		# spread in half so that a 10 degree spread is
+		# 10 degrees total, not plus or minus 10 degrees.
+		var spread:float = deg_to_rad(dat.spread_deg/2.0)
+		# I'm not sure why .normalized() is needed here
+		# and it concerns me that I either need it
+		# everywhere that this sort of rotation is performed
+		# or that something is going uniquely wrong
+		# such that the bases are not normalized (but should be)
+		transform.basis = transform.basis.rotated(transform.basis.x.normalized(), randf_range(-spread, spread))
+		transform.basis = transform.basis.rotated(transform.basis.y.normalized(), randf_range(-spread, spread))
 	# Set velocity
 	velocity = -global_transform.basis.z * speed
 	# 'Super powered' doubles turn rate (which is done
