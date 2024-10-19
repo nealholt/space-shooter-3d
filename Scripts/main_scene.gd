@@ -61,6 +61,17 @@ func load_level(level_name:String) -> void:
 		menu.visible = false
 		hud.visible = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	# Set team node references in the global script
+	Global.red_team_group = null
+	Global.blue_team_group = null
+	for c in Global.get_all_children(main_3d):
+		if c is TeamSetup:
+			if c.team == "red team":
+				Global.red_team_group = c
+			elif c.team == "blue team":
+				Global.blue_team_group = c
+			else:
+				printerr('Unrecognized team %s in main_scene.gd load_level' % c.team)
 
 
 func _on_load_1_pressed() -> void:

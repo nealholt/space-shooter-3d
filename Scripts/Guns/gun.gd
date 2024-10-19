@@ -67,6 +67,9 @@ var reload_sound_player: AudioStreamPlayer3D
 @export var collision_exception1 : Area3D
 @export var collision_exception2 : Area3D
 
+# So guns can know what team they're on
+var ally_team:String
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -148,10 +151,8 @@ func shoot_actual() -> void:
 	for i in range(simultaneous_shots):
 		# Create and fire bullet(s)
 		var b = bullet.instantiate()
-		# Add to main_3d, not root, otherwise the added
-		# node might not be properly cleared when
-		# transitioning to a new scene.
-		Global.main_scene.main_3d.add_child(b)
+		# Add to team group
+		Global.add_to_team_group(b, ally_team)
 		# Pass the bullet the data about the shooter,
 		# initial velocity, etcetera
 		b.set_data(data)

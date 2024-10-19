@@ -5,6 +5,8 @@ extends Node
 # This is a location for anything we want to be globally accessible.
 
 var main_scene: MainScene
+var red_team_group:TeamSetup # Node3D holding everything on team red
+var blue_team_group:TeamSetup # Node3D holding everything on team blue
 var current_camera : Camera3D
 var player: CharacterBody3D
 # For now I'm globally turning off the hud when in
@@ -244,3 +246,31 @@ func get_intercept(shooter_pos:Vector3,
 	if bullet_speed > target_speed:
 		time = (b+sqrt(b*b+4*a*c)) / (2*a)
 	return target_position+time*target_velocity
+
+
+# Get all children of a given node recursively.
+# Source:
+# https://www.reddit.com/r/godot/comments/40cm3w/looping_through_all_children_and_subchildren_of_a/
+# https://www.reddit.com/r/godot/comments/40cm3w/comment/idf9vth/?utm_source=share&utm_medium=web2x&context=3
+# Modified by Neal Holtschulte in 2024
+func get_all_children(node) -> Array:
+	var nodes : Array = []
+	for N in node.get_children():
+		nodes.append(N)
+		if N.get_child_count() > 0:
+			nodes.append_array(get_all_children(N))
+	return nodes
+
+
+# Add the given node to the given team this is
+# important for spawning in new units (and missiles)
+# into the team group that they belong to
+func add_to_team_group(to_add, team:String) -> void:
+	if team == "red team":
+		red_team_group.add_child(to_add)
+		red_team_group.set_team_properties(to_add)
+	elif team == "blue team":
+		blue_team_group.add_child(to_add)
+		blue_team_group.set_team_properties(to_add)
+	else:
+		printerr('Unrecognized team %s in Global.gd load_level' % team)

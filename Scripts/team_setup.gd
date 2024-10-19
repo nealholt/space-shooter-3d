@@ -1,4 +1,5 @@
 extends Node3D
+class_name TeamSetup
 # This script should be attached to organizational nodes
 # holding all members of a given team. The purpose of
 # this script is to consolidate all the code that sets
@@ -22,17 +23,10 @@ func _ready() -> void:
 
 func set_team_properties(parent_node) -> void:
 	# Loop through all children and their children
-	var children:Array = get_all_children(parent_node)
+	var children:Array = Global.get_all_children(parent_node)
 	# Set teams and team colors of all
 	# relevant nodes that are encountered.
 	for child in children:
-		# Currently only Orb, FighterNPC, Player, and
-		# TurretComplete are in group "team member".
-		# You can't use child.name because "FighterNPC" is
-		# the name and when you have duplicates, then there's
-		# FighterNPC2, FighterNPC3, etcetera, which would
-		# not be matched if you only checked
-		# child.name == "FighterNPC"
 		if child.is_in_group("team member"):
 			child.add_to_group(team)
 		
@@ -56,16 +50,3 @@ func set_team_properties(parent_node) -> void:
 		
 		if child is Trail3D: # Contrail
 			child._startColor = color
-
-
-# Source:
-# https://www.reddit.com/r/godot/comments/40cm3w/looping_through_all_children_and_subchildren_of_a/
-# https://www.reddit.com/r/godot/comments/40cm3w/comment/idf9vth/?utm_source=share&utm_medium=web2x&context=3
-# Modified by Neal Holtschulte in 2024
-func get_all_children(node) -> Array:
-	var nodes : Array = []
-	for N in node.get_children():
-		nodes.append(N)
-		if N.get_child_count() > 0:
-			nodes.append_array(get_all_children(N))
-	return nodes

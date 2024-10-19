@@ -74,10 +74,8 @@ func shoot_actual() -> void:
 		ray.force_raycast_update() # Check for collisions
 		# Create a bullet
 		pellet = bullet.instantiate()
-		# Add to main_3d, not root, otherwise the added
-		# node might not be properly cleared when
-		# transitioning to a new scene.
-		Global.main_scene.main_3d.add_child(pellet)
+		# Add to team group
+		Global.add_to_team_group(pellet, ally_team)
 		pellet.set_data(data)
 		if ray.is_colliding():
 			# set_up tells the pellet where to start,
