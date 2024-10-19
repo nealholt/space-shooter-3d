@@ -44,3 +44,6 @@ func shoot(shooter:Node3D, target = null) -> void:
 
 func is_automatic() -> bool:
 	return current_weapon.automatic
+
+func get_bullet_speed() -> float:
+	return current_weapon.bullet_speed

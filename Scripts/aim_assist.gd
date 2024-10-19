@@ -20,7 +20,7 @@ class_name AimAssist
 var angle_assist_limit_radians:float
 
 # Audio to play when aim assist is live
-@export var audio: AudioStreamPlayer3D
+@export var audio:AudioStreamPlayer
 
 func _ready() -> void:
 	angle_assist_limit_radians = deg_to_rad(angle_assist_limit)
@@ -30,7 +30,7 @@ func use_aim_assist(shooter:Node3D, target:Node3D,
 	var intercept:Vector3 = Global.get_intercept(
 		shooter.global_position, bullet_speed, target)
 	var angle_to = Global.get_angle_to_target(
-		shooter.global_position, target.global_position,
+		shooter.global_position, intercept,
 		-shooter.global_basis.z)
 	var do_use_aim_assist:bool = angle_to < angle_assist_limit_radians
 	play_audio(do_use_aim_assist)

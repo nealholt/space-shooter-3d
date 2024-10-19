@@ -87,6 +87,12 @@ func move_and_turn(mover, delta:float) -> void:
 
 
 func shoot(shooter, delta:float) -> void:
+	# Aim assist audio cue
+	if shooter.aim_assist and shooter.targeted and is_instance_valid(shooter.targeted):
+		shooter.aim_assist.use_aim_assist(
+			shooter, shooter.targeted,
+			shooter.weapon_handler.get_bullet_speed())
+	
 	# Trigger pulled. Try to shoot.
 	if shooter.weapon_handler.is_automatic():
 		if Input.is_action_pressed("shoot"):
@@ -95,6 +101,7 @@ func shoot(shooter, delta:float) -> void:
 		if Input.is_action_just_pressed("shoot"):
 			shooter.weapon_handler.shoot(shooter, shooter.targeted)
 	
+	# Missile lock
 	if shooter.missile_lock:
 		# Target most centered enemy and begin missile lock
 		if Input.is_action_just_pressed("right_shoulder"):

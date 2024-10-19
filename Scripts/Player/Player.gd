@@ -5,6 +5,7 @@ extends CharacterBody3D
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var missile_lock: MissileLockGroup = $MissileLockGroup
 @onready var weapon_handler:WeaponHandler = $WeaponHandler
+@onready var aim_assist:AimAssist = $AimAssist
 
 # Currently targeted ship or capital ship component
 var targeted:Node3D

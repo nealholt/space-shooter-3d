@@ -136,6 +136,8 @@ func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
 		data.collision_exception1 = collision_exception1
 	if is_instance_valid(collision_exception2):
 		data.collision_exception2 = collision_exception2
+	if shooter.aim_assist and target and is_instance_valid(target):
+		data.aim_assist = shooter.aim_assist.use_aim_assist(shooter, target, bullet_speed)
 
 
 func shoot_actual() -> void:
