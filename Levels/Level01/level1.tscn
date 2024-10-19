@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2p5fk853guwk"]
+[gd_scene load_steps=7 format=3 uid="uid://b2p5fk853guwk"]
 
 [ext_resource type="Script" path="res://Levels/Level01/level1.gd" id="1_dflt6"]
+[ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_widnh"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="3_matfs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p3vaa"]
@@ -31,5 +32,12 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Setting"]
 environment = SubResource("Environment_xbysf")
 
-[node name="Player" parent="." instance=ExtResource("3_matfs")]
+[node name="RedTeam" type="Node3D" parent="."]
+script = ExtResource("2_widnh")
+
+[node name="BlueTeam" type="Node3D" parent="."]
+script = ExtResource("2_widnh")
+team = "blue team"
+
+[node name="Player" parent="BlueTeam" instance=ExtResource("3_matfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)

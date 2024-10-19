@@ -14,6 +14,8 @@ signal destroyed
 
 @export var missile_lock:MissileLockGroup
 
+@export var aim_assist:AimAssist
+
 
 func _physics_process(delta):
 	controller.move_and_turn(self, delta)

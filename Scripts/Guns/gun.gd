@@ -136,7 +136,11 @@ func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
 		data.collision_exception1 = collision_exception1
 	if is_instance_valid(collision_exception2):
 		data.collision_exception2 = collision_exception2
-	if shooter.aim_assist and target and is_instance_valid(target):
+	# Only use aim assist if it's set up on the shooter
+	# and the target reference is valid
+	# AND the gun only fires one bullet at a time.
+	# Spread shot weapons should not use aim assist.
+	if shooter.aim_assist and simultaneous_shots == 1 and target and is_instance_valid(target):
 		data.aim_assist = shooter.aim_assist.use_aim_assist(shooter, target, bullet_speed)
 
 

@@ -13,7 +13,8 @@ func _ready():
 	# Instantiate orbs
 	for x in range(ORB_COUNT):
 		var orb = orb_scene.instantiate()
-		add_child(orb)
+		$RedTeam.add_child(orb)
+		$RedTeam.set_team_properties(orb)
 		orb.position_randomly()
 		# Connect the destroyed signal of the orb to the orb_died function
 		orb.destroyed.connect(orb_died)

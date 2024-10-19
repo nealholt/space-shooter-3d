@@ -30,3 +30,21 @@ func _on_health_component_died() -> void:
 	on_death_sound.play_then_delete(global_position)
 	# Wait until the end of the frame to execute queue_free
 	Callable(queue_free).call_deferred()
+
+
+# I'm putting this here so the player can
+# target orbs without an error, but for now
+# this does nothing.
+func set_targeted(_targeter:Node3D, _value:bool) -> void:
+	pass
+# These are called by the missile lock group when
+# targeter is seeking lock on this hitbox,
+# loses lock, acquires lock, or fires a missile.
+func seeking_lock(_targeter:Node3D) -> void:
+	pass
+func lost_lock(_targeter:Node3D) -> void:
+	pass
+func lock_acquired(_targeter:Node3D) -> void:
+	pass
+func missile_inbound(_targeter:Node3D) -> void:
+	pass

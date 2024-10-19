@@ -22,6 +22,13 @@ var data:ShootData
 
 var near_miss_audio: AudioStreamPlayer3D
 
+# This is needed because simultaneous shots
+# all reference the same shoot_data so we
+# don't want to modify the shoot_data.aim_assist
+# bool, otherwise only one of all the shots
+# will use the aim assist
+var aim_assist_unhandled:bool = true
+
 # Every bullet has this amount of time during which
 # the bullet will permanently ignore any shields it
 # collides with during those frames. This allows
@@ -66,23 +73,17 @@ func set_data(dat:ShootData) -> void:
 	# by the gun and give the bullet the global
 	# position of the gun
 	global_transform = dat.gun.global_transform
-	# Reorient on target intercept if aim assist is on
-	if dat.aim_assist and dat.target:
-		var intercept:Vector3 = Global.get_intercept(
-			global_position, speed, dat.target)
-		look_at(intercept, Vector3.UP)
-	else:
-		# Randomize angle that bullet comes out. I'm cutting
-		# spread in half so that a 10 degree spread is
-		# 10 degrees total, not plus or minus 10 degrees.
-		var spread:float = deg_to_rad(dat.spread_deg/2.0)
-		# I'm not sure why .normalized() is needed here
-		# and it concerns me that I either need it
-		# everywhere that this sort of rotation is performed
-		# or that something is going uniquely wrong
-		# such that the bases are not normalized (but should be)
-		transform.basis = transform.basis.rotated(transform.basis.x.normalized(), randf_range(-spread, spread))
-		transform.basis = transform.basis.rotated(transform.basis.y.normalized(), randf_range(-spread, spread))
+	# Randomize angle that bullet comes out. I'm cutting
+	# spread in half so that a 10 degree spread is
+	# 10 degrees total, not plus or minus 10 degrees.
+	var spread:float = deg_to_rad(dat.spread_deg/2.0)
+	# I'm not sure why .normalized() is needed here
+	# and it concerns me that I either need it
+	# everywhere that this sort of rotation is performed
+	# or that something is going uniquely wrong
+	# such that the bases are not normalized (but should be)
+	transform.basis = transform.basis.rotated(transform.basis.x.normalized(), randf_range(-spread, spread))
+	transform.basis = transform.basis.rotated(transform.basis.y.normalized(), randf_range(-spread, spread))
 	# Set velocity
 	velocity = -global_transform.basis.z * speed
 	# 'Super powered' doubles turn rate (which is done
@@ -107,6 +108,19 @@ func _physics_process(delta: float) -> void:
 	#crumb.transform = transform
 	#crumb.transform.basis = transform.basis.rotated(transform.basis.x.normalized(), PI/2)
 	#crumb.global_position = global_position
+	
+	# Reorient on target intercept if aim assist is
+	# on, but only do so once and then turn it off.
+	# I do this here, rather than in set_data
+	# because the frame of delay between set_data
+	# and phyics_process can make the intercept
+	# outdated enough that it doesn't work.
+	if aim_assist_unhandled and data.aim_assist and data.target and is_instance_valid(data.target):
+		var intercept:Vector3 = Global.get_intercept(
+			global_position, speed, data.target)
+		look_at(intercept, Vector3.UP)
+		velocity = -global_transform.basis.z * speed
+		aim_assist_unhandled = false # Turn it off. We're done
 	
 	# Seeker missiles and other bullets might
 	# use one of a number of different controllers
