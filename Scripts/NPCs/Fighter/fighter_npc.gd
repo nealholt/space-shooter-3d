@@ -20,9 +20,10 @@ signal destroyed
 func _physics_process(delta):
 	controller.move_and_turn(self, delta)
 	if controller.firing:
-		$Gun.shoot(self)
+		$Gun.shoot(self, controller.target)
 	if missile_lock:
 		missile_lock.update(self, delta)
+
 
 func get_current_gun() -> Gun:
 	return $Gun

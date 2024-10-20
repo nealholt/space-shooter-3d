@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=24 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="9_0cpbp"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/missile_lock_group.tscn" id="17_563f5"]
 [ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/fighter_chassis_ring.tscn" id="19_x2ba7"]
+[ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="19_xjc2u"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="20_a8xhu"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="23_fxr37"]
 [ext_resource type="PackedScene" uid="uid://d3erdmulqy1l2" path="res://Assets/Particles/major_damage.tscn" id="24_a0vwa"]
@@ -35,7 +36,7 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_6dy1g")
 
-[node name="FighterNPC" type="CharacterBody3D" node_paths=PackedStringArray("controller", "health_component", "missile_lock")]
+[node name="FighterNPC" type="CharacterBody3D" node_paths=PackedStringArray("controller", "health_component", "missile_lock", "aim_assist")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
 motion_mode = 1
 script = ExtResource("1_hmqk0")
@@ -44,6 +45,7 @@ finalExplosion = ExtResource("3_5mmgf")
 controller = NodePath("NPCFighterStateMachine")
 health_component = NodePath("HealthComponent")
 missile_lock = NodePath("MissileLockGroup")
+aim_assist = NodePath("AimAssist")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-07, 8.74228e-08, -1, 1.31134e-07, 0, 0, 0)
@@ -109,6 +111,9 @@ fire_rate = 0.033
 npc_missile_lock = true
 missile_launcher = NodePath("../MissileLauncher")
 missile_range = 1000.0
+
+[node name="AimAssist" parent="." instance=ExtResource("19_xjc2u")]
+angle_assist_limit = 10.0
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]

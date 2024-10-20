@@ -18,7 +18,8 @@ var states : Dictionary = {}
 
 # Within this angle of the target, the enemy
 # will start shooting
-@export var shooting_angle := deg_to_rad(10.0) # degrees (immediately converted to radians)
+@export var shooting_angle_degrees := 10.0 # degrees
+var shooting_angle:float
 
 # Modifiers for movement amount
 @export var speed: float = 70.0
@@ -32,8 +33,11 @@ var states : Dictionary = {}
 # Whether or not the controlled ship should try to fire
 var firing:bool = false
 
+var target:Node3D
+
 
 func _ready() -> void:
+	shooting_angle = deg_to_rad(shooting_angle_degrees)
 	#print('In StateMachine _ready adding children:')
 	for child in $States.get_children():
 		if child is State:
@@ -49,7 +53,7 @@ func _ready() -> void:
 func move_and_turn(mover, delta:float) -> void:
 	var gun:Gun = mover.get_current_gun()
 	# Get target from the target selector
-	var target = $TargetSelector.get_target(mover)
+	target = $TargetSelector.get_target(mover)
 	# Update profile.orientation_data
 	if target:
 		movement_profile.orientation_data.update_data(

@@ -33,8 +33,8 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7tg00"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_vnt6v"]
-radius = 3.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
+size = Vector3(6, 2.3, 10.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyjhj"]
 albedo_color = Color(0.282353, 0.282353, 0.282353, 1)
@@ -90,7 +90,8 @@ missile_launcher = NodePath("../MissileLauncher")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
-shape = SubResource("SphereShape3D_vnt6v")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.85)
+shape = SubResource("BoxShape3D_qx57m")
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_vhcpa")]
 max_health = 1000
