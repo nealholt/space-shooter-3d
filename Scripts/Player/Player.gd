@@ -20,12 +20,13 @@ func _ready():
 
 
 func _physics_process(delta):
-	# Move and turn
-	controller.move_and_turn(self,delta)
-	# Select target
-	controller.select_target(self)
-	# Handle shooting of guns and missiles
-	controller.shoot(self, delta)
+	if controller:
+		# Move and turn
+		controller.move_and_turn(self,delta)
+		# Select target
+		controller.select_target(self)
+		# Handle shooting of guns and missiles
+		controller.shoot(self, delta)
 
 
 # Since we're listening for the hitbox getting hit, this doesn't

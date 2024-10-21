@@ -36,7 +36,6 @@ func turn(mover, delta:float) -> void:
 	# Prevent floating point errors from accumulating. (Not sure if necessary)
 	mover.transform.basis = mover.transform.basis.orthonormalized()
 
-
 func move_and_turn(mover, delta:float) -> void:
 	turn(mover, delta)
 	# New velocity is old velocity * friction + impulse in current direction
@@ -60,3 +59,9 @@ func move_and_turn(mover, delta:float) -> void:
 		# https://www.youtube.com/watch?v=SJuScDavstM
 		#collision.get_collider().apply_central_impulse(-collision.get_normal()*100)
 		#collision.get_collider().apply_torque_impulse(mover.transform.basis.y)
+
+func select_target(_targeter:Node3D) -> void:
+	printerr('For the near future, select_target in character_body_control_parent should be overriden by child class.')
+
+func shoot(_shooter, _delta:float) -> void:
+	printerr('For the near future, shoot in character_body_control_parent should be overriden by child class.')

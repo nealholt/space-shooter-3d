@@ -29,6 +29,7 @@ func _ready() -> void:
 	impulse = impulse_std
 
 
+# Override parent class function
 func move_and_turn(mover, delta:float) -> void:
 	friction = friction_std
 	
@@ -86,6 +87,7 @@ func move_and_turn(mover, delta:float) -> void:
 	super.move_and_turn(mover, delta)
 
 
+# Override parent class function
 func shoot(shooter, delta:float) -> void:
 	# Aim assist audio cue
 	if shooter.aim_assist and shooter.targeted and is_instance_valid(shooter.targeted):
@@ -116,6 +118,7 @@ func shoot(shooter, delta:float) -> void:
 			shooter.targeted = shooter.missile_lock.target
 
 
+# Override parent class function
 func select_target(targeter:Node3D) -> void:
 	if Input.is_action_just_pressed("right_shoulder"):
 		# Target most central enemy team member

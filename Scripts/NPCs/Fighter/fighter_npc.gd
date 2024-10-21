@@ -18,11 +18,13 @@ signal destroyed
 
 
 func _physics_process(delta):
-	controller.move_and_turn(self, delta)
-	if controller.firing:
-		$Gun.shoot(self, controller.target)
-	if missile_lock:
-		missile_lock.update(self, delta)
+	if controller:
+		# Move and turn
+		controller.move_and_turn(self, delta)
+		# Select target
+		controller.select_target(self)
+		# Handle shooting of guns and missiles
+		controller.shoot(self, delta)
 
 
 func get_current_gun() -> Gun:

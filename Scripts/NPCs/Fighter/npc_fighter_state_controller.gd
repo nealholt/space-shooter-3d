@@ -30,9 +30,6 @@ var shooting_angle:float
 @export var speed_lerp: float = 10.0
 @export var lerp_str: float = 3.0 # for turning
 
-# Whether or not the controlled ship should try to fire
-var firing:bool = false
-
 var target:Node3D
 
 
@@ -52,10 +49,8 @@ func _ready() -> void:
 
 func move_and_turn(mover, delta:float) -> void:
 	var gun:Gun = mover.get_current_gun()
-	# Get target from the target selector
-	target = $TargetSelector.get_target(mover)
 	# Update profile.orientation_data
-	if target:
+	if target and is_instance_valid(target):
 		movement_profile.orientation_data.update_data(
 			mover.global_position, gun.bullet_speed,
 			target, mover.global_transform.basis)
@@ -75,10 +70,20 @@ func move_and_turn(mover, delta:float) -> void:
 	
 	# Call parent class method
 	super.move_and_turn(mover, delta)
-	
-	# Decide whether or not to fire
-	firing = target and movement_profile.orientation_data.dist_sqd < gun.range_sqd and Global.get_angle_to_target(mover.global_position,target.global_position, -mover.global_transform.basis.z) < shooting_angle
 
+
+func select_target(targeter:Node3D) -> void:
+	# Get target from the target selector
+	target = $TargetSelector.get_target(targeter)
+
+
+func shoot(shooter, delta:float) -> void:
+	var gun = shooter.get_current_gun()
+	# Decide whether or not to fire
+	if target and is_instance_valid(target) and movement_profile.orientation_data.dist_sqd < gun.range_sqd and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < shooting_angle:
+		gun.shoot(shooter, target)
+	if shooter.missile_lock:
+		shooter.missile_lock.update(shooter, delta)
 
 
 func on_child_transition(state, new_state_name):
