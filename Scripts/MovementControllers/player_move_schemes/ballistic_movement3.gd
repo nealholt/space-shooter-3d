@@ -27,6 +27,10 @@ var impulse_lerp: float =  0.2
 
 func _ready() -> void:
 	impulse = impulse_std
+	# Tell the global script who the player is.
+	# Since this is a player controller, it SHOULD
+	# be an immediate child of the player.
+	Global.player = get_parent()
 
 
 # Override parent class function

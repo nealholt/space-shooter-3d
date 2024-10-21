@@ -63,9 +63,10 @@ func _on_health_component_died() -> void:
 	# Tell controller to enter death animation state
 	# which should be some sort of chaotic tumble
 	controller.enter_death_animation()
-	# Start a timer. Go into death animation
-	# for this duration.
-	$DeathTimer.start(randf_range(1.5, 4.5))
+	# Start a timer, if it's not already started.
+	# Go into death animation for this duration.
+	if $DeathTimer.is_stopped():
+		$DeathTimer.start(randf_range(1.5, 4.5))
 
 
 func _on_death_timer_timeout() -> void:

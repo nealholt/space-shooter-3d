@@ -8,6 +8,12 @@ signal died
 
 @export var max_health := 10
 
+# Only signal died once. If for some reason,
+# later on a component gets resurrected, then
+# this bool should be reset as part of that
+# resurrection.
+var signalled_died:bool = false
+
 #Getters and Setters can be set right after the variable!
 #https://www.udemy.com/course/complete-godot-3d/learn/lecture/40514288#questions
 var health: int:
@@ -21,8 +27,9 @@ var health: int:
 		# Change health
 		health = health_in
 		# If dead
-		if health <= 0:
+		if health <= 0 and !signalled_died:
 			died.emit()
+			signalled_died = true
 
 
 # Called when the node enters the scene tree for the first time.

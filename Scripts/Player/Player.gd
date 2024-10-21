@@ -14,11 +14,6 @@ var targeted:Node3D
 @export var controller : CharacterBodyControlParent
 
 
-func _ready():
-	# Tell the global script who the player is
-	Global.player = self
-
-
 func _physics_process(delta):
 	if controller:
 		# Move and turn
