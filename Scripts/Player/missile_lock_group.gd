@@ -206,8 +206,8 @@ func attempt_to_start_seeking(targeter:Node3D) -> void:
 		old_target = target
 		target = null
 	# If targeter already has a target, use it
-	if "targeted" in targeter:
-		target = targeter.targeted
+	if targeter.controller and targeter.controller.target:
+		target = targeter.controller.target
 	else:
 		# Target most central enemy team member
 		target = Global.get_center_most_from_group(enemy_team,targeter)

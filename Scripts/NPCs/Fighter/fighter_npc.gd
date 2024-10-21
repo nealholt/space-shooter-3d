@@ -3,18 +3,48 @@ class_name FighterNPC
 
 signal destroyed
 
+var aim_assist:AimAssist
+var controller : CharacterBodyControlParent
+# The following is used for some testing, to display
+# out the npc's health
+var health_component:HealthComponent
+var missile_lock:MissileLockGroup
+
+# TODO left off here merging player.gd and npc_fighter code
+# NPC fighter needs a 
+#var weapon_handler:WeaponHandler
+
 @export var deathExplosion : PackedScene
 @export var finalExplosion : PackedScene
 
-@export var controller : CharacterBodyControlParent
 
-# The following is used for some testing, to display
-# out the npc's health
-@export var health_component:HealthComponent
-
-@export var missile_lock:MissileLockGroup
-
-@export var aim_assist:AimAssist
+#I really like the idea of _ready functions
+# searching through and equipping components
+# they find as children.
+#Search subtree for components. If found,
+# save a reference to them and subscribe to
+# their signals.
+# Inspired by luislodosm's response here:
+# https://forum.godotengine.org/t/easy-way-to-get-certain-type-of-children/21496/2
+# And also the part of the following example
+# https://www.gdquest.com/tutorial/godot/design-patterns/entity-component-pattern/
+# at this part:
+# "func _find_power_source_child(parent: Node) -> PowerSource:"
+# This link is not saved elsewhere. It's a good
+# little read, but acknowledges at the bottom
+# that it's best for simulation-type games.
+func _ready() -> void:
+	# Search through children for various components
+	# and save a reference to them.
+	for child in get_children():
+		if child is AimAssist:
+			aim_assist = child
+		if child is CharacterBodyControlParent:
+			controller = child
+		if child is HealthComponent:
+			health_component = child
+		if child is MissileLockGroup:
+			missile_lock = child
 
 
 func _physics_process(delta):

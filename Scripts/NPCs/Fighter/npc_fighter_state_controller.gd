@@ -30,8 +30,6 @@ var shooting_angle:float
 @export var speed_lerp: float = 10.0
 @export var lerp_str: float = 3.0 # for turning
 
-var target:Node3D
-
 
 func _ready() -> void:
 	shooting_angle = deg_to_rad(shooting_angle_degrees)

@@ -4,6 +4,9 @@ class_name CharacterBodyControlParent
 # Parent class for movement controllers for fighters,
 # whether NPC or player
 
+# Currently targeted hitbox
+var target:Node3D
+
 # Fundamental control inputs
 var pitch_input: float = 0.0
 var roll_input: float = 0.0

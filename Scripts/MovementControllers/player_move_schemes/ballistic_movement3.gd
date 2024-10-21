@@ -94,18 +94,18 @@ func move_and_turn(mover, delta:float) -> void:
 # Override parent class function
 func shoot(shooter, delta:float) -> void:
 	# Aim assist audio cue
-	if shooter.aim_assist and shooter.targeted and is_instance_valid(shooter.targeted):
+	if shooter.aim_assist and target and is_instance_valid(target):
 		shooter.aim_assist.use_aim_assist(
-			shooter, shooter.targeted,
+			shooter, target,
 			shooter.weapon_handler.get_bullet_speed())
 	
 	# Trigger pulled. Try to shoot.
 	if shooter.weapon_handler.is_automatic():
 		if Input.is_action_pressed("shoot"):
-			shooter.weapon_handler.shoot(shooter, shooter.targeted)
+			shooter.weapon_handler.shoot(shooter, target)
 	else: # Semiautomatic
 		if Input.is_action_just_pressed("shoot"):
-			shooter.weapon_handler.shoot(shooter, shooter.targeted)
+			shooter.weapon_handler.shoot(shooter, target)
 	
 	# Missile lock
 	if shooter.missile_lock:
@@ -119,14 +119,14 @@ func shoot(shooter, delta:float) -> void:
 		# Without this next code, autoseeking missile
 		# won't work.
 		if is_instance_valid(shooter.missile_lock.target):
-			shooter.targeted = shooter.missile_lock.target
+			target = shooter.missile_lock.target
 
 
 # Override parent class function
 func select_target(targeter:Node3D) -> void:
 	if Input.is_action_just_pressed("right_shoulder"):
 		# Target most central enemy team member
-		var target = Global.get_center_most_from_group(enemy_team,targeter)
+		target = Global.get_center_most_from_group(enemy_team,targeter)
 		# If target is valid and missile is off cooldown,
 		# tell target that missile lock is being sought on
 		# it and start the seeking audio and visual
@@ -134,4 +134,3 @@ func select_target(targeter:Node3D) -> void:
 			# set_targeted is called on a hitbox component
 			# and merely modulates the reticle color (for now)
 			target.set_targeted(targeter, true)
-			targeter.targeted = target

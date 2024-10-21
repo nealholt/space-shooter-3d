@@ -66,10 +66,9 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_j4o42")
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("controller")]
+[node name="Player" type="CharacterBody3D"]
 motion_mode = 1
 script = ExtResource("1_rf46g")
-controller = NodePath("BallisticMovementV3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_7tg00")

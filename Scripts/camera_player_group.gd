@@ -86,8 +86,8 @@ func _physics_process(delta: float) -> void:
 # Turn on looking at player's target
 func turn_on_look() -> void:
 	look_at_target = true
-	if is_instance_valid(Global.player.targeted):
-		target = Global.player.targeted
+	if is_instance_valid(Global.player.controller.target):
+		target = Global.player.controller.target
 
 
 # Transition to first person camera
@@ -137,8 +137,8 @@ func flyby_camera() -> void:
 
 # Transition to target closeup camera
 func target_closeup_camera() -> void:
-	if is_instance_valid(Global.player.targeted):
-		target = Global.player.targeted
+	if Global.player.controller.target and is_instance_valid(Global.player.controller.target):
+		target = Global.player.controller.target
 		state = CameraState.TARGETCLOSEUP
 		free_camera.make_current()
 		Global.current_camera = free_camera
