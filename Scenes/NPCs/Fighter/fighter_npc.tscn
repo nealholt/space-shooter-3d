@@ -88,9 +88,6 @@ mesh = SubResource("SphereMesh_6a830")
 
 [node name="NPCFighterStateMachine" parent="." instance=ExtResource("9_0cpbp")]
 
-[node name="DeathTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="MissileLauncher" parent="." instance=ExtResource("4_57m73")]
 bullet = ExtResource("5_70fr4")
 damage = 10.0
@@ -105,7 +102,5 @@ missile_range = 1000.0
 
 [node name="AimAssist" parent="." instance=ExtResource("19_xjc2u")]
 angle_assist_limit = 10.0
-
-[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 
 [editable path="Shield"]

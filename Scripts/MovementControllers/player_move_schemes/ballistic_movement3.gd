@@ -24,6 +24,8 @@ var impulse_accel: float = 100.0
 var impulse_brake: float = 0.0
 var impulse_lerp: float =  0.2
 
+var is_dead := false
+
 
 func _ready() -> void:
 	impulse = impulse_std
@@ -35,6 +37,9 @@ func _ready() -> void:
 
 # Override parent class function
 func move_and_turn(mover, delta:float) -> void:
+	if is_dead:
+		return
+	
 	friction = friction_std
 	
 	var pitch_modifier: float = 1.0
@@ -93,6 +98,9 @@ func move_and_turn(mover, delta:float) -> void:
 
 # Override parent class function
 func shoot(shooter, delta:float) -> void:
+	if is_dead:
+		return
+	
 	# Aim assist audio cue
 	if shooter.aim_assist and target and is_instance_valid(target):
 		shooter.aim_assist.use_aim_assist(
@@ -124,6 +132,9 @@ func shoot(shooter, delta:float) -> void:
 
 # Override parent class function
 func select_target(targeter:Node3D) -> void:
+	if is_dead:
+		return
+	
 	if Input.is_action_just_pressed("right_shoulder"):
 		# Target most central enemy team member
 		target = Global.get_center_most_from_group(enemy_team,targeter)
@@ -134,3 +145,15 @@ func select_target(targeter:Node3D) -> void:
 			# set_targeted is called on a hitbox component
 			# and merely modulates the reticle color (for now)
 			target.set_targeted(targeter, true)
+
+
+# Override parent class function
+func enter_death_animation() -> void:
+	is_dead = true
+
+
+# Override parent class function
+# Died implies that the death animation has concluded.
+func died(_who_died) -> void:
+	# Player died, so go to main menu
+	Global.main_scene.to_main_menu()

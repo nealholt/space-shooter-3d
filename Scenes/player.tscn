@@ -96,7 +96,7 @@ shape = SubResource("BoxShape3D_qx57m")
 stream = ExtResource("8_klb2b")
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_vhcpa")]
-max_health = 1000
+max_health = 20
 
 [node name="Sounds" type="Node3D" parent="."]
 

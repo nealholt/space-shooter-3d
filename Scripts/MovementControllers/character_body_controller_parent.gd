@@ -77,3 +77,13 @@ func shoot(_shooter, _delta:float) -> void:
 func took_damage() -> void:
 	#printerr('For the near future, took_damage in character_body_control_parent should be overriden by child class.')
 	pass # Player controller doesn't currently use this function
+
+func enter_death_animation() -> void:
+	printerr('For the near future, enter_death_animation in character_body_control_parent should be overriden by child class.')
+
+# Died implies that the death animation has concluded.
+# I'm having the player controller reload the main
+# menu if the player died and it will be done through
+# an overriden version of this function.
+func died(_who_died) -> void:
+	printerr('For the near future, died in character_body_control_parent should be overriden by child class.')

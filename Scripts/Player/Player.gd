@@ -9,6 +9,7 @@ var health_component:HealthComponent
 var missile_lock: MissileLockGroup
 var weapon_handler:WeaponHandler
 
+var death_animation_timer:Timer
 # The deathExplosion happens when the ship
 # is first killed. Then the finalExplosion
 # happens after the death animation completes.
@@ -76,8 +77,41 @@ func _on_health_component_health_lost() -> void:
 	if health_component and burning_trail:
 		burning_trail.display_damage(health_component.get_percent_health())
 
-# TODO left off here merging player.gd and npc_fighter code
+
 func _on_health_component_died() -> void:
+	# Explode
+	if deathExplosion:
+		var explosion = deathExplosion.instantiate()
+		# Add to main_3d, not root, otherwise the added
+		# node might not be properly cleared when
+		# transitioning to a new scene.
+		Global.main_scene.main_3d.add_child(explosion)
+		explosion.global_position = global_position
+	# Tell controller to enter death animation state
+	# which should be some sort of chaotic tumble
+	controller.enter_death_animation()
+	# Create and start a timer, if you haven't
+	# already done so.
+	# Go into death animation for this duration.
+	if !death_animation_timer:
+		death_animation_timer = Timer.new()
+		add_child(death_animation_timer)
+		death_animation_timer.timeout.connect(_on_death_timer_timeout)
+		death_animation_timer.start(randf_range(1.5, 4.5))
+
+
+func _on_death_timer_timeout() -> void:
 	destroyed.emit()
-	# Load main scene if player dies
-	Global.main_scene.to_main_menu()
+	# At the end of the timer, add an explosion to
+	# main_3d and properly queue free this ship
+	if finalExplosion:
+		var explosion = finalExplosion.instantiate()
+		# Add to main_3d, not root, otherwise the added
+		# node might not be properly cleared when
+		# transitioning to a new scene.
+		Global.main_scene.main_3d.add_child(explosion)
+		explosion.global_position = global_position
+	# The controller will handle cleaning up.
+	# NPCs will be queue freed. Players will be
+	# sent back to the main menu.
+	controller.died(self)

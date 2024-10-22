@@ -104,14 +104,19 @@ func on_child_transition(state, new_state_name):
 	if $"../DebugLabel" and $"../DebugLabel".visible:
 		$"../DebugLabel".text = new_state_name
 
-
+# Override parent class function
 func took_damage() -> void:
 	go_evasive()
-
 
 func go_evasive() -> void:
 	current_state.choose_random_evasion()
 
-
+# Override parent class function
 func enter_death_animation() -> void:
 	current_state.enter_death_animation()
+
+# Override parent class function
+# Died implies that the death animation has concluded.
+func died(who_died) -> void:
+	# NPC died, so queue free it at the end of the frame
+	Callable(who_died.queue_free).call_deferred()
