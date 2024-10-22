@@ -4,9 +4,8 @@ class_name FighterNPC
 signal destroyed
 
 var aim_assist:AimAssist
-var controller : CharacterBodyControlParent
-# The following is used for some testing, to display
-# out the npc's health
+var burning_trail:BurningTrail # This is a visual effect
+var controller:CharacterBodyControlParent
 var health_component:HealthComponent
 var missile_lock:MissileLockGroup
 var weapon_handler:WeaponHandler
@@ -41,13 +40,18 @@ func _ready() -> void:
 	for child in get_children():
 		if child is AimAssist:
 			aim_assist = child
-		if child is CharacterBodyControlParent:
+		elif child is BurningTrail:
+			burning_trail = child
+		elif child is CharacterBodyControlParent:
 			controller = child
-		if child is HealthComponent:
+		elif child is HealthComponent:
 			health_component = child
-		if child is MissileLockGroup:
+			# Connect signals with code
+			health_component.health_lost.connect(_on_health_component_health_lost)
+			health_component.died.connect(_on_health_component_died)
+		elif child is MissileLockGroup:
 			missile_lock = child
-		if child is WeaponHandler:
+		elif child is WeaponHandler:
 			weapon_handler = child
 
 
@@ -65,29 +69,17 @@ func get_current_gun() -> Gun:
 	return weapon_handler.current_weapon
 
 
-# TODO left off here merging player.gd and npc_fighter code
-
 func _on_health_component_health_lost() -> void:
-	# Force a switch into evasion state
-	controller.go_evasive()
-	#print('hit on hull')
+	# Communicate damage to the controller.
+	# This will let npcs take evasive action.
+	if controller:
+		controller.took_damage()
 	# Trail smoke and sparks when damaged
-	var percent_health = $HealthComponent.get_percent_health()
-	#print(percent_health)
-	if percent_health <= 0.0: #This will happen for death animation
-		$DamageEmitters/MildDamage.stop_emitting()
-		$DamageEmitters/MajorDamageLineSparks.stop_emitting()
-		$DamageEmitters/MajorDamage.start_emitting()
-	elif percent_health < 0.3:
-		$DamageEmitters/MildDamage.stop_emitting()
-		$DamageEmitters/MajorDamageLineSparks.start_emitting()
-		$DamageEmitters/MajorDamage.stop_emitting()
-	elif percent_health < 0.6:
-		$DamageEmitters/MildDamage.start_emitting()
-		$DamageEmitters/MajorDamageLineSparks.stop_emitting()
-		$DamageEmitters/MajorDamage.stop_emitting()
+	if health_component and burning_trail:
+		burning_trail.display_damage(health_component.get_percent_health())
 
 
+# TODO left off here merging player.gd and npc_fighter code
 func _on_health_component_died() -> void:
 	# Explode
 	var explosion = deathExplosion.instantiate()

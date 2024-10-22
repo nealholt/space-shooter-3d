@@ -105,6 +105,10 @@ func on_child_transition(state, new_state_name):
 		$"../DebugLabel".text = new_state_name
 
 
+func took_damage() -> void:
+	go_evasive()
+
+
 func go_evasive() -> void:
 	current_state.choose_random_evasion()
 

@@ -248,8 +248,6 @@ stream = ExtResource("30_ug7q2")
 volume_db = -8.0
 pitch_scale = 0.5
 
-[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
-
 [editable path="WeaponHandler/GatlingGun/GunModel"]
 [editable path="WeaponHandler/HitScanGun/Node"]
 [editable path="Shield"]

@@ -68,3 +68,12 @@ func select_target(_targeter:Node3D) -> void:
 
 func shoot(_shooter, _delta:float) -> void:
 	printerr('For the near future, shoot in character_body_control_parent should be overriden by child class.')
+
+# This lets the controller decide how to respond
+# to damage in the future this probably should
+# be more sophisticated and will require an
+# input, but for now it's mainly here so that
+# npcs can take evasive maneuvers when they get shot.
+func took_damage() -> void:
+	#printerr('For the near future, took_damage in character_body_control_parent should be overriden by child class.')
+	pass # Player controller doesn't currently use this function

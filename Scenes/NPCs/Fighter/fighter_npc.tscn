@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=23 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
@@ -11,15 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="5_70fr4"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_ne5o5"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="9_0cpbp"]
+[ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="14_4fwow"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/missile_lock_group.tscn" id="17_563f5"]
 [ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/fighter_chassis_ring.tscn" id="19_x2ba7"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="19_xjc2u"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="20_a8xhu"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="23_fxr37"]
-[ext_resource type="PackedScene" uid="uid://d3erdmulqy1l2" path="res://Assets/Particles/major_damage.tscn" id="24_a0vwa"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="24_ovt4a"]
-[ext_resource type="PackedScene" uid="uid://b70y8labc000a" path="res://Assets/Particles/major_damage_line_sparks.tscn" id="25_ij4bf"]
-[ext_resource type="PackedScene" uid="uid://dk37kibucmpd0" path="res://Assets/Particles/mild_damage.tscn" id="26_mibdx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rh3fl"]
 
@@ -86,22 +84,9 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 [node name="FresnelAura" parent="Shield" index="0"]
 mesh = SubResource("SphereMesh_6a830")
 
-[node name="DamageEmitters" type="Node3D" parent="."]
-
-[node name="MajorDamage" parent="DamageEmitters" instance=ExtResource("24_a0vwa")]
-
-[node name="MajorDamageLineSparks" parent="DamageEmitters" instance=ExtResource("25_ij4bf")]
-
-[node name="MildDamage" parent="DamageEmitters" instance=ExtResource("26_mibdx")]
+[node name="BurningTrail" parent="." instance=ExtResource("14_4fwow")]
 
 [node name="NPCFighterStateMachine" parent="." instance=ExtResource("9_0cpbp")]
-shooting_angle_degrees = null
-speed = null
-pitch_amt = null
-roll_amt = null
-yaw_amt = null
-speed_lerp = null
-lerp_str = null
 
 [node name="DeathTimer" type="Timer" parent="."]
 one_shot = true
@@ -121,8 +106,6 @@ missile_range = 1000.0
 [node name="AimAssist" parent="." instance=ExtResource("19_xjc2u")]
 angle_assist_limit = 10.0
 
-[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
-[connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 
 [editable path="Shield"]
