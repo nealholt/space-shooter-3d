@@ -9,11 +9,13 @@ var controller : CharacterBodyControlParent
 # out the npc's health
 var health_component:HealthComponent
 var missile_lock:MissileLockGroup
+var weapon_handler:WeaponHandler
 
-# TODO left off here merging player.gd and npc_fighter code
-# NPC fighter needs a 
-#var weapon_handler:WeaponHandler
-
+# The deathExplosion happens when the ship
+# is first killed. Then the finalExplosion
+# happens after the death animation completes.
+# This, like many other things, was inspired
+# by House of the Dying Sun.
 @export var deathExplosion : PackedScene
 @export var finalExplosion : PackedScene
 
@@ -45,6 +47,8 @@ func _ready() -> void:
 			health_component = child
 		if child is MissileLockGroup:
 			missile_lock = child
+		if child is WeaponHandler:
+			weapon_handler = child
 
 
 func _physics_process(delta):
@@ -58,8 +62,10 @@ func _physics_process(delta):
 
 
 func get_current_gun() -> Gun:
-	return $Gun
+	return weapon_handler.current_weapon
 
+
+# TODO left off here merging player.gd and npc_fighter code
 
 func _on_health_component_health_lost() -> void:
 	# Force a switch into evasion state

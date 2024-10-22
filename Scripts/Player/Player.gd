@@ -10,6 +10,14 @@ var health_component:HealthComponent
 var missile_lock: MissileLockGroup
 var weapon_handler:WeaponHandler
 
+# The deathExplosion happens when the ship
+# is first killed. Then the finalExplosion
+# happens after the death animation completes.
+# This, like many other things, was inspired
+# by House of the Dying Sun.
+@export var deathExplosion : PackedScene
+@export var finalExplosion : PackedScene
+
 #I really like the idea of _ready functions
 # searching through and equipping components
 # they find as children.
@@ -50,6 +58,9 @@ func _physics_process(delta):
 		# Handle shooting of guns and missiles
 		controller.shoot(self, delta)
 
+
+func get_current_gun() -> Gun:
+	return weapon_handler.current_weapon
 
 # TODO left off here merging player.gd and npc_fighter code
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=25 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
 [ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="3_5mmgf"]
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="3_qm2p0"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="4_57m73"]
+[ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="4_dhpb0"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="5_1xytm"]
 [ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="5_6ou5s"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="5_70fr4"]
@@ -47,13 +48,15 @@ finalExplosion = ExtResource("3_5mmgf")
 transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-07, 8.74228e-08, -1, 1.31134e-07, 0, 0, 0)
 shape = SubResource("SphereShape3D_rh3fl")
 
-[node name="Gun" parent="." node_paths=PackedStringArray("collision_exception1", "collision_exception2") instance=ExtResource("4_57m73")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2)
+[node name="WeaponHandler" parent="." instance=ExtResource("4_dhpb0")]
+
+[node name="Gun" parent="WeaponHandler" node_paths=PackedStringArray("collision_exception1", "collision_exception2") instance=ExtResource("4_57m73")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2)
 bullet = ExtResource("5_6ou5s")
 bullet_speed = 600.0
 fire_rate = 8.0
-collision_exception1 = NodePath("../HitBoxComponent")
-collision_exception2 = NodePath("../Shield/HitBoxComponent")
+collision_exception1 = NodePath("../../HitBoxComponent")
+collision_exception2 = NodePath("../../Shield/HitBoxComponent")
 
 [node name="HitFeedback" parent="." instance=ExtResource("3_qm2p0")]
 
