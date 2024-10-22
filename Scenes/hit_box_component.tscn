@@ -5,7 +5,9 @@
 
 [node name="HitBoxComponent" type="Area3D" groups=["damageable", "team member"]]
 collision_layer = 2
-collision_mask = 0
 script = ExtResource("1_03eoi")
 
 [node name="TargetReticles" parent="." instance=ExtResource("2_dephd")]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

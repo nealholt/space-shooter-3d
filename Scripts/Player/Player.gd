@@ -10,10 +10,6 @@ var health_component:HealthComponent
 var missile_lock: MissileLockGroup
 var weapon_handler:WeaponHandler
 
-# TODO left off here merging player.gd and npc_fighter code
-@onready var got_hit_audio: AudioStreamPlayer3D = $Sounds/GotHitAudio
-
-
 #I really like the idea of _ready functions
 # searching through and equipping components
 # they find as children.
@@ -55,19 +51,7 @@ func _physics_process(delta):
 		controller.shoot(self, delta)
 
 
-# Since we're listening for the hitbox getting hit, this doesn't
-# actually make a noise based on damage and it isn't.
-# For ex, this makes a noise upon collision with an enemy,
-# but that doesn't actually do damage.
-func _on_hit_box_component_area_entered(_area: Area3D) -> void:
-	#print('hitbox area entered')
-	got_hit_audio.play()
-func _on_hit_box_component_body_entered(_body: Node3D) -> void:
-	#print('hitbox body entered')
-	got_hit_audio.play()
-# THIS is the noise that gets played when we take damage
-func _on_health_component_health_lost() -> void:
-	got_hit_audio.play()
+# TODO left off here merging player.gd and npc_fighter code
 
 func _on_health_component_died() -> void:
 	destroyed.emit()
