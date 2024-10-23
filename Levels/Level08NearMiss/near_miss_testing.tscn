@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://jw5871doy4ch"]
 
-[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="1_ba5yk"]
+[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_ba5yk"]
 [ext_resource type="Script" path="res://Levels/Level08NearMiss/bullet_spawner_testing.gd" id="2_00mhe"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_wmf1n"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="3_fyqj6"]

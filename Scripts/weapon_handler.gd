@@ -6,7 +6,7 @@ class_name WeaponHandler
 
 var index = -1
 
-var current_weapon: Node3D #TODO shouldn't this be a Gun?
+var current_weapon: Gun
 
 func _ready() -> void:
 	change_weapon()

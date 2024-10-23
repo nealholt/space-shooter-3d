@@ -155,9 +155,9 @@ func target_closeup_camera() -> void:
 # This is where we are looking at target but "over the shoulder"
 # from the player themself.
 func target_camera() -> void:
-	if is_instance_valid(Global.player.targeted):
+	if is_instance_valid(Global.player.controller.target):
 		state = CameraState.TARGETVIEW
-		target = Global.player.targeted
+		target = Global.player.controller.target
 		free_camera.make_current()
 		Global.current_camera = free_camera
 		view_target_from_player()

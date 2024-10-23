@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="1_5h06f"]
 [ext_resource type="PackedScene" uid="uid://dp3w08p8gkd3p" path="res://Scenes/capital_ship_frigate.tscn" id="2_jciow"]
-[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="3_gy535"]
+[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_gy535"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sg63n"]
 sky_top_color = Color(0.215686, 0.0235294, 0.490196, 1)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Levels/Level01/level1.gd" id="1_dflt6"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_widnh"]
-[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="3_matfs"]
+[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_matfs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p3vaa"]
 sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)

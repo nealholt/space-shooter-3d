@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dwtyyrj0kw84u"]
 
 [ext_resource type="PackedScene" uid="uid://dc6ljj4ueibm1" path="res://Scenes/asteroid.tscn" id="1_88b2k"]
-[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/player.tscn" id="1_u6taa"]
+[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_u6taa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hwd7p"]
 sky_top_color = Color(0.0509646, 0.0629226, 0.533014, 1)

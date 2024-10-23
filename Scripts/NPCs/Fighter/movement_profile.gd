@@ -6,7 +6,7 @@ class_name MovementProfile
 # evasion sequence.
 
 # All the states will modify this intermediate
-# class and the FighterNPC will check the settings
+# class and the ship will check the settings
 # here on each frame and obey the given directions.
 # This design was suggested in the last section of
 # this video:

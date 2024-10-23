@@ -115,7 +115,7 @@ func _physics_process(delta: float) -> void:
 	# because the frame of delay between set_data
 	# and phyics_process can make the intercept
 	# outdated enough that it doesn't work.
-	if aim_assist_unhandled and data.aim_assist and data.target and is_instance_valid(data.target):
+	if aim_assist_unhandled and data and data.aim_assist and data.target and is_instance_valid(data.target):
 		var intercept:Vector3 = Global.get_intercept(
 			global_position, speed, data.target)
 		look_at(intercept, Vector3.UP)

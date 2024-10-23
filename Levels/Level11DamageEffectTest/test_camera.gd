@@ -2,7 +2,7 @@ extends Camera3D
 
 
 @export var distance_ahead := 90.0
-@onready var target:FighterNPC = $"../FighterNPC"
+@onready var target:Ship = $"../FighterNPC"
 
 
 # Called when the node enters the scene tree for the first time.
