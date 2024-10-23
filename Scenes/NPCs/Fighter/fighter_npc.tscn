@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://juku72fh3dl0"]
 
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/fighter_npc.gd" id="1_hmqk0"]
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_dn8ab"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
 [ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="3_5mmgf"]
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="3_qm2p0"]
@@ -38,7 +38,7 @@ material = SubResource("ShaderMaterial_6dy1g")
 [node name="FighterNPC" type="CharacterBody3D"]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
 motion_mode = 1
-script = ExtResource("1_hmqk0")
+script = ExtResource("1_dn8ab")
 deathExplosion = ExtResource("2_l8ark")
 finalExplosion = ExtResource("3_5mmgf")
 

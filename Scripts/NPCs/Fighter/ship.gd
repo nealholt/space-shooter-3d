@@ -1,12 +1,13 @@
 extends CharacterBody3D
+class_name Ship
 
 signal destroyed
 
 var aim_assist:AimAssist
 var burning_trail:BurningTrail # This is a visual effect
-var controller : CharacterBodyControlParent
+var controller:CharacterBodyControlParent
 var health_component:HealthComponent
-var missile_lock: MissileLockGroup
+var missile_lock:MissileLockGroup
 var weapon_handler:WeaponHandler
 
 var death_animation_timer:Timer
@@ -17,6 +18,7 @@ var death_animation_timer:Timer
 # by House of the Dying Sun.
 @export var deathExplosion : PackedScene
 @export var finalExplosion : PackedScene
+
 
 #I really like the idea of _ready functions
 # searching through and equipping components
@@ -57,7 +59,7 @@ func _ready() -> void:
 func _physics_process(delta):
 	if controller:
 		# Move and turn
-		controller.move_and_turn(self,delta)
+		controller.move_and_turn(self, delta)
 		# Select target
 		controller.select_target(self)
 		# Handle shooting of guns and missiles

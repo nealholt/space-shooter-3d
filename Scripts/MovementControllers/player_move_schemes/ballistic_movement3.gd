@@ -154,6 +154,7 @@ func enter_death_animation() -> void:
 
 # Override parent class function
 # Died implies that the death animation has concluded.
-func died(_who_died) -> void:
+func died(who_died) -> void:
 	# Player died, so go to main menu
 	Global.main_scene.to_main_menu()
+	Callable(who_died.queue_free).call_deferred()

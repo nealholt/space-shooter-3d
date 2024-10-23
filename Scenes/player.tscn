@@ -1,6 +1,6 @@
 [gd_scene load_steps=38 format=3 uid="uid://8dxylurtfwp1"]
 
-[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_rf46g"]
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="3_crlbv"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/missile_lock_group.tscn" id="4_vmlm7"]
@@ -68,7 +68,7 @@ material = SubResource("ShaderMaterial_j4o42")
 
 [node name="Player" type="CharacterBody3D"]
 motion_mode = 1
-script = ExtResource("1_rf46g")
+script = ExtResource("1_bfcrw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_7tg00")
