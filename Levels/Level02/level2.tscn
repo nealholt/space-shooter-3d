@@ -213,6 +213,8 @@ mesh = SubResource("SphereMesh_b3t22")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlueTeam/Player/AimAssist" index="0"]
 stream = ExtResource("6_tjvqf")
+volume_db = -10.0
+pitch_scale = 0.5
 
 [node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("7_cw0p4")]
 

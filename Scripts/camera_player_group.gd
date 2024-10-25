@@ -73,7 +73,7 @@ func _physics_process(delta: float) -> void:
 	# Look at target with first-person cam
 	if look_at_target and state == CameraState.FIRSTPERSON and is_instance_valid(target):
 		$turret_motion_component.rotate_and_elevate($Body, $Body/Head, delta, target.global_position)
-	else:
+	elif Global.player:
 		# Return to facing forward, or at least way far
 		# forward of the nose of the player.
 		# Alternatively, maybe I should have a Node3D

@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwtyyrj0kw84u"]
+[gd_scene load_steps=11 format=3 uid="uid://dwtyyrj0kw84u"]
 
 [ext_resource type="PackedScene" uid="uid://dc6ljj4ueibm1" path="res://Scenes/asteroid.tscn" id="1_88b2k"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_u6taa"]
+[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="3_e4ix2"]
+[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="4_vf0uf"]
+[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="5_ikuj2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hwd7p"]
 sky_top_color = Color(0.0509646, 0.0629226, 0.533014, 1)
@@ -17,6 +20,17 @@ background_mode = 2
 sky = SubResource("Sky_5hn4x")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ovff0"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_e4ix2")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_wyegi"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_ovff0")
 
 [node name="Node3D" type="Node3D"]
 
@@ -36,9 +50,24 @@ environment = SubResource("Environment_uxj80")
 [node name="Player" parent="." instance=ExtResource("1_u6taa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 213.638)
 
+[node name="FresnelAura" parent="Player/Shield" index="0"]
+mesh = SubResource("SphereMesh_wyegi")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player/AimAssist" index="0"]
+stream = ExtResource("4_vf0uf")
+volume_db = -10.0
+pitch_scale = 0.5
+
 [node name="SpotLight3D" type="SpotLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.5967)
 light_energy = 16.0
 spot_range = 300.0
 spot_attenuation = 0.25
 spot_angle_attenuation = 5.46416
+
+[node name="BallisticMovementV3" parent="Player" instance=ExtResource("5_ikuj2")]
+
+[editable path="Player"]
+[editable path="Player/WeaponHandler/GatlingGun/GunModel"]
+[editable path="Player/WeaponHandler/HitScanGun/Node"]
+[editable path="Player/Shield"]

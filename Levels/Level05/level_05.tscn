@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://6qsftwvn1vr"]
+[gd_scene load_steps=13 format=3 uid="uid://6qsftwvn1vr"]
 
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_2nnjr"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_20fsw"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="2_wndl6"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_8iyj5"]
+[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_f202r"]
+[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_j83tu"]
+[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="7_71xba"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hrnrq"]
 panorama = ExtResource("1_2nnjr")
@@ -16,6 +19,17 @@ background_mode = 2
 sky = SubResource("Sky_txwv0")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkq4u"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_f202r")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_nd7so"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_vkq4u")
 
 [node name="Level05" type="Node3D"]
 
@@ -51,6 +65,16 @@ team = "blue team"
 [node name="Player" parent="BlueTeam" instance=ExtResource("3_8iyj5")]
 transform = Transform3D(1, 0, 0, 0, 0.812613, -0.582804, 0, 0.582804, 0.812613, -30.2098, 0, 324.29)
 
+[node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
+mesh = SubResource("SphereMesh_nd7so")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlueTeam/Player/AimAssist" index="0"]
+stream = ExtResource("6_j83tu")
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("7_71xba")]
+
 [node name="FighterNPC" parent="BlueTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(0.67309, 2.90552e-09, -0.739561, 4.37114e-08, 1, 4.37114e-08, 0.739561, -6.17489e-08, 0.67309, -15.7664, 0, 62.1026)
 
@@ -65,3 +89,8 @@ transform = Transform3D(-0.622027, 0.533939, -0.572705, 0.392804, 0.845523, 0.36
 
 [node name="FighterNPC5" parent="BlueTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(-0.983096, 3.49692e-08, 0.183094, 4.37114e-08, 1, 4.37114e-08, -0.183094, 5.09758e-08, -0.983096, 33.3498, 0, 26.4809)
+
+[editable path="BlueTeam/Player"]
+[editable path="BlueTeam/Player/WeaponHandler/GatlingGun/GunModel"]
+[editable path="BlueTeam/Player/WeaponHandler/HitScanGun/Node"]
+[editable path="BlueTeam/Player/Shield"]

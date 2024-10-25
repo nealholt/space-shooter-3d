@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://da5y8fkeokhyx"]
+[gd_scene load_steps=13 format=3 uid="uid://da5y8fkeokhyx"]
 
 [ext_resource type="Script" path="res://Levels/Level06/TestCam.gd" id="1_qvatm"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_hpnlp"]
+[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_2y4mv"]
 [ext_resource type="PackedScene" uid="uid://yaq7cc3oqfp2" path="res://Scenes/turret.tscn" id="5_hshpx"]
+[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_ckr46"]
+[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="7_jm1hj"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="8_weoc8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gyuqi"]
@@ -19,6 +22,17 @@ background_mode = 2
 sky = SubResource("Sky_c1gdl")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aotxv"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_2y4mv")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_77ynf"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_aotxv")
 
 [node name="Node3D" type="Node3D"]
 
@@ -49,5 +63,19 @@ team = "blue team"
 [node name="Player" parent="BlueTeam" instance=ExtResource("8_weoc8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 600)
 
+[node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
+mesh = SubResource("SphereMesh_77ynf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlueTeam/Player/AimAssist" index="0"]
+stream = ExtResource("6_ckr46")
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("7_jm1hj")]
+
 [editable path="RedTeam/TurretComplete"]
 [editable path="RedTeam/TurretComplete/TurretModel"]
+[editable path="BlueTeam/Player"]
+[editable path="BlueTeam/Player/WeaponHandler/GatlingGun/GunModel"]
+[editable path="BlueTeam/Player/WeaponHandler/HitScanGun/Node"]
+[editable path="BlueTeam/Player/Shield"]

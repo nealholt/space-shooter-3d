@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwts5v3tvcwab"]
+[gd_scene load_steps=12 format=3 uid="uid://cwts5v3tvcwab"]
 
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="1_5h06f"]
 [ext_resource type="PackedScene" uid="uid://dp3w08p8gkd3p" path="res://Scenes/capital_ship_frigate.tscn" id="2_jciow"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_gy535"]
+[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="4_5hyc7"]
+[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="5_707l7"]
+[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="6_ft4d0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sg63n"]
 sky_top_color = Color(0.215686, 0.0235294, 0.490196, 1)
@@ -18,6 +21,17 @@ background_mode = 2
 sky = SubResource("Sky_jjo5w")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4o7y5"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_5hyc7")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_gyo7b"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_4o7y5")
 
 [node name="CapitalShipTest" type="Node3D"]
 
@@ -41,3 +55,18 @@ team = "blue team"
 
 [node name="Player" parent="BlueTeam" instance=ExtResource("3_gy535")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -502.457)
+
+[node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
+mesh = SubResource("SphereMesh_gyo7b")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlueTeam/Player/AimAssist" index="0"]
+stream = ExtResource("5_707l7")
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("6_ft4d0")]
+
+[editable path="BlueTeam/Player"]
+[editable path="BlueTeam/Player/WeaponHandler/GatlingGun/GunModel"]
+[editable path="BlueTeam/Player/WeaponHandler/HitScanGun/Node"]
+[editable path="BlueTeam/Player/Shield"]

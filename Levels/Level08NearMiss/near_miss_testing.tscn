@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://jw5871doy4ch"]
+[gd_scene load_steps=13 format=3 uid="uid://jw5871doy4ch"]
 
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_ba5yk"]
 [ext_resource type="Script" path="res://Levels/Level08NearMiss/bullet_spawner_testing.gd" id="2_00mhe"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_wmf1n"]
+[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="3_ekdub"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="3_fyqj6"]
 [ext_resource type="PackedScene" uid="uid://dhe4jb3jefc7e" path="res://Scenes/Projectiles/bullet_area_basic.tscn" id="5_mmiro"]
+[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="7_2foni"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vaoif"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -44,6 +46,11 @@ environment = SubResource("Environment_jia05")
 [node name="FresnelAura" parent="Player/Shield" index="0"]
 mesh = SubResource("SphereMesh_vns14")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player/AimAssist" index="0"]
+stream = ExtResource("3_ekdub")
+volume_db = -10.0
+pitch_scale = 0.5
+
 [node name="GunNode3D" type="Node3D" parent="Player"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.85873, 0, -177.052)
 script = ExtResource("2_00mhe")
@@ -54,6 +61,8 @@ bullet = ExtResource("5_mmiro")
 bullet_speed = 400.0
 fire_rate = 20.0
 automatic = false
+
+[node name="BallisticMovementV3" parent="Player" instance=ExtResource("7_2foni")]
 
 [editable path="Player"]
 [editable path="Player/WeaponHandler/GatlingGun/GunModel"]
