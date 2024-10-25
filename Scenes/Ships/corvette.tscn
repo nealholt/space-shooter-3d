@@ -65,6 +65,7 @@ resource_local_to_scene = true
 material = SubResource("ShaderMaterial_j4o42")
 
 [node name="Corvette" type="CharacterBody3D"]
+collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_bfcrw")
 

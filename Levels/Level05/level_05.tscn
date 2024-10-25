@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://6qsftwvn1vr"]
+[gd_scene load_steps=14 format=3 uid="uid://6qsftwvn1vr"]
 
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_2nnjr"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_20fsw"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="2_wndl6"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_8iyj5"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="4_owcqu"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_f202r"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_j83tu"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="7_71xba"]
@@ -46,17 +47,27 @@ script = ExtResource("2_20fsw")
 [node name="FighterNPC" parent="RedTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(1, -4.37114e-08, 0, 3.72442e-08, 0.852047, 0.523466, -2.28814e-08, -0.523466, 0.852047, -14.921, 0, 0)
 
+[node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC" instance=ExtResource("4_owcqu")]
+
 [node name="FighterNPC2" parent="RedTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -5.56907, 0, 18.7087)
+
+[node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC2" instance=ExtResource("4_owcqu")]
 
 [node name="FighterNPC3" parent="RedTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 11.6173, 4.56897, 32.26)
 
+[node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC3" instance=ExtResource("4_owcqu")]
+
 [node name="FighterNPC4" parent="RedTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(0.00529216, 0.812389, 0.583092, -0.00737289, 0.583116, -0.812356, -0.999959, 4.33129e-08, 0.00907559, 8.72978, 0, 9.72695)
 
+[node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC4" instance=ExtResource("4_owcqu")]
+
 [node name="FighterNPC5" parent="RedTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(-0.826904, 1.15643e-08, 0.562343, 0.49261, 0.482319, 0.724364, -0.271229, 0.875995, -0.398832, 0, 8.39291, -16.0877)
+
+[node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC5" instance=ExtResource("4_owcqu")]
 
 [node name="BlueTeam" type="Node3D" parent="."]
 script = ExtResource("2_20fsw")
@@ -78,17 +89,27 @@ pitch_scale = 0.5
 [node name="FighterNPC" parent="BlueTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(0.67309, 2.90552e-09, -0.739561, 4.37114e-08, 1, 4.37114e-08, 0.739561, -6.17489e-08, 0.67309, -15.7664, 0, 62.1026)
 
+[node name="NPCFighterStateMachine" parent="BlueTeam/FighterNPC" instance=ExtResource("4_owcqu")]
+
 [node name="FighterNPC2" parent="BlueTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(0.519671, -0.729458, 0.444783, -0.554188, -0.684025, -0.474326, 0.650244, 4.78559e-09, -0.759726, -50.8924, 0, 0)
+
+[node name="NPCFighterStateMachine" parent="BlueTeam/FighterNPC2" instance=ExtResource("4_owcqu")]
 
 [node name="FighterNPC3" parent="BlueTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(-0.987167, 3.61701e-08, 0.159692, -0.139389, 0.487966, -0.861661, -0.0779242, -0.872862, -0.481704, 0, -18.5198, -23.3972)
 
+[node name="NPCFighterStateMachine" parent="BlueTeam/FighterNPC3" instance=ExtResource("4_owcqu")]
+
 [node name="FighterNPC4" parent="BlueTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(-0.622027, 0.533939, -0.572705, 0.392804, 0.845523, 0.361658, 0.677338, 2.54983e-09, -0.735672, 22.3963, -2.21217, 0.00296021)
 
+[node name="NPCFighterStateMachine" parent="BlueTeam/FighterNPC4" instance=ExtResource("4_owcqu")]
+
 [node name="FighterNPC5" parent="BlueTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(-0.983096, 3.49692e-08, 0.183094, 4.37114e-08, 1, 4.37114e-08, -0.183094, 5.09758e-08, -0.983096, 33.3498, 0, 26.4809)
+
+[node name="NPCFighterStateMachine" parent="BlueTeam/FighterNPC5" instance=ExtResource("4_owcqu")]
 
 [editable path="BlueTeam/Player"]
 [editable path="BlueTeam/Player/WeaponHandler/GatlingGun/GunModel"]

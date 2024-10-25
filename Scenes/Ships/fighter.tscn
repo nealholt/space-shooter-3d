@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=22 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_dn8ab"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="5_6ou5s"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="5_70fr4"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_ne5o5"]
-[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="9_0cpbp"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="14_4fwow"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/missile_lock_group.tscn" id="17_563f5"]
 [ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/fighter_chassis_ring.tscn" id="19_x2ba7"]
@@ -37,6 +36,7 @@ material = SubResource("ShaderMaterial_6dy1g")
 
 [node name="FighterNPC" type="CharacterBody3D"]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
+collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_dn8ab")
 deathExplosion = ExtResource("2_l8ark")
@@ -85,8 +85,6 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 mesh = SubResource("SphereMesh_6a830")
 
 [node name="BurningTrail" parent="." instance=ExtResource("14_4fwow")]
-
-[node name="NPCFighterStateMachine" parent="." instance=ExtResource("9_0cpbp")]
 
 [node name="MissileLauncher" parent="." instance=ExtResource("4_57m73")]
 bullet = ExtResource("5_70fr4")

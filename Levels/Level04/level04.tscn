@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bofjsmexbmkkv"]
+[gd_scene load_steps=14 format=3 uid="uid://bofjsmexbmkkv"]
 
 [ext_resource type="PackedScene" uid="uid://n1jx2afgefnt" path="res://Scenes/spectator.tscn" id="1_jd547"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_0liob"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="3_vdt0h"]
 [ext_resource type="PackedScene" uid="uid://brec5vmygtijo" path="res://Scenes/orb.tscn" id="4_syabc"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="5_74ca5"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_d02va"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1crdq"]
@@ -66,6 +67,8 @@ visible = true
 
 [node name="FresnelAura" parent="RedTeam/FighterNPC/Shield" index="0"]
 mesh = SubResource("SphereMesh_k2fkl")
+
+[node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC" instance=ExtResource("5_74ca5")]
 
 [node name="BlueTeam" type="Node3D" parent="."]
 script = ExtResource("2_0liob")

@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bobitrhkbf3c3"]
+[gd_scene load_steps=16 format=3 uid="uid://bobitrhkbf3c3"]
 
 [ext_resource type="Script" path="res://Levels/Level03/level3.gd" id="1_6hmdn"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_omxdw"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="2_6b8c8"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_i6ru0"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="4_w1ktu"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="5_o18a7"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_g66x5"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="7_r1tu4"]
 
@@ -66,6 +67,8 @@ visible = true
 
 [node name="FresnelAura" parent="RedTeam/FighterNPC2/Shield" index="0"]
 mesh = SubResource("SphereMesh_7nlpc")
+
+[node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC2" instance=ExtResource("5_o18a7")]
 
 [node name="BlueTeam" type="Node3D" parent="."]
 script = ExtResource("2_i6ru0")

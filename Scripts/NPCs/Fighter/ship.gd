@@ -91,7 +91,8 @@ func _on_health_component_died() -> void:
 		explosion.global_position = global_position
 	# Tell controller to enter death animation state
 	# which should be some sort of chaotic tumble
-	controller.enter_death_animation()
+	if controller:
+		controller.enter_death_animation()
 	# Create and start a timer, if you haven't
 	# already done so.
 	# Go into death animation for this duration.
@@ -116,4 +117,8 @@ func _on_death_timer_timeout() -> void:
 	# The controller will handle cleaning up.
 	# NPCs will be queue freed. Players will be
 	# sent back to the main menu.
-	controller.died(self)
+	if controller:
+		controller.died(self)
+	else:
+		# Just in case there is no controller
+		Callable(queue_free).call_deferred()
