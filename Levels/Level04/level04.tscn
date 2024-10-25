@@ -61,7 +61,7 @@ script = ExtResource("2_0liob")
 [node name="FighterNPC" parent="RedTeam" instance=ExtResource("3_vdt0h")]
 transform = Transform3D(-4.37114e-08, -4.37114e-08, 1, -0.999372, -0.0354402, -4.52331e-08, 0.0354402, -0.999372, -4.21348e-08, -26.6024, 0, 16.9037)
 
-[node name="DebugLabel" parent="RedTeam/FighterNPC" index="6"]
+[node name="DebugLabel" parent="RedTeam/FighterNPC" index="5"]
 visible = true
 
 [node name="FresnelAura" parent="RedTeam/FighterNPC/Shield" index="0"]

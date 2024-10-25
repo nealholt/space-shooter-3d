@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cfiwadbmgx3up"]
+[gd_scene load_steps=14 format=3 uid="uid://cfiwadbmgx3up"]
 
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="1_nau7t"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_5rasv"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="3_6nm7s"]
+[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_7pty0"]
+[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_tjvqf"]
+[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="7_cw0p4"]
 [ext_resource type="PackedScene" uid="uid://brec5vmygtijo" path="res://Scenes/orb.tscn" id="7_yxjtr"]
 
 [sub_resource type="GDScript" id="GDScript_ulixo"]
@@ -42,6 +45,17 @@ background_mode = 2
 sky = SubResource("Sky_um5eh")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6xgje"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("5_7pty0")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_b3t22"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_6xgje")
 
 [node name="Node" type="Node"]
 script = SubResource("GDScript_ulixo")
@@ -193,3 +207,16 @@ team = "blue team"
 
 [node name="Player" parent="BlueTeam" instance=ExtResource("3_5rasv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50.397, 0)
+
+[node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
+mesh = SubResource("SphereMesh_b3t22")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlueTeam/Player/AimAssist" index="0"]
+stream = ExtResource("6_tjvqf")
+
+[node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("7_cw0p4")]
+
+[editable path="BlueTeam/Player"]
+[editable path="BlueTeam/Player/WeaponHandler/GatlingGun/GunModel"]
+[editable path="BlueTeam/Player/WeaponHandler/HitScanGun/Node"]
+[editable path="BlueTeam/Player/Shield"]

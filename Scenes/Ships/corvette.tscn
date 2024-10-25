@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=36 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
@@ -26,10 +26,8 @@
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="21_5ow11"]
 [ext_resource type="PackedScene" uid="uid://bxdfmqb6p8cw6" path="res://Scenes/Projectiles/laser_guided_missile.tscn" id="21_uelja"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="29_3q0pi"]
-[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="30_ug7q2"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="31_sqqoi"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="34_80okc"]
-[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="35_gd40f"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7tg00"]
 
@@ -66,7 +64,7 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_j4o42")
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Corvette" type="CharacterBody3D"]
 motion_mode = 1
 script = ExtResource("1_bfcrw")
 
@@ -237,16 +235,8 @@ transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 [node name="FresnelAura" parent="Shield" index="0"]
 mesh = SubResource("SphereMesh_2lbpm")
 
-[node name="BallisticMovementV3" parent="." instance=ExtResource("35_gd40f")]
-
-[node name="AimAssist" parent="." node_paths=PackedStringArray("audio") instance=ExtResource("29_3q0pi")]
+[node name="AimAssist" parent="." instance=ExtResource("29_3q0pi")]
 angle_assist_limit = 10.0
-audio = NodePath("AudioStreamPlayer")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist"]
-stream = ExtResource("30_ug7q2")
-volume_db = -8.0
-pitch_scale = 0.5
 
 [editable path="WeaponHandler/GatlingGun/GunModel"]
 [editable path="WeaponHandler/HitScanGun/Node"]
