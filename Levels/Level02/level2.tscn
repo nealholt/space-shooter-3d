@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cfiwadbmgx3up"]
+[gd_scene load_steps=15 format=3 uid="uid://cfiwadbmgx3up"]
 
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="1_nau7t"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_5rasv"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_tjvqf"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="7_cw0p4"]
 [ext_resource type="PackedScene" uid="uid://brec5vmygtijo" path="res://Scenes/orb.tscn" id="7_yxjtr"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="8_t5kwi"]
 
 [sub_resource type="GDScript" id="GDScript_ulixo"]
 script/source = "extends Node
@@ -217,6 +218,8 @@ volume_db = -10.0
 pitch_scale = 0.5
 
 [node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("7_cw0p4")]
+
+[node name="CameraGroup" parent="BlueTeam/Player" instance=ExtResource("8_t5kwi")]
 
 [editable path="BlueTeam/Player"]
 [editable path="BlueTeam/Player/WeaponHandler/GatlingGun/GunModel"]

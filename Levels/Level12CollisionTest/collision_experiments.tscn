@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://diemqdllmorgy"]
+[gd_scene load_steps=13 format=3 uid="uid://diemqdllmorgy"]
 
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_nfgym"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_by5cy"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="3_35x76"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="4_yoksv"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="5_k5wyc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_su01a"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -53,6 +54,8 @@ volume_db = -10.0
 pitch_scale = 0.5
 
 [node name="BallisticMovementV3" parent="Player" instance=ExtResource("4_yoksv")]
+
+[node name="CameraGroup" parent="Player" instance=ExtResource("5_k5wyc")]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -122.922)

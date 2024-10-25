@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://da5y8fkeokhyx"]
+[gd_scene load_steps=14 format=3 uid="uid://da5y8fkeokhyx"]
 
 [ext_resource type="Script" path="res://Levels/Level06/TestCam.gd" id="1_qvatm"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_hpnlp"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://yaq7cc3oqfp2" path="res://Scenes/turret.tscn" id="5_hshpx"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_ckr46"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="7_jm1hj"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="8_0rfwm"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="8_weoc8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gyuqi"]
@@ -72,6 +73,8 @@ volume_db = -10.0
 pitch_scale = 0.5
 
 [node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("7_jm1hj")]
+
+[node name="CameraGroup" parent="BlueTeam/Player" instance=ExtResource("8_0rfwm")]
 
 [editable path="RedTeam/TurretComplete"]
 [editable path="RedTeam/TurretComplete/TurretModel"]

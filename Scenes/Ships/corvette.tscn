@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=35 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
@@ -26,7 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="21_5ow11"]
 [ext_resource type="PackedScene" uid="uid://bxdfmqb6p8cw6" path="res://Scenes/Projectiles/laser_guided_missile.tscn" id="21_uelja"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="29_3q0pi"]
-[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="31_sqqoi"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="34_80okc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7tg00"]
@@ -227,8 +226,6 @@ mesh = SubResource("CylinderMesh_tbbj7")
 [node name="RightStrutBack" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
 transform = Transform3D(1, 0, 0, 0, -0.125299, -0.992119, 0, 0.992119, -0.125299, 0.17, 0.16, 0.513)
 mesh = SubResource("CylinderMesh_tbbj7")
-
-[node name="CameraGroup" parent="." instance=ExtResource("31_sqqoi")]
 
 [node name="Shield" parent="." instance=ExtResource("21_5ow11")]
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)

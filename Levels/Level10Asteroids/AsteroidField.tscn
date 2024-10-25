@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwtyyrj0kw84u"]
+[gd_scene load_steps=12 format=3 uid="uid://dwtyyrj0kw84u"]
 
 [ext_resource type="PackedScene" uid="uid://dc6ljj4ueibm1" path="res://Scenes/asteroid.tscn" id="1_88b2k"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_u6taa"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="3_e4ix2"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="4_vf0uf"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="5_ikuj2"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="6_0irx3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hwd7p"]
 sky_top_color = Color(0.0509646, 0.0629226, 0.533014, 1)
@@ -66,6 +67,8 @@ spot_attenuation = 0.25
 spot_angle_attenuation = 5.46416
 
 [node name="BallisticMovementV3" parent="Player" instance=ExtResource("5_ikuj2")]
+
+[node name="CameraGroup" parent="Player" instance=ExtResource("6_0irx3")]
 
 [editable path="Player"]
 [editable path="Player/WeaponHandler/GatlingGun/GunModel"]

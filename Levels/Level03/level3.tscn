@@ -1,13 +1,13 @@
 [gd_scene load_steps=16 format=3 uid="uid://bobitrhkbf3c3"]
 
 [ext_resource type="Script" path="res://Levels/Level03/level3.gd" id="1_6hmdn"]
-[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_omxdw"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="2_6b8c8"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_i6ru0"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="4_w1ktu"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="5_o18a7"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_g66x5"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="7_r1tu4"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="8_abbls"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_guvq5"]
 sky_top_color = Color(0.627451, 0.360784, 0.509804, 1)
@@ -35,16 +35,16 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_v5t0g")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yf31q"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6jni2"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_w1ktu")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_4yia1"]
+[sub_resource type="SphereMesh" id="SphereMesh_gp6sh"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_yf31q")
+material = SubResource("ShaderMaterial_6jni2")
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_6hmdn")
@@ -74,21 +74,21 @@ mesh = SubResource("SphereMesh_7nlpc")
 script = ExtResource("2_i6ru0")
 team = "blue team"
 
-[node name="Player" parent="BlueTeam" instance=ExtResource("1_omxdw")]
+[node name="FighterNPC" parent="BlueTeam" instance=ExtResource("2_6b8c8")]
 
-[node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
-mesh = SubResource("SphereMesh_4yia1")
+[node name="FresnelAura" parent="BlueTeam/FighterNPC/Shield" index="0"]
+mesh = SubResource("SphereMesh_gp6sh")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlueTeam/Player/AimAssist" index="0"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlueTeam/FighterNPC/AimAssist" index="0"]
 stream = ExtResource("6_g66x5")
 volume_db = -10.0
 pitch_scale = 0.5
 
-[node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("7_r1tu4")]
+[node name="BallisticMovementV3" parent="BlueTeam/FighterNPC" instance=ExtResource("7_r1tu4")]
+
+[node name="CameraGroup" parent="BlueTeam/FighterNPC" instance=ExtResource("8_abbls")]
 
 [editable path="RedTeam/FighterNPC2"]
 [editable path="RedTeam/FighterNPC2/Shield"]
-[editable path="BlueTeam/Player"]
-[editable path="BlueTeam/Player/WeaponHandler/GatlingGun/GunModel"]
-[editable path="BlueTeam/Player/WeaponHandler/HitScanGun/Node"]
-[editable path="BlueTeam/Player/Shield"]
+[editable path="BlueTeam/FighterNPC"]
+[editable path="BlueTeam/FighterNPC/Shield"]

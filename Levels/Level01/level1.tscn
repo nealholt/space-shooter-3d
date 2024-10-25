@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2p5fk853guwk"]
+[gd_scene load_steps=13 format=3 uid="uid://b2p5fk853guwk"]
 
 [ext_resource type="Script" path="res://Levels/Level01/level1.gd" id="1_dflt6"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_widnh"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="4_bw7sh"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="5_v2xp1"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="6_87wt5"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="7_oouc0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p3vaa"]
 sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)
@@ -65,6 +66,8 @@ volume_db = -10.0
 pitch_scale = 0.5
 
 [node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("6_87wt5")]
+
+[node name="CameraGroup" parent="BlueTeam/Player" instance=ExtResource("7_oouc0")]
 
 [editable path="BlueTeam/Player"]
 [editable path="BlueTeam/Player/WeaponHandler/GatlingGun/GunModel"]

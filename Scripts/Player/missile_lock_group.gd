@@ -201,7 +201,7 @@ func attempt_to_start_seeking(targeter:Node3D) -> void:
 		old_target = target
 		target = null
 	# If targeter already has a target, use it
-	if targeter.controller and targeter.controller.target:
+	if targeter.controller and targeter.controller.target and is_instance_valid(targeter.controller.target):
 		target = targeter.controller.target
 	else:
 		# Target most central enemy team member

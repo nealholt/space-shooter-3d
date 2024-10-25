@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://6qsftwvn1vr"]
+[gd_scene load_steps=15 format=3 uid="uid://6qsftwvn1vr"]
 
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_2nnjr"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_20fsw"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_f202r"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_j83tu"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="7_71xba"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="9_5x8d7"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hrnrq"]
 panorama = ExtResource("1_2nnjr")
@@ -85,6 +86,8 @@ volume_db = -10.0
 pitch_scale = 0.5
 
 [node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("7_71xba")]
+
+[node name="CameraGroup" parent="BlueTeam/Player" instance=ExtResource("9_5x8d7")]
 
 [node name="FighterNPC" parent="BlueTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(0.67309, 2.90552e-09, -0.739561, 4.37114e-08, 1, 4.37114e-08, 0.739561, -6.17489e-08, 0.67309, -15.7664, 0, 62.1026)
