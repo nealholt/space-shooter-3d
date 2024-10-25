@@ -81,6 +81,7 @@ collision_exception1 = NodePath("../HitBoxComponent")
 collision_exception2 = NodePath("../Shield/HitBoxComponent")
 
 [node name="MissileLockGroup" parent="." node_paths=PackedStringArray("missile_launcher") instance=ExtResource("4_vmlm7")]
+npc_missile_lock = true
 missile_launcher = NodePath("../MissileLauncher")
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_8otd8")]

@@ -70,6 +70,10 @@ transform = Transform3D(-0.826904, 1.15643e-08, 0.562343, 0.49261, 0.482319, 0.7
 
 [node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC5" instance=ExtResource("4_owcqu")]
 
+[node name="Corvette" parent="RedTeam" instance=ExtResource("3_8iyj5")]
+
+[node name="NPCFighterController" parent="RedTeam/Corvette" instance=ExtResource("4_owcqu")]
+
 [node name="BlueTeam" type="Node3D" parent="."]
 script = ExtResource("2_20fsw")
 team = "blue team"
@@ -113,6 +117,10 @@ transform = Transform3D(-0.622027, 0.533939, -0.572705, 0.392804, 0.845523, 0.36
 transform = Transform3D(-0.983096, 3.49692e-08, 0.183094, 4.37114e-08, 1, 4.37114e-08, -0.183094, 5.09758e-08, -0.983096, 33.3498, 0, 26.4809)
 
 [node name="NPCFighterStateMachine" parent="BlueTeam/FighterNPC5" instance=ExtResource("4_owcqu")]
+
+[node name="Corvette" parent="BlueTeam" instance=ExtResource("3_8iyj5")]
+
+[node name="NPCFighterController" parent="BlueTeam/Corvette" instance=ExtResource("4_owcqu")]
 
 [editable path="BlueTeam/Player"]
 [editable path="BlueTeam/Player/WeaponHandler/GatlingGun/GunModel"]

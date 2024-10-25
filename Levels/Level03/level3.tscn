@@ -79,6 +79,9 @@ team = "blue team"
 [node name="FresnelAura" parent="BlueTeam/FighterNPC/Shield" index="0"]
 mesh = SubResource("SphereMesh_gp6sh")
 
+[node name="MissileLockGroup" parent="BlueTeam/FighterNPC" index="11"]
+npc_missile_lock = false
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlueTeam/FighterNPC/AimAssist" index="0"]
 stream = ExtResource("6_g66x5")
 volume_db = -10.0

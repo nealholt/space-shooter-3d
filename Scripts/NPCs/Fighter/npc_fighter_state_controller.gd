@@ -100,9 +100,6 @@ func on_child_transition(state, new_state_name):
 	new_state.Enter()
 	
 	current_state = new_state
-	
-	if $"../DebugLabel" and $"../DebugLabel".visible:
-		$"../DebugLabel".text = new_state_name
 
 # Override parent class function
 func took_damage() -> void:

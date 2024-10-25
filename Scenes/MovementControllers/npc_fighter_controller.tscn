@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/state_fighter_death_animation.gd" id="10_cp4qn"]
 [ext_resource type="Script" path="res://Scripts/target_selector.gd" id="10_kh3qm"]
 
-[node name="NPCFighterStateMachine" type="Node" node_paths=PackedStringArray("movement_profile", "initial_state")]
+[node name="NPCFighterController" type="Node" node_paths=PackedStringArray("movement_profile", "initial_state")]
 script = ExtResource("1_bsujv")
 movement_profile = NodePath("MovementProfile")
 initial_state = NodePath("States/Seek")
