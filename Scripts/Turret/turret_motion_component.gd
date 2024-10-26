@@ -1,4 +1,5 @@
 extends Node
+class_name TurretMotionComponent
 
 # Pass the body to be rotated to the function below
 # ala this tutorial at about 5:30:

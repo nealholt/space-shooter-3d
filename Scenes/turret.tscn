@@ -55,7 +55,4 @@ shape = SubResource("SphereShape3D_g6fsi")
 [node name="TargetSelector" type="Node" parent="."]
 script = ExtResource("6_cy7vo")
 
-[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
-[connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]
-
 [editable path="TurretModel"]
