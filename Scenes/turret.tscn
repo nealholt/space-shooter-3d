@@ -20,6 +20,10 @@ script = ExtResource("1_cbt5p")
 
 [node name="TurretModel" parent="." instance=ExtResource("2_xuhpe")]
 
+[node name="Body" parent="TurretModel" index="0" groups=["turret body"]]
+
+[node name="Head" parent="TurretModel/Body" index="1" groups=["turret head"]]
+
 [node name="BurstGun" parent="TurretModel/Body/Head/Barrel1" index="0" node_paths=PackedStringArray("collision_exception1") instance=ExtResource("4_r7edd")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0)

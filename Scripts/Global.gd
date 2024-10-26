@@ -262,6 +262,21 @@ func get_all_children(node) -> Array:
 	return nodes
 
 
+# Get all the nodes belonging to the given
+# group on the given branch / subtree
+# source:
+# https://www.reddit.com/r/godot/comments/o90vpv/comment/h38fvzg/
+# Fixed and modified by Neal Holtschulte
+func get_group_nodes_on_branch(group: String, branch: Node) -> Array:
+	var group_nodes_on_branch = Array()
+	for child in branch.get_children():
+		if child.is_in_group(group):
+			group_nodes_on_branch.append(child)
+		if child.get_child_count() > 0:
+			group_nodes_on_branch.append_array(get_group_nodes_on_branch(group,child))
+	return group_nodes_on_branch
+
+
 # Add the given node to the given team this is
 # important for spawning in new units (and missiles)
 # into the team group that they belong to
