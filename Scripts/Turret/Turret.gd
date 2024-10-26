@@ -14,18 +14,10 @@ class_name Turret
 @onready var max_elevation: float = deg_to_rad(max_elevation_deg)
 
 var aim_assist:AimAssist
+var guns: Array
 var health_component:HealthComponent
 var target_selector:TargetSelector
 var turret_motion:TurretMotionComponent
-
-#TODO
-# I think the head and body should be in a group
-# for quick access through get_tree().get_nodes_in_group()
-# same thing for gun hardpoints
-# Here's an example you can modify:
-# nodes = get_tree().get_nodes_in_group("Enemy")
-@onready var gun: BurstGun = %BurstGun
-@onready var gun_2: BurstGun = %BurstGun2
 
 # Turret components necessary for rotation toward target
 var head: Node3D
@@ -59,6 +51,8 @@ func _ready() -> void:
 	for child in get_children():
 		if child is AimAssist:
 			aim_assist = child
+		elif child is Gun:
+			guns.append(child)
 		elif child is HealthComponent:
 			health_component = child
 			# Connect signals with code
@@ -68,6 +62,20 @@ func _ready() -> void:
 			target_selector = child
 		elif child is TurretMotionComponent:
 			turret_motion = child
+	
+	# Position all the guns at all the hardpoints
+	var gun_hardpoints = Global.get_group_nodes_on_branch("gun hardpoint", self)
+	# Sanity check
+	if gun_hardpoints.size() != guns.size():
+		printerr("Mismatch between number of guns %d and number of hardpoints %d" % [guns.size(), gun_hardpoints.size()])
+		get_tree().quit()
+	for i in range(guns.size()):
+		print('before')
+		print(guns[i].global_position)
+		guns[i].reparent(gun_hardpoints[i], false)
+		print('after')
+		print(guns[i].global_position)
+		print(gun_hardpoints[i].global_position)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -77,7 +85,7 @@ func _physics_process(delta: float) -> void:
 	# Update profile.orientation_data
 	if target:
 		orientation_data.update_data(global_position,
-			gun.bullet_speed, target, global_transform.basis)
+			guns[0].bullet_speed, target, global_transform.basis)
 	
 	# if components are installed, then move the turret
 	if turret_motion and orientation_data.target_pos != Vector3.ZERO:
@@ -85,8 +93,8 @@ func _physics_process(delta: float) -> void:
 	
 	# Shoot if within angle limit
 	if is_instance_valid(orientation_data.target) and Global.get_angle_to_target(head.global_position, orientation_data.target_pos, head.global_transform.basis.z) < angle_to_shoot:
-		gun.shoot(self, orientation_data.target)
-		gun_2.shoot(self, orientation_data.target)
+		for gun in guns:
+			gun.shoot(self, orientation_data.target)
 
 
 func _on_health_component_health_lost() -> void:

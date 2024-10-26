@@ -24,25 +24,11 @@ script = ExtResource("1_cbt5p")
 
 [node name="Head" parent="TurretModel/Body" index="1" groups=["turret head"]]
 
-[node name="BurstGun" parent="TurretModel/Body/Head/Barrel1" index="0" node_paths=PackedStringArray("collision_exception1") instance=ExtResource("4_r7edd")]
-unique_name_in_owner = true
+[node name="GunHardpoint1" type="Node3D" parent="TurretModel/Body/Head/Barrel1" index="0" groups=["gun hardpoint"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0)
-burst_total = 5
-burst_rate = 20.0
-bullet = ExtResource("5_p2wvi")
-bullet_speed = 500.0
-spread_deg = 10.0
-collision_exception1 = NodePath("../../../../../HitBoxComponent")
 
-[node name="BurstGun2" parent="TurretModel/Body/Head/Barrel2" index="0" node_paths=PackedStringArray("collision_exception1") instance=ExtResource("4_r7edd")]
-unique_name_in_owner = true
+[node name="GunHardpoint2" type="Node3D" parent="TurretModel/Body/Head/Barrel2" index="0" groups=["gun hardpoint"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0)
-burst_total = 5
-burst_rate = 20.0
-bullet = ExtResource("5_p2wvi")
-bullet_speed = 500.0
-spread_deg = 10.0
-collision_exception1 = NodePath("../../../../../HitBoxComponent")
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_qikae")]
 
@@ -58,5 +44,21 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="TargetSelector" type="Node" parent="."]
 script = ExtResource("6_cy7vo")
+
+[node name="BurstGun" parent="." node_paths=PackedStringArray("collision_exception1") instance=ExtResource("4_r7edd")]
+burst_total = 5
+burst_rate = 20.0
+bullet = ExtResource("5_p2wvi")
+bullet_speed = 500.0
+spread_deg = 10.0
+collision_exception1 = NodePath("../HitBoxComponent")
+
+[node name="BurstGun2" parent="." node_paths=PackedStringArray("collision_exception1") instance=ExtResource("4_r7edd")]
+burst_total = 5
+burst_rate = 20.0
+bullet = ExtResource("5_p2wvi")
+bullet_speed = 500.0
+spread_deg = 10.0
+collision_exception1 = NodePath("../HitBoxComponent")
 
 [editable path="TurretModel"]
