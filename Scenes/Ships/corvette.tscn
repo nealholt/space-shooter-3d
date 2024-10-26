@@ -1,8 +1,10 @@
-[gd_scene load_steps=35 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=38 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
+[ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_jw8ud"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="3_crlbv"]
+[ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="3_lvuav"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/missile_lock_group.tscn" id="4_vmlm7"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_8otd8"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="7_vhcpa"]
@@ -26,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="21_5ow11"]
 [ext_resource type="PackedScene" uid="uid://bxdfmqb6p8cw6" path="res://Scenes/Projectiles/laser_guided_missile.tscn" id="21_uelja"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="29_3q0pi"]
+[ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="29_w78kn"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="34_80okc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7tg00"]
@@ -67,6 +70,8 @@ material = SubResource("ShaderMaterial_j4o42")
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_bfcrw")
+deathExplosion = ExtResource("2_jw8ud")
+finalExplosion = ExtResource("3_lvuav")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_7tg00")
@@ -233,6 +238,8 @@ transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0"]
 mesh = SubResource("SphereMesh_2lbpm")
+
+[node name="BurningTrail" parent="." instance=ExtResource("29_w78kn")]
 
 [node name="AimAssist" parent="." instance=ExtResource("29_3q0pi")]
 angle_assist_limit = 10.0
