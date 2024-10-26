@@ -27,16 +27,15 @@ shape = SubResource("SphereShape3D_rhun0")
 mesh = SubResource("SphereMesh_iwjq6")
 surface_material_override/0 = SubResource("StandardMaterial3D_gsmaa")
 
-[node name="HitFeedback" parent="." instance=ExtResource("2_if2x6")]
-
 [node name="HealthComponent" parent="." instance=ExtResource("4_5ba2v")]
 max_health = 20
 
-[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("5_e1bac")]
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_e1bac")]
 health_component = NodePath("../HealthComponent")
-hit_feedback = NodePath("../HitFeedback")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBoxComponent"]
 shape = SubResource("SphereShape3D_rhun0")
+
+[node name="HitFeedback" parent="HitBoxComponent" instance=ExtResource("2_if2x6")]
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

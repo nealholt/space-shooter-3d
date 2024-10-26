@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=39 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Assets/SoundEffects/lowFrequency_explosion_001.ogg" id="8_klb2b"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="9_1xly7"]
 [ext_resource type="AudioStream" uid="uid://cvrvs2a12nuqr" path="res://Assets/SoundEffects/whoosh_medium_001.ogg" id="9_ktweb"]
+[ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="9_sewpe"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="10_shexg"]
 [ext_resource type="PackedScene" uid="uid://djj4vi4d1fq2m" path="res://Scenes/Projectiles/auto_seeking_missile.tscn" id="11_a8ss5"]
 [ext_resource type="AudioStream" uid="uid://ci04qcsgn8w7q" path="res://Assets/SoundEffects/clean-machine-gun-burst-98224.ogg" id="11_itcpr"]
@@ -98,6 +99,8 @@ shape = SubResource("BoxShape3D_qx57m")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HitBoxComponent"]
 stream = ExtResource("8_klb2b")
+
+[node name="HitFeedback" parent="HitBoxComponent" instance=ExtResource("9_sewpe")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_vhcpa")]
 max_health = 20

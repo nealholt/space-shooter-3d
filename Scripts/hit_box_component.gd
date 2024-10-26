@@ -4,12 +4,13 @@ class_name HitBoxComponent
 # https://www.youtube.com/watch?v=74y6zWZfQKk&t=184s
 
 @export var health_component:HealthComponent
-@export var hit_feedback:HitFeedback
 
 # This will be populated probably only for the player
 var got_hit_audio:AudioStreamPlayer
 # I'll need some other system if I want different
 # audio cues for taking damage or whatever.
+
+var hit_feedback:HitFeedback
 
 
 func _ready() -> void:
@@ -18,6 +19,8 @@ func _ready() -> void:
 	for child in get_children():
 		if child is AudioStreamPlayer:
 			got_hit_audio = child
+		elif child is HitFeedback:
+			hit_feedback = child
 
 
 func damage(amount:int):

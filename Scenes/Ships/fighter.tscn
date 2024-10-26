@@ -56,17 +56,17 @@ fire_rate = 8.0
 collision_exception1 = NodePath("../../HitBoxComponent")
 collision_exception2 = NodePath("../../Shield/HitBoxComponent")
 
-[node name="HitFeedback" parent="." instance=ExtResource("3_qm2p0")]
-
 [node name="HealthComponent" parent="." instance=ExtResource("5_1xytm")]
 max_health = 20
 
-[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("6_ne5o5")]
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_ne5o5")]
 health_component = NodePath("../HealthComponent")
-hit_feedback = NodePath("../HitFeedback")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBoxComponent"]
 shape = SubResource("SphereShape3D_ydoww")
+
+[node name="HitFeedback" parent="HitBoxComponent" instance=ExtResource("3_qm2p0")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="DebugLabel" type="Label3D" parent="."]
 visible = false

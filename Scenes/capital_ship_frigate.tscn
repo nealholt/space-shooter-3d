@@ -151,82 +151,81 @@ transform = Transform3D(1, -8.74228e-08, -8.74228e-08, -8.74228e-08, -1, 0, -8.7
 [node name="TurretComplete2" parent="FrigateModel/ReactorShieldRight" index="2" instance=ExtResource("2_3hybn")]
 transform = Transform3D(1, -8.74228e-08, -8.74228e-08, -8.74228e-08, -1, 0, -8.74228e-08, 7.64274e-15, -1, 0, -16, -37)
 
-[node name="HitBoxComponent" parent="FrigateModel/Reactor" index="0" node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("2_ffelx")]
+[node name="HitBoxComponent" parent="FrigateModel/Reactor" index="0" node_paths=PackedStringArray("health_component") instance=ExtResource("2_ffelx")]
 health_component = NodePath("../HealthComponent")
-hit_feedback = NodePath("../HitFeedback")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/Reactor/HitBoxComponent"]
 shape = SubResource("SphereShape3D_mdcux")
 
+[node name="HitFeedback" parent="FrigateModel/Reactor/HitBoxComponent" instance=ExtResource("4_320jg")]
+
 [node name="HealthComponent" parent="FrigateModel/Reactor" index="1" instance=ExtResource("3_ac6d0")]
 
-[node name="HitFeedback" parent="FrigateModel/Reactor" index="2" instance=ExtResource("4_320jg")]
-
-[node name="HitBoxComponent" parent="FrigateModel/StrutLeft1/Radiator1" index="0" node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("2_ffelx")]
+[node name="HitBoxComponent" parent="FrigateModel/StrutLeft1/Radiator1" index="0" node_paths=PackedStringArray("health_component") instance=ExtResource("2_ffelx")]
 health_component = NodePath("../HealthComponent")
-hit_feedback = NodePath("../HitFeedback")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/StrutLeft1/Radiator1/HitBoxComponent"]
 shape = SubResource("SphereShape3D_886au")
 
+[node name="HitFeedback" parent="FrigateModel/StrutLeft1/Radiator1/HitBoxComponent" instance=ExtResource("4_320jg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
 [node name="HealthComponent" parent="FrigateModel/StrutLeft1/Radiator1" index="1" instance=ExtResource("3_ac6d0")]
 
-[node name="HitFeedback" parent="FrigateModel/StrutLeft1/Radiator1" index="2" instance=ExtResource("4_320jg")]
-
-[node name="HitBoxComponent" parent="FrigateModel/StrutLeft2/Radiator2" index="0" node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("2_ffelx")]
+[node name="HitBoxComponent" parent="FrigateModel/StrutLeft2/Radiator2" index="0" node_paths=PackedStringArray("health_component") instance=ExtResource("2_ffelx")]
 health_component = NodePath("../HealthComponent")
-hit_feedback = NodePath("../HitFeedback")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/StrutLeft2/Radiator2/HitBoxComponent"]
 shape = SubResource("SphereShape3D_oqfmh")
 
+[node name="HitFeedback" parent="FrigateModel/StrutLeft2/Radiator2/HitBoxComponent" instance=ExtResource("4_320jg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
 [node name="HealthComponent" parent="FrigateModel/StrutLeft2/Radiator2" index="1" instance=ExtResource("3_ac6d0")]
 
-[node name="HitFeedback" parent="FrigateModel/StrutLeft2/Radiator2" index="2" instance=ExtResource("4_320jg")]
-
-[node name="HitBoxComponent" parent="FrigateModel/StrutLeft3/Radiator3" index="0" node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("2_ffelx")]
+[node name="HitBoxComponent" parent="FrigateModel/StrutLeft3/Radiator3" index="0" node_paths=PackedStringArray("health_component") instance=ExtResource("2_ffelx")]
 health_component = NodePath("../HealthComponent")
-hit_feedback = NodePath("../HitFeedback")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/StrutLeft3/Radiator3/HitBoxComponent"]
 shape = SubResource("SphereShape3D_7yrfv")
 
+[node name="HitFeedback" parent="FrigateModel/StrutLeft3/Radiator3/HitBoxComponent" instance=ExtResource("4_320jg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
 [node name="HealthComponent" parent="FrigateModel/StrutLeft3/Radiator3" index="1" instance=ExtResource("3_ac6d0")]
 
-[node name="HitFeedback" parent="FrigateModel/StrutLeft3/Radiator3" index="2" instance=ExtResource("4_320jg")]
-
-[node name="HitBoxComponent" parent="FrigateModel/StrutRight1/Radiator4" index="0" node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("2_ffelx")]
+[node name="HitBoxComponent" parent="FrigateModel/StrutRight1/Radiator4" index="0" node_paths=PackedStringArray("health_component") instance=ExtResource("2_ffelx")]
 health_component = NodePath("../HealthComponent")
-hit_feedback = NodePath("../HitFeedback")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/StrutRight1/Radiator4/HitBoxComponent"]
 shape = SubResource("SphereShape3D_d63m2")
 
+[node name="HitFeedback" parent="FrigateModel/StrutRight1/Radiator4/HitBoxComponent" instance=ExtResource("4_320jg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
 [node name="HealthComponent" parent="FrigateModel/StrutRight1/Radiator4" index="1" instance=ExtResource("3_ac6d0")]
 
-[node name="HitFeedback" parent="FrigateModel/StrutRight1/Radiator4" index="2" instance=ExtResource("4_320jg")]
-
-[node name="HitBoxComponent" parent="FrigateModel/StrutRight2/Radiator5" index="0" node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("2_ffelx")]
+[node name="HitBoxComponent" parent="FrigateModel/StrutRight2/Radiator5" index="0" node_paths=PackedStringArray("health_component") instance=ExtResource("2_ffelx")]
 health_component = NodePath("../HealthComponent")
-hit_feedback = NodePath("../HitFeedback")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/StrutRight2/Radiator5/HitBoxComponent"]
 shape = SubResource("SphereShape3D_mhyku")
 
+[node name="HitFeedback" parent="FrigateModel/StrutRight2/Radiator5/HitBoxComponent" instance=ExtResource("4_320jg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
 [node name="HealthComponent" parent="FrigateModel/StrutRight2/Radiator5" index="1" instance=ExtResource("3_ac6d0")]
 
-[node name="HitFeedback" parent="FrigateModel/StrutRight2/Radiator5" index="2" instance=ExtResource("4_320jg")]
-
-[node name="HitBoxComponent" parent="FrigateModel/StrutRight3/Radiator6" index="0" node_paths=PackedStringArray("health_component", "hit_feedback") instance=ExtResource("2_ffelx")]
+[node name="HitBoxComponent" parent="FrigateModel/StrutRight3/Radiator6" index="0" node_paths=PackedStringArray("health_component") instance=ExtResource("2_ffelx")]
 health_component = NodePath("../HealthComponent")
-hit_feedback = NodePath("../HitFeedback")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/StrutRight3/Radiator6/HitBoxComponent"]
 shape = SubResource("SphereShape3D_2kirm")
 
-[node name="HealthComponent" parent="FrigateModel/StrutRight3/Radiator6" index="1" instance=ExtResource("3_ac6d0")]
+[node name="HitFeedback" parent="FrigateModel/StrutRight3/Radiator6/HitBoxComponent" instance=ExtResource("4_320jg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="HitFeedback" parent="FrigateModel/StrutRight3/Radiator6" index="2" instance=ExtResource("4_320jg")]
+[node name="HealthComponent" parent="FrigateModel/StrutRight3/Radiator6" index="1" instance=ExtResource("3_ac6d0")]
 
 [node name="ColorMe" parent="FrigateModel" index="12" groups=["team color"]]
 

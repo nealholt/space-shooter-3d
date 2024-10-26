@@ -15,7 +15,6 @@ class_name Turret
 
 var aim_assist:AimAssist
 var health_component:HealthComponent
-var hit_feedback:HitFeedback
 var target_selector:TargetSelector
 var turret_motion:TurretMotionComponent
 
@@ -65,8 +64,6 @@ func _ready() -> void:
 			# Connect signals with code
 			health_component.health_lost.connect(_on_health_component_health_lost)
 			health_component.died.connect(_on_health_component_died)
-		elif child is HitFeedback:
-			hit_feedback = child
 		elif child is TargetSelector:
 			target_selector = child
 		elif child is TurretMotionComponent:
@@ -93,8 +90,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_health_component_health_lost() -> void:
-	if hit_feedback:
-		hit_feedback.hit()
+	pass # nothing for now
 
 
 func _on_health_component_died() -> void:
