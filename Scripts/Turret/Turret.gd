@@ -70,12 +70,7 @@ func _ready() -> void:
 		printerr("Mismatch between number of guns %d and number of hardpoints %d" % [guns.size(), gun_hardpoints.size()])
 		get_tree().quit()
 	for i in range(guns.size()):
-		print('before')
-		print(guns[i].global_position)
 		guns[i].reparent(gun_hardpoints[i], false)
-		print('after')
-		print(guns[i].global_position)
-		print(gun_hardpoints[i].global_position)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

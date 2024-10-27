@@ -52,7 +52,6 @@ func position_laser() -> void:
 	# I wanted this so that the laser lingers in space
 	# where it was fired, rather than firing and
 	# continuing to move with the ship.
-	laser_mesh_pivot.global_position = global_position
 	laser_mesh_pivot.global_transform = global_transform
 	# Change laser mesh length and position relative to Head
 	# so the laser doesn't appear to pass through what it hits

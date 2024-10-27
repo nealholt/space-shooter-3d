@@ -57,6 +57,9 @@ team = "blue team"
 [node name="Player" parent="BlueTeam" instance=ExtResource("3_matfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 0)
 
+[node name="MissileLockGroup" parent="BlueTeam/Player" index="2"]
+npc_missile_lock = false
+
 [node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
 mesh = SubResource("SphereMesh_l7cy0")
 

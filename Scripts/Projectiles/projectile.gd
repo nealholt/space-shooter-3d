@@ -47,6 +47,10 @@ var shield_grace_period:float = 1.0/50.0
 # raycasts to hit from within any shield once
 # the ray is already inside it.
 
+# Ignore collisions with anything in this array
+#TODO TESTING
+#var collision_exceptions := Array()
+
 # Put a bullet image in bread crumb here
 # for testing purposes. I tested ricochet
 # using this.
@@ -108,6 +112,17 @@ func _physics_process(delta: float) -> void:
 	#crumb.transform = transform
 	#crumb.transform.basis = transform.basis.rotated(transform.basis.x.normalized(), PI/2)
 	#crumb.global_position = global_position
+	
+	# Check for inital collisions to be added
+	# to the collision exception list. Only
+	# do this once.
+	#TODO TESTING
+	#if $CollisionExceptionArea.monitoring:
+		#for other in $CollisionExceptionArea.get_overlapping_areas():
+			#print(other)
+			#collision_exceptions.append(other)
+		## Turn off further collisions
+		#$CollisionExceptionArea.monitoring = false
 	
 	# Reorient on target intercept if aim assist is
 	# on, but only do so once and then turn it off.
