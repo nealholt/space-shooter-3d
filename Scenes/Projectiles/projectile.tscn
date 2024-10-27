@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bosxindk1alsp"]
+[gd_scene load_steps=3 format=3 uid="uid://bosxindk1alsp"]
 
 [ext_resource type="Script" path="res://Scripts/Projectiles/projectile.gd" id="1_y78aq"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xop3g"]
 
 [node name="Projectile" type="Node3D" groups=["bullet"]]
 script = ExtResource("1_y78aq")
@@ -10,4 +12,13 @@ wait_time = 2.0
 one_shot = true
 autostart = true
 
+[node name="InitialCollisionArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InitialCollisionArea"]
+shape = SubResource("SphereShape3D_xop3g")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="InitialCollisionArea" to="." method="_on_initial_collision_area_area_entered"]

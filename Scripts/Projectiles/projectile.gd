@@ -40,7 +40,7 @@ var aim_assist_unhandled:bool = true
 # Why doesn't 1/100th or less suffice? Don't know.
 # But 2/100ths seemed to be the magic number.
 # This may need altered for raycast bullets.
-var shield_grace_period:float = 1.0/50.0
+var shield_grace_period:float = 0.0 #1.0/50.0 #TODO TESTING
 # NOTE: For raycasts with the "Hit From Inside"
 # checkbox deselected, shield_grace_period is
 # not even needed. However, you don't want
@@ -49,7 +49,8 @@ var shield_grace_period:float = 1.0/50.0
 
 # Ignore collisions with anything in this array
 #TODO TESTING
-#var collision_exceptions := Array()
+var collision_exceptions := Array()
+var frame_count := 0
 
 # Put a bullet image in bread crumb here
 # for testing purposes. I tested ricochet
@@ -113,16 +114,8 @@ func _physics_process(delta: float) -> void:
 	#crumb.transform.basis = transform.basis.rotated(transform.basis.x.normalized(), PI/2)
 	#crumb.global_position = global_position
 	
-	# Check for inital collisions to be added
-	# to the collision exception list. Only
-	# do this once.
 	#TODO TESTING
-	#if $CollisionExceptionArea.monitoring:
-		#for other in $CollisionExceptionArea.get_overlapping_areas():
-			#print(other)
-			#collision_exceptions.append(other)
-		## Turn off further collisions
-		#$CollisionExceptionArea.monitoring = false
+	frame_count+=1
 	
 	# Reorient on target intercept if aim assist is
 	# on, but only do so once and then turn it off.
@@ -144,6 +137,32 @@ func _physics_process(delta: float) -> void:
 		controller.move_me(self, delta)
 	# Move forward
 	global_position += velocity * delta
+
+
+#TODO TESTING
+#Currently this is not called ANYWHERE
+func test_collisions() -> void:
+	# Check for inital collisions to be added
+	# to the collision exception list. Only
+	# do this once.
+	#TODO TESTING
+	if $InitialCollisionArea.monitoring:
+		var test_count := 0
+		for other in $InitialCollisionArea.get_overlapping_areas():
+			test_count = test_count+1
+			print(test_count)
+			print("frame %d\n" % frame_count)
+			print(other.get_parent())
+			collision_exceptions.append(other)
+			# For reasons unknown, this finds no
+			# collisions the first time it gets run,
+			# no matter what. So I move turning it
+			# off inside the loop so it will run
+			# until it has at least one collision
+			# to ignore.
+			
+		# Turn off further collisions
+		$InitialCollisionArea.monitoring = false
 
 
 func damage_and_die(body, collision_point=null):
@@ -244,3 +263,10 @@ func stop_near_miss_audio() -> void:
 func _on_timer_timeout() -> void:
 	#print('bullet timed out')
 	queue_free()
+
+
+#TODO TESTING
+func _on_initial_collision_area_area_entered(area: Area3D) -> void:
+	print("\nframe %d" % frame_count)
+	print(area.get_parent())
+	collision_exceptions.append(area)

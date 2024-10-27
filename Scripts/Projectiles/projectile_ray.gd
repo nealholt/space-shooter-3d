@@ -66,10 +66,13 @@ func set_data(dat:ShootData) -> void:
 	# should not self-whiff
 	ray.set_collision_mask_value(3, dat.use_near_miss)
 	# Ignore collision with bodies in exclusion list
-	if dat.collision_exception1:
-		ray.add_exception(dat.collision_exception1)
-	if dat.collision_exception2:
-		ray.add_exception(dat.collision_exception2)
+	# TODO TESTING
+	for x in collision_exceptions:
+		ray.add_exception(x)
+	#if dat.collision_exception1:
+		#ray.add_exception(dat.collision_exception1)
+	#if dat.collision_exception2:
+		#ray.add_exception(dat.collision_exception2)
 
 
 # Source at 6:30 here:
