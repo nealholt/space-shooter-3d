@@ -29,7 +29,6 @@ var near_miss_audio: AudioStreamPlayer3D
 # will use the aim assist
 var aim_assist_unhandled:bool = true
 
-#TODO TESTING
 # Count elapsed "frames" this will be used
 # for ignoring immediate collisions such as
 # when bullets spawn within shields or near-miss
@@ -98,7 +97,6 @@ func _physics_process(delta: float) -> void:
 	#crumb.transform.basis = transform.basis.rotated(transform.basis.x.normalized(), PI/2)
 	#crumb.global_position = global_position
 	
-	#TODO TESTING
 	# Count elapsed "frames"
 	frame_count+=1
 	
@@ -163,8 +161,6 @@ func damage_and_die(body, collision_point=null):
 # Returns true if bullet should pass through
 # the body
 func passes_through(body) -> bool:
-	print("\nframe %d" % frame_count)
-	print(body.get_parent())
 	# Null instance can occur when body dies
 	# from another source of damage while this
 	# projectile is still trying to damage it.
@@ -172,9 +168,14 @@ func passes_through(body) -> bool:
 		return true
 	# In order to fire from within a shield, we need
 	# to ignore immediate collisions.
-	if frame_count <= 2: #TODO TESTING
-		print("\nframe %d" % frame_count)
-		print(body.get_parent())
+	# Why the fuck does it need to be 2?!
+	# But I'm telling you, if it's 1 then the
+	# turrets are blowing themselves up with
+	# the area projectiles. They seem okay
+	# with the rays.
+	if frame_count <= 2:
+		#print("\nframe %d" % frame_count)
+		#print(body.get_parent())
 		return true
 	return false
 
@@ -210,13 +211,13 @@ func stick_decal(collision_point:Vector3, collision_normal:Vector3) -> void:
 
 # Start near miss sound upon entering a near miss Area3D
 func start_near_miss_audio() -> void:
-	if data.use_near_miss:
-		# If it doesn't exist yet, create it
-		if !near_miss_audio:
-			near_miss_audio = AudioStreamPlayer3D.new()
-			var audiostream = load("res://Assets/SoundEffects/whoosh_medium_001.ogg")
-			near_miss_audio.set_stream(audiostream)
-			add_child(near_miss_audio)
+	#if data.use_near_miss: TODO TESTING
+	# If it doesn't exist yet, create it
+	if !near_miss_audio:
+		near_miss_audio = AudioStreamPlayer3D.new()
+		var audiostream = load("res://Assets/SoundEffects/whoosh_medium_001.ogg")
+		near_miss_audio.set_stream(audiostream)
+		add_child(near_miss_audio)
 		near_miss_audio.play()
 
 # Stop near miss sound when striking an object
