@@ -141,7 +141,7 @@ func flyby_camera() -> void:
 
 # Transition to target closeup camera
 func target_closeup_camera() -> void:
-	if Global.player.controller.target and is_instance_valid(Global.player.controller.target):
+	if Global.player and Global.player.controller.target and is_instance_valid(Global.player.controller.target):
 		target = Global.player.controller.target
 		state = CameraState.TARGETCLOSEUP
 		free_camera.make_current()

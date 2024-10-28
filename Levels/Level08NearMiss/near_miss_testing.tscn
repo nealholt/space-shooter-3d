@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://jw5871doy4ch"]
+[gd_scene load_steps=13 format=3 uid="uid://jw5871doy4ch"]
 
+[ext_resource type="Script" path="res://Levels/Level08NearMiss/near_miss_testing.gd" id="1_4q2ny"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_ba5yk"]
 [ext_resource type="Script" path="res://Levels/Level08NearMiss/bullet_spawner_testing.gd" id="2_00mhe"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_wmf1n"]
@@ -32,6 +33,7 @@ resource_local_to_scene = true
 material = SubResource("ShaderMaterial_685wi")
 
 [node name="NearMissTesting" type="Node3D"]
+script = ExtResource("1_4q2ny")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
