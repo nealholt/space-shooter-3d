@@ -31,6 +31,11 @@ func _physics_process(delta: float) -> void:
 		var body := ray.get_collider()
 		if !is_instance_valid(body):
 			return
+		# In order to fire from within a shield, we
+		# need to ignore immediate collisions.
+		if frame_count <= 1: #TODO TESTING
+			ray.add_exception(body)
+			return
 		# If we hit a near-miss detector
 		if body.is_in_group("near-miss detector"):
 			start_near_miss_audio()
@@ -67,8 +72,6 @@ func set_data(dat:ShootData) -> void:
 	ray.set_collision_mask_value(3, dat.use_near_miss)
 	# Ignore collision with bodies in exclusion list
 	# TODO TESTING
-	for x in collision_exceptions:
-		ray.add_exception(x)
 	#if dat.collision_exception1:
 		#ray.add_exception(dat.collision_exception1)
 	#if dat.collision_exception2:

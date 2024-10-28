@@ -15,11 +15,7 @@ func _on_area_3d_area_entered(area: Area3D) -> void:
 	# If we hit a near-miss detector
 	if area.is_in_group("near-miss detector"):
 		start_near_miss_audio()
-		return
 	# TODO TESTING
-	elif collision_exceptions.find(area) != -1:
-		print("in projectile area, ignoring %s" % area.get_parent())
-		return
 	#elif data.collision_exception1 and data.collision_exception1 == area:
 		#return
 	#elif data.collision_exception2 and data.collision_exception2 == area:

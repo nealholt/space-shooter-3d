@@ -13,7 +13,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_g6fsi"]
 radius = 1.0
 
-[node name="TurretComplete" type="Node3D"]
+[node name="Turret" type="Node3D"]
 script = ExtResource("1_cbt5p")
 
 [node name="turret_motion_component" parent="." instance=ExtResource("9_x6y6e")]

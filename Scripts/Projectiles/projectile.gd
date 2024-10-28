@@ -29,27 +29,11 @@ var near_miss_audio: AudioStreamPlayer3D
 # will use the aim assist
 var aim_assist_unhandled:bool = true
 
-# Every bullet has this amount of time during which
-# the bullet will permanently ignore any shields it
-# collides with during those frames. This allows
-# bullets that are fired from within shields to
-# ignore the shield.
-# About 2/100ths of a second suffices because
-# collisions are only detected when an area is
-# entered.
-# Why doesn't 1/100th or less suffice? Don't know.
-# But 2/100ths seemed to be the magic number.
-# This may need altered for raycast bullets.
-var shield_grace_period:float = 0.0 #1.0/50.0 #TODO TESTING
-# NOTE: For raycasts with the "Hit From Inside"
-# checkbox deselected, shield_grace_period is
-# not even needed. However, you don't want
-# raycasts to hit from within any shield once
-# the ray is already inside it.
-
-# Ignore collisions with anything in this array
 #TODO TESTING
-var collision_exceptions := Array()
+# Count elapsed "frames" this will be used
+# for ignoring immediate collisions such as
+# when bullets spawn within shields or near-miss
+# detectors or self-collisions.
 var frame_count := 0
 
 # Put a bullet image in bread crumb here
@@ -115,6 +99,7 @@ func _physics_process(delta: float) -> void:
 	#crumb.global_position = global_position
 	
 	#TODO TESTING
+	# Count elapsed "frames"
 	frame_count+=1
 	
 	# Reorient on target intercept if aim assist is
@@ -139,40 +124,16 @@ func _physics_process(delta: float) -> void:
 	global_position += velocity * delta
 
 
-#TODO TESTING
-#Currently this is not called ANYWHERE
-func test_collisions() -> void:
-	# Check for inital collisions to be added
-	# to the collision exception list. Only
-	# do this once.
-	#TODO TESTING
-	if $InitialCollisionArea.monitoring:
-		var test_count := 0
-		for other in $InitialCollisionArea.get_overlapping_areas():
-			test_count = test_count+1
-			print(test_count)
-			print("frame %d\n" % frame_count)
-			print(other.get_parent())
-			collision_exceptions.append(other)
-			# For reasons unknown, this finds no
-			# collisions the first time it gets run,
-			# no matter what. So I move turning it
-			# off inside the loop so it will run
-			# until it has at least one collision
-			# to ignore.
-			
-		# Turn off further collisions
-		$InitialCollisionArea.monitoring = false
-
-
 func damage_and_die(body, collision_point=null):
 	#print()
 	#print('damage_and_die called')
 	#print(passes_through(body))
 	#print(body.is_in_group("damageable"))
+	if passes_through(body):
+		return
 	# Damage what was hit
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
-	if !passes_through(body) and body.is_in_group("damageable"):
+	if body.is_in_group("damageable"):
 		#print("dealt damage")
 		body.damage(damage)
 	# Make a spark at collision point
@@ -202,6 +163,8 @@ func damage_and_die(body, collision_point=null):
 # Returns true if bullet should pass through
 # the body
 func passes_through(body) -> bool:
+	print("\nframe %d" % frame_count)
+	print(body.get_parent())
 	# Null instance can occur when body dies
 	# from another source of damage while this
 	# projectile is still trying to damage it.
@@ -209,7 +172,9 @@ func passes_through(body) -> bool:
 		return true
 	# In order to fire from within a shield, we need
 	# to ignore immediate collisions.
-	if body.is_in_group("shield") and $Timer.wait_time - $Timer.time_left <= shield_grace_period:
+	if frame_count <= 2: #TODO TESTING
+		print("\nframe %d" % frame_count)
+		print(body.get_parent())
 		return true
 	return false
 
@@ -263,10 +228,3 @@ func stop_near_miss_audio() -> void:
 func _on_timer_timeout() -> void:
 	#print('bullet timed out')
 	queue_free()
-
-
-#TODO TESTING
-func _on_initial_collision_area_area_entered(area: Area3D) -> void:
-	print("\nframe %d" % frame_count)
-	print(area.get_parent())
-	collision_exceptions.append(area)
