@@ -118,6 +118,10 @@ func rear_camera() -> void:
 
 # Transition to fly-by cinematic camera
 func flyby_camera() -> void:
+	# In some testing scenes, there is not a player
+	# but there is a camera
+	if !Global.player:
+		return
 	state = CameraState.FLYBY
 	free_camera.make_current()
 	Global.current_camera = free_camera

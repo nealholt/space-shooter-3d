@@ -23,10 +23,6 @@ var firing: bool = false
 # released and pressed again before firing.
 @export var automatic:bool = true
 
-# This variable is used so the player doesn't hear
-# their own bullets whizzing past their head.
-@export var use_near_miss: bool = true
-
 # Later in the code I convert spread_deg to radians
 # and cut it in half so that the spread total is
 # spread_deg rather than plus or minus spread_deg,
@@ -58,14 +54,6 @@ var reload_sound_player: AudioStreamPlayer3D
 # have a ray, such as guns that fire laser guided
 # munitions.
 @export var ray : RayCast3D
-
-# Objects to ignore collisions with. All bullets
-# fired by this gun will ignore collisions with
-# objects in this array.
-# I could not get this to work as an Array, so now
-# it's just two items explicitly.
-@export var collision_exception1 : Area3D
-@export var collision_exception2 : Area3D
 
 # So guns can know what team they're on
 var ally_team:String
@@ -134,11 +122,6 @@ func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
 	data.ray = ray
 	data.target = target
 	data.super_powered = powered_up
-	data.use_near_miss = use_near_miss
-	if is_instance_valid(collision_exception1):
-		data.collision_exception1 = collision_exception1
-	if is_instance_valid(collision_exception2):
-		data.collision_exception2 = collision_exception2
 	# Only use aim assist if it's set up on the shooter
 	# and the target reference is valid
 	# AND the gun only fires one bullet at a time.

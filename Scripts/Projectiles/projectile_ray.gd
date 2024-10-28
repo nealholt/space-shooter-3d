@@ -12,6 +12,7 @@ const MIN_RAY_DISTANCE := 1.0
 
 @export var does_ricochet:bool = true
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	# Move bullet
@@ -51,25 +52,19 @@ func _physics_process(delta: float) -> void:
 				body = ray.get_collider()
 			else: # Otherwise return
 				return
-		# Ricochet
-		if does_ricochet and !passes_through(body) and !body.is_in_group("damageable"):
-			ricochet(delta)
-		else: # or deal damage
+		if passes_through(body):
+			pass
+		elif body.is_in_group("damageable"):
 			# Stick on a decal before damaging and dying
 			# Don't stick decals on shields
 			if !body.is_in_group("shield"):
 				stick_decal(ray.get_collision_point(), ray.get_collision_normal())
 			damage_and_die(body, ray.get_collision_point())
-
-
-
-# Override parent class
-func set_data(dat:ShootData) -> void:
-	super.set_data(dat)
-	# Check if this is a bullet that should not make a
-	# whiffing noise. Currently only player bullets
-	# should not self-whiff
-	ray.set_collision_mask_value(3, dat.use_near_miss)
+		# Ricochet
+		elif does_ricochet:
+			ricochet(delta)
+		else:
+			pass
 
 
 # Source at 6:30 here:

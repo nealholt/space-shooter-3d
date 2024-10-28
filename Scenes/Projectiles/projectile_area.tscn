@@ -9,8 +9,8 @@
 script = ExtResource("2_f3glk")
 
 [node name="Area3D" type="Area3D" parent="." index="1"]
-collision_layer = 4
-collision_mask = 10
+collision_layer = 0
+collision_mask = 14
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 shape = SubResource("SphereShape3D_rk1hd")

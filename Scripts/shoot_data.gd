@@ -12,12 +12,7 @@ var ray:RayCast3D # Used for laser-guided bullets
 var damage:float = 1.0
 var bullet_speed:float
 var bullet_timeout:float
-# This variable is used so the player doesn't hear
-# their own bullets whizzing past their head:
-var use_near_miss:bool
 var spread_deg:float # Bullet spread in degrees
-var collision_exception1:Area3D # Area3d to ignore collisions with
-var collision_exception2:Area3D
 # If aim_assist is not zero, then bullets should
 # adjust to face this location, it will be the
 # intercept returned by aim_assist.gd
