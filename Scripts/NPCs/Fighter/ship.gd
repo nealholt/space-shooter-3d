@@ -64,6 +64,8 @@ func _physics_process(delta):
 		controller.select_target(self)
 		# Handle shooting of guns and missiles
 		controller.shoot(self, delta)
+		# Miscellaneous action (for now just switch weapon)
+		controller.misc_actions(self)
 
 
 func get_current_gun() -> Gun:

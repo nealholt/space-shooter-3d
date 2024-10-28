@@ -147,6 +147,11 @@ func select_target(targeter:Node3D) -> void:
 			target.set_targeted(targeter, true)
 
 
+func misc_actions(actor) -> void:
+	if Input.is_action_just_pressed("switch_weapons"):
+		actor.weapon_handler.change_weapon()
+
+
 # Override parent class function
 func enter_death_animation() -> void:
 	is_dead = true

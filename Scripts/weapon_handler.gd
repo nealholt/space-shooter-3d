@@ -11,10 +11,6 @@ var current_weapon: Gun
 func _ready() -> void:
 	change_weapon()
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("switch_weapons"):
-		change_weapon()
-
 
 func equip(active_weapon:Node3D) -> void:
 	# Pre: All children must be weapons

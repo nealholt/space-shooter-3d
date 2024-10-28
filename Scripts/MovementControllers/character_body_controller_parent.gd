@@ -39,7 +39,7 @@ func turn(mover, delta:float) -> void:
 	# Prevent floating point errors from accumulating. (Not sure if necessary)
 	mover.transform.basis = mover.transform.basis.orthonormalized()
 
-func move_and_turn(mover, delta:float) -> void:
+func move_and_turn(mover:Ship, delta:float) -> void:
 	turn(mover, delta)
 	# New velocity is old velocity * friction + impulse in current direction
 	var new_dir = -mover.transform.basis.z * impulse * delta
@@ -63,11 +63,14 @@ func move_and_turn(mover, delta:float) -> void:
 		#collision.get_collider().apply_central_impulse(-collision.get_normal()*100)
 		#collision.get_collider().apply_torque_impulse(mover.transform.basis.y)
 
-func select_target(_targeter:Node3D) -> void:
+func select_target(_targeter:Ship) -> void:
 	printerr('For the near future, select_target in character_body_control_parent should be overriden by child class.')
 
-func shoot(_shooter, _delta:float) -> void:
+func shoot(_shooter:Ship, _delta:float) -> void:
 	printerr('For the near future, shoot in character_body_control_parent should be overriden by child class.')
+
+func misc_actions(_actor:Ship) -> void:
+	pass
 
 # This lets the controller decide how to respond
 # to damage in the future this probably should
