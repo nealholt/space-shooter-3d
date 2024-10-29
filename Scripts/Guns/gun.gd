@@ -13,7 +13,7 @@ class_name Gun
 
 # True if the gun has received command to fire
 # at next possible opportunity
-var firing: bool = false
+var firing: bool = false #TODO TESTING Can get rid of this?
 
 # Whether gun is automatic or not. If true then
 # holding the shoot button will fire this weapon
@@ -79,9 +79,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time
 # since the previous frame.
-func _process(_delta):
-	if firing:
-		shoot_actual()
+#TODO TESTING
+#func _process(_delta):
+	#if firing:
+		#shoot_actual()
 
 
 func ready_to_fire() -> bool:
@@ -97,11 +98,13 @@ func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
 			muzzle_flash.restart()
 		if fire_sound_player:
 			fire_sound_player.playing = true
-		# Set up booleans for firing the gun
-		# as soon as possible.
-		firing = true
 		restart_timer()
 		setup_shoot_data(shooter,target,powered_up)
+		# TODO TESTING
+		# Set up booleans for firing the gun
+		# as soon as possible.
+		#firing = true
+		shoot_actual()
 
 
 func restart_timer() -> void:

@@ -18,6 +18,12 @@ func _process(_delta):
 		shoot_actual()
 
 
+#TODO TESTING
+# Override parent class
+func ready_to_fire() -> bool:
+	return super.ready_to_fire() and burst_timer.is_stopped()
+
+
 func shoot_actual() -> void:
 	super.shoot_actual()
 	# Start countdown to next burst
