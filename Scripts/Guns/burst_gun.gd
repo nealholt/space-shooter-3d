@@ -1,6 +1,8 @@
 extends Gun
 class_name BurstGun
 
+# True if the gun has received command to fire
+var firing: bool = false
 # Fire a burst over a short period of time.
 @onready var burst_timer: Timer = $BurstTimer
 # How many consecutive shots are fired when trigger is pulled
@@ -13,12 +15,11 @@ var burst_count:int = 0
 
 # Called every frame. 'delta' is the elapsed time
 # since the previous frame.
-func _process(_delta):
+func _physics_process(_delta):
 	if firing and burst_timer.is_stopped():
 		shoot_actual()
 
 
-#TODO TESTING
 # Override parent class
 func ready_to_fire() -> bool:
 	return super.ready_to_fire() and burst_timer.is_stopped()
@@ -26,6 +27,7 @@ func ready_to_fire() -> bool:
 
 func shoot_actual() -> void:
 	super.shoot_actual()
+	firing = true
 	# Start countdown to next burst
 	burst_timer.start(1.0/burst_rate)
 	burst_count += 1 # Count this burst
@@ -43,21 +45,7 @@ func shoot_actual() -> void:
 		# Reset can_burst to true so that it doesn't
 		# interfere with the firing rate
 		burst_timer.stop()
-	else:
-		# Keep firing the burst!
-		# This is necessary because the parent class's
-		# shoot_actual switches off firing.
-		firing = true
-		# Refresh the shootdata otherwise every bullet
-		# fired in the burst will be fired from the
-		# same position
-		#setup_shoot_data(data.shooter, data.target, data.super_powered)
-		# Does not seem necessary, so I'm commenting it for now
-	# Restart FiringRateTimer so it's the time
-	# between bursts, but doesn't count the time
-	# during a burst.
-	#restart_timer()
-	# Does not seem necessary, so I'm commenting it for now
+
 
 # Override parent class's function
 func deactivate() -> void:
@@ -66,3 +54,4 @@ func deactivate() -> void:
 	# Reset can_burst to true so that it doesn't
 	# interfere with the firing rate
 	burst_timer.stop()
+	firing = false

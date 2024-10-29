@@ -6,7 +6,7 @@ class_name LaserShotgun
 # like house of the dying sun's blunderbuss
 
 # IMPORTANT NOTE:
-# Bullet bits should be put in place of any other
+# Shotgun pellets should be put in place of any other
 # bullet in the "bullet" packed scene.
 
 # Damage is dealt in the bulletbits so that
@@ -59,7 +59,6 @@ func _ready() -> void:
 
 # Override parent class's shoot_actual
 func shoot_actual() -> void:
-	firing = false
 	# Loop through all the raycasts
 	# and BulletBits.
 	var pellet:ShotgunPellet

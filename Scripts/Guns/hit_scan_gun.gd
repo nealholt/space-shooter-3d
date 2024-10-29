@@ -25,7 +25,6 @@ func _ready():
 
 # Override parent class's shoot_actual
 func shoot_actual() -> void:
-	firing = false
 	ray.force_raycast_update() # Check for collisions
 	if ray.is_colliding():
 		var collider = ray.get_collider()
