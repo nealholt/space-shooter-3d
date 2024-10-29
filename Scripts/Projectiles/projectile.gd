@@ -161,6 +161,8 @@ func damage_and_die(body, collision_point=null):
 # Returns true if bullet should pass through
 # the body
 func passes_through(body) -> bool:
+	#print("\nframe %d" % frame_count)
+	#print(body.get_parent())
 	# Null instance can occur when body dies
 	# from another source of damage while this
 	# projectile is still trying to damage it.
