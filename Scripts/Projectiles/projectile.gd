@@ -9,6 +9,7 @@ var velocity : Vector3
 
 var controller:Controller
 var health_component:HealthComponent
+var hit_box_component:HitBoxComponent
 
 @export var deathExplosion : PackedScene
 
@@ -60,6 +61,8 @@ func _ready() -> void:
 			health_component = child
 			# Connect signals with code
 			health_component.died.connect(_on_health_component_died)
+		elif child is HitBoxComponent:
+			hit_box_component = child
 
 
 # This is called by the gun that shoots the bullet.
@@ -96,6 +99,9 @@ func set_data(dat:ShootData) -> void:
 		controller.set_data(dat)
 	# Set / reset timer
 	$Timer.start(time_out)
+	# Make it so a Ship can't shoot their own bullets
+	if hit_box_component:
+		hit_box_component.add_damage_exception(dat.shooter)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

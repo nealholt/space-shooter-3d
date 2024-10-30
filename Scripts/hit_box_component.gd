@@ -12,6 +12,11 @@ var got_hit_audio:AudioStreamPlayer
 
 var hit_feedback:HitFeedback
 
+# Anyone can damage this hitbox except for
+# this ship. Currently this is used to prevent
+# npcs from shooting down their own missiles.
+var damage_exception:Ship
+
 
 func _ready() -> void:
 	# Search through children for various components
@@ -24,10 +29,17 @@ func _ready() -> void:
 
 
 func damage(amount:int, damager=null):
+	# A Ship shouldn't shoot down their own missiles
+	if damager and is_instance_valid(damage_exception) and damager == damage_exception:
+		return
 	if health_component:
 		health_component.health -= amount
 	if hit_feedback:
 		hit_feedback.hit()
+
+
+func add_damage_exception(s:Ship) -> void:
+	damage_exception = s
 
 
 # This is called when the player targets this hitbox
