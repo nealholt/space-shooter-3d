@@ -1,13 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dt8e8r0ew3fjn"]
+[gd_scene load_steps=9 format=3 uid="uid://dt8e8r0ew3fjn"]
 
 [ext_resource type="PackedScene" uid="uid://caody2m8xh0b6" path="res://Scenes/Projectiles/projectile_ray.tscn" id="1_0lyqn"]
 [ext_resource type="PackedScene" uid="uid://domnb1m51i30x" path="res://Assets/Particles/ship_strike.tscn" id="2_qofc8"]
 [ext_resource type="PackedScene" uid="uid://loiql7x3ow62" path="res://Assets/Particles/shield_strike.tscn" id="3_h6e4k"]
 [ext_resource type="PackedScene" uid="uid://b8xwbrmhu8ybu" path="res://Assets/Projectiles/Missiles/gray_torpedo_body.tscn" id="4_4eh70"]
 [ext_resource type="PackedScene" uid="uid://dto664xfw5qbf" path="res://Scenes/MovementControllers/physics_seek_controller.tscn" id="5_m3n6r"]
+[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_g4iot"]
+[ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="7_4ccg1"]
 
-[node name="ProjectileRay" node_paths=PackedStringArray("controller") instance=ExtResource("1_0lyqn")]
-controller = NodePath("PhysicsSeekController")
+[sub_resource type="SphereShape3D" id="SphereShape3D_7sobq"]
+radius = 2.2
+
+[node name="ProjectileRay" instance=ExtResource("1_0lyqn")]
 sparks = ExtResource("2_qofc8")
 shieldSparks = ExtResource("3_h6e4k")
 
@@ -15,3 +19,12 @@ shieldSparks = ExtResource("3_h6e4k")
 
 [node name="PhysicsSeekController" parent="." index="3" instance=ExtResource("5_m3n6r")]
 steer_force = 200.0
+
+[node name="HitBoxComponent" parent="." index="4" node_paths=PackedStringArray("health_component") instance=ExtResource("6_g4iot")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent" index="1"]
+shape = SubResource("SphereShape3D_7sobq")
+
+[node name="HealthComponent" parent="." index="5" instance=ExtResource("7_4ccg1")]
+max_health = 1

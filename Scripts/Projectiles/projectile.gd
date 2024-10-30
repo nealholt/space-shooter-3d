@@ -4,12 +4,16 @@ class_name Projectile
 # Bullets and missiles and all projectiles inherit
 # from this class.
 
-var speed:float = 1000.0
+@export var speed:float = 1000.0
 var velocity : Vector3
-@export var controller:Controller
+
+var controller:Controller
+var health_component:HealthComponent
+
+@export var deathExplosion : PackedScene
 
 var damage:float = 1.0
-var time_out:float = 2.0 #seconds
+@export var time_out:float = 2.0 #seconds
 
 # Data on shooter and target:
 var data:ShootData
@@ -47,6 +51,15 @@ func _ready() -> void:
 	# is updated each frame
 	velocity = -global_transform.basis.z * speed
 	$Timer.start(time_out)
+	# Search through children for various components
+	# and save a reference to them.
+	for child in get_children():
+		if child is Controller:
+			controller = child
+		elif child is HealthComponent:
+			health_component = child
+			# Connect signals with code
+			health_component.died.connect(_on_health_component_died)
 
 
 # This is called by the gun that shoots the bullet.
@@ -221,6 +234,7 @@ func start_near_miss_audio() -> void:
 		add_child(near_miss_audio)
 		near_miss_audio.play()
 
+
 # Stop near miss sound when striking an object
 func stop_near_miss_audio() -> void:
 	if near_miss_audio:
@@ -230,3 +244,15 @@ func stop_near_miss_audio() -> void:
 func _on_timer_timeout() -> void:
 	#print('bullet timed out')
 	queue_free()
+
+
+func _on_health_component_died() -> void:
+	# Explode
+	if deathExplosion:
+		var explosion = deathExplosion.instantiate()
+		# Add to main_3d, not root, otherwise the added
+		# node might not be properly cleared when
+		# transitioning to a new scene.
+		Global.main_scene.main_3d.add_child(explosion)
+		explosion.global_position = global_position
+	Callable(queue_free).call_deferred()

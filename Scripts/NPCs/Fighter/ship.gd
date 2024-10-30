@@ -23,7 +23,7 @@ var death_animation_timer:Timer
 #I really like the idea of _ready functions
 # searching through and equipping components
 # they find as children.
-#Search subtree for components. If found,
+# Search subtree for components. If found,
 # save a reference to them and subscribe to
 # their signals.
 # Inspired by luislodosm's response here:
