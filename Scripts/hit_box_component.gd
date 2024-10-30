@@ -23,7 +23,7 @@ func _ready() -> void:
 			hit_feedback = child
 
 
-func damage(amount:int):
+func damage(amount:int, damager=null):
 	if health_component:
 		health_component.health -= amount
 	if hit_feedback:
@@ -40,6 +40,7 @@ func set_targeted(targeter:Node3D, value:bool) -> void:
 	# In the future this should also signal to the
 	# object that owns this hitbox that it is
 	# being targeted
+
 
 # These are called by the missile lock group when
 # targeter is seeking lock on this hitbox,

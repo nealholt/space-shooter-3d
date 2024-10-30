@@ -34,6 +34,6 @@ func _on_timer_timeout() -> void:
 	if damagee != null:
 		stick_decal(target_position, collision_normal)
 		if damagee.is_in_group("damageable"):
-			damagee.damage(1)
+			damagee.damage(damage, data.shooter)
 		damagee = null
 	queue_free()

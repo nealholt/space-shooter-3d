@@ -30,7 +30,7 @@ func shoot_actual() -> void:
 		var collider = ray.get_collider()
 		if collider.is_in_group("damageable"):
 			#print("dealt damage")
-			collider.damage(1)
+			collider.damage(damage, data.shooter)
 		# Spawn sparks on location of hit
 		if sparks:
 			var spark = sparks.instantiate()
