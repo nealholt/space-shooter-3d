@@ -17,5 +17,6 @@ func damage_and_die(body, _collision_point=null):
 	# Set explosion's position and damage
 	explosion.global_position = global_position
 	explosion.damage_amt = damage
+	explosion.shooter = data.shooter
 	# Wait until the end of the frame to execute queue_free
 	Callable(queue_free).call_deferred()

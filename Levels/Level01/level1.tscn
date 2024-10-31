@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b2p5fk853guwk"]
+[gd_scene load_steps=14 format=3 uid="uid://b2p5fk853guwk"]
 
 [ext_resource type="Script" path="res://Levels/Level01/level1.gd" id="1_dflt6"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_widnh"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="6_87wt5"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="7_oouc0"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="8_b1kea"]
-[ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="9_kjtby"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p3vaa"]
 sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)
@@ -76,8 +75,7 @@ pitch_scale = 0.5
 
 [node name="Missile1" parent="BlueTeam" instance=ExtResource("8_b1kea")]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -174.264, 30.6708, -286.437)
-speed = 30.0
-deathExplosion = ExtResource("9_kjtby")
+speed = 50.0
 time_out = 20.0
 
 [editable path="BlueTeam/Player"]
