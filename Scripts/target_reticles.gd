@@ -37,7 +37,8 @@ class_name TargetReticles
 #SOFTWARE.
 
 # Squared distance at which to use smaller reticle
-@export var distance_cutoff := 180.0**2
+@export var distance_cutoff := 180.0
+var distance_cutoff_sqd : float
 # Factor for modifying transparency of reticle with distance
 #@export var scaling_factor:float = 25000.0
 
@@ -73,6 +74,7 @@ var is_targeted:bool:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	distance_cutoff_sqd = distance_cutoff * distance_cutoff
 	is_targeted = false
 	hide_all()
 	camera = get_viewport().get_camera_3d()
@@ -100,7 +102,7 @@ func _process(_delta):
 		cam_distance = global_position.distance_squared_to(camera.global_position)
 		# Choose between near and far reticles
 		var reticle_to_use:TextureRect
-		if cam_distance > distance_cutoff:
+		if cam_distance > distance_cutoff_sqd:
 			reticle_to_use = distant_reticle
 		elif is_targeted:
 			reticle_to_use = targeted_reticle

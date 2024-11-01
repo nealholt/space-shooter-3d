@@ -81,6 +81,17 @@ func _physics_process(delta: float) -> void:
 		# camera looks at instead.
 		var temp_targ_pos : Vector3 = first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0
 		$turret_motion_component.rotate_and_elevate($Body, $Body/Head, delta, temp_targ_pos)
+	# Show target lead indicator if in first person view
+	if state == CameraState.FIRSTPERSON and Global.player and Global.player.controller and is_instance_valid(Global.player.controller.target) and Global.player.weapon_handler and "velocity" in Global.player.controller.target.get_parent():
+		var lead_pos:Vector3 = Global.get_intercept(
+			Global.player.global_position,
+			Global.player.weapon_handler.get_bullet_speed(),
+			Global.player.controller.target.get_parent())
+		var reticle_position = first_person_camera.unproject_position(lead_pos)
+		$TargetLeadIndicator.set_global_position(reticle_position - $TargetLeadIndicator.size/2.0)
+		$TargetLeadIndicator.show()
+	else:
+		$TargetLeadIndicator.hide()
 
 
 # Turn on looking at player's target
