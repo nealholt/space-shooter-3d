@@ -300,6 +300,7 @@ func set_reticle(camera:Camera3D, reticle:TextureRect, position:Vector3) -> bool
 	if !is_instance_valid(camera):
 		camera = get_viewport().get_camera_3d()
 	if !targeting_hud_on or !is_instance_valid(camera):
+		reticle.hide()
 		return false
 	# If the camera can see the target reticle Node3D...
 	if camera.is_position_in_frustum(position):
@@ -311,4 +312,5 @@ func set_reticle(camera:Camera3D, reticle:TextureRect, position:Vector3) -> bool
 		reticle.set_global_position(reticle_position - reticle.size/2.0)
 		return true
 	else:
+		reticle.hide()
 		return false

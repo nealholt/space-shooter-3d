@@ -46,10 +46,15 @@ var reload_sound_player: AudioStreamPlayer3D
 @export var gun_animation : AnimationPlayer
 @export var muzzle_flash : GPUParticles3D
 
+
 # Only guns that actually use a raycast3d should
 # have a ray, such as guns that fire laser guided
 # munitions.
-@export var ray : RayCast3D
+var ray : RayCast3D
+# Reticle, if any, to use for this gun. This should ONLY
+# be attached as a child of the gun on player-controlled
+# ships.
+var reticle:TextureRect
 
 # So guns can know what team they're on
 var ally_team:String
@@ -57,6 +62,13 @@ var ally_team:String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Search through children for various components
+	# and save a reference to them.
+	for child in get_children():
+		if child is RayCast3D:
+			ray = child
+		elif child is TextureRect:
+			reticle = child
 	# Calculate bullet range
 	range_sqd = (bullet_speed*bullet_timeout)*(bullet_speed*bullet_timeout)
 	# create fire audio stream
@@ -71,6 +83,12 @@ func _ready():
 		reload_sound_player.stream = reload_sound
 		reload_sound_player.volume_db = -20.0 #quieter
 		add_child(reload_sound_player)
+
+
+func _process(_delta: float) -> void:
+	if reticle:
+		var position_ahead:Vector3 = global_position - global_transform.basis.z*500.0
+		Global.set_reticle(null, reticle, position_ahead)
 
 
 func ready_to_fire() -> bool:
@@ -133,6 +151,9 @@ func shoot_actual() -> void:
 func deactivate() -> void:
 	#visible = false
 	set_process(false)
+	set_physics_process(false)
+	if reticle:
+		reticle.hide()
 	if gun_animation:
 		gun_animation.stop()
 	# Don't stop the muzzle flash. Let it play out.
@@ -157,5 +178,8 @@ func deactivate() -> void:
 func activate() -> void:
 	visible = true
 	set_process(true)
+	set_physics_process(true)
+	if reticle:
+		reticle.show()
 	if ray:
 		ray.enabled = true

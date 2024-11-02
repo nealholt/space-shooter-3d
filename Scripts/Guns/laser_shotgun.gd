@@ -26,6 +26,7 @@ class_name LaserShotgun
 
 
 func _ready() -> void:
+	super._ready()
 	# Create all the necessary raycasts
 	for i in range(simultaneous_shots):
 		ray = RayCast3D.new()
