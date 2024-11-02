@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://cl5qo04bjawi8"]
+
+[ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Assets/Ships/fighter_chassis_diamond.tscn" id="1_d30o0"]
+[ext_resource type="PackedScene" uid="uid://b6qbkgyc1fdhv" path="res://Scenes/laser.tscn" id="2_vuydy"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jrdj0"]
+sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)
+sky_horizon_color = Color(0.533333, 0.662745, 0.735294, 1)
+ground_bottom_color = Color(0, 0.215686, 0.101961, 1)
+ground_horizon_color = Color(0.533333, 0.662745, 0.735294, 1)
+
+[sub_resource type="Sky" id="Sky_dp1ge"]
+sky_material = SubResource("ProceduralSkyMaterial_jrdj0")
+
+[sub_resource type="Environment" id="Environment_lm22m"]
+background_mode = 2
+sky = SubResource("Sky_dp1ge")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_f2a1l"]
+size = Vector2(5, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_my0ek"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_w6pur"]
+data = PackedVector3Array(-0.25, 0.25, 0.25, 0.25, 0.25, 0.25, -0.25, -0.25, 0.25, 0.25, 0.25, 0.25, 0.25, -0.25, 0.25, -0.25, -0.25, 0.25, 0.25, 0.25, -0.25, -0.25, 0.25, -0.25, 0.25, -0.25, -0.25, -0.25, 0.25, -0.25, -0.25, -0.25, -0.25, 0.25, -0.25, -0.25, 0.25, 0.25, 0.25, 0.25, 0.25, -0.25, 0.25, -0.25, 0.25, 0.25, 0.25, -0.25, 0.25, -0.25, -0.25, 0.25, -0.25, 0.25, -0.25, 0.25, -0.25, -0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25, 0.25, 0.25, -0.25, -0.25, 0.25, -0.25, -0.25, -0.25, 0.25, 0.25, 0.25, -0.25, 0.25, 0.25, 0.25, 0.25, -0.25, -0.25, 0.25, 0.25, -0.25, 0.25, -0.25, 0.25, 0.25, -0.25, -0.25, -0.25, 0.25, 0.25, -0.25, 0.25, -0.25, -0.25, -0.25, 0.25, -0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25, -0.25)
+
+[node name="LaserTestScene" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(1, 1, 0.745098, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lm22m")
+
+[node name="FighterChassisDiamond" parent="." instance=ExtResource("1_d30o0")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5.51175, 1.96563, -0.956974)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00590628, 0)
+mesh = SubResource("PlaneMesh_f2a1l")
+
+[node name="Box" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273687, -1.35227)
+mesh = SubResource("BoxMesh_my0ek")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Box"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_w6pur")
+
+[node name="Box2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273687, 1.58092)
+mesh = SubResource("BoxMesh_my0ek")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Box2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_w6pur")
+
+[node name="Laser" parent="." instance=ExtResource("2_vuydy")]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0.384107, 1.24259)
+target_position = Vector3(0, -10, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-3.99584e-08, -0.405397, 0.914141, -1.77205e-08, 0.914141, 0.405397, -1, 0, -4.37114e-08, 3.91795, 2.33834, 0.134686)
