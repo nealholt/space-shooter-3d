@@ -292,3 +292,18 @@ func add_to_team_group(to_add, team:String) -> void:
 		main_scene.main_3d.add_child(to_add)
 	else:
 		printerr('Unrecognized team %s in Global.gd load_level' % team)
+
+
+func set_reticle(camera:Camera3D, reticle:TextureRect, position:Vector3) -> void:
+	if !is_instance_valid(camera):
+		camera = get_viewport().get_camera_3d()
+	if !targeting_hud_on or !is_instance_valid(camera):
+		return
+	# If the camera can see the target reticle Node3D...
+	if camera.is_position_in_frustum(position):
+		# Get position to put the reticle
+		var reticle_position = camera.unproject_position(position)
+		# Show the reticle
+		reticle.show()
+		# Subtract half width and height to center the reticle
+		reticle.set_global_position(reticle_position - reticle.size/2.0)

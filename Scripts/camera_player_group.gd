@@ -88,9 +88,7 @@ func _physics_process(delta: float) -> void:
 			Global.player.global_position,
 			Global.player.weapon_handler.get_bullet_speed(),
 			Global.player.controller.target.get_parent())
-		var reticle_position = first_person_camera.unproject_position(lead_pos)
-		$TargetLeadIndicator.set_global_position(reticle_position - $TargetLeadIndicator.size/2.0)
-		$TargetLeadIndicator.show()
+		Global.set_reticle(first_person_camera, $TargetLeadIndicator, lead_pos)
 	else:
 		$TargetLeadIndicator.hide()
 	# Show crosshair or not

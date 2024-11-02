@@ -90,7 +90,7 @@ func _ready():
 
 func _process(_delta):
 	hide_all() # Reset all to hidden
-	if!is_instance_valid(camera):
+	if !is_instance_valid(camera):
 		camera = get_viewport().get_camera_3d()
 	if !Global.targeting_hud_on or !is_instance_valid(camera):
 		return
