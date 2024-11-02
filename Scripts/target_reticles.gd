@@ -90,29 +90,24 @@ func _ready():
 
 func _process(_delta):
 	hide_all() # Reset all to hidden
+	# A significant chunk of the following is redundant with
+	# code in the Global.set_reticle function.
 	if !is_instance_valid(camera):
 		camera = get_viewport().get_camera_3d()
 	if !Global.targeting_hud_on or !is_instance_valid(camera):
 		return
-	# If the camera can see the target reticle Node3D...
+	# Get distance to camera
+	cam_distance = global_position.distance_squared_to(camera.global_position)
+	# Choose between near and far reticles
+	var reticle_to_use:TextureRect
+	if cam_distance > distance_cutoff_sqd:
+		reticle_to_use = distant_reticle
+	elif is_targeted:
+		reticle_to_use = targeted_reticle
+	else:
+		reticle_to_use = target_reticle
+	# Try to put reticle on screen
 	if camera.is_position_in_frustum(global_position):
-		# Get position to put the reticle
-		var reticle_position = camera.unproject_position(global_position)
-		# Get distance to camera
-		cam_distance = global_position.distance_squared_to(camera.global_position)
-		# Choose between near and far reticles
-		var reticle_to_use:TextureRect
-		if cam_distance > distance_cutoff_sqd:
-			reticle_to_use = distant_reticle
-		elif is_targeted:
-			reticle_to_use = targeted_reticle
-		else:
-			reticle_to_use = target_reticle
-		# Show the reticle
-		reticle_to_use.show()
-		# Subtract half width and height to center the reticle
-		reticle_to_use.set_global_position(reticle_position - reticle_to_use.size/2.0)
-		
 		# Scale reticle size and transparency with distance,
 		# close up it should be large and transparent
 		# Percent is clamped between 0 and 1
@@ -127,6 +122,7 @@ func _process(_delta):
 		# Keep transparency between 0 and 255
 		#var alpha:int = 255 - int(percent*255)
 		#target_reticle.modulate = Color(target_reticle.modulate, alpha)
+		Global.set_reticle(camera, reticle_to_use, global_position)
 		
 	elif is_targeted: # Show at most one offscreen reticle for targeted unit
 		display_offscreen_reticle()

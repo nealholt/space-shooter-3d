@@ -91,8 +91,6 @@ func _physics_process(delta: float) -> void:
 		Global.set_reticle(first_person_camera, $TargetLeadIndicator, lead_pos)
 	else:
 		$TargetLeadIndicator.hide()
-	# Show crosshair or not
-	$CenterCrosshair.visible = (state == CameraState.FIRSTPERSON)
 
 
 # Turn on looking at player's target

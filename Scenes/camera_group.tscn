@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cungbhnq1r7av"]
+[gd_scene load_steps=5 format=3 uid="uid://cungbhnq1r7av"]
 
 [ext_resource type="Script" path="res://Scripts/camera_player_group.gd" id="1_sad13"]
 [ext_resource type="PackedScene" uid="uid://ymilutrw63dv" path="res://Scenes/turret_motion_component.tscn" id="2_tdt0o"]
 [ext_resource type="Texture2D" uid="uid://bh7nsvxua2tv4" path="res://Assets/Images/crosshair173.png" id="3_a50bn"]
-[ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="4_w4veh"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wtdqg"]
 radius = 15.0
@@ -64,18 +63,3 @@ modulate = Color(1, 1, 1, 0.627451)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("3_a50bn")
-
-[node name="CenterCrosshair" type="TextureRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_w4veh")
-stretch_mode = 3
