@@ -56,9 +56,8 @@ size = Vector3(3, 3, 3)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_vdb3i")
 
-[node name="Laser" parent="." instance=ExtResource("2_vuydy")]
-transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0.384107, 0.509473)
-target_position = Vector3(0, -10, 0)
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.258819, -0.391583, 0.882992, -1.77205e-08, 0.914141, 0.405396, -0.965926, 0.104924, -0.236597, 8.13156, 3.84739, -2.86531)
+
+[node name="Laser" parent="." instance=ExtResource("2_vuydy")]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 5.13429)
