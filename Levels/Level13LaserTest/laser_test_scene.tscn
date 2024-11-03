@@ -19,13 +19,13 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_f2a1l"]
-size = Vector2(5, 5)
+size = Vector2(20, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_my0ek"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(3, 3, 3)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_w6pur"]
-data = PackedVector3Array(-0.25, 0.25, 0.25, 0.25, 0.25, 0.25, -0.25, -0.25, 0.25, 0.25, 0.25, 0.25, 0.25, -0.25, 0.25, -0.25, -0.25, 0.25, 0.25, 0.25, -0.25, -0.25, 0.25, -0.25, 0.25, -0.25, -0.25, -0.25, 0.25, -0.25, -0.25, -0.25, -0.25, 0.25, -0.25, -0.25, 0.25, 0.25, 0.25, 0.25, 0.25, -0.25, 0.25, -0.25, 0.25, 0.25, 0.25, -0.25, 0.25, -0.25, -0.25, 0.25, -0.25, 0.25, -0.25, 0.25, -0.25, -0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25, 0.25, 0.25, -0.25, -0.25, 0.25, -0.25, -0.25, -0.25, 0.25, 0.25, 0.25, -0.25, 0.25, 0.25, 0.25, 0.25, -0.25, -0.25, 0.25, 0.25, -0.25, 0.25, -0.25, 0.25, 0.25, -0.25, -0.25, -0.25, 0.25, 0.25, -0.25, 0.25, -0.25, -0.25, -0.25, 0.25, -0.25, 0.25, 0.25, -0.25, -0.25, -0.25, -0.25, -0.25)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vdb3i"]
+data = PackedVector3Array(-1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, -1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, 1.5, 1.5, -1.5, -1.5, 1.5, -1.5, 1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, -1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, 1.5, -1.5, -1.5, -1.5, -1.5, 1.5, 1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, 1.5, 1.5, 1.5, -1.5, 1.5, 1.5, 1.5, 1.5, -1.5, -1.5, 1.5, 1.5, -1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5, -1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -1.5, -1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5, -1.5, -1.5, -1.5)
 
 [node name="LaserTestScene" type="Node3D"]
 
@@ -41,30 +41,24 @@ environment = SubResource("Environment_lm22m")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5.51175, 1.96563, -0.956974)
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00590628, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.56387, 0)
 mesh = SubResource("PlaneMesh_f2a1l")
 
 [node name="Box" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273687, -1.35227)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273687, -6.20215)
 mesh = SubResource("BoxMesh_my0ek")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Box"]
+size = Vector3(3, 3, 3)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Box"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Box/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_w6pur")
-
-[node name="Box2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.273687, 1.58092)
-mesh = SubResource("BoxMesh_my0ek")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Box2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_w6pur")
+shape = SubResource("ConcavePolygonShape3D_vdb3i")
 
 [node name="Laser" parent="." instance=ExtResource("2_vuydy")]
-transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0.384107, 1.24259)
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0.384107, 0.509473)
 target_position = Vector3(0, -10, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-3.99584e-08, -0.405397, 0.914141, -1.77205e-08, 0.914141, 0.405397, -1, 0, -4.37114e-08, 3.91795, 2.33834, 0.134686)
+transform = Transform3D(-0.258819, -0.391583, 0.882992, -1.77205e-08, 0.914141, 0.405396, -0.965926, 0.104924, -0.236597, 8.13156, 3.84739, -2.86531)
