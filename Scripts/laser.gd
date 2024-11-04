@@ -28,29 +28,27 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	var cast_point:Vector3
+	# Default cast point
+	var cast_point:Vector3 = Vector3(0, -ray_length, 0)
+	# Check for actual collision
 	ray.force_raycast_update()
-	
 	if ray.is_colliding():
 		cast_point = to_local(ray.get_collision_point())
-		
-		beam_mesh.mesh.height = cast_point.y
-		beam_mesh.position.y = cast_point.y/2.0
-		
-		end_particles.position.y = cast_point.y
-		
-		beam_particles.position.y = cast_point.y/2.0
-		
-		# 50 particles per 1 meter of beam
-		var particle_amount:int = snapped(abs(cast_point.y)*50, 1)
-		if particle_amount > 1:
-			beam_particles.amount = particle_amount
-		else:
-			beam_particles.amount = 1
-		
-		beam_particles.process_material.set_emission_box_extents(
-			Vector3(beam_mesh.mesh.top_radius, abs(cast_point.y)/2, beam_mesh.mesh.top_radius)
-		)
+	# Position the beam mesh
+	beam_mesh.mesh.height = cast_point.y
+	beam_mesh.position.y = cast_point.y/2.0
+	#position particles
+	end_particles.position.y = cast_point.y
+	beam_particles.position.y = cast_point.y/2.0
+	
+	# 10 particles per 1 meter of beam
+	# up to a max of 500.
+	var particle_amount:int = snapped(abs(cast_point.y)*10, 1)
+	particle_amount = clampi(particle_amount, 1, 500)
+	# Position beam particles
+	beam_particles.process_material.set_emission_box_extents(
+		Vector3(beam_mesh.mesh.top_radius, abs(cast_point.y)/2, beam_mesh.mesh.top_radius)
+	)
 
 
 # Time is the duration of the activation animation.
