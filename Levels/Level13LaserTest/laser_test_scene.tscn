@@ -45,7 +45,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.56387, 0)
 mesh = SubResource("PlaneMesh_f2a1l")
 
 [node name="Box" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.274, -7.246)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0199, 0.274, -7.246)
 mesh = SubResource("BoxMesh_my0ek")
 
 [node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Box"]
@@ -57,7 +57,7 @@ size = Vector3(3, 3, 3)
 shape = SubResource("ConcavePolygonShape3D_vdb3i")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.258819, -0.391337, 0.883101, 0, 0.914254, 0.405141, -0.965926, 0.104858, -0.236626, 8.13156, 3.84739, -2.86531)
+transform = Transform3D(0.0697565, -0.404155, 0.912027, 0, 0.914254, 0.405142, -0.997564, -0.0282613, 0.0637752, 13.2667, 3.84739, -2.86531)
 
 [node name="Laser" parent="." instance=ExtResource("2_vuydy")]
 transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 5.13429)

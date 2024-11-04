@@ -41,6 +41,17 @@ func _process(_delta: float) -> void:
 	end_particles.position.y = cast_point.y
 	beam_particles.position.y = cast_point.y/2.0
 	
+	# Get distance to end of beam
+	var dist:float = cast_point.length()
+	# Adjust lifetime of beam particles to end
+	# roughly at target. Assumes a particle speed
+	# of 40 meters per second...
+	# ...for some reason there's a further
+	# divide by two. I'm not sure why. I'm not sure
+	# why there's a divide by 2 for the mesh and
+	# particle positions above.
+	beam_particles.lifetime = dist/80.0
+	
 	# 10 particles per 1 meter of beam
 	# up to a max of 500.
 	var particle_amount:int = snapped(abs(cast_point.y)*10, 1)
