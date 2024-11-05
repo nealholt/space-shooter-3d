@@ -3,7 +3,7 @@ class_name ExplosionDamaging
 
 @export var explosion_vfx:PackedScene
 
-var damage_amt:float = 1
+var damage_amt:float = 1.0
 
 # The shooter of this bullet. Could be a Ship or
 # a Turret, but for now I'm declaring a Ship.

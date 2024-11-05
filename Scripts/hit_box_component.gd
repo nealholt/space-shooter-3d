@@ -28,7 +28,7 @@ func _ready() -> void:
 			hit_feedback = child
 
 
-func damage(amount:int, damager=null):
+func damage(amount:float, damager=null):
 	# A Ship shouldn't shoot down their own missiles
 	if damager and is_instance_valid(damage_exception) and damager == damage_exception:
 		return

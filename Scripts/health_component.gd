@@ -6,7 +6,7 @@ class_name HealthComponent
 signal health_lost
 signal died
 
-@export var max_health := 10
+@export var max_health := 10.0
 
 # Only signal died once. If for some reason,
 # later on a component gets resurrected, then
@@ -16,7 +16,7 @@ var signalled_died:bool = false
 
 #Getters and Setters can be set right after the variable!
 #https://www.udemy.com/course/complete-godot-3d/learn/lecture/40514288#questions
-var health: int:
+var health: float:
 	# This setter runs whenever current_health is changed,
 	# including basic assignment like in _ready()
 	set(health_in):
@@ -37,10 +37,10 @@ func _ready():
 	health = max_health
 
 
-func set_max_health(h:int) -> void:
+func set_max_health(h:float) -> void:
 	max_health = h
 	health = h
 
 
 func get_percent_health() -> float:
-	return float(health)/float(max_health)
+	return health/max_health
