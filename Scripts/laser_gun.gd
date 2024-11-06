@@ -24,6 +24,20 @@ var stay_on:bool = false
 
 func _ready():
 	super._ready()
+	ray.target_position.y = -ray_length
+	# The following chunk of code sets the beam
+	# to start in its deactivated state.
+	end_particles.emitting = false
+	beam_particles.emitting = false
+	set_process(false)
+	is_on = false
+	ray.enabled = false
+	visible = false
+	beam_mesh.mesh.top_radius = 0.0
+	beam_mesh.mesh.bottom_radius = 0.0
+	beam_particles.process_material.scale_min = 0.0
+	end_particles.process_material.scale_min = 0.0
+	
 	if !ray:
 		printerr('This gun requires an attached RayCast3D child that is connect to the ray export variable.')
 	# Disable the ray for efficiency. Otherwise the
@@ -38,7 +52,7 @@ func _process(delta: float) -> void:
 	# Default cast point
 	var cast_point:Vector3 = Vector3(0, -ray_length, 0)
 	# Check for actual collision
-	ray.force_raycast_update()
+	ray.force_raycast_update() #TODO is this needed?
 	if ray.is_colliding():
 		deal_damage(ray.get_collider(), delta)
 		cast_point = to_local(ray.get_collision_point())
@@ -84,13 +98,16 @@ func shoot_actual() -> void:
 
 
 func deal_damage(collider, delta:float) -> void:
+	print(collider) #TODO
 	if collider.is_in_group("damageable"):
+		print("dealing damage %f" % (damage*delta)) #TODO
 		collider.damage(damage*delta, data.shooter)
 
 
 # Time is the duration of the activation animation.
 # Make it large for slow activation, small for quick.
 func beam_on(time:float) -> void:
+	ray.enabled = true
 	is_on = true
 	set_process(true)
 	tween = create_tween()
@@ -131,12 +148,13 @@ func beam_off(time:float) -> void:
 	await tween.finished
 	end_particles.emitting = false
 	beam_particles.emitting = false
+	set_process(false)
+	is_on = false
+	ray.enabled = false
 	# Give it another half sec to let the current
 	# particles time out.
 	await get_tree().create_timer(0.5).timeout
 	visible = false
-	set_process(false)
-	is_on = false
 
 
 # Override parent class's activate
@@ -146,5 +164,5 @@ func activate() -> void:
 	#set_physics_process(true)
 	if reticle:
 		reticle.show()
-	#if ray:
-	#	ray.enabled = true
+	if ray:
+		ray.enabled = true

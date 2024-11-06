@@ -213,7 +213,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50.397, 0)
 [node name="MissileLockGroup" parent="BlueTeam/Player" index="2"]
 npc_missile_lock = false
 
-[node name="LaserGun" parent="BlueTeam/Player/WeaponHandler" index="5" instance=ExtResource("5_8sixk")]
+[node name="LaserGun" parent="BlueTeam/Player/WeaponHandler" index="0" instance=ExtResource("5_8sixk")]
 
 [node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
 mesh = SubResource("SphereMesh_b3t22")
