@@ -9,7 +9,7 @@ class_name Gun
 @export var bullet_timeout:float = 2.0
 
 @export var fire_rate:= 1.0 # Shots per second
-@onready var firing_rate_timer: Timer = $FiringRateTimer
+var firing_rate_timer: Timer
 
 # Whether gun is automatic or not. If true then
 # holding the shoot button will fire this weapon
@@ -62,6 +62,9 @@ var ally_team:String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# The new laser doesn't use a firing rate timer.
+	if has_node("FiringRateTimer"):
+		firing_rate_timer = $FiringRateTimer
 	# Search through children for various components
 	# and save a reference to them.
 	for child in get_children():
@@ -92,7 +95,8 @@ func _process(_delta: float) -> void:
 
 
 func ready_to_fire() -> bool:
-	return firing_rate_timer.is_stopped()
+	# The laser beam doesn't use a firing_rate_timer
+	return !firing_rate_timer or firing_rate_timer.is_stopped()
 
 
 func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
@@ -110,7 +114,8 @@ func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
 
 
 func restart_timer() -> void:
-	firing_rate_timer.start(1.0/fire_rate)
+	if firing_rate_timer:
+		firing_rate_timer.start(1.0/fire_rate)
 
 
 func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):

@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://cfiwadbmgx3up"]
+[gd_scene load_steps=16 format=3 uid="uid://cfiwadbmgx3up"]
 
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="1_nau7t"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_5rasv"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="3_6nm7s"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_7pty0"]
+[ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Guns/laser_gun.tscn" id="5_8sixk"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_tjvqf"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="7_cw0p4"]
 [ext_resource type="PackedScene" uid="uid://brec5vmygtijo" path="res://Scenes/orb.tscn" id="7_yxjtr"]
@@ -211,6 +212,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50.397, 0)
 
 [node name="MissileLockGroup" parent="BlueTeam/Player" index="2"]
 npc_missile_lock = false
+
+[node name="LaserGun" parent="BlueTeam/Player/WeaponHandler" index="5" instance=ExtResource("5_8sixk")]
 
 [node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
 mesh = SubResource("SphereMesh_b3t22")
