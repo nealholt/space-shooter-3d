@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://6qsftwvn1vr"]
+[gd_scene load_steps=20 format=3 uid="uid://6qsftwvn1vr"]
 
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_2nnjr"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_20fsw"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_8iyj5"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="4_owcqu"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_f202r"]
+[ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Guns/laser_gun.tscn" id="6_dp2ye"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_j83tu"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="6_yp43s"]
 [ext_resource type="Texture2D" uid="uid://yqry61o8jiwb" path="res://Assets/Images/crosshair177.png" id="7_5m7py"]
@@ -87,6 +88,8 @@ transform = Transform3D(1, 0, 0, 0, 0.812613, -0.582804, 0, 0.582804, 0.812613, 
 
 [node name="MissileLockGroup" parent="BlueTeam/Player" index="2"]
 npc_missile_lock = false
+
+[node name="LaserGun" parent="BlueTeam/Player/WeaponHandler" index="0" instance=ExtResource("6_dp2ye")]
 
 [node name="TextureRect" type="TextureRect" parent="BlueTeam/Player/WeaponHandler/GatlingGun" index="4"]
 self_modulate = Color(1, 1, 1, 0.607843)

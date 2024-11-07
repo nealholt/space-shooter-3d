@@ -21,6 +21,8 @@ var beam_radius:float = 0.5
 var is_on:bool = false
 var stay_on:bool = false
 
+var dont_interrupt:bool = false
+
 
 func _ready():
 	super._ready()
@@ -53,7 +55,13 @@ func _process(delta: float) -> void:
 	var cast_point:Vector3 = Vector3(0, -ray_length, 0)
 	# Check for actual collision
 	ray.force_raycast_update() #TODO is this needed?
+	#print(ray.collision_mask)
+	#print(ray.get_collision_mask_value(1))
+	#print(ray.get_collision_mask_value(2))
+	#print(ray.get_collision_mask_value(3))
+	#print(ray.get_collision_mask_value(4))
 	if ray.is_colliding():
+		print('is colliding') #TODO
 		deal_damage(ray.get_collider(), delta)
 		cast_point = to_local(ray.get_collision_point())
 	# Position the beam mesh
@@ -83,7 +91,7 @@ func _process(delta: float) -> void:
 		Vector3(beam_mesh.mesh.top_radius, abs(cast_point.y)/2, beam_mesh.mesh.top_radius)
 	)
 	# Power down the beam unless the player is holding
-	# the trigger
+	# the trigger to make it stay on
 	if !stay_on:
 		beam_off(power_off_time)
 	stay_on = false
@@ -107,6 +115,12 @@ func deal_damage(collider, delta:float) -> void:
 # Time is the duration of the activation animation.
 # Make it large for slow activation, small for quick.
 func beam_on(time:float) -> void:
+	# Prevent this func from being called again
+	# until it's finished.
+	if dont_interrupt:
+		return
+	dont_interrupt = true
+	# Set all settings to turn on the beam
 	ray.enabled = true
 	is_on = true
 	set_process(true)
@@ -127,11 +141,18 @@ func beam_on(time:float) -> void:
 	# tween.finished before proceeding.
 	# https://gdscript.com/solutions/coroutines-and-yield/
 	await tween.finished
+	dont_interrupt = false
 
 
 # Time is the duration of the deactivation animation.
 # Make it large for slow deactivation, small for quick.
 func beam_off(time:float) -> void:
+	# Prevent this func from being called again
+	# until it's finished.
+	if dont_interrupt:
+		return
+	dont_interrupt = true
+	# Set all settings to turn off the beam
 	tween = create_tween()
 	# set_parallel causes the following tween_property
 	# commands to execute in parallel. In sequence is
@@ -155,6 +176,7 @@ func beam_off(time:float) -> void:
 	# particles time out.
 	await get_tree().create_timer(0.5).timeout
 	visible = false
+	dont_interrupt = false
 
 
 # Override parent class's activate
