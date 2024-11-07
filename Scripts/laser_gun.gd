@@ -10,7 +10,10 @@ class_name LaserGun
 @onready var end_particles := $EndParticles
 @onready var beam_particles := $BeamParticles
 
-@export var ray_length:float = 100.0
+# Damage per second when the beam is at full radius
+@export var damage_max:float = 20.0
+
+@export var ray_length:float = 400.0
 
 @export var power_on_time:float = 5.0 # Seconds
 @export var power_off_time:float = 5.0 # Seconds
@@ -39,6 +42,7 @@ func _ready():
 	beam_mesh.mesh.bottom_radius = 0.0
 	beam_particles.process_material.scale_min = 0.0
 	end_particles.process_material.scale_min = 0.0
+	damage = 0.0
 	
 	if !ray:
 		printerr('This gun requires an attached RayCast3D child that is connect to the ray export variable.')
@@ -124,6 +128,7 @@ func beam_on(time:float) -> void:
 	# commands to execute in parallel. In sequence is
 	# the default.
 	tween.set_parallel(true)
+	tween.tween_property(self, "damage", damage_max, time)
 	tween.tween_property(beam_mesh.mesh, "top_radius", beam_radius, time)
 	tween.tween_property(beam_mesh.mesh, "bottom_radius", beam_radius, time)
 	tween.tween_property(beam_particles.process_material, "scale_min", 1.0, time)
@@ -150,6 +155,7 @@ func beam_off(time:float) -> void:
 	# commands to execute in parallel. In sequence is
 	# the default.
 	tween.set_parallel(true)
+	tween.tween_property(self, "damage", 0.0, time)
 	tween.tween_property(beam_mesh.mesh, "top_radius", 0.0, time)
 	tween.tween_property(beam_mesh.mesh, "bottom_radius", 0.0, time)
 	tween.tween_property(beam_particles.process_material, "scale_min", 0.0, time)
