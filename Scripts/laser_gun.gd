@@ -54,14 +54,7 @@ func _process(delta: float) -> void:
 	# Default cast point
 	var cast_point:Vector3 = Vector3(0, -ray_length, 0)
 	# Check for actual collision
-	ray.force_raycast_update() #TODO is this needed?
-	#print(ray.collision_mask)
-	#print(ray.get_collision_mask_value(1))
-	#print(ray.get_collision_mask_value(2))
-	#print(ray.get_collision_mask_value(3))
-	#print(ray.get_collision_mask_value(4))
 	if ray.is_colliding():
-		print('is colliding') #TODO
 		deal_damage(ray.get_collider(), delta)
 		cast_point = to_local(ray.get_collision_point())
 	# Position the beam mesh
@@ -106,9 +99,8 @@ func shoot_actual() -> void:
 
 
 func deal_damage(collider, delta:float) -> void:
-	print(collider) #TODO
 	if collider.is_in_group("damageable"):
-		print("dealing damage %f" % (damage*delta)) #TODO
+		#print("dealing damage %f" % (damage*delta))
 		collider.damage(damage*delta, data.shooter)
 
 

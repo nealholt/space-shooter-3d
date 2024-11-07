@@ -84,8 +84,9 @@ script = ExtResource("1_d84oy")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = false
-collision_mask = 14
+collision_mask = 10
 hit_back_faces = false
+collide_with_areas = true
 
 [node name="BeamMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_7m7xi")
