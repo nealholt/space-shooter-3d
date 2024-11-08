@@ -5,6 +5,10 @@ class_name EngineAV
 # ship engines.
 # For now there is just some audio.
 
+# Current audio came from here originally:
+# https://imgur.com/gallery/f-18-carrier-catapult-assisted-takeoff-JcPruZg
+# I edited it in Audacity.
+
 @export var afterburner_volume:float = -7 # dB
 @export var afterburner_pitch:float = 1.5
 

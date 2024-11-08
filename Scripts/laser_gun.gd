@@ -177,7 +177,7 @@ func beam_off(time:float) -> void:
 	dont_interrupt = false
 
 
-# Override parent class's activate
+# Override parent class
 func activate() -> void:
 	#visible = true
 	#set_process(true)
@@ -186,3 +186,11 @@ func activate() -> void:
 		reticle.show()
 	if ray:
 		ray.enabled = true
+
+# Override parent class
+func deactivate() -> void:
+	super.deactivate()
+	if tween:
+		tween.kill()
+	dont_interrupt = false
+	beam_off(0.01)
