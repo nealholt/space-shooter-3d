@@ -17,14 +17,27 @@ class_name LaserGun
 
 @export var power_on_time:float = 5.0 # Seconds
 @export var power_off_time:float = 5.0 # Seconds
+# Measures how far into powering on/off the
+# beam is, so that if there's an interrupt,
+# the inverse operation can be correspondingly
+# fast. For example:
+# If we've only been powering up for 0.5 seconds
+# then we should only power down for 0.5 seconds,
+# otherwise a teeny tiny beam lingers on the screen.
+var progress_time:float # Seconds
 
 var tween:Tween
 var beam_radius:float = 0.5
 
-var is_on:bool = false
 var stay_on:bool = false
 
-var dont_interrupt:bool = false
+var state := LaserState.OFF
+enum LaserState {
+	OFF,
+	ON,
+	POWERING_OFF,
+	POWERING_ON
+}
 
 
 func _ready():
@@ -35,7 +48,6 @@ func _ready():
 	end_particles.emitting = false
 	beam_particles.emitting = false
 	set_process(false)
-	is_on = false
 	ray.enabled = false
 	visible = false
 	beam_mesh.mesh.top_radius = 0.0
@@ -51,6 +63,8 @@ func _ready():
 	# update. Instead, only check for collisions
 	# when the gun fires using force_raycast_update
 	ray.enabled = false
+	# Reset progress_time
+	progress_time = power_off_time
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -97,8 +111,7 @@ func _process(delta: float) -> void:
 # Override parent class's shoot_actual
 func shoot_actual() -> void:
 	# Activate the beam if it's not already on
-	if !is_on:
-		beam_on(power_on_time)
+	beam_on(power_on_time)
 	stay_on = true
 
 
@@ -111,55 +124,77 @@ func deal_damage(collider, delta:float) -> void:
 # Time is the duration of the activation animation.
 # Make it large for slow activation, small for quick.
 func beam_on(time:float) -> void:
-	# Prevent this func from being called again
-	# until it's finished.
-	if dont_interrupt:
-		return
-	dont_interrupt = true
+	if state == LaserState.ON:
+		return # Beam is already on
+	if state == LaserState.POWERING_ON:
+		return # Beam is already transitioning to on
+	state = LaserState.POWERING_ON
 	# Set all settings to turn on the beam
 	ray.enabled = true
-	is_on = true
 	set_process(true)
-	tween = create_tween()
 	visible = true
 	end_particles.emitting = true
 	beam_particles.emitting = true
+	# Official documentation recommends this pattern
+	# for cutting off the old tween and starting a
+	# new one
+	#https://docs.godotengine.org/en/stable/classes/class_tween.html
+	if tween:
+		tween.kill()
+	tween = create_tween()
+	# Use the smaller of the two times
+	var actual_time = time
+	if progress_time < time:
+		actual_time = progress_time
+	progress_time = 0.0
 	# set_parallel causes the following tween_property
 	# commands to execute in parallel. In sequence is
 	# the default.
 	tween.set_parallel(true)
-	tween.tween_property(self, "damage", damage_max, time)
-	tween.tween_property(beam_mesh.mesh, "top_radius", beam_radius, time)
-	tween.tween_property(beam_mesh.mesh, "bottom_radius", beam_radius, time)
-	tween.tween_property(beam_particles.process_material, "scale_min", 1.0, time)
-	tween.tween_property(end_particles.process_material, "scale_min", 1.0, time)
+	tween.tween_property(self, "damage", damage_max, actual_time)
+	tween.tween_property(self, "progress_time", time, actual_time)
+	tween.tween_property(beam_mesh.mesh, "top_radius", beam_radius, actual_time)
+	tween.tween_property(beam_mesh.mesh, "bottom_radius", beam_radius, actual_time)
+	tween.tween_property(beam_particles.process_material, "scale_min", 1.0, actual_time)
+	tween.tween_property(end_particles.process_material, "scale_min", 1.0, actual_time)
 	# "await" pauses the current thread of execution
 	# until a signal is received. Here we await
 	# tween.finished before proceeding.
 	# https://gdscript.com/solutions/coroutines-and-yield/
 	await tween.finished
-	dont_interrupt = false
+	state = LaserState.ON
 
 
 # Time is the duration of the deactivation animation.
 # Make it large for slow deactivation, small for quick.
 func beam_off(time:float) -> void:
-	# Prevent this func from being called again
-	# until it's finished.
-	if dont_interrupt:
-		return
-	dont_interrupt = true
-	# Set all settings to turn off the beam
+	if state == LaserState.OFF:
+		return # Beam is already off
+	if state == LaserState.POWERING_OFF:
+		return # Beam is already transitioning to off
+	state = LaserState.POWERING_OFF
+	# Official documentation recommends this pattern
+	# for cutting off the old tween and starting a
+	# new one
+	#https://docs.godotengine.org/en/stable/classes/class_tween.html
+	if tween:
+		tween.kill()
 	tween = create_tween()
+	# Use the smaller of the two times
+	var actual_time = time
+	if progress_time < time:
+		actual_time = progress_time
+	progress_time = 0.0
 	# set_parallel causes the following tween_property
 	# commands to execute in parallel. In sequence is
 	# the default.
 	tween.set_parallel(true)
-	tween.tween_property(self, "damage", 0.0, time)
-	tween.tween_property(beam_mesh.mesh, "top_radius", 0.0, time)
-	tween.tween_property(beam_mesh.mesh, "bottom_radius", 0.0, time)
-	tween.tween_property(beam_particles.process_material, "scale_min", 0.0, time)
-	tween.tween_property(end_particles.process_material, "scale_min", 0.0, time)
+	tween.tween_property(self, "damage", 0.0, actual_time)
+	tween.tween_property(self, "progress_time", time, actual_time)
+	tween.tween_property(beam_mesh.mesh, "top_radius", 0.0, actual_time)
+	tween.tween_property(beam_mesh.mesh, "bottom_radius", 0.0, actual_time)
+	tween.tween_property(beam_particles.process_material, "scale_min", 0.0, actual_time)
+	tween.tween_property(end_particles.process_material, "scale_min", 0.0, actual_time)
 	# "await" pauses the current thread of execution
 	# until a signal is received. Here we await
 	# tween.finished before proceeding.
@@ -168,13 +203,14 @@ func beam_off(time:float) -> void:
 	end_particles.emitting = false
 	beam_particles.emitting = false
 	set_process(false)
-	is_on = false
 	ray.enabled = false
+	visible = false
+	state = LaserState.OFF
 	# Give it another half sec to let the current
 	# particles time out.
-	await get_tree().create_timer(0.5).timeout
-	visible = false
-	dont_interrupt = false
+	# I'm not comfortable with potential side effects
+	# of this code so I commented it out.
+	#await get_tree().create_timer(0.5).timeout
 
 
 # Override parent class
@@ -186,11 +222,16 @@ func activate() -> void:
 		reticle.show()
 	if ray:
 		ray.enabled = true
+	# Reset progress_time
+	progress_time = power_off_time
 
 # Override parent class
 func deactivate() -> void:
 	super.deactivate()
-	if tween:
-		tween.kill()
-	dont_interrupt = false
-	beam_off(0.01)
+	# If laser is not already off, pretend
+	# that it's on so we can do a rapid
+	# shut down.
+	if state != LaserState.POWERING_OFF:
+		print('beaming off') #TODO TESTING
+		state = LaserState.POWERING_ON
+		beam_off(0.01)

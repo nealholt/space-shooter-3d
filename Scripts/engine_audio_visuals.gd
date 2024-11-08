@@ -25,7 +25,8 @@ class_name EngineAV
 @onready var engine_audio := $AudioStreamPlayer3D
 var tween:Tween
 
-# Use state to control whether or not a shift happens
+# Use state to control whether or not a shift
+# to different audio executes.
 var state := EngineState.DEFAULT
 enum EngineState {
 	DEFAULT,
