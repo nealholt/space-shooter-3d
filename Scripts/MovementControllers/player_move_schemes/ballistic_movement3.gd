@@ -46,6 +46,8 @@ func move_and_turn(mover, delta:float) -> void:
 	var roll_modifier: float = 1.0
 	var yaw_modifier: float = 1.0
 	
+	handle_engine_audio(mover)
+	
 	#Brake
 	if Input.is_action_pressed("brake"):
 		#impulse = lerp(impulse, impulse_brake, impulse_lerp*delta)
@@ -94,6 +96,20 @@ func move_and_turn(mover, delta:float) -> void:
 		lerp_strength*delta)
 	
 	super.move_and_turn(mover, delta)
+
+
+func handle_engine_audio(mover) -> void:
+	if !mover.engineAV:
+		return
+	# TODO 
+	if Input.is_action_pressed("brake"):
+		pass
+	elif Input.is_action_pressed("accelerate"):
+		pass
+	elif Input.is_action_pressed("drift"):
+		pass
+	else:
+		pass
 
 
 # Override parent class function

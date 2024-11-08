@@ -6,6 +6,7 @@ signal destroyed
 var aim_assist:AimAssist
 var burning_trail:BurningTrail # This is a visual effect
 var controller:CharacterBodyControlParent
+var engineAV:EngineAV
 var health_component:HealthComponent
 var missile_lock:MissileLockGroup
 var weapon_handler:WeaponHandler
@@ -45,6 +46,8 @@ func _ready() -> void:
 			burning_trail = child
 		elif child is CharacterBodyControlParent:
 			controller = child
+		elif child is EngineAV:
+			engineAV = child
 		elif child is HealthComponent:
 			health_component = child
 			# Connect signals with code
