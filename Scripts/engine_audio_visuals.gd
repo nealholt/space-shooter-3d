@@ -18,39 +18,90 @@ class_name EngineAV
 @export var brake_pitch:float = 0.3
 
 @onready var engine_audio := $AudioStreamPlayer3D
-var tween:Tween = create_tween()
+var tween:Tween
 
-# TODO 
-# Current state
+# Use state to control whether or not a shift happens
+var state := EngineState.DEFAULT
+enum EngineState {
+	DEFAULT,
+	AFTERBURNER,
+	DRIFT,
+	BRAKE
+}
+
+
+func _ready() -> void:
+	engine_audio.play()
+
 
 func shift2afterburners(time:float) -> void:
-	tween.stop()
+	# If already in the state, do nothing.
+	if state == EngineState.AFTERBURNER:
+		return
 	if !engine_audio.playing:
 		engine_audio.play()
+	# Official documentation recommends this pattern
+	# for cutting off the old tween and starting a
+	# new one
+	#https://docs.godotengine.org/en/stable/classes/class_tween.html
+	if tween:
+		tween.kill()
+	tween = create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(engine_audio, "volume_db", afterburner_volume, time)
 	tween.tween_property(engine_audio, "pitch_scale", afterburner_pitch, time)
+	await tween.finished
+	state = EngineState.AFTERBURNER
+
 
 func shift2default(time:float) -> void:
-	tween.stop()
+	# If already in the state, do nothing.
+	if state == EngineState.DEFAULT:
+		return
 	if !engine_audio.playing:
 		engine_audio.play()
+	# Official documentation recommends this pattern
+	# for cutting off the old tween and starting a
+	# new one
+	#https://docs.godotengine.org/en/stable/classes/class_tween.html
+	if tween:
+		tween.kill()
+	tween = create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(engine_audio, "volume_db", default_volume, time)
 	tween.tween_property(engine_audio, "pitch_scale", default_pitch, time)
+	await tween.finished
+	state = EngineState.DEFAULT
+
 
 func shift2drift(time:float) -> void:
-	tween.stop()
+	# If already in the state, do nothing.
+	if state == EngineState.DRIFT:
+		return
+	# Official documentation recommends this pattern
+	# for cutting off the old tween and starting a
+	# new one
+	#https://docs.godotengine.org/en/stable/classes/class_tween.html
+	if tween:
+		tween.kill()
+	tween = create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(engine_audio, "volume_db", drift_volume, time)
 	tween.tween_property(engine_audio, "pitch_scale", drift_pitch, time)
 	await tween.finished
 	engine_audio.stop()
+	state = EngineState.DRIFT
 
-func shift2brake(time:float) -> void:
-	# This one doesn't tween, but snaps to
+
+func shift2brake(_time:float) -> void:
+	# If already in the state, do nothing.
+	if state == EngineState.BRAKE:
+		return
 	if !engine_audio.playing:
 		engine_audio.play()
-	tween.stop()
+	# This one doesn't tween, but snaps to
+	if tween:
+		tween.kill()
 	engine_audio.volume_db = brake_volume
 	engine_audio.pitch_scale = brake_pitch
+	state = EngineState.BRAKE

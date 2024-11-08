@@ -101,15 +101,16 @@ func move_and_turn(mover, delta:float) -> void:
 func handle_engine_audio(mover) -> void:
 	if !mover.engineAV:
 		return
-	# TODO 
+	# NOTE! These transition time numbers
+	# are based on nothing in particular!
 	if Input.is_action_pressed("brake"):
-		pass
+		mover.engineAV.shift2brake(0.0)
 	elif Input.is_action_pressed("accelerate"):
-		pass
+		mover.engineAV.shift2afterburners(8.0)
 	elif Input.is_action_pressed("drift"):
-		pass
+		mover.engineAV.shift2drift(1.0)
 	else:
-		pass
+		mover.engineAV.shift2default(2.0)
 
 
 # Override parent class function

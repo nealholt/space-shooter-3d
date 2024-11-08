@@ -9,4 +9,5 @@ script = ExtResource("1_indx2")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("1_d3dev")
 volume_db = -15.0
+stream_paused = true
 parameters/looping = true
