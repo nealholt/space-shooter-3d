@@ -16,7 +16,8 @@ class_name EngineAV
 @export var default_pitch:float = 1.0
 
 @export var drift_volume:float = -40 # dB
-@export var drift_pitch:float = 0.0
+@export var drift_pitch:float = 0.01 # I got an error...
+# ...when I tried to set drift_pitch to 0.0
 
 @export var brake_volume:float = -10 # dB
 @export var brake_pitch:float = 0.3
@@ -38,12 +39,16 @@ func _ready() -> void:
 	engine_audio.play()
 
 
+# Testing
+#func _process(_delta: float) -> void:
+	#print(engine_audio.pitch_scale)
+
+
 func shift2afterburners(time:float) -> void:
 	# If already in the state, do nothing.
 	if state == EngineState.AFTERBURNER:
 		return
-	if !engine_audio.playing:
-		engine_audio.play()
+	state = EngineState.AFTERBURNER
 	# Official documentation recommends this pattern
 	# for cutting off the old tween and starting a
 	# new one
@@ -54,16 +59,13 @@ func shift2afterburners(time:float) -> void:
 	tween.set_parallel(true)
 	tween.tween_property(engine_audio, "volume_db", afterburner_volume, time)
 	tween.tween_property(engine_audio, "pitch_scale", afterburner_pitch, time)
-	await tween.finished
-	state = EngineState.AFTERBURNER
 
 
 func shift2default(time:float) -> void:
 	# If already in the state, do nothing.
 	if state == EngineState.DEFAULT:
 		return
-	if !engine_audio.playing:
-		engine_audio.play()
+	state = EngineState.DEFAULT
 	# Official documentation recommends this pattern
 	# for cutting off the old tween and starting a
 	# new one
@@ -74,14 +76,13 @@ func shift2default(time:float) -> void:
 	tween.set_parallel(true)
 	tween.tween_property(engine_audio, "volume_db", default_volume, time)
 	tween.tween_property(engine_audio, "pitch_scale", default_pitch, time)
-	await tween.finished
-	state = EngineState.DEFAULT
 
 
 func shift2drift(time:float) -> void:
 	# If already in the state, do nothing.
 	if state == EngineState.DRIFT:
 		return
+	state = EngineState.DRIFT
 	# Official documentation recommends this pattern
 	# for cutting off the old tween and starting a
 	# new one
@@ -92,20 +93,16 @@ func shift2drift(time:float) -> void:
 	tween.set_parallel(true)
 	tween.tween_property(engine_audio, "volume_db", drift_volume, time)
 	tween.tween_property(engine_audio, "pitch_scale", drift_pitch, time)
-	await tween.finished
-	engine_audio.stop()
-	state = EngineState.DRIFT
 
 
 func shift2brake(_time:float) -> void:
 	# If already in the state, do nothing.
 	if state == EngineState.BRAKE:
 		return
-	if !engine_audio.playing:
-		engine_audio.play()
+	state = EngineState.BRAKE
 	# This one doesn't tween, but snaps to
+	# desired values
 	if tween:
 		tween.kill()
 	engine_audio.volume_db = brake_volume
 	engine_audio.pitch_scale = brake_pitch
-	state = EngineState.BRAKE
