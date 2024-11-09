@@ -9,7 +9,7 @@ class_name EngineAV
 # https://imgur.com/gallery/f-18-carrier-catapult-assisted-takeoff-JcPruZg
 # I edited it in Audacity.
 
-@export var afterburner_volume:float = -7 # dB
+@export var afterburner_volume:float = -6 # dB
 @export var afterburner_pitch:float = 1.5
 
 @export var default_volume:float = -15 # dB
@@ -19,7 +19,7 @@ class_name EngineAV
 @export var drift_pitch:float = 0.01 # I got an error...
 # ...when I tried to set drift_pitch to 0.0
 
-@export var brake_volume:float = -10 # dB
+@export var brake_volume:float = -12 # dB
 @export var brake_pitch:float = 0.3
 
 @onready var engine_audio := $AudioStreamPlayer3D

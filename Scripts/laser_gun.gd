@@ -230,8 +230,7 @@ func deactivate() -> void:
 	# If laser is not already off, pretend
 	# that it's on so we can do a rapid
 	# shut down.
-	if state != LaserState.POWERING_OFF:
-		print('beaming off') #TODO TESTING
+	if state != LaserState.OFF:
 		state = LaserState.POWERING_ON
 		beam_off(0.01)
 	super.deactivate()

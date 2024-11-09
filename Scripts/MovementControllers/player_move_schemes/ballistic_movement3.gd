@@ -106,7 +106,7 @@ func handle_engine_audio(mover) -> void:
 	if Input.is_action_pressed("brake"):
 		mover.engineAV.shift2brake(0.0)
 	elif Input.is_action_pressed("accelerate"):
-		mover.engineAV.shift2afterburners(8.0)
+		mover.engineAV.shift2afterburners(4.0)
 	elif Input.is_action_pressed("drift"):
 		mover.engineAV.shift2drift(1.0)
 	else:
