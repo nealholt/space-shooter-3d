@@ -204,13 +204,13 @@ func beam_off(time:float) -> void:
 	beam_particles.emitting = false
 	set_process(false)
 	ray.enabled = false
-	visible = false
 	state = LaserState.OFF
 	# Give it another half sec to let the current
 	# particles time out.
 	# I'm not comfortable with potential side effects
 	# of this code so I commented it out.
 	#await get_tree().create_timer(0.5).timeout
+	visible = false
 
 
 # Override parent class
@@ -227,7 +227,6 @@ func activate() -> void:
 
 # Override parent class
 func deactivate() -> void:
-	super.deactivate()
 	# If laser is not already off, pretend
 	# that it's on so we can do a rapid
 	# shut down.
@@ -235,3 +234,4 @@ func deactivate() -> void:
 		print('beaming off') #TODO TESTING
 		state = LaserState.POWERING_ON
 		beam_off(0.01)
+	super.deactivate()

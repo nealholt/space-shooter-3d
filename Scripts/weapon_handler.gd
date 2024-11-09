@@ -13,15 +13,24 @@ func _ready() -> void:
 
 
 func equip(active_weapon:Node3D) -> void:
-	# Pre: All children must be weapons
+	# New version doesn't re-deactivate all guns,
+	# just the current gun. Old version was
+	# causing issues with LaserGun.
+	# New version:
+	if current_weapon:
+		current_weapon.deactivate()
 	current_weapon = active_weapon
-	for child in get_children():
-		if child == active_weapon:
-			# Precondition: child is a Gun
-			child.activate()
-		else:
-			# Precondition: child is a Gun
-			child.deactivate()
+	current_weapon.activate()
+	# Old version:
+	## Pre: All children must be weapons
+	#current_weapon = active_weapon
+	#for child in get_children():
+		#if child == active_weapon:
+			## Precondition: child is a Gun
+			#child.activate()
+		#else:
+			## Precondition: child is a Gun
+			#child.deactivate()
 
 
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/41204700#questions
