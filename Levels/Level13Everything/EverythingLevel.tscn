@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://k6inhwfk2gp"]
+[gd_scene load_steps=7 format=3 uid="uid://k6inhwfk2gp"]
 
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_wr6oo"]
 [ext_resource type="PackedScene" uid="uid://cbgprvcwh15qd" path="res://Levels/Level13Everything/star.tscn" id="2_2lnk5"]
+[ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="3_eggcn"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_er3bs"]
 panorama = ExtResource("1_wr6oo")
@@ -32,3 +33,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8000, 3000, 10000)
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.999119, 0, -0.0419627, 0, 1, 0, 0.0419627, 0, -0.999119, 0, 0, 0)
 far = 80000.0
+
+[node name="SpaceStation" parent="." instance=ExtResource("3_eggcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.94911, 6.58096)
