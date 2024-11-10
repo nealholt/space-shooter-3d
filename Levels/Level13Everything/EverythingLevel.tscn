@@ -31,8 +31,20 @@ environment = SubResource("Environment_x4e1d")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8000, 3000, 10000)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.999119, 0, -0.0419627, 0, 1, 0, 0.0419627, 0, -0.999119, 0, 0, 0)
+transform = Transform3D(-0.985703, -0.0407612, -0.163484, 0, 0.970296, -0.241922, 0.168489, -0.238463, -0.956424, -6.48489, 0, 0)
 far = 80000.0
 
 [node name="SpaceStation" parent="." instance=ExtResource("3_eggcn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.94911, 6.58096)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.777146, 0.267952, -0.569426, 0, 0.904827, 0.425779, 0.62932, -0.330893, 0.703183, 0, 0, 0)
+light_color = Color(1, 0.643137, 1, 1)
+light_angular_distance = 2.0
+shadow_enabled = true
+shadow_opacity = 0.9
+shadow_blur = 0.4
+directional_shadow_mode = 0
+directional_shadow_max_distance = 1000.0
+
+[node name="GridMap" type="GridMap" parent="."]
