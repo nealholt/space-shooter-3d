@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://k6inhwfk2gp"]
+[gd_scene load_steps=11 format=3 uid="uid://k6inhwfk2gp"]
 
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_wr6oo"]
 [ext_resource type="PackedScene" uid="uid://cbgprvcwh15qd" path="res://Levels/Level13Everything/star.tscn" id="2_2lnk5"]
 [ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="3_eggcn"]
+[ext_resource type="MeshLibrary" uid="uid://onqmfkbeu0js" path="res://Assets/Asteroids/asteroids.tres" id="4_u7bmr"]
+[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="5_h3kq8"]
+[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="6_5ionk"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="7_67cb0"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_er3bs"]
 panorama = ExtResource("1_wr6oo")
@@ -30,12 +34,27 @@ environment = SubResource("Environment_x4e1d")
 [node name="Star" parent="." instance=ExtResource("2_2lnk5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8000, 3000, 10000)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.985703, -0.0407612, -0.163484, 0, 0.970296, -0.241922, 0.168489, -0.238463, -0.956424, -6.48489, 0, 0)
-far = 80000.0
-
 [node name="SpaceStation" parent="." instance=ExtResource("3_eggcn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.94911, 6.58096)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -2.94911, 6.58096)
+
+[node name="GridMap" type="GridMap" parent="SpaceStation"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh_library = ExtResource("4_u7bmr")
+cell_size = Vector3(32, 32, 32)
+cell_scale = 40.0
+data = {
+"cells": PackedInt32Array(65524, 65534, 262147, 65530, 65529, 1310723, 458749, 65535, 65539, -327686, 65529, 65539, -327683, 7, 393220, -720886, 17, 393220, 327676, 3, 1376260, 131081, 65527, 393216, -196587, 9, 917505, -196588, 9, 917505, -131059, 15, 983041)
+}
+metadata/_editor_floor_ = Vector3(0, -2, 0)
+
+[node name="GridMap2" type="GridMap" parent="SpaceStation"]
+mesh_library = ExtResource("4_u7bmr")
+cell_size = Vector3(45, 45, 45)
+cell_scale = 55.0
+data = {
+"cells": PackedInt32Array(-196617, 65533, 65537, -65537, 1, 589828, 65530, 3, 589828, -393233, 65535, 589827, 65531, 65535, 589826, -327687, 65533, 65540)
+}
+metadata/_editor_floor_ = Vector3(0, -6, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.777146, 0.267952, -0.569426, 0, 0.904827, 0.425779, 0.62932, -0.330893, 0.703183, 0, 0, 0)
@@ -47,4 +66,9 @@ shadow_blur = 0.4
 directional_shadow_mode = 0
 directional_shadow_max_distance = 1000.0
 
-[node name="GridMap" type="GridMap" parent="."]
+[node name="Corvette" parent="." instance=ExtResource("5_h3kq8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.0257, 0, 0)
+
+[node name="BallisticMovementV3" parent="Corvette" instance=ExtResource("6_5ionk")]
+
+[node name="CameraGroup" parent="Corvette" instance=ExtResource("7_67cb0")]
