@@ -1,0 +1,73 @@
+[gd_scene load_steps=14 format=3 uid="uid://bkwcr6mxtri7n"]
+
+[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_63oik"]
+[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_jvl32"]
+[ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="2_t24ck"]
+[ext_resource type="Texture2D" uid="uid://yqry61o8jiwb" path="res://Assets/Images/crosshair177.png" id="3_0npbv"]
+[ext_resource type="Texture2D" uid="uid://bpdpseb3x2cbp" path="res://Assets/Images/crosshair026.png" id="4_4gytk"]
+[ext_resource type="Texture2D" uid="uid://b7foqk2u8ykv3" path="res://Assets/Images/crosshair054.png" id="5_aeijj"]
+[ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Guns/laser_gun.tscn" id="6_itfr8"]
+[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="8_m18g3"]
+[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="8_vlve7"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="9_0rmbx"]
+[ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/engine_audio_visuals.tscn" id="10_t22nh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_731x3"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_jvl32")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_tw5gt"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_731x3")
+
+[node name="Corvette" instance=ExtResource("1_63oik")]
+
+[node name="MissileLockGroup" parent="." index="2"]
+npc_missile_lock = false
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHandler/GatlingGun" index="4"]
+self_modulate = Color(1, 1, 1, 0.607843)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_t24ck")
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHandler/HitScanGun" index="3"]
+self_modulate = Color(1, 1, 1, 0.588235)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_0npbv")
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHandler/LaserShotgun" index="2"]
+self_modulate = Color(1, 1, 1, 0.529412)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_4gytk")
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHandler/LaserGuidedLauncher" index="2"]
+self_modulate = Color(1, 1, 1, 0.529412)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_aeijj")
+
+[node name="LaserGun" parent="WeaponHandler" index="5" instance=ExtResource("6_itfr8")]
+
+[node name="FresnelAura" parent="Shield" index="0"]
+mesh = SubResource("SphereMesh_tw5gt")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
+stream = ExtResource("8_vlve7")
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="BallisticMovementV3" parent="." index="12" instance=ExtResource("8_m18g3")]
+
+[node name="CameraGroup" parent="." index="13" instance=ExtResource("9_0rmbx")]
+
+[node name="EngineAudioVisuals" parent="." index="14" instance=ExtResource("10_t22nh")]
+
+[editable path="WeaponHandler/GatlingGun/GunModel"]
+[editable path="WeaponHandler/HitScanGun/Node"]
+[editable path="Shield"]

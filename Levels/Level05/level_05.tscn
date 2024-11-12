@@ -1,20 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://6qsftwvn1vr"]
+[gd_scene load_steps=10 format=3 uid="uid://6qsftwvn1vr"]
 
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_2nnjr"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_20fsw"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="2_wndl6"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_8iyj5"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="4_owcqu"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_f202r"]
-[ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Guns/laser_gun.tscn" id="6_dp2ye"]
-[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_j83tu"]
-[ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="6_yp43s"]
-[ext_resource type="Texture2D" uid="uid://yqry61o8jiwb" path="res://Assets/Images/crosshair177.png" id="7_5m7py"]
-[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="7_71xba"]
-[ext_resource type="Texture2D" uid="uid://bpdpseb3x2cbp" path="res://Assets/Images/crosshair026.png" id="8_vwfcq"]
-[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="9_5x8d7"]
-[ext_resource type="Texture2D" uid="uid://b7foqk2u8ykv3" path="res://Assets/Images/crosshair054.png" id="9_ic7yk"]
-[ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/engine_audio_visuals.tscn" id="15_hsjpn"]
+[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="6_t0qrf"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hrnrq"]
 panorama = ExtResource("1_2nnjr")
@@ -27,17 +18,6 @@ background_mode = 2
 sky = SubResource("Sky_txwv0")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkq4u"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("5_f202r")
-shader_parameter/FresnelPower = 2.0
-shader_parameter/EmissionStrength = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_nd7so"]
-resource_local_to_scene = true
-material = SubResource("ShaderMaterial_vkq4u")
 
 [node name="Level05" type="Node3D"]
 
@@ -84,53 +64,6 @@ transform = Transform3D(-0.826904, 1.15643e-08, 0.562343, 0.49261, 0.482319, 0.7
 script = ExtResource("2_20fsw")
 team = "blue team"
 
-[node name="Player" parent="BlueTeam" instance=ExtResource("3_8iyj5")]
-transform = Transform3D(1, 0, 0, 0, 0.812613, -0.582804, 0, 0.582804, 0.812613, -30.2098, 0, 324.29)
-
-[node name="MissileLockGroup" parent="BlueTeam/Player" index="2"]
-npc_missile_lock = false
-
-[node name="LaserGun" parent="BlueTeam/Player/WeaponHandler" index="0" instance=ExtResource("6_dp2ye")]
-
-[node name="TextureRect" type="TextureRect" parent="BlueTeam/Player/WeaponHandler/GatlingGun" index="4"]
-self_modulate = Color(1, 1, 1, 0.607843)
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("6_yp43s")
-
-[node name="TextureRect" type="TextureRect" parent="BlueTeam/Player/WeaponHandler/HitScanGun" index="3"]
-self_modulate = Color(1, 1, 1, 0.588235)
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("7_5m7py")
-
-[node name="TextureRect" type="TextureRect" parent="BlueTeam/Player/WeaponHandler/LaserShotgun" index="2"]
-self_modulate = Color(1, 1, 1, 0.529412)
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("8_vwfcq")
-
-[node name="TextureRect" type="TextureRect" parent="BlueTeam/Player/WeaponHandler/LaserGuidedLauncher" index="2"]
-self_modulate = Color(1, 1, 1, 0.529412)
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("9_ic7yk")
-
-[node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
-mesh = SubResource("SphereMesh_nd7so")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlueTeam/Player/AimAssist" index="0"]
-stream = ExtResource("6_j83tu")
-volume_db = -10.0
-pitch_scale = 0.5
-
-[node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("7_71xba")]
-
-[node name="CameraGroup" parent="BlueTeam/Player" instance=ExtResource("9_5x8d7")]
-
-[node name="EngineAudioVisuals" parent="BlueTeam/Player" instance=ExtResource("15_hsjpn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
 [node name="FighterNPC" parent="BlueTeam" instance=ExtResource("2_wndl6")]
 transform = Transform3D(0.67309, 2.90552e-09, -0.739561, 4.37114e-08, 1, 4.37114e-08, 0.739561, -6.17489e-08, 0.67309, -15.7664, 0, 62.1026)
 
@@ -160,7 +93,5 @@ transform = Transform3D(-0.983096, 3.49692e-08, 0.183094, 4.37114e-08, 1, 4.3711
 
 [node name="NPCFighterController" parent="BlueTeam/Corvette" instance=ExtResource("4_owcqu")]
 
-[editable path="BlueTeam/Player"]
-[editable path="BlueTeam/Player/WeaponHandler/GatlingGun/GunModel"]
-[editable path="BlueTeam/Player/WeaponHandler/HitScanGun/Node"]
-[editable path="BlueTeam/Player/Shield"]
+[node name="PlayerVette" parent="BlueTeam" instance=ExtResource("6_t0qrf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 164.656)

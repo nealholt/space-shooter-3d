@@ -1,12 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://k6inhwfk2gp"]
+[gd_scene load_steps=10 format=3 uid="uid://k6inhwfk2gp"]
 
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_wr6oo"]
 [ext_resource type="PackedScene" uid="uid://cbgprvcwh15qd" path="res://Levels/Level13Everything/star.tscn" id="2_2lnk5"]
 [ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="3_eggcn"]
 [ext_resource type="MeshLibrary" uid="uid://onqmfkbeu0js" path="res://Assets/Asteroids/asteroids.tres" id="4_u7bmr"]
-[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="5_h3kq8"]
-[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="6_5ionk"]
-[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="7_67cb0"]
+[ext_resource type="Script" path="res://Scripts/team_setup.gd" id="5_0jpk3"]
+[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="6_jnri3"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_er3bs"]
 panorama = ExtResource("1_wr6oo")
@@ -66,9 +65,11 @@ shadow_blur = 0.4
 directional_shadow_mode = 0
 directional_shadow_max_distance = 1000.0
 
-[node name="Corvette" parent="." instance=ExtResource("5_h3kq8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.0257, 0, 0)
+[node name="BlueTeam" type="Node3D" parent="."]
+script = ExtResource("5_0jpk3")
 
-[node name="BallisticMovementV3" parent="Corvette" instance=ExtResource("6_5ionk")]
+[node name="PlayerVette" parent="BlueTeam" instance=ExtResource("6_jnri3")]
+transform = Transform3D(-0.619299, 0, 0.785155, 0, 1, 0, -0.785155, 0, -0.619299, 331.98, 0, -309.925)
 
-[node name="CameraGroup" parent="Corvette" instance=ExtResource("7_67cb0")]
+[node name="RedTeam" type="Node3D" parent="."]
+script = ExtResource("5_0jpk3")

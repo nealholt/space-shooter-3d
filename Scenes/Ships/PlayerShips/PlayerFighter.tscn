@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://conb7kdfab3ks"]
+
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="1_5kq0i"]
+[ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="2_28aj3"]
+[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_ws3ut"]
+[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="4_8t4vn"]
+[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="4_cq55v"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="5_6av2j"]
+[ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/engine_audio_visuals.tscn" id="6_3ywou"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_se4th"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_ws3ut")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_24wxq"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_se4th")
+
+[node name="Fighter" instance=ExtResource("1_5kq0i")]
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHandler/Gun" index="1"]
+self_modulate = Color(1, 1, 1, 0.607843)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_28aj3")
+
+[node name="FresnelAura" parent="Shield" index="0"]
+mesh = SubResource("SphereMesh_24wxq")
+
+[node name="MissileLockGroup" parent="." index="10"]
+npc_missile_lock = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
+stream = ExtResource("4_cq55v")
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="BallisticMovementV3" parent="." index="12" instance=ExtResource("4_8t4vn")]
+
+[node name="CameraGroup" parent="." index="13" instance=ExtResource("5_6av2j")]
+
+[node name="EngineAudioVisuals" parent="." index="14" instance=ExtResource("6_3ywou")]
+
+[editable path="Shield"]
