@@ -109,3 +109,6 @@ func _on_load_11_damage_effects_pressed() -> void:
 
 func _on_load_12_collision_experiment_pressed() -> void:
 	load_level("Level12CollisionTest/collision_experiments")
+
+func _on_load_13_space_station_defense_pressed() -> void:
+	load_level("Level13Everything/EverythingLevel")

@@ -29,99 +29,107 @@ offset_bottom = 85.0
 
 [node name="Load1" type="Button" parent="Menu"]
 layout_mode = 0
-offset_left = 436.0
-offset_top = 21.0
-offset_right = 570.0
-offset_bottom = 52.0
+offset_left = 101.0
+offset_top = 27.0
+offset_right = 235.0
+offset_bottom = 58.0
 text = "Load 1: Balloons"
 
 [node name="Load2" type="Button" parent="Menu"]
 layout_mode = 0
-offset_left = 433.0
-offset_top = 82.0
-offset_right = 680.0
-offset_bottom = 113.0
+offset_left = 98.0
+offset_top = 88.0
+offset_right = 345.0
+offset_bottom = 119.0
 text = "Load 2: Balloons and Obstacles"
 
 [node name="Load3" type="Button" parent="Menu"]
 layout_mode = 0
-offset_left = 440.0
-offset_top = 156.0
-offset_right = 551.0
-offset_bottom = 187.0
+offset_left = 105.0
+offset_top = 162.0
+offset_right = 216.0
+offset_bottom = 193.0
 text = "Load 3: 1 vs 1"
 
 [node name="Load4" type="Button" parent="Menu"]
 layout_mode = 0
-offset_left = 366.0
-offset_top = 214.0
-offset_right = 622.0
-offset_bottom = 245.0
+offset_left = 31.0
+offset_top = 220.0
+offset_right = 287.0
+offset_bottom = 251.0
 text = "Load 4: NPC vs Stationary target"
 
 [node name="Load5" type="Button" parent="Menu"]
 layout_mode = 0
-offset_left = 428.0
-offset_top = 298.0
-offset_right = 585.0
-offset_bottom = 329.0
+offset_left = 93.0
+offset_top = 304.0
+offset_right = 250.0
+offset_bottom = 335.0
 text = "Load 5: Red vs Blue"
 
 [node name="Load6" type="Button" parent="Menu"]
 layout_mode = 0
-offset_left = 436.0
-offset_top = 369.0
-offset_right = 589.0
-offset_bottom = 400.0
+offset_left = 101.0
+offset_top = 375.0
+offset_right = 254.0
+offset_bottom = 406.0
 text = "Load 6: Turret Test"
 
 [node name="Load7" type="Button" parent="Menu"]
 layout_mode = 0
-offset_left = 409.0
-offset_top = 460.0
-offset_right = 605.0
-offset_bottom = 491.0
+offset_left = 74.0
+offset_top = 466.0
+offset_right = 270.0
+offset_bottom = 497.0
 text = "Load 7: Capital Ship Test"
 
 [node name="Load8NearMissSound" type="Button" parent="Menu"]
 layout_mode = 0
-offset_left = 724.0
-offset_top = 17.0
-offset_right = 906.0
-offset_bottom = 48.0
+offset_left = 389.0
+offset_top = 23.0
+offset_right = 571.0
+offset_bottom = 54.0
 text = "Load 8: Near Miss Test"
 
 [node name="Load9Shield" type="Button" parent="Menu"]
 layout_mode = 0
-offset_left = 740.0
-offset_top = 69.0
-offset_right = 892.0
-offset_bottom = 100.0
+offset_left = 410.0
+offset_top = 92.0
+offset_right = 562.0
+offset_bottom = 123.0
 text = "Load 9: Shield Test"
 
 [node name="Load10Asteroids" type="Button" parent="Menu"]
 layout_mode = 0
-offset_left = 741.0
-offset_top = 119.0
-offset_right = 891.0
-offset_bottom = 150.0
+offset_left = 417.0
+offset_top = 153.0
+offset_right = 567.0
+offset_bottom = 184.0
 text = "Load 10: Asteroids"
 
 [node name="Load11DamageEffects" type="Button" parent="Menu"]
 layout_mode = 0
-offset_left = 734.0
-offset_top = 161.0
-offset_right = 967.0
-offset_bottom = 192.0
+offset_left = 399.0
+offset_top = 233.0
+offset_right = 632.0
+offset_bottom = 264.0
 text = "Load 11: Damage Effects Test"
 
 [node name="Load12CollisionExperiment" type="Button" parent="Menu"]
 layout_mode = 0
-offset_left = 725.0
-offset_top = 232.0
-offset_right = 961.0
-offset_bottom = 263.0
+offset_left = 390.0
+offset_top = 304.0
+offset_right = 626.0
+offset_bottom = 335.0
 text = "Load 12: Collision Experiment"
+
+[node name="Load13SpaceStationDefense" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 386.0
+offset_right = 649.0
+offset_bottom = 417.0
+text = "Load 13: Space Station Defense"
 
 [node name="Main3D" type="Node3D" parent="."]
 
@@ -137,3 +145,4 @@ text = "Load 12: Collision Experiment"
 [connection signal="pressed" from="Menu/Load10Asteroids" to="." method="_on_load_10_asteroids_pressed"]
 [connection signal="pressed" from="Menu/Load11DamageEffects" to="." method="_on_load_11_damage_effects_pressed"]
 [connection signal="pressed" from="Menu/Load12CollisionExperiment" to="." method="_on_load_12_collision_experiment_pressed"]
+[connection signal="pressed" from="Menu/Load13SpaceStationDefense" to="." method="_on_load_13_space_station_defense_pressed"]
