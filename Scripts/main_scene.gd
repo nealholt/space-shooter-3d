@@ -9,9 +9,12 @@ class_name MainScene
 @onready var main_3d: Node3D = $Main3D
 # Currently loaded level
 var level_instance: Node
+var fullscreen:=true
 
 
 func _ready() -> void:
+	# Set display to fullscreen
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	# Make this scene globally accessible
 	Global.main_scene = self
 
@@ -112,3 +115,12 @@ func _on_load_12_collision_experiment_pressed() -> void:
 
 func _on_load_13_space_station_defense_pressed() -> void:
 	load_level("Level13Everything/EverythingLevel")
+
+
+
+func _on_toggle_fullscreen_pressed() -> void:
+	fullscreen = !fullscreen
+	if fullscreen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)

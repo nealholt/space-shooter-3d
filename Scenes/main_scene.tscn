@@ -131,6 +131,14 @@ offset_right = 649.0
 offset_bottom = 417.0
 text = "Load 13: Space Station Defense"
 
+[node name="ToggleFullscreen" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 884.0
+offset_top = 535.0
+offset_right = 1026.0
+offset_bottom = 566.0
+text = "Toggle Fullscreen"
+
 [node name="Main3D" type="Node3D" parent="."]
 
 [connection signal="pressed" from="Menu/Load1" to="." method="_on_load_1_pressed"]
@@ -146,3 +154,4 @@ text = "Load 13: Space Station Defense"
 [connection signal="pressed" from="Menu/Load11DamageEffects" to="." method="_on_load_11_damage_effects_pressed"]
 [connection signal="pressed" from="Menu/Load12CollisionExperiment" to="." method="_on_load_12_collision_experiment_pressed"]
 [connection signal="pressed" from="Menu/Load13SpaceStationDefense" to="." method="_on_load_13_space_station_defense_pressed"]
+[connection signal="pressed" from="Menu/ToggleFullscreen" to="." method="_on_toggle_fullscreen_pressed"]
