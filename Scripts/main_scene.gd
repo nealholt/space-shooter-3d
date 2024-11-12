@@ -13,7 +13,9 @@ var fullscreen:=true
 
 
 func _ready() -> void:
-	# Set display to fullscreen
+	# Set display to fullscreen. When I tried to set
+	# fullscreen as the default in project settings,
+	# the toggle button was broken, but this way it works.
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	# Make this scene globally accessible
 	Global.main_scene = self
