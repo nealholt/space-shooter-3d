@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="3_eggcn"]
 [ext_resource type="MeshLibrary" uid="uid://onqmfkbeu0js" path="res://Assets/Asteroids/asteroids.tres" id="4_u7bmr"]
 [ext_resource type="Script" path="res://Scripts/team_setup.gd" id="5_0jpk3"]
-[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="6_jnri3"]
+[ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="6_jotft"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_er3bs"]
 panorama = ExtResource("1_wr6oo")
@@ -68,8 +68,8 @@ directional_shadow_max_distance = 1000.0
 [node name="BlueTeam" type="Node3D" parent="."]
 script = ExtResource("5_0jpk3")
 
-[node name="PlayerVette" parent="BlueTeam" instance=ExtResource("6_jnri3")]
-transform = Transform3D(-0.619299, 0, 0.785155, 0, 1, 0, -0.785155, 0, -0.619299, 331.98, 0, -309.925)
+[node name="Fighter" parent="BlueTeam" instance=ExtResource("6_jotft")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 339.982, 0, 0)
 
 [node name="RedTeam" type="Node3D" parent="."]
 script = ExtResource("5_0jpk3")
