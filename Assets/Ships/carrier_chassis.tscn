@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://du1bwxbrh62at"]
+
+[ext_resource type="Material" uid="uid://der0adt6ep0sg" path="res://carrier_material.tres" id="1_jkwdh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1ccov"]
+material = ExtResource("1_jkwdh")
+size = Vector3(100, 100, 500)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3c2o1"]
+material = ExtResource("1_jkwdh")
+size = Vector3(100, 40, 150)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f4scf"]
+material = ExtResource("1_jkwdh")
+size = Vector3(100, 40, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cvvpr"]
+material = ExtResource("1_jkwdh")
+size = Vector3(100, 40, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g7w0k"]
+size = Vector3(100, 60, 100)
+
+[sub_resource type="PrismMesh" id="PrismMesh_473x4"]
+size = Vector3(100, 80, 100)
+
+[node name="CarrierChassis" type="Node3D"]
+
+[node name="RightHull" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 0)
+mesh = SubResource("BoxMesh_1ccov")
+
+[node name="LeftHull" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+mesh = SubResource("BoxMesh_1ccov")
+
+[node name="Core" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 150)
+mesh = SubResource("BoxMesh_3c2o1")
+
+[node name="HangarGuard1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38, 85)
+mesh = SubResource("BoxMesh_f4scf")
+
+[node name="HangarGuard2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38, 215)
+mesh = SubResource("BoxMesh_cvvpr")
+
+[node name="CoreGuard1" type="MeshInstance3D" parent="." groups=["team color"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35, 30)
+mesh = SubResource("BoxMesh_g7w0k")
+
+[node name="CoreGuard2" type="MeshInstance3D" parent="." groups=["team color"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 30)
+mesh = SubResource("BoxMesh_g7w0k")
+
+[node name="RightFang" type="MeshInstance3D" parent="." groups=["team color"]]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -100, -90, -200)
+mesh = SubResource("PrismMesh_473x4")
+
+[node name="LeftFang" type="MeshInstance3D" parent="." groups=["team color"]]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 100, -90, -200)
+mesh = SubResource("PrismMesh_473x4")

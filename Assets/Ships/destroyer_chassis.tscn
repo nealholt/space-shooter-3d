@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://s17i1n8q4r44"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btsak"]
+albedo_color = Color(0.356143, 0.269602, 0.104332, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_xh4k5"]
+material = SubResource("StandardMaterial3D_btsak")
+size = Vector3(10, 10, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ege6"]
+albedo_color = Color(0.129412, 0.145098, 0, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_0qppt"]
+material = SubResource("StandardMaterial3D_1ege6")
+size = Vector3(15, 5, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i68gq"]
+size = Vector3(25, 1, 10)
+
+[node name="DestroyerChassis" type="Node3D"]
+
+[node name="Hull" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_xh4k5")
+
+[node name="Bridge" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.50826, 12.4247)
+mesh = SubResource("BoxMesh_0qppt")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." groups=["team color"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.97321, -9.82691)
+mesh = SubResource("BoxMesh_i68gq")

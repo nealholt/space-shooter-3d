@@ -1,8 +1,12 @@
-[gd_scene load_steps=43 format=3 uid="uid://c0txuujqpw0h5"]
+[gd_scene load_steps=11 format=3 uid="uid://c0txuujqpw0h5"]
 
 [ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/fighter_chassis_ring.tscn" id="1_574ut"]
 [ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Assets/Ships/fighter_chassis_diamond.tscn" id="2_gjavv"]
-[ext_resource type="Material" uid="uid://der0adt6ep0sg" path="res://carrier_material.tres" id="3_lwgqd"]
+[ext_resource type="PackedScene" uid="uid://du1bwxbrh62at" path="res://Assets/Ships/carrier_chassis.tscn" id="3_goy3e"]
+[ext_resource type="PackedScene" uid="uid://ctw16pilpn8rk" path="res://Assets/Ships/bomber_chassis.tscn" id="3_xbe5d"]
+[ext_resource type="PackedScene" uid="uid://s17i1n8q4r44" path="res://Assets/Ships/destroyer_chassis.tscn" id="4_d3oev"]
+[ext_resource type="PackedScene" uid="uid://bvgxwc28k1fvx" path="res://Assets/Ships/beam_destroyer_chassis.tscn" id="5_idi7t"]
+[ext_resource type="PackedScene" uid="uid://cxd7ahrv8vrys" path="res://Assets/Ships/frigate_chassis.tscn" id="6_4kqao"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kwcv5"]
 sky_top_color = Color(2.23808e-06, 0.154277, 0.464608, 1)
@@ -18,155 +22,6 @@ background_mode = 2
 sky = SubResource("Sky_42mk5")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yp82x"]
-albedo_color = Color(0.768627, 0, 0.0313726, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_4ep6d"]
-material = SubResource("StandardMaterial3D_yp82x")
-top_radius = 0.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pe3rl"]
-albedo_color = Color(0.768627, 0, 0.0313726, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_nyvuf"]
-material = SubResource("StandardMaterial3D_pe3rl")
-radius = 0.2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cjlk2"]
-albedo_color = Color(0.186082, 0.271156, 0.410184, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_1f0k3"]
-material = SubResource("StandardMaterial3D_cjlk2")
-top_radius = 0.8
-bottom_radius = 0.3
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_8j5s3"]
-radius = 0.8
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4708s"]
-albedo_color = Color(0.207843, 0.333333, 0.45098, 1)
-metallic = 0.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_yq8y7"]
-material = SubResource("StandardMaterial3D_4708s")
-size = Vector3(5, 1, 5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3pwd"]
-albedo_color = Color(0.207843, 0.333333, 0.45098, 1)
-metallic = 0.5
-
-[sub_resource type="PrismMesh" id="PrismMesh_5yrm1"]
-material = SubResource("StandardMaterial3D_q3pwd")
-size = Vector3(1, 2, 5)
-
-[sub_resource type="PrismMesh" id="PrismMesh_oic1x"]
-size = Vector3(3, 2, 0.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_btsak"]
-albedo_color = Color(0.356143, 0.269602, 0.104332, 1)
-metallic = 0.5
-roughness = 0.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_xh4k5"]
-material = SubResource("StandardMaterial3D_btsak")
-size = Vector3(10, 10, 30)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ege6"]
-albedo_color = Color(0.129412, 0.145098, 0, 1)
-metallic = 0.5
-roughness = 0.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_0qppt"]
-material = SubResource("StandardMaterial3D_1ege6")
-size = Vector3(15, 5, 10)
-
-[sub_resource type="BoxMesh" id="BoxMesh_i68gq"]
-size = Vector3(25, 1, 10)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vuqul"]
-albedo_color = Color(0, 0.321389, 0.322372, 1)
-metallic = 0.5
-roughness = 0.5
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_bwh8c"]
-material = SubResource("StandardMaterial3D_vuqul")
-top_radius = 7.0
-bottom_radius = 7.0
-height = 40.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4yxkw"]
-albedo_color = Color(0.439216, 0.235294, 0.101961, 1)
-metallic = 0.5
-roughness = 0.5
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_bgxrk"]
-material = SubResource("StandardMaterial3D_4yxkw")
-top_radius = 4.0
-bottom_radius = 4.0
-height = 10.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_sp73l"]
-size = Vector3(30, 6, 10)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5ac3"]
-albedo_color = Color(0.230315, 0.230315, 0.230315, 1)
-metallic = 0.5
-roughness = 0.8
-
-[sub_resource type="PrismMesh" id="PrismMesh_1flhe"]
-material = SubResource("StandardMaterial3D_l5ac3")
-size = Vector3(30, 90, 35)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1wjv"]
-albedo_color = Color(0.384314, 0.160784, 0.101961, 1)
-metallic = 0.5
-roughness = 0.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_qy2dh"]
-material = SubResource("StandardMaterial3D_b1wjv")
-size = Vector3(10, 2, 10)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iqrew"]
-albedo_color = Color(0.437592, 0.236436, 0.100835, 1)
-metallic = 0.5
-roughness = 0.5
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ap4yq"]
-material = SubResource("StandardMaterial3D_iqrew")
-top_radius = 5.0
-bottom_radius = 5.0
-height = 50.0
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_jm5wa"]
-radius = 8.0
-height = 40.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_ycexs"]
-radius = 10.0
-height = 20.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_1ccov"]
-material = ExtResource("3_lwgqd")
-size = Vector3(100, 100, 500)
-
-[sub_resource type="BoxMesh" id="BoxMesh_3c2o1"]
-material = ExtResource("3_lwgqd")
-size = Vector3(100, 40, 150)
-
-[sub_resource type="BoxMesh" id="BoxMesh_f4scf"]
-material = ExtResource("3_lwgqd")
-size = Vector3(100, 40, 20)
-
-[sub_resource type="BoxMesh" id="BoxMesh_cvvpr"]
-material = ExtResource("3_lwgqd")
-size = Vector3(100, 40, 20)
-
-[sub_resource type="BoxMesh" id="BoxMesh_g7w0k"]
-size = Vector3(100, 60, 100)
-
-[sub_resource type="PrismMesh" id="PrismMesh_473x4"]
-size = Vector3(100, 80, 100)
 
 [node name="Node3D" type="Node3D"]
 
@@ -184,140 +39,23 @@ environment = SubResource("Environment_ato7e")
 [node name="FighterChassisDiamond" parent="." instance=ExtResource("2_gjavv")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.27934, 0, 0)
 
-[node name="Bomber" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5393, 0, 0)
+[node name="Bomber" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
 
-[node name="MissileLauncher" type="MeshInstance3D" parent="Bomber"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.120546, 0)
-mesh = SubResource("CylinderMesh_4ep6d")
+[node name="BomberChassis" parent="Bomber" instance=ExtResource("3_xbe5d")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Bomber/MissileLauncher"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4.37114e-08)
-mesh = SubResource("CapsuleMesh_nyvuf")
+[node name="Destroyer" type="CharacterBody3D" parent="."]
 
-[node name="ThrusterRight" type="MeshInstance3D" parent="Bomber"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.34916, 1.28169, 2.46419)
-mesh = SubResource("CylinderMesh_1f0k3")
+[node name="DestroyerChassis" parent="Destroyer" instance=ExtResource("4_d3oev")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Bomber/ThrusterRight" groups=["team color"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
-mesh = SubResource("CapsuleMesh_8j5s3")
+[node name="BeamDestroyer" type="CharacterBody3D" parent="."]
 
-[node name="ThrusterLeft" type="MeshInstance3D" parent="Bomber"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.349, 1.282, 2.464)
-mesh = SubResource("CylinderMesh_1f0k3")
+[node name="BeamDestroyerChassis" parent="BeamDestroyer" instance=ExtResource("5_idi7t")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Bomber/ThrusterLeft" groups=["team color"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
-mesh = SubResource("CapsuleMesh_8j5s3")
+[node name="Frigate" type="CharacterBody3D" parent="."]
 
-[node name="HullBox" type="MeshInstance3D" parent="Bomber"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.837511, 0)
-mesh = SubResource("BoxMesh_yq8y7")
+[node name="FrigateChassis" parent="Frigate" instance=ExtResource("6_4kqao")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Bomber/HullBox"]
-transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 0, -3.5)
-mesh = SubResource("PrismMesh_5yrm1")
+[node name="Carrier" type="CharacterBody3D" parent="."]
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Bomber/HullBox" groups=["team color"]]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.397605, -2.19736)
-mesh = SubResource("PrismMesh_oic1x")
-
-[node name="Destroyer" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.6332, 0, 0)
-
-[node name="Hull" type="MeshInstance3D" parent="Destroyer"]
-mesh = SubResource("BoxMesh_xh4k5")
-
-[node name="Bridge" type="MeshInstance3D" parent="Destroyer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.50826, 12.4247)
-mesh = SubResource("BoxMesh_0qppt")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Destroyer" groups=["team color"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.97321, -9.82691)
-mesh = SubResource("BoxMesh_i68gq")
-
-[node name="BeamDestroyer" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 99.7808, 0, 0)
-
-[node name="Hull" type="MeshInstance3D" parent="BeamDestroyer"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CylinderMesh_bwh8c")
-
-[node name="Laser" type="MeshInstance3D" parent="BeamDestroyer"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -25)
-mesh = SubResource("CylinderMesh_bgxrk")
-
-[node name="Bridge1" type="MeshInstance3D" parent="BeamDestroyer" groups=["team color"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 14)
-mesh = SubResource("BoxMesh_sp73l")
-
-[node name="Bridge2" type="MeshInstance3D" parent="BeamDestroyer" groups=["team color"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 14)
-mesh = SubResource("BoxMesh_sp73l")
-
-[node name="Frigate" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 186.108, 0, 0)
-
-[node name="Hull" type="MeshInstance3D" parent="Frigate"]
-transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("PrismMesh_1flhe")
-
-[node name="MissilePlatform" type="MeshInstance3D" parent="Frigate"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 5.5, -11)
-mesh = SubResource("BoxMesh_qy2dh")
-
-[node name="LaserBeam" type="MeshInstance3D" parent="Frigate"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -21.4957)
-mesh = SubResource("CylinderMesh_ap4yq")
-
-[node name="Vulnerable1" type="MeshInstance3D" parent="Frigate" groups=["team color"]]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 16, 0, 24)
-mesh = SubResource("CapsuleMesh_jm5wa")
-
-[node name="Vulnerable2" type="MeshInstance3D" parent="Frigate" groups=["team color"]]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -16, 0, 24)
-mesh = SubResource("CapsuleMesh_jm5wa")
-
-[node name="Vulnerable3" type="MeshInstance3D" parent="Frigate" groups=["team color"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.46019, 33.4852)
-mesh = SubResource("SphereMesh_ycexs")
-
-[node name="Carrier" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 428.154, 0, 0)
-
-[node name="RightHull" type="MeshInstance3D" parent="Carrier"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 0)
-mesh = SubResource("BoxMesh_1ccov")
-
-[node name="LeftHull" type="MeshInstance3D" parent="Carrier"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
-mesh = SubResource("BoxMesh_1ccov")
-
-[node name="Core" type="MeshInstance3D" parent="Carrier"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 150)
-mesh = SubResource("BoxMesh_3c2o1")
-
-[node name="HangarGuard1" type="MeshInstance3D" parent="Carrier"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38, 85)
-mesh = SubResource("BoxMesh_f4scf")
-
-[node name="HangarGuard2" type="MeshInstance3D" parent="Carrier"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38, 215)
-mesh = SubResource("BoxMesh_cvvpr")
-
-[node name="CoreGuard1" type="MeshInstance3D" parent="Carrier" groups=["team color"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35, 30)
-mesh = SubResource("BoxMesh_g7w0k")
-
-[node name="CoreGuard2" type="MeshInstance3D" parent="Carrier" groups=["team color"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 30)
-mesh = SubResource("BoxMesh_g7w0k")
-
-[node name="RightFang" type="MeshInstance3D" parent="Carrier" groups=["team color"]]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -100, -90, -200)
-mesh = SubResource("PrismMesh_473x4")
-
-[node name="LeftFang" type="MeshInstance3D" parent="Carrier" groups=["team color"]]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 100, -90, -200)
-mesh = SubResource("PrismMesh_473x4")
+[node name="CarrierChassis" parent="Carrier" instance=ExtResource("3_goy3e")]

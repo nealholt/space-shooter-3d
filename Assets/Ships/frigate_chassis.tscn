@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxd7ahrv8vrys"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5ac3"]
+albedo_color = Color(0.230315, 0.230315, 0.230315, 1)
+metallic = 0.5
+roughness = 0.8
+
+[sub_resource type="PrismMesh" id="PrismMesh_1flhe"]
+material = SubResource("StandardMaterial3D_l5ac3")
+size = Vector3(30, 90, 35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1wjv"]
+albedo_color = Color(0.384314, 0.160784, 0.101961, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_qy2dh"]
+material = SubResource("StandardMaterial3D_b1wjv")
+size = Vector3(10, 2, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iqrew"]
+albedo_color = Color(0.437592, 0.236436, 0.100835, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ap4yq"]
+material = SubResource("StandardMaterial3D_iqrew")
+top_radius = 5.0
+bottom_radius = 5.0
+height = 50.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jm5wa"]
+radius = 8.0
+height = 40.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ycexs"]
+radius = 10.0
+height = 20.0
+
+[node name="FrigateChassis" type="Node3D"]
+
+[node name="Hull" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_1flhe")
+
+[node name="MissilePlatform" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 5.5, -11)
+mesh = SubResource("BoxMesh_qy2dh")
+
+[node name="LaserBeam" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -21.4957)
+mesh = SubResource("CylinderMesh_ap4yq")
+
+[node name="Vulnerable1" type="MeshInstance3D" parent="." groups=["team color"]]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 16, 0, 24)
+mesh = SubResource("CapsuleMesh_jm5wa")
+
+[node name="Vulnerable2" type="MeshInstance3D" parent="." groups=["team color"]]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -16, 0, 24)
+mesh = SubResource("CapsuleMesh_jm5wa")
+
+[node name="Vulnerable3" type="MeshInstance3D" parent="." groups=["team color"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.46019, 33.4852)
+mesh = SubResource("SphereMesh_ycexs")

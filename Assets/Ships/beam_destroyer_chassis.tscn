@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvgxwc28k1fvx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vuqul"]
+albedo_color = Color(0, 0.321389, 0.322372, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bwh8c"]
+material = SubResource("StandardMaterial3D_vuqul")
+top_radius = 7.0
+bottom_radius = 7.0
+height = 40.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4yxkw"]
+albedo_color = Color(0.439216, 0.235294, 0.101961, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bgxrk"]
+material = SubResource("StandardMaterial3D_4yxkw")
+top_radius = 4.0
+bottom_radius = 4.0
+height = 10.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_sp73l"]
+size = Vector3(30, 6, 10)
+
+[node name="BeamDestroyerChassis" type="Node3D"]
+
+[node name="Hull" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_bwh8c")
+
+[node name="Laser" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -25)
+mesh = SubResource("CylinderMesh_bgxrk")
+
+[node name="Bridge1" type="MeshInstance3D" parent="." groups=["team color"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 14)
+mesh = SubResource("BoxMesh_sp73l")
+
+[node name="Bridge2" type="MeshInstance3D" parent="." groups=["team color"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 14)
+mesh = SubResource("BoxMesh_sp73l")
