@@ -60,11 +60,11 @@ mesh = SubResource("BoxMesh_bhcna")
 transform = Transform3D(3, 0, 0, 0, -1.31134e-07, -3, 0, 3, -1.31134e-07, 0, 0, -3.6)
 mesh = SubResource("CylinderMesh_kcd14")
 
-[node name="Bulge1" type="MeshInstance3D" parent="."]
+[node name="Bulge1" type="MeshInstance3D" parent="." groups=["team color"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.27893, 0, 0)
 mesh = SubResource("CapsuleMesh_gadeb")
 
-[node name="Bulge2" type="MeshInstance3D" parent="."]
+[node name="Bulge2" type="MeshInstance3D" parent="." groups=["team color"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.279, 0, 0)
 mesh = SubResource("CapsuleMesh_gadeb")
 
