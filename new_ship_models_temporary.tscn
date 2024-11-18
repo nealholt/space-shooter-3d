@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0txuujqpw0h5"]
+[gd_scene load_steps=16 format=3 uid="uid://c0txuujqpw0h5"]
 
 [ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/fighter_chassis_ring.tscn" id="1_574ut"]
 [ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Assets/Ships/fighter_chassis_diamond.tscn" id="2_gjavv"]
@@ -23,6 +23,16 @@ sky = SubResource("Sky_42mk5")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_u613a"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lrnuo"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_40e3l"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lwr7c"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_al21y"]
+
 [node name="Node3D" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -37,25 +47,49 @@ environment = SubResource("Environment_ato7e")
 [node name="FighterChassisRing" parent="." instance=ExtResource("1_574ut")]
 
 [node name="FighterChassisDiamond" parent="." instance=ExtResource("2_gjavv")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.27934, 0, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 116.995, 0, 0)
 
 [node name="Bomber" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 224.24, 0, 0)
+collision_layer = 0
 
 [node name="BomberChassis" parent="Bomber" instance=ExtResource("3_xbe5d")]
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bomber"]
+shape = SubResource("SphereShape3D_u613a")
+
 [node name="Destroyer" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 347.502, 0, 0)
+collision_layer = 0
 
 [node name="DestroyerChassis" parent="Destroyer" instance=ExtResource("4_d3oev")]
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Destroyer"]
+shape = SubResource("SphereShape3D_lrnuo")
+
 [node name="BeamDestroyer" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 488.209, 0, 0)
+collision_layer = 0
 
 [node name="BeamDestroyerChassis" parent="BeamDestroyer" instance=ExtResource("5_idi7t")]
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BeamDestroyer"]
+shape = SubResource("SphereShape3D_40e3l")
+
 [node name="Frigate" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 591.925, 0, 0)
+collision_layer = 0
 
 [node name="FrigateChassis" parent="Frigate" instance=ExtResource("6_4kqao")]
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frigate"]
+shape = SubResource("SphereShape3D_lwr7c")
+
 [node name="Carrier" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 874.022, 0, 0)
+collision_layer = 0
 
 [node name="CarrierChassis" parent="Carrier" instance=ExtResource("3_goy3e")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Carrier"]
+shape = SubResource("SphereShape3D_al21y")

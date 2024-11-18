@@ -48,7 +48,7 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 		mover.velocity = mover.velocity + new_dir
 	else:
 		# Apply friction on a per unit time basis
-		mover.velocity = mover.velocity * (1-friction*delta) + new_dir
+		mover.velocity = mover.velocity * (1-clamp(friction*delta,0,1)) + new_dir
 	# Move, collide, and bounce off
 	# Resources used:
 	# https://docs.godotengine.org/en/stable/tutorials/physics/using_character_body_2d.html

@@ -42,17 +42,27 @@ script = ExtResource("1_dn8ab")
 deathExplosion = ExtResource("2_l8ark")
 finalExplosion = ExtResource("3_5mmgf")
 
+[node name="AimAssist" parent="." instance=ExtResource("19_xjc2u")]
+angle_assist_limit = 10.0
+
+[node name="BurningTrail" parent="." instance=ExtResource("14_4fwow")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="FighterChassisRing" parent="." instance=ExtResource("19_x2ba7")]
+transform = Transform3D(-1, 8.35188e-23, -8.74228e-08, -2.68659e-16, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-07, 8.74228e-08, -1, 1.31134e-07, 0, 0, 0)
 shape = SubResource("SphereShape3D_rh3fl")
 
-[node name="WeaponHandler" parent="." instance=ExtResource("4_dhpb0")]
+[node name="Contrail" parent="." instance=ExtResource("20_a8xhu")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Gun" parent="WeaponHandler" instance=ExtResource("4_57m73")]
-transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2)
-bullet = ExtResource("5_6ou5s")
-bullet_speed = 600.0
-fire_rate = 8.0
+[node name="DebugLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
+billboard = 1
+fixed_size = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_1xytm")]
 max_health = 20
@@ -66,24 +76,6 @@ shape = SubResource("SphereShape3D_ydoww")
 [node name="HitFeedback" parent="HitBoxComponent" instance=ExtResource("3_qm2p0")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="DebugLabel" type="Label3D" parent="."]
-visible = false
-billboard = 1
-fixed_size = true
-
-[node name="FighterChassisRing" parent="." instance=ExtResource("19_x2ba7")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1)
-
-[node name="Contrail" parent="." instance=ExtResource("20_a8xhu")]
-
-[node name="Shield" parent="." instance=ExtResource("23_fxr37")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
-
-[node name="FresnelAura" parent="Shield" index="0"]
-mesh = SubResource("SphereMesh_6a830")
-
-[node name="BurningTrail" parent="." instance=ExtResource("14_4fwow")]
-
 [node name="MissileLauncher" parent="." instance=ExtResource("4_57m73")]
 bullet = ExtResource("5_70fr4")
 damage = 10.0
@@ -96,7 +88,19 @@ npc_missile_lock = true
 missile_launcher = NodePath("../MissileLauncher")
 missile_range = 1000.0
 
-[node name="AimAssist" parent="." instance=ExtResource("19_xjc2u")]
-angle_assist_limit = 10.0
+[node name="Shield" parent="." instance=ExtResource("23_fxr37")]
+transform = Transform3D(20, 1.67038e-21, 3.38813e-21, 0, 20, 0, 3.38813e-21, 0, 20, 0, 0, 0)
+
+[node name="FresnelAura" parent="Shield" index="0"]
+mesh = SubResource("SphereMesh_6a830")
+
+[node name="WeaponHandler" parent="." instance=ExtResource("4_dhpb0")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Gun" parent="WeaponHandler" instance=ExtResource("4_57m73")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2)
+bullet = ExtResource("5_6ou5s")
+bullet_speed = 600.0
+fire_rate = 8.0
 
 [editable path="Shield"]

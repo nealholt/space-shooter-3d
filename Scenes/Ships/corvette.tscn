@@ -32,11 +32,6 @@
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="29_w78kn"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="34_80okc"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_7tg00"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
-size = Vector3(6, 2.3, 10.5)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyjhj"]
 albedo_color = Color(0.282353, 0.282353, 0.282353, 1)
 metallic = 0.51
@@ -56,6 +51,11 @@ bottom_radius = 0.01
 height = 0.35
 radial_segments = 16
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_7tg00"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
+size = Vector3(6, 2.3, 10.5)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j4o42"]
 resource_local_to_scene = true
 render_priority = 0
@@ -74,19 +74,58 @@ script = ExtResource("1_bfcrw")
 deathExplosion = ExtResource("2_jw8ud")
 finalExplosion = ExtResource("3_lvuav")
 
+[node name="AimAssist" parent="." instance=ExtResource("29_3q0pi")]
+angle_assist_limit = 10.0
+
+[node name="BurningTrail" parent="." instance=ExtResource("29_w78kn")]
+
+[node name="FighterChassisDiamond" parent="." instance=ExtResource("12_a77x5")]
+
+[node name="EngineMeshComponent" parent="FighterChassisDiamond" instance=ExtResource("12_e20ac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.7, -8)
+
+[node name="EngineMeshComponent2" parent="FighterChassisDiamond" instance=ExtResource("12_e20ac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.7, -8)
+
+[node name="EngineMeshComponent3" parent="FighterChassisDiamond" instance=ExtResource("12_e20ac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.7, -8)
+
+[node name="EngineMeshComponent4" parent="FighterChassisDiamond" instance=ExtResource("12_e20ac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.7, -8)
+
+[node name="Cockpit3" type="Node3D" parent="FighterChassisDiamond"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.72759e-07, 0.6, 3.12)
+
+[node name="LeftStrut" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+transform = Transform3D(1, 0, 0, 0, 0.867297, -0.497792, 0, 0.497792, 0.867297, -0.17, -0.0907253, -0.0148683)
+mesh = SubResource("CylinderMesh_tbbj7")
+
+[node name="RightStrut" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+transform = Transform3D(1, 0, 0, 0, 0.867297, -0.497792, 0, 0.497792, 0.867297, 0.17, -0.0907253, -0.0148683)
+mesh = SubResource("CylinderMesh_tbbj7")
+
+[node name="CrossBar" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.207488, 0.157279)
+mesh = SubResource("CylinderMesh_s2gsa")
+
+[node name="LeftStrutBack" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+transform = Transform3D(1, 0, 0, 0, -0.125299, -0.992119, 0, 0.992119, -0.125299, -0.17, 0.160132, 0.513052)
+mesh = SubResource("CylinderMesh_tbbj7")
+
+[node name="RightStrutBack" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+transform = Transform3D(1, 0, 0, 0, -0.125299, -0.992119, 0, 0.992119, -0.125299, 0.17, 0.16, 0.513)
+mesh = SubResource("CylinderMesh_tbbj7")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_7tg00")
 
-[node name="MissileLauncher" parent="." instance=ExtResource("2_2p718")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.5)
-bullet = ExtResource("3_crlbv")
-damage = 50.0
-bullet_speed = 200.0
-fire_rate = 0.3
+[node name="Contrail" parent="." instance=ExtResource("10_shexg")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+_startColor = Color(0.537255, 0.152941, 1, 1)
+_endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
 
-[node name="MissileLockGroup" parent="." node_paths=PackedStringArray("missile_launcher") instance=ExtResource("4_vmlm7")]
-npc_missile_lock = true
-missile_launcher = NodePath("../MissileLauncher")
+[node name="HealthComponent" parent="." instance=ExtResource("7_vhcpa")]
+max_health = 20
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_8otd8")]
 health_component = NodePath("../HealthComponent")
@@ -100,18 +139,27 @@ stream = ExtResource("8_klb2b")
 
 [node name="HitFeedback" parent="HitBoxComponent" instance=ExtResource("9_sewpe")]
 
-[node name="HealthComponent" parent="." instance=ExtResource("7_vhcpa")]
-max_health = 20
-
 [node name="Sounds" type="Node3D" parent="."]
 
 [node name="NearMissAudio" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource("9_ktweb")
 
-[node name="Contrail" parent="." instance=ExtResource("10_shexg")]
-transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
-_startColor = Color(0.537255, 0.152941, 1, 1)
-_endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
+[node name="MissileLauncher" parent="." instance=ExtResource("2_2p718")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.5)
+bullet = ExtResource("3_crlbv")
+damage = 50.0
+bullet_speed = 200.0
+fire_rate = 0.3
+
+[node name="MissileLockGroup" parent="." node_paths=PackedStringArray("missile_launcher") instance=ExtResource("4_vmlm7")]
+npc_missile_lock = true
+missile_launcher = NodePath("../MissileLauncher")
+
+[node name="Shield" parent="." instance=ExtResource("21_5ow11")]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+
+[node name="FresnelAura" parent="Shield" index="0"]
+mesh = SubResource("SphereMesh_2lbpm")
 
 [node name="WeaponHandler" parent="." instance=ExtResource("9_1xly7")]
 
@@ -180,54 +228,6 @@ target_position = Vector3(0, 0, -1000)
 collision_mask = 10
 collide_with_areas = true
 
-[node name="FighterChassisDiamond" parent="." instance=ExtResource("12_a77x5")]
-
-[node name="EngineMeshComponent" parent="FighterChassisDiamond" instance=ExtResource("12_e20ac")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.7, -8)
-
-[node name="EngineMeshComponent2" parent="FighterChassisDiamond" instance=ExtResource("12_e20ac")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.7, -8)
-
-[node name="EngineMeshComponent3" parent="FighterChassisDiamond" instance=ExtResource("12_e20ac")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.7, -8)
-
-[node name="EngineMeshComponent4" parent="FighterChassisDiamond" instance=ExtResource("12_e20ac")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.7, -8)
-
-[node name="Cockpit3" type="Node3D" parent="FighterChassisDiamond"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.72759e-07, 0.6, 3.12)
-
-[node name="LeftStrut" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
-transform = Transform3D(1, 0, 0, 0, 0.867297, -0.497792, 0, 0.497792, 0.867297, -0.17, -0.0907253, -0.0148683)
-mesh = SubResource("CylinderMesh_tbbj7")
-
-[node name="RightStrut" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
-transform = Transform3D(1, 0, 0, 0, 0.867297, -0.497792, 0, 0.497792, 0.867297, 0.17, -0.0907253, -0.0148683)
-mesh = SubResource("CylinderMesh_tbbj7")
-
-[node name="CrossBar" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.207488, 0.157279)
-mesh = SubResource("CylinderMesh_s2gsa")
-
-[node name="LeftStrutBack" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
-transform = Transform3D(1, 0, 0, 0, -0.125299, -0.992119, 0, 0.992119, -0.125299, -0.17, 0.160132, 0.513052)
-mesh = SubResource("CylinderMesh_tbbj7")
-
-[node name="RightStrutBack" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
-transform = Transform3D(1, 0, 0, 0, -0.125299, -0.992119, 0, 0.992119, -0.125299, 0.17, 0.16, 0.513)
-mesh = SubResource("CylinderMesh_tbbj7")
-
-[node name="Shield" parent="." instance=ExtResource("21_5ow11")]
-transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
-
-[node name="FresnelAura" parent="Shield" index="0"]
-mesh = SubResource("SphereMesh_2lbpm")
-
-[node name="BurningTrail" parent="." instance=ExtResource("29_w78kn")]
-
-[node name="AimAssist" parent="." instance=ExtResource("29_3q0pi")]
-angle_assist_limit = 10.0
-
+[editable path="Shield"]
 [editable path="WeaponHandler/GatlingGun/GunModel"]
 [editable path="WeaponHandler/HitScanGun/Node"]
-[editable path="Shield"]

@@ -1,3 +1,4 @@
+
 extends CharacterBodyControlParent
 class_name PlayerMovement4
 
@@ -7,12 +8,12 @@ class_name PlayerMovement4
 #     Reduced pitch, roll, yaw while drifting: 1.3 -> 0.7
 #     More roll on right stick: 1.2 -> 2
 #     Mild "fine-grained" pitch on right stick: 0.4
-#     Stronger impulse acceleration: 100 -> 8000
+#     Stronger impulse acceleration: 100 -> 6500
 #     This stronger accel is offset by use of impulse_lerp
 # such that the impulse isn't instantaneous, but has to be
 # lerped up to and back down from, meanwhile, turn rate is
 # reduced.
-#     Slower impulse lerp: 0.2 -> 0.1
+#     Slower impulse lerp: 0.2 -> 1.0
 #     Pitch, roll, yaw maxes out at default speed and
 # scales based on difference between current speed and
 # default speed. See everything related to
@@ -22,6 +23,10 @@ class_name PlayerMovement4
 # accel_max_duration. <----- Except I didn't like it so I 
 # kept the code, but set the values such that accel shouldn't
 # ever really run out.
+#     I lowered friction from 0.99 (which was misleading because
+# it's also getting multiplied by delta which is typically 1/60)
+# to 0.8 to get a "driftier" feel. Zero is full ballistic
+# "asteroids" controls.
 #     No brakes (EXCEPT WE KEPT THEM IN FOR TESTING PURPOSES)
 
 #Strength of movements under standard motion
@@ -31,14 +36,14 @@ var roll_std_right_stick: float = 2.0
 var pitch_std_right_stick: float = 0.4
 var yaw_std: float = 0.6
 #Standard air friction and forward impulse
-var friction_std: float = 0.99
+var friction_std: float = 0.8 # Lower is closer "asteroids" controls
 #var friction_lerp: float =  2.4
 
 #forward motion
-var impulse_std: float = 70.0
-var impulse_accel: float = 8000.0
+var impulse_std: float = 60.0
+var impulse_accel: float = 6500.0
 var impulse_brake: float = 0.0
-var impulse_lerp: float =  1.0
+var impulse_lerp: float = 1.0
 
 # Scaling factor for reducing turn rate as a function of speed
 # The smaller this number is, the more turn rate will be
@@ -133,7 +138,7 @@ func move_and_turn(mover, delta:float) -> void:
 	# Don't apply if drifting.
 	if !Input.is_action_pressed("drift"):
 		var speed:float = mover.velocity.length()
-		var turn_reduction:float = max(abs(speed-impulse_std) / turn_reduction_factor, 1.0)
+		var turn_reduction:float = max(abs(speed-impulse_std/friction_std) / turn_reduction_factor, 1.0)
 		pitch_modifier /= turn_reduction
 		roll_modifier /= turn_reduction
 		yaw_modifier /= turn_reduction
