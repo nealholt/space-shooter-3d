@@ -77,14 +77,12 @@ finalExplosion = ExtResource("3_lvuav")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_7tg00")
 
-[node name="MissileLauncher" parent="." node_paths=PackedStringArray("collision_exception1", "collision_exception2") instance=ExtResource("2_2p718")]
+[node name="MissileLauncher" parent="." instance=ExtResource("2_2p718")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.5)
 bullet = ExtResource("3_crlbv")
 damage = 50.0
 bullet_speed = 200.0
 fire_rate = 0.3
-collision_exception1 = NodePath("../HitBoxComponent")
-collision_exception2 = NodePath("../Shield/HitBoxComponent")
 
 [node name="MissileLockGroup" parent="." node_paths=PackedStringArray("missile_launcher") instance=ExtResource("4_vmlm7")]
 npc_missile_lock = true
@@ -117,7 +115,7 @@ _endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
 
 [node name="WeaponHandler" parent="." instance=ExtResource("9_1xly7")]
 
-[node name="GatlingGun" parent="WeaponHandler" node_paths=PackedStringArray("gun_animation", "muzzle_flash", "collision_exception1", "collision_exception2") instance=ExtResource("2_2p718")]
+[node name="GatlingGun" parent="WeaponHandler" node_paths=PackedStringArray("gun_animation", "muzzle_flash") instance=ExtResource("2_2p718")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63, 0.14, -5)
 burst_total = 6
 burst_rate = 12.0
@@ -129,8 +127,6 @@ fire_sound = ExtResource("11_itcpr")
 reload_sound = ExtResource("12_ig3m3")
 gun_animation = NodePath("GunModel/AnimationPlayer")
 muzzle_flash = NodePath("MuzzleFlash")
-collision_exception1 = NodePath("../../HitBoxComponent")
-collision_exception2 = NodePath("../../Shield/HitBoxComponent")
 
 [node name="GunModel" parent="WeaponHandler/GatlingGun" instance=ExtResource("11_kbwk7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.132, 1.3)
@@ -138,24 +134,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.132, 1.3)
 [node name="MuzzleFlash" parent="WeaponHandler/GatlingGun" instance=ExtResource("14_4ajg4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.185093)
 
-[node name="AutoSeekingMissileLauncher" parent="WeaponHandler" node_paths=PackedStringArray("collision_exception1", "collision_exception2") instance=ExtResource("19_yfprc")]
+[node name="AutoSeekingMissileLauncher" parent="WeaponHandler" instance=ExtResource("19_yfprc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.33626)
 bullet = ExtResource("11_a8ss5")
 bullet_speed = 150.0
 bullet_timeout = 3.0
 fire_rate = 3.0
-collision_exception1 = NodePath("../../HitBoxComponent")
-collision_exception2 = NodePath("../../Shield/HitBoxComponent")
 
-[node name="HitScanGun" parent="WeaponHandler" node_paths=PackedStringArray("laser_mesh", "laser_mesh_pivot", "gun_animation", "ray", "collision_exception1", "collision_exception2") instance=ExtResource("13_428na")]
+[node name="HitScanGun" parent="WeaponHandler" node_paths=PackedStringArray("laser_mesh", "laser_mesh_pivot", "gun_animation") instance=ExtResource("13_428na")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14718, 0, -2.39168)
 laser_mesh = NodePath("Node/Head/LaserMesh")
 laser_mesh_pivot = NodePath("Node/Head")
 fire_rate = 5.0
 gun_animation = NodePath("Node/Head/LaserMesh/AnimationPlayer")
-ray = NodePath("RayCast3D")
-collision_exception1 = NodePath("../../HitBoxComponent")
-collision_exception2 = NodePath("../../Shield/HitBoxComponent")
 
 [node name="RayCast3D" type="RayCast3D" parent="WeaponHandler/HitScanGun"]
 target_position = Vector3(0, 0, -1000)
@@ -167,16 +158,14 @@ collide_with_areas = true
 [node name="LaserMesh" parent="WeaponHandler/HitScanGun/Node/Head" index="0"]
 visible = false
 
-[node name="LaserShotgun" parent="WeaponHandler" node_paths=PackedStringArray("collision_exception1", "collision_exception2") instance=ExtResource("15_ufo67")]
+[node name="LaserShotgun" parent="WeaponHandler" instance=ExtResource("15_ufo67")]
 bullet = ExtResource("20_de7w0")
 bullet_speed = 500.0
 fire_rate = 3.0
 spread_deg = 5.0
 simultaneous_shots = 8
-collision_exception1 = NodePath("../../HitBoxComponent")
-collision_exception2 = NodePath("../../Shield/HitBoxComponent")
 
-[node name="LaserGuidedLauncher" parent="WeaponHandler" node_paths=PackedStringArray("ray", "collision_exception1", "collision_exception2") instance=ExtResource("19_yfprc")]
+[node name="LaserGuidedLauncher" parent="WeaponHandler" instance=ExtResource("19_yfprc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.40851)
 bullet = ExtResource("21_uelja")
 bullet_speed = 200.0
@@ -184,9 +173,6 @@ bullet_timeout = 5.0
 fire_rate = 2.0
 spread_deg = 90.0
 simultaneous_shots = 8
-ray = NodePath("RayCast3D")
-collision_exception1 = NodePath("../../HitBoxComponent")
-collision_exception2 = NodePath("../../Shield/HitBoxComponent")
 
 [node name="RayCast3D" type="RayCast3D" parent="WeaponHandler/LaserGuidedLauncher"]
 enabled = false

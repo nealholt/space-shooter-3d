@@ -7,14 +7,21 @@ class_name PlayerMovement4
 #     Reduced pitch, roll, yaw while drifting: 1.3 -> 0.7
 #     More roll on right stick: 1.2 -> 2
 #     Mild "fine-grained" pitch on right stick: 0.4
-#     Stronger impulse acceleration: 100 -> 200
+#     Stronger impulse acceleration: 100 -> 8000
+#     This stronger accel is offset by use of impulse_lerp
+# such that the impulse isn't instantaneous, but has to be
+# lerped up to and back down from, meanwhile, turn rate is
+# reduced.
 #     Slower impulse lerp: 0.2 -> 0.1
 #     Pitch, roll, yaw maxes out at default speed and
 # scales based on difference between current speed and
 # default speed. See everything related to
 # "turn_reduction" below.
 #     Temporary acceleration (You can't just keep holding the button)
-# Implemented with all the variables below starting with accel_max_duration
+# Implemented with all the variables below starting with
+# accel_max_duration. <----- Except I didn't like it so I 
+# kept the code, but set the values such that accel shouldn't
+# ever really run out.
 #     No brakes (EXCEPT WE KEPT THEM IN FOR TESTING PURPOSES)
 
 #Strength of movements under standard motion
@@ -29,9 +36,9 @@ var friction_std: float = 0.99
 
 #forward motion
 var impulse_std: float = 70.0
-var impulse_accel: float = 200.0
+var impulse_accel: float = 8000.0
 var impulse_brake: float = 0.0
-var impulse_lerp: float =  0.1
+var impulse_lerp: float =  1.0
 
 # Scaling factor for reducing turn rate as a function of speed
 # The smaller this number is, the more turn rate will be
@@ -43,11 +50,11 @@ var turn_reduction_factor:float = 40.0
 # Can't accelerate forever. These variables control how
 # long ship can accelerate and how long it takes for the
 # acceleration bar to refill.
-var accel_max_duration:float = 5.0 # seconds
-var accel_available:float = 5.0 # seconds
+var accel_max_duration:float = 500.0 # seconds Used to be 5.0, but I didn't like the "feature"
+var accel_available:float = 500.0 # seconds Used to be 5.0, but I didn't like the "feature"
 # accel_regen_rate will be multiplied by delta. The result
 # will be added to accel_available
-var accel_regen_rate:float = 1.0
+var accel_regen_rate:float = 100.0 #Used to be 1.0, but I didn't like the "feature"
 # Can't accelerate if accel_available is less than accel_min
 var accel_min:float = 1.5
 var is_accelerating:bool
@@ -94,12 +101,12 @@ func move_and_turn(mover, delta:float) -> void:
 		yaw_modifier = 1.5
 	#Accelerate
 	elif Input.is_action_pressed("accelerate") and can_accelerate:
-		#impulse = lerp(impulse, impulse_accel, impulse_lerp*delta)
 		# Acceleration is now limited by a rechargeable resource
 		# stored in the accel_available variable.
 		is_accelerating = accel_available > 0
 		if is_accelerating:
-			impulse = impulse_accel
+			impulse = lerp(impulse, impulse_accel, impulse_lerp*delta)
+			#impulse = impulse_accel
 			accel_available -= delta
 		# Reduced maneuverability while accelerating
 		pitch_modifier = 0.3
