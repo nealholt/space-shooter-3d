@@ -30,14 +30,18 @@ adjustment_saturation = 1.3
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_x4e1d")
 
-[node name="Star" parent="." instance=ExtResource("2_2lnk5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8000, 3000, 10000)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.777146, 0.267952, -0.569426, 0, 0.904827, 0.42578, 0.62932, -0.330893, 0.703183, 0, 0, 0)
+light_color = Color(1, 0.643137, 1, 1)
+light_angular_distance = 2.0
+shadow_enabled = true
+shadow_opacity = 0.9
+shadow_blur = 0.4
+directional_shadow_mode = 0
+directional_shadow_max_distance = 1000.0
 
-[node name="SpaceStation" parent="." instance=ExtResource("3_eggcn")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -2.94911, 6.58096)
-
-[node name="GridMap" type="GridMap" parent="SpaceStation"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+[node name="GridMap" type="GridMap" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 7)
 mesh_library = ExtResource("4_u7bmr")
 cell_size = Vector3(32, 32, 32)
 cell_scale = 40.0
@@ -46,7 +50,8 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, -2, 0)
 
-[node name="GridMap2" type="GridMap" parent="SpaceStation"]
+[node name="GridMap2" type="GridMap" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -3, 7)
 mesh_library = ExtResource("4_u7bmr")
 cell_size = Vector3(45, 45, 45)
 cell_scale = 55.0
@@ -55,15 +60,11 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, -6, 0)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.777146, 0.267952, -0.569426, 0, 0.904827, 0.425779, 0.62932, -0.330893, 0.703183, 0, 0, 0)
-light_color = Color(1, 0.643137, 1, 1)
-light_angular_distance = 2.0
-shadow_enabled = true
-shadow_opacity = 0.9
-shadow_blur = 0.4
-directional_shadow_mode = 0
-directional_shadow_max_distance = 1000.0
+[node name="Star" parent="." instance=ExtResource("2_2lnk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8000, 3000, 10000)
+
+[node name="SpaceStation" parent="." instance=ExtResource("3_eggcn")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -3, 7)
 
 [node name="BlueTeam" type="Node3D" parent="."]
 script = ExtResource("5_0jpk3")

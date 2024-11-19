@@ -56,7 +56,6 @@ transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-
 shape = SubResource("SphereShape3D_rh3fl")
 
 [node name="Contrail" parent="." instance=ExtResource("20_a8xhu")]
-transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="DebugLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

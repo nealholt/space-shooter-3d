@@ -1,4 +1,3 @@
-
 extends CharacterBodyControlParent
 class_name PlayerMovement4
 

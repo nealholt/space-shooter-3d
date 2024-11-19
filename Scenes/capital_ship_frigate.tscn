@@ -168,7 +168,6 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("SphereShape3D_886au")
 
 [node name="HitFeedback" parent="FrigateModel/StrutLeft1/Radiator1/HitBoxComponent" instance=ExtResource("4_320jg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="HealthComponent" parent="FrigateModel/StrutLeft1/Radiator1" index="1" instance=ExtResource("3_ac6d0")]
 
@@ -179,7 +178,6 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("SphereShape3D_oqfmh")
 
 [node name="HitFeedback" parent="FrigateModel/StrutLeft2/Radiator2/HitBoxComponent" instance=ExtResource("4_320jg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="HealthComponent" parent="FrigateModel/StrutLeft2/Radiator2" index="1" instance=ExtResource("3_ac6d0")]
 
@@ -190,7 +188,6 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("SphereShape3D_7yrfv")
 
 [node name="HitFeedback" parent="FrigateModel/StrutLeft3/Radiator3/HitBoxComponent" instance=ExtResource("4_320jg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="HealthComponent" parent="FrigateModel/StrutLeft3/Radiator3" index="1" instance=ExtResource("3_ac6d0")]
 
@@ -201,7 +198,6 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("SphereShape3D_d63m2")
 
 [node name="HitFeedback" parent="FrigateModel/StrutRight1/Radiator4/HitBoxComponent" instance=ExtResource("4_320jg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="HealthComponent" parent="FrigateModel/StrutRight1/Radiator4" index="1" instance=ExtResource("3_ac6d0")]
 
@@ -212,7 +208,6 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("SphereShape3D_mhyku")
 
 [node name="HitFeedback" parent="FrigateModel/StrutRight2/Radiator5/HitBoxComponent" instance=ExtResource("4_320jg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="HealthComponent" parent="FrigateModel/StrutRight2/Radiator5" index="1" instance=ExtResource("3_ac6d0")]
 
@@ -223,7 +218,6 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("SphereShape3D_2kirm")
 
 [node name="HitFeedback" parent="FrigateModel/StrutRight3/Radiator6/HitBoxComponent" instance=ExtResource("4_320jg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="HealthComponent" parent="FrigateModel/StrutRight3/Radiator6" index="1" instance=ExtResource("3_ac6d0")]
 
