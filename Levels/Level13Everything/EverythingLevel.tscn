@@ -63,14 +63,15 @@ metadata/_editor_floor_ = Vector3(0, -6, 0)
 [node name="Star" parent="." instance=ExtResource("2_2lnk5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8000, 3000, 10000)
 
-[node name="SpaceStation" parent="." instance=ExtResource("3_eggcn")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -3, 7)
-
 [node name="BlueTeam" type="Node3D" parent="."]
 script = ExtResource("5_0jpk3")
+team = "blue team"
 
-[node name="Fighter" parent="BlueTeam" instance=ExtResource("6_jotft")]
-transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 339.982, 0, 0)
+[node name="SpaceStation" parent="BlueTeam" instance=ExtResource("3_eggcn")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -3, 7)
+
+[node name="PlayerFighter" parent="BlueTeam" instance=ExtResource("6_jotft")]
+transform = Transform3D(0.0122519, -4.42437e-08, 0.999925, 4.37114e-08, 1, 4.37114e-08, -0.999925, 4.31726e-08, 0.0122519, 399.758, 0, 0)
 
 [node name="RedTeam" type="Node3D" parent="."]
 script = ExtResource("5_0jpk3")

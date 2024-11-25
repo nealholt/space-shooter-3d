@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c0txuujqpw0h5"]
+[gd_scene load_steps=36 format=3 uid="uid://c0txuujqpw0h5"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_ebpt7"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="2_ivbk8"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://ctw16pilpn8rk" path="res://Assets/Ships/bomber_chassis.tscn" id="3_xbe5d"]
 [ext_resource type="PackedScene" uid="uid://s17i1n8q4r44" path="res://Assets/Ships/destroyer_chassis.tscn" id="4_d3oev"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="4_yjne8"]
-[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="5_6162q"]
 [ext_resource type="PackedScene" uid="uid://bvgxwc28k1fvx" path="res://Assets/Ships/beam_destroyer_chassis.tscn" id="5_idi7t"]
 [ext_resource type="PackedScene" uid="uid://cxd7ahrv8vrys" path="res://Assets/Ships/frigate_chassis.tscn" id="6_4kqao"]
 [ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="8_30p2y"]
@@ -119,8 +118,6 @@ shape = SubResource("SphereShape3D_u613a")
 
 [node name="HealthComponent" parent="Bomber" instance=ExtResource("4_yjne8")]
 
-[node name="HitBoxComponent" parent="Bomber" instance=ExtResource("5_6162q")]
-
 [node name="Destroyer" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 347.502, 0, 0)
 collision_layer = 3
@@ -140,8 +137,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.973, -9.827)
 shape = SubResource("ConvexPolygonShape3D_v5onn")
 
 [node name="HealthComponent" parent="Destroyer" instance=ExtResource("4_yjne8")]
-
-[node name="HitBoxComponent" parent="Destroyer" instance=ExtResource("5_6162q")]
 
 [node name="BeamDestroyer" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 488.209, 0, 0)
@@ -167,8 +162,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 14)
 shape = SubResource("ConvexPolygonShape3D_dca3j")
 
 [node name="HealthComponent" parent="BeamDestroyer" instance=ExtResource("4_yjne8")]
-
-[node name="HitBoxComponent" parent="BeamDestroyer" instance=ExtResource("5_6162q")]
 
 [node name="Frigate" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 591.925, 0, 0)
@@ -202,8 +195,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.46019, 33.4852)
 shape = SubResource("ConvexPolygonShape3D_si2lx")
 
 [node name="HealthComponent" parent="Frigate" instance=ExtResource("4_yjne8")]
-
-[node name="HitBoxComponent" parent="Frigate" instance=ExtResource("5_6162q")]
 
 [node name="Carrier" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 874.022, 0, 0)
@@ -257,8 +248,6 @@ transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 100, -
 shape = SubResource("ConvexPolygonShape3D_0bygj")
 
 [node name="HealthComponent" parent="Carrier" instance=ExtResource("4_yjne8")]
-
-[node name="HitBoxComponent" parent="Carrier" instance=ExtResource("5_6162q")]
 
 [node name="Player" parent="." instance=ExtResource("8_30p2y")]
 transform = Transform3D(-0.576489, 6.09159e-08, -0.817105, 4.37114e-08, 1, 4.37114e-08, 0.817105, -1.05176e-08, -0.576489, 0, 0, -324.158)
