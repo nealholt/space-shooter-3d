@@ -1,6 +1,6 @@
 [gd_scene load_steps=133 format=4 uid="uid://br3bb2mewavvc"]
 
-[ext_resource type="Script" path="res://Scripts/NPCs/CapitalShip.gd" id="1_3la4c"]
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_usm2i"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_eniao"]
 
 [sub_resource type="Animation" id="Animation_tgpxr"]
@@ -574,7 +574,7 @@ points = PackedVector3Array(0.442885, -3.49419, -0.942066, -0.602512, -3.8059, -
 
 [node name="SpaceStation" type="CharacterBody3D" groups=["damageable", "team member"]]
 collision_layer = 3
-script = ExtResource("1_3la4c")
+script = ExtResource("1_usm2i")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_eniao")]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://diilp2vvcvj53"]
 
 [ext_resource type="PackedScene" uid="uid://du1bwxbrh62at" path="res://Assets/Ships/carrier_chassis.tscn" id="1_67lmr"]
-[ext_resource type="Script" path="res://Scripts/NPCs/CapitalShip.gd" id="1_xxr7j"]
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_isj6t"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_r2d5f"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_el2o6"]
@@ -33,7 +33,7 @@ points = PackedVector3Array(-50, -40, -50, -50, -40, 50, 0, 40, -50, 50, -40, -5
 
 [node name="Carrier" type="CharacterBody3D" groups=["damageable", "team member"]]
 collision_layer = 3
-script = ExtResource("1_xxr7j")
+script = ExtResource("1_isj6t")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_r2d5f")]
 

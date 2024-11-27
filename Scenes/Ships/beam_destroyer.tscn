@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bqvcfo7v6o6ip"]
 
-[ext_resource type="Script" path="res://Scripts/NPCs/CapitalShip.gd" id="1_1ptee"]
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_h4lox"]
 [ext_resource type="PackedScene" uid="uid://bvgxwc28k1fvx" path="res://Assets/Ships/beam_destroyer_chassis.tscn" id="2_vmkim"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_ju2iv"]
 
@@ -18,7 +18,7 @@ points = PackedVector3Array(-15, -3, -5, -15, 3, -5, 15, -3, -5, -15, -3, 5, -15
 
 [node name="BeamDestroyer" type="CharacterBody3D" groups=["damageable", "team member"]]
 collision_layer = 3
-script = ExtResource("1_1ptee")
+script = ExtResource("1_h4lox")
 
 [node name="BeamDestroyerChassis" parent="." instance=ExtResource("2_vmkim")]
 

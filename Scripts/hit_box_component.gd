@@ -8,6 +8,13 @@ class_name HitBoxComponent
 # Honestly, I'm not using this as much, just for 
 # shoot-down-able missiles and for shields (and orbs).
 
+# Since ships are CharacterBody3Ds and those require
+# collision shapes to handle phyics of collisions,
+# I'm faced with the choice of either duplicate code
+# (here and in ship.gd) or duplicate collision shapes
+# (as children of CharacterBody3D ships and hit box area).
+# Until I resolve this, I'm going to duplicate code.
+
 @export var health_component:HealthComponent
 
 # This will be populated probably only for the player

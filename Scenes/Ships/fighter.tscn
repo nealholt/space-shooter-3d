@@ -19,7 +19,7 @@
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="24_ovt4a"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ydoww"]
-radius = 3.0
+radius = 2.3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6dy1g"]
 resource_local_to_scene = true
@@ -39,6 +39,8 @@ motion_mode = 1
 script = ExtResource("1_dn8ab")
 deathExplosion = ExtResource("2_l8ark")
 finalExplosion = ExtResource("3_5mmgf")
+death_animation_duration_min = 1.5
+death_animation_duration_max = 4.5
 
 [node name="AimAssist" parent="." instance=ExtResource("19_xjc2u")]
 angle_assist_limit = 10.0

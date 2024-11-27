@@ -20,9 +20,17 @@ var death_animation_timer:Timer
 @export var deathExplosion : PackedScene
 @export var finalExplosion : PackedScene
 
+@export var death_animation_duration_min:float = 0.0
+@export var death_animation_duration_max:float = 0.1
+
+# Since ships are CharacterBody3Ds and those require
+# collision shapes to handle phyics of collisions,
+# I'm faced with the choice of either duplicate code
+# (here and in ship.gd) or duplicate collision shapes
+# (as children of CharacterBody3D ships and hit box area).
+# Until I resolve this, I'm going to duplicate code.
 # The following 4 variables are duplicates of the code
-# in hit_box_component, but I didn't know how else to
-# stop using duplicate collision shapes:
+# in hit_box_component.
 # This will be populated probably only for the player
 var got_hit_audio:AudioStreamPlayer
 # I'll need some other system if I want different
@@ -126,7 +134,9 @@ func _on_health_component_died() -> void:
 		death_animation_timer = Timer.new()
 		add_child(death_animation_timer)
 		death_animation_timer.timeout.connect(_on_death_timer_timeout)
-		death_animation_timer.start(randf_range(1.5, 4.5))
+		death_animation_timer.start(randf_range(
+			death_animation_duration_min,
+			death_animation_duration_max))
 
 
 func _on_death_timer_timeout() -> void:

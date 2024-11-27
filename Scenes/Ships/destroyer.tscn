@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cjtrd5ktq5ypj"]
 
-[ext_resource type="Script" path="res://Scripts/NPCs/CapitalShip.gd" id="1_yw0nw"]
+[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_2su5o"]
 [ext_resource type="PackedScene" uid="uid://s17i1n8q4r44" path="res://Assets/Ships/destroyer_chassis.tscn" id="2_qpwbv"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_2fe14"]
 
@@ -15,7 +15,7 @@ points = PackedVector3Array(12.6959, 0.888734, 5.11905, -12.6959, -0.698257, -5.
 
 [node name="Destroyer" type="CharacterBody3D" groups=["damageable", "team member"]]
 collision_layer = 3
-script = ExtResource("1_yw0nw")
+script = ExtResource("1_2su5o")
 
 [node name="DestroyerChassis" parent="." instance=ExtResource("2_qpwbv")]
 
