@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://diilp2vvcvj53"]
+
+[ext_resource type="PackedScene" uid="uid://du1bwxbrh62at" path="res://Assets/Ships/carrier_chassis.tscn" id="1_67lmr"]
+[ext_resource type="Script" path="res://Scripts/NPCs/CapitalShip.gd" id="1_xxr7j"]
+[ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_r2d5f"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_el2o6"]
+points = PackedVector3Array(-50, -30, -50, -50, 30, -50, 50, -30, -50, -50, -30, 50, -50, 30, 50, 50, 30, -50, 50, -30, 50, 50, 30, 50)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_62bww"]
+points = PackedVector3Array(-50, -30, -50, -50, 30, -50, 50, -30, -50, -50, -30, 50, -50, 30, 50, 50, 30, -50, 50, -30, 50, 50, 30, 50)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qq0cr"]
+points = PackedVector3Array(50, 50, 250, 50, -50, 250, 50, 50, -250, -50, 50, 250, -50, -50, 250, 50, -50, -250, -50, 50, -250, -50, -50, -250)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nye65"]
+points = PackedVector3Array(50, 50, 250, 50, -50, 250, 50, 50, -250, -50, 50, 250, -50, -50, 250, 50, -50, -250, -50, 50, -250, -50, -50, -250)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mkuc3"]
+points = PackedVector3Array(50, 20, 75, 50, -20, 75, 50, 20, -75, -50, 20, 75, -50, -20, 75, 50, -20, -75, -50, 20, -75, -50, -20, -75)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ggicq"]
+points = PackedVector3Array(50, 20, 10, 50, 20, -10, -50, 20, 10, 50, -20, 10, 50, -20, -10, -50, 20, -10, -50, -20, 10, -50, -20, -10)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a6pf0"]
+points = PackedVector3Array(50, 20, 10, 50, 20, -10, -50, 20, 10, 50, -20, 10, 50, -20, -10, -50, 20, -10, -50, -20, 10, -50, -20, -10)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_62fux"]
+points = PackedVector3Array(-50, -40, -50, -50, -40, 50, 0, 40, -50, 50, -40, -50, 50, -40, 50, 0, 40, 50)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0bygj"]
+points = PackedVector3Array(-50, -40, -50, -50, -40, 50, 0, 40, -50, 50, -40, -50, 50, -40, 50, 0, 40, 50)
+
+[node name="Carrier" type="CharacterBody3D" groups=["damageable", "team member"]]
+collision_layer = 3
+script = ExtResource("1_xxr7j")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_r2d5f")]
+
+[node name="CarrierChassis" parent="." instance=ExtResource("1_67lmr")]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="CarrierChassis/CoreGuard1" index="0"]
+collision_layer = 3
+collision_mask = 3
+gravity_scale = 0.0
+
+[node name="CollisionCoreGuard1" type="CollisionShape3D" parent="CarrierChassis/CoreGuard1/RigidBody3D"]
+shape = SubResource("ConvexPolygonShape3D_el2o6")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="CarrierChassis/CoreGuard2" index="0"]
+collision_layer = 3
+collision_mask = 3
+gravity_scale = 0.0
+
+[node name="CollisionCoreGuard2" type="CollisionShape3D" parent="CarrierChassis/CoreGuard2/RigidBody3D"]
+shape = SubResource("ConvexPolygonShape3D_62bww")
+
+[node name="CollisionRightHull" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_qq0cr")
+
+[node name="CollisionLeftHull" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_nye65")
+
+[node name="CollisionCore" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 150)
+shape = SubResource("ConvexPolygonShape3D_mkuc3")
+
+[node name="CollisionHangarGuard1" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38, 85)
+shape = SubResource("ConvexPolygonShape3D_ggicq")
+
+[node name="CollisionHangarGuard2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38, 215)
+shape = SubResource("ConvexPolygonShape3D_a6pf0")
+
+[node name="CollisionRightFang" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -100, -90, -200)
+shape = SubResource("ConvexPolygonShape3D_62fux")
+
+[node name="CollisionLeftFang" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 100, -90, -200)
+shape = SubResource("ConvexPolygonShape3D_0bygj")
+
+[editable path="CarrierChassis"]

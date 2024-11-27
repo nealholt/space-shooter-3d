@@ -151,7 +151,11 @@ func damage_and_die(body, collision_point=null):
 	# Damage what was hit
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
 	if body.is_in_group("damageable"):
+		#print()
 		#print("dealt damage")
+		#print(body)
+		#print(damage)
+		#print(body.has_method("damage"))
 		body.damage(damage, data.shooter)
 	# Make a spark at collision point
 	if collision_point:

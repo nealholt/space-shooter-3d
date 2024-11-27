@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjtrd5ktq5ypj"]
+
+[ext_resource type="Script" path="res://Scripts/NPCs/CapitalShip.gd" id="1_yw0nw"]
+[ext_resource type="PackedScene" uid="uid://s17i1n8q4r44" path="res://Assets/Ships/destroyer_chassis.tscn" id="2_qpwbv"]
+[ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_2fe14"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jcj40"]
+points = PackedVector3Array(-5, -5, -14.5455, 5, 5, 14.5455, 5, -5, 14.5455, 5, 5, -14.5455, -5, 5, 14.5455, -5, -5, 14.5455, 5, -5, -14.5455, -5, 5, -14.5455)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ssu23"]
+points = PackedVector3Array(7.27259, 2.5, 4.88636, -7.27273, -2.5, -4.88636, -7.27273, -2.5, 4.88636, 7.27259, -2.5, -4.88636, -7.27273, 2.5, -4.88636, -7.27273, 2.5, 4.88636, 7.27259, -2.5, 4.88636, 7.27259, 2.5, -4.88636)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v5onn"]
+points = PackedVector3Array(12.6959, 0.888734, 5.11905, -12.6959, -0.698257, -5.19841, -12.6959, 0.888734, -5.19841, 12.6959, -0.698257, -5.19841, -12.6959, -0.698257, 5.11905, -12.6959, 0.888734, 5.11905, 12.6959, 0.888734, -5.19841, 12.6959, -0.698257, 5.11905)
+
+[node name="Destroyer" type="CharacterBody3D" groups=["damageable", "team member"]]
+collision_layer = 3
+script = ExtResource("1_yw0nw")
+
+[node name="DestroyerChassis" parent="." instance=ExtResource("2_qpwbv")]
+
+[node name="CollisionShapeHull" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_jcj40")
+
+[node name="CollisionShape3Bridge" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.508, 12.425)
+shape = SubResource("ConvexPolygonShape3D_ssu23")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.973, -9.827)
+shape = SubResource("ConvexPolygonShape3D_v5onn")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_2fe14")]
