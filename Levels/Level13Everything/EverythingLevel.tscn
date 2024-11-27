@@ -77,6 +77,7 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -3, 7)
 
 [node name="PlayerFighter" parent="BlueTeam" instance=ExtResource("6_jotft")]
 transform = Transform3D(0.0122519, -4.42437e-08, 0.999925, 4.37114e-08, 1, 4.37114e-08, -0.999925, 4.31726e-08, 0.0122519, 399.758, 0, 0)
+collision_layer = 0
 
 [node name="RedTeam" type="Node3D" parent="."]
 script = ExtResource("5_0jpk3")

@@ -25,8 +25,22 @@ material = SubResource("ShaderMaterial_731x3")
 
 [node name="Corvette" instance=ExtResource("1_63oik")]
 
-[node name="MissileLockGroup" parent="." index="2"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
+stream = ExtResource("8_vlve7")
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="MissileLockGroup" parent="." index="10"]
 npc_missile_lock = false
+
+[node name="FresnelAura" parent="Shield" index="0"]
+mesh = SubResource("SphereMesh_tw5gt")
+
+[node name="BallisticMovementV3" parent="." index="12" instance=ExtResource("8_m18g3")]
+
+[node name="CameraGroup" parent="." index="13" instance=ExtResource("9_0rmbx")]
+
+[node name="EngineAudioVisuals" parent="." index="14" instance=ExtResource("10_t22nh")]
 
 [node name="TextureRect" type="TextureRect" parent="WeaponHandler/GatlingGun" index="4"]
 self_modulate = Color(1, 1, 1, 0.607843)
@@ -54,20 +68,6 @@ texture = ExtResource("5_aeijj")
 
 [node name="LaserGun" parent="WeaponHandler" index="5" instance=ExtResource("6_itfr8")]
 
-[node name="FresnelAura" parent="Shield" index="0"]
-mesh = SubResource("SphereMesh_tw5gt")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
-stream = ExtResource("8_vlve7")
-volume_db = -10.0
-pitch_scale = 0.5
-
-[node name="BallisticMovementV3" parent="." index="12" instance=ExtResource("8_m18g3")]
-
-[node name="CameraGroup" parent="." index="13" instance=ExtResource("9_0rmbx")]
-
-[node name="EngineAudioVisuals" parent="." index="14" instance=ExtResource("10_t22nh")]
-
+[editable path="Shield"]
 [editable path="WeaponHandler/GatlingGun/GunModel"]
 [editable path="WeaponHandler/HitScanGun/Node"]
-[editable path="Shield"]

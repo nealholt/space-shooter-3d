@@ -3,6 +3,11 @@ class_name HitBoxComponent
 # Inspired by this:
 # https://www.youtube.com/watch?v=74y6zWZfQKk&t=184s
 
+# Warning: All the code here is duplicated in ship.gd.
+# Anything that changes here, should also change there.
+# Honestly, I'm not using this as much, just for 
+# shoot-down-able missiles and for shields (and orbs).
+
 @export var health_component:HealthComponent
 
 # This will be populated probably only for the player
@@ -17,6 +22,7 @@ var hit_feedback:HitFeedback
 # npcs from shooting down their own missiles.
 var damage_exception:Ship
 
+var reticle:TargetReticles
 
 func _ready() -> void:
 	# Search through children for various components
@@ -26,6 +32,8 @@ func _ready() -> void:
 			got_hit_audio = child
 		elif child is HitFeedback:
 			hit_feedback = child
+		elif child is TargetReticles:
+			reticle = child
 
 
 func damage(amount:float, damager=null):
@@ -47,8 +55,8 @@ func add_damage_exception(s:Ship) -> void:
 # be more flexible, so now I'm passing in the
 # targeter so we can check if it's the player.
 func set_targeted(targeter:Node3D, value:bool) -> void:
-	if Global.player == targeter:
-		$TargetReticles.is_targeted = value
+	if Global.player == targeter and reticle:
+		reticle.is_targeted = value
 	# In the future this should also signal to the
 	# object that owns this hitbox that it is
 	# being targeted

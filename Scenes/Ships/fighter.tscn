@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=21 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_dn8ab"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
@@ -9,16 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="5_1xytm"]
 [ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="5_6ou5s"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="5_70fr4"]
-[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_ne5o5"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="14_4fwow"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="15_kfjug"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/missile_lock_group.tscn" id="17_563f5"]
 [ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/fighter_chassis_ring.tscn" id="19_x2ba7"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="19_xjc2u"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="20_a8xhu"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="23_fxr37"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="24_ovt4a"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_rh3fl"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ydoww"]
 radius = 3.0
@@ -34,9 +32,9 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_6dy1g")
 
-[node name="Fighter" type="CharacterBody3D"]
+[node name="Fighter" type="CharacterBody3D" groups=["damageable", "team member"]]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
-collision_layer = 0
+collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_dn8ab")
 deathExplosion = ExtResource("2_l8ark")
@@ -52,8 +50,8 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 transform = Transform3D(-1, 8.35188e-23, -8.74228e-08, -2.68659e-16, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.31134e-07, -1.31134e-07, -1, 1, 8.74228e-08, 1.31134e-07, 8.74228e-08, -1, 1.31134e-07, 0, 0, 0)
-shape = SubResource("SphereShape3D_rh3fl")
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_ydoww")
 
 [node name="Contrail" parent="." instance=ExtResource("20_a8xhu")]
 
@@ -66,13 +64,7 @@ fixed_size = true
 [node name="HealthComponent" parent="." instance=ExtResource("5_1xytm")]
 max_health = 20
 
-[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_ne5o5")]
-health_component = NodePath("../HealthComponent")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBoxComponent"]
-shape = SubResource("SphereShape3D_ydoww")
-
-[node name="HitFeedback" parent="HitBoxComponent" instance=ExtResource("3_qm2p0")]
+[node name="HitFeedback" parent="." instance=ExtResource("3_qm2p0")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="MissileLauncher" parent="." instance=ExtResource("4_57m73")]
@@ -92,6 +84,8 @@ transform = Transform3D(20, 1.67038e-21, 3.38813e-21, 0, 20, 0, 3.38813e-21, 0, 
 
 [node name="FresnelAura" parent="Shield" index="0"]
 mesh = SubResource("SphereMesh_6a830")
+
+[node name="TargetReticles" parent="." instance=ExtResource("15_kfjug")]
 
 [node name="WeaponHandler" parent="." instance=ExtResource("4_dhpb0")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

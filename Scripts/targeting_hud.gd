@@ -38,4 +38,3 @@ func _draw() -> void:
 			draw_arc(point,32,0,2*PI,5,Color.RED, 5)
 	#TESTING
 	#draw_arc(Vector2(900.0,500.0),32,0,2*PI,5,Color.RED, 5)
-

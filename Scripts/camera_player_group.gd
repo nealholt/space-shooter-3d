@@ -83,11 +83,11 @@ func _physics_process(delta: float) -> void:
 		$turret_motion_component.rotate_and_elevate($Body, $Body/Head, delta, temp_targ_pos)
 	# Show target lead indicator and center crosshair
 	# if in first person view
-	if state == CameraState.FIRSTPERSON and Global.player and Global.player.controller and is_instance_valid(Global.player.controller.target) and Global.player.weapon_handler and "velocity" in Global.player.controller.target.get_parent():
+	if state == CameraState.FIRSTPERSON and Global.player and Global.player.controller and is_instance_valid(Global.player.controller.target) and Global.player.weapon_handler and "velocity" in Global.player.controller.target:
 		var lead_pos:Vector3 = Global.get_intercept(
 			Global.player.global_position,
 			Global.player.weapon_handler.get_bullet_speed(),
-			Global.player.controller.target.get_parent())
+			Global.player.controller.target)
 		Global.set_reticle(first_person_camera, $TargetLeadIndicator, lead_pos)
 	else:
 		$TargetLeadIndicator.hide()

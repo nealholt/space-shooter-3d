@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=38 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="3_crlbv"]
 [ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="3_lvuav"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/missile_lock_group.tscn" id="4_vmlm7"]
-[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_8otd8"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="7_vhcpa"]
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Assets/SoundEffects/lowFrequency_explosion_001.ogg" id="8_klb2b"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="9_1xly7"]
@@ -24,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://58nrpfbay3lf" path="res://Assets/Particles/muzzle_flash.tscn" id="14_4ajg4"]
 [ext_resource type="PackedScene" uid="uid://dup57p4ygajr1" path="res://Scenes/Guns/laser_shotgun.tscn" id="15_ufo67"]
 [ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Assets/Guns/laser_beam.tscn" id="16_y2utm"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="18_g51j4"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="19_yfprc"]
 [ext_resource type="PackedScene" uid="uid://cbyb5ysj3umaf" path="res://Scenes/Projectiles/shotgun_pellet.tscn" id="20_de7w0"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="21_5ow11"]
@@ -51,8 +51,6 @@ bottom_radius = 0.01
 height = 0.35
 radial_segments = 16
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_7tg00"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
 size = Vector3(6, 2.3, 10.5)
 
@@ -67,8 +65,8 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_j4o42")
 
-[node name="Corvette" type="CharacterBody3D"]
-collision_layer = 0
+[node name="Corvette" type="CharacterBody3D" groups=["damageable", "team member"]]
+collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_bfcrw")
 deathExplosion = ExtResource("2_jw8ud")
@@ -116,28 +114,22 @@ mesh = SubResource("CylinderMesh_tbbj7")
 transform = Transform3D(1, 0, 0, 0, -0.125299, -0.992119, 0, 0.992119, -0.125299, 0.17, 0.16, 0.513)
 mesh = SubResource("CylinderMesh_tbbj7")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_7tg00")
-
 [node name="Contrail" parent="." instance=ExtResource("10_shexg")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 _startColor = Color(0.537255, 0.152941, 1, 1)
 _endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
 
-[node name="HealthComponent" parent="." instance=ExtResource("7_vhcpa")]
-max_health = 20
-
-[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_8otd8")]
-health_component = NodePath("../HealthComponent")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.85)
 shape = SubResource("BoxShape3D_qx57m")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HitBoxComponent"]
+[node name="HealthComponent" parent="." instance=ExtResource("7_vhcpa")]
+max_health = 20
+
+[node name="GotHitAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_klb2b")
 
-[node name="HitFeedback" parent="HitBoxComponent" instance=ExtResource("9_sewpe")]
+[node name="HitFeedback" parent="." instance=ExtResource("9_sewpe")]
 
 [node name="Sounds" type="Node3D" parent="."]
 
@@ -160,6 +152,8 @@ transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0"]
 mesh = SubResource("SphereMesh_2lbpm")
+
+[node name="TargetReticles" parent="." instance=ExtResource("18_g51j4")]
 
 [node name="WeaponHandler" parent="." instance=ExtResource("9_1xly7")]
 
