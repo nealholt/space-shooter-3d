@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://k6inhwfk2gp"]
+[gd_scene load_steps=16 format=3 uid="uid://k6inhwfk2gp"]
 
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_wr6oo"]
 [ext_resource type="PackedScene" uid="uid://cbgprvcwh15qd" path="res://Levels/Level13Everything/star.tscn" id="2_2lnk5"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="6_jotft"]
 [ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Scenes/Ships/bomber.tscn" id="7_m10fo"]
 [ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Scenes/Ships/destroyer.tscn" id="8_5shl4"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="8_isq32"]
 [ext_resource type="PackedScene" uid="uid://bqvcfo7v6o6ip" path="res://Scenes/Ships/beam_destroyer.tscn" id="9_kc2e1"]
 [ext_resource type="PackedScene" uid="uid://byb8ya6fryjw0" path="res://Scenes/Ships/frigate.tscn" id="10_d6xr2"]
 [ext_resource type="PackedScene" uid="uid://diilp2vvcvj53" path="res://Scenes/Ships/carrier.tscn" id="11_gd4i7"]
@@ -83,7 +84,9 @@ collision_layer = 0
 script = ExtResource("5_0jpk3")
 
 [node name="Bomber" parent="RedTeam" instance=ExtResource("7_m10fo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 77.4889)
+transform = Transform3D(0.102862, 0, -0.994696, 0, 1, 0, 0.994696, 0, 0.102862, 0, 0, 77.4889)
+
+[node name="NPCFighterController" parent="RedTeam/Bomber" instance=ExtResource("8_isq32")]
 
 [node name="Destroyer" parent="RedTeam" instance=ExtResource("8_5shl4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 126.993)

@@ -1,15 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://dct3loj10mg5k"]
+[gd_scene load_steps=14 format=3 uid="uid://dct3loj10mg5k"]
 
 [ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_uw5oo"]
+[ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_0tp8c"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="2_6e5lt"]
+[ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="2_120ti"]
+[ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="3_2d3u8"]
 [ext_resource type="PackedScene" uid="uid://ctw16pilpn8rk" path="res://Assets/Ships/bomber_chassis.tscn" id="3_hrk35"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="4_40no2"]
+[ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="5_rgdmc"]
+[ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="7_f8b5m"]
+[ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="8_30gv8"]
+[ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/missile_lock_group.tscn" id="9_7wsae"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="10_up24e"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_u613a"]
 
-[node name="Bomber" type="CharacterBody3D"]
-collision_layer = 0
+[node name="Bomber" type="CharacterBody3D" groups=["damageable", "team member"]]
+collision_layer = 2
+motion_mode = 1
 script = ExtResource("1_uw5oo")
+deathExplosion = ExtResource("2_0tp8c")
+finalExplosion = ExtResource("3_2d3u8")
+death_animation_duration_min = 1.0
+death_animation_duration_max = 3.2
+
+[node name="AimAssist" parent="." instance=ExtResource("2_120ti")]
+angle_assist_limit = 10.0
 
 [node name="BurningTrail" parent="." instance=ExtResource("2_6e5lt")]
 
@@ -18,4 +34,18 @@ script = ExtResource("1_uw5oo")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_u613a")
 
+[node name="Contrail" parent="." instance=ExtResource("5_rgdmc")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 1.35, 1.28, 3)
+
+[node name="Contrail2" parent="." instance=ExtResource("5_rgdmc")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, -1.35, 1.28, 3)
+
 [node name="HealthComponent" parent="." instance=ExtResource("4_40no2")]
+
+[node name="MissileLockGroup" parent="." instance=ExtResource("9_7wsae")]
+npc_missile_lock = true
+
+[node name="MissileLauncher" parent="MissileLockGroup" instance=ExtResource("7_f8b5m")]
+bullet = ExtResource("8_30gv8")
+
+[node name="TargetReticles" parent="." instance=ExtResource("10_up24e")]

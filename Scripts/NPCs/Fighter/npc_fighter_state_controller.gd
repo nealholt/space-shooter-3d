@@ -48,7 +48,7 @@ func _ready() -> void:
 func move_and_turn(mover, delta:float) -> void:
 	var gun:Gun = mover.get_current_gun()
 	# Update profile.orientation_data
-	if target and is_instance_valid(target):
+	if gun and target and is_instance_valid(target):
 		movement_profile.orientation_data.update_data(
 			mover.global_position, gun.bullet_speed,
 			target, mover.global_transform.basis)
@@ -78,7 +78,7 @@ func select_target(targeter:Node3D) -> void:
 func shoot(shooter, delta:float) -> void:
 	var gun = shooter.get_current_gun()
 	# Decide whether or not to fire
-	if target and is_instance_valid(target) and movement_profile.orientation_data.dist_sqd < gun.range_sqd and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < shooting_angle:
+	if gun and target and is_instance_valid(target) and movement_profile.orientation_data.dist_sqd < gun.range_sqd and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < shooting_angle:
 		gun.shoot(shooter, target)
 	if shooter.missile_lock:
 		shooter.missile_lock.update(shooter, delta)

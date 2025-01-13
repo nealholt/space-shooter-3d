@@ -39,8 +39,6 @@ motion_mode = 1
 script = ExtResource("1_dn8ab")
 deathExplosion = ExtResource("2_l8ark")
 finalExplosion = ExtResource("3_5mmgf")
-death_animation_duration_min = 1.5
-death_animation_duration_max = 4.5
 
 [node name="AimAssist" parent="." instance=ExtResource("19_xjc2u")]
 angle_assist_limit = 10.0
@@ -69,17 +67,17 @@ max_health = 20
 [node name="HitFeedback" parent="." instance=ExtResource("3_qm2p0")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="MissileLauncher" parent="." instance=ExtResource("4_57m73")]
+[node name="MissileLockGroup" parent="." instance=ExtResource("17_563f5")]
+npc_missile_lock = true
+missile_range = 1000.0
+
+[node name="MissileLauncher" parent="MissileLockGroup" instance=ExtResource("4_57m73")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 bullet = ExtResource("5_70fr4")
 damage = 10.0
 bullet_speed = 150.0
 bullet_timeout = 5.0
 fire_rate = 0.033
-
-[node name="MissileLockGroup" parent="." node_paths=PackedStringArray("missile_launcher") instance=ExtResource("17_563f5")]
-npc_missile_lock = true
-missile_launcher = NodePath("../MissileLauncher")
-missile_range = 1000.0
 
 [node name="Shield" parent="." instance=ExtResource("23_fxr37")]
 transform = Transform3D(20, 1.67038e-21, 3.38813e-21, 0, 20, 0, 3.38813e-21, 0, 20, 0, 0, 0)

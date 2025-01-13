@@ -71,8 +71,6 @@ motion_mode = 1
 script = ExtResource("1_bfcrw")
 deathExplosion = ExtResource("2_jw8ud")
 finalExplosion = ExtResource("3_lvuav")
-death_animation_duration_min = 1.5
-death_animation_duration_max = 4.5
 
 [node name="AimAssist" parent="." instance=ExtResource("29_3q0pi")]
 angle_assist_limit = 10.0
@@ -138,16 +136,15 @@ stream = ExtResource("8_klb2b")
 [node name="NearMissAudio" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource("9_ktweb")
 
-[node name="MissileLauncher" parent="." instance=ExtResource("2_2p718")]
+[node name="MissileLockGroup" parent="." instance=ExtResource("4_vmlm7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.5)
+npc_missile_lock = true
+
+[node name="MissileLauncher" parent="MissileLockGroup" instance=ExtResource("2_2p718")]
 bullet = ExtResource("3_crlbv")
 damage = 50.0
 bullet_speed = 200.0
 fire_rate = 0.3
-
-[node name="MissileLockGroup" parent="." node_paths=PackedStringArray("missile_launcher") instance=ExtResource("4_vmlm7")]
-npc_missile_lock = true
-missile_launcher = NodePath("../MissileLauncher")
 
 [node name="Shield" parent="." instance=ExtResource("21_5ow11")]
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)

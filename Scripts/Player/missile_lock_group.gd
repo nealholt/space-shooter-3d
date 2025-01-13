@@ -25,7 +25,7 @@ var faster_lock_angle:float = 5.0 # degrees
 var slower_lock_angle:float = 25.0 # degrees
 
 # Gun to fire when launch is triggered
-@export var missile_launcher:Gun
+var missile_launcher:Gun
 
 # range within which missile lock can be acquired.
 # Will be used to calculate missile_range_sqd
@@ -119,12 +119,19 @@ func _ready() -> void:
 	acquiring.hide()
 	lock_offset = lock.size/2.0
 	lock.hide()
+	# Search through children for gun to use
+	# as missile launcher.
+	for child in get_children():
+		if child is Gun:
+			missile_launcher = child
 	# If this is an NPC missile lock group, then
-	# queue free all children of this node.
+	# queue free all children of this node EXCEPT
+	# for the gun / missile_launcher.
 	# They aren't needed.
 	if npc_missile_lock:
 		for c in get_children():
-			c.queue_free()
+			if missile_launcher != c:
+				c.queue_free()
 
 
 # Ship that this scene is a child of ought to be the

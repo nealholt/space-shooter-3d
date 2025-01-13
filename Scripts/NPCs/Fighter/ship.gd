@@ -20,8 +20,8 @@ var death_animation_timer:Timer
 @export var deathExplosion : PackedScene
 @export var finalExplosion : PackedScene
 
-@export var death_animation_duration_min:float = 0.0
-@export var death_animation_duration_max:float = 0.1
+@export var death_animation_duration_min:float = 1.5
+@export var death_animation_duration_max:float = 4.5
 
 # Since ships are CharacterBody3Ds and those require
 # collision shapes to handle phyics of collisions,
@@ -101,7 +101,10 @@ func _physics_process(delta):
 
 
 func get_current_gun() -> Gun:
-	return weapon_handler.current_weapon
+	if weapon_handler:
+		return weapon_handler.current_weapon
+	else:
+		return null
 
 
 func _on_health_component_health_lost() -> void:
