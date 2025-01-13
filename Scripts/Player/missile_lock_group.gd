@@ -14,9 +14,8 @@ class_name MissileLockGroup
 # angle to target. Lock can still be broken
 # by target leaving range missile_range_sqd
 # or by angle to target exceeding missile_lock_max_angle
-@export var npc_missile_lock:bool = false
-# Time in seconds needed to acquire lock
-const lock_timeout:float = 4.0
+@export var npc_missile_lock:bool = false ## True if for npc use. Eliminates a lot of audio visual stuff that only humans need.
+@export var lock_timeout:float = 4.0 ## Time in seconds needed to acquire lock
 # Used to count down time to lock
 var lock_timer:float = 0.0
 # angle within which lock timer goes twice as fast
@@ -27,14 +26,10 @@ var slower_lock_angle:float = 25.0 # degrees
 # Gun to fire when launch is triggered
 var missile_launcher:Gun
 
-# range within which missile lock can be acquired.
-# Will be used to calculate missile_range_sqd
-@export var missile_range:float = 300.0
-# Squared range within which missile lock can be acquired
-var missile_range_sqd:float
-# Can achieve and maintain missile lock if target is
-# within plus of minus of this angle from center.
-@export var missile_lock_max_angle:float = 35.0 # degrees
+@export var missile_range:float = 300.0 ## Range within which missile lock can be acquired.
+# Calculated from missile_range
+var missile_range_sqd:float ## Squared range within which missile lock can be acquired
+@export var missile_lock_max_angle:float = 35.0 ## In degrees. Can achieve and maintain missile lock if target is within plus of minus of this angle from center.
 
 # Track time since missile lock acquired
 var time_since_lock:float = 0.0

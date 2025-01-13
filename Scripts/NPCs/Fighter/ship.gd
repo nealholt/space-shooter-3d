@@ -103,6 +103,8 @@ func _physics_process(delta):
 func get_current_gun() -> Gun:
 	if weapon_handler:
 		return weapon_handler.current_weapon
+	elif missile_lock:
+		return missile_lock.missile_launcher
 	else:
 		return null
 

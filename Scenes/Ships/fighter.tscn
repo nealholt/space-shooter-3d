@@ -39,6 +39,8 @@ motion_mode = 1
 script = ExtResource("1_dn8ab")
 deathExplosion = ExtResource("2_l8ark")
 finalExplosion = ExtResource("3_5mmgf")
+death_animation_duration_min = null
+death_animation_duration_max = null
 
 [node name="AimAssist" parent="." instance=ExtResource("19_xjc2u")]
 angle_assist_limit = 10.0
