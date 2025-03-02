@@ -1,8 +1,5 @@
 extends Node
 
-# Needed for creating orbs in the scene
-var orb_scene = preload("res://Scenes/orb.tscn")
-
 const ORB_COUNT:int = 20
 var dead_orb_count := 0
 
@@ -12,7 +9,7 @@ func _ready():
 	seed(123)
 	# Instantiate orbs
 	for x in range(ORB_COUNT):
-		var orb = orb_scene.instantiate()
+		var orb = Orb.new_orb()
 		$RedTeam.add_child(orb)
 		$RedTeam.set_team_properties(orb)
 		orb.position_randomly()

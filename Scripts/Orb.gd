@@ -1,4 +1,6 @@
-extends StaticBody3D
+class_name Orb extends StaticBody3D
+
+const ORB_SCENE : PackedScene = preload("res://Scenes/orb.tscn")
 
 signal destroyed
 
@@ -6,6 +8,12 @@ signal destroyed
 @export var pop_player: PackedScene
 
 const MAX_COORD: int = 200
+
+# This function is like a constructor and helps make the
+# Orb more self-contained.
+# Idea from here: youtube.com/watch?v=u9aMR50yjCE
+static func new_orb() -> Orb:
+	return ORB_SCENE.instantiate()
 
 func position_randomly():
 	#Spawn orbs in random location:

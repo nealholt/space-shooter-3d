@@ -81,8 +81,6 @@ death_animation_duration_max = null
 [node name="PlayerFighter" parent="BlueTeam" instance=ExtResource("6_jotft")]
 transform = Transform3D(0.0122519, -4.42437e-08, 0.999925, 4.37114e-08, 1, 4.37114e-08, -0.999925, 4.31726e-08, 0.0122519, 399.758, 0, 0)
 collision_layer = 0
-death_animation_duration_min = null
-death_animation_duration_max = null
 
 [node name="RedTeam" type="Node3D" parent="."]
 script = ExtResource("5_0jpk3")
@@ -94,20 +92,12 @@ transform = Transform3D(0.102862, 0, -0.994696, 0, 1, 0, 0.994696, 0, 0.102862, 
 
 [node name="Destroyer" parent="RedTeam" instance=ExtResource("8_5shl4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 126.993)
-death_animation_duration_min = null
-death_animation_duration_max = null
 
 [node name="BeamDestroyer" parent="RedTeam" instance=ExtResource("9_kc2e1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 210.075)
-death_animation_duration_min = null
-death_animation_duration_max = null
 
 [node name="Frigate" parent="RedTeam" instance=ExtResource("10_d6xr2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 347.175)
-death_animation_duration_min = null
-death_animation_duration_max = null
 
 [node name="Carrier" parent="RedTeam" instance=ExtResource("11_gd4i7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 729.95)
-death_animation_duration_min = null
-death_animation_duration_max = null
