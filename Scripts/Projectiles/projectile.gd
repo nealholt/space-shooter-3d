@@ -151,12 +151,12 @@ func damage_and_die(body, collision_point=null):
 	# Damage what was hit
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
 	if body.is_in_group("damageable"):
-		#print()
-		#print("dealt damage")
-		#print(body)
-		#print(damage)
-		#print(body.has_method("damage"))
-		body.damage(damage, data.shooter)
+		# In rare circumstances (such as testing) there
+		# won't be a shooter. We need to work around that.
+		var shooter = null
+		if data:
+			shooter = data.shooter
+		body.damage(damage, shooter)
 	# Make a spark at collision point
 	if collision_point:
 		# https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088252#questions/21003762
