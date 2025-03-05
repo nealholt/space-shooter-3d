@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://6qsftwvn1vr"]
 
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_2nnjr"]
-[ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_20fsw"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_20fsw"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="2_wndl6"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_8iyj5"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="4_owcqu"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dk37kibucmpd0"]
 
-[ext_resource type="Script" path="res://Scripts/emission_controller.gd" id="1_m4oen"]
+[ext_resource type="Script" uid="uid://e227y4iwmttr" path="res://Scripts/emission_controller.gd" id="1_m4oen"]
 [ext_resource type="Shader" uid="uid://f1k01v3aocxo" path="res://Assets/Shaders/FireShader.tres" id="1_q8wva"]
 [ext_resource type="Texture2D" uid="uid://dj56rpx4qmqh7" path="res://Assets/ParticleImages/flame_03.png" id="2_t4108"]
 [ext_resource type="Material" uid="uid://c5bww2oms7d84" path="res://Assets/Particles/fire_particle_process_material.tres" id="3_qcsm0"]

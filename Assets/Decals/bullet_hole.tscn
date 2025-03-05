@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dgfgr1a12mn0l"]
 
 [ext_resource type="Texture2D" uid="uid://c2n3xbyh8bkck" path="res://Assets/Decals/20-bullet-shot-hole-png-image.png" id="1_uqydj"]
-[ext_resource type="Script" path="res://Scripts/Decals/bullet_hole.gd" id="1_vkm4f"]
+[ext_resource type="Script" uid="uid://dktif0f5q2dk8" path="res://Scripts/Decals/bullet_hole.gd" id="1_vkm4f"]
 
 [sub_resource type="Animation" id="Animation_4qbyk"]
 resource_name = "Fade_out"
@@ -36,8 +36,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p3vvo"]
 _data = {
-"Fade_out": SubResource("Animation_4qbyk"),
-"RESET": SubResource("Animation_ca7dw")
+&"Fade_out": SubResource("Animation_4qbyk"),
+&"RESET": SubResource("Animation_ca7dw")
 }
 
 [node name="Node3D" type="Node3D"]

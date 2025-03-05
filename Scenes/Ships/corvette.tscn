@@ -1,6 +1,6 @@
 [gd_scene load_steps=38 format=3 uid="uid://8dxylurtfwp1"]
 
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
+[ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_jw8ud"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="3_crlbv"]

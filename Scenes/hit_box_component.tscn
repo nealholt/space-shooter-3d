@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dc6ukdkam24n"]
 
-[ext_resource type="Script" path="res://Scripts/hit_box_component.gd" id="1_03eoi"]
+[ext_resource type="Script" uid="uid://dj2iogg4gh8e8" path="res://Scripts/hit_box_component.gd" id="1_03eoi"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="2_dephd"]
 
 [node name="HitBoxComponent" type="Area3D" groups=["damageable", "team member"]]

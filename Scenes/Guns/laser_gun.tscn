@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://cwvjmhlcv8ry7"]
 
-[ext_resource type="Script" path="res://Scripts/laser_gun.gd" id="1_d84oy"]
+[ext_resource type="Script" uid="uid://baxrmmxjl3l63" path="res://Scripts/laser_gun.gd" id="1_d84oy"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_7m7xi"]
 flip_faces = true

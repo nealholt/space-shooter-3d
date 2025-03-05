@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ymilutrw63dv"]
 
-[ext_resource type="Script" path="res://Scripts/Turret/turret_motion_component.gd" id="1_7jwv6"]
+[ext_resource type="Script" uid="uid://bkpwrw5qbp3ag" path="res://Scripts/Turret/turret_motion_component.gd" id="1_7jwv6"]
 
 [node name="turret_motion_component" type="Node"]
 script = ExtResource("1_7jwv6")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=59 format=3 uid="uid://d3erdmulqy1l2"]
 
 [ext_resource type="Texture2D" uid="uid://pa25y2mrbjiq" path="res://Assets/ParticleImages/spark_03.png" id="1_bck12"]
-[ext_resource type="Script" path="res://Scripts/emission_controller.gd" id="1_qqwqp"]
+[ext_resource type="Script" uid="uid://e227y4iwmttr" path="res://Scripts/emission_controller.gd" id="1_qqwqp"]
 [ext_resource type="Texture2D" uid="uid://cqxy5k2dm2wt8" path="res://Assets/ParticleImages/fire_01.png" id="2_2isrm"]
 [ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/ParticleImages/star_04.png" id="3_5rw88"]
 
@@ -91,8 +91,8 @@ uniform sampler2D MainTexture;
 uniform vec2 noise_uv_scale = vec2(1.000000, 1.000000);
 uniform vec2 noise_scroll;
 uniform sampler2D NoiseTexture;
-uniform float Contrast = 1;
-uniform float EmissionStrength = 0;
+uniform float Contrast = 1.0;
+uniform float EmissionStrength = 0.0;
 
 
 
@@ -242,12 +242,12 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 5, 0, 5, 0, 0, 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0ij1p"]
 render_priority = 0
 shader = SubResource("VisualShader_tayuj")
+shader_parameter/MainTexture = ExtResource("1_bck12")
 shader_parameter/noise_uv_scale = Vector2(1, 1)
 shader_parameter/noise_scroll = Vector2(0, -1)
+shader_parameter/NoiseTexture = ExtResource("2_2isrm")
 shader_parameter/Contrast = 1.0
 shader_parameter/EmissionStrength = 0.1
-shader_parameter/MainTexture = ExtResource("1_bck12")
-shader_parameter/NoiseTexture = ExtResource("2_2isrm")
 
 [sub_resource type="Gradient" id="Gradient_87riw"]
 offsets = PackedFloat32Array(0, 0.457447, 1)
@@ -364,8 +364,8 @@ uniform sampler2D MainTexture;
 uniform vec2 noise_uv_scale = vec2(1.000000, 1.000000);
 uniform vec2 noise_scroll;
 uniform sampler2D NoiseTexture;
-uniform float Contrast = 1;
-uniform float EmissionStrength = 0;
+uniform float Contrast = 1.0;
+uniform float EmissionStrength = 0.0;
 
 
 
@@ -518,12 +518,12 @@ load_path = "res://.godot/imported/fire_01.png-b5b733a0367ad80fe88e92a1c14145ff.
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0c7af"]
 render_priority = 0
 shader = SubResource("VisualShader_ofgxh")
+shader_parameter/MainTexture = ExtResource("3_5rw88")
 shader_parameter/noise_uv_scale = Vector2(1, 1)
 shader_parameter/noise_scroll = Vector2(0, -1)
+shader_parameter/NoiseTexture = SubResource("CompressedTexture2D_h0ak4")
 shader_parameter/Contrast = 1.0
 shader_parameter/EmissionStrength = 0.0
-shader_parameter/MainTexture = ExtResource("3_5rw88")
-shader_parameter/NoiseTexture = SubResource("CompressedTexture2D_h0ak4")
 
 [sub_resource type="Gradient" id="Gradient_4wo7f"]
 offsets = PackedFloat32Array(0, 0.457447, 1)

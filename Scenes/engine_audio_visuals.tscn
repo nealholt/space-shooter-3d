@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dvl5nj413nxh2"]
 
 [ext_resource type="AudioStream" uid="uid://dy40ncrvi1e1r" path="res://Assets/SoundEffects/cockpit_ambiance.ogg" id="1_d3dev"]
-[ext_resource type="Script" path="res://Scripts/engine_audio_visuals.gd" id="1_indx2"]
+[ext_resource type="Script" uid="uid://buutdijcsnawl" path="res://Scripts/engine_audio_visuals.gd" id="1_indx2"]
 
 [node name="EngineAudioVisuals" type="Node3D"]
 script = ExtResource("1_indx2")

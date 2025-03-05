@@ -28,7 +28,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_oa5he"]
-max_value = 5.0
+_limits = [0.0, 5.0, 0.0, 1.0]
 _data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -132,8 +132,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p3cuw"]
 _data = {
-"Init": SubResource("Animation_bhq3k"),
-"RESET": SubResource("Animation_v1qbr")
+&"Init": SubResource("Animation_bhq3k"),
+&"RESET": SubResource("Animation_v1qbr")
 }
 
 [node name="ShieldExplosion" type="Node3D"]

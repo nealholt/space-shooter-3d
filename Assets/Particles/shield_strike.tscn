@@ -16,7 +16,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_ra0xe"]
-max_value = 5.0
+_limits = [0.0, 5.0, 0.0, 1.0]
 _data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -223,8 +223,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i5idb"]
 _data = {
-"Init": SubResource("Animation_0mguu"),
-"RESET": SubResource("Animation_31a1w")
+&"Init": SubResource("Animation_0mguu"),
+&"RESET": SubResource("Animation_31a1w")
 }
 
 [node name="ShieldStrike" type="Node3D"]

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cbgprvcwh15qd" path="res://Levels/Level13Everything/star.tscn" id="2_2lnk5"]
 [ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="3_eggcn"]
 [ext_resource type="MeshLibrary" uid="uid://onqmfkbeu0js" path="res://Assets/Asteroids/asteroids.tres" id="4_u7bmr"]
-[ext_resource type="Script" path="res://Scripts/team_setup.gd" id="5_0jpk3"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="5_0jpk3"]
 [ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="6_jotft"]
 [ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Scenes/Ships/bomber.tscn" id="7_m10fo"]
 [ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Scenes/Ships/destroyer.tscn" id="8_5shl4"]

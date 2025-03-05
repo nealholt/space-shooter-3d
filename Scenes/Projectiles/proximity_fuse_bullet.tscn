@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cs8hx275hwfsf"]
 
 [ext_resource type="PackedScene" uid="uid://cuuitp4vmj5j4" path="res://Scenes/Projectiles/projectile_area.tscn" id="1_xv0iy"]
-[ext_resource type="Script" path="res://Scripts/Projectiles/proximity_fuse_bullet.gd" id="2_vvwix"]
+[ext_resource type="Script" uid="uid://cermkrqhukd6y" path="res://Scripts/Projectiles/proximity_fuse_bullet.gd" id="2_vvwix"]
 [ext_resource type="PackedScene" uid="uid://dbpuijlnfgmru" path="res://Scenes/explosion_damage_dealing.tscn" id="3_irk0b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bdq6x"]

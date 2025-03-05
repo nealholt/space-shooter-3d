@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://cfiwadbmgx3up"]
 
-[ext_resource type="Script" path="res://Scripts/team_setup.gd" id="1_nau7t"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="1_nau7t"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_5rasv"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="3_6nm7s"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_7pty0"]

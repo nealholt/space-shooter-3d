@@ -104,8 +104,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i0xkb"]
 _data = {
-"Init": SubResource("Animation_u6se1"),
-"RESET": SubResource("Animation_tkou0")
+&"Init": SubResource("Animation_u6se1"),
+&"RESET": SubResource("Animation_tkou0")
 }
 
 [node name="VFX_Flak_Explosion" type="Node3D"]

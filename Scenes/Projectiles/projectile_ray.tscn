@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://caody2m8xh0b6"]
 
 [ext_resource type="PackedScene" uid="uid://bosxindk1alsp" path="res://Scenes/Projectiles/projectile.tscn" id="1_s006r"]
-[ext_resource type="Script" path="res://Scripts/Projectiles/projectile_ray.gd" id="2_e7gw1"]
+[ext_resource type="Script" uid="uid://bypxy3lg6edop" path="res://Scripts/Projectiles/projectile_ray.gd" id="2_e7gw1"]
 
 [node name="ProjectileRay" instance=ExtResource("1_s006r")]
 script = ExtResource("2_e7gw1")

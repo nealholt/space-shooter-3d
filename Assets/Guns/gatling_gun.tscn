@@ -50,8 +50,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b4hp1"]
 _data = {
-"RESET": SubResource("Animation_rrafk"),
-"gun_animation": SubResource("Animation_ehqcn")
+&"RESET": SubResource("Animation_rrafk"),
+&"gun_animation": SubResource("Animation_ehqcn")
 }
 
 [node name="GatlingGun" type="Node3D"]

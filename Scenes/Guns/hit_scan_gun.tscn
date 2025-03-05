@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ddoyejlbh51s5"]
 
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="1_av3ot"]
-[ext_resource type="Script" path="res://Scripts/Guns/hit_scan_gun.gd" id="1_ksxwb"]
+[ext_resource type="Script" uid="uid://blu2oolgjq5f0" path="res://Scripts/Guns/hit_scan_gun.gd" id="1_ksxwb"]
 
 [node name="HitScanGun" instance=ExtResource("1_av3ot")]
 script = ExtResource("1_ksxwb")

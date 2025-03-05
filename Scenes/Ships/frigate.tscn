@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://byb8ya6fryjw0"]
 
 [ext_resource type="PackedScene" uid="uid://cxd7ahrv8vrys" path="res://Assets/Ships/frigate_chassis.tscn" id="1_18ao0"]
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_veikt"]
+[ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_veikt"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_2gkw6"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qmjcj"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bosxindk1alsp"]
 
-[ext_resource type="Script" path="res://Scripts/Projectiles/projectile.gd" id="1_y78aq"]
+[ext_resource type="Script" uid="uid://bny3bgxy3dvvq" path="res://Scripts/Projectiles/projectile.gd" id="1_y78aq"]
 
 [node name="Projectile" type="Node3D" groups=["bullet"]]
 script = ExtResource("1_y78aq")

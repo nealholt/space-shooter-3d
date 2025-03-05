@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://bofjsmexbmkkv"]
 
 [ext_resource type="PackedScene" uid="uid://n1jx2afgefnt" path="res://Scenes/spectator.tscn" id="1_jd547"]
-[ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_0liob"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_0liob"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="3_vdt0h"]
 [ext_resource type="PackedScene" uid="uid://brec5vmygtijo" path="res://Scenes/orb.tscn" id="4_syabc"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="5_74ca5"]

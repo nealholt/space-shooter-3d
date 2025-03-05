@@ -25,8 +25,8 @@ default_value = 2.0
 code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
 
-uniform float FresnelPower = 2;
-uniform float EmissionStrength = 1;
+uniform float FresnelPower = 2.0;
+uniform float EmissionStrength = 1.0;
 
 
 

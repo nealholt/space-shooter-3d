@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cruqo01kbn3ab"]
 
-[ext_resource type="Script" path="res://Scripts/shield.gd" id="1_xlxvf"]
+[ext_resource type="Script" uid="uid://7megq05mf7kt" path="res://Scripts/shield.gd" id="1_xlxvf"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_1831n"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="3_6jkow"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="4_t4iu0"]

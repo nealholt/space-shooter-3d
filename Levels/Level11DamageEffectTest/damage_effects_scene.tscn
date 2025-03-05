@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://c5aj0hxrmxrbg"]
 
-[ext_resource type="Script" path="res://Levels/Level11DamageEffectTest/test_camera.gd" id="1_ktv67"]
+[ext_resource type="Script" uid="uid://c4bajredph1hp" path="res://Levels/Level11DamageEffectTest/test_camera.gd" id="1_ktv67"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="1_w5e31"]
-[ext_resource type="Script" path="res://Levels/Level08NearMiss/bullet_spawner_testing.gd" id="2_xar6i"]
+[ext_resource type="Script" uid="uid://dct8roiqo6fdl" path="res://Levels/Level08NearMiss/bullet_spawner_testing.gd" id="2_xar6i"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="3_08cq6"]
 [ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="3_8rcco"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="6_vl6bu"]

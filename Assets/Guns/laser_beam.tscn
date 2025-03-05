@@ -69,8 +69,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_swh51"]
 _data = {
-"RESET": SubResource("Animation_vxv36"),
-"gun_animation": SubResource("Animation_nnov1")
+&"RESET": SubResource("Animation_vxv36"),
+&"gun_animation": SubResource("Animation_nnov1")
 }
 
 [node name="Node" type="Node"]

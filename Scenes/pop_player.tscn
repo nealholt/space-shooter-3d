@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3pdq381luwwg"]
 
 [ext_resource type="AudioStream" uid="uid://djeyrkdc4qrxe" path="res://Assets/SoundEffects/mixkit-hard-pop-click-2364.wav" id="1_qsipe"]
-[ext_resource type="Script" path="res://Scripts/pop_player.gd" id="1_qukc5"]
+[ext_resource type="Script" uid="uid://bnbuncwojo6vl" path="res://Scripts/pop_player.gd" id="1_qukc5"]
 
 [node name="PopPlayer" type="Node3D"]
 top_level = true

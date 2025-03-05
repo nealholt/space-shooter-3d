@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bqvcfo7v6o6ip"]
 
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_h4lox"]
+[ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_h4lox"]
 [ext_resource type="PackedScene" uid="uid://bvgxwc28k1fvx" path="res://Assets/Ships/beam_destroyer_chassis.tscn" id="2_vmkim"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_ju2iv"]
 

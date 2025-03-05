@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dup57p4ygajr1"]
 
-[ext_resource type="Script" path="res://Scripts/Guns/laser_shotgun.gd" id="1_j6dff"]
+[ext_resource type="Script" uid="uid://cv02it6wviv4s" path="res://Scripts/Guns/laser_shotgun.gd" id="1_j6dff"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="1_ppvyh"]
 
 [node name="LaserShotgun" instance=ExtResource("1_ppvyh")]

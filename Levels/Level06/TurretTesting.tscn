@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://da5y8fkeokhyx"]
 
-[ext_resource type="Script" path="res://Levels/Level06/TestCam.gd" id="1_qvatm"]
-[ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_hpnlp"]
+[ext_resource type="Script" uid="uid://ca1xpxadpwp5u" path="res://Levels/Level06/TestCam.gd" id="1_qvatm"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_hpnlp"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_2y4mv"]
 [ext_resource type="PackedScene" uid="uid://yaq7cc3oqfp2" path="res://Scenes/turret.tscn" id="5_hshpx"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_ckr46"]

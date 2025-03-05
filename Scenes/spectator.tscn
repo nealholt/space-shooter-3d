@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://n1jx2afgefnt"]
 
-[ext_resource type="Script" path="res://Scripts/camera_body.gd" id="1_yd5px"]
-[ext_resource type="Script" path="res://Scripts/camera_controller.gd" id="2_wvefg"]
+[ext_resource type="Script" uid="uid://dkh8g7b2u2dif" path="res://Scripts/camera_body.gd" id="1_yd5px"]
+[ext_resource type="Script" uid="uid://c1r1vdv3x38me" path="res://Scripts/camera_controller.gd" id="2_wvefg"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_yoxi7"]
 

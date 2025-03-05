@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://b2p5fk853guwk"]
 
-[ext_resource type="Script" path="res://Levels/Level01/level1.gd" id="1_dflt6"]
-[ext_resource type="Script" path="res://Scripts/team_setup.gd" id="2_widnh"]
+[ext_resource type="Script" uid="uid://d3i1pj3lavuuy" path="res://Levels/Level01/level1.gd" id="1_dflt6"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_widnh"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_matfs"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="4_bw7sh"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="5_v2xp1"]

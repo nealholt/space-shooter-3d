@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bcs6gvltbhd48"]
 
 [ext_resource type="PackedScene" uid="uid://caody2m8xh0b6" path="res://Scenes/Projectiles/projectile_ray.tscn" id="1_crmv3"]
-[ext_resource type="Script" path="res://Scripts/Projectiles/timed_fuse_bullet.gd" id="2_7x58s"]
+[ext_resource type="Script" uid="uid://c6hp0a211nbca" path="res://Scripts/Projectiles/timed_fuse_bullet.gd" id="2_7x58s"]
 [ext_resource type="PackedScene" uid="uid://dbpuijlnfgmru" path="res://Scenes/explosion_damage_dealing.tscn" id="3_rvjog"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_3juk2"]

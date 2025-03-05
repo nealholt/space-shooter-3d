@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://dp3w08p8gkd3p"]
 
-[ext_resource type="Script" path="res://Scripts/capital_ship_frigate.gd" id="1_nf210"]
+[ext_resource type="Script" uid="uid://nmvuwja71fox" path="res://Scripts/capital_ship_frigate.gd" id="1_nf210"]
 [ext_resource type="PackedScene" uid="uid://bh2v67l31a2lg" path="res://Assets/CapitalShips/frigate_model.tscn" id="1_ukj0d"]
 [ext_resource type="PackedScene" uid="uid://yaq7cc3oqfp2" path="res://Scenes/turret.tscn" id="2_3hybn"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="2_ffelx"]
@@ -108,8 +108,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vnrft"]
 _data = {
-"OpenReactorShield": SubResource("Animation_ltsdl"),
-"RESET": SubResource("Animation_3iay6")
+&"OpenReactorShield": SubResource("Animation_ltsdl"),
+&"RESET": SubResource("Animation_3iay6")
 }
 
 [node name="CapitalShipFrigate" type="CharacterBody3D"]

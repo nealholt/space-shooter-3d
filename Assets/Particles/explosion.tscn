@@ -16,7 +16,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_3v3hb"]
-max_value = 5.0
+_limits = [0.0, 5.0, 0.0, 1.0]
 _data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -253,8 +253,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h4ga4"]
 _data = {
-"Init": SubResource("Animation_bv6qo"),
-"RESET": SubResource("Animation_44uyp")
+&"Init": SubResource("Animation_bv6qo"),
+&"RESET": SubResource("Animation_44uyp")
 }
 
 [node name="Explosion" type="Node3D"]

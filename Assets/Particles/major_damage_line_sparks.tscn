@@ -1,7 +1,7 @@
 [gd_scene load_steps=58 format=3 uid="uid://b70y8labc000a"]
 
 [ext_resource type="Texture2D" uid="uid://pa25y2mrbjiq" path="res://Assets/ParticleImages/spark_03.png" id="1_7ikgm"]
-[ext_resource type="Script" path="res://Scripts/emission_controller.gd" id="1_eutjj"]
+[ext_resource type="Script" uid="uid://e227y4iwmttr" path="res://Scripts/emission_controller.gd" id="1_eutjj"]
 [ext_resource type="Texture2D" uid="uid://cqxy5k2dm2wt8" path="res://Assets/ParticleImages/fire_01.png" id="2_p1m76"]
 [ext_resource type="Texture2D" uid="uid://bxn3al27h6rn5" path="res://Assets/ParticleImages/trace_02.png" id="3_ncvxi"]
 
@@ -91,8 +91,8 @@ uniform sampler2D MainTexture;
 uniform vec2 noise_uv_scale = vec2(1.000000, 1.000000);
 uniform vec2 noise_scroll;
 uniform sampler2D NoiseTexture;
-uniform float Contrast = 1;
-uniform float EmissionStrength = 0;
+uniform float Contrast = 1.0;
+uniform float EmissionStrength = 0.0;
 
 
 
@@ -242,12 +242,12 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 5, 0, 5, 0, 0, 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0ij1p"]
 render_priority = 0
 shader = SubResource("VisualShader_tayuj")
+shader_parameter/MainTexture = ExtResource("1_7ikgm")
 shader_parameter/noise_uv_scale = Vector2(1, 1)
 shader_parameter/noise_scroll = Vector2(0, -1)
+shader_parameter/NoiseTexture = ExtResource("2_p1m76")
 shader_parameter/Contrast = 1.0
 shader_parameter/EmissionStrength = 0.1
-shader_parameter/MainTexture = ExtResource("1_7ikgm")
-shader_parameter/NoiseTexture = ExtResource("2_p1m76")
 
 [sub_resource type="Gradient" id="Gradient_87riw"]
 offsets = PackedFloat32Array(0, 0.457447, 1)
@@ -364,8 +364,8 @@ uniform sampler2D MainTexture;
 uniform vec2 noise_uv_scale = vec2(1.000000, 1.000000);
 uniform vec2 noise_scroll;
 uniform sampler2D NoiseTexture;
-uniform float Contrast = 1;
-uniform float EmissionStrength = 0;
+uniform float Contrast = 1.0;
+uniform float EmissionStrength = 0.0;
 
 
 
@@ -514,11 +514,11 @@ nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 5, 0, 5, 0, 0, 0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tcoql"]
 render_priority = 0
 shader = SubResource("VisualShader_upprl")
+shader_parameter/MainTexture = ExtResource("3_ncvxi")
 shader_parameter/noise_uv_scale = Vector2(1, 1)
 shader_parameter/noise_scroll = Vector2(0, -1)
 shader_parameter/Contrast = 1.0
 shader_parameter/EmissionStrength = 0.0
-shader_parameter/MainTexture = ExtResource("3_ncvxi")
 
 [sub_resource type="Gradient" id="Gradient_klbku"]
 offsets = PackedFloat32Array(0, 0.457447, 1)

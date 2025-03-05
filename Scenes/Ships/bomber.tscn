@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://dct3loj10mg5k"]
 
-[ext_resource type="Script" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_uw5oo"]
+[ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_uw5oo"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_0tp8c"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="2_6e5lt"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="2_120ti"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://d33fc5p10x7j7"]
 
 [ext_resource type="AudioStream" uid="uid://bby20742mlyqa" path="res://Assets/SoundEffects/Realistic_Punch-Mark_DiAngelo-1609462330.wav" id="1_uoaqb"]
-[ext_resource type="Script" path="res://Scripts/hit_feedback.gd" id="1_xcpcd"]
+[ext_resource type="Script" uid="uid://b5urj5rsuhk1h" path="res://Scripts/hit_feedback.gd" id="1_xcpcd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebylc"]
 no_depth_test = true
@@ -42,8 +42,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_604r7"]
 _data = {
-"RESET": SubResource("Animation_ljk0c"),
-"TakeDamage": SubResource("Animation_l6wrv")
+&"RESET": SubResource("Animation_ljk0c"),
+&"TakeDamage": SubResource("Animation_l6wrv")
 }
 
 [node name="HitFeedback" type="Node3D"]
