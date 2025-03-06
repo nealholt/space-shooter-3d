@@ -1,5 +1,4 @@
-extends CharacterBody3D
-class_name Ship
+class_name Ship extends CharacterBody3D
 
 signal destroyed
 

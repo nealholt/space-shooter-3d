@@ -1,5 +1,4 @@
-extends CharacterBodyControlParent
-class_name PlayerMovement4
+class_name PlayerMovement4 extends CharacterBodyControlParent
 
 # Differences between this and Version 3
 #     Tighter pitch radius: pitch_std from 1 -> 1.8
@@ -65,9 +64,12 @@ var is_accelerating:bool
 
 var is_dead := false
 
+var im : InputManager
+
 
 func _ready() -> void:
 	impulse = impulse_std
+	im = Global.input_man
 	# Tell the global script who the player is.
 	# Since this is a player controller, it SHOULD
 	# be an immediate child of the player.
@@ -78,6 +80,8 @@ func _ready() -> void:
 func move_and_turn(mover, delta:float) -> void:
 	if is_dead:
 		return
+	
+	im.update()
 	
 	is_accelerating = false
 	friction = friction_std
@@ -92,11 +96,11 @@ func move_and_turn(mover, delta:float) -> void:
 	# is available. Can continue to accelerate down to
 	# zero if accel button is already held down.
 	var can_accelerate = true
-	if Input.is_action_just_pressed("accelerate"):
+	if im.accelerate:
 		can_accelerate = accel_available > accel_min
 	
 	#Brake
-	if Input.is_action_pressed("brake"):
+	if im.brake:
 		#impulse = lerp(impulse, impulse_brake, impulse_lerp*delta)
 		impulse = impulse_brake
 		# Sharper turning while braking
@@ -202,10 +206,10 @@ func shoot(shooter, delta:float) -> void:
 	# Missile lock
 	if shooter.missile_lock:
 		# Target most centered enemy and begin missile lock
-		if Input.is_action_just_pressed("right_shoulder"):
+		if Input.is_action_just_pressed("retarget"):
 			shooter.missile_lock.attempt_to_start_seeking(shooter)
 		# Fire missile if lock is acquired
-		if Input.is_action_just_released("right_shoulder"):
+		if Input.is_action_just_released("retarget"):
 			shooter.missile_lock.attempt_to_fire_missile(shooter)
 		shooter.missile_lock.update(shooter, delta)
 		# Without this next code, autoseeking missile
@@ -219,7 +223,7 @@ func select_target(targeter:Node3D) -> void:
 	if is_dead:
 		return
 	
-	if Input.is_action_just_pressed("right_shoulder"):
+	if Input.is_action_just_pressed("retarget"):
 		# Target most central enemy team member
 		target = Global.get_center_most_from_group(enemy_team,targeter)
 		# If target is valid and missile is off cooldown,

@@ -1,4 +1,8 @@
 extends CharacterBody3D
+
+# This is used by the spectator scene, to control a camera
+# indpendent of any ship.
+
 # Source:
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/40979546#questions
 const SPEED = 50.0
@@ -7,8 +11,6 @@ var mouse_motion := Vector2.ZERO
 
 @onready var camera_pivot: Node3D = $CameraPivot
 
-func _ready() -> void:
-	pass
 
 func _process(_delta: float) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -23,7 +25,7 @@ func _process(_delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	
 	move_and_slide()
 
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/40979542#questions
@@ -38,4 +40,3 @@ func handle_camera_rotation() -> void:
 	camera_pivot.rotate_x(mouse_motion.y)
 	#camera_pivot.rotation_degrees.x = clampf(camera_pivot.rotation_degrees.x, -90.0, 90.0)
 	mouse_motion = Vector2.ZERO # Reset
-

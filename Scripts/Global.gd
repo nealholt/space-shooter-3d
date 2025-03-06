@@ -9,6 +9,7 @@ var red_team_group:TeamSetup # Node3D holding everything on team red
 var blue_team_group:TeamSetup # Node3D holding everything on team blue
 var current_camera : Camera3D
 var player: CharacterBody3D
+var input_man : InputManager
 # For now I'm globally turning off the hud when in
 # camera views other than first person.
 var targeting_hud_on:bool = true

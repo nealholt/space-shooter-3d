@@ -19,6 +19,7 @@ func _ready() -> void:
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	# Make this scene globally accessible
 	Global.main_scene = self
+	Global.input_man = $InputManager
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -126,3 +127,11 @@ func _on_toggle_fullscreen_pressed() -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+
+func _on_toggle_inverted_toggled(toggled_on: bool) -> void:
+	Global.input_man.toggle_inverted(toggled_on)
+
+
+func _on_toggle_controls_toggled(toggled_on: bool) -> void:
+	Global.input_man.toggle_mouse_and_keyboard(toggled_on)

@@ -1,13 +1,4 @@
-extends CharacterBodyControlParent
-class_name BallisticMovement3
-
-# This is where I put code while I'm trying to figure out
-# the right movement style for the game
-
-# Base this on ballistic movement 1,
-# but always moving. Cannot brake down to zero
-# acceleration is extra
-# DONE also add in roll on the right stick
+class_name BallisticMovement3 extends CharacterBodyControlParent
 
 #Strength of movements under standard motion
 var pitch_std: float = 1.0
@@ -26,9 +17,12 @@ var impulse_lerp: float =  0.2
 
 var is_dead := false
 
+var im : InputManager
+
 
 func _ready() -> void:
 	impulse = impulse_std
+	im = Global.input_man
 	# Tell the global script who the player is.
 	# Since this is a player controller, it SHOULD
 	# be an immediate child of the player.
@@ -40,6 +34,8 @@ func move_and_turn(mover, delta:float) -> void:
 	if is_dead:
 		return
 	
+	im.update()
+	
 	friction = friction_std
 	
 	var pitch_modifier: float = 1.0
@@ -49,7 +45,7 @@ func move_and_turn(mover, delta:float) -> void:
 	handle_engine_audio(mover)
 	
 	#Brake
-	if Input.is_action_pressed("brake"):
+	if im.brake:
 		#impulse = lerp(impulse, impulse_brake, impulse_lerp*delta)
 		impulse = impulse_brake
 		# Sharper turning while braking
@@ -57,7 +53,7 @@ func move_and_turn(mover, delta:float) -> void:
 		roll_modifier = 1.5
 		yaw_modifier = 1.5
 	#Accelerate
-	elif Input.is_action_pressed("accelerate"):
+	elif im.accelerate:
 		#impulse = lerp(impulse, impulse_accel, impulse_lerp*delta)
 		impulse = impulse_accel
 		# Reduced maneuverability while accelerating
@@ -135,10 +131,10 @@ func shoot(shooter, delta:float) -> void:
 	# Missile lock
 	if shooter.missile_lock:
 		# Target most centered enemy and begin missile lock
-		if Input.is_action_just_pressed("right_shoulder"):
+		if Input.is_action_just_pressed("retarget"):
 			shooter.missile_lock.attempt_to_start_seeking(shooter)
 		# Fire missile if lock is acquired
-		if Input.is_action_just_released("right_shoulder"):
+		if Input.is_action_just_released("retarget"):
 			shooter.missile_lock.attempt_to_fire_missile(shooter)
 		shooter.missile_lock.update(shooter, delta)
 		# Without this next code, autoseeking missile
@@ -152,7 +148,7 @@ func select_target(targeter:Node3D) -> void:
 	if is_dead:
 		return
 	
-	if Input.is_action_just_pressed("right_shoulder"):
+	if Input.is_action_just_pressed("retarget"):
 		# Target most central enemy team member
 		target = Global.get_center_most_from_group(enemy_team,targeter)
 		# If target is valid and missile is off cooldown,

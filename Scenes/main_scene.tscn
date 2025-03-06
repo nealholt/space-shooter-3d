@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://daqnnfoj1hjbd"]
+[gd_scene load_steps=3 format=3 uid="uid://daqnnfoj1hjbd"]
 
 [ext_resource type="Script" uid="uid://dn2agce7cfvlb" path="res://Scripts/main_scene.gd" id="1_ke176"]
+[ext_resource type="PackedScene" uid="uid://coy483f2kf274" path="res://Scenes/input_manager.tscn" id="2_6l7je"]
 
 [node name="MainScene" type="Node"]
 script = ExtResource("1_ke176")
@@ -139,7 +140,26 @@ offset_right = 1026.0
 offset_bottom = 566.0
 text = "Toggle Fullscreen"
 
+[node name="ToggleControls" type="CheckButton" parent="Menu"]
+layout_mode = 0
+offset_left = 797.0
+offset_top = 464.0
+offset_right = 1046.0
+offset_bottom = 495.0
+button_pressed = true
+text = "Use Mouse and Keyboard"
+
+[node name="ToggleInverted" type="CheckButton" parent="Menu"]
+layout_mode = 0
+offset_left = 798.0
+offset_top = 434.0
+offset_right = 1047.0
+offset_bottom = 465.0
+text = "Fly Inverted"
+
 [node name="Main3D" type="Node3D" parent="."]
+
+[node name="InputManager" parent="." instance=ExtResource("2_6l7je")]
 
 [connection signal="pressed" from="Menu/Load1" to="." method="_on_load_1_pressed"]
 [connection signal="pressed" from="Menu/Load2" to="." method="_on_load_2_pressed"]
@@ -155,3 +175,5 @@ text = "Toggle Fullscreen"
 [connection signal="pressed" from="Menu/Load12CollisionExperiment" to="." method="_on_load_12_collision_experiment_pressed"]
 [connection signal="pressed" from="Menu/Load13SpaceStationDefense" to="." method="_on_load_13_space_station_defense_pressed"]
 [connection signal="pressed" from="Menu/ToggleFullscreen" to="." method="_on_toggle_fullscreen_pressed"]
+[connection signal="toggled" from="Menu/ToggleControls" to="." method="_on_toggle_controls_toggled"]
+[connection signal="toggled" from="Menu/ToggleInverted" to="." method="_on_toggle_inverted_toggled"]
