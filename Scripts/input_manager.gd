@@ -1,12 +1,13 @@
 class_name InputManager extends Node
 
 @export var use_mouse_and_keyboard := true
-@export var use_inverted := true
+@export var use_inverted := false
 
 var inverted := 1.0
 
 var switch_weapons := false
-var retarget := false # Also used to fire missile
+var retarget_just_pressed := false
+var retarget_just_released := false # Used to fire missile
 var shoot_pressed := false
 var shoot_just_pressed := false
 var brake := false
@@ -19,9 +20,9 @@ var up_down1 := 0.0 # Left stick
 var up_down2 := 0.0 # Right stick
 
 
-func _ready() -> void:
-	if use_inverted:
-		inverted = -1.0
+func refresh() -> void:
+	toggle_inverted(use_inverted)
+	toggle_mouse_and_keyboard(use_mouse_and_keyboard)
 
 
 func toggle_inverted(toggled_on: bool) -> void:
@@ -45,7 +46,8 @@ func toggle_mouse_and_keyboard(toggled_on: bool) -> void:
 
 func update() -> void:
 	switch_weapons = Input.is_action_just_pressed("switch_weapons")
-	retarget = Input.is_action_just_pressed("retarget")
+	retarget_just_pressed = Input.is_action_just_pressed("retarget")
+	retarget_just_released = Input.is_action_just_released("retarget")
 	shoot_pressed = Input.is_action_pressed("shoot")
 	shoot_just_pressed = Input.is_action_just_pressed("shoot")
 	brake = Input.is_action_pressed("brake")

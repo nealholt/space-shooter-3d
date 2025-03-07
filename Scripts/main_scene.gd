@@ -66,7 +66,7 @@ func load_level(level_name:String) -> void:
 		main_3d.add_child(level_instance)
 		menu.visible = false
 		hud.visible = true
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		Global.input_man.refresh()
 	# Set team node references in the global script
 	Global.red_team_group = null
 	Global.blue_team_group = null

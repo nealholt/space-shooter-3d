@@ -108,7 +108,7 @@ func move_and_turn(mover, delta:float) -> void:
 		roll_modifier = 1.5
 		yaw_modifier = 1.5
 	#Accelerate
-	elif Input.is_action_pressed("accelerate") and can_accelerate:
+	elif im.accelerate and can_accelerate:
 		# Acceleration is now limited by a rechargeable resource
 		# stored in the accel_available variable.
 		is_accelerating = accel_available > 0
@@ -121,7 +121,7 @@ func move_and_turn(mover, delta:float) -> void:
 		roll_modifier = 0.3
 		yaw_modifier = 0.3
 	#Drift
-	elif Input.is_action_pressed("drift"):
+	elif im.drift:
 		# I like that drift snaps straight to zero impulse and friction
 		impulse = 0.0
 		friction = 0.0
@@ -133,13 +133,13 @@ func move_and_turn(mover, delta:float) -> void:
 	handle_engine_audio(mover)
 	
 	# Recharge acceleration "fuel"
-	if !Input.is_action_pressed("accelerate"):
+	if !im.accelerate:
 		accel_available = min(accel_available+accel_regen_rate*delta, accel_max_duration)
 	
 	# Calculate reduced turn rate based on difference
 	# between speed and default speed.
 	# Don't apply if drifting.
-	if !Input.is_action_pressed("drift"):
+	if !im.drift:
 		var speed:float = mover.velocity.length()
 		var turn_reduction:float = max(abs(speed-impulse_std/friction_std) / turn_reduction_factor, 1.0)
 		pitch_modifier /= turn_reduction
@@ -147,23 +147,18 @@ func move_and_turn(mover, delta:float) -> void:
 		yaw_modifier /= turn_reduction
 	
 	# Get pitch
-	var input_strength: float = Input.get_action_strength("left_stick_down") - Input.get_action_strength("left_stick_up")
-	var input_strength_right: float = Input.get_action_strength("right_stick_down") - Input.get_action_strength("right_stick_up")
-	input_strength_right *= pitch_std_right_stick
 	pitch_input = lerp(pitch_input,
-		(input_strength*pitch_std + input_strength_right) * pitch_modifier,
+		(im.up_down1*pitch_std + im.up_down2*pitch_std_right_stick) * pitch_modifier,
 		lerp_strength*delta)
 	
 	# Get Roll
 	# Right stick's roll is not affected by roll modifiers
-	input_strength = Input.get_action_strength("left_stick_left") - Input.get_action_strength("left_stick_right")
-	var input_strength_right_stick:float = Input.get_action_strength("right_stick_left") - Input.get_action_strength("right_stick_right")
 	roll_input = lerp(roll_input,
-		(input_strength*roll_std_left_stick + input_strength_right_stick*roll_std_right_stick) * roll_modifier,
+		(im.left_right1*roll_std_left_stick + im.left_right2*roll_std_right_stick) * roll_modifier,
 		lerp_strength*delta)
 	# Get yaw using same left stick input as roll
 	yaw_input = lerp(yaw_input,
-		input_strength*yaw_std*yaw_modifier,
+		im.left_right1*yaw_std*yaw_modifier,
 		lerp_strength*delta)
 	
 	super.move_and_turn(mover, delta)
@@ -174,11 +169,11 @@ func handle_engine_audio(mover) -> void:
 		return
 	# NOTE! These transition time numbers
 	# are based on nothing in particular!
-	if Input.is_action_pressed("brake"):
+	if im.brake:
 		mover.engineAV.shift2brake(0.0)
 	elif is_accelerating:
 		mover.engineAV.shift2afterburners(4.0)
-	elif Input.is_action_pressed("drift"):
+	elif im.drift:
 		mover.engineAV.shift2drift(1.0)
 	else:
 		mover.engineAV.shift2default(2.0)
@@ -197,19 +192,19 @@ func shoot(shooter, delta:float) -> void:
 	
 	# Trigger pulled. Try to shoot.
 	if shooter.weapon_handler.is_automatic():
-		if Input.is_action_pressed("shoot"):
+		if im.shoot_pressed:
 			shooter.weapon_handler.shoot(shooter, target)
 	else: # Semiautomatic
-		if Input.is_action_just_pressed("shoot"):
+		if im.shoot_just_pressed:
 			shooter.weapon_handler.shoot(shooter, target)
 	
 	# Missile lock
 	if shooter.missile_lock:
 		# Target most centered enemy and begin missile lock
-		if Input.is_action_just_pressed("retarget"):
+		if im.retarget_just_pressed:
 			shooter.missile_lock.attempt_to_start_seeking(shooter)
 		# Fire missile if lock is acquired
-		if Input.is_action_just_released("retarget"):
+		if im.retarget_just_released:
 			shooter.missile_lock.attempt_to_fire_missile(shooter)
 		shooter.missile_lock.update(shooter, delta)
 		# Without this next code, autoseeking missile
@@ -223,7 +218,7 @@ func select_target(targeter:Node3D) -> void:
 	if is_dead:
 		return
 	
-	if Input.is_action_just_pressed("retarget"):
+	if im.retarget_just_pressed:
 		# Target most central enemy team member
 		target = Global.get_center_most_from_group(enemy_team,targeter)
 		# If target is valid and missile is off cooldown,
@@ -236,7 +231,7 @@ func select_target(targeter:Node3D) -> void:
 
 
 func misc_actions(actor) -> void:
-	if Input.is_action_just_pressed("switch_weapons"):
+	if im.switch_weapons:
 		actor.weapon_handler.change_weapon()
 
 
