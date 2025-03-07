@@ -21,27 +21,25 @@ var up_down2 := 0.0 # Right stick
 
 
 func refresh() -> void:
-	toggle_inverted(use_inverted)
-	toggle_mouse_and_keyboard(use_mouse_and_keyboard)
-
-
-func toggle_inverted(toggled_on: bool) -> void:
-	use_inverted = toggled_on
-	if toggled_on:
+	if use_inverted:
 		inverted = -1.0
 	else:
 		inverted = 1.0
-
-
-func toggle_mouse_and_keyboard(toggled_on: bool) -> void:
-	use_mouse_and_keyboard = toggled_on
-	if toggled_on:
+	if use_mouse_and_keyboard:
 		# Confine mouse to the screen and hide it.
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 		# Confine mouse to the screen and show it.
 		#Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+
+func toggle_inverted(toggled_on: bool) -> void:
+	use_inverted = toggled_on
+
+
+func toggle_mouse_and_keyboard(toggled_on: bool) -> void:
+	use_mouse_and_keyboard = toggled_on
 
 
 func update() -> void:
