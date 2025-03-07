@@ -28,152 +28,375 @@ offset_top = 45.0
 offset_right = 110.0
 offset_bottom = 85.0
 
-[node name="Load1" type="Button" parent="Menu"]
+[node name="SceneOptions" type="VBoxContainer" parent="Menu"]
 layout_mode = 0
-offset_left = 101.0
-offset_top = 27.0
-offset_right = 235.0
-offset_bottom = 58.0
+offset_right = 247.0
+offset_bottom = 101.0
+theme_override_constants/separation = 10
+
+[node name="Load1" type="Button" parent="Menu/SceneOptions"]
+layout_mode = 2
 text = "Load 1: Balloons"
 
-[node name="Load2" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 98.0
-offset_top = 88.0
-offset_right = 345.0
-offset_bottom = 119.0
+[node name="Load2" type="Button" parent="Menu/SceneOptions"]
+layout_mode = 2
 text = "Load 2: Balloons and Obstacles"
 
-[node name="Load3" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 105.0
-offset_top = 162.0
-offset_right = 216.0
-offset_bottom = 193.0
+[node name="Load3" type="Button" parent="Menu/SceneOptions"]
+layout_mode = 2
 text = "Load 3: 1 vs 1"
 
-[node name="Load4" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 31.0
-offset_top = 220.0
-offset_right = 287.0
-offset_bottom = 251.0
+[node name="Load4" type="Button" parent="Menu/SceneOptions"]
+layout_mode = 2
 text = "Load 4: NPC vs Stationary target"
 
-[node name="Load5" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 93.0
-offset_top = 304.0
-offset_right = 250.0
-offset_bottom = 335.0
+[node name="Load5" type="Button" parent="Menu/SceneOptions"]
+layout_mode = 2
 text = "Load 5: Red vs Blue"
 
-[node name="Load6" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 101.0
-offset_top = 375.0
-offset_right = 254.0
-offset_bottom = 406.0
+[node name="Load6" type="Button" parent="Menu/SceneOptions"]
+layout_mode = 2
 text = "Load 6: Turret Test"
 
-[node name="Load7" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 74.0
-offset_top = 466.0
-offset_right = 270.0
-offset_bottom = 497.0
+[node name="Load7" type="Button" parent="Menu/SceneOptions"]
+layout_mode = 2
 text = "Load 7: Capital Ship Test"
 
-[node name="Load8NearMissSound" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 389.0
-offset_top = 23.0
-offset_right = 571.0
-offset_bottom = 54.0
+[node name="Load8NearMissSound" type="Button" parent="Menu/SceneOptions"]
+layout_mode = 2
 text = "Load 8: Near Miss Test"
 
-[node name="Load9Shield" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 410.0
-offset_top = 92.0
-offset_right = 562.0
-offset_bottom = 123.0
+[node name="Load9Shield" type="Button" parent="Menu/SceneOptions"]
+layout_mode = 2
 text = "Load 9: Shield Test"
 
-[node name="Load10Asteroids" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 417.0
-offset_top = 153.0
-offset_right = 567.0
-offset_bottom = 184.0
+[node name="Load10Asteroids" type="Button" parent="Menu/SceneOptions"]
+layout_mode = 2
 text = "Load 10: Asteroids"
 
-[node name="Load11DamageEffects" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 399.0
-offset_top = 233.0
-offset_right = 632.0
-offset_bottom = 264.0
+[node name="Load11DamageEffects" type="Button" parent="Menu/SceneOptions"]
+layout_mode = 2
 text = "Load 11: Damage Effects Test"
 
-[node name="Load12CollisionExperiment" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 390.0
-offset_top = 304.0
-offset_right = 626.0
-offset_bottom = 335.0
+[node name="Load12CollisionExperiment" type="Button" parent="Menu/SceneOptions"]
+layout_mode = 2
 text = "Load 12: Collision Experiment"
 
-[node name="Load13SpaceStationDefense" type="Button" parent="Menu"]
-layout_mode = 0
-offset_left = 400.0
-offset_top = 386.0
-offset_right = 649.0
-offset_bottom = 417.0
+[node name="Load13SpaceStationDefense" type="Button" parent="Menu/SceneOptions"]
+layout_mode = 2
 text = "Load 13: Space Station Defense"
 
-[node name="ToggleFullscreen" type="Button" parent="Menu"]
+[node name="Settings" type="VBoxContainer" parent="Menu"]
 layout_mode = 0
-offset_left = 884.0
-offset_top = 535.0
-offset_right = 1026.0
-offset_bottom = 566.0
+offset_left = 350.0
+offset_top = 200.0
+offset_right = 595.0
+offset_bottom = 313.0
+theme_override_constants/separation = 10
+
+[node name="ToggleFullscreen" type="Button" parent="Menu/Settings"]
+layout_mode = 2
 text = "Toggle Fullscreen"
 
-[node name="ToggleControls" type="CheckButton" parent="Menu"]
-layout_mode = 0
-offset_left = 797.0
-offset_top = 464.0
-offset_right = 1046.0
-offset_bottom = 495.0
+[node name="ToggleControls" type="CheckButton" parent="Menu/Settings"]
+layout_mode = 2
 button_pressed = true
 text = "Use Mouse and Keyboard"
 
-[node name="ToggleInverted" type="CheckButton" parent="Menu"]
-layout_mode = 0
-offset_left = 798.0
-offset_top = 434.0
-offset_right = 1047.0
-offset_bottom = 465.0
+[node name="ToggleInverted" type="CheckButton" parent="Menu/Settings"]
+layout_mode = 2
 text = "Fly Inverted"
+
+[node name="ControllerControls" type="VBoxContainer" parent="Menu"]
+visible = false
+layout_mode = 0
+offset_left = 650.0
+offset_right = 993.0
+offset_bottom = 480.0
+
+[node name="LabelControllerControls" type="Label" parent="Menu/ControllerControls"]
+layout_mode = 2
+text = "CONTROLLER"
+
+[node name="GridContainer" type="GridContainer" parent="Menu/ControllerControls"]
+layout_mode = 2
+columns = 2
+
+[node name="Pitch" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Pitch"
+
+[node name="Label" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Both thumbsticks"
+
+[node name="YawRoll" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Yaw + Roll"
+
+[node name="Label2" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Both thumbsticks"
+
+[node name="Accelerate" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Accelerate"
+
+[node name="Label3" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Left trigger"
+
+[node name="Drift" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Drift"
+
+[node name="Label4" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Left Shoulder"
+
+[node name="Brake" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Brake"
+
+[node name="Label5" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "B"
+
+[node name="Shoot" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Shoot"
+
+[node name="Label6" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Right trigger"
+
+[node name="SwitchWeapons" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Switch Weapons"
+
+[node name="Label7" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Y"
+
+[node name="Retarget" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Retarget /
+Missile Lock"
+
+[node name="Label8" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Right Shoulder"
+
+[node name="TargetCam" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "3rd Person Target Camera"
+
+[node name="Label9" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "D-pad Up"
+
+[node name="TargetCamCloseUp" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Target Camera Close-up"
+
+[node name="Label15" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "D-pad Right"
+
+[node name="RearCam" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Rear Camera"
+
+[node name="Label10" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "D-pad Down"
+
+[node name="FlybyCamera" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Flyby Camera"
+
+[node name="Label11" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "D-pad Left"
+
+[node name="StandardCamera" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Standard Camera (hold
+to look at target)"
+
+[node name="Label12" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Right stick in"
+
+[node name="MainMenu" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Label13" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Start / Menu"
+
+[node name="Quit" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="Label14" type="Label" parent="Menu/ControllerControls/GridContainer"]
+layout_mode = 2
+text = "Back / Select"
+
+[node name="MouseKeyboardControls" type="VBoxContainer" parent="Menu"]
+layout_mode = 0
+offset_left = 650.0
+offset_right = 993.0
+offset_bottom = 480.0
+
+[node name="LabelControllerControls" type="Label" parent="Menu/MouseKeyboardControls"]
+layout_mode = 2
+text = "MOUSE AND KEYBOARD"
+
+[node name="GridContainer" type="GridContainer" parent="Menu/MouseKeyboardControls"]
+layout_mode = 2
+columns = 2
+
+[node name="Pitch" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Pitch"
+
+[node name="Label" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Mouse up / down"
+
+[node name="YawRoll" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Yaw + Roll"
+
+[node name="Label2" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Mouse left / right"
+
+[node name="Accelerate" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Accelerate"
+
+[node name="Label3" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "W"
+
+[node name="Drift" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Drift"
+
+[node name="Label4" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "S"
+
+[node name="Brake" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Brake"
+
+[node name="Label5" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "B"
+
+[node name="Shoot" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Shoot"
+
+[node name="Label6" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Left Mouse Click"
+
+[node name="SwitchWeapons" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Switch Weapons"
+
+[node name="Label7" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Spacebar"
+
+[node name="Retarget" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Retarget /
+Missile Lock"
+
+[node name="Label8" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Right Mouse Click"
+
+[node name="TargetCam" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "3rd Person Target Camera"
+
+[node name="Label9" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "4"
+
+[node name="TargetCamCloseUp" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Target Camera Close-up"
+
+[node name="Label15" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "3"
+
+[node name="RearCam" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Rear Camera"
+
+[node name="Label10" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "2"
+
+[node name="FlybyCamera" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Flyby Camera"
+
+[node name="Label11" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "1"
+
+[node name="StandardCamera" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Standard Camera (hold
+to look at target)"
+
+[node name="Label12" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Control"
+
+[node name="MainMenu" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Label13" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Enter"
+
+[node name="Quit" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="Label14" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+text = "Escape"
 
 [node name="Main3D" type="Node3D" parent="."]
 
 [node name="InputManager" parent="." instance=ExtResource("2_6l7je")]
 
-[connection signal="pressed" from="Menu/Load1" to="." method="_on_load_1_pressed"]
-[connection signal="pressed" from="Menu/Load2" to="." method="_on_load_2_pressed"]
-[connection signal="pressed" from="Menu/Load3" to="." method="_on_load_3_pressed"]
-[connection signal="pressed" from="Menu/Load4" to="." method="_on_load_4_pressed"]
-[connection signal="pressed" from="Menu/Load5" to="." method="_on_load_5_pressed"]
-[connection signal="pressed" from="Menu/Load6" to="." method="_on_load_6_pressed"]
-[connection signal="pressed" from="Menu/Load7" to="." method="_on_load_7_pressed"]
-[connection signal="pressed" from="Menu/Load8NearMissSound" to="." method="_on_load_8_near_miss_sound_pressed"]
-[connection signal="pressed" from="Menu/Load9Shield" to="." method="_on_load_9_shield_pressed"]
-[connection signal="pressed" from="Menu/Load10Asteroids" to="." method="_on_load_10_asteroids_pressed"]
-[connection signal="pressed" from="Menu/Load11DamageEffects" to="." method="_on_load_11_damage_effects_pressed"]
-[connection signal="pressed" from="Menu/Load12CollisionExperiment" to="." method="_on_load_12_collision_experiment_pressed"]
-[connection signal="pressed" from="Menu/Load13SpaceStationDefense" to="." method="_on_load_13_space_station_defense_pressed"]
-[connection signal="pressed" from="Menu/ToggleFullscreen" to="." method="_on_toggle_fullscreen_pressed"]
-[connection signal="toggled" from="Menu/ToggleControls" to="." method="_on_toggle_controls_toggled"]
-[connection signal="toggled" from="Menu/ToggleInverted" to="." method="_on_toggle_inverted_toggled"]
+[connection signal="pressed" from="Menu/SceneOptions/Load1" to="." method="_on_load_1_pressed"]
+[connection signal="pressed" from="Menu/SceneOptions/Load2" to="." method="_on_load_2_pressed"]
+[connection signal="pressed" from="Menu/SceneOptions/Load3" to="." method="_on_load_3_pressed"]
+[connection signal="pressed" from="Menu/SceneOptions/Load4" to="." method="_on_load_4_pressed"]
+[connection signal="pressed" from="Menu/SceneOptions/Load5" to="." method="_on_load_5_pressed"]
+[connection signal="pressed" from="Menu/SceneOptions/Load6" to="." method="_on_load_6_pressed"]
+[connection signal="pressed" from="Menu/SceneOptions/Load7" to="." method="_on_load_7_pressed"]
+[connection signal="pressed" from="Menu/SceneOptions/Load8NearMissSound" to="." method="_on_load_8_near_miss_sound_pressed"]
+[connection signal="pressed" from="Menu/SceneOptions/Load9Shield" to="." method="_on_load_9_shield_pressed"]
+[connection signal="pressed" from="Menu/SceneOptions/Load10Asteroids" to="." method="_on_load_10_asteroids_pressed"]
+[connection signal="pressed" from="Menu/SceneOptions/Load11DamageEffects" to="." method="_on_load_11_damage_effects_pressed"]
+[connection signal="pressed" from="Menu/SceneOptions/Load12CollisionExperiment" to="." method="_on_load_12_collision_experiment_pressed"]
+[connection signal="pressed" from="Menu/SceneOptions/Load13SpaceStationDefense" to="." method="_on_load_13_space_station_defense_pressed"]
+[connection signal="pressed" from="Menu/Settings/ToggleFullscreen" to="." method="_on_toggle_fullscreen_pressed"]
+[connection signal="toggled" from="Menu/Settings/ToggleControls" to="." method="_on_toggle_controls_toggled"]
+[connection signal="toggled" from="Menu/Settings/ToggleInverted" to="." method="_on_toggle_inverted_toggled"]
