@@ -21,6 +21,7 @@ Global="*res://Scripts/Global.gd"
 
 [display]
 
+window/size/mode=4
 window/size/borderless=true
 
 [global_group]
