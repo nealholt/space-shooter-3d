@@ -29,17 +29,26 @@ func _process(_delta):
 		$HUD/Demo.text = "Velocity: %.0f" % Global.player.velocity.length()
 		$HUD/Demo.text += "\nHealth: %.d" % Global.player.health_component.health
 		$HUD/Demo.text += "\nFPS: %d" % Engine.get_frames_per_second()
-	# Exit on escape key and controller left menu button
+
+
+
+func _input(_event: InputEvent) -> void:
+	# Exit to main menu on exit, or if we're already
+	# on the main menu, exit game
 	if Input.is_action_just_pressed('exit'):
-		get_tree().quit()
-	# Reset to main menu on enter key and controller start button
-	if Input.is_action_just_pressed('reset'):
-		to_main_menu()
+		if menu.visible:
+			get_tree().quit()
+		else:
+			to_main_menu()
+	# "p" to pause the game, but not from the main menu
+	if Input.is_action_just_pressed('pause') and !menu.visible:
+		$PauseCanvasLayer.visible = true
+		get_tree().paused = true
+
 
 
 func to_main_menu() -> void:
-	if Global.player and is_instance_valid(Global.player):
-		Global.player.set_physics_process(false)
+	unload_level()
 	menu.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 

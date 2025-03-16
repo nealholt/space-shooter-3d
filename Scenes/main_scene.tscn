@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://daqnnfoj1hjbd"]
+[gd_scene load_steps=4 format=3 uid="uid://daqnnfoj1hjbd"]
 
 [ext_resource type="Script" uid="uid://dn2agce7cfvlb" path="res://Scripts/main_scene.gd" id="1_ke176"]
 [ext_resource type="PackedScene" uid="uid://coy483f2kf274" path="res://Scenes/input_manager.tscn" id="2_6l7je"]
+[ext_resource type="Script" uid="uid://csj0vmdw4ljl8" path="res://Scripts/pause_script.gd" id="3_jv6wh"]
 
 [node name="MainScene" type="Node"]
 script = ExtResource("1_ke176")
@@ -228,9 +229,9 @@ to look at target)"
 layout_mode = 2
 text = "Right stick in"
 
-[node name="MainMenu" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Pause" type="Label" parent="Menu/ControllerControls/GridContainer"]
 layout_mode = 2
-text = "Main Menu"
+text = "Pause"
 
 [node name="Label13" type="Label" parent="Menu/ControllerControls/GridContainer"]
 layout_mode = 2
@@ -364,13 +365,13 @@ to look at target)"
 layout_mode = 2
 text = "Control"
 
-[node name="MainMenu" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Pause" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
 text = "Main Menu"
 
 [node name="Label13" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
-text = "Enter"
+text = "p"
 
 [node name="Quit" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
@@ -383,6 +384,31 @@ text = "Escape"
 [node name="Main3D" type="Node3D" parent="."]
 
 [node name="InputManager" parent="." instance=ExtResource("2_6l7je")]
+
+[node name="PauseCanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="PauseLabel" type="Label" parent="PauseCanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -11.5
+offset_right = 31.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 64
+text = "PAUSED"
+
+[node name="PauseNode" type="Node" parent="PauseCanvasLayer"]
+process_mode = 2
+script = ExtResource("3_jv6wh")
 
 [connection signal="pressed" from="Menu/SceneOptions/Load1" to="." method="_on_load_1_pressed"]
 [connection signal="pressed" from="Menu/SceneOptions/Load2" to="." method="_on_load_2_pressed"]
