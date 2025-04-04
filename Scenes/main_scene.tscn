@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://daqnnfoj1hjbd"]
+[gd_scene load_steps=7 format=3 uid="uid://daqnnfoj1hjbd"]
 
 [ext_resource type="Script" uid="uid://dn2agce7cfvlb" path="res://Scripts/main_scene.gd" id="1_ke176"]
 [ext_resource type="PackedScene" uid="uid://coy483f2kf274" path="res://Scenes/input_manager.tscn" id="2_6l7je"]
+[ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="2_x6ack"]
+[ext_resource type="Theme" uid="uid://b1uy61qicurbh" path="res://Assets/Themes/button_theme.tres" id="3_iacmt"]
 [ext_resource type="Script" uid="uid://csj0vmdw4ljl8" path="res://Scripts/pause_script.gd" id="3_jv6wh"]
+[ext_resource type="Theme" uid="uid://cgxfk4t3qm477" path="res://Assets/Themes/label_theme.tres" id="4_6ev3c"]
 
 [node name="MainScene" type="Node"]
 script = ExtResource("1_ke176")
@@ -23,362 +26,451 @@ text = "Health or velocity or whatever"
 
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 70.0
-offset_top = 45.0
-offset_right = 110.0
-offset_bottom = 85.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="SceneOptions" type="VBoxContainer" parent="Menu"]
-layout_mode = 0
-offset_right = 247.0
-offset_bottom = 101.0
-theme_override_constants/separation = 10
+[node name="TextureRect" type="TextureRect" parent="Menu"]
+layout_mode = 1
+offset_right = 7680.0
+offset_bottom = 4320.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_x6ack")
 
-[node name="Load1" type="Button" parent="Menu/SceneOptions"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SceneOptions" type="VBoxContainer" parent="Menu/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Load1" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
+layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Load 1: Balloons"
 
-[node name="Load2" type="Button" parent="Menu/SceneOptions"]
+[node name="Load2" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Load 2: Balloons and Obstacles"
 
-[node name="Load3" type="Button" parent="Menu/SceneOptions"]
+[node name="Load3" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Load 3: 1 vs 1"
 
-[node name="Load4" type="Button" parent="Menu/SceneOptions"]
+[node name="Load4" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Load 4: NPC vs Stationary target"
 
-[node name="Load5" type="Button" parent="Menu/SceneOptions"]
+[node name="Load5" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Load 5: Red vs Blue"
 
-[node name="Load6" type="Button" parent="Menu/SceneOptions"]
+[node name="Load6" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Load 6: Turret Test"
 
-[node name="Load7" type="Button" parent="Menu/SceneOptions"]
+[node name="Load7" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Load 7: Capital Ship Test"
 
-[node name="Load8NearMissSound" type="Button" parent="Menu/SceneOptions"]
+[node name="Load8NearMissSound" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Load 8: Near Miss Test"
 
-[node name="Load9Shield" type="Button" parent="Menu/SceneOptions"]
+[node name="Load9Shield" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Load 9: Shield Test"
 
-[node name="Load10Asteroids" type="Button" parent="Menu/SceneOptions"]
+[node name="Load10Asteroids" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Load 10: Asteroids"
 
-[node name="Load11DamageEffects" type="Button" parent="Menu/SceneOptions"]
+[node name="Load11DamageEffects" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Load 11: Damage Effects Test"
 
-[node name="Load12CollisionExperiment" type="Button" parent="Menu/SceneOptions"]
+[node name="Load12CollisionExperiment" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Load 12: Collision Experiment"
 
-[node name="Load13SpaceStationDefense" type="Button" parent="Menu/SceneOptions"]
+[node name="Load13SpaceStationDefense" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Load 13: Space Station Defense"
 
-[node name="Settings" type="VBoxContainer" parent="Menu"]
-layout_mode = 0
-offset_left = 350.0
-offset_top = 200.0
-offset_right = 595.0
-offset_bottom = 313.0
-theme_override_constants/separation = 10
-
-[node name="ToggleFullscreen" type="Button" parent="Menu/Settings"]
+[node name="Settings" type="VBoxContainer" parent="Menu/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ToggleFullscreen" type="Button" parent="Menu/HBoxContainer/Settings"]
+layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Toggle Fullscreen"
 
-[node name="ToggleControls" type="CheckButton" parent="Menu/Settings"]
+[node name="ToggleControls" type="CheckButton" parent="Menu/HBoxContainer/Settings"]
 layout_mode = 2
+theme = ExtResource("3_iacmt")
 button_pressed = true
 text = "Use Mouse and Keyboard"
 
-[node name="ToggleInverted" type="CheckButton" parent="Menu/Settings"]
+[node name="ToggleInverted" type="CheckButton" parent="Menu/HBoxContainer/Settings"]
 layout_mode = 2
+theme = ExtResource("3_iacmt")
 text = "Fly Inverted"
 
-[node name="ControllerControls" type="VBoxContainer" parent="Menu"]
+[node name="ControllerControls" type="VBoxContainer" parent="Menu/HBoxContainer"]
 visible = false
-layout_mode = 0
-offset_left = 650.0
-offset_right = 993.0
-offset_bottom = 480.0
-
-[node name="LabelControllerControls" type="Label" parent="Menu/ControllerControls"]
 layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="LabelControllerControls" type="Label" parent="Menu/HBoxContainer/ControllerControls"]
+layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "CONTROLLER"
 
-[node name="GridContainer" type="GridContainer" parent="Menu/ControllerControls"]
+[node name="GridContainer" type="GridContainer" parent="Menu/HBoxContainer/ControllerControls"]
 layout_mode = 2
 columns = 2
 
-[node name="Pitch" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Pitch" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Pitch"
 
-[node name="Label" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Both thumbsticks"
 
-[node name="YawRoll" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="YawRoll" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Yaw + Roll"
 
-[node name="Label2" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label2" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Both thumbsticks"
 
-[node name="Accelerate" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Accelerate" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Accelerate"
 
-[node name="Label3" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label3" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Left trigger"
 
-[node name="Drift" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Drift" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Drift"
 
-[node name="Label4" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label4" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Left Shoulder"
 
-[node name="Brake" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Brake" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Brake"
 
-[node name="Label5" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label5" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "B"
 
-[node name="Shoot" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Shoot" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Shoot"
 
-[node name="Label6" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label6" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Right trigger"
 
-[node name="SwitchWeapons" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="SwitchWeapons" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Switch Weapons"
 
-[node name="Label7" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label7" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Y"
 
-[node name="Retarget" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Retarget" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Retarget /
 Missile Lock"
 
-[node name="Label8" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label8" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Right Shoulder"
 
-[node name="TargetCam" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="TargetCam" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "3rd Person Target Camera"
 
-[node name="Label9" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label9" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "D-pad Up"
 
-[node name="TargetCamCloseUp" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="TargetCamCloseUp" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Target Camera Close-up"
 
-[node name="Label15" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label15" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "D-pad Right"
 
-[node name="RearCam" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="RearCam" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Rear Camera"
 
-[node name="Label10" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label10" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "D-pad Down"
 
-[node name="FlybyCamera" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="FlybyCamera" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Flyby Camera"
 
-[node name="Label11" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label11" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "D-pad Left"
 
-[node name="StandardCamera" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="StandardCamera" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Standard Camera (hold
 to look at target)"
 
-[node name="Label12" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label12" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Right stick in"
 
-[node name="Pause" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Pause" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Pause"
 
-[node name="Label13" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label13" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Start / Menu"
 
-[node name="Quit" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Quit" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Quit"
 
-[node name="Label14" type="Label" parent="Menu/ControllerControls/GridContainer"]
+[node name="Label14" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Back / Select"
 
-[node name="MouseKeyboardControls" type="VBoxContainer" parent="Menu"]
-layout_mode = 0
-offset_left = 650.0
-offset_right = 993.0
-offset_bottom = 480.0
-
-[node name="LabelControllerControls" type="Label" parent="Menu/MouseKeyboardControls"]
+[node name="MouseKeyboardControls" type="VBoxContainer" parent="Menu/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="LabelControllerControls" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls"]
+layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "MOUSE AND KEYBOARD"
 
-[node name="GridContainer" type="GridContainer" parent="Menu/MouseKeyboardControls"]
+[node name="GridContainer" type="GridContainer" parent="Menu/HBoxContainer/MouseKeyboardControls"]
 layout_mode = 2
 columns = 2
 
-[node name="Pitch" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Pitch" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Pitch"
 
-[node name="Label" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Mouse up / down"
 
-[node name="YawRoll" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="YawRoll" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Yaw + Roll"
 
-[node name="Label2" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label2" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Mouse left / right"
 
-[node name="Accelerate" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Accelerate" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Accelerate"
 
-[node name="Label3" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label3" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "W"
 
-[node name="Drift" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Drift" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Drift"
 
-[node name="Label4" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label4" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "S"
 
-[node name="Brake" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Brake" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Brake"
 
-[node name="Label5" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label5" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "B"
 
-[node name="Shoot" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Shoot" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Shoot"
 
-[node name="Label6" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label6" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Left Mouse Click"
 
-[node name="SwitchWeapons" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="SwitchWeapons" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Switch Weapons"
 
-[node name="Label7" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label7" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Spacebar"
 
-[node name="Retarget" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Retarget" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Retarget /
 Missile Lock"
 
-[node name="Label8" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label8" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Right Mouse Click"
 
-[node name="TargetCam" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="TargetCam" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "3rd Person Target Camera"
 
-[node name="Label9" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label9" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "4"
 
-[node name="TargetCamCloseUp" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="TargetCamCloseUp" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Target Camera Close-up"
 
-[node name="Label15" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label15" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "3"
 
-[node name="RearCam" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="RearCam" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Rear Camera"
 
-[node name="Label10" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label10" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "2"
 
-[node name="FlybyCamera" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="FlybyCamera" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Flyby Camera"
 
-[node name="Label11" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label11" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "1"
 
-[node name="StandardCamera" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="StandardCamera" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Standard Camera (hold
 to look at target)"
 
-[node name="Label12" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label12" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Control"
 
-[node name="Pause" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Pause" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Main Menu"
 
-[node name="Label13" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label13" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "p"
 
-[node name="Quit" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Quit" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Quit"
 
-[node name="Label14" type="Label" parent="Menu/MouseKeyboardControls/GridContainer"]
+[node name="Label14" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
+theme = ExtResource("4_6ev3c")
 text = "Escape"
 
 [node name="Main3D" type="Node3D" parent="."]
@@ -410,19 +502,19 @@ text = "PAUSED"
 process_mode = 2
 script = ExtResource("3_jv6wh")
 
-[connection signal="pressed" from="Menu/SceneOptions/Load1" to="." method="_on_load_1_pressed"]
-[connection signal="pressed" from="Menu/SceneOptions/Load2" to="." method="_on_load_2_pressed"]
-[connection signal="pressed" from="Menu/SceneOptions/Load3" to="." method="_on_load_3_pressed"]
-[connection signal="pressed" from="Menu/SceneOptions/Load4" to="." method="_on_load_4_pressed"]
-[connection signal="pressed" from="Menu/SceneOptions/Load5" to="." method="_on_load_5_pressed"]
-[connection signal="pressed" from="Menu/SceneOptions/Load6" to="." method="_on_load_6_pressed"]
-[connection signal="pressed" from="Menu/SceneOptions/Load7" to="." method="_on_load_7_pressed"]
-[connection signal="pressed" from="Menu/SceneOptions/Load8NearMissSound" to="." method="_on_load_8_near_miss_sound_pressed"]
-[connection signal="pressed" from="Menu/SceneOptions/Load9Shield" to="." method="_on_load_9_shield_pressed"]
-[connection signal="pressed" from="Menu/SceneOptions/Load10Asteroids" to="." method="_on_load_10_asteroids_pressed"]
-[connection signal="pressed" from="Menu/SceneOptions/Load11DamageEffects" to="." method="_on_load_11_damage_effects_pressed"]
-[connection signal="pressed" from="Menu/SceneOptions/Load12CollisionExperiment" to="." method="_on_load_12_collision_experiment_pressed"]
-[connection signal="pressed" from="Menu/SceneOptions/Load13SpaceStationDefense" to="." method="_on_load_13_space_station_defense_pressed"]
-[connection signal="pressed" from="Menu/Settings/ToggleFullscreen" to="." method="_on_toggle_fullscreen_pressed"]
-[connection signal="toggled" from="Menu/Settings/ToggleControls" to="." method="_on_toggle_controls_toggled"]
-[connection signal="toggled" from="Menu/Settings/ToggleInverted" to="." method="_on_toggle_inverted_toggled"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load1" to="." method="_on_load_1_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load2" to="." method="_on_load_2_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load3" to="." method="_on_load_3_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load4" to="." method="_on_load_4_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load5" to="." method="_on_load_5_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load6" to="." method="_on_load_6_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load7" to="." method="_on_load_7_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load8NearMissSound" to="." method="_on_load_8_near_miss_sound_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load9Shield" to="." method="_on_load_9_shield_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load10Asteroids" to="." method="_on_load_10_asteroids_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load11DamageEffects" to="." method="_on_load_11_damage_effects_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load12CollisionExperiment" to="." method="_on_load_12_collision_experiment_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load13SpaceStationDefense" to="." method="_on_load_13_space_station_defense_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/Settings/ToggleFullscreen" to="." method="_on_toggle_fullscreen_pressed"]
+[connection signal="toggled" from="Menu/HBoxContainer/Settings/ToggleControls" to="." method="_on_toggle_controls_toggled"]
+[connection signal="toggled" from="Menu/HBoxContainer/Settings/ToggleInverted" to="." method="_on_toggle_inverted_toggled"]

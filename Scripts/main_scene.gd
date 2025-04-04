@@ -145,8 +145,8 @@ func _on_toggle_inverted_toggled(toggled_on: bool) -> void:
 func _on_toggle_controls_toggled(toggled_on: bool) -> void:
 	Global.input_man.toggle_mouse_and_keyboard(toggled_on)
 	if toggled_on:
-		$Menu/MouseKeyboardControls.visible = true
-		$Menu/ControllerControls.visible = false
+		$Menu/HBoxContainer/MouseKeyboardControls.visible = true
+		$Menu/HBoxContainer/ControllerControls.visible = false
 	else:
-		$Menu/MouseKeyboardControls.visible = false
-		$Menu/ControllerControls.visible = true
+		$Menu/HBoxContainer/MouseKeyboardControls.visible = false
+		$Menu/HBoxContainer/ControllerControls.visible = true

@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cgxfk4t3qm477"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_udfup"]
+bg_color = Color(0.0966463, 0.0434528, 0.265926, 1)
+
+[resource]
+Label/font_sizes/font_size = 20
+Label/styles/normal = SubResource("StyleBoxFlat_udfup")
