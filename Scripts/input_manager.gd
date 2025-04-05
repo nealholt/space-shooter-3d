@@ -2,6 +2,8 @@ class_name InputManager extends Node
 
 @export var use_mouse_and_keyboard := true
 @export var use_inverted := false
+# Use this curve to scale mouse input to make the ship easier to control
+@export var mouse_control_curve : Curve
 
 var inverted := 1.0
 
@@ -67,8 +69,6 @@ func update_controller_input() -> void:
 
 
 func update_mouse_keyboard_input() -> void:
-	# TODO LEFT OFF HERE
-	# var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	# This script has to be attached to a node in the scene tree
 	# otherwise get_viewport() won't work.
 	var half_size : Vector2 = get_viewport().size / 2
@@ -77,22 +77,9 @@ func update_mouse_keyboard_input() -> void:
 	var x_rel_center = half_size.x - mouse_pos.x
 	var y_rel_center = inverted*(half_size.y - mouse_pos.y)
 	# Normalize
+	# Old way:
 	left_right1 = x_rel_center / half_size.x
 	up_down1 = y_rel_center / half_size.y
-
-
-# TODO
-# This script has to be attached to a node in the scene tree
-# otherwise this function will never get called.
-#func _input(event: InputEvent) -> void:
-	#if use_controller:
-		#return
-	#
-	#if event is InputEventMouseMotion:
-		#var half_size : Vector2 = get_viewport().size / 2
-		## Get mouse x and y relative to screen center
-		#var x_rel_center = half_size.x - event.position.x
-		#var y_rel_center = inverted*(half_size.y - event.position.y)
-		## Normalize
-		#left_right1 = x_rel_center / half_size.x
-		#up_down1 = y_rel_center / half_size.y
+	# New way
+	#left_right1 = sign(x_rel_center)*mouse_control_curve.sample(abs(x_rel_center / half_size.x))
+	#up_down1 = sign(y_rel_center)*mouse_control_curve.sample(abs(y_rel_center / half_size.y))

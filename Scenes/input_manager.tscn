@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://coy483f2kf274"]
+[gd_scene load_steps=3 format=3 uid="uid://coy483f2kf274"]
 
 [ext_resource type="Script" uid="uid://o4gk4uc06j7s" path="res://Scripts/input_manager.gd" id="1_umdoe"]
 
+[sub_resource type="Curve" id="Curve_umdoe"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.12, 0), 0.0, 0.0, 0, 0, Vector2(0.76, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_enabled = true
+metadata/_snap_count = 50
+
 [node name="InputManager" type="Node"]
 script = ExtResource("1_umdoe")
+mouse_control_curve = SubResource("Curve_umdoe")
