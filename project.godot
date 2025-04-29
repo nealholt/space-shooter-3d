@@ -30,6 +30,7 @@ window/size/borderless=true
 damageable=""
 "team member"=""
 "gun hardpoint"=""
+capital_ship="Group for capital ships so that things that prefer slow moving targets can find them."
 
 [input]
 

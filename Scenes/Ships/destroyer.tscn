@@ -13,7 +13,7 @@ points = PackedVector3Array(7.27259, 2.5, 4.88636, -7.27273, -2.5, -4.88636, -7.
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v5onn"]
 points = PackedVector3Array(12.6959, 0.888734, 5.11905, -12.6959, -0.698257, -5.19841, -12.6959, 0.888734, -5.19841, 12.6959, -0.698257, -5.19841, -12.6959, -0.698257, 5.11905, -12.6959, 0.888734, 5.11905, 12.6959, 0.888734, -5.19841, 12.6959, -0.698257, 5.11905)
 
-[node name="Destroyer" type="CharacterBody3D" groups=["damageable", "team member"]]
+[node name="Destroyer" type="CharacterBody3D" groups=["capital_ship", "damageable", "team member"]]
 collision_layer = 3
 collision_mask = 3
 motion_mode = 1

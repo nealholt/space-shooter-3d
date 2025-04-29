@@ -8,6 +8,8 @@ class_name NPCFighterStateMachine
 # Source:
 # https://www.youtube.com/watch?v=ow_Lum-Agbs&t=300s
 
+@onready var target_selector := $TargetSelector
+
 # Reference to an intermediate script through which
 # states and the npc moved by the state can communicate.
 @export var movement_profile : MovementProfile
@@ -30,6 +32,8 @@ var shooting_angle:float
 @export var speed_lerp: float = 10.0
 @export var lerp_str: float = 3.0 # for turning
 
+@export var target_capital_ships : bool = false
+
 
 func _ready() -> void:
 	shooting_angle = deg_to_rad(shooting_angle_degrees)
@@ -43,6 +47,8 @@ func _ready() -> void:
 	if initial_state:
 		initial_state.Enter()
 		current_state = initial_state
+	# Tell target selector to prefer capital ships
+	target_selector.prefer_capital_ships = target_capital_ships
 
 
 func move_and_turn(mover, delta:float) -> void:
@@ -72,7 +78,7 @@ func move_and_turn(mover, delta:float) -> void:
 
 func select_target(targeter:Node3D) -> void:
 	# Get target from the target selector
-	target = $TargetSelector.get_target(targeter)
+	target = target_selector.get_target(targeter)
 
 
 func shoot(shooter, delta:float) -> void:

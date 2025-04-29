@@ -572,7 +572,7 @@ points = PackedVector3Array(0.833089, -0.390705, -2.60391, 0.456266, -3.11302, -
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3dken"]
 points = PackedVector3Array(0.442885, -3.49419, -0.942066, -0.602512, -3.8059, -1.4005, -0.617888, -3.81058, -1.36951, -0.617888, -3.76345, -1.36951, -0.561249, -3.76345, -1.40718)
 
-[node name="SpaceStation" type="CharacterBody3D" groups=["damageable", "team member"]]
+[node name="SpaceStation" type="CharacterBody3D" groups=["capital_ship", "damageable", "team member"]]
 collision_layer = 3
 script = ExtResource("1_usm2i")
 
@@ -580,7 +580,7 @@ script = ExtResource("1_usm2i")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_yt4lk")
+&"": SubResource("AnimationLibrary_yt4lk")
 }
 autoplay = "ROTATE"
 

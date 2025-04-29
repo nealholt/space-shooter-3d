@@ -18,13 +18,56 @@ var targeting_hud_on:bool = true
 # Control-Shift-f to search for anywhere text is found
 
 
+# Get the member of the given groups who is nearest to
+# the center of the looker's view.
+# This is initially used by seeking missiles and
+# NPCs.
+# If there are no members of all the requested groups,
+# then fewer groups will be required until a member
+# is found or we run out of groups.
+func get_center_most_from_groups(group_array:Array, looker):
+	# Get a list of members of the groups
+	var targets = Array()
+	# The following is the closest gdscript has to dowhile
+	while true:
+		targets = get_tree().get_nodes_in_group(group_array[0])
+		# If there are one or zero, quit now
+		if targets.size() == 0:
+			return null
+		elif targets.size() == 1:
+			return targets[0]
+		# Loop over the remaining groups
+		for i in range(1,group_array.size()):
+			# Loop over the targets in reverse order,
+			# removing targets that aren't in the group.
+			for j in range(targets.size()-1, 0, -1):
+				if !targets[j].is_in_group(group_array[i]):
+					targets.remove_at(j)
+		# If no targets remain, remove a group and try again
+		if targets.size() == 0:
+			if group_array.size()>1:
+				group_array.pop_back()
+			else:
+				return null
+		else:
+			break
+	# Identify target with smallest angle to
+	return get_center_most(looker, targets)
+
+
 # Get the member of the given group who is nearest to
 # the center of the looker's view.
 # This is initially used by seeking missiles and
 # NPCs.
-func get_center_most_from_group(group:String,looker):
-	# Identify target with smallest angle to
+func get_center_most_from_group(group:String, looker):
+	# Identify target from group with smallest angle to
 	var targets = get_tree().get_nodes_in_group(group)
+	return get_center_most(looker, targets)
+
+
+# Get item from array targets that is most centered
+# from looker's perspective.
+func get_center_most(looker, targets:Array):
 	var most_centered # This is a target-type variable
 	var smallest_angle_to := 7.0 # Start off with any upper limit over 2pi
 	var temp_angle_to : float
