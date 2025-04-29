@@ -34,7 +34,8 @@ material = SubResource("ShaderMaterial_6dy1g")
 
 [node name="Fighter" type="CharacterBody3D" groups=["damageable", "team member"]]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
-collision_layer = 2
+collision_layer = 3
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_dn8ab")
 deathExplosion = ExtResource("2_l8ark")

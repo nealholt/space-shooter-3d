@@ -30,7 +30,7 @@ stream = ExtResource("8_vlve7")
 volume_db = -10.0
 pitch_scale = 0.5
 
-[node name="MissileLockGroup" parent="." index="10"]
+[node name="MissileLockGroup" parent="." index="9"]
 npc_missile_lock = false
 
 [node name="FresnelAura" parent="Shield" index="0"]

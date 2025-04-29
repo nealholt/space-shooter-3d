@@ -1,8 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://cfiwadbmgx3up"]
+[gd_scene load_steps=19 format=3 uid="uid://cfiwadbmgx3up"]
 
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="1_nau7t"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_5rasv"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="3_6nm7s"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="4_s6g67"]
+[ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Scenes/Ships/bomber.tscn" id="5_1d1v4"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_7pty0"]
 [ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Guns/laser_gun.tscn" id="5_8sixk"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_tjvqf"]
@@ -204,6 +206,18 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 49.2309, 202.131, 5.05472)
 [node name="Orb16" parent="RedTeam" instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 143.357, 98.8829, 136.363)
 
+[node name="Fighter" parent="RedTeam" instance=ExtResource("4_s6g67")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -55.1471, 50.2299, -241.805)
+
+[node name="Fighter2" parent="RedTeam" instance=ExtResource("4_s6g67")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 44.9051, -241.844)
+
+[node name="Bomber" parent="RedTeam" instance=ExtResource("5_1d1v4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 62.3887, -191.61)
+
+[node name="Bomber2" parent="RedTeam" instance=ExtResource("5_1d1v4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.0185, 50.3287, -277.873)
+
 [node name="BlueTeam" type="Node3D" parent="."]
 script = ExtResource("1_nau7t")
 team = "blue team"
@@ -211,18 +225,18 @@ team = "blue team"
 [node name="Player" parent="BlueTeam" instance=ExtResource("3_5rasv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50.397, 0)
 
-[node name="MissileLockGroup" parent="BlueTeam/Player" index="2"]
-npc_missile_lock = false
-
-[node name="LaserGun" parent="BlueTeam/Player/WeaponHandler" index="0" instance=ExtResource("5_8sixk")]
-
-[node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
-mesh = SubResource("SphereMesh_b3t22")
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlueTeam/Player/AimAssist" index="0"]
 stream = ExtResource("6_tjvqf")
 volume_db = -10.0
 pitch_scale = 0.5
+
+[node name="MissileLockGroup" parent="BlueTeam/Player" index="9"]
+npc_missile_lock = false
+
+[node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
+mesh = SubResource("SphereMesh_b3t22")
+
+[node name="LaserGun" parent="BlueTeam/Player/WeaponHandler" index="0" instance=ExtResource("5_8sixk")]
 
 [node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("7_cw0p4")]
 
@@ -231,6 +245,6 @@ pitch_scale = 0.5
 [node name="EngineAudioVisuals" parent="BlueTeam/Player" instance=ExtResource("10_vci83")]
 
 [editable path="BlueTeam/Player"]
+[editable path="BlueTeam/Player/Shield"]
 [editable path="BlueTeam/Player/WeaponHandler/GatlingGun/GunModel"]
 [editable path="BlueTeam/Player/WeaponHandler/HitScanGun/Node"]
-[editable path="BlueTeam/Player/Shield"]

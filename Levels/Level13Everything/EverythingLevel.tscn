@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="3_eggcn"]
 [ext_resource type="MeshLibrary" uid="uid://onqmfkbeu0js" path="res://Assets/Asteroids/asteroids.tres" id="4_u7bmr"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="5_0jpk3"]
-[ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="6_jotft"]
+[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="6_lqyyp"]
 [ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Scenes/Ships/bomber.tscn" id="7_m10fo"]
 [ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Scenes/Ships/destroyer.tscn" id="8_5shl4"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="8_isq32"]
@@ -76,9 +76,7 @@ team = "blue team"
 [node name="SpaceStation" parent="BlueTeam" instance=ExtResource("3_eggcn")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -3, 7)
 
-[node name="PlayerFighter" parent="BlueTeam" instance=ExtResource("6_jotft")]
-transform = Transform3D(0.0122519, -4.42437e-08, 0.999925, 4.37114e-08, 1, 4.37114e-08, -0.999925, 4.31726e-08, 0.0122519, 399.758, 0, 0)
-collision_layer = 0
+[node name="Corvette" parent="BlueTeam" instance=ExtResource("6_lqyyp")]
 
 [node name="RedTeam" type="Node3D" parent="."]
 script = ExtResource("5_0jpk3")

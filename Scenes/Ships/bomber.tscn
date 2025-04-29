@@ -16,7 +16,8 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_u613a"]
 
 [node name="Bomber" type="CharacterBody3D" groups=["damageable", "team member"]]
-collision_layer = 2
+collision_layer = 3
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_uw5oo")
 deathExplosion = ExtResource("2_0tp8c")
@@ -49,6 +50,7 @@ missile_range = 1000.0
 
 [node name="MissileLauncher" parent="MissileLockGroup" instance=ExtResource("7_f8b5m")]
 bullet = ExtResource("8_30gv8")
-fire_rate = 10.0
+bullet_speed = 600.0
+fire_rate = 4.0
 
 [node name="TargetReticles" parent="." instance=ExtResource("10_up24e")]

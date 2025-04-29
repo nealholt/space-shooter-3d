@@ -21,22 +21,22 @@ material = SubResource("ShaderMaterial_se4th")
 
 [node name="Fighter" instance=ExtResource("1_5kq0i")]
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
+stream = ExtResource("4_cq55v")
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="MissileLockGroup" parent="." index="8"]
+npc_missile_lock = false
+
+[node name="FresnelAura" parent="Shield" index="0"]
+mesh = SubResource("SphereMesh_24wxq")
+
 [node name="TextureRect" type="TextureRect" parent="WeaponHandler/Gun" index="1"]
 self_modulate = Color(1, 1, 1, 0.607843)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_28aj3")
-
-[node name="FresnelAura" parent="Shield" index="0"]
-mesh = SubResource("SphereMesh_24wxq")
-
-[node name="MissileLockGroup" parent="." index="10"]
-npc_missile_lock = false
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
-stream = ExtResource("4_cq55v")
-volume_db = -10.0
-pitch_scale = 0.5
 
 [node name="CameraGroup" parent="." index="12" instance=ExtResource("5_6av2j")]
 
