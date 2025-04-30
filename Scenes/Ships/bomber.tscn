@@ -46,11 +46,14 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, -1.35, 1.28, 3)
 [node name="MissileLockGroup" parent="." instance=ExtResource("9_7wsae")]
 npc_missile_lock = true
 lock_timeout = 0.2
-missile_range = 1000.0
+missile_range = 2000.0
+speed = 50.0
 
 [node name="MissileLauncher" parent="MissileLockGroup" instance=ExtResource("7_f8b5m")]
 bullet = ExtResource("8_30gv8")
-bullet_speed = 600.0
-fire_rate = 4.0
+damage = 100.0
+bullet_speed = 80.0
+bullet_timeout = 60.0
+fire_rate = 0.1
 
 [node name="TargetReticles" parent="." instance=ExtResource("10_up24e")]

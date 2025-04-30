@@ -1,0 +1,13 @@
+[gd_resource type="SphereMesh" load_steps=2 format=3 uid="uid://dxbq33opcb5to"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pwbh"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.0
+
+[resource]
+material = SubResource("StandardMaterial3D_6pwbh")
+radius = 0.1
+height = 0.2
+radial_segments = 32
+rings = 16

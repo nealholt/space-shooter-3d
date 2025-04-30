@@ -15,6 +15,8 @@ initial_velocity_max = 4.0
 gravity = Vector3(0, 0, 0)
 damping_min = 9.0
 damping_max = 9.0
+scale_min = 3.0
+scale_max = 3.0
 scale_curve = SubResource("CurveTexture_0capg")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pwbh"]
@@ -30,7 +32,7 @@ radial_segments = 32
 rings = 16
 
 [node name="BoosterParticles" type="GPUParticles3D"]
-amount = 32
-lifetime = 0.5
+amount = 64
+lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_fgg2i")
 draw_pass_1 = SubResource("SphereMesh_atjxn")

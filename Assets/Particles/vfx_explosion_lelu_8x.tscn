@@ -281,7 +281,7 @@ draw_pass_1 = SubResource("QuadMesh_qadt1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_i0xkb")
+&"": SubResource("AnimationLibrary_i0xkb")
 }
 autoplay = "Init"
 

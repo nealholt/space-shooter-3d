@@ -86,7 +86,7 @@ transform = Transform3D(0.102862, 0, -0.994696, 0, 1, 0, 0.994696, 0, 0.102862, 
 
 [node name="NPCFighterController" parent="RedTeam/Bomber" instance=ExtResource("8_isq32")]
 target_capital_ships = true
-too_far = 500.0
+too_far = 800.0
 too_close = 300.0
 
 [node name="Destroyer" parent="RedTeam" instance=ExtResource("8_5shl4")]

@@ -35,13 +35,13 @@ func _process(_delta):
 func _input(_event: InputEvent) -> void:
 	# Exit to main menu on exit, or if we're already
 	# on the main menu, exit game
-	if Input.is_action_just_pressed('exit'):
+	if Input.is_action_just_released('exit'):
 		if menu.visible:
 			get_tree().quit()
 		else:
 			to_main_menu()
 	# "p" to pause the game, but not from the main menu
-	if Input.is_action_just_pressed('pause') and !menu.visible:
+	elif Input.is_action_just_pressed('pause') and !menu.visible:
 		$PauseCanvasLayer.visible = true
 		get_tree().paused = true
 

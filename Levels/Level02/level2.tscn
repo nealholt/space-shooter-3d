@@ -227,11 +227,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50.397, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlueTeam/Player/AimAssist" index="0"]
 stream = ExtResource("6_tjvqf")
-volume_db = -10.0
+volume_db = -20.0
 pitch_scale = 0.5
 
 [node name="MissileLockGroup" parent="BlueTeam/Player" index="9"]
 npc_missile_lock = false
+
+[node name="MissileLauncher" parent="BlueTeam/Player/MissileLockGroup" index="7"]
+bullet_speed = 150.0
 
 [node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
 mesh = SubResource("SphereMesh_b3t22")

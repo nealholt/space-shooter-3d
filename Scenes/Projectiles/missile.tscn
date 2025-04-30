@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dt8e8r0ew3fjn"]
+[gd_scene load_steps=9 format=3 uid="uid://dt8e8r0ew3fjn"]
 
 [ext_resource type="PackedScene" uid="uid://caody2m8xh0b6" path="res://Scenes/Projectiles/projectile_ray.tscn" id="1_0lyqn"]
 [ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="2_ajfq5"]
-[ext_resource type="PackedScene" uid="uid://domnb1m51i30x" path="res://Assets/Particles/ship_strike.tscn" id="2_qofc8"]
 [ext_resource type="PackedScene" uid="uid://loiql7x3ow62" path="res://Assets/Particles/shield_strike.tscn" id="3_h6e4k"]
 [ext_resource type="PackedScene" uid="uid://b8xwbrmhu8ybu" path="res://Assets/Projectiles/Missiles/gray_torpedo_body.tscn" id="4_4eh70"]
 [ext_resource type="PackedScene" uid="uid://dto664xfw5qbf" path="res://Scenes/MovementControllers/physics_seek_controller.tscn" id="5_m3n6r"]
@@ -14,7 +13,7 @@ radius = 5.0
 
 [node name="ProjectileRay" instance=ExtResource("1_0lyqn")]
 deathExplosion = ExtResource("2_ajfq5")
-sparks = ExtResource("2_qofc8")
+sparks = ExtResource("2_ajfq5")
 shieldSparks = ExtResource("3_h6e4k")
 
 [node name="GrayTorpedo" parent="." index="2" instance=ExtResource("4_4eh70")]

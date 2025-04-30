@@ -6,9 +6,9 @@ class_name Gun
 
 @export var damage:float = 1.0
 @export var bullet_speed:float = 1000.0
-@export var bullet_timeout:float = 2.0
+@export var bullet_timeout:float = 2.0 ## Seconds
 
-@export var fire_rate:= 1.0 # Shots per second
+@export var fire_rate:= 1.0 ## Shots per second
 var firing_rate_timer: Timer
 
 # Whether gun is automatic or not. If true then
@@ -25,7 +25,7 @@ var firing_rate_timer: Timer
 # which makes it twice as large.
 @export var spread_deg:float = 0.0 # degrees
 
-# How many bullets to spawn simultaneously
+## How many bullets to spawn simultaneously
 @export var simultaneous_shots:int = 1
 
 # Struct containing info about how and where to shoot

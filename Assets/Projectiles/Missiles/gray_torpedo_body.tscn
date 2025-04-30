@@ -1,8 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8xwbrmhu8ybu"]
+[gd_scene load_steps=8 format=3 uid="uid://b8xwbrmhu8ybu"]
 
 [ext_resource type="PackedScene" uid="uid://ux6ivcx1ovdp" path="res://Assets/Particles/booster_particles.tscn" id="1_hysmg"]
+[ext_resource type="Texture2D" uid="uid://dwhxx0f2kh1cu" path="res://Assets/Textures/kenney_particle-pack/smoke_07.png" id="2_uudvm"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_fjlpl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uudvm"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("2_uudvm")
+disable_receive_shadows = true
+billboard_mode = 2
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_5hgfo"]
+material = SubResource("StandardMaterial3D_uudvm")
 
 [sub_resource type="SphereMesh" id="SphereMesh_inaim"]
 
@@ -15,7 +27,8 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 mesh = SubResource("CylinderMesh_fjlpl")
 
 [node name="BoosterParticles" parent="." instance=ExtResource("1_hysmg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+amount = 128
+draw_pass_1 = SubResource("QuadMesh_5hgfo")
 
 [node name="Nose" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
