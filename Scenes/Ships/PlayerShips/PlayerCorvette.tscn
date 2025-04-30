@@ -27,7 +27,7 @@ material = SubResource("ShaderMaterial_731x3")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
 stream = ExtResource("8_vlve7")
-volume_db = -10.0
+volume_db = -20.0
 pitch_scale = 0.5
 
 [node name="MissileLockGroup" parent="." index="9"]

@@ -48,6 +48,7 @@ func Physics_Update(delta:float) -> void:
 	
 	# Transition to flee if too close
 	if motion.orientation_data.dist_sqd < too_close_sqd:
+		#print('transitioning from seek to flee')
 		Transitioned.emit(self,"flee")
 	# Time out
 	elapsed_time += delta

@@ -121,3 +121,4 @@ func pitch_target_behind() -> void:
 	# I sure would love a better way of doing this.
 	if rad_to_deg(motion.orientation_data.amt_above_below) < 5.0:
 		motion.goal_pitch = motion.goal_pitch/10.0
+	print(motion.goal_pitch) # TODO TESTING

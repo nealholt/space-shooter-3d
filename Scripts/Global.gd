@@ -25,7 +25,7 @@ var targeting_hud_on:bool = true
 # If there are no members of all the requested groups,
 # then fewer groups will be required until a member
 # is found or we run out of groups.
-func get_center_most_from_groups(group_array:Array, looker):
+func get_center_most_from_groups(group_array:Array, looker) -> Node3D:
 	# Get a list of members of the groups
 	var targets = Array()
 	# The following is the closest gdscript has to dowhile
@@ -59,7 +59,7 @@ func get_center_most_from_groups(group_array:Array, looker):
 # the center of the looker's view.
 # This is initially used by seeking missiles and
 # NPCs.
-func get_center_most_from_group(group:String, looker):
+func get_center_most_from_group(group:String, looker) -> Node3D:
 	# Identify target from group with smallest angle to
 	var targets = get_tree().get_nodes_in_group(group)
 	return get_center_most(looker, targets)
@@ -67,8 +67,8 @@ func get_center_most_from_group(group:String, looker):
 
 # Get item from array targets that is most centered
 # from looker's perspective.
-func get_center_most(looker, targets:Array):
-	var most_centered # This is a target-type variable
+func get_center_most(looker, targets:Array) -> Node3D:
+	var most_centered:Node3D # This is a target-type variable
 	var smallest_angle_to := 7.0 # Start off with any upper limit over 2pi
 	var temp_angle_to : float
 	for target in targets:

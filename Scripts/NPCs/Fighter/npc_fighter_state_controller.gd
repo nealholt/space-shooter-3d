@@ -34,6 +34,13 @@ var shooting_angle:float
 
 @export var target_capital_ships : bool = false
 
+# I'm anxious about the wisdom of adding variables
+# here that just set lower level variables in the
+# states, but for now, this is the best I've come
+# up with.
+@export var too_far:float = 150.0 ## Distance at which to come in for another attack pass
+@export var too_close:float = 30.0 ## Distance at which to stop attack pass and peel off
+
 
 func _ready() -> void:
 	shooting_angle = deg_to_rad(shooting_angle_degrees)
@@ -49,6 +56,9 @@ func _ready() -> void:
 		current_state = initial_state
 	# Tell target selector to prefer capital ships
 	target_selector.prefer_capital_ships = target_capital_ships
+	# Set state parameters. Squared for efficiency.
+	$States/Seek.too_close_sqd = too_close * too_close
+	$States/Flee.distance_limit_sqd = too_far * too_far
 
 
 func move_and_turn(mover, delta:float) -> void:
