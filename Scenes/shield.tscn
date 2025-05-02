@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cruqo01kbn3ab"]
+[gd_scene load_steps=8 format=3 uid="uid://cruqo01kbn3ab"]
 
 [ext_resource type="Script" uid="uid://7megq05mf7kt" path="res://Scripts/shield.gd" id="1_xlxvf"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_1831n"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="3_6jkow"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="4_t4iu0"]
-[ext_resource type="PackedScene" uid="uid://w2dnuhc55w32" path="res://Assets/Particles/shield_explosion.tscn" id="6_din6m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_51wj8"]
 resource_local_to_scene = true
@@ -21,7 +20,7 @@ material = SubResource("ShaderMaterial_51wj8")
 
 [node name="Shield" type="Node3D" groups=["shield"]]
 script = ExtResource("1_xlxvf")
-explosion = ExtResource("6_din6m")
+explosion = 2
 
 [node name="FresnelAura" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_n464a")

@@ -6,7 +6,7 @@ class_name Shield
 # Otherwise, damaging one shield causes ALL
 # shields to flicker.
 
-@export var explosion : PackedScene
+@export var explosion:VisualEffectSetting.VISUAL_EFFECT_TYPE
 
 @export var max_health := 10
 
@@ -57,10 +57,6 @@ func _on_health_component_died() -> void:
 	set_deferred("$HitBoxComponent.monitorable", false)
 	$FresnelAura.visible = false
 	# Start the fireworks!
-	var shieldExplosion = explosion.instantiate()
-	# Add the explosion as a child of shield's parent
-	# so it sticks with the ship.
-	get_parent().add_child(shieldExplosion)
-	shieldExplosion.global_position = global_position
+	VfxManager.play(explosion, global_position)
 	# Delete self at the end of the frame
 	Callable(queue_free).call_deferred()

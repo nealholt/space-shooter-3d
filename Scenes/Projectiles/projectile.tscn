@@ -4,6 +4,8 @@
 
 [node name="Projectile" type="Node3D" groups=["bullet"]]
 script = ExtResource("1_y78aq")
+sparks = 3
+shieldSparks = 1
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0

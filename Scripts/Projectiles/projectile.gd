@@ -11,17 +11,16 @@ var controller:Controller
 var health_component:HealthComponent
 var hit_box_component:HitBoxComponent
 
-@export var deathExplosion : PackedScene
-
 var damage:float = 1.0
 @export var time_out:float = 2.0 #seconds
 
 # Data on shooter and target:
 var data:ShootData
 
+@export var deathExplosion : PackedScene
 # Different spark effects depending on what gets hit
-@export var sparks : PackedScene
-@export var shieldSparks : PackedScene
+@export var sparks:VisualEffectSetting.VISUAL_EFFECT_TYPE
+@export var shieldSparks:VisualEffectSetting.VISUAL_EFFECT_TYPE
 # Bullet hole decal
 @export var bullet_hole_decal : PackedScene
 
@@ -159,23 +158,10 @@ func damage_and_die(body, collision_point=null):
 		body.damage(damage, shooter)
 	# Make a spark at collision point
 	if collision_point:
-		# https://www.udemy.com/course/complete-godot-3d/learn/lecture/41088252#questions/21003762
-		var spark = null
-		if body.is_in_group("shield") and shieldSparks:
-			spark = shieldSparks.instantiate()
-		elif sparks:
-			spark = sparks.instantiate()
-		if spark:
-			# Add to main_3d, not root, otherwise the added
-			# node might not be properly cleared when
-			# transitioning to a new scene.
-			Global.main_scene.main_3d.add_child(spark)
-			#spark.global_transform.basis.z = -area.global_transform.basis.z
-			#spark.global_transform = area.global_transform
-			spark.transform = transform
-			#spark.rotate_y(deg_to_rad(-90))
-			#spark.rotate_x(deg_to_rad(90))
-			spark.global_position = collision_point
+		if body.is_in_group("shield"):
+			VfxManager.play_with_transform(shieldSparks, collision_point, transform)
+		else:
+			VfxManager.play_with_transform(sparks, collision_point, transform)
 	stop_near_miss_audio()
 	#Delete bullets that strike a body
 	Callable(queue_free).call_deferred()

@@ -7,6 +7,7 @@ class_name VisualEffectSetting extends Node
 
 ## Stores the different types of visual effects available to be played to distinguish them from another. Each new VisualEffect resource created should add to this enum.
 enum VISUAL_EFFECT_TYPE {
+	NO_EFFECT,
 	SHIELD_STRIKE,
 	SHIELD_EXPLOSION,
 	SHIP_STRIKE,

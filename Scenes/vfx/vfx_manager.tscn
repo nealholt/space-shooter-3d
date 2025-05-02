@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://ccfvjdnbobmr3" path="res://Scenes/vfx/visual_effect_setting.tscn" id="2_kqin3"]
 [ext_resource type="PackedScene" uid="uid://loiql7x3ow62" path="res://Assets/Particles/shield_strike.tscn" id="3_8do65"]
 [ext_resource type="PackedScene" uid="uid://w2dnuhc55w32" path="res://Assets/Particles/shield_explosion.tscn" id="4_levs1"]
-[ext_resource type="PackedScene" uid="uid://domnb1m51i30x" path="res://Assets/Particles/ship_strike.tscn" id="5_le2sy"]
-[ext_resource type="PackedScene" uid="uid://dgfgr1a12mn0l" path="res://Assets/Decals/bullet_hole.tscn" id="6_14doy"]
+[ext_resource type="Script" uid="uid://dxavjpjg06j5w" path="res://Scripts/vfx/visual_effect_setting.gd" id="4_vbg6y"]
+[ext_resource type="PackedScene" uid="uid://ctylowk0dxhp3" path="res://Assets/Particles/sparks.tscn" id="6_8do65"]
 
 [node name="VFX_Manager" type="Node"]
 script = ExtResource("1_4hukn")
@@ -13,20 +13,20 @@ script = ExtResource("1_4hukn")
 [node name="all_vfx_settings" type="Node" parent="."]
 
 [node name="ShieldStrikeSetting" parent="all_vfx_settings" instance=ExtResource("2_kqin3")]
-limit = 30
+limit = 40
+type = 1
 visual_effect = ExtResource("3_8do65")
 
-[node name="ShieldexplosionSetting" parent="all_vfx_settings" instance=ExtResource("2_kqin3")]
-limit = 10
-type = 1
-visual_effect = ExtResource("4_levs1")
-
-[node name="ShipStrikeSetting" parent="all_vfx_settings" instance=ExtResource("2_kqin3")]
-limit = 30
+[node name="ShieldExplosionEffectSetting" type="Node" parent="all_vfx_settings"]
+script = ExtResource("4_vbg6y")
+limit = 20
 type = 2
-visual_effect = ExtResource("5_le2sy")
+visual_effect = ExtResource("4_levs1")
+metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
-[node name="BulletHoleDecalSetting" parent="all_vfx_settings" instance=ExtResource("2_kqin3")]
-limit = 100
+[node name="ShipStrikeSetting" type="Node" parent="all_vfx_settings"]
+script = ExtResource("4_vbg6y")
+limit = 40
 type = 3
-visual_effect = ExtResource("6_14doy")
+visual_effect = ExtResource("6_8do65")
+metadata/_custom_type_script = "uid://dxavjpjg06j5w"

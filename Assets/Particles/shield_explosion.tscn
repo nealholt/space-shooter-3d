@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://w2dnuhc55w32"]
+[gd_scene load_steps=15 format=3 uid="uid://w2dnuhc55w32"]
 
+[ext_resource type="Script" uid="uid://ci83rhvh14wov" path="res://Scripts/vfx/specific_effects/shield_explosion.gd" id="1_ao3mx"]
 [ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/ParticleImages/star_04.png" id="1_eaxiw"]
 [ext_resource type="AudioStream" uid="uid://bt2ywlugnn3ji" path="res://Assets/SoundEffects/shield_explosion.wav" id="2_ya06w"]
 
@@ -62,81 +63,8 @@ turbulence_initial_displacement_max = 20.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_u36mk"]
 
-[sub_resource type="Animation" id="Animation_bhq3k"]
-resource_name = "Init"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sparks:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AudioStreamPlayer3D:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_v1qbr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sparks:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_p3cuw"]
-_data = {
-&"Init": SubResource("Animation_bhq3k"),
-&"RESET": SubResource("Animation_v1qbr")
-}
-
 [node name="ShieldExplosion" type="Node3D"]
+script = ExtResource("1_ao3mx")
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_46d27")
@@ -149,12 +77,9 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_te03x")
 draw_pass_1 = SubResource("QuadMesh_u36mk")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_p3cuw")
-}
-autoplay = "Init"
-
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_ya06w")
 volume_db = -5.0
+
+[connection signal="finished" from="Sparks" to="." method="_on_part_finished"]
+[connection signal="finished" from="AudioStreamPlayer3D" to="." method="_on_part_finished"]

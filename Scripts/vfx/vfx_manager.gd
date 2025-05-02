@@ -12,14 +12,22 @@ func _ready() -> void:
 
 
 ## Plays an effect if the limit has not been reached. Otherwise does nothing. Returns index of effect played.
-func play(type:int, loc:Vector2) -> int:
+func play(type:int, loc:Vector3) -> int:
+	if type == VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT:
+		return -1
 	return vfx_dict[type].play(loc)
 
-func face_and_play(type:int, loc:Vector2, to_face:Vector2) -> int:
+func face_and_play(type:int, loc:Vector3, to_face:Vector3) -> int:
+	if type == VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT:
+		return -1
 	return vfx_dict[type].face_and_play(loc, to_face)
 
-func play_at_angle(type:int, loc:Vector2, angle:float) -> int:
-	return vfx_dict[type].play_at_angle(loc, angle)
+func play_with_transform(type:int, loc:Vector3, tf:Transform3D) -> int:
+	if type == VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT:
+		return -1
+	return vfx_dict[type].play_with_transform(loc, tf)
 
-func play_remote_transform(type:int, remote_mover:Node2D) -> int:
+func play_remote_transform(type:int, remote_mover:Node3D) -> int:
+	if type == VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT:
+		return -1
 	return vfx_dict[type].play_remote_transform(remote_mover)
