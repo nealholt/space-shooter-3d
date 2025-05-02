@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://kajb6p7lffi5"]
+
+[ext_resource type="Script" uid="uid://batqx03r3snei" path="res://Scripts/vfx/vfx_queue.gd" id="1_x542c"]
+
+[node name="VFX_Queue" type="Node"]
+script = ExtResource("1_x542c")

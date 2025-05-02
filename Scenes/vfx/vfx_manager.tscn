@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0rcajlxs43qd"]
+
+[ext_resource type="Script" uid="uid://652nr7crax26" path="res://Scripts/vfx/vfx_manager.gd" id="1_4hukn"]
+[ext_resource type="PackedScene" uid="uid://ccfvjdnbobmr3" path="res://Scenes/vfx/visual_effect_setting.tscn" id="2_kqin3"]
+[ext_resource type="PackedScene" uid="uid://loiql7x3ow62" path="res://Assets/Particles/shield_strike.tscn" id="3_8do65"]
+[ext_resource type="PackedScene" uid="uid://w2dnuhc55w32" path="res://Assets/Particles/shield_explosion.tscn" id="4_levs1"]
+[ext_resource type="PackedScene" uid="uid://domnb1m51i30x" path="res://Assets/Particles/ship_strike.tscn" id="5_le2sy"]
+[ext_resource type="PackedScene" uid="uid://dgfgr1a12mn0l" path="res://Assets/Decals/bullet_hole.tscn" id="6_14doy"]
+
+[node name="VFX_Manager" type="Node"]
+script = ExtResource("1_4hukn")
+
+[node name="all_vfx_settings" type="Node" parent="."]
+
+[node name="ShieldStrikeSetting" parent="all_vfx_settings" instance=ExtResource("2_kqin3")]
+limit = 30
+visual_effect = ExtResource("3_8do65")
+
+[node name="ShieldexplosionSetting" parent="all_vfx_settings" instance=ExtResource("2_kqin3")]
+limit = 10
+type = 1
+visual_effect = ExtResource("4_levs1")
+
+[node name="ShipStrikeSetting" parent="all_vfx_settings" instance=ExtResource("2_kqin3")]
+limit = 30
+type = 2
+visual_effect = ExtResource("5_le2sy")
+
+[node name="BulletHoleDecalSetting" parent="all_vfx_settings" instance=ExtResource("2_kqin3")]
+limit = 100
+type = 3
+visual_effect = ExtResource("6_14doy")

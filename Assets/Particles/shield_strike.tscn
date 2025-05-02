@@ -1,5 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://loiql7x3ow62"]
+[gd_scene load_steps=27 format=3 uid="uid://loiql7x3ow62"]
 
+[ext_resource type="Script" uid="uid://bohtbu5g83x78" path="res://Scripts/vfx/specific_effects/shield_strike.gd" id="1_rcwin"]
 [ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/ParticleImages/star_04.png" id="1_xdx7c"]
 [ext_resource type="Material" uid="uid://covsu58qwnqru" path="res://Assets/Materials/flare00.tres" id="2_l105u"]
 [ext_resource type="AudioStream" uid="uid://drwbhql0pjblr" path="res://Assets/SoundEffects/shield_strike.wav" id="3_30u2s"]
@@ -228,6 +229,7 @@ _data = {
 }
 
 [node name="ShieldStrike" type="Node3D"]
+script = ExtResource("1_rcwin")
 
 [node name="Sparks" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_46d27")
@@ -264,7 +266,7 @@ draw_pass_1 = SubResource("QuadMesh_pnf0b")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_i5idb")
+&"": SubResource("AnimationLibrary_i5idb")
 }
 autoplay = "Init"
 
