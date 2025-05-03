@@ -308,7 +308,6 @@ draw_pass_1 = SubResource("QuadMesh_m3584")
 libraries = {
 &"": SubResource("AnimationLibrary_h4ga4")
 }
-autoplay = "Init"
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_ehf7x")

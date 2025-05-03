@@ -286,7 +286,6 @@ draw_pass_1 = SubResource("QuadMesh_qadt1")
 libraries = {
 &"": SubResource("AnimationLibrary_i0xkb")
 }
-autoplay = "Init"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 light_color = Color(0.886275, 0.345098, 0.12549, 1)
