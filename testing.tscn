@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcgf6dagmv3xb"]
+[gd_scene load_steps=17 format=3 uid="uid://dcgf6dagmv3xb"]
 
 [ext_resource type="PackedScene" uid="uid://du1bwxbrh62at" path="res://Assets/Ships/carrier_chassis.tscn" id="1_co24e"]
 [ext_resource type="Script" uid="uid://805tinnvkvpn" path="res://testing.gd" id="1_kj3p2"]
 [ext_resource type="Texture2D" uid="uid://hghgh008vwv" path="res://Assets/Textures/kenney_particle-pack/flare_01.png" id="2_feb8i"]
-[ext_resource type="Texture2D" uid="uid://dr5x7m3c1x4pw" path="res://Assets/Textures/explosion_textures/T_vfx_hit122.jpg" id="2_kj3p2"]
+[ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/ParticleImages/star_05.png" id="4_kj3p2"]
+[ext_resource type="Texture2D" uid="uid://p6vwpntup0ja" path="res://Assets/Textures/kenney_particle-pack/circle_01.png" id="5_lc7k4"]
+[ext_resource type="Texture2D" uid="uid://cevjv4lsemkac" path="res://Assets/Textures/kenney_particle-pack/circle_05.png" id="6_jn4p2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kj3p2"]
 sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)
@@ -22,22 +24,35 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybq6y"]
 transparency = 1
-blend_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_kj3p2")
+albedo_color = Color(5, 5, 5, 1)
+albedo_texture = ExtResource("2_feb8i")
 disable_receive_shadows = true
 billboard_mode = 1
 
-[sub_resource type="Gradient" id="Gradient_lc7k4"]
-offsets = PackedFloat32Array(0, 0.37037, 0.671296, 1)
-colors = PackedColorArray(100, 100, 100, 1, 1, 1, 1, 0.1, 1, 1, 1, 0, 1, 1, 1, 0)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jn4p2"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(5, 2, 1, 1)
+albedo_texture = ExtResource("5_lc7k4")
+disable_receive_shadows = true
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_jn4p2"]
-gradient = SubResource("Gradient_lc7k4")
-use_hdr = true
-fill = 1
-fill_from = Vector2(0.5, 0.5)
+[sub_resource type="Curve" id="Curve_jn4p2"]
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.130435, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ybq6y"]
+curve = SubResource("Curve_jn4p2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w078t"]
+emission_shape = 3
+emission_box_extents = Vector3(100, 50, 200)
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 20.0
+scale_curve = SubResource("CurveTexture_ybq6y")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11ixh"]
 transparency = 1
@@ -45,14 +60,16 @@ blend_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(100, 100, 100, 1)
-albedo_texture = SubResource("GradientTexture2D_jn4p2")
+albedo_texture = ExtResource("6_jn4p2")
 disable_receive_shadows = true
-billboard_mode = 1
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w078t"]
-gravity = Vector3(0, 0, 0)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_20t1u"]
+material = SubResource("StandardMaterial3D_11ixh")
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_kj3p2")
@@ -63,22 +80,34 @@ environment = SubResource("Environment_jn4p2")
 [node name="CarrierChassis" parent="." instance=ExtResource("1_co24e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -318.85, 0, -156.377)
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="ExplosionSprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.21379, 0, -8.5021)
 visible = false
 material_override = SubResource("StandardMaterial3D_ybq6y")
 cast_shadow = 0
-modulate = Color(100, 100, 100, 1)
 billboard = 1
 double_sided = false
-texture = ExtResource("2_feb8i")
+texture = ExtResource("4_kj3p2")
+
+[node name="RingSprite3D" type="Sprite3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_jn4p2")
+cast_shadow = 0
+double_sided = false
+texture = ExtResource("5_lc7k4")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.653921, -0.246204, 0.715382, -0.0201847, 0.939554, 0.341805, -0.756294, -0.237953, 0.609424, 5.56213, 3.0584, 0.789273)
+transform = Transform3D(0.50816, -0.045491, 0.86006, -0.00123998, 0.998565, 0.0535494, -0.861262, -0.0282781, 0.507374, 1028.54, 3.0584, 703.978)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="FireflyParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.45546)
-visible = false
-material_override = SubResource("StandardMaterial3D_11ixh")
+emitting = false
+amount = 32
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.5
+randomness = 1.0
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_w078t")
 draw_pass_1 = SubResource("QuadMesh_20t1u")
 

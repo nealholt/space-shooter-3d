@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfhih0ckkvpog"
-path.s3tc="res://.godot/imported/star_06.png-7b1da31a49fb8b558591f76bc367fef2.s3tc.ctex"
+uid="uid://cevjv4lsemkac"
+path.s3tc="res://.godot/imported/circle_05.png-215684f9be6a51eb0af1c6c11556c071.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/ParticleImages/star_06.png"
-dest_files=["res://.godot/imported/star_06.png-7b1da31a49fb8b558591f76bc367fef2.s3tc.ctex"]
+source_file="res://Assets/Textures/kenney_particle-pack/circle_05.png"
+dest_files=["res://.godot/imported/circle_05.png-215684f9be6a51eb0af1c6c11556c071.s3tc.ctex"]
 
 [params]
 
