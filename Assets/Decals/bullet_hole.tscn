@@ -41,6 +41,7 @@ _data = {
 }
 
 [node name="Node3D" type="Node3D"]
+visible = false
 script = ExtResource("1_vkm4f")
 
 [node name="Decal" type="Decal" parent="."]
@@ -50,12 +51,11 @@ texture_albedo = ExtResource("1_uqydj")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
-autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_p3vvo")
+&"": SubResource("AnimationLibrary_p3vvo")
 }
 autoplay = "Fade_out"
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_animation_finished"]

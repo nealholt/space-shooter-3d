@@ -10,7 +10,6 @@ func play_at(loc:Vector3) -> void:
 	global_position = loc
 	play()
 
-# TODO TESTING LEFT OFF HERE
 # The following was initially used for applying bullet decals.
 # That might still be the only thing it's used for.
 func play_at_angle(loc:Vector3, angle:Vector3) -> void:

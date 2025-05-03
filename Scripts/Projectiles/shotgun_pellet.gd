@@ -32,7 +32,7 @@ func set_up(start:Vector3, end:Vector3, collision_norm:Vector3, victim:Node3D) -
 func _on_timer_timeout() -> void:
 	# Damage target if there is one
 	if damagee != null:
-		stick_decal(target_position, collision_normal)
+		VfxManager.play_at_angle(bullet_hole_decal, target_position, collision_normal)
 		if damagee.is_in_group("damageable"):
 			damagee.damage(damage, data.shooter)
 		damagee = null

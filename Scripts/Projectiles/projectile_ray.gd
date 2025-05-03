@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 			# Stick on a decal before damaging and dying
 			# Don't stick decals on shields
 			if !body.is_in_group("shield"):
-				stick_decal(ray.get_collision_point(), ray.get_collision_normal())
+				VfxManager.play_at_angle(bullet_hole_decal, ray.get_collision_point(), ray.get_collision_normal())
 			damage_and_die(body, ray.get_collision_point())
 		# Ricochet
 		elif does_ricochet:

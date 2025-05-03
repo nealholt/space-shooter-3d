@@ -1,7 +1,13 @@
-extends Node3D
+class_name BulletHole extends VisualEffect
 
-# Source:
-# https://www.youtube.com/watch?v=8vFOOglWW3w
+@onready var anim := $AnimationPlayer
+@onready var timer := $Timer
 
-func _on_timer_timeout() -> void:
-	queue_free()
+func play() -> void:
+	visible = true
+	anim.play()
+	timer.start()
+
+func _on_animation_finished() -> void:
+	super()
+	visible = false

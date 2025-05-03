@@ -1,7 +1,7 @@
 extends Node3D
 class_name ExplosionDamaging
 
-@export var explosion_vfx:PackedScene
+@export var explosion_vfx:VisualEffectSetting.VISUAL_EFFECT_TYPE
 
 var damage_amt:float = 1.0
 
@@ -17,14 +17,7 @@ var delete_me:bool = false
 
 func _process(_delta: float) -> void:
 	if !delete_me:
-		# Add an explosion to main_3d and properly
-		# queue free this ship
-		var explosion = explosion_vfx.instantiate()
-		# Add to main_3d, not root, otherwise the added
-		# node might not be properly cleared when
-		# transitioning to a new scene.
-		Global.main_scene.main_3d.add_child(explosion)
-		explosion.global_position = global_position
+		VfxManager.play_with_transform(explosion_vfx, global_position, transform)
 	# Damage all overlapping bodies
 	for body in $Area3D.get_overlapping_bodies():
 		if body.is_in_group("damageable"):

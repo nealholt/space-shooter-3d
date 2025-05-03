@@ -38,6 +38,19 @@ func play(loc:Vector3) -> int:
 	return index
 
 
+func play_at_angle(loc:Vector3, angle:Vector3) -> int:
+	var index := next
+	# If the current effect is playing then we're maxed
+	# out. Prefer to skip than to interrupt
+	if vfx_players[next].is_playing():
+		return -1
+	# Set up and play the effect
+	vfx_players[next].play_at_angle(loc, angle)
+	# Increment next
+	next = (next+1) % vfx_players.size()
+	return index
+
+
 func face_and_play(loc:Vector3, to_face:Vector3) -> int:
 	var index := next
 	# If the current effect is playing then we're maxed

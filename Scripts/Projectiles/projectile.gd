@@ -17,12 +17,12 @@ var damage:float = 1.0
 # Data on shooter and target:
 var data:ShootData
 
-@export var deathExplosion : PackedScene
+@export var deathExplosion:VisualEffectSetting.VISUAL_EFFECT_TYPE
 # Different spark effects depending on what gets hit
 @export var sparks:VisualEffectSetting.VISUAL_EFFECT_TYPE
 @export var shieldSparks:VisualEffectSetting.VISUAL_EFFECT_TYPE
 # Bullet hole decal
-@export var bullet_hole_decal : PackedScene
+@export var bullet_hole_decal:VisualEffectSetting.VISUAL_EFFECT_TYPE
 
 var near_miss_audio: AudioStreamPlayer3D
 
@@ -191,35 +191,6 @@ func passes_through(body) -> bool:
 	return false
 
 
-# Source:
-# https://www.youtube.com/watch?v=8vFOOglWW3w
-func stick_decal(collision_point:Vector3, collision_normal:Vector3) -> void:
-	if bullet_hole_decal:
-		#Stick a decal on the target or on whatever was hit
-		var decal = bullet_hole_decal.instantiate()
-		# Parent decal to root, otherwise there can be
-		# weird scaling if attaching as a child of a scaled
-		# node.
-		# Add to main_3d, not root, otherwise the added
-		# node might not be properly cleared when
-		# transitioning to a new scene.
-		Global.main_scene.main_3d.add_child(decal)
-		# Position and orient the decal
-		decal.global_position = collision_point
-		# https://forum.godotengine.org/t/up-vector-and-direction-between-node-origin-and-target-are-aligned-look-at-failed/20575/2
-		# .is_equal_approx() should be used to compare vectors
-		# because of this issue:
-		# https://forum.godotengine.org/t/comparing-vectors-return-false-even-theyre-same/22474/2
-		# however, the solution given on that webpage
-		# is not ideal.
-		if collision_normal.is_equal_approx(Vector3.DOWN):
-			decal.rotation_degrees.x = 90
-		elif collision_normal.is_equal_approx(Vector3.UP):
-			decal.rotation_degrees.x = -90
-		elif !collision_normal.is_equal_approx(Vector3.ZERO):
-			decal.look_at(global_position - collision_normal, Vector3(0,1,0))
-
-
 # Start near miss sound upon entering a near miss Area3D
 func start_near_miss_audio() -> void:
 	# If it doesn't exist yet, create it
@@ -244,11 +215,5 @@ func _on_timer_timeout() -> void:
 
 func _on_health_component_died() -> void:
 	# Explode
-	if deathExplosion:
-		var explosion = deathExplosion.instantiate()
-		# Add to main_3d, not root, otherwise the added
-		# node might not be properly cleared when
-		# transitioning to a new scene.
-		Global.main_scene.main_3d.add_child(explosion)
-		explosion.global_position = global_position
+	VfxManager.play_with_transform(deathExplosion, global_position, transform)
 	Callable(queue_free).call_deferred()

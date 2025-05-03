@@ -17,6 +17,11 @@ func play(type:int, loc:Vector3) -> int:
 		return -1
 	return vfx_dict[type].play(loc)
 
+func play_at_angle(type:int, loc:Vector3, angle:Vector3) -> int:
+	if type == VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT:
+		return -1
+	return vfx_dict[type].play_at_angle(loc, angle)
+
 func face_and_play(type:int, loc:Vector3, to_face:Vector3) -> int:
 	if type == VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT:
 		return -1

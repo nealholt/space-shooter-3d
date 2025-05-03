@@ -12,6 +12,7 @@ enum VISUAL_EFFECT_TYPE {
 	SHIELD_EXPLOSION,
 	SHIP_STRIKE,
 	BULLET_HOLE,
+	FLAK_EXPLOSION
 }
 
 @export var limit: int = 50 ## Maximum number of this VisualEffect to play simultaneously before culled.

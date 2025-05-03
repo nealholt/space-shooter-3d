@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbyb5ysj3umaf"]
+[gd_scene load_steps=5 format=3 uid="uid://cbyb5ysj3umaf"]
 
 [ext_resource type="PackedScene" uid="uid://bosxindk1alsp" path="res://Scenes/Projectiles/projectile.tscn" id="1_bbraa"]
 [ext_resource type="Script" uid="uid://b30e2kgewgin" path="res://Scripts/Projectiles/shotgun_pellet.gd" id="2_elodn"]
-[ext_resource type="PackedScene" uid="uid://dgfgr1a12mn0l" path="res://Assets/Decals/bullet_hole.tscn" id="3_we58o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_up8ur"]
 emission_enabled = true
@@ -14,7 +13,7 @@ material = SubResource("StandardMaterial3D_up8ur")
 [node name="ShotgunPellet" instance=ExtResource("1_bbraa")]
 script = ExtResource("2_elodn")
 speed = 500.0
-bullet_hole_decal = ExtResource("3_we58o")
+bullet_hole_decal = 4
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
 cast_shadow = 0
