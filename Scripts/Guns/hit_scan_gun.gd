@@ -8,7 +8,7 @@ class_name HitScanGun
 # GPU particles to spawn on point of impact.
 # Normally this would be in the bullet, but
 # there is no bullet.
-@export var sparks:PackedScene
+@export var sparks:VisualEffectSetting.VISUAL_EFFECT_TYPE
 # For now, every hitscan weapon has a laser beam
 @export var laser_mesh: MeshInstance3D
 @export var laser_mesh_pivot: Node3D
@@ -32,11 +32,7 @@ func shoot_actual() -> void:
 			#print("dealt damage")
 			collider.damage(damage, data.shooter)
 		# Spawn sparks on location of hit
-		if sparks:
-			var spark = sparks.instantiate()
-			# Add to team group
-			Global.add_to_team_group(spark, ally_team)
-			spark.global_position = ray.get_collision_point()
+		VfxManager.play(muzzle_flash, ray.get_collision_point())
 	position_laser()
 
 

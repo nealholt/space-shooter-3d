@@ -163,6 +163,7 @@ func damage_and_die(body, collision_point=null):
 		else:
 			VfxManager.play_with_transform(sparks, collision_point, transform)
 	stop_near_miss_audio()
+	VfxManager.play_with_transform(deathExplosion, global_position, transform)
 	#Delete bullets that strike a body
 	Callable(queue_free).call_deferred()
 

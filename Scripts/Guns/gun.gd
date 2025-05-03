@@ -44,8 +44,7 @@ var reload_sound_player: AudioStreamPlayer3D
 
 # Gun animation, for example, rotation of the gatling gun
 @export var gun_animation : AnimationPlayer
-@export var muzzle_flash : GPUParticles3D
-
+@export var muzzle_flash:VisualEffectSetting.VISUAL_EFFECT_TYPE
 
 # Only guns that actually use a raycast3d should
 # have a ray, such as guns that fire laser guided
@@ -104,8 +103,7 @@ func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
 		# Animate 'em if you got 'em
 		if gun_animation:
 			gun_animation.play("gun_animation")
-		if muzzle_flash:
-			muzzle_flash.restart()
+		VfxManager.play_remote_transform(muzzle_flash, self)
 		if fire_sound_player:
 			fire_sound_player.playing = true
 		restart_timer()
@@ -161,14 +159,6 @@ func deactivate() -> void:
 		reticle.hide()
 	if gun_animation:
 		gun_animation.stop()
-	# Don't stop the muzzle flash. Let it play out.
-	# But... it doesn't play out, then it plays
-	# when you switch back to it. That's not ideal.
-	# HOWEVER, if you leave visible to true
-	# (see top of this function) then it all works
-	# out fine.
-	#if muzzle_flash:
-	#	muzzle_flash.emitting = false
 	# Don't stop the reload sound. Let it play out.
 	#if reload_sound_player:
 	#	reload_sound_player.playing = false

@@ -1,6 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://dappypoft2ab4"]
+[gd_scene load_steps=31 format=3 uid="uid://dappypoft2ab4"]
 
 [ext_resource type="Material" uid="uid://ck6a2ts7de74c" path="res://Assets/Shaders/material_explosion_cloud.tres" id="1_hr0sc"]
+[ext_resource type="Script" uid="uid://jce54cs8xhg1" path="res://Scripts/vfx/specific_effects/explosion_single.gd" id="1_vfgmw"]
 [ext_resource type="Shader" uid="uid://bee3mywubqp6k" path="res://Assets/Shaders/streak_shader.tres" id="2_sn71f"]
 [ext_resource type="Texture2D" uid="uid://dr5x7m3c1x4pw" path="res://Assets/Textures/explosion_textures/T_vfx_hit122.jpg" id="3_0yid1"]
 [ext_resource type="AudioStream" uid="uid://wqqcngisdu7g" path="res://Assets/SoundEffects/explosion_audio_deep.wav" id="4_gy7j6"]
@@ -145,7 +146,7 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"queue_free"
+"method": &"_on_animation_finished"
 }]
 }
 tracks/5/type = "value"
@@ -258,6 +259,7 @@ scale_curve = SubResource("CurveTexture_12lof")
 [sub_resource type="QuadMesh" id="QuadMesh_bl1ix"]
 
 [node name="VFX_Explosion" type="Node3D"]
+script = ExtResource("1_vfgmw")
 
 [node name="VFX_SmokeClouds" type="GPUParticles3D" parent="."]
 material_override = ExtResource("1_hr0sc")

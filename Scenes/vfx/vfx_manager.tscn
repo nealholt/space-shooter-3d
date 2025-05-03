@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0rcajlxs43qd"]
+[gd_scene load_steps=12 format=3 uid="uid://b0rcajlxs43qd"]
 
 [ext_resource type="Script" uid="uid://652nr7crax26" path="res://Scripts/vfx/vfx_manager.gd" id="1_4hukn"]
 [ext_resource type="PackedScene" uid="uid://ccfvjdnbobmr3" path="res://Scenes/vfx/visual_effect_setting.tscn" id="2_kqin3"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://ctylowk0dxhp3" path="res://Assets/Particles/sparks.tscn" id="6_8do65"]
 [ext_resource type="PackedScene" uid="uid://dgfgr1a12mn0l" path="res://Assets/Decals/bullet_hole.tscn" id="7_levs1"]
 [ext_resource type="PackedScene" uid="uid://dry7yodrwl18u" path="res://Assets/Particles/vfx_explosion_lelu_single.tscn" id="8_le2sy"]
+[ext_resource type="PackedScene" uid="uid://58nrpfbay3lf" path="res://Assets/Particles/muzzle_flash.tscn" id="9_14doy"]
+[ext_resource type="PackedScene" uid="uid://wvqr1nvfc2u1" path="res://Assets/Particles/vfx_explosion_lelu_tutorial.tscn" id="10_ptu8o"]
+[ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="11_j7uvs"]
 
 [node name="VFX_Manager" type="Node"]
 script = ExtResource("1_4hukn")
@@ -45,4 +48,24 @@ script = ExtResource("4_vbg6y")
 limit = 80
 type = 5
 visual_effect = ExtResource("8_le2sy")
+metadata/_custom_type_script = "uid://dxavjpjg06j5w"
+
+[node name="MuzzleFlashSetting" type="Node" parent="all_vfx_settings"]
+script = ExtResource("4_vbg6y")
+limit = 100
+type = 6
+visual_effect = ExtResource("9_14doy")
+metadata/_custom_type_script = "uid://dxavjpjg06j5w"
+
+[node name="SingleExplosionSetting" type="Node" parent="all_vfx_settings"]
+script = ExtResource("4_vbg6y")
+type = 7
+visual_effect = ExtResource("10_ptu8o")
+metadata/_custom_type_script = "uid://dxavjpjg06j5w"
+
+[node name="SingleExplosion8xSetting" type="Node" parent="all_vfx_settings"]
+script = ExtResource("4_vbg6y")
+limit = 30
+type = 8
+visual_effect = ExtResource("11_j7uvs")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
