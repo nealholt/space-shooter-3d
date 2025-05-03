@@ -97,7 +97,7 @@ double_sided = false
 texture = ExtResource("5_lc7k4")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.50816, -0.045491, 0.86006, -0.00123998, 0.998565, 0.0535494, -0.861262, -0.0282781, 0.507374, 1028.54, 3.0584, 703.978)
+transform = Transform3D(0.219721, 0.229124, 0.948275, 0.00950994, 0.971479, -0.236934, -0.975516, 0.0610775, 0.211276, 732.714, 3.0584, 614.117)
 
 [node name="FireflyParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.45546)
