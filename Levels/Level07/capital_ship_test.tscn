@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://cwts5v3tvcwab"]
+[gd_scene load_steps=14 format=3 uid="uid://cwts5v3tvcwab"]
 
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="1_5h06f"]
+[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_e2ue2"]
 [ext_resource type="PackedScene" uid="uid://dp3w08p8gkd3p" path="res://Scenes/capital_ship_frigate.tscn" id="2_jciow"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_gy535"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="4_5hyc7"]
@@ -35,6 +36,7 @@ resource_local_to_scene = true
 material = SubResource("ShaderMaterial_4o7y5")
 
 [node name="CapitalShipTest" type="Node3D"]
+script = ExtResource("1_e2ue2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_tss5r")
@@ -57,22 +59,22 @@ team = "blue team"
 [node name="Player" parent="BlueTeam" instance=ExtResource("3_gy535")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -502.457)
 
-[node name="MissileLockGroup" parent="BlueTeam/Player" index="2"]
-npc_missile_lock = false
-
-[node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
-mesh = SubResource("SphereMesh_gyo7b")
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlueTeam/Player/AimAssist" index="0"]
 stream = ExtResource("5_707l7")
 volume_db = -10.0
 pitch_scale = 0.5
+
+[node name="MissileLockGroup" parent="BlueTeam/Player" index="9"]
+npc_missile_lock = false
+
+[node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
+mesh = SubResource("SphereMesh_gyo7b")
 
 [node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("6_ft4d0")]
 
 [node name="CameraGroup" parent="BlueTeam/Player" instance=ExtResource("7_bgk5p")]
 
 [editable path="BlueTeam/Player"]
+[editable path="BlueTeam/Player/Shield"]
 [editable path="BlueTeam/Player/WeaponHandler/GatlingGun/GunModel"]
 [editable path="BlueTeam/Player/WeaponHandler/HitScanGun/Node"]
-[editable path="BlueTeam/Player/Shield"]

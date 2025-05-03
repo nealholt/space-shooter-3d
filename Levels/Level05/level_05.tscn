@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://6qsftwvn1vr"]
+[gd_scene load_steps=11 format=3 uid="uid://6qsftwvn1vr"]
 
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_2nnjr"]
+[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_02qsi"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_20fsw"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="2_wndl6"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_8iyj5"]
@@ -20,6 +21,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="Level05" type="Node3D"]
+script = ExtResource("1_02qsi")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)

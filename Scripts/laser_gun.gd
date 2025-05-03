@@ -116,7 +116,7 @@ func shoot_actual() -> void:
 
 
 func deal_damage(collider, delta:float) -> void:
-	if collider.is_in_group("damageable"):
+	if is_instance_valid(collider) and collider.is_in_group("damageable"):
 		#print("dealing damage %f" % (damage*delta))
 		collider.damage(damage*delta, data.shooter)
 

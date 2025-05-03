@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://dwtyyrj0kw84u"]
+[gd_scene load_steps=13 format=3 uid="uid://dwtyyrj0kw84u"]
 
 [ext_resource type="PackedScene" uid="uid://dc6ljj4ueibm1" path="res://Scenes/asteroid.tscn" id="1_88b2k"]
+[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_pnlws"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_u6taa"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="3_e4ix2"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="4_vf0uf"]
@@ -34,6 +35,7 @@ resource_local_to_scene = true
 material = SubResource("ShaderMaterial_ovff0")
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_pnlws")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.992546, 0.0663749, -0.102208, 0, 0.838671, 0.544639, 0.121869, 0.540579, -0.832419, 0, 0, 0)
@@ -51,13 +53,13 @@ environment = SubResource("Environment_uxj80")
 [node name="Player" parent="." instance=ExtResource("1_u6taa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 213.638)
 
-[node name="FresnelAura" parent="Player/Shield" index="0"]
-mesh = SubResource("SphereMesh_wyegi")
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player/AimAssist" index="0"]
 stream = ExtResource("4_vf0uf")
 volume_db = -10.0
 pitch_scale = 0.5
+
+[node name="FresnelAura" parent="Player/Shield" index="0"]
+mesh = SubResource("SphereMesh_wyegi")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.5967)
@@ -71,6 +73,6 @@ spot_angle_attenuation = 5.46416
 [node name="CameraGroup" parent="Player" instance=ExtResource("6_0irx3")]
 
 [editable path="Player"]
+[editable path="Player/Shield"]
 [editable path="Player/WeaponHandler/GatlingGun/GunModel"]
 [editable path="Player/WeaponHandler/HitScanGun/Node"]
-[editable path="Player/Shield"]

@@ -1,10 +1,11 @@
-extends Node
+extends Level
 
 const ORB_COUNT:int = 20
 var dead_orb_count := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	super()
 	# Seed global random number generator for replicable first level
 	seed(123)
 	# Instantiate orbs

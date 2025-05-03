@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://bofjsmexbmkkv"]
+[gd_scene load_steps=15 format=3 uid="uid://bofjsmexbmkkv"]
 
+[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_6xial"]
 [ext_resource type="PackedScene" uid="uid://n1jx2afgefnt" path="res://Scenes/spectator.tscn" id="1_jd547"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_0liob"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="3_vdt0h"]
@@ -45,6 +46,7 @@ resource_local_to_scene = true
 material = SubResource("ShaderMaterial_njs2f")
 
 [node name="Level04" type="Node3D"]
+script = ExtResource("1_6xial")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5aj0hxrmxrbg"]
+[gd_scene load_steps=11 format=3 uid="uid://c5aj0hxrmxrbg"]
 
 [ext_resource type="Script" uid="uid://c4bajredph1hp" path="res://Levels/Level11DamageEffectTest/test_camera.gd" id="1_ktv67"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="1_w5e31"]
+[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_y6dhh"]
 [ext_resource type="Script" uid="uid://dct8roiqo6fdl" path="res://Levels/Level08NearMiss/bullet_spawner_testing.gd" id="2_xar6i"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="3_08cq6"]
 [ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="3_8rcco"]
@@ -23,6 +24,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [node name="DamageEffectsScene" type="Node3D"]
+script = ExtResource("1_y6dhh")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(7.10543e-15, 0.707107, -0.707107, 6.18172e-08, 0.707107, 0.707107, 1, -4.37114e-08, -4.37114e-08, -20, 20, -8.74228e-07)

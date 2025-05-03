@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://diemqdllmorgy"]
+[gd_scene load_steps=14 format=3 uid="uid://diemqdllmorgy"]
 
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_nfgym"]
+[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_oykks"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_by5cy"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="3_35x76"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="4_yoksv"]
@@ -35,6 +36,7 @@ material = SubResource("ShaderMaterial_ishnh")
 [sub_resource type="BoxMesh" id="BoxMesh_8sb0x"]
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_oykks")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -45,13 +47,13 @@ environment = SubResource("Environment_f265c")
 
 [node name="Player" parent="." instance=ExtResource("1_nfgym")]
 
-[node name="FresnelAura" parent="Player/Shield" index="0"]
-mesh = SubResource("SphereMesh_i1ex1")
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player/AimAssist" index="0"]
 stream = ExtResource("3_35x76")
 volume_db = -10.0
 pitch_scale = 0.5
+
+[node name="FresnelAura" parent="Player/Shield" index="0"]
+mesh = SubResource("SphereMesh_i1ex1")
 
 [node name="BallisticMovementV3" parent="Player" instance=ExtResource("4_yoksv")]
 
@@ -71,6 +73,6 @@ transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 mesh = SubResource("BoxMesh_8sb0x")
 
 [editable path="Player"]
+[editable path="Player/Shield"]
 [editable path="Player/WeaponHandler/GatlingGun/GunModel"]
 [editable path="Player/WeaponHandler/HitScanGun/Node"]
-[editable path="Player/Shield"]

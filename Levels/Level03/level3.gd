@@ -1,10 +1,11 @@
-extends Node3D
+extends Level
 
 const ORB_COUNT:int = 3
 var dead_orb_count := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	super()
 	# Hide mouse cursor
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	# Connect the destroyed signal of the orb to the ui

@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://dd7gue1cwbx6u"]
+
+[ext_resource type="Texture2D" uid="uid://hghgh008vwv" path="res://Assets/Textures/kenney_particle-pack/flare_01.png" id="1_f3jch"]
+[ext_resource type="Script" uid="uid://dcdgmk2hdc70k" path="res://Scripts/vfx/specific_effects/massive_explosion.gd" id="1_t7dhc"]
+[ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/ParticleImages/star_05.png" id="2_t7dhc"]
+[ext_resource type="Texture2D" uid="uid://p6vwpntup0ja" path="res://Assets/Textures/kenney_particle-pack/circle_01.png" id="3_6j2k2"]
+[ext_resource type="Texture2D" uid="uid://cevjv4lsemkac" path="res://Assets/Textures/kenney_particle-pack/circle_05.png" id="4_q5vej"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybq6y"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(5, 5, 5, 1)
+albedo_texture = ExtResource("1_f3jch")
+disable_receive_shadows = true
+billboard_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jn4p2"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(5, 2, 1, 1)
+albedo_texture = ExtResource("3_6j2k2")
+disable_receive_shadows = true
+
+[sub_resource type="Curve" id="Curve_jn4p2"]
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.130435, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ybq6y"]
+curve = SubResource("Curve_jn4p2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w078t"]
+emission_shape = 3
+emission_box_extents = Vector3(100, 50, 200)
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 20.0
+scale_curve = SubResource("CurveTexture_ybq6y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11ixh"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(100, 100, 100, 1)
+albedo_texture = ExtResource("4_q5vej")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_20t1u"]
+material = SubResource("StandardMaterial3D_11ixh")
+
+[node name="MassiveExplosion" type="Node3D"]
+script = ExtResource("1_t7dhc")
+
+[node name="ExplosionSprite3D" type="Sprite3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_ybq6y")
+cast_shadow = 0
+billboard = 1
+double_sided = false
+texture = ExtResource("2_t7dhc")
+
+[node name="RingSprite3D" type="Sprite3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_jn4p2")
+cast_shadow = 0
+double_sided = false
+texture = ExtResource("3_6j2k2")
+
+[node name="FireflyParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 32
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.5
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_w078t")
+draw_pass_1 = SubResource("QuadMesh_20t1u")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.2
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_animation_finished"]

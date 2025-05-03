@@ -30,10 +30,11 @@ func play_at_angle(loc:Vector3, angle:Vector3) -> void:
 
 
 func face_and_play(loc:Vector3, to_face:Vector3) -> void:
-	play_at(loc)
+	global_position = loc
 	# You have to set the global position BEFORE look_at!
 	# play sets the global position
 	look_at(to_face)
+	play()
 
 func play_with_transform(loc:Vector3, tf:Transform3D) -> void:
 	transform = tf

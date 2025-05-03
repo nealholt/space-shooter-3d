@@ -5,6 +5,7 @@ extends Node
 # This is a location for anything we want to be globally accessible.
 
 var main_scene: MainScene
+var environment: Environment
 var red_team_group:TeamSetup # Node3D holding everything on team red
 var blue_team_group:TeamSetup # Node3D holding everything on team blue
 var current_camera : Camera3D

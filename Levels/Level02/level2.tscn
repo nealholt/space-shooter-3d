@@ -14,13 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/engine_audio_visuals.tscn" id="10_vci83"]
 
 [sub_resource type="GDScript" id="GDScript_ulixo"]
-script/source = "extends Node
+script/source = "extends Level
 
 const ORB_COUNT:int = 16
 var dead_orb_count := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	super()
 	# Hide mouse cursor
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	# Connect the destroyed signal of the orb to the ui
@@ -62,17 +63,15 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_6xgje")
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node3D"]
 script = SubResource("GDScript_ulixo")
 
-[node name="Setting" type="Node" parent="."]
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Setting"]
-transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 12, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.75, -0.43301, 0, 12, 0)
 light_color = Color(1, 1, 0.745098, 1)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Setting"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_285v5")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]

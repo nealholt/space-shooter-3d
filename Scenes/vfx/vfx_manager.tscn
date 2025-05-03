@@ -64,16 +64,14 @@ type = 7
 visual_effect = ExtResource("10_ptu8o")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
-[node name="not_in_use" type="Node" parent="."]
-
-[node name="SingleExplosion8xSetting" type="Node" parent="not_in_use"]
+[node name="SingleExplosion8xSetting" type="Node" parent="all_vfx_settings"]
 script = ExtResource("4_vbg6y")
 limit = 30
 type = 8
 visual_effect = ExtResource("11_j7uvs")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
-[node name="ExplosionSetting" type="Node" parent="not_in_use"]
+[node name="ExplosionSetting" type="Node" parent="all_vfx_settings"]
 script = ExtResource("4_vbg6y")
 limit = 30
 type = 9

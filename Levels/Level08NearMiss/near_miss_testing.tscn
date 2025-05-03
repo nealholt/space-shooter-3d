@@ -61,6 +61,6 @@ automatic = false
 [node name="CameraGroup" parent="Player" instance=ExtResource("8_hmejg")]
 
 [editable path="Player"]
+[editable path="Player/Shield"]
 [editable path="Player/WeaponHandler/GatlingGun/GunModel"]
 [editable path="Player/WeaponHandler/HitScanGun/Node"]
-[editable path="Player/Shield"]
