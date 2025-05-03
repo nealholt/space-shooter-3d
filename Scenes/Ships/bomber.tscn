@@ -1,10 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://dct3loj10mg5k"]
+[gd_scene load_steps=12 format=3 uid="uid://dct3loj10mg5k"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_uw5oo"]
-[ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_0tp8c"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="2_6e5lt"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="2_120ti"]
-[ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="3_2d3u8"]
 [ext_resource type="PackedScene" uid="uid://ctw16pilpn8rk" path="res://Assets/Ships/bomber_chassis.tscn" id="3_hrk35"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="4_40no2"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="5_rgdmc"]
@@ -20,8 +18,8 @@ collision_layer = 3
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_uw5oo")
-deathExplosion = ExtResource("2_0tp8c")
-finalExplosion = ExtResource("3_2d3u8")
+deathExplosion = 9
+finalExplosion = 8
 death_animation_duration_min = 1.0
 death_animation_duration_max = 3.2
 

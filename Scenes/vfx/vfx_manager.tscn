@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b0rcajlxs43qd"]
+[gd_scene load_steps=13 format=3 uid="uid://b0rcajlxs43qd"]
 
 [ext_resource type="Script" uid="uid://652nr7crax26" path="res://Scripts/vfx/vfx_manager.gd" id="1_4hukn"]
 [ext_resource type="PackedScene" uid="uid://ccfvjdnbobmr3" path="res://Scenes/vfx/visual_effect_setting.tscn" id="2_kqin3"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://58nrpfbay3lf" path="res://Assets/Particles/muzzle_flash.tscn" id="9_14doy"]
 [ext_resource type="PackedScene" uid="uid://wvqr1nvfc2u1" path="res://Assets/Particles/vfx_explosion_lelu_tutorial.tscn" id="10_ptu8o"]
 [ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="11_j7uvs"]
+[ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="12_ey1l5"]
 
 [node name="VFX_Manager" type="Node"]
 script = ExtResource("1_4hukn")
@@ -68,4 +69,11 @@ script = ExtResource("4_vbg6y")
 limit = 30
 type = 8
 visual_effect = ExtResource("11_j7uvs")
+metadata/_custom_type_script = "uid://dxavjpjg06j5w"
+
+[node name="ExplosionSetting" type="Node" parent="all_vfx_settings"]
+script = ExtResource("4_vbg6y")
+limit = 30
+type = 9
+visual_effect = ExtResource("12_ey1l5")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"

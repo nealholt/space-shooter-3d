@@ -15,7 +15,8 @@ enum VISUAL_EFFECT_TYPE {
 	FLAK_EXPLOSION,
 	MUZZLE_FLASH,
 	SINGLE_EXPLOSION,
-	SINGLE_EXPLOSION_8X
+	SINGLE_EXPLOSION_8X,
+	EXPLOSION
 }
 
 @export var limit: int = 50 ## Maximum number of this VisualEffect to play simultaneously before culled.

@@ -1,8 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=19 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_dn8ab"]
-[ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_l8ark"]
-[ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="3_5mmgf"]
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="3_qm2p0"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="4_57m73"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="4_dhpb0"]
@@ -38,8 +36,8 @@ collision_layer = 3
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_dn8ab")
-deathExplosion = ExtResource("2_l8ark")
-finalExplosion = ExtResource("3_5mmgf")
+deathExplosion = 9
+finalExplosion = 8
 
 [node name="AimAssist" parent="." instance=ExtResource("19_xjc2u")]
 angle_assist_limit = 10.0

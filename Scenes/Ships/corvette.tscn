@@ -1,10 +1,8 @@
-[gd_scene load_steps=37 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=35 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
-[ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="2_jw8ud"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="3_crlbv"]
-[ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="3_lvuav"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/missile_lock_group.tscn" id="4_vmlm7"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="7_vhcpa"]
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Assets/SoundEffects/lowFrequency_explosion_001.ogg" id="8_klb2b"]
@@ -69,8 +67,8 @@ collision_layer = 3
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_bfcrw")
-deathExplosion = ExtResource("2_jw8ud")
-finalExplosion = ExtResource("3_lvuav")
+deathExplosion = 9
+finalExplosion = 8
 
 [node name="AimAssist" parent="." instance=ExtResource("29_3q0pi")]
 angle_assist_limit = 10.0

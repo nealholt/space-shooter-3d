@@ -16,8 +16,8 @@ var death_animation_timer:Timer
 # happens after the death animation completes.
 # This, like many other things, was inspired
 # by House of the Dying Sun.
-@export var deathExplosion : PackedScene
-@export var finalExplosion : PackedScene
+@export var deathExplosion:VisualEffectSetting.VISUAL_EFFECT_TYPE
+@export var finalExplosion:VisualEffectSetting.VISUAL_EFFECT_TYPE
 
 @export var death_animation_duration_min:float = 1.5
 @export var death_animation_duration_max:float = 4.5
@@ -120,13 +120,7 @@ func _on_health_component_health_lost() -> void:
 
 func _on_health_component_died() -> void:
 	# Explode
-	if deathExplosion:
-		var explosion = deathExplosion.instantiate()
-		# Add to main_3d, not root, otherwise the added
-		# node might not be properly cleared when
-		# transitioning to a new scene.
-		Global.main_scene.main_3d.add_child(explosion)
-		explosion.global_position = global_position
+	VfxManager.play_with_transform(deathExplosion, global_position, transform)
 	# Tell controller to enter death animation state
 	# which should be some sort of chaotic tumble
 	if controller:
@@ -147,13 +141,7 @@ func _on_death_timer_timeout() -> void:
 	destroyed.emit()
 	# At the end of the timer, add an explosion to
 	# main_3d and properly queue free this ship
-	if finalExplosion:
-		var explosion = finalExplosion.instantiate()
-		# Add to main_3d, not root, otherwise the added
-		# node might not be properly cleared when
-		# transitioning to a new scene.
-		Global.main_scene.main_3d.add_child(explosion)
-		explosion.global_position = global_position
+	VfxManager.play_with_transform(finalExplosion, global_position, transform)
 	# The controller will handle cleaning up.
 	# NPCs will be queue freed. Players will be
 	# sent back to the main menu.
