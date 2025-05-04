@@ -83,7 +83,6 @@ process_material = SubResource("ParticleProcessMaterial_w078t")
 draw_pass_1 = SubResource("QuadMesh_20t1u")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.2
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_animation_finished"]

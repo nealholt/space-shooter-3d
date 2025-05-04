@@ -1,28 +1,94 @@
 extends VisualEffect
 
+# NOTE: The firefly particles are explicitly set up
+# for the carrier size and shape. Different shape
+# would be good for other ships.
+
 # NOTE: It might be nice to scale the environment
 # effects based on distance as well as angle to the
 # explosion. Currently only angle is used.
 
-# NOTE: The firefly particles are explicitly set up
-# for the carrier size and shape. Different shape
-# would be good for other ships.
+# NOTE: Since the images are positioned between the
+# camera and the exploding thing, not actually AT
+# the exploding thing, it's possible that the explosion
+# should be obscured (for instance by a large asteroid)
+# but the image gets put camera-side of the asteroid.
 
 @onready var timer:=$Timer
 @onready var explosion_sprite:=$ExplosionSprite3D
 @onready var ring_sprite:=$RingSprite3D
 @onready var fireflies:=$FireflyParticles3D
 
+const MAX_ANGLE := 70.0 ## Degrees. Max angle at which the world environment is modified.
+const MIN_ANGLE := 0.0 ## Degrees. Max angle at which the world environment is modified.
+
+# Currently brightness goes up to 4x
+const MAX_BRIGHTNESS_FACTOR := 4.0 ## Max factor by which brightness will be scaled when the camera is staring into the explosion.
+const MIN_BRIGHTNESS_FACTOR := 1.0
+# Currently contrast goes up to 3x.
+# Darks become darker and brights become brighter.
+# Alternatively, you can drop the contrast down, which
+# washes out everything to gray. I think that's less striking.
+const MAX_CONTRAST_FACTOR := 3.0 ## Max factor by which contrast will be scaled when the camera is staring into the explosion.
+const MIN_CONTRAST_FACTOR := 1.0
+# Currently saturation drops to zero, which leaches color
+# out of the world.
+const MAX_SATURATION_FACTOR := 1.0 ## Max factor by which saturation will be scaled when the camera is staring into the explosion.
+const MIN_SATURATION_FACTOR := 0.0
+
+var brightness_change_duration := 0.3 ## Seconds
+var contrast_change_duration := 0.4 ## Seconds
+var saturation_change_duration := 1.5 ## Seconds
+
+var explosion_alpha_duration := 2.0 ## Tween duration for changing explosion image's alpha
+var explosion_alpha_target := 0.1 ## Alpha value we are tweening to
+
+var ring_alpha_duration := 1.5 ## Tween duration for changing ring image's alpha
+var ring_alpha_target := 0.3 ## Alpha value we are tweening to
+var ring_scale_duration := 1.5 ## Tween duration for changing ring image's scale
+var ring_scale_target := 1.6 ## Scale value we are tweening to
+var ring_scale_start := 0.1 ## Scale value we are starting at
+
+# How far flare image will be placed from the camera
+var flare_distance_min_actual := 1.0
+var flare_distance_max_actual := 5.0
+# Camera range from explosion which will be linearly mapped
+# to the above two values, the "actual" values.
+# These were experimentally determined.
+var flare_distance_camera_min := 350.0
+var flare_distance_camera_max := 1600.0
+
+# How far ring image will be placed from the camera
+var ring_distance_min_actual := 1.0
+var ring_distance_max_actual := 5.0
+# Camera range from explosion which will be linearly mapped
+# to the above two values, the "actual" values.
+# These were experimentally determined.
+var ring_distance_camera_min := 350.0
+var ring_distance_camera_max := 1600.0
+
+# bool for whether or not this effect is still animating.
 var effect_is_live := false
 
+# Reference to current camera
 var camera:Camera3D
 
+# Backing up the world environment variables so they
+# can get reset back to baseline after temporarily
+# modifying them.
 var baseline_brightness:float
 var baseline_contrast:float
 var baseline_saturation:float
 
+var max_time:float ## Max time this effect might last.
+
 
 func _ready() -> void:
+	# Set max_time to be the largest of all the durations
+	# then add on 50% as a buffer. After this time, the
+	# effect is officially finished.
+	max_time = [brightness_change_duration, contrast_change_duration, saturation_change_duration, explosion_alpha_duration, ring_alpha_duration, ring_scale_duration].max()
+	max_time = max_time * 1.5 # 50% buffer
 	# Give the environment a chance to set up.
 	backup_environment_baselines.call_deferred()
 
@@ -47,25 +113,28 @@ func play() -> void:
 	camera = get_viewport().get_camera_3d()
 	
 	# Get distance to camera
-	var cam_distance:float = global_position.distance_to(camera.global_position)
-	#print(cam_distance)
-	# Explosion effects
-	flare_explosion(cam_distance)
-	ring_explosion(cam_distance)
+	#var cam_distance:float = global_position.distance_to(camera.global_position)
+	#
+	## Explosion effects
+	#flare_explosion(cam_distance)
+	#ring_explosion(cam_distance)
 	
 	# Angle from camera to self
 	var cam_angle:float = rad_to_deg(Global.get_angle_to_target(camera.global_position, global_position, -camera.global_transform.basis.z))
-	# Change environment variables
-	var factor:float = clamp(remap(cam_angle, 70.0,0.0, 1.0,3.0), 1.0, 3.0)
-	blink_environment('adjustment_brightness', baseline_brightness, factor)
-	blink_environment('adjustment_contrast', baseline_contrast, factor)
-	# Less than 1 to briefly leach color out of the world
-	factor = clamp(remap(cam_angle, 70.0,0.0, 1.0,0.0), 0.0, 1.0)
-	blink_environment('adjustment_saturation', baseline_saturation, factor)
+	# Change environment variables.
+	# remap from max to min angle because lowest values should
+	# occur at max and highest at min because zero means camera
+	# is staring right into the explosion.
+	var factor:float = clamp(remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MIN_BRIGHTNESS_FACTOR,MAX_BRIGHTNESS_FACTOR), MIN_BRIGHTNESS_FACTOR, MAX_BRIGHTNESS_FACTOR)
+	blink_environment('adjustment_brightness', baseline_brightness, factor, brightness_change_duration)
+	factor = clamp(remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MIN_CONTRAST_FACTOR,MAX_CONTRAST_FACTOR), MIN_CONTRAST_FACTOR, MAX_CONTRAST_FACTOR)
+	blink_environment('adjustment_contrast', baseline_contrast, factor, contrast_change_duration)
+	factor = clamp(remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MAX_SATURATION_FACTOR, MIN_SATURATION_FACTOR), MIN_SATURATION_FACTOR, MAX_SATURATION_FACTOR)
+	blink_environment('adjustment_saturation', baseline_saturation, factor, saturation_change_duration)
 	
 	fireflies.emitting = true
 	effect_is_live = true
-	timer.start()
+	timer.start(max_time)
 
 
 func is_playing() -> bool:
@@ -91,12 +160,11 @@ func flare_explosion(cam_distance:float) -> void:
 	# Figure out where to put sprite so it's between
 	# camera and ship.
 	var direction := camera.global_position.direction_to(global_position)
-	# Determine how far away to place the sprite.
-	# Limit the value to between 1.0 and 5.0
-	# based on distance from the camera between 350 and 1600.
+	# Determine how far away to place the sprite
+	# based on distance of explosion from the camera.
 	# These were experimentally determined
 	# https://docs.godotengine.org/en/latest/classes/class_@globalscope.html#class-globalscope-method-remap
-	var ideal_distance:float=clamp(remap(cam_distance, 350, 1600, 1.0, 5.0), 1.0, 5.0)
+	var ideal_distance:float=clamp(remap(cam_distance, flare_distance_camera_min, flare_distance_camera_max, flare_distance_min_actual, flare_distance_max_actual), flare_distance_min_actual, flare_distance_max_actual)
 	explosion_sprite.global_position = camera.global_position + direction * ideal_distance
 	explosion_sprite.look_at(camera.global_position)
 	# "look_at" puts the backside to the camera, so
@@ -108,14 +176,15 @@ func flare_explosion(cam_distance:float) -> void:
 	# used look at so I could throw in this random
 	# rotation. I don't know if it really matters, 
 	# but that's what I did.
-	explosion_sprite.rotate_z(randf_range(-PI/4, PI/4))
+	#explosion_sprite.rotate_z(randf_range(-PI/4, PI/4))
+	explosion_sprite.rotate_x(randf_range(-PI/2, PI/2))
 	
 	explosion_sprite.visible = true
 	# Modulate sprite's opacity until it disappears
 	var tween:Tween = create_tween()
 	tween.tween_property(explosion_sprite,
 		'modulate:a8',
-		0.1, 2.0).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		explosion_alpha_target, explosion_alpha_duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	# An animation player could be used to modify the
 	# sprite in other ways, per this suggestion:
 	# https://www.reddit.com/r/godot/comments/r4snzr/how_do_you_make_a_spotlight_have_a/
@@ -128,12 +197,11 @@ func ring_explosion(cam_distance:float) -> void:
 	# Figure out where to put sprite so it's between
 	# camera and ship.
 	var direction := camera.global_position.direction_to(global_position)
-	# Determine how far away to place the sprite.
-	# Limit the value to between 1.0 and 5.0
-	# based on distance from the camera between 350 and 1600.
+	# Determine how far away to place the sprite
+	# based on distance of explosion from the camera.
 	# These were experimentally determined
 	# https://docs.godotengine.org/en/latest/classes/class_@globalscope.html#class-globalscope-method-remap
-	var ideal_distance:float= clamp(remap(cam_distance, 350, 1600, 1.0, 5.0), 1.0, 5.0)
+	var ideal_distance:float=clamp(remap(cam_distance, ring_distance_camera_min, ring_distance_camera_max, ring_distance_min_actual, ring_distance_max_actual), flare_distance_min_actual, flare_distance_max_actual)
 	ring_sprite.global_position = camera.global_position + direction * ideal_distance
 	ring_sprite.look_at(camera.global_position)
 	# "look_at" puts the backside to the camera, so
@@ -144,16 +212,16 @@ func ring_explosion(cam_distance:float) -> void:
 	ring_sprite.rotate_x(randf_range(-PI/2, PI/2))
 	ring_sprite.rotate_z(randf_range(-PI/2, PI/2))
 	
-	ring_sprite.scale = Vector3(0.1,0.1,0.1)
+	ring_sprite.scale = Vector3(ring_scale_start,ring_scale_start,ring_scale_start)
 	ring_sprite.visible = true
 	
 	# Modulate sprite's scale and opacity until it disappears
 	var tween:Tween = create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(ring_sprite, 'modulate:a8',
-		0.3, 1.5).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		ring_alpha_target, ring_alpha_duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	tween.tween_property(ring_sprite, 'scale',
-		Vector3(1.6, 1.6, 1.6), 1.5)
+		Vector3(ring_scale_target,ring_scale_target,ring_scale_target), ring_scale_duration)
 
 
 # Tween into and out of an environment attribute
@@ -163,9 +231,13 @@ func blink_environment(attribute:String, baseline:float, factor:=3.0, duration:=
 	var tween:Tween = create_tween()
 	var current = Global.environment.get(attribute)
 	tween.tween_property(Global.environment,
-		attribute,
-		current*factor, duration) #.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+		attribute, current*factor, duration
+		).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
 	# Reset to baseline
 	tween.tween_property(Global.environment,
-		attribute,
-		baseline, duration) #.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		attribute, baseline, duration
+		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	# Tween easing animated:
+	# https://www.reddit.com/r/godot/comments/14gt180/all_possible_tweening_transition_types_and_easing/
+	# Graph visualization:
+	# https://raw.githubusercontent.com/urodelagames/urodelagames.github.io/master/photos/tween_cheatsheet.png
