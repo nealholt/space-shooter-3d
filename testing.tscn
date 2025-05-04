@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcgf6dagmv3xb"]
+[gd_scene load_steps=9 format=3 uid="uid://dcgf6dagmv3xb"]
 
 [ext_resource type="PackedScene" uid="uid://du1bwxbrh62at" path="res://Assets/Ships/carrier_chassis.tscn" id="1_co24e"]
 [ext_resource type="Script" uid="uid://805tinnvkvpn" path="res://testing.gd" id="1_kj3p2"]
 [ext_resource type="PackedScene" uid="uid://dd7gue1cwbx6u" path="res://Assets/Particles/massive_explosion.tscn" id="3_feb8i"]
+[ext_resource type="PackedScene" uid="uid://bvgxwc28k1fvx" path="res://Assets/Ships/beam_destroyer_chassis.tscn" id="3_lc7k4"]
+[ext_resource type="PackedScene" uid="uid://cxd7ahrv8vrys" path="res://Assets/Ships/frigate_chassis.tscn" id="4_jn4p2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kj3p2"]
 sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)
@@ -28,13 +30,42 @@ environment = SubResource("Environment_jn4p2")
 [node name="CarrierChassis" parent="." instance=ExtResource("1_co24e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -318.85, 0, -156.377)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.219721, 0.229124, 0.948275, 0.00950994, 0.971479, -0.236934, -0.975516, 0.0610775, 0.211276, 732.714, 3.0584, 614.117)
+[node name="CarrierChassis2" parent="." instance=ExtResource("1_co24e")]
+transform = Transform3D(1, 0, 0, 0, 0.112509, 0.993651, 0, -0.993651, 0.112509, 132.147, 256.08, 802.368)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="BeamDestroyerChassis" parent="." instance=ExtResource("3_lc7k4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 326.446, 0, -50.7979)
+
+[node name="FrigateChassis" parent="." instance=ExtResource("4_jn4p2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122.465, 0, 0)
+
+[node name="Timer1" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Timer3" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="Timer4" type="Timer" parent="."]
+wait_time = 15.0
 one_shot = true
 autostart = true
 
 [node name="MassiveExplosion" parent="." instance=ExtResource("3_feb8i")]
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(0.0467062, -0.330507, 0.942647, -0.0167148, 0.943286, 0.331559, -0.998769, -0.0312421, 0.038533, 759.27, 315.505, 279.235)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+
+[connection signal="timeout" from="Timer1" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]
+[connection signal="timeout" from="Timer4" to="." method="_on_timer_4_timeout"]

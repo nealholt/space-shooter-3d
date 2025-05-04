@@ -54,7 +54,7 @@ func play() -> void:
 	ring_explosion(cam_distance)
 	
 	# Angle from camera to self
-	var cam_angle:float = 180 - rad_to_deg(camera.transform.basis.z.angle_to(global_position))
+	var cam_angle:float = rad_to_deg(Global.get_angle_to_target(camera.global_position, global_position, -camera.global_transform.basis.z))
 	# Change environment variables
 	var factor:float = clamp(remap(cam_angle, 70.0,0.0, 1.0,3.0), 1.0, 3.0)
 	blink_environment('adjustment_brightness', baseline_brightness, factor)
@@ -86,6 +86,8 @@ func _on_animation_finished() -> void:
 
 
 func flare_explosion(cam_distance:float) -> void:
+	# Reset sprite modulate value back to full
+	explosion_sprite.modulate.a8 = 255
 	# Figure out where to put sprite so it's between
 	# camera and ship.
 	var direction := camera.global_position.direction_to(global_position)
@@ -96,6 +98,18 @@ func flare_explosion(cam_distance:float) -> void:
 	# https://docs.godotengine.org/en/latest/classes/class_@globalscope.html#class-globalscope-method-remap
 	var ideal_distance:float=clamp(remap(cam_distance, 350, 1600, 1.0, 5.0), 1.0, 5.0)
 	explosion_sprite.global_position = camera.global_position + direction * ideal_distance
+	explosion_sprite.look_at(camera.global_position)
+	# "look_at" puts the backside to the camera, so
+	# rotate it another 180
+	explosion_sprite.rotate_y(PI)
+	# Add some random rotation.
+	# I removed all the billboarding (it was both in
+	# flags and under materials process) and instead
+	# used look at so I could throw in this random
+	# rotation. I don't know if it really matters, 
+	# but that's what I did.
+	explosion_sprite.rotate_z(randf_range(-PI/4, PI/4))
+	
 	explosion_sprite.visible = true
 	# Modulate sprite's opacity until it disappears
 	var tween:Tween = create_tween()
@@ -108,6 +122,9 @@ func flare_explosion(cam_distance:float) -> void:
 
 
 func ring_explosion(cam_distance:float) -> void:
+	# Reset sprite modulate and scale values back to full
+	ring_sprite.modulate.a8 = 255
+	ring_sprite.scale = Vector3(1.0,1.0,1.0)
 	# Figure out where to put sprite so it's between
 	# camera and ship.
 	var direction := camera.global_position.direction_to(global_position)

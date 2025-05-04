@@ -81,7 +81,7 @@ func get_center_most(looker, targets:Array) -> Node3D:
 
 
 # I'm pretty sure this is just used in
-# Ship, Turret, and aim assist.
+# Ship, Turret, and aim assist, and now in MassiveExplosion.
 func get_angle_to_target(seeker_pos:Vector3, target_pos:Vector3, facing_dir:Vector3) -> float:
 	# Pre: target_pos is a Vector3 representing x,y,z
 	# coordinates in space.

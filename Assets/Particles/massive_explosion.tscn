@@ -13,7 +13,6 @@ vertex_color_use_as_albedo = true
 albedo_color = Color(5, 5, 5, 1)
 albedo_texture = ExtResource("1_f3jch")
 disable_receive_shadows = true
-billboard_mode = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jn4p2"]
 transparency = 1
@@ -62,7 +61,6 @@ script = ExtResource("1_t7dhc")
 visible = false
 material_override = SubResource("StandardMaterial3D_ybq6y")
 cast_shadow = 0
-billboard = 1
 double_sided = false
 texture = ExtResource("2_t7dhc")
 
