@@ -89,8 +89,10 @@ func _ready() -> void:
 	# effect is officially finished.
 	max_time = [brightness_change_duration, contrast_change_duration, saturation_change_duration, explosion_alpha_duration, ring_alpha_duration, ring_scale_duration].max()
 	max_time = max_time * 1.5 # 50% buffer
-	# Give the environment a chance to set up.
-	backup_environment_baselines.call_deferred()
+	# Back up environment baseline values every time
+	# the world environment gets set (usually when the
+	# level is first created).
+	EventsBus.environment_set.connect(backup_environment_baselines)
 
 
 func backup_environment_baselines() -> void:
@@ -113,11 +115,11 @@ func play() -> void:
 	camera = get_viewport().get_camera_3d()
 	
 	# Get distance to camera
-	#var cam_distance:float = global_position.distance_to(camera.global_position)
-	#
-	## Explosion effects
-	#flare_explosion(cam_distance)
-	#ring_explosion(cam_distance)
+	var cam_distance:float = global_position.distance_to(camera.global_position)
+	
+	# Explosion effects
+	flare_explosion(cam_distance)
+	ring_explosion(cam_distance)
 	
 	# Angle from camera to self
 	var cam_angle:float = rad_to_deg(Global.get_angle_to_target(camera.global_position, global_position, -camera.global_transform.basis.z))

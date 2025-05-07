@@ -79,12 +79,14 @@ team = "blue team"
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -133.42, 46.6032, 7)
 
 [node name="Fighter" parent="BlueTeam" instance=ExtResource("6_xbcqs")]
+finalExplosion = 0
 
 [node name="RedTeam" type="Node3D" parent="."]
 script = ExtResource("5_0jpk3")
 
 [node name="Bomber" parent="RedTeam" instance=ExtResource("7_m10fo")]
 transform = Transform3D(0.102862, 0, -0.994696, 0, 1, 0, 0.994696, 0, 0.102862, 0, 0, 77.4889)
+finalExplosion = 0
 
 [node name="NPCFighterController" parent="RedTeam/Bomber" instance=ExtResource("8_isq32")]
 target_capital_ships = true

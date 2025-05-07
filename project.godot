@@ -17,8 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://Scripts/Global.gd"
+Global="*res://Scripts/Autoloads/Global.gd"
 VfxManager="*res://Scenes/vfx/vfx_manager.tscn"
+EventsBus="*res://Scripts/Autoloads/events_bus.gd"
 
 [display]
 

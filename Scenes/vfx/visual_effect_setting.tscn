@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ccfvjdnbobmr3"]
 
-[ext_resource type="Script" uid="uid://dxavjpjg06j5w" path="res://Scripts/vfx/visual_effect_setting.gd" id="1_khrhi"]
+[ext_resource type="Script" uid="uid://dxavjpjg06j5w" path="res://Assets/Particles/visual_effect_setting.gd" id="1_khrhi"]
 
 [node name="VisualEffectSetting" type="Node"]
 script = ExtResource("1_khrhi")
