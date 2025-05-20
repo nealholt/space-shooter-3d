@@ -193,9 +193,8 @@ func flare_explosion(cam_distance:float) -> void:
 
 
 func ring_explosion(cam_distance:float) -> void:
-	# Reset sprite modulate and scale values back to full
+	# Reset sprite modulate back to full
 	ring_sprite.modulate.a8 = 255
-	ring_sprite.scale = Vector3(1.0,1.0,1.0)
 	# Figure out where to put sprite so it's between
 	# camera and ship.
 	var direction := camera.global_position.direction_to(global_position)
@@ -214,6 +213,7 @@ func ring_explosion(cam_distance:float) -> void:
 	ring_sprite.rotate_x(randf_range(-PI/2, PI/2))
 	ring_sprite.rotate_z(randf_range(-PI/2, PI/2))
 	
+	# Reset scale and visibility
 	ring_sprite.scale = Vector3(ring_scale_start,ring_scale_start,ring_scale_start)
 	ring_sprite.visible = true
 	
