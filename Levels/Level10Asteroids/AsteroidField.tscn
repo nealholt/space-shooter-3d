@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwtyyrj0kw84u"]
+[gd_scene load_steps=9 format=3 uid="uid://dwtyyrj0kw84u"]
 
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_pnlws"]
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="2_xl1h2"]
 [ext_resource type="MeshLibrary" uid="uid://onqmfkbeu0js" path="res://Assets/Asteroids/asteroids.tres" id="3_odp1w"]
+[ext_resource type="Script" uid="uid://4fxgma0xk4a1" path="res://Scripts/asteroid_field_gen.gd" id="4_po0pu"]
 [ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="4_s677o"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1cmtw"]
@@ -28,13 +29,10 @@ shadow_enabled = true
 environment = SubResource("Environment_dpk7j")
 
 [node name="GridMap" type="GridMap" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 7)
 mesh_library = ExtResource("3_odp1w")
-cell_size = Vector3(32, 32, 32)
-cell_scale = 40.0
-data = {
-"cells": PackedInt32Array(65524, 65534, 262147, 65530, 65529, 1310723, 458749, 65535, 65539, -327686, 65529, 65539, -327683, 7, 393220, -720886, 17, 393220, 327676, 3, 1376260, 131081, 65527, 393216, -196587, 9, 917505, -196588, 9, 917505, -131059, 15, 983041)
-}
-metadata/_editor_floor_ = Vector3(0, -2, 0)
+cell_size = Vector3(64, 64, 64)
+cell_scale = 80.0
+script = ExtResource("4_po0pu")
 
 [node name="Corvette" parent="." instance=ExtResource("4_s677o")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 802.998, 0, 0)
