@@ -1,78 +1,40 @@
-[gd_scene load_steps=13 format=3 uid="uid://dwtyyrj0kw84u"]
+[gd_scene load_steps=8 format=3 uid="uid://dwtyyrj0kw84u"]
 
-[ext_resource type="PackedScene" uid="uid://dc6ljj4ueibm1" path="res://Scenes/asteroid.tscn" id="1_88b2k"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_pnlws"]
-[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_u6taa"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="3_e4ix2"]
-[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="4_vf0uf"]
-[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="5_ikuj2"]
-[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="6_0irx3"]
+[ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="2_xl1h2"]
+[ext_resource type="MeshLibrary" uid="uid://onqmfkbeu0js" path="res://Assets/Asteroids/asteroids.tres" id="3_odp1w"]
+[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="4_s677o"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hwd7p"]
-sky_top_color = Color(0.0509646, 0.0629226, 0.533014, 1)
-sky_horizon_color = Color(0.512741, 0.515731, 0.633253, 1)
-ground_bottom_color = Color(0, 0, 0, 1)
-ground_horizon_color = Color(0.512741, 0.515731, 0.633253, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1cmtw"]
+panorama = ExtResource("2_xl1h2")
 
-[sub_resource type="Sky" id="Sky_5hn4x"]
-sky_material = SubResource("ProceduralSkyMaterial_hwd7p")
+[sub_resource type="Sky" id="Sky_txwv0"]
+sky_material = SubResource("PanoramaSkyMaterial_1cmtw")
 
-[sub_resource type="Environment" id="Environment_uxj80"]
+[sub_resource type="Environment" id="Environment_dpk7j"]
 background_mode = 2
-sky = SubResource("Sky_5hn4x")
+sky = SubResource("Sky_txwv0")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ovff0"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("3_e4ix2")
-shader_parameter/FresnelPower = 2.0
-shader_parameter/EmissionStrength = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_wyegi"]
-resource_local_to_scene = true
-material = SubResource("ShaderMaterial_ovff0")
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_pnlws")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.992546, 0.0663749, -0.102208, 0, 0.838671, 0.544639, 0.121869, 0.540579, -0.832419, 0, 0, 0)
-light_color = Color(0.980052, 0.923478, 0.766185, 1)
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
-directional_shadow_max_distance = 2000.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_uxj80")
+environment = SubResource("Environment_dpk7j")
 
-[node name="AsteroidGroup" type="Node3D" parent="."]
+[node name="GridMap" type="GridMap" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 7)
+mesh_library = ExtResource("3_odp1w")
+cell_size = Vector3(32, 32, 32)
+cell_scale = 40.0
+data = {
+"cells": PackedInt32Array(65524, 65534, 262147, 65530, 65529, 1310723, 458749, 65535, 65539, -327686, 65529, 65539, -327683, 7, 393220, -720886, 17, 393220, 327676, 3, 1376260, 131081, 65527, 393216, -196587, 9, 917505, -196588, 9, 917505, -131059, 15, 983041)
+}
+metadata/_editor_floor_ = Vector3(0, -2, 0)
 
-[node name="Asteroid" parent="AsteroidGroup" instance=ExtResource("1_88b2k")]
-
-[node name="Player" parent="." instance=ExtResource("1_u6taa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 213.638)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player/AimAssist" index="0"]
-stream = ExtResource("4_vf0uf")
-volume_db = -10.0
-pitch_scale = 0.5
-
-[node name="FresnelAura" parent="Player/Shield" index="0"]
-mesh = SubResource("SphereMesh_wyegi")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.5967)
-light_energy = 16.0
-spot_range = 300.0
-spot_attenuation = 0.25
-spot_angle_attenuation = 5.46416
-
-[node name="BallisticMovementV3" parent="Player" instance=ExtResource("5_ikuj2")]
-
-[node name="CameraGroup" parent="Player" instance=ExtResource("6_0irx3")]
-
-[editable path="Player"]
-[editable path="Player/Shield"]
-[editable path="Player/WeaponHandler/GatlingGun/GunModel"]
-[editable path="Player/WeaponHandler/HitScanGun/Node"]
+[node name="Corvette" parent="." instance=ExtResource("4_s677o")]
