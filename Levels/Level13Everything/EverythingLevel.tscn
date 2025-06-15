@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://k6inhwfk2gp"]
+[gd_scene load_steps=22 format=3 uid="uid://k6inhwfk2gp"]
 
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_lqyyp"]
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_wr6oo"]
 [ext_resource type="PackedScene" uid="uid://cbgprvcwh15qd" path="res://Levels/Level13Everything/star.tscn" id="2_2lnk5"]
 [ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="3_eggcn"]
-[ext_resource type="MeshLibrary" uid="uid://onqmfkbeu0js" path="res://Assets/Asteroids/asteroids.tres" id="4_u7bmr"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="5_0jpk3"]
 [ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="6_xbcqs"]
 [ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Scenes/Ships/bomber.tscn" id="7_m10fo"]
@@ -13,6 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://bqvcfo7v6o6ip" path="res://Scenes/Ships/beam_destroyer.tscn" id="9_kc2e1"]
 [ext_resource type="PackedScene" uid="uid://byb8ya6fryjw0" path="res://Scenes/Ships/frigate.tscn" id="10_d6xr2"]
 [ext_resource type="PackedScene" uid="uid://diilp2vvcvj53" path="res://Scenes/Ships/carrier.tscn" id="11_gd4i7"]
+[ext_resource type="PackedScene" uid="uid://ct14xs5b052ay" path="res://Scenes/Asteroids/asteroid_brown.tscn" id="13_2pdmp"]
+[ext_resource type="PackedScene" uid="uid://f5ns6ks1l1em" path="res://Scenes/Asteroids/asteroid_foam_and_blue.tscn" id="14_83use"]
+[ext_resource type="PackedScene" uid="uid://bnme5l5dyvdaj" path="res://Scenes/Asteroids/asteroid_gray.tscn" id="15_t5c7k"]
+[ext_resource type="PackedScene" uid="uid://h6qoukgaivr" path="res://Scenes/Asteroids/asteroid_gray_green.tscn" id="16_rts0o"]
+[ext_resource type="PackedScene" uid="uid://dxb411gkh7mx6" path="res://Scenes/Asteroids/asteroid_green_purple.tscn" id="17_ka707"]
+[ext_resource type="PackedScene" uid="uid://cbgts8m0eeix7" path="res://Scenes/Asteroids/asteroid_purple.tscn" id="18_hxa7u"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_er3bs"]
 panorama = ExtResource("1_wr6oo")
@@ -47,26 +52,6 @@ shadow_opacity = 0.9
 shadow_blur = 0.4
 directional_shadow_mode = 0
 directional_shadow_max_distance = 1000.0
-
-[node name="GridMap" type="GridMap" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 7)
-mesh_library = ExtResource("4_u7bmr")
-cell_size = Vector3(32, 32, 32)
-cell_scale = 40.0
-data = {
-"cells": PackedInt32Array(65524, 65534, 262147, 65530, 65529, 1310723, 458749, 65535, 65539, -327686, 65529, 65539, -327683, 7, 393220, -720886, 17, 393220, 327676, 3, 1376260, 131081, 65527, 393216, -196587, 9, 917505, -196588, 9, 917505, -131059, 15, 983041)
-}
-metadata/_editor_floor_ = Vector3(0, -2, 0)
-
-[node name="GridMap2" type="GridMap" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -3, 7)
-mesh_library = ExtResource("4_u7bmr")
-cell_size = Vector3(45, 45, 45)
-cell_scale = 55.0
-data = {
-"cells": PackedInt32Array(-196617, 65533, 65537, -65537, 1, 589828, 65530, 3, 589828, -393233, 65535, 589827, 65531, 65535, 589826, -327687, 65533, 65540)
-}
-metadata/_editor_floor_ = Vector3(0, -6, 0)
 
 [node name="Star" parent="." instance=ExtResource("2_2lnk5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8000, 3000, 10000)
@@ -104,3 +89,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 347.175)
 
 [node name="Carrier" parent="RedTeam" instance=ExtResource("11_gd4i7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 729.95)
+
+[node name="AsteroidGroup" type="Node3D" parent="."]
+
+[node name="AsteroidBrown" parent="AsteroidGroup" instance=ExtResource("13_2pdmp")]
+transform = Transform3D(132.963, 2.23517e-06, 69.4318, -36.5535, 127.529, 70.0007, -59.0306, -78.9699, 113.045, 789.945, 213.932, 195.713)
+
+[node name="AsteroidFoamAndBlue" parent="AsteroidGroup" instance=ExtResource("14_83use")]
+transform = Transform3D(85.2629, 118.52, 34.3983, -109.912, 91.9402, -44.3428, -56.1206, 0, 139.106, -316.427, 199.639, 598.091)
+
+[node name="AsteroidGray" parent="AsteroidGroup" instance=ExtResource("15_t5c7k")]
+transform = Transform3D(136.881, 14.0901, 59.7075, 0, 145.99, -34.4514, -61.3475, 31.4383, 133.222, -460.431, -113.469, -783.136)
+
+[node name="AsteroidGrayGreen" parent="AsteroidGroup" instance=ExtResource("16_rts0o")]
+transform = Transform3D(47.2773, 0, 16.2743, 0, 50, 0, -16.2743, 0, 47.2773, -107.879, -59.6615, 86.8361)
+
+[node name="AsteroidGrayGreen2" parent="AsteroidGroup" instance=ExtResource("16_rts0o")]
+transform = Transform3D(50, 0, 0, 0, 46.4155, 18.5903, 0, -18.5903, 46.4155, 80.4728, 0, -194.298)
+
+[node name="AsteroidGreenPurple" parent="AsteroidGroup" instance=ExtResource("17_ka707")]
+transform = Transform3D(-36.5677, -34.0999, -1.59842e-06, -2.18557e-06, 9.55343e-14, 50, -34.0999, 36.5677, -1.49055e-06, -161.23, 19.8419, -119.049)
+
+[node name="AsteroidGreenPurple2" parent="AsteroidGroup" instance=ExtResource("17_ka707")]
+transform = Transform3D(-16.9369, -6.22187, -46.6308, 0, 49.5608, -6.61282, 47.044, -2.24001, -16.7881, 60.8297, -87.7114, 0)
+
+[node name="AsteroidPurple" parent="AsteroidGroup" instance=ExtResource("18_hxa7u")]
+transform = Transform3D(4.41094, 0, 54.8228, 0, 55, 0, -54.8228, 0, 4.41094, -37.5272, 155.403, 41.8384)
+
+[node name="AsteroidPurple2" parent="AsteroidGroup" instance=ExtResource("18_hxa7u")]
+transform = Transform3D(32.1127, 23.6395, -3.15418, 0, -5.29026, -39.6486, -23.849, 31.8306, -4.24711, -46.194, 181.993, 192.322)

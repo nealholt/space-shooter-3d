@@ -1,9 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwtyyrj0kw84u"]
+[gd_scene load_steps=7 format=3 uid="uid://dwtyyrj0kw84u"]
 
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_pnlws"]
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="2_xl1h2"]
-[ext_resource type="MeshLibrary" uid="uid://onqmfkbeu0js" path="res://Assets/Asteroids/asteroids.tres" id="3_odp1w"]
-[ext_resource type="Script" uid="uid://4fxgma0xk4a1" path="res://Scripts/asteroid_field_gen.gd" id="4_po0pu"]
 [ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="4_s677o"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1cmtw"]
@@ -31,12 +29,6 @@ sky_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dpk7j")
-
-[node name="GridMap" type="GridMap" parent="."]
-mesh_library = ExtResource("3_odp1w")
-cell_size = Vector3(64, 64, 64)
-cell_scale = 80.0
-script = ExtResource("4_po0pu")
 
 [node name="Corvette" parent="." instance=ExtResource("4_s677o")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 802.998, 0, 0)
