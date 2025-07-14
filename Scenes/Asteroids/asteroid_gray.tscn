@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=4 uid="uid://bnme5l5dyvdaj"]
+[gd_scene load_steps=7 format=4 uid="uid://bnme5l5dyvdaj"]
 
 [ext_resource type="Texture2D" uid="uid://djffjpqobj70d" path="res://Assets/Asteroids/asteroids_-_low_poly_0.png" id="1_yvng6"]
+[ext_resource type="Script" uid="uid://bjc4j7absfknu" path="res://Scripts/asteroid.gd" id="2_0xr7x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0mxeo"]
 resource_name = "Asteroid"
@@ -48,6 +49,7 @@ radius = 0.4
 [node name="AsteroidGray" type="MeshInstance3D"]
 mesh = SubResource("ArrayMesh_lh2td")
 skeleton = NodePath("")
+script = ExtResource("2_0xr7x")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
