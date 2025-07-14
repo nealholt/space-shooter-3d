@@ -10,6 +10,12 @@ var health_component:HealthComponent
 var missile_lock:MissileLockGroup
 var weapon_handler:WeaponHandler
 
+# I added the following in so I could parameterize the
+# PlayerCorvette differently on the asteroids level.
+# This is probably hacky and bad, but whatever.
+@export var impulse_std:float = -1.0 ## standard impulse. If -1 is used, default controller values will be used.
+@export var impulse_accel:float = -1.0 ## acceleration impulse. If -1 is used, default controller values will be used.
+
 var death_animation_timer:Timer
 # The deathExplosion happens when the ship
 # is first killed. Then the finalExplosion
@@ -67,6 +73,11 @@ func _ready() -> void:
 			burning_trail = child
 		elif child is CharacterBodyControlParent:
 			controller = child
+			# Pass export var values to controller
+			if impulse_std != -1.0:
+				controller.impulse_std = impulse_std
+			if impulse_accel != -1.0:
+				controller.impulse_accel = impulse_accel
 		elif child is EngineAV:
 			engineAV = child
 		elif child is HealthComponent:

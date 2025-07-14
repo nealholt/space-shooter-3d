@@ -1,10 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8ln3rpl1ayn6"]
+[gd_scene load_steps=11 format=3 uid="uid://b8ln3rpl1ayn6"]
 
 [ext_resource type="Material" uid="uid://r575donrt7pe" path="res://Assets/Materials/ship_metal.tres" id="1_4gun6"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ar6wd"]
-no_depth_test = true
-shading_mode = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_bhcna"]
 material = ExtResource("1_4gun6")
@@ -54,7 +50,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 
 [node name="Hull" type="MeshInstance3D" parent="."]
 transform = Transform3D(3.53553, 0, 3.53553, 0, 0.5, 0, -3.53553, 0, 3.53553, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_ar6wd")
 mesh = SubResource("BoxMesh_bhcna")
 
 [node name="Hull2" type="MeshInstance3D" parent="."]

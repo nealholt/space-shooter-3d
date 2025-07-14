@@ -17,7 +17,7 @@ min_elevation_deg = -10.0
 max_elevation_deg = 80.0
 
 [node name="RearUnderCamera" type="Camera3D" parent="."]
-transform = Transform3D(-0.903916, 0.103591, 0.414976, 0.25829, 0.905543, 0.336567, -0.340914, 0.411413, -0.845292, 347.664, 231.546, -672.833)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.3, -1.174, -5.5)
 far = 80000.0
 
 [node name="NearMissDetector" type="Area3D" parent="RearUnderCamera" groups=["near-miss detector"]]

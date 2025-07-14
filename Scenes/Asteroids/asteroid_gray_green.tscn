@@ -53,8 +53,6 @@ skeleton = NodePath("")
 script = ExtResource("2_s5xo5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-collision_layer = 0
-collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.97623e-09, 0.01213)

@@ -52,8 +52,6 @@ skeleton = NodePath("")
 script = ExtResource("2_aut54")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-collision_layer = 0
-collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("SphereShape3D_k6k7r")
