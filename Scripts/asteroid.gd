@@ -1,4 +1,4 @@
-extends MeshInstance3D
+class_name Asteroid extends MeshInstance3D
 
 var tween:Tween
 

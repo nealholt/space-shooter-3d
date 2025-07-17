@@ -20,8 +20,8 @@ var position_array:Array # Array of positions at the center of each cell.
 var center := Vector3i.ZERO # Possibly previous (or current) cell index of the player
 var player_center := Vector3i.ZERO # Current cell index of the player
 
-# This is done instead of using the _ready function
-# because the player needs to be instantiated before the
+# This function is used instead of the _ready function
+# because the Global player reference needs to be set before the
 # asteroid field, since the player is referenced in this function.
 func generate_field() -> void:
 	# Center the player in the middle of the asteroid field.
@@ -71,7 +71,7 @@ func generate_field() -> void:
 
 # Randomly create an asteroid (or not) at the given position.
 # Returns the new asteroid or null.
-func create_asteroid(pos:Vector3, grow_in:=true) -> Node3D:
+func create_asteroid(pos:Vector3, grow_in:=true) -> Asteroid:
 	if randf() > DENSITY:
 		return null
 	# Otherwise, create an asteroid
@@ -88,16 +88,16 @@ func create_asteroid(pos:Vector3, grow_in:=true) -> Node3D:
 	var rot_y = randf_range(0, TAU)
 	var rot_z = randf_range(0, TAU)
 	a.rotation = Vector3(rot_x, rot_y, rot_z)
-	# Randomize position
+	# Randomize position, but keep the asteroid within the cell
 	var amount := GRID_SIZE/2.0 - temp_scale + 1
 	var pos_x = randf_range(-amount, amount)
 	var pos_y = randf_range(-amount, amount)
 	var pos_z = randf_range(-amount, amount)
 	a.global_position += Vector3(pos_x, pos_y, pos_z)
-	# Fade in
+	# Grow from small to full size...
 	if grow_in:
 		a.swell_in(temp_scale)
-	else:
+	else: # ...or appear instantly at full size
 		a.scale = Vector3(temp_scale, temp_scale, temp_scale)
 	return a
 
@@ -117,25 +117,29 @@ func _process(_delta: float) -> void:
 	#print('\nPlayer was in cell '+str(center)+' but is now in '+str(player_center)+' at global position '+str(Global.player.global_position))
 	#print('was in grid cell '+str(wrap_index(center.x))+', '+str(wrap_index(center.y))+', '+str(wrap_index(center.z)))
 	#print('now in grid cell '+str(wrap_index(player_center.x))+', '+str(wrap_index(player_center.y))+', '+str(wrap_index(player_center.z)))
+	# Update one x, y, or z slice per frame. You could do them
+	# all in one frame, but amortizing spreads out the load
+	# to a small degree.
 	if diff.x != 0:
-		if abs(diff.x) != 1: push_error('diff x not equal to 1')
+		#if abs(diff.x) != 1: push_error('diff x not equal to 1')
 		#print('    x update '+str(diff))
 		update_x(diff.x)
 		center.x = player_center.x # Update the center
 	elif diff.y != 0:
-		if abs(diff.y) != 1: push_error('diff y not equal to 1')
+		#if abs(diff.y) != 1: push_error('diff y not equal to 1')
 		#print('    y update '+str(diff))
 		update_y(diff.y)
 		center.y = player_center.y # Update the center
 	elif diff.z != 0:
-		if abs(diff.z) != 1: push_error('diff z not equal to 1')
+		#if abs(diff.z) != 1: push_error('diff z not equal to 1')
 		#print('    z update '+str(diff))
 		update_z(diff.z)
 		center.z = player_center.z # Update the center
 	else:
-		push_error('THIS SHOULD NEVER HAPPEN')
+		push_error('ERROR in asteroid_field.gd _process')
 
 
+# Wrap the index to be a valid index into the cube of asteroids.
 func wrap_index(index:int) -> int:
 	while index < 0:
 		index += WIDTH
@@ -146,7 +150,7 @@ func update_x(x_diff:int) -> void:
 	# Get the row, column, or page of the asteroid_array
 	# that needs to be updated
 	var slice_to_update:int = wrap_index(center.x - x_diff*RADIUS)
-	# Remove all asteroids in that slice
+	# Update all asteroids in that slice
 	#print('    replacing asteroids in '+str(slice_to_update)+', *, *')
 	for y in WIDTH:
 		for z in WIDTH:
@@ -164,7 +168,7 @@ func update_y(y_diff:int) -> void:
 	# Get the row, column, or page of the asteroid_array
 	# that needs to be updated
 	var slice_to_update:int = wrap_index(center.y - y_diff*RADIUS)
-	# Remove all asteroids in that slice
+	# Update all asteroids in that slice
 	#print('    replacing asteroids in *, '+str(slice_to_update)+', *')
 	for x in WIDTH:
 		for z in WIDTH:
@@ -182,7 +186,7 @@ func update_z(z_diff:int) -> void:
 	# Get the row, column, or page of the asteroid_array
 	# that needs to be updated
 	var slice_to_update:int = wrap_index(center.z - z_diff*RADIUS)
-	# Remove all asteroids in that slice
+	# Update all asteroids in that slice
 	#print('    replacing asteroids in *, *, '+str(slice_to_update))
 	for x in WIDTH:
 		for y in WIDTH:
