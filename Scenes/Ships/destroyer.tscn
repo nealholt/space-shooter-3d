@@ -33,3 +33,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.973, -9.827)
 shape = SubResource("ConvexPolygonShape3D_v5onn")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_2fe14")]
+
+[node name="TurretGroup" type="Node3D" parent="."]
+
+[node name="LeftHardpoint" type="Node3D" parent="TurretGroup"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3.5, -10)
+
+[node name="RightHardpoint" type="Node3D" parent="TurretGroup"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3.5, -10)

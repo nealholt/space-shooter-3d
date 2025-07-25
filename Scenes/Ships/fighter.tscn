@@ -46,7 +46,7 @@ angle_assist_limit = 10.0
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="FighterChassisRing" parent="." instance=ExtResource("19_x2ba7")]
-transform = Transform3D(-1, 8.35188e-23, -8.74228e-08, -2.68659e-16, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

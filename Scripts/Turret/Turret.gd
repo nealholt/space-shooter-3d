@@ -1,5 +1,6 @@
-extends Node3D
-class_name Turret
+class_name Turret extends Node3D
+
+const TURRET_SCENE:PackedScene = preload("res://Scenes/turret.tscn")
 
 # movement speeds and constraints in degrees
 @export var elevation_speed_deg: float = 5
@@ -27,6 +28,12 @@ var orientation_data:TargetOrientationData
 # If angle to target is less than this number of degrees, then shoot
 @export var angle_to_shoot_deg : float = 5
 var angle_to_shoot : float = deg_to_rad(angle_to_shoot_deg)
+
+
+static func new_turret(my_parent:Node3D) -> Turret:
+	var t := TURRET_SCENE.instantiate()
+	my_parent.add_child(t)
+	return t
 
 
 func _ready() -> void:

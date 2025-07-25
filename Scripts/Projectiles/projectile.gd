@@ -1,5 +1,4 @@
-extends Node3D
-class_name Projectile
+class_name Projectile extends Node3D
 
 # Bullets and missiles and all projectiles inherit
 # from this class.

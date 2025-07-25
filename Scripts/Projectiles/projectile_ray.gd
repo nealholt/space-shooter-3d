@@ -1,5 +1,4 @@
-extends Projectile
-class_name ProjectileRay
+class_name ProjectileRay extends Projectile
 
 # Improvements made to my code based on this
 # excellent tutorial:
