@@ -1,5 +1,4 @@
-extends CharacterBodyControlParent
-class_name NPCFighterStateMachine
+class_name NPCFighterStateMachine extends CharacterBodyControlParent
 
 # This script handles basic transitioning between states
 # and an extreme check that sends the ship toward the

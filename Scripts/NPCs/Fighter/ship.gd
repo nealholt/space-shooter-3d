@@ -96,13 +96,6 @@ func _ready() -> void:
 			hit_feedback = child
 		elif child is TargetReticles:
 			reticle = child
-		elif child.name == 'TurretGroup':
-			setup_turrets(child)
-
-
-func setup_turrets(turret_parent:Node3D) -> void:
-	for child in turret_parent.get_children():
-		Turret.new_turret(child)
 
 
 func _physics_process(delta):

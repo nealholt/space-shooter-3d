@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://o2spk0lv7tup"]
+
+[ext_resource type="Script" uid="uid://drjid0sfh27lx" path="res://Scripts/Turret/turret_group.gd" id="1_onaua"]
+
+[node name="TurretGroup" type="Node3D"]
+script = ExtResource("1_onaua")
