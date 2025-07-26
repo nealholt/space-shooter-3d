@@ -1,4 +1,4 @@
-class_name NPCFighterStateMachine extends CharacterBodyControlParent
+class_name NPCStateMachine extends CharacterBodyControlParent
 
 # This script handles basic transitioning between states
 # and an extreme check that sends the ship toward the
@@ -11,7 +11,7 @@ class_name NPCFighterStateMachine extends CharacterBodyControlParent
 
 # Reference to an intermediate script through which
 # states and the npc moved by the state can communicate.
-@export var movement_profile : MovementProfile
+@onready var movement_profile := $MovementProfile
 
 @export var initial_state : State
 var current_state : State

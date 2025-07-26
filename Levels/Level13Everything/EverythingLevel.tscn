@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="6_xbcqs"]
 [ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Scenes/Ships/bomber.tscn" id="7_m10fo"]
 [ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Scenes/Ships/destroyer.tscn" id="8_5shl4"]
-[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_fighter_controller.tscn" id="8_isq32"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="8_isq32"]
 [ext_resource type="PackedScene" uid="uid://bqvcfo7v6o6ip" path="res://Scenes/Ships/beam_destroyer.tscn" id="9_kc2e1"]
 [ext_resource type="PackedScene" uid="uid://byb8ya6fryjw0" path="res://Scenes/Ships/frigate.tscn" id="10_d6xr2"]
 [ext_resource type="PackedScene" uid="uid://diilp2vvcvj53" path="res://Scenes/Ships/carrier.tscn" id="11_gd4i7"]

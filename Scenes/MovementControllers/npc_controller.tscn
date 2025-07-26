@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dpv3fsfu1trkj"]
+[gd_scene load_steps=13 format=3 uid="uid://dpv3fsfu1trkj"]
 
-[ext_resource type="Script" uid="uid://bnw6xd02yadui" path="res://Scripts/NPCs/Fighter/npc_fighter_state_controller.gd" id="1_bsujv"]
+[ext_resource type="Script" uid="uid://bnw6xd02yadui" path="res://Scripts/NPCs/Fighter/npc_state_controller.gd" id="1_bsujv"]
 [ext_resource type="Script" uid="uid://dpu7mi2acxa31" path="res://Scripts/NPCs/Fighter/movement_profile.gd" id="2_hkqme"]
 [ext_resource type="Script" uid="uid://c8d34u5vfldag" path="res://Scripts/NPCs/Fighter/state.gd" id="3_4u817"]
 [ext_resource type="Script" uid="uid://dtv874lfhiow6" path="res://Scripts/NPCs/Fighter/state_loop.gd" id="4_8so7c"]
@@ -11,10 +11,10 @@
 [ext_resource type="Script" uid="uid://xric4kglnjbe" path="res://Scripts/NPCs/Fighter/state_jink.gd" id="9_m06hc"]
 [ext_resource type="Script" uid="uid://bwic7uvlkd66r" path="res://Scripts/NPCs/Fighter/state_fighter_death_animation.gd" id="10_cp4qn"]
 [ext_resource type="Script" uid="uid://c3gw1nt0lnjsu" path="res://Scripts/target_selector.gd" id="10_kh3qm"]
+[ext_resource type="Script" uid="uid://bdsf0fc3mi1vk" path="res://Scripts/NPCs/Fighter/state_orbit.gd" id="11_ahqse"]
 
-[node name="NPCFighterController" type="Node" node_paths=PackedStringArray("movement_profile", "initial_state")]
+[node name="NPCController" type="Node" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_bsujv")
-movement_profile = NodePath("MovementProfile")
 initial_state = NodePath("States/Seek")
 
 [node name="MovementProfile" type="Node" parent="."]
@@ -45,6 +45,9 @@ script = ExtResource("9_m06hc")
 
 [node name="DeathAnimation" type="Node" parent="States"]
 script = ExtResource("10_cp4qn")
+
+[node name="Orbit" type="Node" parent="States"]
+script = ExtResource("11_ahqse")
 
 [node name="TargetSelector" type="Node" parent="."]
 script = ExtResource("10_kh3qm")

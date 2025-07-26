@@ -1,5 +1,4 @@
-extends Node
-class_name TargetSelector
+class_name TargetSelector extends Node
 
 var ally_team:String
 # Group from which targets will be selected

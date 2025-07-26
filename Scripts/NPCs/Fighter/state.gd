@@ -1,5 +1,4 @@
-extends Node
-class_name State
+class_name State extends Node
 # Source:
 # https://www.youtube.com/watch?v=ow_Lum-Agbs&t=145s
 
@@ -103,11 +102,14 @@ func pitch_target_ahead() -> void:
 		motion.goal_pitch = 1.0
 	else:
 		motion.goal_pitch = -1.0
-	# If we are within 3 degrees of perfect,
-	# then reduce the pitch so as to not oscillate.
+	# If we are within 5 degrees of perfect,
+	# then reduce the pitch by a factor of at
+	# least 2, more reduction as the angle above / below
+	# gets closer to zero, so as to not oscillate.
 	# I sure would love a better way of doing this.
-	if rad_to_deg(motion.orientation_data.amt_above_below) < 5.0:
-		motion.goal_pitch = motion.goal_pitch/10.0
+	var angle_diff_deg:float = rad_to_deg(motion.orientation_data.amt_above_below)
+	if angle_diff_deg < 5.0:
+		motion.goal_pitch = motion.goal_pitch/(52.0-10*angle_diff_deg)
 
 
 # Pitch to get target behind
@@ -116,9 +118,43 @@ func pitch_target_behind() -> void:
 		motion.goal_pitch = -1.0
 	else:
 		motion.goal_pitch = 1.0
-	# If we are within 3 degrees of perfect,
-	# then reduce the pitch so as to not oscillate.
+	# If we are within 5 degrees of perfect,
+	# then reduce the pitch by a factor of at
+	# least 2, more reduction as the angle above / below
+	# gets closer to zero, so as to not oscillate.
 	# I sure would love a better way of doing this.
-	if rad_to_deg(motion.orientation_data.amt_above_below) < 5.0:
-		motion.goal_pitch = motion.goal_pitch/10.0
-	#print(motion.goal_pitch)
+	var angle_diff_deg:float = rad_to_deg(motion.orientation_data.amt_above_below)
+	if angle_diff_deg < 5.0:
+		motion.goal_pitch = motion.goal_pitch/(52.0-10*angle_diff_deg)
+
+
+# Yaw to get target ahead
+func yaw_target_ahead() -> void:
+	if motion.orientation_data.target_is_right:
+		motion.goal_yaw = 1.0
+	else:
+		motion.goal_yaw = -1.0
+	# If we are within 5 degrees of perfect,
+	# then reduce the yaw by a factor of at
+	# least 2, more reduction as the angle right / left
+	# gets closer to zero, so as to not oscillate.
+	# I sure would love a better way of doing this.
+	var angle_diff_deg:float = rad_to_deg(motion.orientation_data.amt_right_left)
+	if angle_diff_deg < 5.0:
+		motion.goal_yaw = motion.goal_yaw/(52.0-10*angle_diff_deg)
+
+
+# Yaw to get target behind
+func yaw_target_behind() -> void:
+	if motion.orientation_data.target_is_right:
+		motion.goal_yaw = -1.0
+	else:
+		motion.goal_yaw = 1.0
+	# If we are within 5 degrees of perfect,
+	# then reduce the yaw by a factor of at
+	# least 2, more reduction as the angle right / left
+	# gets closer to zero, so as to not oscillate.
+	# I sure would love a better way of doing this.
+	var angle_diff_deg:float = rad_to_deg(motion.orientation_data.amt_right_left)
+	if angle_diff_deg < 5.0:
+		motion.goal_yaw = motion.goal_yaw/(52.0-10*angle_diff_deg)
