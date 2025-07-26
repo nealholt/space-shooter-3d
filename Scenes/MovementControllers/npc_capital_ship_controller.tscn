@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbxmm661qby3d"]
+
+[ext_resource type="Script" uid="uid://bajgi6qkpu672" path="res://Scripts/NPCs/npc_capital_ship_controller.gd" id="1_7sab1"]
+
+[node name="NPCCapitalShipController" type="Node"]
+script = ExtResource("1_7sab1")

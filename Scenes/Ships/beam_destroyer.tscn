@@ -52,15 +52,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 15)
 [node name="BottomHardpoint" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -8, 15)
 
-[node name="NPCController" parent="." instance=ExtResource("5_dr01k")]
+[node name="NPCController" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("5_dr01k")]
+initial_state = NodePath("States/Orbit")
 shooting_angle_degrees = 3.0
-speed = 10.0
+speed = 30.0
 x_speed = 5.0
 y_speed = 5.0
-pitch_amt = 0.1
-roll_amt = 0.1
+pitch_amt = 1.0
+roll_amt = 1.0
+yaw_amt = 1.0
 speed_lerp = 1.0
 lerp_str = 1.0
 target_capital_ships = true
 too_far = 450.0
 too_close = 250.0
+
+[editable path="NPCController"]

@@ -63,7 +63,8 @@ shape = SubResource("ConvexPolygonShape3D_si2lx")
 [node name="Hardpoint" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 6.5, -11)
 
-[node name="NPCController" parent="." instance=ExtResource("5_qfai7")]
+[node name="NPCController" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("5_qfai7")]
+initial_state = NodePath("States/Orbit")
 shooting_angle_degrees = 3.0
 speed = 5.0
 x_speed = 3.0
@@ -76,3 +77,5 @@ lerp_str = 1.0
 target_capital_ships = true
 too_far = 600.0
 too_close = 400.0
+
+[editable path="NPCController"]

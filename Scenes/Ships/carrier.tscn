@@ -108,7 +108,8 @@ transform = Transform3D(-0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1
 [node name="RightFangOutside" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(-0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 0, 0, 1, 120, -100, -200)
 
-[node name="NPCController" parent="." instance=ExtResource("5_pp34p")]
+[node name="NPCController" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("5_pp34p")]
+initial_state = NodePath("States/Orbit")
 speed = 3.0
 x_speed = 1.0
 y_speed = 1.0
@@ -122,3 +123,4 @@ too_far = 800.0
 too_close = 600.0
 
 [editable path="CarrierChassis"]
+[editable path="NPCController"]

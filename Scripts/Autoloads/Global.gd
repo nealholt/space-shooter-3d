@@ -277,19 +277,18 @@ func get_intercept(shooter_pos:Vector3,
 		target_velocity = target.velocity
 	# Begin calculating intercept
 	var target_position:Vector3 = target.global_position
-	# It's really easy if the target is not moving
+	# It's really easy if the target is not moving, but
+	# we also need to protect against divide by zero and/or
+	# imaginary results which occur when bullet speed is
+	# slower than target speed
 	var target_speed:float = target_velocity.length()
-	if target_speed == 0.0:
+	if target_speed == 0.0 or bullet_speed <= target_speed:
 		return target_position
 	# For real, calculate intercept now
 	var a:float = bullet_speed*bullet_speed - target_velocity.dot(target_velocity)
 	var b:float = 2*target_velocity.dot(target_position-shooter_pos)
 	var c:float = (target_position-shooter_pos).dot(target_position-shooter_pos)
-	# Protect against divide by zero and/or imaginary results
-	# which occur when bullet speed is slower than target speed
-	var time:float = 0.0
-	if bullet_speed > target_speed:
-		time = (b+sqrt(b*b+4*a*c)) / (2*a)
+	var time := (b+sqrt(b*b+4*a*c)) / (2*a)
 	return target_position+time*target_velocity
 
 

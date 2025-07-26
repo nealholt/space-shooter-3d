@@ -126,9 +126,9 @@ func pitch_target_behind() -> void:
 # Yaw to get target ahead
 func yaw_target_ahead() -> void:
 	if motion.orientation_data.target_is_right:
-		motion.goal_yaw = 1.0
-	else:
 		motion.goal_yaw = -1.0
+	else:
+		motion.goal_yaw = 1.0
 	# Reduce rotation when close to ideal angle
 	motion.goal_yaw = rotation_adjustment(motion.orientation_data.amt_right_left, motion.goal_yaw)
 
@@ -136,9 +136,9 @@ func yaw_target_ahead() -> void:
 # Yaw to get target behind
 func yaw_target_behind() -> void:
 	if motion.orientation_data.target_is_right:
-		motion.goal_yaw = -1.0
-	else:
 		motion.goal_yaw = 1.0
+	else:
+		motion.goal_yaw = -1.0
 	# Reduce rotation when close to ideal angle
 	motion.goal_yaw = rotation_adjustment(motion.orientation_data.amt_right_left, motion.goal_yaw)
 

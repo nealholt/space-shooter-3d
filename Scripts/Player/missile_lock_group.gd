@@ -320,7 +320,10 @@ func launch(targeter:Node3D) -> void:
 		else:
 			launch_audio.play()
 	# Fire zee missile! (For now, don't let npcs use quick launch)
-	missile_launcher.shoot(targeter, target, is_quick_launch and !npc_missile_lock)
+	# I added the if statement here after getting an error when I
+	# launched a missile just as a target was getting queue_freed.
+	if is_instance_valid(target):
+		missile_launcher.shoot(targeter, target, is_quick_launch and !npc_missile_lock)
 
 
 func acquire_lock() -> void:
