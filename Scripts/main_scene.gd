@@ -130,6 +130,8 @@ func _on_load_12_collision_experiment_pressed() -> void:
 func _on_load_13_space_station_defense_pressed() -> void:
 	load_level("Level13Everything/EverythingLevel")
 
+func _on_load_14_delete_me_pressed() -> void:
+	load_level("Level14DeleteMe/delete_me")
 
 
 func _on_toggle_fullscreen_pressed() -> void:

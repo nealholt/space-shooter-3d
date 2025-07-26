@@ -89,11 +89,18 @@ func roll_target_above() -> void:
 		motion.goal_roll = -1.0
 	else:
 		motion.goal_roll = 1.0
-	# If we are within 3 degrees of perfect,
-	# then reduce the roll so as to not oscillate.
-	# I sure would love a better way of doing this.
-	if rad_to_deg(motion.orientation_data.amt_right_left) < 5.0:
-		motion.goal_pitch = motion.goal_roll/10.0
+	# Reduce rotation when close to ideal angle
+	motion.goal_roll = rotation_adjustment(motion.orientation_data.amt_right_left, motion.goal_roll)
+
+
+# Pitch to get target above
+func pitch_target_above() -> void:
+	if motion.orientation_data.target_is_ahead:
+		motion.goal_pitch = -1.0
+	else:
+		motion.goal_pitch = 1.0
+	# Reduce rotation when close to ideal angle
+	motion.goal_pitch = rotation_adjustment(PI/2 - motion.orientation_data.amt_above_below, motion.goal_pitch)
 
 
 # Pitch to get target ahead
@@ -102,14 +109,8 @@ func pitch_target_ahead() -> void:
 		motion.goal_pitch = 1.0
 	else:
 		motion.goal_pitch = -1.0
-	# If we are within 5 degrees of perfect,
-	# then reduce the pitch by a factor of at
-	# least 2, more reduction as the angle above / below
-	# gets closer to zero, so as to not oscillate.
-	# I sure would love a better way of doing this.
-	var angle_diff_deg:float = rad_to_deg(motion.orientation_data.amt_above_below)
-	if angle_diff_deg < 5.0:
-		motion.goal_pitch = motion.goal_pitch/(52.0-10*angle_diff_deg)
+	# Reduce rotation when close to ideal angle
+	motion.goal_pitch = rotation_adjustment(motion.orientation_data.amt_above_below, motion.goal_pitch)
 
 
 # Pitch to get target behind
@@ -118,14 +119,8 @@ func pitch_target_behind() -> void:
 		motion.goal_pitch = -1.0
 	else:
 		motion.goal_pitch = 1.0
-	# If we are within 5 degrees of perfect,
-	# then reduce the pitch by a factor of at
-	# least 2, more reduction as the angle above / below
-	# gets closer to zero, so as to not oscillate.
-	# I sure would love a better way of doing this.
-	var angle_diff_deg:float = rad_to_deg(motion.orientation_data.amt_above_below)
-	if angle_diff_deg < 5.0:
-		motion.goal_pitch = motion.goal_pitch/(52.0-10*angle_diff_deg)
+	# Reduce rotation when close to ideal angle
+	motion.goal_pitch = rotation_adjustment(motion.orientation_data.amt_above_below, motion.goal_pitch)
 
 
 # Yaw to get target ahead
@@ -134,14 +129,8 @@ func yaw_target_ahead() -> void:
 		motion.goal_yaw = 1.0
 	else:
 		motion.goal_yaw = -1.0
-	# If we are within 5 degrees of perfect,
-	# then reduce the yaw by a factor of at
-	# least 2, more reduction as the angle right / left
-	# gets closer to zero, so as to not oscillate.
-	# I sure would love a better way of doing this.
-	var angle_diff_deg:float = rad_to_deg(motion.orientation_data.amt_right_left)
-	if angle_diff_deg < 5.0:
-		motion.goal_yaw = motion.goal_yaw/(52.0-10*angle_diff_deg)
+	# Reduce rotation when close to ideal angle
+	motion.goal_yaw = rotation_adjustment(motion.orientation_data.amt_right_left, motion.goal_yaw)
 
 
 # Yaw to get target behind
@@ -150,11 +139,18 @@ func yaw_target_behind() -> void:
 		motion.goal_yaw = -1.0
 	else:
 		motion.goal_yaw = 1.0
-	# If we are within 5 degrees of perfect,
-	# then reduce the yaw by a factor of at
-	# least 2, more reduction as the angle right / left
-	# gets closer to zero, so as to not oscillate.
-	# I sure would love a better way of doing this.
-	var angle_diff_deg:float = rad_to_deg(motion.orientation_data.amt_right_left)
+	# Reduce rotation when close to ideal angle
+	motion.goal_yaw = rotation_adjustment(motion.orientation_data.amt_right_left, motion.goal_yaw)
+
+
+# Given an angle in radians. If that angle is less than 5 degrees,
+# then reduce the turning amount by a factor of at least 2,
+# more reduction as the angle difference gets closer to zero.
+# This prevents oscillation when honing in on a target.
+# I sure would love a better way of doing this.
+func rotation_adjustment(angle_diff_rad:float, rotation_val:float) -> float:
+	var angle_diff_deg:float = rad_to_deg(angle_diff_rad)
 	if angle_diff_deg < 5.0:
-		motion.goal_yaw = motion.goal_yaw/(52.0-10*angle_diff_deg)
+		return rotation_val/(52.0-10*angle_diff_deg)
+	else:
+		return rotation_val

@@ -35,6 +35,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.973, -9.827)
 shape = SubResource("ConvexPolygonShape3D_v5onn")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_2fe14")]
+max_health = 50.0
 
 [node name="TurretGroup" parent="." instance=ExtResource("4_mjmit")]
 
@@ -44,4 +45,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3.5, -10)
 [node name="RightHardpoint" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3.5, -10)
 
-[node name="NPCController" parent="." instance=ExtResource("5_1ts7h")]
+[node name="NPCController" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("5_1ts7h")]
+initial_state = NodePath("States/Orbit")
+speed = 15.0
+x_speed = 3.0
+y_speed = 5.0
+pitch_amt = 0.2
+roll_amt = 0.2
+speed_lerp = 1.0
+lerp_str = 1.0
+target_capital_ships = true
+too_far = 400.0
+too_close = 200.0
+keep_target_above = true
+
+[editable path="NPCController"]

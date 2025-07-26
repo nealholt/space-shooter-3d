@@ -23,7 +23,9 @@ var states : Dictionary = {}
 var shooting_angle:float
 
 # Modifiers for movement amount
-@export var speed: float = 70.0
+@export var speed: float = 70.0 ## z axis speed. Forward / backward
+@export var x_speed: float = 0.0 ## Left / right speed.
+@export var y_speed: float = 0.0 ## Up / down speed.
 @export var pitch_amt: float = 0.8
 @export var roll_amt: float = 0.8
 @export var yaw_amt: float = 0.1
@@ -34,11 +36,12 @@ var shooting_angle:float
 @export var target_capital_ships : bool = false
 
 # I'm anxious about the wisdom of adding variables
-# here that just set lower level variables in the
-# states, but for now, this is the best I've come
+# here that just set variables in child state
+# nodes, but for now, this is the best I've come
 # up with.
 @export var too_far:float = 150.0 ## Distance at which to come in for another attack pass
 @export var too_close:float = 30.0 ## Distance at which to stop attack pass and peel off
+@export var keep_target_above:bool = false ## Default is to orient so target is ahead, but some capital ships want their target above
 
 
 func _ready() -> void:
@@ -58,15 +61,25 @@ func _ready() -> void:
 	# Set state parameters. Squared for efficiency.
 	$States/Seek.too_close_sqd = too_close * too_close
 	$States/Flee.distance_limit_sqd = too_far * too_far
+	$States/Orbit.ideal_distance_sqd = (too_far * too_far + too_close * too_close) / 2
+	$States/Orbit.keep_target_above = keep_target_above
 
 
 func move_and_turn(mover, delta:float) -> void:
 	var gun:Gun = mover.get_current_gun()
-	# Update profile.orientation_data
-	if gun and target and is_instance_valid(target):
-		movement_profile.orientation_data.update_data(
-			mover.global_position, gun.bullet_speed,
-			target, mover.global_transform.basis)
+	# Update profile.orientation_data ...
+	if target and is_instance_valid(target):
+		# ... to shoot the main gun at the target ...
+		if gun:
+			movement_profile.orientation_data.update_data(
+				mover.global_position, gun.bullet_speed,
+				target, mover.global_transform.basis)
+		# ... but if there is no main gun, as with some
+		# capital ships, we still want to move toward the target
+		else:
+			movement_profile.orientation_data.update_data(
+				mover.global_position, speed,
+				target, mover.global_transform.basis)
 	# Update the current state, which updates
 	# the movement profile, which is used below
 	# to steer the craft
@@ -78,6 +91,8 @@ func move_and_turn(mover, delta:float) -> void:
 	roll_input = lerp(roll_input, movement_profile.goal_roll * roll_amt, lerp_str*delta)
 	yaw_input = lerp(yaw_input, movement_profile.goal_yaw * yaw_amt, lerp_str*delta)
 	impulse = lerp(impulse, movement_profile.goal_speed * speed, speed_lerp*delta)
+	x_impulse = lerp(x_impulse, movement_profile.goal_strafe_x * x_speed, speed_lerp*delta)
+	y_impulse = lerp(y_impulse, movement_profile.goal_strafe_y * y_speed, speed_lerp*delta)
 	
 	ballistic = movement_profile.ballistic
 	

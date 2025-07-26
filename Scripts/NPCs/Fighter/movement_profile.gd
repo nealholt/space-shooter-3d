@@ -1,5 +1,4 @@
-extends Node
-class_name MovementProfile
+class_name MovementProfile extends Node
 # The idea here is to store information on the
 # movement parameters to apply to an npc so it
 # can go through preset motions such as an
@@ -23,10 +22,12 @@ class_name MovementProfile
 # The NPC will lerp to the given settings.
 # But these are just modifiers in the range
 # -1 to 1. Speed is probably 0 to 1.
-var goal_speed:float
+var goal_speed:float # z axis speed / impulse
 var goal_pitch:float
 var goal_yaw:float
 var goal_roll:float
+var goal_strafe_x:float # x axis speed / impulse. Comparable to goal speed.
+var goal_strafe_y:float # y axis speed / impulse. Comparable to goal speed.
 
 # Add this to npc velocity
 var acceleration : Vector3
@@ -58,5 +59,7 @@ func reset() -> void:
 	goal_pitch = 0.0
 	goal_yaw = 0.0
 	goal_roll = 0.0
+	goal_strafe_x = 0.0
+	goal_strafe_y = 0.0
 	can_interrupt_state = true
 	acceleration = Vector3.ZERO

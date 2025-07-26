@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://bq4kqa6h3ojks"]
+
+[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_su1dd"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_avkgv"]
+[ext_resource type="PackedScene" uid="uid://bqvcfo7v6o6ip" path="res://Scenes/Ships/beam_destroyer.tscn" id="3_su1dd"]
+[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="4_12cyn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_su1dd"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_avkgv"]
+sky_material = SubResource("ProceduralSkyMaterial_su1dd")
+
+[sub_resource type="Environment" id="Environment_tak7s"]
+background_mode = 2
+sky = SubResource("Sky_avkgv")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_su1dd")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tak7s")
+
+[node name="RedTeam" type="Node3D" parent="."]
+script = ExtResource("2_avkgv")
+
+[node name="BeamDestroyer" parent="RedTeam" instance=ExtResource("3_su1dd")]
+transform = Transform3D(-0.65627, 0, -0.754526, 0, 1, 0, 0.754526, 0, -0.65627, 0, 0, -388.103)
+
+[node name="BlueTeam" type="Node3D" parent="."]
+script = ExtResource("2_avkgv")
+team = "blue team"
+
+[node name="Corvette" parent="BlueTeam" instance=ExtResource("4_12cyn")]
+impulse_std = 0.0
