@@ -15,10 +15,6 @@ class_name MovementProfile extends Node
 # the movement profile and the state machine
 # and check the movement profile each frame.
 
-# Export this so that all the states can get access
-# to the npc they are controlling
-@export var npc:CharacterBody3D
-
 # The NPC will lerp to the given settings.
 # But these are just modifiers in the range
 # -1 to 1. Speed is probably 0 to 1.

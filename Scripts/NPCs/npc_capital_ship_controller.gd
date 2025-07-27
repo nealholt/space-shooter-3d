@@ -1,23 +1,15 @@
 class_name NPCCapitalShipController extends CharacterBodyControlParent
 
-# This script handles basic transitioning between states
-# and an extreme check that sends the ship toward the
-# origin if the ship goes way out of bounds.
-
-# Source:
-# https://www.youtube.com/watch?v=ow_Lum-Agbs&t=300s
+# This script is based on (and has a lot of overlap with)
+# npc_state_controller.gd.
 
 @onready var target_selector := $TargetSelector
-
 # Reference to an intermediate script through which
 # states and the npc moved by the state can communicate.
 @onready var movement_profile := $MovementProfile
+@onready var orbit_state := $OrbitState
 
-@export var initial_state : State
-var current_state : State
-var states : Dictionary = {}
-
-# Within this angle of the target, the enemy
+# Within this angle of the target, the NPC
 # will start shooting
 @export var shooting_angle_degrees := 10.0 # degrees
 var shooting_angle:float
@@ -35,34 +27,22 @@ var shooting_angle:float
 
 @export var target_capital_ships : bool = false
 
-# I'm anxious about the wisdom of adding variables
-# here that just set variables in child state
-# nodes, but for now, this is the best I've come
-# up with.
-@export var too_far:float = 150.0 ## Distance at which to come in for another attack pass
-@export var too_close:float = 30.0 ## Distance at which to stop attack pass and peel off
+# Ideal attack distance squared
+@export var ideal_distance := 450.0
+# Distance at which to reduce speed as we ease toward
+# ideal attack distance
+@export var ease_dist := 300.0 # Squared for efficiency
 @export var keep_target_above:bool = false ## Default is to orient so target is ahead, but some capital ships want their target above
 
 
 func _ready() -> void:
 	shooting_angle = deg_to_rad(shooting_angle_degrees)
-	#print('In StateMachine _ready adding children:')
-	for child in $States.get_children():
-		if child is State:
-			#print(child.name.to_lower())
-			states[child.name.to_lower()] = child
-			child.Transitioned.connect(on_child_transition)
-			child.motion = movement_profile
-	if initial_state:
-		initial_state.Enter()
-		current_state = initial_state
+	orbit_state.keep_target_above = keep_target_above
+	orbit_state.ideal_distance_sqd = ideal_distance * ideal_distance
+	orbit_state.ease_dist_sqd = ease_dist * ease_dist
+	orbit_state.motion = movement_profile
 	# Tell target selector to prefer capital ships
 	target_selector.prefer_capital_ships = target_capital_ships
-	# Set state parameters. Squared for efficiency.
-	$States/Seek.too_close_sqd = too_close * too_close
-	$States/Flee.distance_limit_sqd = too_far * too_far
-	$States/Orbit.ideal_distance_sqd = (too_far * too_far + too_close * too_close) / 2
-	$States/Orbit.keep_target_above = keep_target_above
 
 
 func move_and_turn(mover, delta:float) -> void:
@@ -80,11 +60,8 @@ func move_and_turn(mover, delta:float) -> void:
 			movement_profile.orientation_data.update_data(
 				mover.global_position, speed,
 				target, mover.global_transform.basis)
-	# Update the current state, which updates
-	# the movement profile, which is used below
-	# to steer the craft
-	if current_state:
-		current_state.Physics_Update(delta)
+	# steer the craft
+	orbit_state.Physics_Update(delta)
 	# Move
 	# Lerp toward desired settings
 	pitch_input = lerp(pitch_input, movement_profile.goal_pitch * pitch_amt, lerp_str*delta)
@@ -113,34 +90,9 @@ func shoot(shooter, delta:float) -> void:
 	if shooter.missile_lock:
 		shooter.missile_lock.update(shooter, delta)
 
-
-func on_child_transition(state, new_state_name):
-	if state != current_state:
-		#print('in state machine state != current_state')
-		return
-	
-	var new_state = states.get(new_state_name.to_lower())
-	if !new_state:
-		#print('in state machine !new_state')
-		return
-	
-	if current_state:
-		current_state.Exit()
-	
-	new_state.Enter()
-	
-	current_state = new_state
-
-# Override parent class function
-func took_damage() -> void:
-	go_evasive()
-
-func go_evasive() -> void:
-	current_state.choose_random_evasion()
-
 # Override parent class function
 func enter_death_animation() -> void:
-	current_state.enter_death_animation()
+	pass
 
 # Override parent class function
 # Died implies that the death animation has concluded.

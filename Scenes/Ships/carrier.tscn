@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_isj6t"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_r2d5f"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="4_h1ncn"]
-[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="5_pp34p"]
+[ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_pp34p"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_el2o6"]
 points = PackedVector3Array(-50, -30, -50, -50, 30, -50, 50, -30, -50, -50, -30, 50, -50, 30, 50, 50, 30, -50, 50, -30, 50, 50, 30, 50)
@@ -108,19 +108,16 @@ transform = Transform3D(-0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1
 [node name="RightFangOutside" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(-0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 0, 0, 1, 120, -100, -200)
 
-[node name="NPCController" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("5_pp34p")]
-initial_state = NodePath("States/Orbit")
+[node name="NPCCapitalShipController" parent="." instance=ExtResource("5_pp34p")]
 speed = 3.0
 x_speed = 1.0
 y_speed = 1.0
 pitch_amt = 0.01
 roll_amt = 0.01
 yaw_amt = 0.01
-speed_lerp = 0.05
-lerp_str = 0.05
+speed_lerp = 1.0
+lerp_str = 1.0
 target_capital_ships = true
-too_far = 800.0
-too_close = 600.0
+ideal_distance = 800.0
 
 [editable path="CarrierChassis"]
-[editable path="NPCController"]

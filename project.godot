@@ -172,6 +172,10 @@ pause={
 3d_physics/layer_3="near_miss"
 3d_physics/layer_4="shields"
 
+[physics]
+
+3d/default_gravity=0.0
+
 [rendering]
 
 mesh_lod/lod_change/threshold_pixels=0.0

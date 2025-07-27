@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_veikt"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_2gkw6"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="4_7ugl6"]
-[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="5_qfai7"]
+[ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_qfai7"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qmjcj"]
 points = PackedVector3Array(-9.53674e-07, 45, 17.5, -9.53674e-07, 45, -17.5, -15, -45, 17.5, 15, -45, 17.5, 15, -45, -17.5, -15, -45, -17.5)
@@ -63,9 +63,7 @@ shape = SubResource("ConvexPolygonShape3D_si2lx")
 [node name="Hardpoint" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 6.5, -11)
 
-[node name="NPCController" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("5_qfai7")]
-initial_state = NodePath("States/Orbit")
-shooting_angle_degrees = 3.0
+[node name="NPCCapitalShipController" parent="." instance=ExtResource("5_qfai7")]
 speed = 5.0
 x_speed = 3.0
 y_speed = 3.0
@@ -75,7 +73,4 @@ yaw_amt = 0.05
 speed_lerp = 1.0
 lerp_str = 1.0
 target_capital_ships = true
-too_far = 600.0
-too_close = 400.0
-
-[editable path="NPCController"]
+ideal_distance = 600.0

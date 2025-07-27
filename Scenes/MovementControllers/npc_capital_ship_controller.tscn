@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbxmm661qby3d"]
+[gd_scene load_steps=5 format=3 uid="uid://bbxmm661qby3d"]
 
 [ext_resource type="Script" uid="uid://bajgi6qkpu672" path="res://Scripts/NPCs/npc_capital_ship_controller.gd" id="1_7sab1"]
+[ext_resource type="Script" uid="uid://dpu7mi2acxa31" path="res://Scripts/NPCs/Fighter/movement_profile.gd" id="2_3gflc"]
+[ext_resource type="Script" uid="uid://c3gw1nt0lnjsu" path="res://Scripts/target_selector.gd" id="3_dofdh"]
+[ext_resource type="Script" uid="uid://bdsf0fc3mi1vk" path="res://Scripts/NPCs/Fighter/state_orbit.gd" id="4_dofdh"]
 
 [node name="NPCCapitalShipController" type="Node"]
 script = ExtResource("1_7sab1")
+
+[node name="MovementProfile" type="Node" parent="."]
+script = ExtResource("2_3gflc")
+
+[node name="TargetSelector" type="Node" parent="."]
+script = ExtResource("3_dofdh")
+
+[node name="OrbitState" type="Node" parent="."]
+script = ExtResource("4_dofdh")
