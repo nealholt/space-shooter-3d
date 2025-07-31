@@ -1,21 +1,20 @@
-extends Node
-class_name TurretMotionComponent
+class_name TurretMotionComponent extends Node
 
 # Pass the body to be rotated to the function below
 # ala this tutorial at about 5:30:
 # https://www.youtube.com/watch?v=EMpXt2MLx_4
 
-# movement speeds and constraints in degrees
-@export var elevation_speed_deg: float = 5
-@export var rotation_speed_deg: float = 5
-@export var min_elevation_deg: float = 0
-@export var max_elevation_deg: float = 60
-
 # movement speeds and constraints in radians
-@onready var elevation_speed: float = deg_to_rad(elevation_speed_deg)
-@onready var rotation_speed: float = deg_to_rad(rotation_speed_deg)
-@onready var min_elevation: float = deg_to_rad(min_elevation_deg)
-@onready var max_elevation: float = deg_to_rad(max_elevation_deg)
+var elevation_speed:float
+var rotation_speed:float
+var min_elevation:float
+var max_elevation:float
+
+func setup_values(dat:TurretData) -> void:
+	elevation_speed = deg_to_rad(dat.elevation_speed_deg)
+	rotation_speed = deg_to_rad(dat.rotation_speed_deg)
+	min_elevation = deg_to_rad(dat.min_elevation_deg)
+	max_elevation = deg_to_rad(dat.max_elevation_deg)
 
 # The following is loosely based on code from here:
 # https://github.com/IndieQuest/ModularTurret/tree/master/src

@@ -8,12 +8,6 @@ const TURRET_SCENE:PackedScene = preload("res://Scenes/turret.tscn")
 @export var min_elevation_deg: float = 0
 @export var max_elevation_deg: float = 60
 
-# movement speeds and constraints in radians
-@onready var elevation_speed: float = deg_to_rad(elevation_speed_deg)
-@onready var rotation_speed: float = deg_to_rad(rotation_speed_deg)
-@onready var min_elevation: float = deg_to_rad(min_elevation_deg)
-@onready var max_elevation: float = deg_to_rad(max_elevation_deg)
-
 var aim_assist:AimAssist
 var guns: Array
 var health_component:HealthComponent
@@ -30,9 +24,10 @@ var orientation_data:TargetOrientationData
 var angle_to_shoot : float = deg_to_rad(angle_to_shoot_deg)
 
 
-static func new_turret(my_parent:Node3D) -> Turret:
+static func new_turret(my_parent:TurretData) -> Turret:
 	var t := TURRET_SCENE.instantiate()
 	my_parent.add_child(t)
+	t.setup_turret(my_parent)
 	return t
 
 
@@ -78,6 +73,17 @@ func _ready() -> void:
 		get_tree().quit()
 	for i in range(guns.size()):
 		guns[i].reparent(gun_hardpoints[i], false)
+
+
+func setup_turret(dat:TurretData) -> void:
+	if turret_motion:
+		turret_motion.setup_values(dat)
+	
+	angle_to_shoot_deg = dat.angle_to_shoot_deg
+	angle_to_shoot = deg_to_rad(angle_to_shoot_deg)
+	
+	if dat.use_aim_assist:
+		aim_assist = AimAssist.new_aim_assist(self, dat.angle_assist_limit)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

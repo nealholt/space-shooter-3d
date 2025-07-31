@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://diilp2vvcvj53"]
+[gd_scene load_steps=16 format=3 uid="uid://diilp2vvcvj53"]
 
 [ext_resource type="PackedScene" uid="uid://du1bwxbrh62at" path="res://Assets/Ships/carrier_chassis.tscn" id="1_67lmr"]
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_isj6t"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_r2d5f"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="4_h1ncn"]
+[ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_cyiqs"]
 [ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_pp34p"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_el2o6"]
@@ -39,6 +40,8 @@ collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_isj6t")
 finalExplosion = 10
+death_animation_duration_min = 0.0
+death_animation_duration_max = 0.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_r2d5f")]
 
@@ -92,21 +95,27 @@ shape = SubResource("ConvexPolygonShape3D_0bygj")
 
 [node name="TopLeftFrontHardpoint" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 53, -155)
+script = ExtResource("5_cyiqs")
 
 [node name="TopRightFrontHardpoint2" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 53, -155)
+script = ExtResource("5_cyiqs")
 
 [node name="LeftFangOutside" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(-0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1, -120, -100, -200)
+script = ExtResource("5_cyiqs")
 
 [node name="LeftFangInside" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(-0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 0, 0, 1, -80, -100, -200)
+script = ExtResource("5_cyiqs")
 
 [node name="RightFangInside" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(-0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1, 80, -100, -200)
+script = ExtResource("5_cyiqs")
 
 [node name="RightFangOutside" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(-0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 0, 0, 1, 120, -100, -200)
+script = ExtResource("5_cyiqs")
 
 [node name="NPCCapitalShipController" parent="." instance=ExtResource("5_pp34p")]
 speed = 3.0

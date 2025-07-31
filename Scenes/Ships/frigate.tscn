@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://byb8ya6fryjw0"]
+[gd_scene load_steps=13 format=3 uid="uid://byb8ya6fryjw0"]
 
 [ext_resource type="PackedScene" uid="uid://cxd7ahrv8vrys" path="res://Assets/Ships/frigate_chassis.tscn" id="1_18ao0"]
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_veikt"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_2gkw6"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="4_7ugl6"]
+[ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_mh4mh"]
 [ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_qfai7"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qmjcj"]
@@ -29,6 +30,10 @@ collision_layer = 3
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_veikt")
+deathExplosion = 8
+finalExplosion = 9
+death_animation_duration_min = 0.0
+death_animation_duration_max = 0.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_2gkw6")]
 
@@ -62,6 +67,7 @@ shape = SubResource("ConvexPolygonShape3D_si2lx")
 
 [node name="Hardpoint" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 6.5, -11)
+script = ExtResource("5_mh4mh")
 
 [node name="NPCCapitalShipController" parent="." instance=ExtResource("5_qfai7")]
 speed = 5.0

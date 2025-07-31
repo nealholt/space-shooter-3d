@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjtrd5ktq5ypj"]
+[gd_scene load_steps=10 format=3 uid="uid://cjtrd5ktq5ypj"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_2su5o"]
 [ext_resource type="PackedScene" uid="uid://s17i1n8q4r44" path="res://Assets/Ships/destroyer_chassis.tscn" id="2_qpwbv"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_2fe14"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="4_mjmit"]
 [ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_1ts7h"]
+[ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_i0xpl"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jcj40"]
 points = PackedVector3Array(-5, -5, -14.5455, 5, 5, 14.5455, 5, -5, 14.5455, 5, 5, -14.5455, -5, 5, 14.5455, -5, -5, 14.5455, 5, -5, -14.5455, -5, 5, -14.5455)
@@ -20,6 +21,10 @@ collision_layer = 3
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_2su5o")
+deathExplosion = 8
+finalExplosion = 9
+death_animation_duration_min = 0.0
+death_animation_duration_max = 0.0
 
 [node name="DestroyerChassis" parent="." instance=ExtResource("2_qpwbv")]
 
@@ -35,15 +40,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.973, -9.827)
 shape = SubResource("ConvexPolygonShape3D_v5onn")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_2fe14")]
-max_health = 50.0
 
 [node name="TurretGroup" parent="." instance=ExtResource("4_mjmit")]
 
 [node name="LeftHardpoint" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3.5, -10)
+script = ExtResource("5_i0xpl")
+max_elevation_deg = 90.0
 
 [node name="RightHardpoint" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3.5, -10)
+script = ExtResource("5_i0xpl")
+max_elevation_deg = 90.0
 
 [node name="NPCCapitalShipController" parent="." instance=ExtResource("5_1ts7h")]
 speed = 10.0

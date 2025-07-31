@@ -1,5 +1,6 @@
-extends Node
-class_name AimAssist
+class_name AimAssist extends Node
+
+const AIMASSIST_SCENE:PackedScene = preload("res://Scenes/aim_assist.tscn")
 
 # The idea is that this node will identify whether
 # a ship (or turret) has aim assist, and will
@@ -22,11 +23,23 @@ var angle_assist_limit_radians:float
 # Audio to play when aim assist is live
 var audio:AudioStreamPlayer
 
+
+static func new_aim_assist(my_parent:Node3D, angle_assist_limit_deg:float) -> AimAssist:
+	var t := AIMASSIST_SCENE.instantiate()
+	my_parent.add_child(t)
+	t.set_assist_limit_deg(angle_assist_limit_deg)
+	return t
+
+
 func _ready() -> void:
 	angle_assist_limit_radians = deg_to_rad(angle_assist_limit)
 	for c in get_children():
 		if c is AudioStreamPlayer:
 			audio = c
+
+func set_assist_limit_deg(angle_assist_limit_deg:float) -> void:
+	angle_assist_limit = angle_assist_limit_deg
+	angle_assist_limit_radians = deg_to_rad(angle_assist_limit)
 
 func use_aim_assist(shooter:Node3D, target:Node3D,
 					bullet_speed:float) -> bool:

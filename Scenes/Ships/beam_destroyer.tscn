@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bqvcfo7v6o6ip"]
+[gd_scene load_steps=11 format=3 uid="uid://bqvcfo7v6o6ip"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_h4lox"]
 [ext_resource type="PackedScene" uid="uid://bvgxwc28k1fvx" path="res://Assets/Ships/beam_destroyer_chassis.tscn" id="2_vmkim"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_ju2iv"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="4_oimyf"]
+[ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_1v2wc"]
 [ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_dr01k"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0do6w"]
@@ -23,6 +24,10 @@ collision_layer = 3
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_h4lox")
+deathExplosion = 8
+finalExplosion = 9
+death_animation_duration_min = 0.0
+death_animation_duration_max = 0.0
 
 [node name="BeamDestroyerChassis" parent="." instance=ExtResource("2_vmkim")]
 
@@ -48,9 +53,15 @@ shape = SubResource("ConvexPolygonShape3D_dca3j")
 
 [node name="TopHardpoint" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 15)
+script = ExtResource("5_1v2wc")
+min_elevation_deg = 15.0
+max_elevation_deg = 90.0
 
 [node name="BottomHardpoint" type="Node3D" parent="TurretGroup"]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -8, 15)
+script = ExtResource("5_1v2wc")
+min_elevation_deg = 15.0
+max_elevation_deg = 90.0
 
 [node name="NPCCapitalShipController" parent="." instance=ExtResource("5_dr01k")]
 shooting_angle_degrees = 3.0
