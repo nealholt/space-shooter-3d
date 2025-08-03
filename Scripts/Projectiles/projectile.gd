@@ -75,17 +75,7 @@ func set_data(dat:ShootData) -> void:
 	# by the gun and give the bullet the global
 	# position of the gun
 	global_transform = dat.gun.global_transform
-	# Randomize angle that bullet comes out. I'm cutting
-	# spread in half so that a 10 degree spread is
-	# 10 degrees total, not plus or minus 10 degrees.
-	var spread:float = deg_to_rad(dat.spread_deg/2.0)
-	# I'm not sure why .normalized() is needed here
-	# and it concerns me that I either need it
-	# everywhere that this sort of rotation is performed
-	# or that something is going uniquely wrong
-	# such that the bases are not normalized (but should be)
-	transform.basis = transform.basis.rotated(transform.basis.x.normalized(), randf_range(-spread, spread))
-	transform.basis = transform.basis.rotated(transform.basis.y.normalized(), randf_range(-spread, spread))
+	apply_spread(dat)
 	# Set velocity
 	velocity = -global_transform.basis.z * speed
 	# 'Super powered' doubles turn rate (which is done
@@ -100,6 +90,21 @@ func set_data(dat:ShootData) -> void:
 	# Make it so a Ship can't shoot their own bullets
 	if hit_box_component:
 		hit_box_component.add_damage_exception(dat.shooter)
+
+
+# Randomize heading of this bullet based on ShootData
+func apply_spread(dat:ShootData) -> void:
+	# Randomize angle that bullet comes out. I'm cutting
+	# spread in half so that a 10 degree spread is
+	# 10 degrees total, not plus or minus 10 degrees.
+	var spread:float = deg_to_rad(dat.spread_deg/2.0)
+	# I'm not sure why .normalized() is needed here
+	# and it concerns me that I either need it
+	# everywhere that this sort of rotation is performed
+	# or that something is going uniquely wrong
+	# such that the bases are not normalized (but should be)
+	transform.basis = transform.basis.rotated(transform.basis.x.normalized(), randf_range(-spread, spread))
+	transform.basis = transform.basis.rotated(transform.basis.y.normalized(), randf_range(-spread, spread))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -123,10 +128,15 @@ func _physics_process(delta: float) -> void:
 	# because the frame of delay between set_data
 	# and phyics_process can make the intercept
 	# outdated enough that it doesn't work.
+	# IMPORTANT NOTE: spread is still applied so that
+	# bullets look natural, but aim assist is still
+	# valuable because it centers the spread on
+	# the projected intercept position.
 	if aim_assist_unhandled and data and data.aim_assist and data.target and is_instance_valid(data.target):
 		var intercept:Vector3 = Global.get_intercept(
 			global_position, speed, data.target)
 		look_at(intercept, Vector3.UP)
+		apply_spread(data)
 		velocity = -global_transform.basis.z * speed
 		aim_assist_unhandled = false # Turn it off. We're done
 	

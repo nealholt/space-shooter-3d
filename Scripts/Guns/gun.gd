@@ -1,5 +1,4 @@
-extends Node3D
-class_name Gun
+class_name Gun extends Node3D
 
 # What sort of bullet to fire:
 @export var bullet: PackedScene
@@ -42,6 +41,12 @@ var range_sqd:float
 var fire_sound_player: AudioStreamPlayer3D
 var reload_sound_player: AudioStreamPlayer3D
 
+const INFINITE_AMMO:int = 2**30-1
+@export var magazine_size:int = INFINITE_AMMO ## Default is infinite ammo, no reload
+var current_mag:int
+@export var reload_time:= 1.0 ## seconds
+var reload_timer:Timer
+
 # Gun animation, for example, rotation of the gatling gun
 @export var gun_animation : AnimationPlayer
 @export var muzzle_flash:VisualEffectSetting.VISUAL_EFFECT_TYPE
@@ -61,9 +66,12 @@ var ally_team:String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# The new laser doesn't use a firing rate timer.
+	current_mag = magazine_size
+	# The new laser doesn't use a firing rate timer or reload timer.
 	if has_node("FiringRateTimer"):
 		firing_rate_timer = $FiringRateTimer
+	if has_node("ReloadTimer"):
+		reload_timer = $ReloadTimer
 	# Search through children for various components
 	# and save a reference to them.
 	for child in get_children():
@@ -95,7 +103,8 @@ func _process(_delta: float) -> void:
 
 func ready_to_fire() -> bool:
 	# The laser beam doesn't use a firing_rate_timer
-	return !firing_rate_timer or firing_rate_timer.is_stopped()
+	# so first check if that exists.
+	return (!firing_rate_timer or firing_rate_timer.is_stopped()) and current_mag > 0
 
 
 func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
@@ -105,7 +114,7 @@ func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
 			gun_animation.play("gun_animation")
 		VfxManager.play_remote_transform(muzzle_flash, self)
 		if fire_sound_player:
-			fire_sound_player.playing = true
+			fire_sound_player.play()
 		restart_timer()
 		setup_shoot_data(shooter,target,powered_up)
 		shoot_actual()
@@ -147,11 +156,20 @@ func shoot_actual() -> void:
 		# Pass the bullet the data about the shooter,
 		# initial velocity, etcetera
 		b.set_data(data)
+	# Spend bullets unless they are supposed to be infinite
+	if magazine_size != INFINITE_AMMO:
+		current_mag -= simultaneous_shots
+		# Begin reload
+		if current_mag <= 0:
+			reload()
 
 
 # Called by weapon handler when switching to a
 # different weapon
 func deactivate() -> void:
+	# Reload if at anything less than a full mag
+	if current_mag < magazine_size:
+		reload()
 	#visible = false
 	set_process(false)
 	set_physics_process(false)
@@ -159,11 +177,9 @@ func deactivate() -> void:
 		reticle.hide()
 	if gun_animation:
 		gun_animation.stop()
-	# Don't stop the reload sound. Let it play out.
-	#if reload_sound_player:
-	#	reload_sound_player.playing = false
+	# Interrupt firing sound
 	if fire_sound_player:
-		fire_sound_player.playing = false
+		fire_sound_player.stop()
 	if ray:
 		ray.enabled = false
 
@@ -178,3 +194,13 @@ func activate() -> void:
 		reticle.show()
 	if ray:
 		ray.enabled = true
+
+
+func _on_reload_timer_timeout() -> void:
+	current_mag = magazine_size
+
+
+func reload() -> void:
+	reload_timer.start(reload_time)
+	if reload_sound_player:
+		reload_sound_player.play()

@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://conb7kdfab3ks"]
+[gd_scene load_steps=12 format=3 uid="uid://conb7kdfab3ks"]
 
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="1_5kq0i"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="2_28aj3"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_ws3ut"]
+[ext_resource type="AudioStream" uid="uid://btsaxnl2sg05y" path="res://Assets/SoundEffects/shot.wav" id="4_0a0ca"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="4_cq55v"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="5_6av2j"]
+[ext_resource type="AudioStream" uid="uid://bjvh6ui8ln1fd" path="res://Assets/SoundEffects/industrial-mechanic-using-rattle-gun-compressed-air-socket-wrench-9944.ogg" id="5_llsar"]
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/engine_audio_visuals.tscn" id="6_3ywou"]
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="7_cla1y"]
 
@@ -21,6 +23,9 @@ material = SubResource("ShaderMaterial_se4th")
 
 [node name="Fighter" instance=ExtResource("1_5kq0i")]
 
+[node name="AimAssist" parent="." index="0"]
+angle_assist_limit = 5.0
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
 stream = ExtResource("4_cq55v")
 volume_db = -20.0
@@ -31,6 +36,16 @@ npc_missile_lock = false
 
 [node name="FresnelAura" parent="Shield" index="0"]
 mesh = SubResource("SphereMesh_24wxq")
+
+[node name="Gun" parent="WeaponHandler" index="0"]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+bullet_speed = 1000.0
+fire_rate = 30.0
+spread_deg = 1.0
+fire_sound = ExtResource("4_0a0ca")
+reload_sound = ExtResource("5_llsar")
+magazine_size = 60
+reload_time = 2.0
 
 [node name="TextureRect" type="TextureRect" parent="WeaponHandler/Gun" index="1"]
 self_modulate = Color(1, 1, 1, 0.607843)

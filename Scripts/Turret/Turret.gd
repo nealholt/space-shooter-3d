@@ -84,6 +84,9 @@ func setup_turret(dat:TurretData) -> void:
 	
 	if dat.use_aim_assist:
 		aim_assist = AimAssist.new_aim_assist(self, dat.angle_assist_limit)
+	
+	if target_selector:
+		target_selector.prefer_capital_ships = dat.prefer_capital_ships
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

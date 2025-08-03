@@ -12,6 +12,8 @@ class_name TurretData extends Node3D
 
 @export var angle_to_shoot_deg : float = 5
 
-# Not yet implemented
 @export var use_aim_assist:bool = false
 @export var angle_assist_limit:float = 3.0 # degrees
+
+# Whether or not to target capital ships first
+@export var prefer_capital_ships:bool = false

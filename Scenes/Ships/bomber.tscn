@@ -11,7 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/missile_lock_group.tscn" id="9_7wsae"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="10_up24e"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_u613a"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_rfws3"]
+size = Vector3(5.03894, 1.51178, 7.49753)
 
 [node name="Bomber" type="CharacterBody3D" groups=["damageable", "team member"]]
 collision_layer = 3
@@ -29,9 +30,11 @@ angle_assist_limit = 10.0
 [node name="BurningTrail" parent="." instance=ExtResource("2_6e5lt")]
 
 [node name="BomberChassis" parent="." instance=ExtResource("3_hrk35")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_u613a")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0123901, 0.0948181, -0.755264)
+shape = SubResource("BoxShape3D_rfws3")
 
 [node name="Contrail" parent="." instance=ExtResource("5_rgdmc")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 1.35, 1.28, 3)
@@ -48,10 +51,11 @@ missile_range = 2000.0
 speed = 50.0
 
 [node name="MissileLauncher" parent="MissileLockGroup" instance=ExtResource("7_f8b5m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -1.1)
 bullet = ExtResource("8_30gv8")
 damage = 100.0
 bullet_speed = 80.0
-bullet_timeout = 60.0
+bullet_timeout = 20.0
 fire_rate = 0.1
 
 [node name="TargetReticles" parent="." instance=ExtResource("10_up24e")]

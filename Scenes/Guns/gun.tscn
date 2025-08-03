@@ -8,3 +8,8 @@ script = ExtResource("1_c3s1i")
 [node name="FiringRateTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
