@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Global="*res://Scripts/Autoloads/Global.gd"
 VfxManager="*res://Scenes/vfx/vfx_manager.tscn"
 EventsBus="*res://Scripts/Autoloads/events_bus.gd"
+ShipSpawner="*res://Scripts/Autoloads/ship_spawner.gd"
 
 [display]
 

@@ -55,6 +55,9 @@ visible = true
 [node name="FresnelAura" parent="RedTeam/FighterNPC2/Shield" index="0"]
 mesh = SubResource("SphereMesh_7nlpc")
 
+[node name="Gun" parent="RedTeam/FighterNPC2/WeaponHandler" index="0"]
+spread_deg = 1.5
+
 [node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC2" instance=ExtResource("5_o18a7")]
 
 [node name="BlueTeam" type="Node3D" parent="."]

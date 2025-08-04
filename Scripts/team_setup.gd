@@ -1,5 +1,5 @@
-extends Node3D
-class_name TeamSetup
+class_name TeamSetup extends Node3D
+
 # This script should be attached to organizational nodes
 # holding all members of a given team. The purpose of
 # this script is to consolidate all the code that sets
@@ -22,8 +22,11 @@ func _ready() -> void:
 
 
 func set_team_properties(parent_node) -> void:
-	# Loop through all children and their children
+	# Loop through parent_node, all its children, and all
+	# their children's children's children
 	var children:Array = Global.get_all_children(parent_node)
+	# Add in the parent
+	children.push_back(parent_node)
 	# Set teams and team colors of all
 	# relevant nodes that are encountered.
 	for child in children:

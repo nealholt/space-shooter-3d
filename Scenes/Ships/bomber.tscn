@@ -37,10 +37,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0123901, 0.0948181, -0.7552
 shape = SubResource("BoxShape3D_rfws3")
 
 [node name="Contrail" parent="." instance=ExtResource("5_rgdmc")]
-transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 1.35, 1.28, 3)
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 1.35, 0.5, 3.3)
 
 [node name="Contrail2" parent="." instance=ExtResource("5_rgdmc")]
-transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, -1.35, 1.28, 3)
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, -1.35, 0.5, 3.3)
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_40no2")]
 
