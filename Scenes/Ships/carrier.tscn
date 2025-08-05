@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://diilp2vvcvj53"]
+[gd_scene load_steps=17 format=3 uid="uid://diilp2vvcvj53"]
 
 [ext_resource type="PackedScene" uid="uid://du1bwxbrh62at" path="res://Assets/Ships/carrier_chassis.tscn" id="1_67lmr"]
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_isj6t"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="4_h1ncn"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_cyiqs"]
 [ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_pp34p"]
+[ext_resource type="PackedScene" uid="uid://cbhoikklwgc0c" path="res://Scenes/hangar.tscn" id="7_db1yb"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_el2o6"]
 points = PackedVector3Array(-50, -30, -50, -50, 30, -50, 50, -30, -50, -50, -30, 50, -50, 30, 50, 50, 30, -50, 50, -30, 50, 50, 30, 50)
@@ -128,5 +129,8 @@ speed_lerp = 1.0
 lerp_str = 1.0
 target_capital_ships = true
 ideal_distance = 800.0
+
+[node name="Hangar" parent="." instance=ExtResource("7_db1yb")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 40, 150)
 
 [editable path="CarrierChassis"]

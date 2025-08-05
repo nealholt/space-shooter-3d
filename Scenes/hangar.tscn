@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbhoikklwgc0c"]
+
+[ext_resource type="Script" uid="uid://d1hwpigxm8im7" path="res://Scripts/hangar.gd" id="1_nbb7t"]
+
+[node name="Hangar" type="Node3D"]
+script = ExtResource("1_nbb7t")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
