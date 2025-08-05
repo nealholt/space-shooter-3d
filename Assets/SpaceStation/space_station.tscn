@@ -578,6 +578,7 @@ script = ExtResource("1_usm2i")
 finalExplosion = 10
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_eniao")]
+max_health = 100000.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

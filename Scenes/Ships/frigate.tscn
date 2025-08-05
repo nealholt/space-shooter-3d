@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://byb8ya6fryjw0"]
+[gd_scene load_steps=15 format=3 uid="uid://byb8ya6fryjw0"]
 
 [ext_resource type="PackedScene" uid="uid://cxd7ahrv8vrys" path="res://Assets/Ships/frigate_chassis.tscn" id="1_18ao0"]
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_veikt"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="4_7ugl6"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_mh4mh"]
 [ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_qfai7"]
+[ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="7_qbhaa"]
+[ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Guns/laser_gun.tscn" id="8_14glc"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qmjcj"]
 points = PackedVector3Array(-9.53674e-07, 45, 17.5, -9.53674e-07, 45, -17.5, -15, -45, 17.5, 15, -45, 17.5, 15, -45, -17.5, -15, -45, -17.5)
@@ -80,3 +82,8 @@ speed_lerp = 1.0
 lerp_str = 1.0
 target_capital_ships = true
 ideal_distance = 600.0
+
+[node name="WeaponHandler" parent="." instance=ExtResource("7_qbhaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -46.5)
+
+[node name="LaserGun" parent="WeaponHandler" instance=ExtResource("8_14glc")]
