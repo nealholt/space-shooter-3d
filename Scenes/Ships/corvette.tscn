@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=33 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
@@ -11,12 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="9_sewpe"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="10_shexg"]
 [ext_resource type="PackedScene" uid="uid://djj4vi4d1fq2m" path="res://Scenes/Projectiles/auto_seeking_missile.tscn" id="11_a8ss5"]
-[ext_resource type="AudioStream" uid="uid://ci04qcsgn8w7q" path="res://Assets/SoundEffects/clean-machine-gun-burst-98224.ogg" id="11_itcpr"]
 [ext_resource type="PackedScene" uid="uid://drm4t5i6exnhc" path="res://Assets/Guns/gatling_gun.tscn" id="11_kbwk7"]
 [ext_resource type="PackedScene" uid="uid://cs8hx275hwfsf" path="res://Scenes/Projectiles/proximity_fuse_bullet.tscn" id="11_yl8fu"]
 [ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Assets/Ships/fighter_chassis_diamond.tscn" id="12_a77x5"]
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Assets/Ships/engine_mesh_component.tscn" id="12_e20ac"]
-[ext_resource type="AudioStream" uid="uid://bjvh6ui8ln1fd" path="res://Assets/SoundEffects/industrial-mechanic-using-rattle-gun-compressed-air-socket-wrench-9944.ogg" id="12_ig3m3"]
 [ext_resource type="PackedScene" uid="uid://ddoyejlbh51s5" path="res://Scenes/Guns/hit_scan_gun.tscn" id="13_428na"]
 [ext_resource type="PackedScene" uid="uid://dup57p4ygajr1" path="res://Scenes/Guns/laser_shotgun.tscn" id="15_ufo67"]
 [ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Assets/Guns/laser_beam.tscn" id="16_y2utm"]
@@ -162,8 +160,8 @@ bullet = ExtResource("11_yl8fu")
 bullet_speed = 600.0
 fire_rate = 1.2
 spread_deg = 3.0
-fire_sound = ExtResource("11_itcpr")
-reload_sound = ExtResource("12_ig3m3")
+fire_sound = 4
+reload_sound = 2
 gun_animation = NodePath("GunModel/AnimationPlayer")
 muzzle_flash = 6
 

@@ -1,5 +1,5 @@
 class_name SoundEffectSetting extends Resource
-## Sound effect resource, used to configure unique sound effects for use with the AudioManager. Passed to [method AudioManager.create_2d_audio_at_location()] and [method AudioManager.create_audio()] to play sound effects.
+## Sound effect resource, used to configure unique sound effects for use with the AudioManager. Passed to [method AudioManager.create_3d_audio_at_location()] and [method AudioManager.create_audio()] to play sound effects.
 
 # Since enums are stored as int under the hood,
 # this works by assuming that the enum + 1 is
@@ -10,21 +10,20 @@ class_name SoundEffectSetting extends Resource
 # WARNING: Reordering the following list will screw up
 # the sound_effects array in AudioManager and you'll
 # have to reset all their types.
-## Stores the different types of sounds effects available to be played to distinguish them from another. Each new SoundEffect resource created should add to this enum, to allow them to be easily instantiated via [method AudioManager.create_2d_audio_at_location()] and [method AudioManager.create_audio()].
+## Stores the different types of sounds effects available to be played to distinguish them from another. Each new SoundEffect resource created should add to this enum, to allow them to be easily instantiated via [method AudioManager.create_3d_audio_at_location()] and [method AudioManager.create_audio()].
 enum SOUND_EFFECT_TYPE {
-	RESOURCE_PLUNK,
-	RESOURCE_PLUNK_2D,
-	DELIVERING_RESOURCES,
-	DELIVERING_RESOURCES_2D,
-	POWER_UP,
-	POWER_UP_2D,
-	ROCKET_ENGINE,
-	ROCKET_ENGINE_2D
+	SHOT_BASIC,
+	SHOT_BASIC_3D,
+	RELOAD_SOCKET_WRENCH,
+	RELOAD_SOCKET_WRENCH_3D,
+	MACHINE_GUN,
+	MACHINE_GUN_3D,
+	NONE
 }
 
 @export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.
 @export var type: SOUND_EFFECT_TYPE ## The unique sound effect in the [enum SOUND_EFFECT_TYPE] to associate with this effect. Each SoundEffect resource should have it's own unique [enum SOUND_EFFECT_TYPE] setting.
-@export var sound_effect: AudioStreamMP3 ## The [AudioStreamMP3] audio resource to play.
+@export var sound_effect: AudioStreamWAV ## The [AudioStreamWAV] audio resource to play.
 @export_range(-40, 20) var volume: float = 0 ## The volume of the [member sound_effect].
 @export var volume_min: float = -40.0
 @export var volume_max: float = 20.0

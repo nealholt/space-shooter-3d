@@ -45,17 +45,31 @@ mesh = SubResource("SphereMesh_tw5gt")
 
 [node name="EngineAudioVisuals" parent="." index="14" instance=ExtResource("10_t22nh")]
 
+[node name="GatlingGun" parent="WeaponHandler" index="0"]
+fire_sound = 0
+reload_sound = 0
+
 [node name="TextureRect" type="TextureRect" parent="WeaponHandler/GatlingGun" index="3"]
 self_modulate = Color(1, 1, 1, 0.607843)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_t24ck")
 
+[node name="HitScanGun" parent="WeaponHandler" index="2"]
+fire_rate = 1.0
+
 [node name="TextureRect" type="TextureRect" parent="WeaponHandler/HitScanGun" index="3"]
 self_modulate = Color(1, 1, 1, 0.588235)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("3_0npbv")
+
+[node name="LaserShotgun" parent="WeaponHandler" index="3"]
+bullet = null
+bullet_speed = 1000.0
+fire_rate = 1.0
+spread_deg = 0.0
+simultaneous_shots = 1
 
 [node name="TextureRect" type="TextureRect" parent="WeaponHandler/LaserShotgun" index="2"]
 self_modulate = Color(1, 1, 1, 0.529412)

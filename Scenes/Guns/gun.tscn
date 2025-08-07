@@ -4,6 +4,8 @@
 
 [node name="Gun" type="Node3D"]
 script = ExtResource("1_c3s1i")
+fire_sound = 6
+reload_sound = 6
 
 [node name="FiringRateTimer" type="Timer" parent="."]
 wait_time = 0.2

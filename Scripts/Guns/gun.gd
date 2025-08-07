@@ -35,11 +35,9 @@ var data:ShootData
 # and bullet duration
 var range_sqd:float
 
-@export var fire_sound: AudioStream
-@export var reload_sound: AudioStream
-# sound players to be created in _ready()
-var fire_sound_player: AudioStreamPlayer3D
-var reload_sound_player: AudioStreamPlayer3D
+@export var fire_sound: SoundEffectSetting.SOUND_EFFECT_TYPE
+var fire_sound_active:SoundEffectSetting.SOUND_EFFECT_TYPE = SoundEffectSetting.SOUND_EFFECT_TYPE.NONE
+@export var reload_sound: SoundEffectSetting.SOUND_EFFECT_TYPE
 
 const INFINITE_AMMO:int = 2**30-1
 @export var magazine_size:int = INFINITE_AMMO ## Default is infinite ammo, no reload
@@ -81,18 +79,6 @@ func _ready():
 			reticle = child
 	# Calculate bullet range
 	range_sqd = (bullet_speed*bullet_timeout)*(bullet_speed*bullet_timeout)
-	# create fire audio stream
-	if fire_sound:
-		fire_sound_player = AudioStreamPlayer3D.new()
-		fire_sound_player.stream = fire_sound
-		fire_sound_player.volume_db = -10.0 #quieter
-		add_child(fire_sound_player)
-	# create reload audio stream
-	if reload_sound:
-		reload_sound_player = AudioStreamPlayer3D.new()
-		reload_sound_player.stream = reload_sound
-		reload_sound_player.volume_db = -20.0 #quieter
-		add_child(reload_sound_player)
 
 
 func _process(_delta: float) -> void:
@@ -108,16 +94,18 @@ func ready_to_fire() -> bool:
 
 
 func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
-	if ready_to_fire():
-		# Animate 'em if you got 'em
-		if gun_animation:
-			gun_animation.play("gun_animation")
-		VfxManager.play_remote_transform(muzzle_flash, self)
-		if fire_sound_player:
-			fire_sound_player.play()
-		restart_timer()
-		setup_shoot_data(shooter,target,powered_up)
-		shoot_actual()
+	if !ready_to_fire():
+		return
+	# Animate 'em if you got 'em
+	if gun_animation:
+		gun_animation.play("gun_animation")
+	VfxManager.play_remote_transform(muzzle_flash, self)
+	# create fire audio stream
+	if fire_sound != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
+		fire_sound_active = AudioManager.play(int(fire_sound), global_position)
+	restart_timer()
+	setup_shoot_data(shooter,target,powered_up)
+	shoot_actual()
 
 
 func restart_timer() -> void:
@@ -178,8 +166,8 @@ func deactivate() -> void:
 	if gun_animation:
 		gun_animation.stop()
 	# Interrupt firing sound
-	if fire_sound_player:
-		fire_sound_player.stop()
+	if fire_sound_active != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
+		AudioManager.stop(fire_sound, fire_sound_active, true)
 	if ray:
 		ray.enabled = false
 
@@ -202,5 +190,5 @@ func _on_reload_timer_timeout() -> void:
 
 func reload() -> void:
 	reload_timer.start(reload_time)
-	if reload_sound_player:
-		reload_sound_player.play()
+	if reload_sound != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
+		AudioManager.play(reload_sound, global_position)

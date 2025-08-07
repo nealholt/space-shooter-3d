@@ -22,6 +22,7 @@ VfxManager="*res://Scenes/vfx/vfx_manager.tscn"
 EventsBus="*res://Scripts/Autoloads/events_bus.gd"
 ShipSpawner="*res://Scripts/Autoloads/ship_spawner.gd"
 GunSpawner="*res://Scripts/Autoloads/gun_spawner.gd"
+AudioManager="*res://Scenes/Audio/audio_manager.tscn"
 
 [display]
 
