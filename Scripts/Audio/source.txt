@@ -1,0 +1,5 @@
+
+All these files originally came from here
+https://github.com/Aarimous/AudioManager
+https://www.youtube.com/watch?v=Egf2jgET3nQ
+before I made modifications to them.

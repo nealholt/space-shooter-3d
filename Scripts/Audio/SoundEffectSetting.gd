@@ -1,0 +1,32 @@
+class_name SoundEffectSetting extends Resource
+## Sound effect resource, used to configure unique sound effects for use with the AudioManager. Passed to [method AudioManager.create_2d_audio_at_location()] and [method AudioManager.create_audio()] to play sound effects.
+
+# Since enums are stored as int under the hood,
+# this works by assuming that the enum + 1 is
+# always the 3-dimensional version of the audio stream.
+# The _3D version should NEVER be used in the array
+# of sound effects in AudioManager, just in the dictionary.
+
+# WARNING: Reordering the following list will screw up
+# the sound_effects array in AudioManager and you'll
+# have to reset all their types.
+## Stores the different types of sounds effects available to be played to distinguish them from another. Each new SoundEffect resource created should add to this enum, to allow them to be easily instantiated via [method AudioManager.create_2d_audio_at_location()] and [method AudioManager.create_audio()].
+enum SOUND_EFFECT_TYPE {
+	RESOURCE_PLUNK,
+	RESOURCE_PLUNK_2D,
+	DELIVERING_RESOURCES,
+	DELIVERING_RESOURCES_2D,
+	POWER_UP,
+	POWER_UP_2D,
+	ROCKET_ENGINE,
+	ROCKET_ENGINE_2D
+}
+
+@export_range(0, 10) var limit: int = 5 ## Maximum number of this SoundEffect to play simultaneously before culled.
+@export var type: SOUND_EFFECT_TYPE ## The unique sound effect in the [enum SOUND_EFFECT_TYPE] to associate with this effect. Each SoundEffect resource should have it's own unique [enum SOUND_EFFECT_TYPE] setting.
+@export var sound_effect: AudioStreamMP3 ## The [AudioStreamMP3] audio resource to play.
+@export_range(-40, 20) var volume: float = 0 ## The volume of the [member sound_effect].
+@export var volume_min: float = -40.0
+@export var volume_max: float = 20.0
+@export_range(0.0, 4.0,.01) var pitch_scale: float = 1.0 ## The pitch scale of the [member sound_effect].
+@export_range(0.0, 1.0,.01) var pitch_randomness: float = 0.0 ## The pitch randomness setting of the [member sound_effect].
