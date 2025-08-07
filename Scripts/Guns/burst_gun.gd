@@ -5,10 +5,8 @@ class_name BurstGun
 var firing: bool = false
 # Fire a burst over a short period of time.
 @onready var burst_timer: Timer = $BurstTimer
-# How many consecutive shots are fired when trigger is pulled
-@export var burst_total:int = 1
-# Shots in a burst per second:
-@export var burst_rate:float = 1.0
+@export var burst_total:int = 1 ## How many consecutive shots are fired when trigger is pulled
+@export var burst_rate:float = 1.0 ## Shots in a burst per second:
 # For tracking how many shots in the burst have been fired
 var burst_count:int = 0
 

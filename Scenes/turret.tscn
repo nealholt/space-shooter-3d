@@ -1,9 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://yaq7cc3oqfp2"]
+[gd_scene load_steps=9 format=3 uid="uid://yaq7cc3oqfp2"]
 
 [ext_resource type="Script" uid="uid://186tcf0aadua" path="res://Scripts/Turret/Turret.gd" id="1_cbt5p"]
 [ext_resource type="PackedScene" uid="uid://deuokls15ey84" path="res://Assets/turret_model.tscn" id="2_xuhpe"]
-[ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="4_r7edd"]
-[ext_resource type="PackedScene" uid="uid://bcs6gvltbhd48" path="res://Scenes/Projectiles/timed_fuse_bullet.tscn" id="5_p2wvi"]
 [ext_resource type="Script" uid="uid://c3gw1nt0lnjsu" path="res://Scripts/target_selector.gd" id="6_cy7vo"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="8_qikae"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="9_b5qkf"]
@@ -44,19 +42,5 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="TargetSelector" type="Node" parent="."]
 script = ExtResource("6_cy7vo")
-
-[node name="BurstGun" parent="." instance=ExtResource("4_r7edd")]
-burst_total = 5
-burst_rate = 20.0
-bullet = ExtResource("5_p2wvi")
-bullet_speed = 500.0
-spread_deg = 10.0
-
-[node name="BurstGun2" parent="." instance=ExtResource("4_r7edd")]
-burst_total = 5
-burst_rate = 20.0
-bullet = ExtResource("5_p2wvi")
-bullet_speed = 500.0
-spread_deg = 10.0
 
 [editable path="TurretModel"]

@@ -26,7 +26,7 @@ var slower_lock_angle:float = 25.0 # degrees
 # Gun to fire when launch is triggered
 var missile_launcher:Gun
 
-@export var missile_range:float = 300.0 ## Range within which missile lock can be acquired.
+@export var missile_range:float = 600.0 ## Range within which missile lock can be acquired.
 # Calculated from missile_range
 var missile_range_sqd:float ## Squared range within which missile lock can be acquired
 @export var missile_lock_max_angle:float = 35.0 ## In degrees. Can achieve and maintain missile lock if target is within plus of minus of this angle from center.

@@ -26,8 +26,10 @@ var angle_to_shoot : float = deg_to_rad(angle_to_shoot_deg)
 
 static func new_turret(my_parent:TurretData) -> Turret:
 	var t := TURRET_SCENE.instantiate()
+	# Order matters for these next three lines of code
+	t.setup_turret_pre_tree(my_parent)
 	my_parent.add_child(t)
-	t.setup_turret(my_parent)
+	t.setup_turret_in_tree(my_parent)
 	return t
 
 
@@ -75,7 +77,16 @@ func _ready() -> void:
 		guns[i].reparent(gun_hardpoints[i], false)
 
 
-func setup_turret(dat:TurretData) -> void:
+func setup_turret_pre_tree(dat:TurretData) -> void:
+	# Guns have to be put on the turret before adding to the
+	# tree because of gun-related stuff taken care of in _ready
+	if dat.gun_type != GunSpawner.GUN_TYPE.NO_GUN:
+		# Attach two guns as children of this turret
+		GunSpawner.new_gun(dat.gun_type, dat.bullet_type, self)
+		GunSpawner.new_gun(dat.gun_type, dat.bullet_type, self)
+
+
+func setup_turret_in_tree(dat:TurretData) -> void:
 	if turret_motion:
 		turret_motion.setup_values(dat)
 	

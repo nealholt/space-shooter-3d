@@ -1,11 +1,12 @@
-[gd_scene load_steps=27 format=3 uid="uid://dp3w08p8gkd3p"]
+[gd_scene load_steps=28 format=3 uid="uid://dp3w08p8gkd3p"]
 
 [ext_resource type="Script" uid="uid://nmvuwja71fox" path="res://Scripts/capital_ship_frigate.gd" id="1_nf210"]
 [ext_resource type="PackedScene" uid="uid://bh2v67l31a2lg" path="res://Assets/CapitalShips/frigate_model.tscn" id="1_ukj0d"]
-[ext_resource type="PackedScene" uid="uid://yaq7cc3oqfp2" path="res://Scenes/turret.tscn" id="2_3hybn"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="2_ffelx"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_ac6d0"]
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="4_320jg"]
+[ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="7_bof2b"]
+[ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="8_ejvar"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4an4i"]
 
@@ -131,12 +132,6 @@ motion_mode = 1
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/ReactorShieldLeft/CharacterBody3D"]
 shape = SubResource("BoxShape3D_0hrgw")
 
-[node name="TurretComplete" parent="FrigateModel/ReactorShieldLeft" index="1" instance=ExtResource("2_3hybn")]
-transform = Transform3D(1, -8.74228e-08, -8.74228e-08, -8.74228e-08, -1, 0, -8.74228e-08, 7.64274e-15, -1, 0, -16, 37)
-
-[node name="TurretComplete2" parent="FrigateModel/ReactorShieldLeft" index="2" instance=ExtResource("2_3hybn")]
-transform = Transform3D(1, -8.74228e-08, -8.74228e-08, -8.74228e-08, -1, 0, -8.74228e-08, 7.64274e-15, -1, 0, -16, -37)
-
 [node name="CharacterBody3D" type="CharacterBody3D" parent="FrigateModel/ReactorShieldRight" index="0"]
 collision_layer = 3
 collision_mask = 3
@@ -144,12 +139,6 @@ motion_mode = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FrigateModel/ReactorShieldRight/CharacterBody3D"]
 shape = SubResource("BoxShape3D_45crj")
-
-[node name="TurretComplete" parent="FrigateModel/ReactorShieldRight" index="1" instance=ExtResource("2_3hybn")]
-transform = Transform3D(1, -8.74228e-08, -8.74228e-08, -8.74228e-08, -1, 0, -8.74228e-08, 7.64274e-15, -1, 0, -16, 37)
-
-[node name="TurretComplete2" parent="FrigateModel/ReactorShieldRight" index="2" instance=ExtResource("2_3hybn")]
-transform = Transform3D(1, -8.74228e-08, -8.74228e-08, -8.74228e-08, -1, 0, -8.74228e-08, 7.64274e-15, -1, 0, -16, -37)
 
 [node name="HitBoxComponent" parent="FrigateModel/Reactor" index="0" node_paths=PackedStringArray("health_component") instance=ExtResource("2_ffelx")]
 health_component = NodePath("../HealthComponent")
@@ -273,26 +262,31 @@ shape = SubResource("ConvexPolygonShape3D_wfxmv")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -32, 20, 0)
 shape = SubResource("ConvexPolygonShape3D_w81vi")
 
-[node name="Turrets" type="Node3D" parent="."]
+[node name="TurretGroup" parent="." instance=ExtResource("7_bof2b")]
 
-[node name="TurretComplete" parent="Turrets" instance=ExtResource("2_3hybn")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 31, -76)
+[node name="Turret1" type="Node3D" parent="TurretGroup"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 31, -76)
+script = ExtResource("8_ejvar")
 
-[node name="TurretComplete2" parent="Turrets" instance=ExtResource("2_3hybn")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 38, -35)
+[node name="Turret2" type="Node3D" parent="TurretGroup"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 38, -35)
+script = ExtResource("8_ejvar")
 
-[node name="TurretComplete3" parent="Turrets" instance=ExtResource("2_3hybn")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 38, 35)
+[node name="Turret3" type="Node3D" parent="TurretGroup"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 38, 35)
+script = ExtResource("8_ejvar")
 
-[node name="TurretComplete4" parent="Turrets" instance=ExtResource("2_3hybn")]
-transform = Transform3D(4.37114e-08, 1, -8.74228e-08, 1, -4.37114e-08, 0, -3.82137e-15, -8.74228e-08, -1, 37, 0, 0)
+[node name="Turret4" type="Node3D" parent="TurretGroup"]
+transform = Transform3D(4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, 0, 3.82137e-15, 8.74228e-08, -1, 37, 0, 0)
+script = ExtResource("8_ejvar")
 
-[node name="TurretComplete5" parent="Turrets" instance=ExtResource("2_3hybn")]
-transform = Transform3D(4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 0, -3.82137e-15, 8.74228e-08, -1, -37, 0, 0)
+[node name="Turret5" type="Node3D" parent="TurretGroup"]
+transform = Transform3D(4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 3.82137e-15, -8.74228e-08, -1, -37, 0, 0)
+script = ExtResource("8_ejvar")
 
 [node name="ReactorOpenAnimation" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_vnrft")
+&"": SubResource("AnimationLibrary_vnrft")
 }
 
 [connection signal="died" from="FrigateModel/Reactor/HealthComponent" to="." method="_on_reactor_died"]
