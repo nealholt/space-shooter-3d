@@ -1,7 +1,7 @@
 class_name InputManager extends Node
 
-@export var use_mouse_and_keyboard := true
-@export var use_inverted := false
+@export var use_mouse_and_keyboard := false
+@export var use_inverted := true
 # Use this curve to scale mouse input to make the ship easier to control
 @export var mouse_control_curve : Curve
 

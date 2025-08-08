@@ -136,12 +136,12 @@ text = "Toggle Fullscreen"
 [node name="ToggleControls" type="CheckButton" parent="Menu/HBoxContainer/Settings"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-button_pressed = true
 text = "Use Mouse and Keyboard"
 
 [node name="ToggleInverted" type="CheckButton" parent="Menu/HBoxContainer/Settings"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
+button_pressed = true
 text = "Fly Inverted"
 
 [node name="ControllerControls" type="VBoxContainer" parent="Menu/HBoxContainer"]
