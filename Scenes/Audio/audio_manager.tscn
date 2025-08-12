@@ -32,7 +32,7 @@ metadata/_custom_type_script = "uid://cr1an6d85yksa"
 
 [sub_resource type="Resource" id="Resource_ieupc"]
 script = ExtResource("2_lu82t")
-limit = 5
+limit = 10
 type = 4
 sound_effect = ExtResource("5_7nmqq")
 volume = 0.0

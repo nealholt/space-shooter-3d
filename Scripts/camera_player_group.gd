@@ -2,6 +2,12 @@ extends Node3D
 
 # https://www.reddit.com/r/godot/comments/18w6prn/camera_considerations/
 
+# Controls for looking at target
+@export var elevation_speed_deg:float = 100.0
+@export var rotation_speed_deg:float = 100.0
+@export var min_elevation_deg:float = 0.0
+@export var max_elevation_deg:float = 80.0
+
 enum CameraState {FIRSTPERSON, REAR, FLYBY, TARGETCLOSEUP, TARGETVIEW}
 var state : CameraState
 
@@ -11,6 +17,10 @@ var state : CameraState
 @onready var first_person_camera: Camera3D = $Body/Head/FirstPersonCamera
 @onready var rear_under_camera: Camera3D = $RearUnderCamera
 @onready var free_camera: Camera3D = $FreeCamera
+
+@onready var turret_motion:TurretMotionComponent = $turret_motion_component
+@onready var body:Node3D = $Body
+@onready var head:Node3D = $Body/Head
 
 var rng = RandomNumberGenerator.new() # For positioning flyby camera
 
@@ -22,6 +32,10 @@ var look_at_target : bool = false
 
 
 func _ready() -> void:
+	turret_motion.elevation_speed = deg_to_rad(elevation_speed_deg)
+	turret_motion.rotation_speed = deg_to_rad(rotation_speed_deg)
+	turret_motion.min_elevation = deg_to_rad(min_elevation_deg)
+	turret_motion.max_elevation = deg_to_rad(max_elevation_deg)
 	# Start off in first=person
 	first_person()
 
@@ -72,7 +86,7 @@ func _physics_process(delta: float) -> void:
 			first_person()
 	# Look at target with first-person cam
 	if look_at_target and state == CameraState.FIRSTPERSON and is_instance_valid(target):
-		$turret_motion_component.rotate_and_elevate($Body, $Body/Head, delta, target.global_position)
+		turret_motion.rotate_and_elevate(body, head, delta, target.global_position)
 	elif Global.player:
 		# Return to facing forward, or at least way far
 		# forward of the nose of the player.
@@ -80,7 +94,7 @@ func _physics_process(delta: float) -> void:
 		# attached to the player straight ahead that the
 		# camera looks at instead.
 		var temp_targ_pos : Vector3 = first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0
-		$turret_motion_component.rotate_and_elevate($Body, $Body/Head, delta, temp_targ_pos)
+		turret_motion.rotate_and_elevate(body, head, delta, temp_targ_pos)
 	# Show target lead indicator and center crosshair
 	# if in first person view
 	if state == CameraState.FIRSTPERSON and Global.player and Global.player.controller and is_instance_valid(Global.player.controller.target) and Global.player.weapon_handler and "velocity" in Global.player.controller.target:

@@ -11,10 +11,6 @@ radius = 15.0
 script = ExtResource("1_sad13")
 
 [node name="turret_motion_component" parent="." instance=ExtResource("2_tdt0o")]
-elevation_speed_deg = 120.0
-rotation_speed_deg = 120.0
-min_elevation_deg = -10.0
-max_elevation_deg = 80.0
 
 [node name="RearUnderCamera" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.3, -1.174, -5.5)
