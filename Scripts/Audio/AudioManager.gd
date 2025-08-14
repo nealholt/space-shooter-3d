@@ -56,6 +56,13 @@ func play(type:int, loc:Vector3=Vector3.INF) -> int:
 	error_check(type)
 	return sound_effect_dict[type].play(loc)
 
+## Plays a sound effect if the limit has not been reached. Otherwise does nothing. Returns index of audio stream played.
+func play_remote_transform(type:int, remote_mover:Node3D, loc:Vector3=Vector3.INF) -> int:
+	if loc != Vector3.INF:
+		type = type + 1
+	error_check(type)
+	return sound_effect_dict[type].play_remote_transform(remote_mover, loc)
+
 func stop_all(type:int, use_3d:=false) -> void:
 	if use_3d:
 		type = type + 1

@@ -4,6 +4,11 @@ class_name SoundQueue3D extends SoundQueue
 
 const SOUNDQUEUE3D_SCENE:PackedScene = preload("res://Scenes/audio/sound_queue_3d.tscn")
 
+# An array of remote transforms for longer-playing sounds
+# that need to follow an object rather than play briefly
+# at a position, for instance the machine gun sound or
+# the reload noise.
+var remote_ts : Array
 
 static func new_sound_queue(my_parent:Node, sf:SoundEffectSetting) -> SoundQueue3D:
 	var sq := SOUNDQUEUE3D_SCENE.instantiate()
@@ -19,6 +24,11 @@ func _ready() -> void:
 		new_audio.stream = sound_effect.sound_effect
 		new_audio.volume_db = sound_effect.volume
 		audio_players.push_back(new_audio)
+		# Connect to finished signal in case there's a transform to clean up
+		new_audio.finished.connect(_on_audio_finished.bind(i))
+		# Add in a null for each audio so the remote transform
+		# array is the same length.
+		remote_ts.push_back(null)
 
 
 # Play next audio and return index of the audio player
@@ -38,3 +48,24 @@ func play(location:Vector3 = Vector3.ZERO) -> int:
 	# Increment next
 	next = (next+1) % audio_players.size()
 	return index
+
+
+func play_remote_transform(remote_mover:Node3D, location:Vector3 = Vector3.ZERO) -> int:
+	# Play the effect
+	var i := play(location)
+	# If nothing played, then abort
+	if i == -1: return -1
+	# Create a new remote transform, attach it
+	# to the thing the sound should move with,
+	# then set the transform's path to the sound
+	remote_ts[i] = RemoteTransform3D.new()
+	remote_mover.add_child(remote_ts[i])
+	remote_ts[i].remote_path = audio_players[i].get_path()
+	return i
+
+
+# i is the index of the player that just finished
+func _on_audio_finished(i:int) -> void:
+	# If there is a corresponding remote transform, kill it
+	if is_instance_valid(remote_ts[i]):
+		remote_ts[i].queue_free()

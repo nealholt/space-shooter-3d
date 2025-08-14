@@ -36,7 +36,7 @@ func shoot_actual() -> void:
 			AudioManager.stop(fire_sound, fire_sound_active, true)
 		if reload_sound != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
 			# Play reload sound
-			AudioManager.play(reload_sound, global_position)
+			AudioManager.play_remote_transform(reload_sound, self, Vector3.ZERO)
 		# Stop firing
 		firing = false
 		burst_count = 0 # Reset burst count
