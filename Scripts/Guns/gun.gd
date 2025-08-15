@@ -35,9 +35,9 @@ var data:ShootData
 # and bullet duration
 var range_sqd:float
 
-@export var fire_sound: SoundEffectSetting.SOUND_EFFECT_TYPE
+@export var fire_sound: SoundEffectSetting.SOUND_EFFECT_TYPE = SoundEffectSetting.SOUND_EFFECT_TYPE.NONE
 var fire_sound_active:SoundEffectSetting.SOUND_EFFECT_TYPE = SoundEffectSetting.SOUND_EFFECT_TYPE.NONE
-@export var reload_sound: SoundEffectSetting.SOUND_EFFECT_TYPE
+@export var reload_sound: SoundEffectSetting.SOUND_EFFECT_TYPE = SoundEffectSetting.SOUND_EFFECT_TYPE.NONE
 
 const INFINITE_AMMO:int = 2**30-1
 @export var magazine_size:int = INFINITE_AMMO ## Default is infinite ammo, no reload

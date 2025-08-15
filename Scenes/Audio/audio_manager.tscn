@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://cr1an6d85yksa"
 [sub_resource type="Resource" id="Resource_dpp4s"]
 script = ExtResource("2_lu82t")
 limit = 5
-type = 2
+type = 1
 sound_effect = ExtResource("4_2wtmb")
 volume = 0.0
 volume_min = -40.0
@@ -33,7 +33,7 @@ metadata/_custom_type_script = "uid://cr1an6d85yksa"
 [sub_resource type="Resource" id="Resource_ieupc"]
 script = ExtResource("2_lu82t")
 limit = 10
-type = 4
+type = 2
 sound_effect = ExtResource("5_7nmqq")
 volume = 0.0
 volume_min = -40.0

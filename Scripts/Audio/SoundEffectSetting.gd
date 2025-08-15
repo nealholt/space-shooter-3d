@@ -13,11 +13,8 @@ class_name SoundEffectSetting extends Resource
 ## Stores the different types of sounds effects available to be played to distinguish them from another. Each new SoundEffect resource created should add to this enum, to allow them to be easily instantiated via [method AudioManager.create_3d_audio_at_location()] and [method AudioManager.create_audio()].
 enum SOUND_EFFECT_TYPE {
 	SHOT_BASIC,
-	SHOT_BASIC_3D,
 	RELOAD_SOCKET_WRENCH,
-	RELOAD_SOCKET_WRENCH_3D,
 	MACHINE_GUN,
-	MACHINE_GUN_3D,
 	NONE
 }
 

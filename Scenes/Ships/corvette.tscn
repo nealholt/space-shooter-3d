@@ -160,8 +160,8 @@ bullet = ExtResource("11_yl8fu")
 bullet_speed = 600.0
 fire_rate = 1.2
 spread_deg = 3.0
-fire_sound = 4
-reload_sound = 2
+fire_sound = 2
+reload_sound = 1
 gun_animation = NodePath("GunModel/AnimationPlayer")
 muzzle_flash = 6
 
