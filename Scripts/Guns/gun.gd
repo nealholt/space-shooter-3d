@@ -102,7 +102,7 @@ func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
 	VfxManager.play_remote_transform(muzzle_flash, self)
 	# create fire audio stream
 	if fire_sound != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
-		fire_sound_active = AudioManager.play_remote_transform(int(fire_sound), self, Vector3.ZERO)
+		fire_sound_active = AudioManager.play_remote_transform(int(fire_sound), self)
 	restart_timer()
 	setup_shoot_data(shooter,target,powered_up)
 	shoot_actual()
@@ -191,4 +191,4 @@ func _on_reload_timer_timeout() -> void:
 func reload() -> void:
 	reload_timer.start(reload_time)
 	if reload_sound != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
-		AudioManager.play_remote_transform(reload_sound, self, Vector3.ZERO)
+		AudioManager.play_remote_transform(reload_sound, self)
