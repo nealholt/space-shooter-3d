@@ -29,6 +29,9 @@ stream = ExtResource("4_cq55v")
 volume_db = -20.0
 pitch_scale = 0.5
 
+[node name="HealthComponent" parent="." index="6"]
+max_health = 100.0
+
 [node name="MissileLockGroup" parent="." index="8"]
 npc_missile_lock = false
 

@@ -39,6 +39,7 @@ func _ready() -> void:
 
 ## Plays a sound effect if the limit has not been reached. Otherwise does nothing. Returns index of audio stream played.
 func play(type:int, loc:Vector3=Vector3.INF) -> int:
+	#print("Playing ", SoundEffectSetting.SOUND_EFFECT_TYPE.keys()[type])
 	if loc != Vector3.INF:
 		return sound_effect_dict_3d[type].play(loc)
 	else:
@@ -46,6 +47,7 @@ func play(type:int, loc:Vector3=Vector3.INF) -> int:
 
 ## Plays a sound effect if the limit has not been reached. Otherwise does nothing. Returns index of audio stream played.
 func play_remote_transform(type:int, remote_mover:Node3D, loc:Vector3=Vector3.ZERO) -> int:
+	#print("Playing remote ", SoundEffectSetting.SOUND_EFFECT_TYPE.keys()[type])
 	return sound_effect_dict_3d[type].play_remote_transform(remote_mover, loc)
 
 func stop_all(type:int, use_3d:=false) -> void:
@@ -83,3 +85,11 @@ func stop_everything() -> void:
 		audio.stop_all()
 	for audio in sound_effect_dict_3d.values():
 		audio.stop_all()
+
+func print_summary() -> void:
+	print('\nSummary for non-positional audio:')
+	for audio in sound_effect_dict.values():
+		audio.print_summary()
+	print('Summary for 3d-positional audio:')
+	for audio in sound_effect_dict_3d.values():
+		audio.print_summary()

@@ -1,12 +1,6 @@
 class_name SoundEffectSetting extends Resource
 ## Sound effect resource, used to configure unique sound effects for use with the AudioManager. Passed to [method AudioManager.create_3d_audio_at_location()] and [method AudioManager.create_audio()] to play sound effects.
 
-# Since enums are stored as int under the hood,
-# this works by assuming that the enum + 1 is
-# always the 3-dimensional version of the audio stream.
-# The _3D version should NEVER be used in the array
-# of sound effects in AudioManager, just in the dictionary.
-
 # WARNING: Reordering the following list will screw up
 # the sound_effects array in AudioManager and you'll
 # have to reset all their types.

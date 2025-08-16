@@ -59,3 +59,12 @@ func set_volume(new_volume:float, index:int=0) -> void:
 
 func set_volume_percent(percent:float, index:int=0) -> void:
 	audio_players[index].volume_db = percent * (sound_effect.volume_max-sound_effect.volume_min) + sound_effect.volume_min
+
+func print_summary() -> void:
+	print("    Summary for ", SoundEffectSetting.SOUND_EFFECT_TYPE.keys()[sound_effect.type])
+	var count:int = 0
+	for player in audio_players:
+		if player.playing:
+			count+=1
+	print('        %d playing' % count)
+	print('        index: %d' % next)

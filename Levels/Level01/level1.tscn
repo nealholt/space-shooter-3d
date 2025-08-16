@@ -67,10 +67,6 @@ npc_missile_lock = false
 [node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
 mesh = SubResource("SphereMesh_l7cy0")
 
-[node name="GatlingGun" parent="BlueTeam/Player/WeaponHandler" index="0"]
-fire_sound = 2
-reload_sound = 1
-
 [node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("6_87wt5")]
 
 [node name="CameraGroup" parent="BlueTeam/Player" instance=ExtResource("7_oouc0")]

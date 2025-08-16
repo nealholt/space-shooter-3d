@@ -240,10 +240,6 @@ mesh = SubResource("SphereMesh_b3t22")
 
 [node name="LaserGun" parent="BlueTeam/Player/WeaponHandler" index="0" instance=ExtResource("5_8sixk")]
 
-[node name="GatlingGun" parent="BlueTeam/Player/WeaponHandler" index="1"]
-fire_sound = 2
-reload_sound = 1
-
 [node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("7_cw0p4")]
 
 [node name="CameraGroup" parent="BlueTeam/Player" instance=ExtResource("8_t5kwi")]

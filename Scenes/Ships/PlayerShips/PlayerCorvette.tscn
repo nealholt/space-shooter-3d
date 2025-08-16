@@ -31,7 +31,7 @@ volume_db = -20.0
 pitch_scale = 0.5
 
 [node name="HealthComponent" parent="." index="5"]
-max_health = 20000.0
+max_health = 100.0
 
 [node name="MissileLockGroup" parent="." index="9"]
 npc_missile_lock = false
@@ -45,10 +45,6 @@ mesh = SubResource("SphereMesh_tw5gt")
 
 [node name="EngineAudioVisuals" parent="." index="14" instance=ExtResource("10_t22nh")]
 
-[node name="GatlingGun" parent="WeaponHandler" index="0"]
-fire_sound = 2
-reload_sound = 1
-
 [node name="TextureRect" type="TextureRect" parent="WeaponHandler/GatlingGun" index="3"]
 self_modulate = Color(1, 1, 1, 0.607843)
 offset_right = 40.0
@@ -57,18 +53,12 @@ texture = ExtResource("2_t24ck")
 
 [node name="HitScanGun" parent="WeaponHandler" index="2"]
 fire_rate = 1.0
-fire_sound = 6
-reload_sound = 6
 
 [node name="TextureRect" type="TextureRect" parent="WeaponHandler/HitScanGun" index="3"]
 self_modulate = Color(1, 1, 1, 0.588235)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("3_0npbv")
-
-[node name="LaserShotgun" parent="WeaponHandler" index="3"]
-fire_sound = 6
-reload_sound = 6
 
 [node name="TextureRect" type="TextureRect" parent="WeaponHandler/LaserShotgun" index="2"]
 self_modulate = Color(1, 1, 1, 0.529412)

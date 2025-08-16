@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://dk6y2tyoo25sn"]
+
+[ext_resource type="Material" uid="uid://ddae1ji8rllcb" path="res://Assets/CapitalShips/radiator_material.tres" id="1_mj5u5"]
+[ext_resource type="Script" uid="uid://df54n8rhbsk88" path="res://Scripts/weakpoint.gd" id="1_v3ei0"]
+[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="3_mpr5y"]
+[ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="4_goev0"]
+[ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="5_w03n3"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_dknmi"]
+material = ExtResource("1_mj5u5")
+radial_segments = 32
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_b2obo"]
+
+[node name="Weakpoint" type="Node3D"]
+script = ExtResource("1_v3ei0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_dknmi")
+
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_mpr5y")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
+shape = SubResource("SphereShape3D_b2obo")
+
+[node name="HitFeedback" parent="HitBoxComponent" instance=ExtResource("4_goev0")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_w03n3")]
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

@@ -53,6 +53,7 @@ func play(location:Vector3 = Vector3.ZERO) -> int:
 func play_remote_transform(remote_mover:Node3D, location:Vector3 = Vector3.ZERO) -> int:
 	# Play the effect
 	var i := play(location)
+	#print('Playing index %d remote' % i)
 	# If nothing played, then abort
 	if i == -1: return -1
 	# Create a new remote transform, attach it
@@ -69,3 +70,4 @@ func _on_audio_finished(i:int) -> void:
 	# If there is a corresponding remote transform, kill it
 	if is_instance_valid(remote_ts[i]):
 		remote_ts[i].queue_free()
+		remote_ts[i] = null
