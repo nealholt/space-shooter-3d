@@ -27,8 +27,8 @@ var health: float:
 			health_lost.emit()
 		# Change health
 		health = health_in
-		# If dead
-		if health <= 0 and !signalled_died:
+		# If dead. Check against 0.5 in order to round down.
+		if health <= 0.5 and !signalled_died:
 			died.emit()
 			signalled_died = true
 

@@ -55,7 +55,26 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 	# https://docs.godotengine.org/en/stable/tutorials/physics/using_character_body_2d.html
 	var collision :KinematicCollision3D = mover.move_and_collide(mover.velocity * delta)
 	if collision:
+		# Deal collision damage. Collision angle currently
+		# factors into collision damage, but speed
+		# does not.
+		var temp:Vector3 = collision.get_normal()
+		mover.collision_occurred(temp.angle_to(mover.velocity))
+		# Collision angles close to 180 are essentially head on.
+		# Collision angles close to 90 are glancing blows.
+		#print('\nAngle of collision %d' % int(rad_to_deg(collision.get_angle(0, -mover.global_basis.z))))
+		# The following gets the exact same value as the
+		# above print statement.
+		#var temp:Vector3 = collision.get_normal()
+		#print('Angle of normal to heading %d' % int(rad_to_deg(temp.angle_to(-mover.global_basis.z))))
+		# HOWEVER, The following are almost never the same! Weird.
+		#print('\nAngle of collision %d' % int(rad_to_deg(collision.get_angle(0, mover.velocity))))
+		#var temp:Vector3 = collision.get_normal()
+		#print('Angle of normal to heading %d' % int(rad_to_deg(temp.angle_to(mover.velocity))))
+		
+		# Bounce off
 		mover.velocity = mover.velocity.bounce(collision.get_normal())
+		
 		# Apply an impulse and a torque to whatever we hit.
 		# Except don't really because you should check that
 		# we hit a rigid body, otherwise this throws an error.
@@ -63,6 +82,7 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 		# https://www.youtube.com/watch?v=SJuScDavstM
 		#collision.get_collider().apply_central_impulse(-collision.get_normal()*100)
 		#collision.get_collider().apply_torque_impulse(mover.transform.basis.y)
+
 
 func select_target(_targeter:Ship) -> void:
 	printerr('For the near future, select_target in character_body_control_parent should be overriden by child class.')
