@@ -31,6 +31,9 @@ const target_close_up_dist:=-30.0
 var look_at_target : bool = false
 
 var mouse_guide:Line2D
+# Custom images for the mouse cursor.
+var near_center:Sprite2D
+var beyond_center:Sprite2D
 
 
 func _ready() -> void:
@@ -51,6 +54,17 @@ func _ready() -> void:
 	mouse_guide.add_point(center_screen)
 	mouse_guide.add_point(center_screen)
 	mouse_guide.visible = false
+	# Set cursor images
+	near_center = Sprite2D.new()
+	near_center.texture = load("res://Assets/Images/crosshair177.png")
+	#near_center.scale = Vector2(0.5, 0.5) # Shrink
+	near_center.visible = false
+	add_child(near_center)
+	beyond_center = Sprite2D.new()
+	beyond_center.texture = load("res://Assets/Images/crosshair180.png")
+	#beyond_center.scale = Vector2(0.5, 0.5) # Shrink
+	beyond_center.visible = false
+	add_child(beyond_center)
 
 
 func _physics_process(delta: float) -> void:
@@ -121,9 +135,22 @@ func _physics_process(delta: float) -> void:
 	# Draw a line from the center of the screen to the mouse position.
 	# This is how House of the Dying Sun does mouse controls.
 	if Global.input_man.use_mouse_and_keyboard and Global.targeting_hud_on:
-		mouse_guide.set_point_position(1, get_viewport().get_mouse_position())
+		var mouse_pos:Vector2 = get_viewport().get_mouse_position()
+		mouse_guide.set_point_position(1, mouse_pos)
 		# Hide the mouse_guide if it's close to center
-		mouse_guide.visible = mouse_guide.get_point_position(0).distance_squared_to(mouse_guide.get_point_position(1)) > 10000.0
+		var guide_length:float = mouse_pos.distance_squared_to(mouse_guide.get_point_position(0))
+		mouse_guide.visible = guide_length > 10000.0 # Magic number
+		# Set cursor based on distance to center.
+		# The idea is that later this would indicate whether or
+		# not auto-aim has kicked in.
+		if guide_length > 40000:
+			near_center.visible = false
+			beyond_center.visible = true
+			beyond_center.global_position = mouse_pos
+		else:
+			beyond_center.visible = false
+			near_center.visible = true
+			near_center.global_position = mouse_pos
 
 
 # Turn on looking at player's target

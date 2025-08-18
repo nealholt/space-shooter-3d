@@ -28,6 +28,8 @@ func refresh() -> void:
 	else:
 		inverted = 1.0
 	if use_mouse_and_keyboard:
+		# Show mouse
+		#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		# Confine mouse to the screen and hide it.
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 		# Confine mouse to the screen and show it.
