@@ -174,29 +174,14 @@ func _on_death_timer_timeout() -> void:
 
 # This function is called by the ship's controller,
 # inheritor of CharacterBodyControlParent, when a
-# collision occurs. The collision angle is passed as
-# input. Full damage is dealt when the collision is
+# collision occurs.
+# collision_severity is a percent from 0 to 1
+# Full damage is dealt when the collision is
 # head on at 180 degrees (pi radians). Damage falls
 # off linearly from there down to zero at an angle of
-# 90 degrees (pi/2) or less.
-func collision_occurred(collision_angle_rads:float) -> void:
-	var actual_damage:float
-	if collision_angle_rads <= PI/2:
-		# I'm not 100% sure how this can occur...
-		# but it does... BUT the values are VERY
-		# close to 90 degrees, so I'm simply going
-		# to apply a minimal amount of damage.
-		actual_damage = 1.0
-	elif collision_angle_rads > PI:
-		# I don't think this should be possible.
-		push_error('Large collision angle (%d) in ship.collision_occurred. How is this possible?' % int(rad_to_deg(collision_angle_rads)))
-	else:
-		# collision_angle_rads/PI ranges between 1/2 and 1
-		# so, multiply it by 2 so it ranges between 1 and 2
-		# then subtract 1 so it ranges between 0 and 1 as desired.
-		# Minimum damage is 1.0.
-		actual_damage = max(1.0, max_collision_damage*(2*collision_angle_rads/PI - 1))
-	health_component.health -= actual_damage
+# 90 degrees (pi/2) or less, but speed also factors in.
+func collision_occurred(collision_severity:float) -> void:
+	health_component.health -= max(1.0, max_collision_damage*collision_severity)
 	# Play sound effect. Sound effect source:
 	# https://pixabay.com/sound-effects/sound-design-elements-impact-sfx-ps-094-369576/
 	# Creator:

@@ -55,11 +55,11 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 	# https://docs.godotengine.org/en/stable/tutorials/physics/using_character_body_2d.html
 	var collision :KinematicCollision3D = mover.move_and_collide(mover.velocity * delta)
 	if collision:
-		# Deal collision damage. Collision angle currently
-		# factors into collision damage, but speed
-		# does not.
+		# Deal collision damage.
+		# Factor in collision angle and speed.
 		var temp:Vector3 = collision.get_normal()
-		mover.collision_occurred(temp.angle_to(mover.velocity))
+		var collision_severity:= get_collision_severity(temp.angle_to(mover.velocity), mover.velocity.length())
+		mover.collision_occurred(collision_severity)
 		# Collision angles close to 180 are essentially head on.
 		# Collision angles close to 90 are glancing blows.
 		#print('\nAngle of collision %d' % int(rad_to_deg(collision.get_angle(0, -mover.global_basis.z))))
@@ -82,6 +82,27 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 		# https://www.youtube.com/watch?v=SJuScDavstM
 		#collision.get_collider().apply_central_impulse(-collision.get_normal()*100)
 		#collision.get_collider().apply_torque_impulse(mover.transform.basis.y)
+
+
+# Returns a number between 0 and 1.
+# 0 is a trivial collision.
+# 1 is a catastrophic collision.
+# collision_angle_rads is the angle from the ship to the
+# collision point in radians. Pi (180) is a head-on
+# collision. Pi/2 (90) is a glancing blow to the side of
+# the ship.
+# speed is literally the length of the velocity vector.
+func get_collision_severity(collision_angle_rads:float, speed:float) -> float:
+	# collision_angle_rads/PI ranges between 1/2 and 1
+	# so, multiply it by 2 so it ranges between 1 and 2
+	# then subtract 1 so it ranges between 0 and 1 as desired.
+	# Sometimes it's slightly below 1/2, not sure why, but
+	# we're talking fractions of degrees so I'm just going to
+	# clamp it to be sure.
+	var angle:float = clamp((2*collision_angle_rads/PI - 1), 0.0, 1.0)
+	# This is hacky as fuck, but we're just going to assume that
+	# a speed of 100 is a lot.
+	return clamp(angle * (speed/100.0), 0.0, 1.0)
 
 
 func select_target(_targeter:Ship) -> void:
