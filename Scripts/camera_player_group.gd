@@ -30,6 +30,8 @@ const target_close_up_dist:=-30.0
 
 var look_at_target : bool = false
 
+var mouse_guide:Line2D
+
 
 func _ready() -> void:
 	turret_motion.elevation_speed = deg_to_rad(elevation_speed_deg)
@@ -38,6 +40,17 @@ func _ready() -> void:
 	turret_motion.max_elevation = deg_to_rad(max_elevation_deg)
 	# Start off in first=person
 	first_person()
+	# Set the first two points in the mouse_guide line to
+	# be center screen. Two points are added because 
+	# _physics_process always resets the second point,
+	# so there has to be an existing second point to reset.
+	mouse_guide = Line2D.new()
+	add_child(mouse_guide)
+	mouse_guide.width = 1.0
+	var center_screen := Vector2(get_viewport().size) / 2.0
+	mouse_guide.add_point(center_screen)
+	mouse_guide.add_point(center_screen)
+	mouse_guide.visible = false
 
 
 func _physics_process(delta: float) -> void:
@@ -105,6 +118,12 @@ func _physics_process(delta: float) -> void:
 		Global.set_reticle(first_person_camera, $TargetLeadIndicator, lead_pos)
 	else:
 		$TargetLeadIndicator.hide()
+	# Draw a line from the center of the screen to the mouse position.
+	# This is how House of the Dying Sun does mouse controls.
+	if Global.input_man.use_mouse_and_keyboard and Global.targeting_hud_on:
+		mouse_guide.set_point_position(1, get_viewport().get_mouse_position())
+		# Hide the mouse_guide if it's close to center
+		mouse_guide.visible = mouse_guide.get_point_position(0).distance_squared_to(mouse_guide.get_point_position(1)) > 10000.0
 
 
 # Turn on looking at player's target
