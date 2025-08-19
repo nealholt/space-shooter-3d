@@ -345,6 +345,16 @@ layout_mode = 2
 theme = ExtResource("4_6ev3c")
 text = "Mouse left / right"
 
+[node name="Roll" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+theme = ExtResource("4_6ev3c")
+text = "Roll"
+
+[node name="Label16" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
+layout_mode = 2
+theme = ExtResource("4_6ev3c")
+text = "A / D"
+
 [node name="Accelerate" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")

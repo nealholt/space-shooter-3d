@@ -20,6 +20,10 @@ func _ready() -> void:
 	# Make this scene globally accessible
 	Global.main_scene = self
 	Global.input_man = $InputManager
+	# Make sure the interface is synced with the default
+	# input manager settings.
+	_on_toggle_inverted_toggled(Global.input_man.use_inverted)
+	_on_toggle_controls_toggled(Global.input_man.use_mouse_and_keyboard)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

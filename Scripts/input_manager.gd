@@ -78,10 +78,13 @@ func update_mouse_keyboard_input() -> void:
 	# Get mouse x and y relative to screen center
 	var x_rel_center = half_size.x - mouse_pos.x
 	var y_rel_center = inverted*(half_size.y - mouse_pos.y)
+	# Roll
+	left_right2 = Input.get_axis("right_stick_right", "right_stick_left")
 	# Normalize
 	# Old way:
-	left_right1 = x_rel_center / half_size.x
-	up_down1 = y_rel_center / half_size.y
+	#left_right1 = x_rel_center / half_size.x
+	#up_down1 = y_rel_center / half_size.y
 	# New way
-	#left_right1 = sign(x_rel_center)*mouse_control_curve.sample(abs(x_rel_center / half_size.x))
-	#up_down1 = sign(y_rel_center)*mouse_control_curve.sample(abs(y_rel_center / half_size.y))
+	left_right1 = sign(x_rel_center)*mouse_control_curve.sample(abs(x_rel_center / half_size.x))
+	up_down1 = sign(y_rel_center)*mouse_control_curve.sample(abs(y_rel_center / half_size.y))
+	#print(abs(x_rel_center / half_size.x))
