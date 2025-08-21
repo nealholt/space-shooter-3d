@@ -215,19 +215,16 @@ func shoot(shooter, delta:float) -> void:
 
 # Override parent class function
 func select_target(targeter:Node3D) -> void:
-	if is_dead:
-		return
+	if is_dead: return
+	if !im.retarget_just_pressed: return
 	
-	if im.retarget_just_pressed:
+	if im.use_mouse_and_keyboard:
 		# Target most central enemy team member
-		target = Global.get_center_most_from_group(enemy_team,targeter)
-		# If target is valid and missile is off cooldown,
-		# tell target that missile lock is being sought on
-		# it and start the seeking audio and visual
-		if is_instance_valid(target):
-			# set_targeted is called on a hitbox component
-			# and merely modulates the reticle color (for now)
-			target.set_targeted(targeter, true)
+		# based on where the mouse is looking.
+		select_target_from_mouse(targeter)
+	else:
+		# Target most central enemy team member
+		select_target_screen_center(targeter)
 
 
 func misc_actions(actor) -> void:

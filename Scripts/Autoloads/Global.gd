@@ -66,6 +66,15 @@ func get_center_most_from_group(group:String, looker) -> Node3D:
 	return get_center_most(looker, targets)
 
 
+# Get the member of the given group who has lowest
+# angle from source and direction.
+# This is used for selecting targets with the mouse.
+func get_lowest_angleto_from_group(group:String, source:Vector3, direction:Vector3) -> Node3D:
+	# Identify target from group with smallest angle to
+	var targets = get_tree().get_nodes_in_group(group)
+	return get_center_most_from_angle(targets, source, direction)
+
+
 # Get item from array targets that is most centered
 # from looker's perspective.
 func get_center_most(looker, targets:Array) -> Node3D:
@@ -74,6 +83,20 @@ func get_center_most(looker, targets:Array) -> Node3D:
 	var temp_angle_to : float
 	for target in targets:
 		temp_angle_to = Global.get_angle_to_target(looker.global_position, target.global_position, -looker.global_transform.basis.z)
+		if temp_angle_to < smallest_angle_to:
+			smallest_angle_to = temp_angle_to
+			most_centered = target
+	return most_centered
+
+
+# Get item from array targets that is lowest angle from
+# source and direction.
+func get_center_most_from_angle(targets:Array, source:Vector3, direction:Vector3) -> Node3D:
+	var most_centered:Node3D # This is a target-type variable
+	var smallest_angle_to := 7.0 # Start off with any upper limit over 2pi
+	var temp_angle_to : float
+	for target in targets:
+		temp_angle_to = Global.get_angle_to_target(source, target.global_position, direction)
 		if temp_angle_to < smallest_angle_to:
 			smallest_angle_to = temp_angle_to
 			most_centered = target
