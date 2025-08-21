@@ -34,6 +34,12 @@ var mouse_guide:Line2D
 # Custom images for the mouse cursor.
 var near_center:Sprite2D
 var beyond_center:Sprite2D
+# Radius (squared)  from the center of the screen within which
+# guns aim at the mouse rather than straight ahead
+const MOUSE_CENTER_RADIUS := 200.0*200.0
+# Radius (squared)  from the center of the screen within which
+# the mouse guide is hidden
+const MOUSE_HIDE_RADIUS := 100.0*100.0
 
 
 func _ready() -> void:
@@ -120,6 +126,7 @@ func _physics_process(delta: float) -> void:
 		# Alternatively, maybe I should have a Node3D
 		# attached to the player straight ahead that the
 		# camera looks at instead.
+		# The 10000.0 is simply to indicate "far ahead." Is it needed?
 		var temp_targ_pos : Vector3 = first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0
 		turret_motion.rotate_and_elevate(body, head, delta, temp_targ_pos)
 	# Show target lead indicator and center crosshair
@@ -139,11 +146,11 @@ func _physics_process(delta: float) -> void:
 		mouse_guide.set_point_position(1, mouse_pos)
 		# Hide the mouse_guide if it's close to center
 		var guide_length:float = mouse_pos.distance_squared_to(mouse_guide.get_point_position(0))
-		mouse_guide.visible = guide_length > 10000.0 # Magic number
+		mouse_guide.visible = guide_length > MOUSE_HIDE_RADIUS
 		# Set cursor based on distance to center.
 		# The idea is that later this would indicate whether or
 		# not auto-aim has kicked in.
-		if guide_length > 40000:
+		if guide_length > MOUSE_CENTER_RADIUS:
 			near_center.visible = false
 			beyond_center.visible = true
 			beyond_center.global_position = mouse_pos
@@ -270,3 +277,7 @@ func shutdown_near_miss() -> void:
 	$RearUnderCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_DISABLED
 	$FreeCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_DISABLED
 	$Body/Head/FirstPersonCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func is_mouse_near_center() -> bool:
+	return Global.input_man.use_mouse_and_keyboard and Global.targeting_hud_on and near_center.visible
