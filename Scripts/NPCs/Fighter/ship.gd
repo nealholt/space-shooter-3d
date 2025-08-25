@@ -4,6 +4,7 @@ signal destroyed
 
 var aim_assist:AimAssist
 var burning_trail:BurningTrail # This is a visual effect
+var camera_group:CameraGroup
 var controller:CharacterBodyControlParent
 var engineAV:EngineAV
 var health_component:HealthComponent
@@ -80,6 +81,8 @@ func _ready() -> void:
 			aim_assist = child
 		elif child is BurningTrail:
 			burning_trail = child
+		elif child is CameraGroup:
+			camera_group = child
 		elif child is CharacterBodyControlParent:
 			controller = child
 			# Pass export var values to controller
@@ -189,6 +192,16 @@ func collision_occurred(collision_severity:float) -> void:
 	# Edited by Neal Holtschulte using Audacity
 	AudioManager.play_remote_transform(SoundEffectSetting.SOUND_EFFECT_TYPE.COLLISION_IMPACT, self)
 
+
+# Projectiles ask if the cursor / mouse is centered enough to
+# aim at it instead of aiming straight ahead. This code gives
+# me the heeby jeebies, because it's just a wrapper for the
+# camera group, which NPCs won't even have, but it's what I'm
+# going with for now.
+func is_mouse_near_center() -> bool:
+	if is_instance_valid(camera_group):
+		return camera_group.is_mouse_near_center()
+	return false
 
 # ALL THE FOLLOWING CODE IS duplicated from hit_box_component
 

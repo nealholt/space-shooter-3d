@@ -1,4 +1,4 @@
-extends Node3D
+class_name CameraGroup extends Node3D
 
 # https://www.reddit.com/r/godot/comments/18w6prn/camera_considerations/
 

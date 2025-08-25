@@ -122,17 +122,31 @@ func _physics_process(delta: float) -> void:
 	# Count elapsed "frames"
 	frame_count+=1
 	
+	#TODO LEFT OFF HERE TESTING Also need to merge this logic with "if aim_assist_unhandled" below
+	# If the shooter is the player...
+	if aim_assist_unhandled and data and data.shooter == Global.player:
+		# If using mouse controls and the mouse is inside the circle...
+		if Global.input_man.use_mouse_and_keyboard and Global.player.is_mouse_near_center():
+			#if aim assist and mouse angle to target < whatever
+				#shoot at target intercept
+			#else: 
+				#shoot at mouse
+			#shoot at mouse / cursor
+			aim_self_at_cursor()
+		pass
+		aim_assist_unhandled = false # Turn it off. We're done
+	
 	# Reorient on target intercept if aim assist is
 	# on, but only do so once and then turn it off.
 	# I do this here, rather than in set_data
 	# because the frame of delay between set_data
 	# and phyics_process can make the intercept
 	# outdated enough that it doesn't work.
-	# IMPORTANT NOTE: spread is still applied so that
+	# IMPORTANT: spread is still applied so that
 	# bullets look natural, but aim assist is still
 	# valuable because it centers the spread on
 	# the projected intercept position.
-	if aim_assist_unhandled and data and data.aim_assist and data.target and is_instance_valid(data.target):
+	if aim_assist_unhandled and data and data.aim_assist and is_instance_valid(data.target):
 		var intercept:Vector3 = Global.get_intercept(
 			global_position, speed, data.target)
 		look_at(intercept, Vector3.UP)
@@ -147,6 +161,18 @@ func _physics_process(delta: float) -> void:
 		controller.move_me(self, delta)
 	# Move forward
 	global_position += velocity * delta
+
+
+
+func aim_self_at_cursor() -> void:
+	var viewport := get_viewport()
+	var mouse_position := viewport.get_mouse_position()
+	var camera := viewport.get_camera_3d()
+	# Go to camera position + camera direction times 100000
+	var go_to_point := camera.project_ray_origin(mouse_position) + camera.project_ray_normal(mouse_position) * 100000
+	look_at(go_to_point, Vector3.UP)
+	apply_spread(data)
+	velocity = -global_transform.basis.z * speed
 
 
 func damage_and_die(body, collision_point=null):
