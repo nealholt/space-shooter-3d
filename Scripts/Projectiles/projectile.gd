@@ -126,7 +126,7 @@ func _physics_process(delta: float) -> void:
 	# If the shooter is the player...
 	if aim_assist_unhandled and data and data.shooter == Global.player:
 		# If using mouse controls and the mouse is inside the circle...
-		if Global.input_man.use_mouse_and_keyboard and Global.player.is_mouse_near_center():
+		if Global.input_man.use_mouse_and_keyboard:
 			#if aim assist and mouse angle to target < whatever
 				#shoot at target intercept
 			#else: 
@@ -166,7 +166,34 @@ func _physics_process(delta: float) -> void:
 
 func aim_self_at_cursor() -> void:
 	var viewport := get_viewport()
-	var mouse_position := viewport.get_mouse_position()
+	var mouse_position : Vector2
+	# The following if-else makes the projectile head off
+	# toward the mouse/cursor if the mouse is near screen
+	# center, and makes the projectile head toward the
+	# nearest point on the circle that limits the mouse/cursor
+	# when the mouse is not near screen center.
+	if Global.player.is_mouse_near_center():
+		# If the mouse/cursor is near the screen center, just
+		# aim at the mouse position.
+		mouse_position = viewport.get_mouse_position()
+		#print(mouse_position)
+	else:
+		# Otherwise, find the vector toward the mouse from
+		# screen center, shrink it to the proper length,
+		# and add it to the screen center.
+		# Note: This script has to be attached to a node in
+		# the scene tree otherwise get_viewport() won't work.
+		var half_size : Vector2 = viewport.size / 2
+		var mouse_pos = viewport.get_mouse_position()
+		# Get mouse x and y relative to screen center
+		var x_rel_center = half_size.x - mouse_pos.x
+		var y_rel_center = half_size.y - mouse_pos.y
+		mouse_position = Vector2(x_rel_center, y_rel_center)
+		var aim_radius:float = data.shooter.get_mouse_center_radius()
+		var vect_length := mouse_position.length()
+		# Shrink vector to length and subtract it off of screen center
+		mouse_position = half_size - mouse_position*(aim_radius / vect_length)
+		#print(mouse_position)
 	var camera := viewport.get_camera_3d()
 	# Go to camera position + camera direction times 100000
 	var go_to_point := camera.project_ray_origin(mouse_position) + camera.project_ray_normal(mouse_position) * 100000

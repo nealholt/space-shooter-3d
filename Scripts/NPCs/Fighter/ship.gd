@@ -202,6 +202,10 @@ func is_mouse_near_center() -> bool:
 	if is_instance_valid(camera_group):
 		return camera_group.is_mouse_near_center()
 	return false
+func get_mouse_center_radius() -> float:
+	if is_instance_valid(camera_group):
+		return sqrt(camera_group.MOUSE_CENTER_RADIUS)
+	return 0.0
 
 # ALL THE FOLLOWING CODE IS duplicated from hit_box_component
 
