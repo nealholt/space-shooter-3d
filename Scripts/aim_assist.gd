@@ -53,8 +53,9 @@ func use_aim_assist(shooter:Node3D, target:Node3D,
 	return do_use_aim_assist
 
 func play_audio(do_use_aim_assist:bool) -> void:
-	if audio:
-		if do_use_aim_assist and !audio.playing:
-			audio.play()
-		if !do_use_aim_assist and audio.playing:
-			audio.stop()
+	if !audio:
+		return
+	if do_use_aim_assist and !audio.playing:
+		audio.play()
+	if !do_use_aim_assist and audio.playing:
+		audio.stop()

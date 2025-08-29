@@ -21,6 +21,9 @@ var left_right2 := 0.0 # Right stick
 var up_down1 := 0.0 # Left stick
 var up_down2 := 0.0 # Right stick
 
+var current_viewport:Viewport
+var mouse_pos:Vector2 ## Current mouse position on the viewport
+
 
 func refresh() -> void:
 	if use_inverted:
@@ -46,6 +49,9 @@ func toggle_mouse_and_keyboard(toggled_on: bool) -> void:
 	use_mouse_and_keyboard = toggled_on
 
 
+# This is called by player_movement4 and ballistic_movement3,
+# the two player control scripts, as im.update().
+# I believe it is called every physics update.
 func update() -> void:
 	switch_weapons = Input.is_action_just_pressed("switch_weapons")
 	retarget_just_pressed = Input.is_action_just_pressed("retarget")
@@ -70,11 +76,15 @@ func update_controller_input() -> void:
 	up_down2 = inverted * (Input.get_action_strength("right_stick_up") - Input.get_action_strength("right_stick_down"))
 
 
+# This function updates the current_viewport and
+# mouse_pos variables which are used for aim assist.
+# Therefore, this function needs called every frame.
 func update_mouse_keyboard_input() -> void:
 	# This script has to be attached to a node in the scene tree
 	# otherwise get_viewport() won't work.
-	var half_size : Vector2 = get_viewport().size / 2
-	var mouse_pos = get_viewport().get_mouse_position()
+	current_viewport = get_viewport() # Does the viewport need to be refreshed like this?
+	mouse_pos = current_viewport.get_mouse_position()
+	var half_size : Vector2 = current_viewport.size / 2
 	# Get mouse x and y relative to screen center
 	var x_rel_center = half_size.x - mouse_pos.x
 	var y_rel_center = inverted*(half_size.y - mouse_pos.y)

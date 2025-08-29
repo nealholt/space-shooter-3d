@@ -123,13 +123,9 @@ func select_target_from_mouse(targeter:Ship) -> void:
 	# Target most central enemy team member
 	# based on where the mouse is looking.
 	# Point in direction of mouse viewed from camera
-	# Source for the following:
-	# https://stackoverflow.com/questions/76893256/how-to-get-the-3d-mouse-pos-in-godot-4-1
-	var viewport := get_viewport()
-	var mouse_position := viewport.get_mouse_position()
-	var camera := viewport.get_camera_3d()
-	var origin := camera.project_ray_origin(mouse_position)
-	var direction := camera.project_ray_normal(mouse_position)
+	var camera := Global.input_man.current_viewport.get_camera_3d()
+	var origin := camera.project_ray_origin(Global.input_man.mouse_pos)
+	var direction := camera.project_ray_normal(Global.input_man.mouse_pos)
 	target = Global.get_lowest_angleto_from_group(enemy_team, origin, direction)
 	# If target is valid and missile is off cooldown,
 	# tell target that missile lock is being sought on
