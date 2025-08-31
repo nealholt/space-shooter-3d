@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cp4m6n403qink"]
+[gd_scene load_steps=3 format=3 uid="uid://cp4m6n403qink"]
 
 [ext_resource type="Script" uid="uid://b71sbd0x2fpe3" path="res://Scripts/aim_assist.gd" id="1_fldk8"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_kwpai"]
+
 [node name="AimAssist" type="Node"]
 script = ExtResource("1_fldk8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_kwpai")

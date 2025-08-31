@@ -43,13 +43,45 @@ func set_assist_limit_deg(angle_assist_limit_deg:float) -> void:
 
 func use_aim_assist(shooter:Node3D, target:Node3D,
 					bullet_speed:float) -> bool:
+	# If shooter is the player and mouse controls are in use
+	# then this needs to be handled differently;
+	# do_use_aim_assist is true if angle from where mouse / camera
+	# is looking is within limit, not from where shooter is looking.
+	if shooter == Global.player and Global.input_man.use_mouse_and_keyboard:
+		return use_aim_assist_mouse(shooter, target, bullet_speed)
+	# Otherwise calculate whether or not to use aim assist
+	# from the shooter's perspective.
 	var intercept:Vector3 = Global.get_intercept(
 		shooter.global_position, bullet_speed, target)
-	var angle_to = Global.get_angle_to_target(
+	var angle_to:float = Global.get_angle_to_target(
 		shooter.global_position, intercept,
 		-shooter.global_basis.z)
 	var do_use_aim_assist:bool = angle_to < angle_assist_limit_radians
 	play_audio(do_use_aim_assist)
+	return do_use_aim_assist
+
+# Detmerine aim assist usage from relative positions
+# of camera and mouse.
+# If angle between two vectors (camera to intercept versus
+# camera to mouse) is less than angle_assist_limit_radians
+# then return true for do_use_aim_assist
+func use_aim_assist_mouse(shooter:Node3D, target:Node3D,
+					bullet_speed:float) -> bool:
+	# TODO LEFT OFF HERE
+	var intercept:Vector3 = Global.get_intercept(
+		shooter.global_position, bullet_speed, target)
+	var camera := Global.input_man.current_viewport.get_camera_3d()
+	var vect_to_cursor := camera.project_ray_normal(Global.input_man.mouse_pos)
+	# TESTING
+	#$MeshInstance3D.global_position = camera.global_position + vect_to_cursor * 50.0
+	#print(vect_to_cursor)
+	var vect_to_intercept := intercept - camera.global_position
+	#var vect_to_intercept := camera.global_position - intercept
+	#print(vect_to_intercept)
+	var angle_to:float = vect_to_cursor.angle_to(vect_to_intercept)
+	var do_use_aim_assist:bool = angle_to < angle_assist_limit_radians
+	play_audio(do_use_aim_assist)
+	#print(rad_to_deg(angle_to)) # TODO LEFT OFF HERE
 	return do_use_aim_assist
 
 func play_audio(do_use_aim_assist:bool) -> void:
