@@ -109,7 +109,7 @@ func apply_spread(dat:ShootData) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	# Was previously used for testing:
+	# This was previously used for testing:
 	#var crumb = bread_crumb.instantiate()
 	# Add to main_3d, not root, otherwise the added
 	# node might not be properly cleared when
@@ -122,20 +122,6 @@ func _physics_process(delta: float) -> void:
 	# Count elapsed "frames"
 	frame_count+=1
 	
-	#TODO LEFT OFF HERE TESTING Also need to merge this logic with "if aim_assist_unhandled" below
-	# If the shooter is the player...
-	if aim_assist_unhandled and data and data.shooter == Global.player:
-		# If using mouse controls and the mouse is inside the circle...
-		if Global.input_man.use_mouse_and_keyboard:
-			#if aim assist and mouse angle to target < whatever
-				#shoot at target intercept
-			#else: 
-				#shoot at mouse
-			#shoot at mouse / cursor
-			aim_self_at_cursor()
-		pass
-		aim_assist_unhandled = false # Turn it off. We're done
-	
 	# Reorient on target intercept if aim assist is
 	# on, but only do so once and then turn it off.
 	# I do this here, rather than in set_data
@@ -146,13 +132,22 @@ func _physics_process(delta: float) -> void:
 	# bullets look natural, but aim assist is still
 	# valuable because it centers the spread on
 	# the projected intercept position.
-	if aim_assist_unhandled and data and data.aim_assist and is_instance_valid(data.target):
-		var intercept:Vector3 = Global.get_intercept(
-			global_position, speed, data.target)
-		look_at(intercept, Vector3.UP)
-		apply_spread(data)
-		velocity = -global_transform.basis.z * speed
-		aim_assist_unhandled = false # Turn it off. We're done
+	if aim_assist_unhandled and data:
+		# If aim assist is on and the target is valid, intercept
+		# the target.
+		if data.aim_assist and is_instance_valid(data.target):
+			var intercept:Vector3 = Global.get_intercept(
+				global_position, speed, data.target)
+			look_at(intercept, Vector3.UP)
+			apply_spread(data)
+			velocity = -global_transform.basis.z * speed
+		# Else if the shooter is the player and the player is
+		# using mouse controls...
+		elif data.shooter == Global.player and Global.input_man.use_mouse_and_keyboard:
+			#shoot at mouse / cursor
+			aim_self_at_cursor()
+		# Turn off aim assist. It's been handled
+		aim_assist_unhandled = false
 	
 	# Seeker missiles and other bullets might
 	# use one of a number of different controllers

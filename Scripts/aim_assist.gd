@@ -67,21 +67,14 @@ func use_aim_assist(shooter:Node3D, target:Node3D,
 # then return true for do_use_aim_assist
 func use_aim_assist_mouse(shooter:Node3D, target:Node3D,
 					bullet_speed:float) -> bool:
-	# TODO LEFT OFF HERE
 	var intercept:Vector3 = Global.get_intercept(
 		shooter.global_position, bullet_speed, target)
 	var camera := Global.input_man.current_viewport.get_camera_3d()
 	var vect_to_cursor := camera.project_ray_normal(Global.input_man.mouse_pos)
-	# TESTING
-	#$MeshInstance3D.global_position = camera.global_position + vect_to_cursor * 50.0
-	#print(vect_to_cursor)
 	var vect_to_intercept := intercept - camera.global_position
-	#var vect_to_intercept := camera.global_position - intercept
-	#print(vect_to_intercept)
 	var angle_to:float = vect_to_cursor.angle_to(vect_to_intercept)
 	var do_use_aim_assist:bool = angle_to < angle_assist_limit_radians
 	play_audio(do_use_aim_assist)
-	#print(rad_to_deg(angle_to)) # TODO LEFT OFF HERE
 	return do_use_aim_assist
 
 func play_audio(do_use_aim_assist:bool) -> void:
