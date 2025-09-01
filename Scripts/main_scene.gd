@@ -13,6 +13,11 @@ var fullscreen:=true
 
 
 func _ready() -> void:
+	# Start with load level 1 button focused. This lets you
+	# use arrow keys and enter to nabigate the menus.
+	# After completing a level, you might want to default
+	# the next level to be in focus.
+	$Menu/HBoxContainer/SceneOptions/Load1.grab_focus()
 	# Set display to fullscreen. When I tried to set
 	# fullscreen as the default in project settings,
 	# the toggle button was broken, but this way it works.
@@ -57,6 +62,11 @@ func to_main_menu() -> void:
 	unload_level()
 	menu.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	# Reset focus to load level 1 button. This lets you
+	# use arrow keys and enter to nabigate the menus.
+	# After completing a level, you might want to default
+	# the next level to be in focus.
+	$Menu/HBoxContainer/SceneOptions/Load1.grab_focus()
 
 
 func set_hud_label(text:String) -> void:
