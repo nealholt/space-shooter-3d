@@ -186,6 +186,9 @@ func rear_camera() -> void:
 	rear_under_camera.make_current()
 	Global.current_camera = rear_under_camera
 	Global.targeting_hud_on = false
+	mouse_guide.visible = false
+	near_center.visible = false
+	beyond_center.visible = false
 	# Turn off near miss detectors for all but this camera.
 	# Could we instead have just one near miss detector
 	# and reparent it to the current camera?
@@ -209,6 +212,9 @@ func flyby_camera() -> void:
 		Global.player.transform.basis.x*rng.randf_range(-20.0,20.0)
 	free_camera.look_at(global_position, Vector3.UP)
 	Global.targeting_hud_on = false
+	mouse_guide.visible = false
+	near_center.visible = false
+	beyond_center.visible = false
 	# Turn off near miss detectors for all but this camera.
 	# Could we instead have just one near miss detector
 	# and reparent it to the current camera?
@@ -218,36 +224,44 @@ func flyby_camera() -> void:
 
 # Transition to target closeup camera
 func target_closeup_camera() -> void:
-	if Global.player and Global.player.controller.target and is_instance_valid(Global.player.controller.target):
-		target = Global.player.controller.target
-		state = CameraState.TARGETCLOSEUP
-		free_camera.make_current()
-		Global.current_camera = free_camera
-		view_target_close()
-		Global.targeting_hud_on = false
-		# Turn off near miss detectors for all but this camera.
-		# Could we instead have just one near miss detector
-		# and reparent it to the current camera?
-		shutdown_near_miss()
-		$FreeCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_ALWAYS
+	if !(Global.player and Global.player.controller.target and is_instance_valid(Global.player.controller.target)):
+		return
+	target = Global.player.controller.target
+	state = CameraState.TARGETCLOSEUP
+	free_camera.make_current()
+	Global.current_camera = free_camera
+	view_target_close()
+	Global.targeting_hud_on = false
+	mouse_guide.visible = false
+	near_center.visible = false
+	beyond_center.visible = false
+	# Turn off near miss detectors for all but this camera.
+	# Could we instead have just one near miss detector
+	# and reparent it to the current camera?
+	shutdown_near_miss()
+	$FreeCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 # Transition to target view camera.
 # This is where we are looking at target but "over the shoulder"
 # from the player themself.
 func target_camera() -> void:
-	if is_instance_valid(Global.player.controller.target):
-		state = CameraState.TARGETVIEW
-		target = Global.player.controller.target
-		free_camera.make_current()
-		Global.current_camera = free_camera
-		view_target_from_player()
-		Global.targeting_hud_on = false
-		# Turn off near miss detectors for all but this camera.
-		# Could we instead have just one near miss detector
-		# and reparent it to the current camera?
-		shutdown_near_miss()
-		$FreeCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_ALWAYS
+	if !is_instance_valid(Global.player.controller.target):
+		return
+	state = CameraState.TARGETVIEW
+	target = Global.player.controller.target
+	free_camera.make_current()
+	Global.current_camera = free_camera
+	view_target_from_player()
+	Global.targeting_hud_on = false
+	mouse_guide.visible = false
+	near_center.visible = false
+	beyond_center.visible = false
+	# Turn off near miss detectors for all but this camera.
+	# Could we instead have just one near miss detector
+	# and reparent it to the current camera?
+	shutdown_near_miss()
+	$FreeCamera/NearMissDetector.process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 # Pre: target is valid
