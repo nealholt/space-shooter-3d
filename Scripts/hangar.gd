@@ -8,6 +8,8 @@ class_name Hangar extends Node3D
 var ally_team:String
 
 func _on_timer_timeout() -> void:
+	if global_transform.basis.z.length() < 0.01:
+		push_error('ERROR in hangar.gd: Vector too short. I\'m trying to suss out a different error and I thought this might be the issue.')
 	# Spawn a new ship on the hangar's team, at the
 	# hangar's location, facing the direction the
 	# hangar's -z axis is facing.

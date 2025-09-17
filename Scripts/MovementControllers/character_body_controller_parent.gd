@@ -55,6 +55,12 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 	# https://docs.godotengine.org/en/stable/tutorials/physics/using_character_body_2d.html
 	var collision :KinematicCollision3D = mover.move_and_collide(mover.velocity * delta)
 	if collision:
+		#print()
+		#print(mover)
+		#print('collided with')
+		#var temp_collider = collision.get_collider()
+		#print(temp_collider.get_parent())
+		
 		# Deal collision damage.
 		# Factor in collision angle and speed.
 		var temp:Vector3 = collision.get_normal()

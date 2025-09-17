@@ -94,7 +94,9 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2)
 bullet = ExtResource("5_6ou5s")
 bullet_speed = 600.0
 fire_rate = 8.0
+spread_deg = 2.0
 fire_sound = 0
 reload_sound = 2
+magazine_size = 20
 
 [editable path="Shield"]
