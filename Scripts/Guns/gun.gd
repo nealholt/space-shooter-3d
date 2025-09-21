@@ -45,9 +45,11 @@ var current_mag:int
 @export var reload_time:= 1.0 ## seconds
 var reload_timer:Timer
 
-# Gun animation, for example, rotation of the gatling gun
+# Gun animation, for example, rotation of the gatling gun.
+# Also the muzzle flash and muzzle flash position adjustment
 @export var gun_animation : AnimationPlayer
 @export var muzzle_flash:VisualEffectSetting.VISUAL_EFFECT_TYPE
+@export var muzzle_flash_pos_adj:Vector3 = Vector3.ZERO ## Adjustment to muzzle flash effect's position
 
 # Only guns that actually use a raycast3d should
 # have a ray, such as guns that fire laser guided
@@ -99,7 +101,7 @@ func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
 	# Animate 'em if you got 'em
 	if gun_animation:
 		gun_animation.play("gun_animation")
-	VfxManager.play_remote_transform(muzzle_flash, self)
+	VfxManager.play_remote_transform(muzzle_flash, self, muzzle_flash_pos_adj)
 	# create fire audio stream
 	if fire_sound != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
 		fire_sound_active = AudioManager.play_remote_transform(fire_sound, self)

@@ -40,13 +40,17 @@ func play_with_transform(loc:Vector3, tf:Transform3D) -> void:
 	transform = tf
 	play_at(loc)
 
-func play_remote_transform(remote_mover:Node3D) -> void:
+# Second argument is optional adjusmtent to effect position.
+func play_remote_transform(remote_mover:Node3D, adjust:Vector3=Vector3.INF) -> void:
 	# Create a new remote transform, attach it
 	# to the thing the effect should move with,
 	# then set the transform's path to self
 	remote_transform = RemoteTransform3D.new()
 	remote_mover.add_child(remote_transform)
 	remote_transform.remote_path = get_path()
+	# Adjust remote_transform position
+	if adjust!=Vector3.INF:
+		remote_transform.position += adjust
 	# Play the effect
 	play()
 

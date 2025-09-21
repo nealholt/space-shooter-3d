@@ -76,15 +76,15 @@ func play_with_transform(loc:Vector3, tf:Transform3D) -> int:
 	next = (next+1) % vfx_players.size()
 	return index
 
-
-func play_remote_transform(remote_mover:Node3D) -> int:
+# Second argument is optional adjusmtent to effect position.
+func play_remote_transform(remote_mover:Node3D, adjust:Vector3=Vector3.INF) -> int:
 	var index := next
 	# If the current effect is playing then we're maxed
 	# out. Prefer to skip than to interrupt
 	if vfx_players[next].is_playing():
 		return -1
 	# Set up and play the effect
-	vfx_players[next].play_remote_transform(remote_mover)
+	vfx_players[next].play_remote_transform(remote_mover, adjust)
 	# Increment next
 	next = (next+1) % vfx_players.size()
 	return index

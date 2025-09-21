@@ -32,7 +32,10 @@ func play_with_transform(type:int, loc:Vector3, tf:Transform3D) -> int:
 		return -1
 	return vfx_dict[type].play_with_transform(loc, tf)
 
-func play_remote_transform(type:int, remote_mover:Node3D) -> int:
+# Third argument is optional adjusmtent to effect position.
+# The optional parameter is currently only used with the gun's
+# muzzle_flash_pos_adj.
+func play_remote_transform(type:int, remote_mover:Node3D, adjust:Vector3=Vector3.INF) -> int:
 	if type == VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT:
 		return -1
-	return vfx_dict[type].play_remote_transform(remote_mover)
+	return vfx_dict[type].play_remote_transform(remote_mover, adjust)

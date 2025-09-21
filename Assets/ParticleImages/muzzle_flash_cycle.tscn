@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://crh8dyjwvnjy2"]
+
+[ext_resource type="Texture2D" uid="uid://b01acnvx5utfj" path="res://Assets/ParticleImages/muzzle_01.png" id="1_02rxb"]
+[ext_resource type="Script" uid="uid://b5xh1sj0p38q2" path="res://Scripts/vfx/specific_effects/muzzle_flash_cycle.gd" id="1_w7nta"]
+
+[node name="MuzzleFlashCycle" type="Node3D"]
+script = ExtResource("1_w7nta")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+visible = false
+modulate = Color(0.4353445, 1, 0.46254948, 1)
+texture = ExtResource("1_02rxb")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_animation_finished"]
