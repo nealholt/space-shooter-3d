@@ -45,7 +45,6 @@ bullet_speed = 1000.0
 fire_rate = 25.0
 spread_deg = 1.0
 reload_sound = 1
-muzzle_flash = 6
 muzzle_flash_pos_adj = Vector3(0, 0, 2)
 
 [node name="TextureRect" type="TextureRect" parent="WeaponHandler/Gun" index="1"]

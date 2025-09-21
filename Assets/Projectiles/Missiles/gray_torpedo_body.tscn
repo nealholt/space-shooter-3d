@@ -10,7 +10,7 @@ transparency = 1
 shading_mode = 0
 albedo_texture = ExtResource("2_uudvm")
 disable_receive_shadows = true
-billboard_mode = 2
+billboard_mode = 1
 billboard_keep_scale = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_5hgfo"]
