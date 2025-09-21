@@ -85,9 +85,9 @@ fractal_octaves = 2
 fractal_gain = 2.145
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_npj0j"]
+noise = SubResource("FastNoiseLite_kcjd2")
 seamless = true
 seamless_blend_skirt = 0.433
-noise = SubResource("FastNoiseLite_kcjd2")
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_rpfiq"]
 output_port_for_preview = 0
@@ -146,7 +146,7 @@ input_name = "time"
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_back, diffuse_lambert, specular_schlick_ggx;
 
 uniform vec2 cloud_roll_speed = vec2(0.700000, 0.700000);
 uniform sampler2D tex_vtx_5 : source_color;

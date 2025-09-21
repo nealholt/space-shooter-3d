@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://diilp2vvcvj53"]
+[gd_scene load_steps=18 format=3 uid="uid://diilp2vvcvj53"]
 
 [ext_resource type="PackedScene" uid="uid://du1bwxbrh62at" path="res://Assets/Ships/carrier_chassis.tscn" id="1_67lmr"]
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_isj6t"]
@@ -8,6 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_pp34p"]
 [ext_resource type="PackedScene" uid="uid://cbhoikklwgc0c" path="res://Scenes/hangar.tscn" id="7_db1yb"]
 [ext_resource type="PackedScene" uid="uid://dk6y2tyoo25sn" path="res://Scenes/weakpoint.tscn" id="8_sqmai"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sqmai"]
+points = PackedVector3Array(-50, -30, -50, -50, 29.999996, -50, 50, -30, -50, -50, -30, 50, -50, 29.999996, 50, 50, 29.999996, -50, 50, -30, 50, 50, 29.999996, 50)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2hhpl"]
+points = PackedVector3Array(-50, -30, -50, -50, 29.999996, -50, 50, -30, -50, -50, -30, 50, -50, 29.999996, 50, 50, 29.999996, -50, 50, -30, 50, 50, 29.999996, 50)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qq0cr"]
 points = PackedVector3Array(50, 50, 250, 50, -50, 250, 50, 50, -250, -50, 50, 250, -50, -50, 250, 50, -50, -250, -50, 50, -250, -50, -50, -250)
@@ -44,6 +50,14 @@ max_health = 1000.0
 weakpoint_damage = 50.0
 
 [node name="CarrierChassis" parent="." instance=ExtResource("1_67lmr")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35, 30)
+shape = SubResource("ConvexPolygonShape3D_sqmai")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 30)
+shape = SubResource("ConvexPolygonShape3D_2hhpl")
 
 [node name="CollisionRightHull" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 0)
