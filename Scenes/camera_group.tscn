@@ -13,7 +13,6 @@ script = ExtResource("1_sad13")
 [node name="turret_motion_component" parent="." instance=ExtResource("2_tdt0o")]
 
 [node name="RearUnderCamera" type="Camera3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.3, -1.174, -5.5)
 far = 80000.0
 
 [node name="NearMissDetector" type="Area3D" parent="RearUnderCamera" groups=["near-miss detector"]]
@@ -38,12 +37,11 @@ monitoring = false
 shape = SubResource("SphereShape3D_wtdqg")
 
 [node name="Body" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.6, -2.9)
 
 [node name="Head" type="Node3D" parent="Body"]
 
 [node name="FirstPersonCamera" type="Camera3D" parent="Body/Head"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 current = true
 far = 80000.0
 

@@ -24,6 +24,8 @@ resource_local_to_scene = true
 material = SubResource("ShaderMaterial_731x3")
 
 [node name="Corvette" instance=ExtResource("1_63oik")]
+fps_cam_position = Vector3(0, 0.6, -2.9)
+side_cam_position = Vector3(2.3, -1.174, -5.5)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
 stream = ExtResource("8_vlve7")

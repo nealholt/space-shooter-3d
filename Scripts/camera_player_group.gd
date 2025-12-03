@@ -71,6 +71,17 @@ func _ready() -> void:
 	#beyond_center.scale = Vector2(0.5, 0.5) # Shrink
 	beyond_center.visible = false
 	add_child(beyond_center)
+	# Camera groups should only be attached to ships.
+	# We assume the parent is a ship with variables
+	# for positioning the FirstPerson and RearUnder
+	# cameras.
+	var p:Ship = get_parent()
+	if !('fps_cam_position' in p and 'fps_cam_rotation_deg' in p and 'side_cam_position' in p and 'side_cam_rotation_deg' in p):
+		push_error('ERROR in CameraGroup _ready. Expect parent to be a ship with certain attributes for positioning camera.')
+	body.position = p.fps_cam_position
+	body.rotation = p.fps_cam_rotation_deg
+	rear_under_camera.position = p.side_cam_position
+	rear_under_camera.rotation = p.side_cam_rotation_deg
 
 
 func _physics_process(delta: float) -> void:

@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://ux6ivcx1ovdp"]
+[gd_scene load_steps=7 format=3 uid="uid://ux6ivcx1ovdp"]
+
+[ext_resource type="Texture2D" uid="uid://dwhxx0f2kh1cu" path="res://Assets/Textures/kenney_particle-pack/smoke_07.png" id="1_mrvbu"]
 
 [sub_resource type="Curve" id="Curve_w7ove"]
 _data = [Vector2(0, 1), 0.0, 1.40451, 0, 0, Vector2(1, 0), -2.21649, 0.0, 0, 0]
@@ -19,20 +21,19 @@ scale_min = 3.0
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_0capg")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pwbh"]
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 2.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b6ssq"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_mrvbu")
+disable_receive_shadows = true
+billboard_mode = 1
+billboard_keep_scale = true
 
-[sub_resource type="SphereMesh" id="SphereMesh_atjxn"]
-material = SubResource("StandardMaterial3D_6pwbh")
-radius = 0.1
-height = 0.2
-radial_segments = 32
-rings = 16
+[sub_resource type="QuadMesh" id="QuadMesh_mrvbu"]
+material = SubResource("StandardMaterial3D_b6ssq")
 
 [node name="BoosterParticles" type="GPUParticles3D"]
 amount = 64
 lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_fgg2i")
-draw_pass_1 = SubResource("SphereMesh_atjxn")
+draw_pass_1 = SubResource("QuadMesh_mrvbu")

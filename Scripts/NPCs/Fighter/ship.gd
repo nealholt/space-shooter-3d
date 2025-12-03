@@ -11,6 +11,15 @@ var health_component:HealthComponent
 var missile_lock:MissileLockGroup
 var weapon_handler:WeaponHandler
 
+# The following is so different ships can have different
+# camera positions.
+# Why in the name of the seven new gods and the old gods beyond
+# counting would the correct cam_rotation_deg be -135 y?
+@export var fps_cam_position := Vector3(0, 0, 0)
+@export var fps_cam_rotation_deg := Vector3(0, -135, 0)
+@export var side_cam_position := Vector3(0, 0, 0)
+@export var side_cam_rotation_deg := Vector3(0, -135, 0)
+
 # I added the following in so I could parameterize the
 # PlayerCorvette differently on the asteroids level.
 # This is probably hacky and bad, but whatever.

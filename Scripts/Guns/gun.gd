@@ -50,6 +50,13 @@ var reload_timer:Timer
 @export var gun_animation : AnimationPlayer
 @export var muzzle_flash:VisualEffectSetting.VISUAL_EFFECT_TYPE
 @export var muzzle_flash_pos_adj:Vector3 = Vector3.ZERO ## Adjustment to muzzle flash effect's position
+# Not all effects should be run through the Visual Effects Manager.
+# Sometimes it's just better and easier to attach an effect,
+# especially when the effect is frequently reused and would
+# otherwise require a remote transform. So, for now, I'm
+# just going to add ANOTHER export var. Later, I should
+# consider if the above muzzle flash is even needed or wanted.
+@export var muzzle_flash_direct:VisualEffect
 
 # Only guns that actually use a raycast3d should
 # have a ray, such as guns that fire laser guided
@@ -101,7 +108,11 @@ func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
 	# Animate 'em if you got 'em
 	if gun_animation:
 		gun_animation.play("gun_animation")
-	VfxManager.play_remote_transform(muzzle_flash, self, muzzle_flash_pos_adj)
+	# Run one muzzle flash effect or the other
+	if muzzle_flash_direct:
+		muzzle_flash_direct.play()
+	else:
+		VfxManager.play_remote_transform(muzzle_flash, self, muzzle_flash_pos_adj)
 	# create fire audio stream
 	if fire_sound != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
 		fire_sound_active = AudioManager.play_remote_transform(fire_sound, self)

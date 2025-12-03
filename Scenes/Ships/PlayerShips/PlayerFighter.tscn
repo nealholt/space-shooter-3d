@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://conb7kdfab3ks"]
+[gd_scene load_steps=12 format=3 uid="uid://conb7kdfab3ks"]
 
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="1_5kq0i"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="2_28aj3"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="4_cq55v"]
 [ext_resource type="PackedScene" uid="uid://ls7l4tvcl8tb" path="res://Assets/Guns/gun_model_basic.tscn" id="5_01wq6"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="5_6av2j"]
+[ext_resource type="PackedScene" uid="uid://58nrpfbay3lf" path="res://Assets/Particles/muzzle_flash.tscn" id="6_0a0ca"]
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/engine_audio_visuals.tscn" id="6_3ywou"]
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="7_cla1y"]
 
@@ -21,6 +22,8 @@ resource_local_to_scene = true
 material = SubResource("ShaderMaterial_se4th")
 
 [node name="Fighter" instance=ExtResource("1_5kq0i")]
+fps_cam_position = Vector3(2.6830346e-08, 0.61380655, -1.8305256)
+side_cam_position = Vector3(1.2755041, -0.20307307, -4.352357)
 
 [node name="AimAssist" parent="." index="0"]
 angle_assist_limit = 5.0
@@ -39,13 +42,14 @@ npc_missile_lock = false
 [node name="FresnelAura" parent="Shield" index="0"]
 mesh = SubResource("SphereMesh_24wxq")
 
-[node name="Gun" parent="WeaponHandler" index="0"]
-transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 6.3490587e-15, 1.4524953e-07, -6.3229213)
+[node name="Gun" parent="WeaponHandler" index="0" node_paths=PackedStringArray("muzzle_flash_direct")]
+transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 3.7456072e-15, 8.568951e-08, -4.960347)
 bullet_speed = 1000.0
 fire_rate = 25.0
 spread_deg = 1.0
 reload_sound = 1
 muzzle_flash_pos_adj = Vector3(0, 0, 2)
+muzzle_flash_direct = NodePath("MuzzleFlash")
 
 [node name="TextureRect" type="TextureRect" parent="WeaponHandler/Gun" index="1"]
 self_modulate = Color(1, 1, 1, 0.607843)
@@ -55,6 +59,9 @@ texture = ExtResource("2_28aj3")
 
 [node name="gun_model_basic" parent="WeaponHandler/Gun" index="3" instance=ExtResource("5_01wq6")]
 transform = Transform3D(1, 8.351873e-23, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, -5.203404e-15, -1.1904001e-07, 2.7233171)
+
+[node name="MuzzleFlash" parent="WeaponHandler/Gun" index="4" instance=ExtResource("6_0a0ca")]
+transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, -3.5532693e-15, -8.12893e-08, 1.8596821)
 
 [node name="CameraGroup" parent="." index="12" instance=ExtResource("5_6av2j")]
 

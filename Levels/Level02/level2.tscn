@@ -1,17 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://cfiwadbmgx3up"]
+[gd_scene load_steps=11 format=3 uid="uid://cfiwadbmgx3up"]
 
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="1_nau7t"]
-[ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_5rasv"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="3_6nm7s"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="4_s6g67"]
 [ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Scenes/Ships/bomber.tscn" id="5_1d1v4"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_7pty0"]
-[ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Guns/laser_gun.tscn" id="5_8sixk"]
-[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="6_tjvqf"]
-[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="7_cw0p4"]
+[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="6_5kr4y"]
 [ext_resource type="PackedScene" uid="uid://brec5vmygtijo" path="res://Scenes/orb.tscn" id="7_yxjtr"]
-[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="8_t5kwi"]
-[ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/engine_audio_visuals.tscn" id="10_vci83"]
 
 [sub_resource type="GDScript" id="GDScript_ulixo"]
 script/source = "extends Level
@@ -51,17 +45,6 @@ background_mode = 2
 sky = SubResource("Sky_um5eh")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6xgje"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("5_7pty0")
-shader_parameter/FresnelPower = 2.0
-shader_parameter/EmissionStrength = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_b3t22"]
-resource_local_to_scene = true
-material = SubResource("ShaderMaterial_6xgje")
 
 [node name="Node" type="Node3D"]
 script = SubResource("GDScript_ulixo")
@@ -221,32 +204,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.0185, 50.3287, -277.873)
 script = ExtResource("1_nau7t")
 team = "blue team"
 
-[node name="Player" parent="BlueTeam" instance=ExtResource("3_5rasv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50.397, 0)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BlueTeam/Player/AimAssist" index="0"]
-stream = ExtResource("6_tjvqf")
-volume_db = -20.0
-pitch_scale = 0.5
-
-[node name="MissileLockGroup" parent="BlueTeam/Player" index="9"]
-npc_missile_lock = false
-
-[node name="MissileLauncher" parent="BlueTeam/Player/MissileLockGroup" index="7"]
-bullet_speed = 150.0
-
-[node name="FresnelAura" parent="BlueTeam/Player/Shield" index="0"]
-mesh = SubResource("SphereMesh_b3t22")
-
-[node name="LaserGun" parent="BlueTeam/Player/WeaponHandler" index="0" instance=ExtResource("5_8sixk")]
-
-[node name="BallisticMovementV3" parent="BlueTeam/Player" instance=ExtResource("7_cw0p4")]
-
-[node name="CameraGroup" parent="BlueTeam/Player" instance=ExtResource("8_t5kwi")]
-
-[node name="EngineAudioVisuals" parent="BlueTeam/Player" instance=ExtResource("10_vci83")]
-
-[editable path="BlueTeam/Player"]
-[editable path="BlueTeam/Player/Shield"]
-[editable path="BlueTeam/Player/WeaponHandler/GatlingGun/GunModel"]
-[editable path="BlueTeam/Player/WeaponHandler/HitScanGun/Node"]
+[node name="Corvette" parent="BlueTeam" instance=ExtResource("6_5kr4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34.533386, 0)
