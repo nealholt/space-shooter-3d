@@ -1,0 +1,323 @@
+[gd_scene load_steps=42 format=3 uid="uid://chhlq0fbj03la"]
+
+[ext_resource type="Script" uid="uid://b5eecujjbgqeh" path="res://Scripts/vfx/MuzzleFlash/muzzle_flash_rand.gd" id="1_kyxxm"]
+[ext_resource type="Texture2D" uid="uid://die8v8wcj1pfv" path="res://Assets/ParticleImages/muzzle_01_right.png" id="2_td5st"]
+[ext_resource type="ArrayMesh" uid="uid://phyrt75f30w8" path="res://Assets/Models/MuzzlePlane01.obj" id="3_frx31"]
+[ext_resource type="Texture2D" uid="uid://bwfyyi3q8raw4" path="res://Assets/ParticleImages/spark_02.png" id="4_4sang"]
+[ext_resource type="ArrayMesh" uid="uid://dmovo5tcqpbhn" path="res://Assets/Models/muzzle_cone01.obj" id="5_pda7p"]
+[ext_resource type="Texture2D" uid="uid://2d7d12xuapf2" path="res://Assets/ParticleImages/muzzle_02_right.png" id="5_td5st"]
+[ext_resource type="Texture2D" uid="uid://cevjv4lsemkac" path="res://Assets/Textures/kenney_particle-pack/circle_05.png" id="6_koa05"]
+[ext_resource type="Texture2D" uid="uid://ffparbmt0lc0" path="res://Assets/ParticleImages/muzzle_03_right.png" id="6_pda7p"]
+[ext_resource type="Texture2D" uid="uid://dut5xl8c5as7" path="res://Assets/ParticleImages/muzzle_04_right.png" id="7_koa05"]
+[ext_resource type="Texture2D" uid="uid://d26kga6pm77np" path="res://Assets/ParticleImages/muzzle_05_right.png" id="8_bcmoy"]
+[ext_resource type="Texture2D" uid="uid://cqxy5k2dm2wt8" path="res://Assets/ParticleImages/fire_01.png" id="11_bmxqy"]
+[ext_resource type="Texture2D" uid="uid://dhgy70nb1wj4x" path="res://Assets/ParticleImages/fire_02.png" id="12_ivdx1"]
+[ext_resource type="Texture2D" uid="uid://248g7uvjmjrp" path="res://Assets/ParticleImages/flame_01.png" id="13_h8v7r"]
+[ext_resource type="Texture2D" uid="uid://dwhxx0f2kh1cu" path="res://Assets/Textures/kenney_particle-pack/smoke_07.png" id="14_1lwm6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xguk"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("6_koa05")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_cufgk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_08frx"]
+curve = SubResource("Curve_cufgk")
+
+[sub_resource type="Curve" id="Curve_j30g7"]
+_data = [Vector2(0, 0), 0.0, 2.3927577, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ojca0"]
+curve = SubResource("Curve_j30g7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_46rhx"]
+gravity = Vector3(0, 0, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_ojca0")
+color = Color(0.43529412, 1, 0.4117647, 1)
+alpha_curve = SubResource("CurveTexture_08frx")
+
+[sub_resource type="QuadMesh" id="QuadMesh_rhr0g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tyaal"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("6_koa05")
+
+[sub_resource type="Curve" id="Curve_lklsr"]
+_data = [Vector2(0, 1), 0.0, -2.9706204, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_srd5a"]
+curve = SubResource("Curve_lklsr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k6rkm"]
+lifetime_randomness = 1.0
+particle_flag_align_y = true
+direction = Vector3(0, 0, 1)
+spread = 10.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.049999997
+scale_max = 0.29999998
+color = Color(4.415934, 5.912981, 4.415934, 1)
+alpha_curve = SubResource("CurveTexture_srd5a")
+
+[sub_resource type="QuadMesh" id="QuadMesh_0xguk"]
+size = Vector2(0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s22ts"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("2_td5st")
+
+[sub_resource type="Curve" id="Curve_s22ts"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gciti"]
+curve = SubResource("Curve_s22ts")
+
+[sub_resource type="Curve" id="Curve_gciti"]
+_data = [Vector2(0, 0), 0.0, 2.3927577, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ji0jx"]
+curve = SubResource("Curve_gciti")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tyaal"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_ji0jx")
+color = Color(0.43529412, 1, 0.4117647, 1)
+alpha_curve = SubResource("CurveTexture_gciti")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frx31"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("5_td5st")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_prung"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("6_pda7p")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bmxqy"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("7_koa05")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ivdx1"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("8_bcmoy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k6rkm"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("4_4sang")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_koa05"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("11_bmxqy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h8v7r"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("12_ivdx1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3dea"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("13_h8v7r")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f3ovb"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("14_1lwm6")
+
+[node name="MuzzleFlashRand" type="Node3D"]
+script = ExtResource("1_kyxxm")
+
+[node name="BeamFlash" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_0xguk")
+emitting = false
+amount = 1
+lifetime = 0.1
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_46rhx")
+draw_pass_1 = SubResource("QuadMesh_rhr0g")
+
+[node name="Sparks" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_tyaal")
+emitting = false
+amount = 20
+lifetime = 0.3
+explosiveness = 0.7
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_k6rkm")
+draw_pass_1 = SubResource("QuadMesh_0xguk")
+
+[node name="PlanesGroup" type="Node3D" parent="."]
+
+[node name="MuzzlePlane00" type="GPUParticles3D" parent="PlanesGroup"]
+material_override = SubResource("StandardMaterial3D_s22ts")
+emitting = false
+amount = 1
+lifetime = 0.09999999999999999
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_tyaal")
+draw_pass_1 = ExtResource("3_frx31")
+
+[node name="MuzzlePlane01" type="GPUParticles3D" parent="PlanesGroup"]
+material_override = SubResource("StandardMaterial3D_frx31")
+emitting = false
+amount = 1
+lifetime = 0.09999999999999999
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_tyaal")
+draw_pass_1 = ExtResource("3_frx31")
+
+[node name="MuzzlePlane02" type="GPUParticles3D" parent="PlanesGroup"]
+material_override = SubResource("StandardMaterial3D_prung")
+emitting = false
+amount = 1
+lifetime = 0.09999999999999999
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_tyaal")
+draw_pass_1 = ExtResource("3_frx31")
+
+[node name="MuzzlePlane03" type="GPUParticles3D" parent="PlanesGroup"]
+material_override = SubResource("StandardMaterial3D_bmxqy")
+emitting = false
+amount = 1
+lifetime = 0.09999999999999999
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_tyaal")
+draw_pass_1 = ExtResource("3_frx31")
+
+[node name="MuzzlePlane04" type="GPUParticles3D" parent="PlanesGroup"]
+material_override = SubResource("StandardMaterial3D_ivdx1")
+emitting = false
+amount = 1
+lifetime = 0.09999999999999999
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_tyaal")
+draw_pass_1 = ExtResource("3_frx31")
+
+[node name="ConesGroup" type="Node3D" parent="."]
+
+[node name="MuzzleCone00" type="GPUParticles3D" parent="ConesGroup"]
+material_override = SubResource("StandardMaterial3D_k6rkm")
+emitting = false
+amount = 1
+lifetime = 0.1
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_tyaal")
+draw_pass_1 = ExtResource("5_pda7p")
+
+[node name="MuzzleCone01" type="GPUParticles3D" parent="ConesGroup"]
+material_override = SubResource("StandardMaterial3D_koa05")
+emitting = false
+amount = 1
+lifetime = 0.1
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_tyaal")
+draw_pass_1 = ExtResource("5_pda7p")
+
+[node name="MuzzleCone02" type="GPUParticles3D" parent="ConesGroup"]
+material_override = SubResource("StandardMaterial3D_h8v7r")
+emitting = false
+amount = 1
+lifetime = 0.1
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_tyaal")
+draw_pass_1 = ExtResource("5_pda7p")
+
+[node name="MuzzleCone03" type="GPUParticles3D" parent="ConesGroup"]
+material_override = SubResource("StandardMaterial3D_b3dea")
+emitting = false
+amount = 1
+lifetime = 0.1
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_tyaal")
+draw_pass_1 = ExtResource("5_pda7p")
+
+[node name="MuzzleCone04" type="GPUParticles3D" parent="ConesGroup"]
+material_override = SubResource("StandardMaterial3D_f3ovb")
+emitting = false
+amount = 1
+lifetime = 0.1
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_tyaal")
+draw_pass_1 = ExtResource("5_pda7p")

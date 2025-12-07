@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://248g7uvjmjrp"
-path.s3tc="res://.godot/imported/flame_01.png-5aed47d4817218f493a59317c97bdafd.s3tc.ctex"
+uid="uid://2d7d12xuapf2"
+path.s3tc="res://.godot/imported/muzzle_02_right.png-887393b608d6a029c19383d801808918.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/ParticleImages/flame_01.png"
-dest_files=["res://.godot/imported/flame_01.png-5aed47d4817218f493a59317c97bdafd.s3tc.ctex"]
+source_file="res://Assets/ParticleImages/muzzle_02_right.png"
+dest_files=["res://.godot/imported/muzzle_02_right.png-887393b608d6a029c19383d801808918.s3tc.ctex"]
 
 [params]
 

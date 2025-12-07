@@ -84,7 +84,7 @@ void fragment() {
 
 // MultiplyAdd:4
 	vec2 n_in4p1 = vec2(0.25000, 1.00000);
-	vec2 n_out4p0 = fma(n_out3p0, n_in4p1, n_out7p0);
+	vec2 n_out4p0 = (n_out3p0 * n_in4p1) + n_out7p0;
 
 
 // Texture2D:2

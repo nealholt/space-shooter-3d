@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnerjnl8w7alf"]
+
+[ext_resource type="PackedScene" uid="uid://123jkwus4316" path="res://Scenes/vfx/MuzzleFlash/muzzle_flash.tscn" id="1_4wtqt"]
+[ext_resource type="Script" uid="uid://b1fyoiju51ugv" path="res://Scripts/vfx/MuzzleFlash/testing_muzzle_flash.gd" id="1_ryj20"]
+[ext_resource type="PackedScene" uid="uid://chhlq0fbj03la" path="res://Scenes/vfx/MuzzleFlash/muzzle_flash_rand.tscn" id="3_qu0gk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qu0gk"]
+sky_top_color = Color(0.5890956, 0.5890956, 0.5890956, 1)
+sky_horizon_color = Color(0.6381378, 0.6381378, 0.6381378, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.6381378, 0.6381378, 0.6381378, 1)
+
+[sub_resource type="Sky" id="Sky_6bbpv"]
+sky_material = SubResource("ProceduralSkyMaterial_qu0gk")
+
+[sub_resource type="Environment" id="Environment_2i8le"]
+background_mode = 2
+sky = SubResource("Sky_6bbpv")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_ryj20")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 1.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2i8le")
+
+[node name="MuzzleFlash" parent="." instance=ExtResource("1_4wtqt")]
+transform = Transform3D(0.34202015, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, 0.34202015, -1.1331549, -0.5766332, 0)
+
+[node name="MuzzleFlashRand" parent="." instance=ExtResource("3_qu0gk")]
+transform = Transform3D(0.34202015, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, 0.34202015, 0.91459036, -0.36218858, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.9689899, 7.219538e-09, 0.2471005, -0.044784524, 0.9834389, 0.17561981, -0.24300824, -0.1812401, 0.9529423, 1.8020146, 0.76260066, 3.526933)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
