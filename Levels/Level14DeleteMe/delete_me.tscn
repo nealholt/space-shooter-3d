@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bq4kqa6h3ojks"]
+[gd_scene load_steps=7 format=3 uid="uid://bq4kqa6h3ojks"]
 
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_su1dd"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_avkgv"]
-[ext_resource type="PackedScene" uid="uid://diilp2vvcvj53" path="res://Scenes/Ships/carrier.tscn" id="3_su1dd"]
 [ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="4_su1dd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_su1dd"]
@@ -27,12 +26,10 @@ environment = SubResource("Environment_tak7s")
 [node name="RedTeam" type="Node3D" parent="."]
 script = ExtResource("2_avkgv")
 
-[node name="Carrier" parent="RedTeam" instance=ExtResource("3_su1dd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 616.138)
-
 [node name="BlueTeam" type="Node3D" parent="."]
 script = ExtResource("2_avkgv")
 team = "blue team"
 
 [node name="PlayerFighter" parent="BlueTeam" instance=ExtResource("4_su1dd")]
 transform = Transform3D(-0.764202, 5.21145e-09, 0.644978, 4.37114e-08, 1, 4.37114e-08, -0.644978, 6.15972e-08, -0.764202, 0, 0, 0)
+impulse_std = 0.0

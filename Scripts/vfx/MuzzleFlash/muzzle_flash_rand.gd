@@ -12,7 +12,6 @@ extends Node3D
 var emitter_list : Array
 var planes_count : int
 var cones_count : int
-var temp_emitter :GPUParticles3D
 
 func _ready() -> void:
 	# Add all GPU Particles children to the
@@ -21,19 +20,19 @@ func _ready() -> void:
 		if c is GPUParticles3D:
 			emitter_list.push_back(c)
 	# Count children of planes and cones
-	# Subtract one because randi_range's upper end
-	# is inclusive.
-	planes_count = planes_group.get_child_count()-1
-	cones_count = cones_group.get_child_count()-1
-	if planes_count < 0:
+	planes_count = planes_group.get_child_count()
+	cones_count = cones_group.get_child_count()
+	if planes_count < 1:
 		push_error('MuzzleFlash planes group must have at least one GPUParticles3D as child.')
-	if cones_count < 0:
+	if cones_count < 1:
 		push_error('MuzzleFlash planes group must have at least one GPUParticles3D as child.')
 
 func play() -> void:
+	# Randomize z
+	rotation.z = randf() * 2.0 * PI
 	# Activate all the standard emitters
 	for gpu_particle in emitter_list:
 		gpu_particle.set_emitting(true)
 	# Activate one random plane and one random cone
-	planes_group.get_child(randi_range(0,planes_count)).set_emitting(true)
-	cones_group.get_child(randi_range(0,cones_count)).set_emitting(true)
+	planes_group.get_child(randi()%planes_count).set_emitting(true)
+	cones_group.get_child(randi()%cones_count).set_emitting(true)

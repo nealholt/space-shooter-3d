@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bnerjnl8w7alf"]
 
-[ext_resource type="PackedScene" uid="uid://123jkwus4316" path="res://Scenes/vfx/MuzzleFlash/muzzle_flash.tscn" id="1_4wtqt"]
+[ext_resource type="PackedScene" uid="uid://123jkwus4316" path="res://Scenes/vfx/MuzzleFlash/muzzle_flash_demo.tscn" id="1_4wtqt"]
 [ext_resource type="Script" uid="uid://b1fyoiju51ugv" path="res://Scripts/vfx/MuzzleFlash/testing_muzzle_flash.gd" id="1_ryj20"]
-[ext_resource type="PackedScene" uid="uid://chhlq0fbj03la" path="res://Scenes/vfx/MuzzleFlash/muzzle_flash_rand.tscn" id="3_qu0gk"]
+[ext_resource type="PackedScene" uid="uid://chhlq0fbj03la" path="res://Scenes/vfx/MuzzleFlash/muzzle_flash_rand_demo.tscn" id="3_qu0gk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qu0gk"]
 sky_top_color = Color(0.5890956, 0.5890956, 0.5890956, 1)

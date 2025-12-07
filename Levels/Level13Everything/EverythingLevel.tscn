@@ -65,7 +65,6 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -133.42, 46.6032, 7)
 
 [node name="Fighter" parent="BlueTeam" instance=ExtResource("6_xbcqs")]
 transform = Transform3D(-0.274882, -3.00121e-08, 0.961478, 4.37114e-08, 1, 4.37114e-08, -0.961478, 5.4043e-08, -0.274882, 219.253, 0, 0)
-finalExplosion = 0
 
 [node name="RedTeam" type="Node3D" parent="."]
 script = ExtResource("5_0jpk3")

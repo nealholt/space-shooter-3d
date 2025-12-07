@@ -1,19 +1,19 @@
-[gd_scene load_steps=42 format=3 uid="uid://chhlq0fbj03la"]
+[gd_scene load_steps=42 format=3 uid="uid://do50y2jdho5iq"]
 
-[ext_resource type="Script" uid="uid://b5eecujjbgqeh" path="res://Scripts/vfx/MuzzleFlash/muzzle_flash_rand.gd" id="1_kyxxm"]
-[ext_resource type="Texture2D" uid="uid://die8v8wcj1pfv" path="res://Assets/ParticleImages/muzzle_01_right.png" id="2_td5st"]
-[ext_resource type="ArrayMesh" uid="uid://phyrt75f30w8" path="res://Assets/Models/MuzzlePlane01.obj" id="3_frx31"]
-[ext_resource type="Texture2D" uid="uid://bwfyyi3q8raw4" path="res://Assets/ParticleImages/spark_02.png" id="4_4sang"]
-[ext_resource type="ArrayMesh" uid="uid://dmovo5tcqpbhn" path="res://Assets/Models/muzzle_cone01.obj" id="5_pda7p"]
-[ext_resource type="Texture2D" uid="uid://2d7d12xuapf2" path="res://Assets/ParticleImages/muzzle_02_right.png" id="5_td5st"]
-[ext_resource type="Texture2D" uid="uid://cevjv4lsemkac" path="res://Assets/Textures/kenney_particle-pack/circle_05.png" id="6_koa05"]
-[ext_resource type="Texture2D" uid="uid://ffparbmt0lc0" path="res://Assets/ParticleImages/muzzle_03_right.png" id="6_pda7p"]
-[ext_resource type="Texture2D" uid="uid://dut5xl8c5as7" path="res://Assets/ParticleImages/muzzle_04_right.png" id="7_koa05"]
-[ext_resource type="Texture2D" uid="uid://d26kga6pm77np" path="res://Assets/ParticleImages/muzzle_05_right.png" id="8_bcmoy"]
-[ext_resource type="Texture2D" uid="uid://cqxy5k2dm2wt8" path="res://Assets/ParticleImages/fire_01.png" id="11_bmxqy"]
-[ext_resource type="Texture2D" uid="uid://dhgy70nb1wj4x" path="res://Assets/ParticleImages/fire_02.png" id="12_ivdx1"]
-[ext_resource type="Texture2D" uid="uid://248g7uvjmjrp" path="res://Assets/ParticleImages/flame_01.png" id="13_h8v7r"]
-[ext_resource type="Texture2D" uid="uid://dwhxx0f2kh1cu" path="res://Assets/Textures/kenney_particle-pack/smoke_07.png" id="14_1lwm6"]
+[ext_resource type="Script" uid="uid://b5eecujjbgqeh" path="res://Scripts/vfx/MuzzleFlash/muzzle_flash_rand.gd" id="1_50lh3"]
+[ext_resource type="Texture2D" uid="uid://cevjv4lsemkac" path="res://Assets/Textures/kenney_particle-pack/circle_05.png" id="2_tbda7"]
+[ext_resource type="Texture2D" uid="uid://die8v8wcj1pfv" path="res://Assets/ParticleImages/muzzle_01_right.png" id="3_dhcul"]
+[ext_resource type="ArrayMesh" uid="uid://phyrt75f30w8" path="res://Assets/Models/MuzzlePlane01.obj" id="4_iba8p"]
+[ext_resource type="Texture2D" uid="uid://2d7d12xuapf2" path="res://Assets/ParticleImages/muzzle_02_right.png" id="5_22sac"]
+[ext_resource type="Texture2D" uid="uid://ffparbmt0lc0" path="res://Assets/ParticleImages/muzzle_03_right.png" id="6_hhsuu"]
+[ext_resource type="Texture2D" uid="uid://dut5xl8c5as7" path="res://Assets/ParticleImages/muzzle_04_right.png" id="7_p4e21"]
+[ext_resource type="Texture2D" uid="uid://d26kga6pm77np" path="res://Assets/ParticleImages/muzzle_05_right.png" id="8_j44fh"]
+[ext_resource type="Texture2D" uid="uid://bwfyyi3q8raw4" path="res://Assets/ParticleImages/spark_02.png" id="9_rbtcd"]
+[ext_resource type="ArrayMesh" uid="uid://dmovo5tcqpbhn" path="res://Assets/Models/muzzle_cone01.obj" id="10_f5i4y"]
+[ext_resource type="Texture2D" uid="uid://cqxy5k2dm2wt8" path="res://Assets/ParticleImages/fire_01.png" id="11_7px1a"]
+[ext_resource type="Texture2D" uid="uid://dhgy70nb1wj4x" path="res://Assets/ParticleImages/fire_02.png" id="12_2e55s"]
+[ext_resource type="Texture2D" uid="uid://248g7uvjmjrp" path="res://Assets/ParticleImages/flame_01.png" id="13_ulld0"]
+[ext_resource type="Texture2D" uid="uid://dwhxx0f2kh1cu" path="res://Assets/Textures/kenney_particle-pack/smoke_07.png" id="14_52qps"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xguk"]
 transparency = 1
@@ -22,7 +22,7 @@ cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_texture = ExtResource("6_koa05")
+albedo_texture = ExtResource("2_tbda7")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -59,7 +59,7 @@ cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_texture = ExtResource("6_koa05")
+albedo_texture = ExtResource("2_tbda7")
 
 [sub_resource type="Curve" id="Curve_lklsr"]
 _data = [Vector2(0, 1), 0.0, -2.9706204, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -91,7 +91,7 @@ cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_texture = ExtResource("2_td5st")
+albedo_texture = ExtResource("3_dhcul")
 
 [sub_resource type="Curve" id="Curve_s22ts"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -120,7 +120,7 @@ cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_texture = ExtResource("5_td5st")
+albedo_texture = ExtResource("5_22sac")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_prung"]
 transparency = 1
@@ -129,7 +129,7 @@ cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_texture = ExtResource("6_pda7p")
+albedo_texture = ExtResource("6_hhsuu")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bmxqy"]
 transparency = 1
@@ -138,7 +138,7 @@ cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_texture = ExtResource("7_koa05")
+albedo_texture = ExtResource("7_p4e21")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ivdx1"]
 transparency = 1
@@ -147,7 +147,7 @@ cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_texture = ExtResource("8_bcmoy")
+albedo_texture = ExtResource("8_j44fh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k6rkm"]
 transparency = 1
@@ -156,7 +156,7 @@ cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_texture = ExtResource("4_4sang")
+albedo_texture = ExtResource("9_rbtcd")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_koa05"]
 transparency = 1
@@ -165,7 +165,7 @@ cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_texture = ExtResource("11_bmxqy")
+albedo_texture = ExtResource("11_7px1a")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h8v7r"]
 transparency = 1
@@ -174,7 +174,7 @@ cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_texture = ExtResource("12_ivdx1")
+albedo_texture = ExtResource("12_2e55s")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3dea"]
 transparency = 1
@@ -183,7 +183,7 @@ cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_texture = ExtResource("13_h8v7r")
+albedo_texture = ExtResource("13_ulld0")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f3ovb"]
 transparency = 1
@@ -192,18 +192,20 @@ cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_texture = ExtResource("14_1lwm6")
+albedo_texture = ExtResource("14_52qps")
 
-[node name="MuzzleFlashRand" type="Node3D"]
-script = ExtResource("1_kyxxm")
+[node name="MuzzleFlashGreenMonster" type="Node3D"]
+script = ExtResource("1_50lh3")
 
 [node name="BeamFlash" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_0xguk")
 emitting = false
 amount = 1
 lifetime = 0.1
+one_shot = true
 randomness = 1.0
 fixed_fps = 60
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_46rhx")
 draw_pass_1 = SubResource("QuadMesh_rhr0g")
 
@@ -212,9 +214,11 @@ material_override = SubResource("StandardMaterial3D_tyaal")
 emitting = false
 amount = 20
 lifetime = 0.3
+one_shot = true
 explosiveness = 0.7
 randomness = 1.0
 fixed_fps = 60
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_k6rkm")
 draw_pass_1 = SubResource("QuadMesh_0xguk")
 
@@ -224,51 +228,61 @@ draw_pass_1 = SubResource("QuadMesh_0xguk")
 material_override = SubResource("StandardMaterial3D_s22ts")
 emitting = false
 amount = 1
-lifetime = 0.09999999999999999
+lifetime = 0.1
+one_shot = true
 randomness = 1.0
 fixed_fps = 60
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
-draw_pass_1 = ExtResource("3_frx31")
+draw_pass_1 = ExtResource("4_iba8p")
 
 [node name="MuzzlePlane01" type="GPUParticles3D" parent="PlanesGroup"]
 material_override = SubResource("StandardMaterial3D_frx31")
 emitting = false
 amount = 1
-lifetime = 0.09999999999999999
+lifetime = 0.1
+one_shot = true
 randomness = 1.0
 fixed_fps = 60
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
-draw_pass_1 = ExtResource("3_frx31")
+draw_pass_1 = ExtResource("4_iba8p")
 
 [node name="MuzzlePlane02" type="GPUParticles3D" parent="PlanesGroup"]
 material_override = SubResource("StandardMaterial3D_prung")
 emitting = false
 amount = 1
-lifetime = 0.09999999999999999
+lifetime = 0.1
+one_shot = true
 randomness = 1.0
 fixed_fps = 60
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
-draw_pass_1 = ExtResource("3_frx31")
+draw_pass_1 = ExtResource("4_iba8p")
 
 [node name="MuzzlePlane03" type="GPUParticles3D" parent="PlanesGroup"]
 material_override = SubResource("StandardMaterial3D_bmxqy")
 emitting = false
 amount = 1
-lifetime = 0.09999999999999999
+lifetime = 0.1
+one_shot = true
 randomness = 1.0
 fixed_fps = 60
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
-draw_pass_1 = ExtResource("3_frx31")
+draw_pass_1 = ExtResource("4_iba8p")
 
 [node name="MuzzlePlane04" type="GPUParticles3D" parent="PlanesGroup"]
 material_override = SubResource("StandardMaterial3D_ivdx1")
 emitting = false
 amount = 1
-lifetime = 0.09999999999999999
+lifetime = 0.1
+one_shot = true
 randomness = 1.0
 fixed_fps = 60
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
-draw_pass_1 = ExtResource("3_frx31")
+draw_pass_1 = ExtResource("4_iba8p")
 
 [node name="ConesGroup" type="Node3D" parent="."]
 
@@ -277,47 +291,57 @@ material_override = SubResource("StandardMaterial3D_k6rkm")
 emitting = false
 amount = 1
 lifetime = 0.1
+one_shot = true
 randomness = 1.0
 fixed_fps = 60
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
-draw_pass_1 = ExtResource("5_pda7p")
+draw_pass_1 = ExtResource("10_f5i4y")
 
 [node name="MuzzleCone01" type="GPUParticles3D" parent="ConesGroup"]
 material_override = SubResource("StandardMaterial3D_koa05")
 emitting = false
 amount = 1
 lifetime = 0.1
+one_shot = true
 randomness = 1.0
 fixed_fps = 60
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
-draw_pass_1 = ExtResource("5_pda7p")
+draw_pass_1 = ExtResource("10_f5i4y")
 
 [node name="MuzzleCone02" type="GPUParticles3D" parent="ConesGroup"]
 material_override = SubResource("StandardMaterial3D_h8v7r")
 emitting = false
 amount = 1
 lifetime = 0.1
+one_shot = true
 randomness = 1.0
 fixed_fps = 60
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
-draw_pass_1 = ExtResource("5_pda7p")
+draw_pass_1 = ExtResource("10_f5i4y")
 
 [node name="MuzzleCone03" type="GPUParticles3D" parent="ConesGroup"]
 material_override = SubResource("StandardMaterial3D_b3dea")
 emitting = false
 amount = 1
 lifetime = 0.1
+one_shot = true
 randomness = 1.0
 fixed_fps = 60
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
-draw_pass_1 = ExtResource("5_pda7p")
+draw_pass_1 = ExtResource("10_f5i4y")
 
 [node name="MuzzleCone04" type="GPUParticles3D" parent="ConesGroup"]
 material_override = SubResource("StandardMaterial3D_f3ovb")
 emitting = false
 amount = 1
 lifetime = 0.1
+one_shot = true
 randomness = 1.0
 fixed_fps = 60
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
-draw_pass_1 = ExtResource("5_pda7p")
+draw_pass_1 = ExtResource("10_f5i4y")

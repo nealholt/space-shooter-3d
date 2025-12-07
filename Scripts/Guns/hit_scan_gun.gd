@@ -32,7 +32,7 @@ func shoot_actual() -> void:
 			#print("dealt damage")
 			collider.damage(damage, data.shooter)
 		# Spawn sparks on location of hit
-		VfxManager.play(muzzle_flash, ray.get_collision_point())
+		VfxManager.play(VisualEffectSetting.VISUAL_EFFECT_TYPE.MUZZLE_FLASH, ray.get_collision_point())
 	position_laser()
 
 
