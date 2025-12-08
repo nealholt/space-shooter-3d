@@ -37,6 +37,12 @@ damageable=""
 "gun hardpoint"=""
 capital_ship="Group for capital ships so that things that prefer slow moving targets can find them."
 
+[importer_defaults]
+
+scene={
+&"materials/extract": 1
+}
+
 [input]
 
 ui_accept={

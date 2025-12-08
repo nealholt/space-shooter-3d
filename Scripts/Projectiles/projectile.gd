@@ -142,8 +142,9 @@ func _physics_process(delta: float) -> void:
 			apply_spread(data)
 			velocity = -global_transform.basis.z * speed
 		# Else if the shooter is the player and the player is
-		# using mouse controls...
-		elif data.shooter == Global.player and Global.input_man.use_mouse_and_keyboard:
+		# using mouse controls, and the player is in first
+		# person...
+		elif data.shooter == Global.player and Global.input_man.use_mouse_and_keyboard and Global.player.camera_group.is_first_person():
 			#shoot at mouse / cursor
 			aim_self_at_cursor()
 		# Turn off aim assist. It's been handled

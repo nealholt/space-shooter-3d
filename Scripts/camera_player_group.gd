@@ -306,3 +306,7 @@ func shutdown_near_miss() -> void:
 
 func is_mouse_near_center() -> bool:
 	return Global.input_man.use_mouse_and_keyboard and Global.targeting_hud_on and near_center.visible
+
+
+func is_first_person() -> bool:
+	return state == CameraState.FIRSTPERSON

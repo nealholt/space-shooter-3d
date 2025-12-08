@@ -34,10 +34,9 @@ environment = SubResource("Environment_2i8le")
 transform = Transform3D(0.34202015, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, 0.34202015, -1.1331549, -0.5766332, 0)
 
 [node name="MuzzleFlashRand" parent="." instance=ExtResource("3_qu0gk")]
-transform = Transform3D(0.34202015, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, 0.34202015, 0.91459036, -0.36218858, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.7780756, -0.14938357, -0.927081)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.9689899, 7.219538e-09, 0.2471005, -0.044784524, 0.9834389, 0.17561981, -0.24300824, -0.1812401, 0.9529423, 1.8020146, 0.76260066, 3.526933)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3

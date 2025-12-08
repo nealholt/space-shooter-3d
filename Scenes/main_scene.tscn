@@ -53,37 +53,37 @@ size_flags_horizontal = 6
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Load1" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
+[node name="Load1Balloons" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
 text = "Load 1: Balloons"
 
-[node name="Load2" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
+[node name="Load2ShootingGallery" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 2: Balloons and Obstacles"
+text = "Load 2: Shooting Gallery"
 
-[node name="Load3" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
+[node name="Load31v1" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
 text = "Load 3: 1 vs 1"
 
-[node name="Load4" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
+[node name="Load4NPCTargeting" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
 text = "Load 4: NPC vs Stationary target"
 
-[node name="Load5" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
+[node name="Load5Furball" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
 text = "Load 5: Red vs Blue"
 
-[node name="Load6" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
+[node name="Load6TurretTest" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
 text = "Load 6: Turret Test"
 
-[node name="Load7" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
+[node name="Load7CapitalShipTest" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
 text = "Load 7: Capital Ship Test"
@@ -516,13 +516,13 @@ text = "PAUSED"
 process_mode = 2
 script = ExtResource("3_jv6wh")
 
-[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load1" to="." method="_on_load_1_pressed"]
-[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load2" to="." method="_on_load_2_pressed"]
-[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load3" to="." method="_on_load_3_pressed"]
-[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load4" to="." method="_on_load_4_pressed"]
-[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load5" to="." method="_on_load_5_pressed"]
-[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load6" to="." method="_on_load_6_pressed"]
-[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load7" to="." method="_on_load_7_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load1Balloons" to="." method="_on_load_1_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load2ShootingGallery" to="." method="_on_load_2_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load31v1" to="." method="_on_load_3_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load4NPCTargeting" to="." method="_on_load_4_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load5Furball" to="." method="_on_load_5_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load6TurretTest" to="." method="_on_load_6_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load7CapitalShipTest" to="." method="_on_load_7_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load8NearMissSound" to="." method="_on_load_8_near_miss_sound_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load9Shield" to="." method="_on_load_9_shield_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load10Asteroids" to="." method="_on_load_10_asteroids_pressed"]

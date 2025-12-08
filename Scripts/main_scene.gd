@@ -17,7 +17,7 @@ func _ready() -> void:
 	# use arrow keys and enter to nabigate the menus.
 	# After completing a level, you might want to default
 	# the next level to be in focus.
-	$Menu/HBoxContainer/SceneOptions/Load1.grab_focus()
+	$Menu/HBoxContainer/SceneOptions/Load1Balloons.grab_focus()
 	# Set display to fullscreen. When I tried to set
 	# fullscreen as the default in project settings,
 	# the toggle button was broken, but this way it works.
@@ -66,7 +66,7 @@ func to_main_menu() -> void:
 	# use arrow keys and enter to nabigate the menus.
 	# After completing a level, you might want to default
 	# the next level to be in focus.
-	$Menu/HBoxContainer/SceneOptions/Load1.grab_focus()
+	$Menu/HBoxContainer/SceneOptions/Load1Balloons.grab_focus()
 
 
 func set_hud_label(text:String) -> void:
