@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://da5y8fkeokhyx"]
 
-[ext_resource type="Script" uid="uid://ca1xpxadpwp5u" path="res://Levels/Level06/TestCam.gd" id="1_qvatm"]
+[ext_resource type="Script" uid="uid://ca1xpxadpwp5u" path="res://Levels/Level06TurretTest/TestCam.gd" id="1_qvatm"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_t2ssg"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_hpnlp"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_2y4mv"]

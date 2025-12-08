@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://b2p5fk853guwk"]
 
-[ext_resource type="Script" uid="uid://d3i1pj3lavuuy" path="res://Levels/Level01/level1.gd" id="1_dflt6"]
+[ext_resource type="Script" uid="uid://d3i1pj3lavuuy" path="res://Levels/Level01Balloons/level1.gd" id="1_dflt6"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_widnh"]
 [ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="3_e7dw1"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="8_b1kea"]

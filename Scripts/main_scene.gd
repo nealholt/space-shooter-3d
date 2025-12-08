@@ -106,25 +106,25 @@ func load_level(level_name:String) -> void:
 
 
 func _on_load_1_pressed() -> void:
-	load_level("Level01/level1")
+	load_level("Level01Balloons/level1")
 
 func _on_load_2_pressed() -> void:
-	load_level("Level02/level2")
+	load_level("Level02ShootingGallery/level2")
 
 func _on_load_3_pressed() -> void:
-	load_level("Level03/level3")
+	load_level("Level031v1/level3")
 
 func _on_load_4_pressed() -> void:
-	load_level("Level04/level04")
+	load_level("Level04NPCTargeting/level04")
 
 func _on_load_5_pressed() -> void:
-	load_level("Level05/level_05")
+	load_level("Level05Furball/level_05")
 
 func _on_load_6_pressed() -> void:
-	load_level("Level06/TurretTesting")
+	load_level("Level06TurretTest/TurretTesting")
 
 func _on_load_7_pressed() -> void:
-	load_level("Level07/capital_ship_test")
+	load_level("Level07CapitalShipTest/capital_ship_test")
 
 func _on_load_8_near_miss_sound_pressed() -> void:
 	load_level("Level08NearMiss/near_miss_testing")
