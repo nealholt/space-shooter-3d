@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="1_5h06f"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_e2ue2"]
-[ext_resource type="PackedScene" uid="uid://dp3w08p8gkd3p" path="res://Scenes/capital_ship_frigate.tscn" id="2_jciow"]
+[ext_resource type="PackedScene" uid="uid://dp3w08p8gkd3p" path="res://Scenes/Ships/capital_ship_frigate.tscn" id="2_jciow"]
 [ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="4_vkmbw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sg63n"]

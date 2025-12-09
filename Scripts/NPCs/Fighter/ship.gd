@@ -11,6 +11,14 @@ var health_component:HealthComponent
 var missile_lock:MissileLockGroup
 var weapon_handler:WeaponHandler
 
+# For testing purposes, I want some ships to just sit there
+# and do nothing. This is easy for fighters and corvettes
+# because by default they do not have a controller attached
+# to them because they could be player or NPC controlled.
+# However, capital ships DO have controllers attached so
+# this bool here disables them.
+@export var disable_for_testing := false
+
 # The following is so different ships can have different
 # camera positions.
 # Why in the name of the seven new gods and the old gods beyond
@@ -92,7 +100,7 @@ func _ready() -> void:
 			burning_trail = child
 		elif child is CameraGroup:
 			camera_group = child
-		elif child is CharacterBodyControlParent:
+		elif child is CharacterBodyControlParent and !disable_for_testing:
 			controller = child
 			# Pass export var values to controller
 			if impulse_std != -1.0:
@@ -117,6 +125,9 @@ func _ready() -> void:
 			hit_feedback = child
 		elif child is TargetReticles:
 			reticle = child
+		# Remove turrets if we're just testing
+		elif child is TurretGroup and !disable_for_testing:
+			child.queue_free()
 
 
 func _physics_process(delta):

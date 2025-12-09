@@ -14,5 +14,10 @@ func new_npc_fighter(team:String, pos:Vector3, direction:Vector3) -> Ship:
 	Global.add_to_team_group(f, team)
 	# Position and orient the fighter
 	f.global_position = pos
-	f.look_at(pos + direction)
+	# I added 
+	# direction.rotated(Vector3.RIGHT, PI/2.0)
+	# on the next line to avoid the warning:
+	# "look_at target and up vectors are colinear" but I'm concerned
+	# that colinearity can still occur at certain orientations.
+	f.look_at(pos + direction, direction.rotated(Vector3.RIGHT, PI/2.0))
 	return f
