@@ -29,10 +29,10 @@ func _ready() -> void:
 
 func play() -> void:
 	# Randomize z
-	#rotation.z = randf() * 2.0 * PI
+	rotation.z = randf() * 2.0 * PI
 	# Activate all the standard emitters
 	for gpu_particle in emitter_list:
-		print(gpu_particle.name)
+		#print(gpu_particle.name)
 		gpu_particle.set_emitting(true)
 	# Activate one random plane and one random cone
 	planes_group.get_child(randi()%planes_count).set_emitting(true)

@@ -2,7 +2,8 @@ class_name InputManager extends Node
 
 @export var use_mouse_and_keyboard := false
 @export var use_inverted := true
-# Use this curve to scale mouse input to make the ship easier to control
+# Use this curve to scale mouse input to make the ship easier
+# to control
 @export var mouse_control_curve : Curve
 
 var inverted := 1.0
@@ -82,7 +83,7 @@ func update_controller_input() -> void:
 func update_mouse_keyboard_input() -> void:
 	# This script has to be attached to a node in the scene tree
 	# otherwise get_viewport() won't work.
-	current_viewport = get_viewport() # Does the viewport need to be refreshed like this?
+	current_viewport = get_viewport()
 	mouse_pos = current_viewport.get_mouse_position()
 	var half_size : Vector2 = current_viewport.size / 2
 	# Get mouse x and y relative to screen center
