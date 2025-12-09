@@ -278,12 +278,16 @@ func target_camera() -> void:
 # Pre: target is valid
 # Post: Moves free_camera to look at target close up
 func view_target_close() -> void:
-	# Look at target
-	free_camera.look_at(target.global_position, Global.player.transform.basis.y)
+	# To avoid this error:
+	# "Node origin and target are in the same position, look_at() failed."
+	# Make sure to position the camera before calling look_at.
+	
 	# Reposition to at target position, but back up
 	# the camera to get a better view
 	free_camera.global_position = target.global_position + \
 		transform.basis.z*target_close_up_dist
+	# Look at target
+	free_camera.look_at(target.global_position, Global.player.transform.basis.y)
 
 
 # Pre: target is valid

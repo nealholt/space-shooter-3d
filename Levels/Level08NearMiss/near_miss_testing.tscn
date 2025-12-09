@@ -43,6 +43,7 @@ shadow_enabled = true
 environment = SubResource("Environment_jia05")
 
 [node name="Player" parent="." instance=ExtResource("1_ba5yk")]
+fps_cam_position = Vector3(0, 0.6, -2.9)
 
 [node name="FresnelAura" parent="Player/Shield" index="0"]
 mesh = SubResource("SphereMesh_vns14")
