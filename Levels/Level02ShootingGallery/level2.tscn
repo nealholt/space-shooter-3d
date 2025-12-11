@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://cfiwadbmgx3up"]
+[gd_scene load_steps=18 format=3 uid="uid://cfiwadbmgx3up"]
 
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="1_nau7t"]
+[ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_qb1ff"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="3_6nm7s"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="4_s6g67"]
 [ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Scenes/Ships/bomber.tscn" id="5_1d1v4"]
@@ -37,20 +38,24 @@ func orb_died() -> void:
 		Global.main_scene.to_main_menu()
 "
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3w27u"]
-sky_top_color = Color(0.623529, 0.301961, 0.639216, 1)
-sky_horizon_color = Color(0.663725, 0.620588, 0.737255, 1)
-ground_bottom_color = Color(0.0313726, 0.180392, 0.309804, 1)
-ground_horizon_color = Color(0.663725, 0.620588, 0.737255, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1bvmw"]
+panorama = ExtResource("1_qb1ff")
 
 [sub_resource type="Sky" id="Sky_um5eh"]
-sky_material = SubResource("ProceduralSkyMaterial_3w27u")
+sky_material = SubResource("PanoramaSkyMaterial_1bvmw")
 
 [sub_resource type="Environment" id="Environment_285v5"]
 background_mode = 2
+background_energy_multiplier = 2.0
 sky = SubResource("Sky_um5eh")
+ambient_light_source = 1
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 16.0
+reflected_light_source = 1
 tonemap_mode = 2
 glow_enabled = true
+glow_bloom = 0.35
+adjustment_enabled = true
 
 [node name="Node" type="Node3D"]
 script = SubResource("GDScript_ulixo")

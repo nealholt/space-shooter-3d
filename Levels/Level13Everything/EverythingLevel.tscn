@@ -27,15 +27,17 @@ sky_material = SubResource("PanoramaSkyMaterial_er3bs")
 
 [sub_resource type="Environment" id="Environment_x4e1d"]
 background_mode = 2
-background_energy_multiplier = 0.8
+background_energy_multiplier = 2.0
 sky = SubResource("Sky_8we3c")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.1
+reflected_light_source = 1
+tonemap_mode = 2
 glow_enabled = true
-glow_bloom = 0.2
+glow_bloom = 0.35
 glow_blend_mode = 1
 adjustment_enabled = true
-adjustment_brightness = 1.4
-adjustment_contrast = 1.1
-adjustment_saturation = 1.3
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_lqyyp")

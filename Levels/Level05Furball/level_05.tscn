@@ -16,9 +16,12 @@ sky_material = SubResource("PanoramaSkyMaterial_hrnrq")
 
 [sub_resource type="Environment" id="Environment_ehjee"]
 background_mode = 2
+background_energy_multiplier = 2.0
 sky = SubResource("Sky_txwv0")
+ambient_light_source = 1
+reflected_light_source = 1
 tonemap_mode = 2
-glow_enabled = true
+tonemap_white = 0.5
 
 [node name="Level05" type="Node3D"]
 script = ExtResource("1_02qsi")
