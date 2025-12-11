@@ -221,6 +221,7 @@ disable_for_testing = true
 
 [node name="CapitalShipFrigate" parent="RedTeam" instance=ExtResource("11_c40xb")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -83.53566, 0, -490.16235)
+disable_for_testing = true
 
 [node name="BlueTeam" type="Node3D" parent="."]
 script = ExtResource("1_nau7t")
