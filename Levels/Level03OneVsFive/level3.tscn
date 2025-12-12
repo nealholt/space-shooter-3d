@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://bobitrhkbf3c3"]
+
+[ext_resource type="Script" uid="uid://d1homfq0vnx4y" path="res://Levels/Level03OneVsFive/level3.gd" id="1_6hmdn"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="2_6b8c8"]
+[ext_resource type="Texture2D" uid="uid://ba1gb0dgunagh" path="res://Assets/Skyboxes/ringed_gas_giant_planet.png" id="2_fykje"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_i6ru0"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="5_o18a7"]
+[ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="6_csw5y"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_trw21"]
+panorama = ExtResource("2_fykje")
+
+[sub_resource type="Sky" id="Sky_434m5"]
+sky_material = SubResource("PanoramaSkyMaterial_trw21")
+
+[sub_resource type="Environment" id="Environment_eupmo"]
+background_mode = 2
+background_energy_multiplier = 1.5
+sky = SubResource("Sky_434m5")
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 1.2
+glow_bloom = 0.2
+glow_hdr_threshold = 0.5
+glow_hdr_scale = 0.5
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_6hmdn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 250, 0, 0)
+shadow_enabled = true
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_eupmo")
+
+[node name="RedTeam" type="Node3D" parent="."]
+script = ExtResource("2_i6ru0")
+
+[node name="FighterNPC1" parent="RedTeam" instance=ExtResource("2_6b8c8")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -30, -3.050682, -200)
+
+[node name="NPCController" parent="RedTeam/FighterNPC1" instance=ExtResource("5_o18a7")]
+
+[node name="FighterNPC2" parent="RedTeam" instance=ExtResource("2_6b8c8")]
+transform = Transform3D(-1, 4.3711402e-08, -8.742278e-08, 4.37114e-08, 1, 4.3711353e-08, 8.742278e-08, 4.371135e-08, -1, -15, 7.342024, -200)
+
+[node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC2" instance=ExtResource("5_o18a7")]
+
+[node name="FighterNPC3" parent="RedTeam" instance=ExtResource("2_6b8c8")]
+transform = Transform3D(-1, 4.3711402e-08, -8.742278e-08, 4.37114e-08, 1, 4.3711353e-08, 8.742278e-08, 4.371135e-08, -1, 0, 3.0645924, -200)
+
+[node name="NPCController" parent="RedTeam/FighterNPC3" instance=ExtResource("5_o18a7")]
+
+[node name="FighterNPC4" parent="RedTeam" instance=ExtResource("2_6b8c8")]
+transform = Transform3D(-1, 4.3711402e-08, -8.742278e-08, 4.37114e-08, 1, 4.3711353e-08, 8.742278e-08, 4.371135e-08, -1, 15, -3.866909, -200)
+
+[node name="NPCController" parent="RedTeam/FighterNPC4" instance=ExtResource("5_o18a7")]
+
+[node name="FighterNPC5" parent="RedTeam" instance=ExtResource("2_6b8c8")]
+transform = Transform3D(-1, 4.3711402e-08, -8.742278e-08, 4.37114e-08, 1, 4.3711353e-08, 8.742278e-08, 4.371135e-08, -1, 30, 9.4671135, -200)
+
+[node name="NPCController" parent="RedTeam/FighterNPC5" instance=ExtResource("5_o18a7")]
+
+[node name="BlueTeam" type="Node3D" parent="."]
+script = ExtResource("2_i6ru0")
+team = "blue team"
+
+[node name="PlayerFighter" parent="BlueTeam" instance=ExtResource("6_csw5y")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 18.8762, 0, 47.6905)

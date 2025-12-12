@@ -171,6 +171,10 @@ func _on_health_component_died() -> void:
 	# which should be some sort of chaotic tumble
 	if controller:
 		controller.enter_death_animation()
+	# Delete targeting reticle
+	if reticle:
+		reticle.queue_free()
+		reticle = null
 	# Create and start a timer, if you haven't
 	# already done so.
 	# Go into death animation for this duration.

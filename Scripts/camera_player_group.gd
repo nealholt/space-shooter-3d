@@ -142,7 +142,20 @@ func _physics_process(delta: float) -> void:
 		turret_motion.rotate_and_elevate(body, head, delta, temp_targ_pos)
 	# Show target lead indicator and center crosshair
 	# if in first person view
-	if state == CameraState.FIRSTPERSON and Global.player and Global.player.controller and is_instance_valid(Global.player.controller.target) and Global.player.weapon_handler and "velocity" in Global.player.controller.target:
+	# state == CameraState.FIRSTPERSON
+	# and the player exists
+	# Global.player
+	# and the player has a controller
+	# Global.player.controller
+	# and the target is valid
+	# is_instance_valid(Global.player.controller.target)
+	# and there is a current weapon
+	# Global.player.weapon_handler
+	# and the target has a velocity
+	# "velocity" in Global.player.controller.target
+	# and the target has not yet instantiated a death_animation_timer
+	# !Global.player.controller.target.death_animation_timer
+	if state == CameraState.FIRSTPERSON and Global.player and Global.player.controller and is_instance_valid(Global.player.controller.target) and Global.player.weapon_handler and "velocity" in Global.player.controller.target and !Global.player.controller.target.death_animation_timer:
 		var lead_pos:Vector3 = Global.get_intercept(
 			Global.player.global_position,
 			Global.player.weapon_handler.get_bullet_speed(),

@@ -1,25 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://conb7kdfab3ks"]
+[gd_scene load_steps=9 format=3 uid="uid://conb7kdfab3ks"]
 
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="1_5kq0i"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="2_28aj3"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_ws3ut"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="4_cq55v"]
 [ext_resource type="PackedScene" uid="uid://ls7l4tvcl8tb" path="res://Assets/Guns/gun_model_basic.tscn" id="5_01wq6"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="5_6av2j"]
 [ext_resource type="PackedScene" uid="uid://do50y2jdho5iq" path="res://Scenes/vfx/MuzzleFlash/muzzle_flash_green_monster.tscn" id="6_0a0ca"]
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/engine_audio_visuals.tscn" id="6_3ywou"]
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="7_cla1y"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_se4th"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("2_ws3ut")
-shader_parameter/FresnelPower = 2.0
-shader_parameter/EmissionStrength = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_24wxq"]
-resource_local_to_scene = true
-material = SubResource("ShaderMaterial_se4th")
 
 [node name="Fighter" instance=ExtResource("1_5kq0i")]
 fps_cam_position = Vector3(2.6830346e-08, 0.61380655, -1.8305256)
@@ -39,8 +27,8 @@ max_health = 100.0
 [node name="MissileLockGroup" parent="." index="8"]
 npc_missile_lock = false
 
-[node name="FresnelAura" parent="Shield" index="0"]
-mesh = SubResource("SphereMesh_24wxq")
+[node name="MissileLauncher" parent="MissileLockGroup" index="7"]
+damage = 20.0
 
 [node name="Gun" parent="WeaponHandler" index="0" node_paths=PackedStringArray("muzzle_flash")]
 transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 3.7456072e-15, 8.568951e-08, -4.960347)
@@ -62,10 +50,8 @@ transform = Transform3D(1, 8.351873e-23, 0, 0, -1, 8.742278e-08, 0, -8.742278e-0
 [node name="MuzzleFlashGreenMonster" parent="WeaponHandler/Gun" index="4" instance=ExtResource("6_0a0ca")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 2)
 
-[node name="CameraGroup" parent="." index="12" instance=ExtResource("5_6av2j")]
+[node name="CameraGroup" parent="." index="11" instance=ExtResource("5_6av2j")]
 
-[node name="EngineAudioVisuals" parent="." index="13" instance=ExtResource("6_3ywou")]
+[node name="EngineAudioVisuals" parent="." index="12" instance=ExtResource("6_3ywou")]
 
-[node name="PlayerMovementV4" parent="." index="14" instance=ExtResource("7_cla1y")]
-
-[editable path="Shield"]
+[node name="PlayerMovementV4" parent="." index="13" instance=ExtResource("7_cla1y")]
