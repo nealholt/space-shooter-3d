@@ -1,8 +1,9 @@
-extends Node3D
-class_name Shield
+class_name Shield extends Node3D
+
+const SHIELD_SCENE:PackedScene = preload("res://Scenes/shield.tscn")
 
 # NOTE: Under the FresnelAura mesh, under Resource,
-# I set "Local to Scene" to "On"
+# Set "Local to Scene" to "On"
 # Otherwise, damaging one shield causes ALL
 # shields to flicker.
 
@@ -20,6 +21,14 @@ var fresnel_emission_current := 1.0
 var fresnel_emission_default := 1.0
 var fresnel_emission_when_struck := 100.0
 var fresnel_emission_lerp_speed := 10.0
+
+
+static func new_shield(my_parent:Node3D, scal:float) -> Shield:
+	var s := SHIELD_SCENE.instantiate()
+	# Order matters for these next three lines of code
+	my_parent.add_child(s)
+	s.scale = Vector3(scal,scal,scal)
+	return s
 
 
 # Called when the node enters the scene tree for the first time.
@@ -56,6 +65,7 @@ func _on_health_component_died() -> void:
 	set_deferred("$HitBoxComponent.monitoring", false)
 	set_deferred("$HitBoxComponent.monitorable", false)
 	$FresnelAura.visible = false
+	set_physics_process(false)
 	# Start the fireworks!
 	VfxManager.play(explosion, global_position)
 	# Delete self at the end of the frame

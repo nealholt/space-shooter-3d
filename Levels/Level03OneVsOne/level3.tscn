@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://bobitrhkbf3c3"]
 
-[ext_resource type="Script" uid="uid://d1homfq0vnx4y" path="res://Levels/Level031v1/level3.gd" id="1_6hmdn"]
+[ext_resource type="Script" uid="uid://d1homfq0vnx4y" path="res://Levels/Level03OneVsOne/level3.gd" id="1_6hmdn"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="2_6b8c8"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_i6ru0"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="4_w1ktu"]

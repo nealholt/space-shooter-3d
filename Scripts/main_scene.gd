@@ -112,7 +112,7 @@ func _on_load_2_pressed() -> void:
 	load_level("Level02ShootingGallery/level2")
 
 func _on_load_3_pressed() -> void:
-	load_level("Level031v1/level3")
+	load_level("Level03OneVsOne/level3")
 
 func _on_load_4_pressed() -> void:
 	load_level("Level04NPCTargeting/level04")

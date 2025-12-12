@@ -5,8 +5,12 @@
 [node name="Hangar" type="Node3D"]
 script = ExtResource("1_nbb7t")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+[node name="TimerMacro" type="Timer" parent="."]
+wait_time = 30.0
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="TimerMicro" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="TimerMacro" to="." method="_on_timermacro_timeout"]
+[connection signal="timeout" from="TimerMicro" to="." method="_on_timermicro_timeout"]

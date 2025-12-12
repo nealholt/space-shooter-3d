@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://k6inhwfk2gp"]
+[gd_scene load_steps=23 format=3 uid="uid://k6inhwfk2gp"]
 
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_lqyyp"]
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_wr6oo"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="3_eggcn"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="5_0jpk3"]
 [ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="6_xbcqs"]
+[ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="7_ka707"]
 [ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Scenes/Ships/bomber.tscn" id="7_m10fo"]
 [ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Scenes/Ships/destroyer.tscn" id="8_5shl4"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="8_isq32"]
@@ -67,6 +68,9 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -133.42, 46.6032, 7)
 
 [node name="Fighter" parent="BlueTeam" instance=ExtResource("6_xbcqs")]
 transform = Transform3D(-0.274882, -3.00121e-08, 0.961478, 4.37114e-08, 1, 4.37114e-08, -0.961478, 5.4043e-08, -0.274882, 219.253, 0, 0)
+
+[node name="Shield" parent="BlueTeam/Fighter" instance=ExtResource("7_ka707")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
 [node name="RedTeam" type="Node3D" parent="."]
 script = ExtResource("5_0jpk3")

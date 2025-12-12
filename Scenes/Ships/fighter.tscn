@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=15 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_dn8ab"]
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="3_qm2p0"]
@@ -13,22 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/fighter_chassis_ring.tscn" id="19_x2ba7"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="19_xjc2u"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="20_a8xhu"]
-[ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="23_fxr37"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="24_ovt4a"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ydoww"]
 radius = 2.3
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6dy1g"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("24_ovt4a")
-shader_parameter/FresnelPower = 2.0
-shader_parameter/EmissionStrength = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_6a830"]
-resource_local_to_scene = true
-material = SubResource("ShaderMaterial_6dy1g")
 
 [node name="Fighter" type="CharacterBody3D" groups=["damageable", "team member"]]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
@@ -78,12 +65,6 @@ bullet_speed = 150.0
 bullet_timeout = 5.0
 fire_rate = 0.033
 
-[node name="Shield" parent="." instance=ExtResource("23_fxr37")]
-transform = Transform3D(20, 1.67038e-21, 3.38813e-21, 0, 20, 0, 3.38813e-21, 0, 20, 0, 0, 0)
-
-[node name="FresnelAura" parent="Shield" index="0"]
-mesh = SubResource("SphereMesh_6a830")
-
 [node name="TargetReticles" parent="." instance=ExtResource("15_kfjug")]
 
 [node name="WeaponHandler" parent="." instance=ExtResource("4_dhpb0")]
@@ -98,5 +79,3 @@ spread_deg = 2.0
 fire_sound = 0
 reload_sound = 2
 magazine_size = 20
-
-[editable path="Shield"]
