@@ -56,3 +56,7 @@ func get_percent_health() -> float:
 
 func _on_weakpoint_destroyed() -> void:
 	health -= weakpoint_damage
+
+
+func is_dead() -> bool:
+	return health <= 0

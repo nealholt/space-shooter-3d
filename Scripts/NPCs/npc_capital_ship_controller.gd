@@ -93,9 +93,3 @@ func shoot(shooter, delta:float) -> void:
 # Override parent class function
 func enter_death_animation() -> void:
 	pass
-
-# Override parent class function
-# Died implies that the death animation has concluded.
-func died(who_died) -> void:
-	# NPC died, so queue free it at the end of the frame
-	Callable(who_died.queue_free).call_deferred()

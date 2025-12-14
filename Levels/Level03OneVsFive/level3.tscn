@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bobitrhkbf3c3"]
+[gd_scene load_steps=11 format=3 uid="uid://bobitrhkbf3c3"]
 
-[ext_resource type="Script" uid="uid://d1homfq0vnx4y" path="res://Levels/Level03OneVsFive/level3.gd" id="1_6hmdn"]
+[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_trw21"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="2_6b8c8"]
 [ext_resource type="Texture2D" uid="uid://ba1gb0dgunagh" path="res://Assets/Skyboxes/ringed_gas_giant_planet.png" id="2_fykje"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_i6ru0"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="5_o18a7"]
 [ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="6_csw5y"]
+[ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="7_trw21"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_trw21"]
 panorama = ExtResource("2_fykje")
@@ -27,7 +28,7 @@ glow_hdr_threshold = 0.5
 glow_hdr_scale = 0.5
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_6hmdn")
+script = ExtResource("1_trw21")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 250, 0, 0)
@@ -71,3 +72,6 @@ team = "blue team"
 
 [node name="PlayerFighter" parent="BlueTeam" instance=ExtResource("6_csw5y")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 18.8762, 0, 47.6905)
+
+[node name="VictoryLayer" parent="." instance=ExtResource("7_trw21")]
+visible = false

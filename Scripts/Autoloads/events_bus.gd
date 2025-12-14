@@ -7,3 +7,7 @@ extends Node
 # explosion scene can save the baseline world environment values.
 @warning_ignore("unused_signal") # Added so the debugger stops nagging me.
 signal environment_set()
+# Emitted when any ship dies. Currently used for
+# victory_layer / end screen.
+@warning_ignore("unused_signal") # Added so the debugger stops nagging me.
+signal ship_died(s:Ship)

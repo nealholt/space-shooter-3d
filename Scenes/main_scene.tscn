@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://coy483f2kf274" path="res://Scenes/input_manager.tscn" id="2_6l7je"]
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="2_x6ack"]
 [ext_resource type="Theme" uid="uid://b1uy61qicurbh" path="res://Assets/Themes/button_theme.tres" id="3_iacmt"]
-[ext_resource type="Script" uid="uid://csj0vmdw4ljl8" path="res://Scripts/pause_script.gd" id="3_jv6wh"]
+[ext_resource type="Script" uid="uid://csj0vmdw4ljl8" path="res://Scripts/UI/pause_script.gd" id="3_jv6wh"]
 [ext_resource type="Theme" uid="uid://cgxfk4t3qm477" path="res://Assets/Themes/label_theme.tres" id="4_6ev3c"]
 
 [node name="MainScene" type="Node"]
@@ -304,7 +304,7 @@ text = "Start / Menu"
 [node name="Quit" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "Quit"
+text = "Main Menu / Quit"
 
 [node name="Label14" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer"]
 layout_mode = 2
@@ -470,7 +470,7 @@ text = "Control"
 [node name="Pause" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "Main Menu"
+text = "Pause"
 
 [node name="Label13" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
@@ -480,7 +480,7 @@ text = "p"
 [node name="Quit" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "Quit"
+text = "Main Menu / Quit"
 
 [node name="Label14" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer"]
 layout_mode = 2

@@ -10,6 +10,7 @@ class_name MainScene
 # Currently loaded level
 var level_instance: Node
 var fullscreen:=true
+var level_string:String ## String used to load current level
 
 
 func _ready() -> void:
@@ -69,6 +70,10 @@ func to_main_menu() -> void:
 	$Menu/HBoxContainer/SceneOptions/Load1Balloons.grab_focus()
 
 
+func retry_current_level() -> void:
+	load_level(level_string)
+
+
 func set_hud_label(text:String) -> void:
 	$HUD/Demo.text = text
 
@@ -84,6 +89,7 @@ func unload_level() -> void:
 
 func load_level(level_name:String) -> void:
 	unload_level()
+	level_string = level_name # Used for retrying current level
 	var level_path := "res://Levels/%s.tscn" % level_name
 	var level_resource := load(level_path)
 	if(level_resource):

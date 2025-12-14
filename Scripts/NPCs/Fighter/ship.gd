@@ -189,17 +189,12 @@ func _on_health_component_died() -> void:
 
 func _on_death_timer_timeout() -> void:
 	destroyed.emit()
-	# At the end of the timer, add an explosion to
-	# main_3d and properly queue free this ship
+	# At the end of the timer, add an explosion
 	VfxManager.play_with_transform(finalExplosion, global_position, transform)
-	# The controller will handle cleaning up.
-	# NPCs will be queue freed. Players will be
-	# sent back to the main menu.
-	if controller:
-		controller.died(self)
-	else:
-		# Just in case there is no controller
-		Callable(queue_free).call_deferred()
+	# Emit a signal that a ship died
+	EventsBus.ship_died.emit(self)
+	# Queue free this ship
+	Callable(queue_free).call_deferred()
 
 
 # This function is called by the ship's controller,

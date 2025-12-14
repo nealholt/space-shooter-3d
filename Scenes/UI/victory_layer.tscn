@@ -1,0 +1,137 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb00fex7moxp5"]
+
+[ext_resource type="Script" uid="uid://btljtjs0t0fkx" path="res://Scripts/ui/victory_layer.gd" id="1_mrbas"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_w75yu"]
+font_size = 96
+
+[node name="VictoryLayer" type="CanvasLayer"]
+script = ExtResource("1_mrbas")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.588235)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "VICTORY"
+label_settings = SubResource("LabelSettings_w75yu")
+horizontal_alignment = 1
+
+[node name="StarContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Star1" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/StarContainer"]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/StarContainer"]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/StarContainer"]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+expand_mode = 2
+stretch_mode = 5
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 10
+columns = 2
+
+[node name="Star1Outcome" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.355314, 0.355314, 0.355314, 1)
+theme_override_font_sizes/font_size = 24
+text = "FAILED"
+horizontal_alignment = 1
+
+[node name="Star1Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.355314, 0.355314, 0.355314, 1)
+theme_override_font_sizes/font_size = 24
+text = "Under Time Limit"
+horizontal_alignment = 1
+
+[node name="Star2Outcome" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.355314, 0.355314, 0.355314, 1)
+theme_override_font_sizes/font_size = 24
+text = "FAILED"
+horizontal_alignment = 1
+
+[node name="Star2Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.355314, 0.355314, 0.355314, 1)
+theme_override_font_sizes/font_size = 24
+text = "All Upgrades"
+horizontal_alignment = 1
+
+[node name="Star3Outcome" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.355314, 0.355314, 0.355314, 1)
+theme_override_font_sizes/font_size = 24
+text = "FAILED"
+horizontal_alignment = 1
+
+[node name="Star3Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.355314, 0.355314, 0.355314, 1)
+theme_override_font_sizes/font_size = 24
+text = "Go Beyond Victory"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RetryButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Retry"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

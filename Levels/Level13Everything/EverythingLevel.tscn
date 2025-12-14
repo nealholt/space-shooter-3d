@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://k6inhwfk2gp"]
+[gd_scene load_steps=24 format=3 uid="uid://k6inhwfk2gp"]
 
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_lqyyp"]
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_wr6oo"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://h6qoukgaivr" path="res://Scenes/Asteroids/asteroid_gray_green.tscn" id="16_rts0o"]
 [ext_resource type="PackedScene" uid="uid://dxb411gkh7mx6" path="res://Scenes/Asteroids/asteroid_green_purple.tscn" id="17_ka707"]
 [ext_resource type="PackedScene" uid="uid://cbgts8m0eeix7" path="res://Scenes/Asteroids/asteroid_purple.tscn" id="18_hxa7u"]
+[ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="20_hxa7u"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_er3bs"]
 panorama = ExtResource("1_wr6oo")
@@ -123,3 +124,6 @@ transform = Transform3D(4.41094, 0, 54.8228, 0, 55, 0, -54.8228, 0, 4.41094, -37
 
 [node name="AsteroidPurple2" parent="AsteroidGroup" instance=ExtResource("18_hxa7u")]
 transform = Transform3D(32.1127, 23.6395, -3.15418, 0, -5.29026, -39.6486, -23.849, 31.8306, -4.24711, -46.194, 181.993, 192.322)
+
+[node name="VictoryLayer" parent="." instance=ExtResource("20_hxa7u")]
+visible = false
