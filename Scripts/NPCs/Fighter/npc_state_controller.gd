@@ -43,6 +43,11 @@ var shooting_angle:float
 @export var too_close:float = 30.0 ## Distance at which to stop attack pass and peel off
 @export var keep_target_above:bool = false ## Default is to orient so target is ahead, but some capital ships want their target above
 
+# Setting the following to true will cause the fighter label to
+# show the current state.
+var DEBUG : bool = false #TESTING
+var debug_label:Label3D
+
 
 func _ready() -> void:
 	shooting_angle = deg_to_rad(shooting_angle_degrees)
@@ -63,6 +68,14 @@ func _ready() -> void:
 	$States/Flee.distance_limit_sqd = too_far * too_far
 	$States/Orbit.ideal_distance_sqd = (too_far * too_far + too_close * too_close) / 2
 	$States/Orbit.keep_target_above = keep_target_above
+	#TESTING
+	if DEBUG:
+		var p = get_parent()
+		for c in p.get_children():
+			if c is Label3D:
+				debug_label = c
+				c.visible = true
+				break
 
 
 func move_and_turn(mover, delta:float) -> void:
@@ -130,6 +143,10 @@ func on_child_transition(state, new_state_name):
 	new_state.Enter()
 	
 	current_state = new_state
+	
+	#TESTING
+	if DEBUG and debug_label:
+		debug_label.text = new_state_name.to_lower()
 
 # Override parent class function
 func took_damage() -> void:

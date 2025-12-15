@@ -33,12 +33,13 @@ func Enter() -> void:
 # physics update frame.
 func Physics_Update(delta:float) -> void:
 	elapsed_time += delta
-	if elapsed_time > time_limit:
-		# Transition out of this state after a limited number of waves.
-		if wave_count == wave_limit:
-			Transitioned.emit(self,"seek")
-		else:
-			wave_count += 1
-			# Pitch the other direction and reset timer
-			motion.goal_pitch = motion.goal_pitch*-1.0
-			time_limit = random.randf_range(minimum_wave_duration,maximum_wave_duration)
+	if elapsed_time < time_limit:
+		return
+	# Transition out of this state after a limited number of waves.
+	if wave_count >= wave_limit:
+		Transitioned.emit(self,"seek")
+	else:
+		wave_count += 1
+		# Pitch the other direction and reset timer
+		motion.goal_pitch = motion.goal_pitch*-1.0
+		time_limit = random.randf_range(minimum_wave_duration,maximum_wave_duration)
