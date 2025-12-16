@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://yaq7cc3oqfp2"]
+[gd_scene load_steps=8 format=3 uid="uid://yaq7cc3oqfp2"]
 
 [ext_resource type="Script" uid="uid://186tcf0aadua" path="res://Scripts/Turret/Turret.gd" id="1_cbt5p"]
 [ext_resource type="PackedScene" uid="uid://deuokls15ey84" path="res://Assets/turret_model.tscn" id="2_xuhpe"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="8_qikae"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="9_b5qkf"]
 [ext_resource type="PackedScene" uid="uid://ymilutrw63dv" path="res://Scenes/turret_motion_component.tscn" id="9_x6y6e"]
-[ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="10_4os1p"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g6fsi"]
 radius = 1.0
@@ -36,9 +35,6 @@ health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
 shape = SubResource("SphereShape3D_g6fsi")
-
-[node name="HitFeedback" parent="HitBoxComponent" instance=ExtResource("10_4os1p")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="TargetSelector" type="Node" parent="."]
 script = ExtResource("6_cy7vo")

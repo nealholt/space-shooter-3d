@@ -1,10 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://dp3w08p8gkd3p"]
+[gd_scene load_steps=22 format=3 uid="uid://dp3w08p8gkd3p"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_dp23i"]
 [ext_resource type="PackedScene" uid="uid://bh2v67l31a2lg" path="res://Assets/CapitalShips/frigate_model.tscn" id="1_ukj0d"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="2_ffelx"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_ac6d0"]
-[ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="4_320jg"]
 [ext_resource type="Script" uid="uid://nmvuwja71fox" path="res://Scripts/weakpoint_opener.gd" id="7_3qdq6"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="7_bof2b"]
 [ext_resource type="PackedScene" uid="uid://dk6y2tyoo25sn" path="res://Scenes/weakpoint.tscn" id="8_3qdq6"]
@@ -161,8 +160,6 @@ health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
 shape = SubResource("SphereShape3D_mdcux")
-
-[node name="HitFeedback" parent="HitBoxComponent" instance=ExtResource("4_320jg")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_ac6d0")]
 

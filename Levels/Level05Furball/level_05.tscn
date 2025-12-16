@@ -55,7 +55,7 @@ transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.3
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
 [node name="FighterNPC3" parent="RedTeam" instance=ExtResource("2_wndl6")]
-transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 11.6173, 4.56897, 32.26)
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 31.244192, 4.56897, 58.383106)
 
 [node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC3" instance=ExtResource("4_owcqu")]
 
@@ -63,7 +63,7 @@ transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.3
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
 [node name="FighterNPC4" parent="RedTeam" instance=ExtResource("2_wndl6")]
-transform = Transform3D(0.00529216, 0.812389, 0.583092, -0.00737289, 0.583116, -0.812356, -0.999959, 4.33129e-08, 0.00907559, 8.72978, 0, 9.72695)
+transform = Transform3D(0.00529216, 0.812389, 0.583092, -0.00737289, 0.583116, -0.812356, -0.999959, 4.33129e-08, 0.00907559, 8.72978, -236.84882, 9.72695)
 
 [node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC4" instance=ExtResource("4_owcqu")]
 
@@ -79,6 +79,7 @@ transform = Transform3D(-0.826904, 1.15643e-08, 0.562343, 0.49261, 0.482319, 0.7
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
 [node name="Corvette" parent="RedTeam" instance=ExtResource("3_8iyj5")]
+transform = Transform3D(0.16862698, 0, 0.9856799, 0, 1, 0, -0.9856799, 0, 0.16862698, 24.458979, 13.902914, 0)
 
 [node name="NPCFighterController" parent="RedTeam/Corvette" instance=ExtResource("4_owcqu")]
 
@@ -127,6 +128,7 @@ transform = Transform3D(-0.983096, 3.49692e-08, 0.183094, 4.37114e-08, 1, 4.3711
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
 [node name="Corvette" parent="BlueTeam" instance=ExtResource("3_8iyj5")]
+transform = Transform3D(0.9999995, -0.0009773843, 0, 0.0009773843, 0.9999995, 0, 0, 0, 1, 0, 0, -61.66853)
 
 [node name="NPCFighterController" parent="BlueTeam/Corvette" instance=ExtResource("4_owcqu")]
 

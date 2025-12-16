@@ -6,7 +6,7 @@ class_name HitBoxComponent
 # Warning: All the code here is duplicated in ship.gd.
 # Anything that changes here, should also change there.
 # Honestly, I'm not using this as much, just for 
-# shoot-down-able missiles and for shields (and orbs).
+# shoot-down-able missiles, shields, turrets, and orbs.
 
 # Since ships are CharacterBody3Ds and those require
 # collision shapes to handle phyics of collisions,

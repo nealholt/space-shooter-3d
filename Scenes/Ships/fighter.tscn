@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=14 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_dn8ab"]
-[ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="3_qm2p0"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="4_57m73"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="4_dhpb0"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="5_1xytm"]
@@ -49,9 +48,6 @@ fixed_size = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_1xytm")]
 max_health = 20
-
-[node name="HitFeedback" parent="." instance=ExtResource("3_qm2p0")]
-transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="MissileLockGroup" parent="." instance=ExtResource("17_563f5")]
 npc_missile_lock = true

@@ -67,7 +67,7 @@ var death_animation_timer:Timer
 var got_hit_audio:AudioStreamPlayer
 # I'll need some other system if I want different
 # audio cues for taking damage or whatever.
-var hit_feedback:HitFeedback
+#var hit_feedback:HitFeedback
 # Anyone can damage this hitbox except for
 # this ship. Currently this is used to prevent
 # npcs from shooting down their own missiles.
@@ -121,8 +121,8 @@ func _ready() -> void:
 		# The following are all from hit_box_component
 		elif child is AudioStreamPlayer:
 			got_hit_audio = child
-		elif child is HitFeedback:
-			hit_feedback = child
+		#elif child is HitFeedback:
+			#hit_feedback = child
 		elif child is TargetReticles:
 			reticle = child
 		# Remove turrets if we're just testing
@@ -237,8 +237,8 @@ func damage(amount:float, damager=null):
 		return
 	if health_component:
 		health_component.health -= amount
-	if hit_feedback:
-		hit_feedback.hit()
+	#if hit_feedback:
+		#hit_feedback.hit()
 
 
 func add_damage_exception(s:Ship) -> void:
