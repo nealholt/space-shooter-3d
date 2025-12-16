@@ -189,13 +189,15 @@ func aim_self_at_cursor() -> void:
 	velocity = -global_transform.basis.z * speed
 
 
-func damage_and_die(body, collision_point=null):
+func damage_and_die(body, collision_point=null) -> void:
 	#print()
 	#print('damage_and_die called')
 	#print(passes_through(body))
 	#print(body.is_in_group("damageable"))
 	if passes_through(body):
 		return
+	# Play feedback for player if relevant
+	Global.player_feedback(body, data)
 	# Damage what was hit
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
 	if body.is_in_group("damageable"):

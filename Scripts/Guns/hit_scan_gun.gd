@@ -1,5 +1,4 @@
-extends Gun
-class_name HitScanGun
+class_name HitScanGun extends Gun
 
 # The following code initially based on the hitscan
 # weapon from the FPS tutorial here:
@@ -33,6 +32,8 @@ func shoot_actual() -> void:
 			collider.damage(damage, data.shooter)
 		# Spawn sparks on location of hit
 		VfxManager.play(VisualEffectSetting.VISUAL_EFFECT_TYPE.MUZZLE_FLASH, ray.get_collision_point())
+		# Play feedback for player if relevant
+		Global.player_feedback(collider, data)
 	position_laser()
 
 

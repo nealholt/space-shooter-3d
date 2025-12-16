@@ -5,4 +5,4 @@
 
 [node name="HitScanGun" instance=ExtResource("1_av3ot")]
 script = ExtResource("1_ksxwb")
-sparks = null
+sparks = 0

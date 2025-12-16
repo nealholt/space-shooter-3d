@@ -381,3 +381,22 @@ func set_reticle(camera:Camera3D, reticle:TextureRect, position:Vector3) -> bool
 	else:
 		reticle.hide()
 		return false
+
+
+func player_feedback(collider, shoot_data) -> void:
+	if !shoot_data or !shoot_data.shooter or shoot_data.shooter != player:
+		return
+	if collider.is_in_group("damageable"):
+		var parent = collider.get_parent()
+		if parent is Weakpoint:
+			print('damage to weakpoint') # strong_hit.wav
+			AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.HIT_ON_WEAKPOINT)
+		elif collider.is_in_group("shield"):
+			print('damage to shield') # shield_hit.wav
+			AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.HIT_ON_SHIELD)
+		else:
+			print('damage') # standard_hit.wav
+			AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.HIT_STANDARD)
+	else:
+		print('hit but no damage') # bad_hit.wav
+		AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.HIT_NO_DAMAGE)

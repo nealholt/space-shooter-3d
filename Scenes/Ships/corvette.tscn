@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=32 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
@@ -8,7 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Assets/SoundEffects/lowFrequency_explosion_001.ogg" id="8_klb2b"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="9_1xly7"]
 [ext_resource type="AudioStream" uid="uid://cvrvs2a12nuqr" path="res://Assets/SoundEffects/whoosh_medium_001.ogg" id="9_ktweb"]
-[ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Scenes/hit_feedback.tscn" id="9_sewpe"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="10_shexg"]
 [ext_resource type="PackedScene" uid="uid://djj4vi4d1fq2m" path="res://Scenes/Projectiles/auto_seeking_missile.tscn" id="11_a8ss5"]
 [ext_resource type="PackedScene" uid="uid://drm4t5i6exnhc" path="res://Assets/Guns/gatling_gun.tscn" id="11_kbwk7"]
@@ -125,8 +124,6 @@ max_health = 20
 [node name="GotHitAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_klb2b")
 
-[node name="HitFeedback" parent="." instance=ExtResource("9_sewpe")]
-
 [node name="Sounds" type="Node3D" parent="."]
 
 [node name="NearMissAudio" type="AudioStreamPlayer3D" parent="Sounds"]
@@ -163,7 +160,6 @@ spread_deg = 3.0
 fire_sound = 2
 reload_sound = 1
 gun_animation = NodePath("GunModel/AnimationPlayer")
-muzzle_flash = 6
 
 [node name="GunModel" parent="WeaponHandler/GatlingGun" instance=ExtResource("11_kbwk7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.132, 1.3)
@@ -177,7 +173,6 @@ fire_rate = 3.0
 
 [node name="HitScanGun" parent="WeaponHandler" node_paths=PackedStringArray("laser_mesh", "laser_mesh_pivot", "gun_animation") instance=ExtResource("13_428na")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14718, 0, -2.39168)
-sparks = 0
 laser_mesh = NodePath("Node/Head/LaserMesh")
 laser_mesh_pivot = NodePath("Node/Head")
 fire_rate = 5.0

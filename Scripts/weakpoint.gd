@@ -1,4 +1,4 @@
-extends Node3D
+class_name Weakpoint extends Node3D
 
 signal destroyed
 

@@ -2,11 +2,12 @@ extends ProjectileArea
 
 @export var damaging_explosion:PackedScene
 
-
 # Override
 func damage_and_die(body, _collision_point=null):
 	if passes_through(body):
 		return
+	# Play feedback for player if relevant
+	Global.player_feedback(body, data)
 	# Add an explosion to main_3d and properly
 	# queue free this ship
 	var explosion = damaging_explosion.instantiate()

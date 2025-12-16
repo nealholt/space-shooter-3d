@@ -1,16 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://6aihaxnn6c6p"]
+[gd_scene load_steps=3 format=3 uid="uid://6aihaxnn6c6p"]
 
 [ext_resource type="PackedScene" uid="uid://caody2m8xh0b6" path="res://Scenes/Projectiles/projectile_ray.tscn" id="1_8o1e8"]
 [ext_resource type="PackedScene" uid="uid://cuu8wfwoj2nbe" path="res://Assets/Projectiles/Bullets/green_laser_bolt.tscn" id="2_3fccp"]
-[ext_resource type="PackedScene" uid="uid://domnb1m51i30x" path="res://Assets/Particles/ship_strike.tscn" id="2_rfdoh"]
-[ext_resource type="PackedScene" uid="uid://loiql7x3ow62" path="res://Assets/Particles/shield_strike.tscn" id="3_p2h8n"]
-[ext_resource type="PackedScene" uid="uid://dgfgr1a12mn0l" path="res://Assets/Decals/bullet_hole.tscn" id="4_ywcms"]
 
 [node name="ProjectileRay" instance=ExtResource("1_8o1e8")]
 does_ricochet = false
-sparks = ExtResource("2_rfdoh")
-shieldSparks = ExtResource("3_p2h8n")
-bullet_hole_decal = ExtResource("4_ywcms")
+sparks = 0
+shieldSparks = 0
 
 [node name="Timer" parent="." index="0"]
 wait_time = 1.0

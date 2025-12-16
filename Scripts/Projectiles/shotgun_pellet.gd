@@ -1,5 +1,4 @@
-extends Projectile
-class_name ShotgunPellet
+class_name ShotgunPellet extends Projectile
 
 # This is currently exclusively used with the
 # laser shotgun.
@@ -35,5 +34,7 @@ func _on_timer_timeout() -> void:
 		VfxManager.play_at_angle(bullet_hole_decal, target_position, collision_normal)
 		if damagee.is_in_group("damageable"):
 			damagee.damage(damage, data.shooter)
+		# Play feedback for player if relevant
+		Global.player_feedback(damagee, data)
 		damagee = null
 	queue_free()

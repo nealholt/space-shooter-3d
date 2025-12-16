@@ -52,8 +52,10 @@ func _physics_process(delta: float) -> void:
 			else: # Otherwise return
 				return
 		if passes_through(body):
-			pass
-		elif body.is_in_group("damageable"):
+			return
+		# Play feedback for player if relevant
+		Global.player_feedback(body, data)
+		if body.is_in_group("damageable"):
 			# Stick on a decal before damaging and dying
 			# Don't stick decals on shields
 			if !body.is_in_group("shield"):
@@ -62,8 +64,7 @@ func _physics_process(delta: float) -> void:
 		# Ricochet
 		elif does_ricochet:
 			ricochet(delta)
-		else:
-			pass
+
 
 
 # Source at 6:30 here:

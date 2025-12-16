@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cm762fx68amrb"]
+[gd_scene load_steps=19 format=3 uid="uid://cm762fx68amrb"]
 
 [ext_resource type="Script" uid="uid://dn6tsow1n8pb4" path="res://Scripts/Audio/AudioManager.gd" id="1_7o6mq"]
 [ext_resource type="Script" uid="uid://cr1an6d85yksa" path="res://Scripts/Audio/SoundEffectSetting.gd" id="2_lu82t"]
@@ -6,29 +6,21 @@
 [ext_resource type="AudioStream" uid="uid://yjaoqj8agxus" path="res://Assets/SoundEffects/industrial-mechanic-using-rattle-gun-compressed-air-socket-wrench-9944.wav" id="4_2wtmb"]
 [ext_resource type="AudioStream" uid="uid://dcyrwnxgv5hgy" path="res://Assets/SoundEffects/clean-machine-gun-burst-98224.wav" id="5_7nmqq"]
 [ext_resource type="AudioStream" uid="uid://dfmifoecexo5a" path="res://Assets/SoundEffects/collision-impact.wav" id="6_ft5o5"]
+[ext_resource type="AudioStream" uid="uid://q8beg7mbhsha" path="res://Assets/SoundEffects/bad_hit.wav" id="7_dpp4s"]
+[ext_resource type="AudioStream" uid="uid://bt17mwe1peger" path="res://Assets/SoundEffects/standard_hit.wav" id="8_ieupc"]
+[ext_resource type="AudioStream" uid="uid://76irvq5fgbjp" path="res://Assets/SoundEffects/strong_hit.wav" id="9_b8e2d"]
+[ext_resource type="AudioStream" uid="uid://dpemay63t54i1" path="res://Assets/SoundEffects/shield_hit.wav" id="10_nmqn7"]
 
 [sub_resource type="Resource" id="Resource_omf2n"]
 script = ExtResource("2_lu82t")
 limit = 10
-type = 0
 sound_effect = ExtResource("3_ft5o5")
-volume = 0.0
-volume_min = -40.0
-volume_max = 20.0
-pitch_scale = 1.0
-pitch_randomness = 0.0
 metadata/_custom_type_script = "uid://cr1an6d85yksa"
 
 [sub_resource type="Resource" id="Resource_dpp4s"]
 script = ExtResource("2_lu82t")
-limit = 5
 type = 1
 sound_effect = ExtResource("4_2wtmb")
-volume = 0.0
-volume_min = -40.0
-volume_max = 20.0
-pitch_scale = 1.0
-pitch_randomness = 0.0
 metadata/_custom_type_script = "uid://cr1an6d85yksa"
 
 [sub_resource type="Resource" id="Resource_ieupc"]
@@ -36,11 +28,6 @@ script = ExtResource("2_lu82t")
 limit = 10
 type = 2
 sound_effect = ExtResource("5_7nmqq")
-volume = 0.0
-volume_min = -40.0
-volume_max = 20.0
-pitch_scale = 1.0
-pitch_randomness = 0.0
 metadata/_custom_type_script = "uid://cr1an6d85yksa"
 
 [sub_resource type="Resource" id="Resource_2wtmb"]
@@ -48,13 +35,41 @@ script = ExtResource("2_lu82t")
 limit = 3
 type = 3
 sound_effect = ExtResource("6_ft5o5")
-volume = 0.0
-volume_min = -40.0
-volume_max = 20.0
-pitch_scale = 1.0
 pitch_randomness = 0.5
+metadata/_custom_type_script = "uid://cr1an6d85yksa"
+
+[sub_resource type="Resource" id="Resource_ca3r6"]
+script = ExtResource("2_lu82t")
+type = 4
+sound_effect = ExtResource("7_dpp4s")
+volume = -10.0
+pitch_randomness = 0.2
+metadata/_custom_type_script = "uid://cr1an6d85yksa"
+
+[sub_resource type="Resource" id="Resource_frebe"]
+script = ExtResource("2_lu82t")
+type = 5
+sound_effect = ExtResource("8_ieupc")
+volume = -10.0
+pitch_randomness = 0.2
+metadata/_custom_type_script = "uid://cr1an6d85yksa"
+
+[sub_resource type="Resource" id="Resource_5g1tu"]
+script = ExtResource("2_lu82t")
+type = 6
+sound_effect = ExtResource("9_b8e2d")
+volume = -10.0
+pitch_randomness = 0.2
+metadata/_custom_type_script = "uid://cr1an6d85yksa"
+
+[sub_resource type="Resource" id="Resource_7xao4"]
+script = ExtResource("2_lu82t")
+type = 7
+sound_effect = ExtResource("10_nmqn7")
+volume = -10.0
+pitch_randomness = 0.2
 metadata/_custom_type_script = "uid://cr1an6d85yksa"
 
 [node name="AudioManager" type="Node3D"]
 script = ExtResource("1_7o6mq")
-sound_effects = Array[ExtResource("2_lu82t")]([SubResource("Resource_omf2n"), SubResource("Resource_dpp4s"), SubResource("Resource_ieupc"), SubResource("Resource_2wtmb")])
+sound_effects = Array[ExtResource("2_lu82t")]([SubResource("Resource_omf2n"), SubResource("Resource_dpp4s"), SubResource("Resource_ieupc"), SubResource("Resource_2wtmb"), SubResource("Resource_ca3r6"), SubResource("Resource_frebe"), SubResource("Resource_5g1tu"), SubResource("Resource_7xao4")])

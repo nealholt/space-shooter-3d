@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="3_6nm7s"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="4_s6g67"]
 [ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Scenes/Ships/bomber.tscn" id="5_1d1v4"]
-[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="6_5kr4y"]
 [ext_resource type="PackedScene" uid="uid://byb8ya6fryjw0" path="res://Scenes/Ships/frigate.tscn" id="6_fva1o"]
 [ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Scenes/Ships/destroyer.tscn" id="7_c40xb"]
 [ext_resource type="PackedScene" uid="uid://brec5vmygtijo" path="res://Scenes/orb.tscn" id="7_yxjtr"]
@@ -13,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="9_1bvmw"]
 [ext_resource type="PackedScene" uid="uid://diilp2vvcvj53" path="res://Scenes/Ships/carrier.tscn" id="10_3xvk7"]
 [ext_resource type="PackedScene" uid="uid://dp3w08p8gkd3p" path="res://Scenes/Ships/capital_ship_frigate.tscn" id="11_c40xb"]
+[ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="13_qb1ff"]
 
 [sub_resource type="GDScript" id="GDScript_ulixo"]
 script/source = "extends Level
@@ -232,5 +232,5 @@ disable_for_testing = true
 script = ExtResource("1_nau7t")
 team = "blue team"
 
-[node name="Corvette" parent="BlueTeam" instance=ExtResource("6_5kr4y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34.533386, 0)
+[node name="Fighter" parent="BlueTeam" instance=ExtResource("13_qb1ff")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 36.62413, 137.6766)

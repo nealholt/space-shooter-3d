@@ -1,5 +1,4 @@
-extends Gun
-class_name LaserShotgun
+class_name LaserShotgun extends Gun
 
 # Here I want to create a "laser" shotgun
 # (by which I mean a hitscan shotgun)
@@ -21,6 +20,8 @@ class_name LaserShotgun
 # created whether they hit their target or not based
 # on the raycasts in the laser shotgun
 
+@onready var ray_group := $RayCastGroup
+
 # Range of this weapon
 @export var gun_range:float = 300.0
 
@@ -30,7 +31,7 @@ func _ready() -> void:
 	# Create all the necessary raycasts
 	for i in range(simultaneous_shots):
 		ray = RayCast3D.new()
-		$RayCastGroup.add_child(ray)
+		ray_group.add_child(ray)
 		# Disable the ray for efficiency. Otherwise the
 		# ray checks for collisions on every physics
 		# update. Instead, only check for collisions
@@ -65,7 +66,7 @@ func shoot_actual() -> void:
 	var pellet:ShotgunPellet
 	for i in range(simultaneous_shots):
 		# Access ith raycast
-		ray = $RayCastGroup.get_child(i)
+		ray = ray_group.get_child(i)
 		# Rotate the ray a random amount
 		ray.rotation_degrees = Vector3(
 				randf_range(-spread_deg,spread_deg),
