@@ -165,6 +165,9 @@ func _on_health_component_health_lost() -> void:
 
 
 func _on_health_component_died() -> void:
+	# Disconnect the camera group
+	if camera_group:
+		camera_group.reparent(get_parent())
 	# Explode
 	VfxManager.play_with_transform(deathExplosion, global_position, transform)
 	# Tell controller to enter death animation state

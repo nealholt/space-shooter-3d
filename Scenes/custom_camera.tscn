@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4j6tlub3lnw4"]
+
+[ext_resource type="Script" uid="uid://dv8m6n2u8qec7" path="res://Scripts/custom_camera.gd" id="1_tgeqx"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wtdqg"]
+radius = 15.0
+
+[node name="Camera" type="Camera3D"]
+far = 80000.0
+script = ExtResource("1_tgeqx")
+
+[node name="NearMissDetector" type="Area3D" parent="." groups=["near-miss detector"]]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.3, 1.17356, -5.5)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NearMissDetector"]
+shape = SubResource("SphereShape3D_wtdqg")
