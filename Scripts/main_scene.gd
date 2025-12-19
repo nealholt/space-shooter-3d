@@ -5,6 +5,7 @@ class_name MainScene
 # https://www.youtube.com/watch?v=a0UQ-t-vuzY
 
 @onready var hud: Control = $HUD
+@onready var d2t:Label = $HUD/DistanceToTarget
 @onready var menu: Control = $Menu
 @onready var main_3d: Node3D = $Main3D
 # Currently loaded level
@@ -76,6 +77,17 @@ func retry_current_level() -> void:
 
 func set_hud_label(text:String) -> void:
 	$HUD/Demo.text = text
+
+# Hide distance to target
+func hide_dist2targ() -> void:
+	d2t.visible = false
+
+# Set and show distance to target
+func set_dist2targ(text:String) -> void:
+	d2t.visible = true
+	var window_size = get_viewport().get_visible_rect().size
+	d2t.position = Vector2(window_size.x/2-180, window_size.y/2-20)
+	d2t.text = text
 
 
 func unload_level() -> void:

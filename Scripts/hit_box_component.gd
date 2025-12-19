@@ -50,6 +50,8 @@ func damage(amount:float, damager=null):
 		return
 	if health_component:
 		health_component.health -= amount
+		if health_component.is_dead():
+			reticle.is_targeted = false
 	if hit_feedback:
 		hit_feedback.hit()
 

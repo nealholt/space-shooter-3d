@@ -176,7 +176,7 @@ func _on_health_component_died() -> void:
 		controller.enter_death_animation()
 	# Delete targeting reticle
 	if reticle:
-		reticle.queue_free()
+		reticle.die()
 		reticle = null
 	# Create and start a timer, if you haven't
 	# already done so.

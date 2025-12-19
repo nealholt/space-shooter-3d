@@ -124,4 +124,5 @@ func _on_health_component_health_lost() -> void:
 
 
 func _on_health_component_died() -> void:
+	
 	queue_free()

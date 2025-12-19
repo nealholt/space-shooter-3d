@@ -68,6 +68,9 @@ var max_reticle_position:Vector2
 var is_targeted:bool:
 	set(value):
 		is_targeted = value
+		# If no longer targeted, hide distance to target
+		if !value:
+			Global.main_scene.hide_dist2targ()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -103,6 +106,9 @@ func _process(_delta):
 		var reticle_to_use:TextureRect
 		if is_targeted:
 			reticle_to_use = targeted_reticle
+			# Set distance to target
+			var dist = global_position.distance_to(Global.player.global_position)
+			Global.main_scene.set_dist2targ(str(int(dist))+' km')
 		elif cam_distance > distance_cutoff_sqd:
 			reticle_to_use = distant_reticle
 		else:
@@ -124,6 +130,7 @@ func _process(_delta):
 		Global.set_reticle(camera, reticle_to_use, global_position)
 	elif is_targeted: # Show at most one offscreen reticle for targeted unit
 		display_offscreen_reticle()
+		Global.main_scene.hide_dist2targ()
 	#else:
 	# Otherwise reticle is neither on screen nor targeted.
 	# Don't display it.
@@ -184,3 +191,8 @@ func set_color(c:Color) -> void:
 	offscreen_reticle.modulate = Color(c, 1.0) # No transparency
 	distant_reticle.modulate = Color(c, 0.5)
 	targeted_reticle.modulate = Color(c, 0.7)
+
+
+func die() -> void:
+	is_targeted = false
+	queue_free()
