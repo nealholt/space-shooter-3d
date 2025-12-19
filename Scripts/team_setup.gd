@@ -7,6 +7,7 @@ class_name TeamSetup extends Node3D
 
 @export var team : String = "red team"
 var color:Color = Color.RED
+var reticle_color:Color = Color.GREEN
 var enemy:String = "blue team"
 
 # Called when the node enters the scene tree for the first time.
@@ -14,6 +15,7 @@ func _ready() -> void:
 	# Set up team color
 	if team == "blue team":
 		color = Color.BLUE
+		reticle_color = Color.WHITE
 		enemy = "red team"
 	# Set team properties for all children of self
 	# and all their children and children's children,
@@ -49,7 +51,7 @@ func set_team_properties(parent_node) -> void:
 			child.enemy_team = enemy
 		
 		if child is TargetReticles:
-			child.set_color(color)
+			child.set_color(reticle_color)
 		
 		if child is Trail3D: # Contrail
 			child._startColor = color

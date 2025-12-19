@@ -1,5 +1,4 @@
-extends Node3D
-class_name TargetReticles
+class_name TargetReticles extends Node3D
 # This uses images from the kenney crosshair pack
 # https://kenney.nl/assets/crosshair-pack
 
@@ -10,12 +9,13 @@ class_name TargetReticles
 #   -adding comments
 #   -adding types to the variables
 #   -replaced Vector2(32,32) with $TargetReticle.size/2.0 in case I want to make the reticles bigger
-#   -added set_color function to set reticle color
-#   -doubled size of offscreen reticle from 64 to 128 under Control->Layout->Transform
+#   -added set_color function
+#   -changed size/scale of reticles under Control->Layout->Transform
 #   -added third reticle at a distance and export variable for the distance limit
 #   -Added code to set reticle based on distance to camera
 #   -(Did I ever get this working?) Attempted to dynamically size and transparency the reticles
 #   -Added code and image for a special reticle when targeted
+#   -Added enum for different sets of reticles
 # see "Scale reticle size and transparency with distance" below, but
 # couldn't get it working.
 
@@ -36,8 +36,12 @@ class_name TargetReticles
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
+# Which set of reticle images to use
+enum ReticleSet {FIGHTER, TURRET, WEAKPOINT, REACTOR, MISSILE}
+@export var reticle_set:ReticleSet
+
 # Squared distance at which to use smaller reticle
-@export var distance_cutoff := 180.0
+@export var distance_cutoff := 250.0
 var distance_cutoff_sqd : float
 # Factor for modifying transparency of reticle with distance
 #@export var scaling_factor:float = 25000.0
@@ -64,16 +68,11 @@ var max_reticle_position:Vector2
 var is_targeted:bool:
 	set(value):
 		is_targeted = value
-		if !is_targeted:
-			# Set to semi transparent
-			distant_reticle.modulate = Color(distant_reticle.modulate, 0.25)
-		else:
-			# Set to no transparency
-			distant_reticle.modulate = Color(distant_reticle.modulate, 1.0)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	set_reticle_textures(reticle_set)
 	distance_cutoff_sqd = distance_cutoff * distance_cutoff
 	is_targeted = false
 	hide_all()
@@ -96,18 +95,18 @@ func _process(_delta):
 		camera = get_viewport().get_camera_3d()
 	if !Global.targeting_hud_on or !is_instance_valid(camera):
 		return
-	# Get distance to camera
-	cam_distance = global_position.distance_squared_to(camera.global_position)
-	# Choose between near and far reticles
-	var reticle_to_use:TextureRect
-	if cam_distance > distance_cutoff_sqd:
-		reticle_to_use = distant_reticle
-	elif is_targeted:
-		reticle_to_use = targeted_reticle
-	else:
-		reticle_to_use = target_reticle
 	# Try to put reticle on screen
 	if camera.is_position_in_frustum(global_position):
+		# Get distance to camera
+		cam_distance = global_position.distance_squared_to(camera.global_position)
+		# Choose between near and far reticles
+		var reticle_to_use:TextureRect
+		if is_targeted:
+			reticle_to_use = targeted_reticle
+		elif cam_distance > distance_cutoff_sqd:
+			reticle_to_use = distant_reticle
+		else:
+			reticle_to_use = target_reticle
 		# Scale reticle size and transparency with distance,
 		# close up it should be large and transparent
 		# Percent is clamped between 0 and 1
@@ -123,9 +122,36 @@ func _process(_delta):
 		#var alpha:int = 255 - int(percent*255)
 		#target_reticle.modulate = Color(target_reticle.modulate, alpha)
 		Global.set_reticle(camera, reticle_to_use, global_position)
-		
 	elif is_targeted: # Show at most one offscreen reticle for targeted unit
 		display_offscreen_reticle()
+	#else:
+	# Otherwise reticle is neither on screen nor targeted.
+	# Don't display it.
+
+
+func set_reticle_textures(rs:ReticleSet) -> void:
+	if rs == ReticleSet.FIGHTER:
+		pass # Use all defaults
+	elif rs == ReticleSet.TURRET:
+		target_reticle.texture = load('res://Assets/Images/crosshair121.png')
+		#offscreen_reticle.texture = load() # use default
+		distant_reticle.texture = load('res://Assets/Images/crosshair120.png')
+		targeted_reticle.texture = load('res://Assets/Images/crosshair134.png')
+	elif rs == ReticleSet.WEAKPOINT:
+		target_reticle.texture = load('res://Assets/Images/crosshair044.png')
+		#offscreen_reticle.texture = load() # use default
+		distant_reticle.texture = load('res://Assets/Images/crosshair043.png')
+		targeted_reticle.texture = load('res://Assets/Images/crosshair050.png')
+	elif rs == ReticleSet.REACTOR:
+		target_reticle.texture = load('res://Assets/Images/crosshair056.png')
+		#offscreen_reticle.texture = load() # use default
+		distant_reticle.texture = load('res://Assets/Images/crosshair057.png')
+		targeted_reticle.texture = load('res://Assets/Images/crosshair058.png')
+	else: #if rs == ReticleSet.MISSILE:
+		target_reticle.texture = load('res://Assets/Images/crosshair085.png')
+		#offscreen_reticle.texture = load() # use default
+		distant_reticle.texture = load('res://Assets/Images/crosshair086.png')
+		targeted_reticle.texture = load('res://Assets/Images/crosshair101.png')
 
 
 # This was moved into a function for organizational purposes
@@ -153,7 +179,8 @@ func hide_all() -> void:
 
 
 func set_color(c:Color) -> void:
-	target_reticle.modulate = Color(c, 0.25)
-	offscreen_reticle.modulate = Color(c, 1.0) # no transparency
-	distant_reticle.modulate = Color(c, 0.25)
-	targeted_reticle.modulate = Color(c, 1.0) # no transparency
+	# Set amount of transparency
+	target_reticle.modulate = Color(c, 0.5)
+	offscreen_reticle.modulate = Color(c, 1.0) # No transparency
+	distant_reticle.modulate = Color(c, 0.5)
+	targeted_reticle.modulate = Color(c, 0.7)

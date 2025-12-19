@@ -1,5 +1,4 @@
-extends Gun
-class_name LaserGun
+class_name LaserGun extends Gun
 
 # Source:
 # https://www.youtube.com/watch?v=8QumOFwX9Z0

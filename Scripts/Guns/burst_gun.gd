@@ -1,5 +1,4 @@
-extends Gun
-class_name BurstGun
+class_name BurstGun extends Gun
 
 # True if the gun has received command to fire
 var firing: bool = false

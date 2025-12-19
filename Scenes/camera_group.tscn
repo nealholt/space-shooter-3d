@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b0vteh3cq1l8k" path="res://Scripts/camera_player_group.gd" id="1_sad13"]
 [ext_resource type="PackedScene" uid="uid://ymilutrw63dv" path="res://Scenes/turret_motion_component.tscn" id="2_tdt0o"]
 [ext_resource type="PackedScene" uid="uid://c4j6tlub3lnw4" path="res://Scenes/custom_camera.tscn" id="3_0u455"]
-[ext_resource type="Texture2D" uid="uid://bh7nsvxua2tv4" path="res://Assets/Images/crosshair173.png" id="3_a50bn"]
+[ext_resource type="Texture2D" uid="uid://gbelwe6g4lw" path="res://Assets/Images/crosshair005.png" id="4_0u455"]
 
 [node name="CameraGroup" type="Node3D"]
 script = ExtResource("1_sad13")
@@ -25,7 +25,7 @@ current = true
 
 [node name="TargetLeadIndicator" type="TextureRect" parent="."]
 visible = false
-modulate = Color(1, 1, 1, 0.627451)
+modulate = Color(1, 1, 0, 1)
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("3_a50bn")
+texture = ExtResource("4_0u455")

@@ -20,6 +20,7 @@ mesh = SubResource("SphereMesh_dknmi")
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_mpr5y")]
 health_component = NodePath("../HealthComponent")
+reticle_set = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
 shape = SubResource("SphereShape3D_b2obo")

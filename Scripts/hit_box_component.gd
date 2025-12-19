@@ -1,5 +1,4 @@
-extends Area3D
-class_name HitBoxComponent
+class_name HitBoxComponent extends Area3D
 # Inspired by this:
 # https://www.youtube.com/watch?v=74y6zWZfQKk&t=184s
 
@@ -16,6 +15,8 @@ class_name HitBoxComponent
 # Until I resolve this, I'm going to duplicate code.
 
 @export var health_component:HealthComponent
+@export var reticle_set:TargetReticles.ReticleSet
+var reticle:TargetReticles
 
 # This will be populated probably only for the player
 var got_hit_audio:AudioStreamPlayer
@@ -29,7 +30,6 @@ var hit_feedback:HitFeedback
 # npcs from shooting down their own missiles.
 var damage_exception:Ship
 
-var reticle:TargetReticles
 
 func _ready() -> void:
 	# Search through children for various components
@@ -41,6 +41,7 @@ func _ready() -> void:
 			hit_feedback = child
 		elif child is TargetReticles:
 			reticle = child
+			reticle.set_reticle_textures(reticle_set)
 
 
 func damage(amount:float, damager=null):

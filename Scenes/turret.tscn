@@ -32,6 +32,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_b5qkf")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 health_component = NodePath("../HealthComponent")
+reticle_set = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
 shape = SubResource("SphereShape3D_g6fsi")

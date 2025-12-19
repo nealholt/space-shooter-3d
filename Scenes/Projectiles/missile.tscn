@@ -21,6 +21,7 @@ steer_force = 200.0
 
 [node name="HitBoxComponent" parent="." index="4" node_paths=PackedStringArray("health_component") instance=ExtResource("6_g4iot")]
 health_component = NodePath("../HealthComponent")
+reticle_set = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent" index="1"]
 shape = SubResource("SphereShape3D_7sobq")

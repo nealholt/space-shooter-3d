@@ -157,6 +157,7 @@ script = ExtResource("1_dp23i")
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_ffelx")]
 transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, -30, 0)
 health_component = NodePath("../HealthComponent")
+reticle_set = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
 shape = SubResource("SphereShape3D_mdcux")

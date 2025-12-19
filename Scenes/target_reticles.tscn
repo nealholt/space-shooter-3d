@@ -1,31 +1,31 @@
 [gd_scene load_steps=6 format=3 uid="uid://dp3ouf5e4fqhk"]
 
 [ext_resource type="Script" uid="uid://bnfpjo4h8hgp0" path="res://Scripts/target_reticles.gd" id="1_e3x8k"]
-[ext_resource type="Texture2D" uid="uid://bt6nq0y6q2678" path="res://Assets/Images/crosshair186.png" id="2_55ck8"]
-[ext_resource type="Texture2D" uid="uid://dj76rypd532ce" path="res://Assets/Images/crosshair180.png" id="2_e5pgu"]
+[ext_resource type="Texture2D" uid="uid://c4n625lh665gm" path="res://Assets/Images/crosshair025.png" id="2_6ce1x"]
 [ext_resource type="Texture2D" uid="uid://bk4twivo4taum" path="res://Assets/Images/crosshair022.png" id="3_fi5sc"]
-[ext_resource type="Texture2D" uid="uid://d3eoswp57p4be" path="res://Assets/Images/crosshair081.png" id="5_agti2"]
+[ext_resource type="Texture2D" uid="uid://bpdpseb3x2cbp" path="res://Assets/Images/crosshair026.png" id="4_pfbvf"]
+[ext_resource type="Texture2D" uid="uid://d1c22lm76ch5x" path="res://Assets/Images/crosshair028.png" id="5_82t2t"]
 
 [node name="TargetReticles" type="Node3D"]
 script = ExtResource("1_e3x8k")
 
 [node name="TargetReticle" type="TextureRect" parent="."]
-offset_right = 64.0
-offset_bottom = 64.0
-texture = ExtResource("2_55ck8")
+offset_right = 72.0
+offset_bottom = 72.0
+texture = ExtResource("2_6ce1x")
 
 [node name="OffscreenReticle" type="TextureRect" parent="."]
 offset_right = 128.0
 offset_bottom = 128.0
-pivot_offset = Vector2(32, 32)
+pivot_offset = Vector2(64, 64)
 texture = ExtResource("3_fi5sc")
 
 [node name="DistantReticle" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("2_e5pgu")
+offset_right = 72.0
+offset_bottom = 72.0
+texture = ExtResource("4_pfbvf")
 
 [node name="TargetedReticle" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("5_agti2")
+offset_right = 72.0
+offset_bottom = 72.0
+texture = ExtResource("5_82t2t")
