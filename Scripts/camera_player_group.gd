@@ -22,6 +22,16 @@ var state : CameraState
 @onready var body:Node3D = $Body
 @onready var head:Node3D = $Body/Head
 
+@onready var targ_indicator: TextureRect = $TargetLeadIndicator
+@onready var targ_hit: TextureRect = $TargLeadHit
+@onready var targ_strong_hit: TextureRect = $TargLeadStrongHit
+@onready var targ_shield_hit: TextureRect = $TargLeadShieldHit
+@onready var timer_hit_flicker: Timer = $TimerHitFlicker
+@onready var current_targ_indicator: TextureRect = targ_indicator
+var target_lead_visible := false
+enum HIT_TYPE {STANDARD, STRONG, SHIELD}
+
+
 var rng = RandomNumberGenerator.new() # For positioning flyby camera
 
 var target:Node3D
@@ -160,9 +170,11 @@ func _physics_process(delta: float) -> void:
 			Global.player.global_position,
 			Global.player.weapon_handler.get_bullet_speed(),
 			Global.player.controller.target)
-		Global.set_reticle(first_person_camera, $TargetLeadIndicator, lead_pos)
+		Global.set_reticle(first_person_camera, current_targ_indicator, lead_pos)
+		target_lead_visible = true
 	else:
-		$TargetLeadIndicator.hide()
+		current_targ_indicator.hide()
+		target_lead_visible = false
 	# Draw a line from the center of the screen to the mouse position.
 	# This is how House of the Dying Sun does mouse controls.
 	if Global.input_man.use_mouse_and_keyboard and Global.targeting_hud_on:
@@ -315,3 +327,29 @@ func is_mouse_near_center() -> bool:
 
 func is_first_person() -> bool:
 	return state == CameraState.FIRSTPERSON
+
+func visualize_hit(hit:HIT_TYPE) -> void:
+	# Hide current target lead indicator
+	current_targ_indicator.visible = false
+	# Swap to selected target lead indicator
+	if hit == HIT_TYPE.STANDARD:
+		current_targ_indicator = targ_hit
+	elif hit == HIT_TYPE.STRONG:
+		current_targ_indicator = targ_strong_hit
+	else: #if hit == HIT_TYPE.SHIELD
+		current_targ_indicator = targ_shield_hit
+	# Determine whether or not to show new lead indicator
+	if target_lead_visible:
+		current_targ_indicator.visible = true
+	# Start timer to ultimately switch back to default
+	timer_hit_flicker.start()
+
+
+func _on_timer_hit_flicker_timeout() -> void:
+	# Hide current target lead indicator
+	current_targ_indicator.visible = false
+	# Swap to standard target lead indicator
+	current_targ_indicator = targ_indicator
+	# Determine whether or not to show lead indicator
+	if target_lead_visible:
+		current_targ_indicator.visible = true

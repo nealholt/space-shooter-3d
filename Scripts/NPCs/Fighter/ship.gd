@@ -100,6 +100,7 @@ func _ready() -> void:
 			burning_trail = child
 		elif child is CameraGroup:
 			camera_group = child
+			Global.camera_group = camera_group
 		elif child is CharacterBodyControlParent and !disable_for_testing:
 			controller = child
 			# Pass export var values to controller
