@@ -10,8 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="7_cla1y"]
 
 [node name="Fighter" instance=ExtResource("1_5kq0i")]
-fps_cam_position = Vector3(2.6830346e-08, 0.61380655, -1.8305256)
-side_cam_position = Vector3(1.2755041, -0.20307307, -4.352357)
 
 [node name="AimAssist" parent="." index="0"]
 angle_assist_limit = 5.0

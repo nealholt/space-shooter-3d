@@ -64,6 +64,8 @@ collision_layer = 3
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_bfcrw")
+fps_cam_position = Vector3(0, 0.6, -2.9)
+side_cam_position = Vector3(2.3, -0.5, -3.5)
 deathExplosion = 9
 finalExplosion = 8
 

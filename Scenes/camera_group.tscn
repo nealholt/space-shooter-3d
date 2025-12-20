@@ -11,6 +11,7 @@ script = ExtResource("1_sad13")
 [node name="turret_motion_component" parent="." instance=ExtResource("2_tdt0o")]
 
 [node name="RearUnderCamera" parent="." instance=ExtResource("3_0u455")]
+fov = 100.0
 
 [node name="FreeCamera" parent="." instance=ExtResource("3_0u455")]
 top_level = true
