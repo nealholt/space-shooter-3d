@@ -1,12 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bofjsmexbmkkv"]
+[gd_scene load_steps=10 format=3 uid="uid://bofjsmexbmkkv"]
 
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_6xial"]
-[ext_resource type="PackedScene" uid="uid://n1jx2afgefnt" path="res://Scenes/spectator.tscn" id="1_jd547"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_0liob"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="2_25llv"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="3_vdt0h"]
 [ext_resource type="PackedScene" uid="uid://brec5vmygtijo" path="res://Scenes/orb.tscn" id="4_syabc"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="5_74ca5"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="5_d02va"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1crdq"]
 sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)
@@ -23,28 +22,6 @@ sky = SubResource("Sky_bgqgu")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0i13u"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("5_d02va")
-shader_parameter/FresnelPower = 2.0
-shader_parameter/EmissionStrength = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_k2fkl"]
-resource_local_to_scene = true
-material = SubResource("ShaderMaterial_0i13u")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_njs2f"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("5_d02va")
-shader_parameter/FresnelPower = 2.0
-shader_parameter/EmissionStrength = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_q31v4"]
-resource_local_to_scene = true
-material = SubResource("ShaderMaterial_njs2f")
-
 [node name="Level04" type="Node3D"]
 script = ExtResource("1_6xial")
 
@@ -56,7 +33,7 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1pi3i")
 
-[node name="Spectator" parent="." instance=ExtResource("1_jd547")]
+[node name="CameraGroup" parent="." instance=ExtResource("2_25llv")]
 
 [node name="RedTeam" type="Node3D" parent="."]
 script = ExtResource("2_0liob")
@@ -66,9 +43,6 @@ transform = Transform3D(-4.37114e-08, -4.37114e-08, 1, -0.999372, -0.0354402, -4
 
 [node name="DebugLabel" parent="RedTeam/FighterNPC" index="5"]
 visible = true
-
-[node name="FresnelAura" parent="RedTeam/FighterNPC/Shield" index="0"]
-mesh = SubResource("SphereMesh_k2fkl")
 
 [node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC" instance=ExtResource("5_74ca5")]
 
@@ -82,10 +56,5 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -29, 0, -34)
 [node name="FighterNPC" parent="BlueTeam" instance=ExtResource("3_vdt0h")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -55.1692, 0, -156.585)
 
-[node name="FresnelAura" parent="BlueTeam/FighterNPC/Shield" index="0"]
-mesh = SubResource("SphereMesh_q31v4")
-
 [editable path="RedTeam/FighterNPC"]
-[editable path="RedTeam/FighterNPC/Shield"]
 [editable path="BlueTeam/FighterNPC"]
-[editable path="BlueTeam/FighterNPC/Shield"]

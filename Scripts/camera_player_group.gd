@@ -31,7 +31,6 @@ var state : CameraState
 var target_lead_visible := false
 enum HIT_TYPE {STANDARD, STRONG, SHIELD}
 
-
 var rng = RandomNumberGenerator.new() # For positioning flyby camera
 
 var target:Node3D
@@ -50,6 +49,14 @@ const MOUSE_CENTER_RADIUS := 200.0*200.0
 # Radius (squared)  from the center of the screen within which
 # the mouse guide is hidden
 const MOUSE_HIDE_RADIUS := 100.0*100.0
+
+
+
+# These are used to control a camera indpendent of any ship.
+const SPEED = 50.0
+var mouse_motion:=Vector2.ZERO
+var velocity:=Vector3.ZERO
+
 
 
 func _ready() -> void:
@@ -81,19 +88,33 @@ func _ready() -> void:
 	#beyond_center.scale = Vector2(0.5, 0.5) # Shrink
 	beyond_center.visible = false
 	add_child(beyond_center)
-	# Camera groups should only be attached to ships.
-	# We assume the parent is a ship with variables
-	# for positioning the FirstPerson and RearUnder
-	# cameras.
-	var p:Ship = get_parent()
-	if !('fps_cam_position' in p and 'fps_cam_rotation_deg' in p and 'side_cam_position' in p and 'side_cam_rotation_deg' in p):
-		push_error('ERROR in CameraGroup _ready. Expect parent to be a ship with certain attributes for positioning camera.')
-	body.position = p.fps_cam_position
-	body.rotation = p.fps_cam_rotation_deg
-	rear_under_camera.position = p.side_cam_position
-	rear_under_camera.rotation = p.side_cam_rotation_deg
+	# Camera group should typically be attached to ships
+	# but if not, use the camera group in spectator mode
+	# with mouse and ketboard controls.
+	var p = get_parent()
+	if p is Ship:
+		# Turn off _process, which handles spectator mode
+		set_process(false)
+		# We assume the parent is a ship with variables
+		# for positioning the FirstPerson and RearUnder
+		# cameras.
+		if !('fps_cam_position' in p and 'fps_cam_rotation_deg' in p and 'side_cam_position' in p and 'side_cam_rotation_deg' in p):
+			push_error('ERROR in CameraGroup _ready. Expect parent to be a ship with certain attributes for positioning camera.')
+		body.position = p.fps_cam_position
+		body.rotation = p.fps_cam_rotation_deg
+		rear_under_camera.position = p.side_cam_position
+		rear_under_camera.rotation = p.side_cam_rotation_deg
+	else:
+		# Turn off _physics_process, which handles gameplay mode
+		set_physics_process(false)
+	# Register self with global
+	Global.camera_group = self
 
 
+
+
+
+# For gameplay mode
 func _physics_process(delta: float) -> void:
 	# Right thumb stick pressed in. Switch to first person
 	# and as long as right stick is held in, look at
@@ -170,7 +191,8 @@ func _physics_process(delta: float) -> void:
 			Global.player.global_position,
 			Global.player.weapon_handler.get_bullet_speed(),
 			Global.player.controller.target)
-		Global.set_reticle(first_person_camera, current_targ_indicator, lead_pos)
+		#Global.set_reticle(first_person_camera, current_targ_indicator, lead_pos)
+		Global.set_reticle(current_targ_indicator, lead_pos)
 		target_lead_visible = true
 	else:
 		current_targ_indicator.hide()
@@ -353,3 +375,31 @@ func _on_timer_hit_flicker_timeout() -> void:
 	# Determine whether or not to show lead indicator
 	if target_lead_visible:
 		current_targ_indicator.visible = true
+
+
+
+# All the following functions are for spectator mode
+# (mostly debugging)
+func _process(delta: float) -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	handle_camera_rotation()
+	var input_dir := Input.get_vector("ui_right", "ui_left", "ui_down", "ui_up")
+	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	if direction:
+		velocity.x = direction.x * SPEED * delta
+		velocity.z = direction.z * SPEED * delta
+	else:
+		velocity = Vector3.ZERO
+	global_position += velocity
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		# Think of 0.001 as sensitivity to mouse motion
+		mouse_motion = -event.relative * 0.001
+
+func handle_camera_rotation() -> void:
+	rotate_y(mouse_motion.x)
+	# https://www.udemy.com/course/complete-godot-3d/learn/lecture/40979546#questions
+	head.rotate_x(-mouse_motion.y)
+	#head.rotation_degrees.x = clampf(head.rotation_degrees.x, -90.0, 90.0)
+	mouse_motion = Vector2.ZERO # Reset

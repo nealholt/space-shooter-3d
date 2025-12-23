@@ -217,13 +217,17 @@ func attempt_to_start_seeking(targeter:Node3D) -> void:
 		# old target that it's no longer locked on to
 		if old_target and old_target != target:
 			old_target.lost_lock(targeter)
+		
 		# set_targeted is called on a hitbox component
 		# and merely modulates the reticle color (for now)
 		# In the future, you might want to do
 		# this differently. Currently, this is also
 		# called in the player's controller, but is
-		# not otherwise called by NPCs
-		target.set_targeted(targeter, true)
+		# not otherwise called by NPCs.
+		# I commented this out because it was fucking
+		# with my animation of the reticle.
+		#target.set_targeted(targeter, true)
+		
 		# Create missile reticle and put it on the screen
 		# only if another missile is ready to fire
 		if missile_launcher.ready_to_fire():

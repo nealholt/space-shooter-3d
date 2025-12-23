@@ -362,22 +362,50 @@ func add_to_team_group(to_add, team:String) -> void:
 		printerr('Unrecognized team %s in Global.gd load_level' % team)
 
 
+## Returns true if the reticle was drawn on screen.
+## Returns false if the reticle was not drawn.
+## This function is called by gun.gd and camera_player_group.gd.
+## A significant chunk of the following is redundant with
+## code in the target_reticles.gd's _process function.
+#func set_reticle(camera:Camera3D, reticle:TextureRect, position:Vector3) -> bool:
+	#if !is_instance_valid(camera):
+		#camera = get_viewport().get_camera_3d()
+	#if !targeting_hud_on or !is_instance_valid(camera):
+		#reticle.hide()
+		#return false
+	## If the camera can see the target reticle Node3D...
+	#if camera.is_position_in_frustum(position):
+		## Get position to put the reticle
+		#var reticle_position = camera.unproject_position(position)
+		## Show the reticle
+		#reticle.visible = true
+		## Subtract half width and height to center the reticle.
+		## The following does do elementwise multiplication.
+		#var half_size : Vector2 = (reticle.size * reticle.scale) /2.0
+		#reticle.set_global_position(reticle_position - half_size)
+		#return true
+	#else:
+		#reticle.hide()
+		#return false
 # Returns true if the reticle was drawn on screen.
 # Returns false if the reticle was not drawn.
-func set_reticle(camera:Camera3D, reticle:TextureRect, position:Vector3) -> bool:
-	if !is_instance_valid(camera):
-		camera = get_viewport().get_camera_3d()
-	if !targeting_hud_on or !is_instance_valid(camera):
+# This function is called by gun.gd and camera_player_group.gd.
+# A significant chunk of the following is redundant with
+# code in the target_reticles.gd's _process function.
+func set_reticle(reticle:TextureRect, position:Vector3) -> bool:
+	if !targeting_hud_on:
 		reticle.hide()
 		return false
 	# If the camera can see the target reticle Node3D...
-	if camera.is_position_in_frustum(position):
+	if current_camera.is_position_in_frustum(position):
 		# Get position to put the reticle
-		var reticle_position = camera.unproject_position(position)
+		var reticle_position = current_camera.unproject_position(position)
 		# Show the reticle
-		reticle.show()
-		# Subtract half width and height to center the reticle
-		reticle.set_global_position(reticle_position - reticle.size/2.0)
+		reticle.visible = true
+		# Subtract half width and height to center the reticle.
+		# The following does do elementwise multiplication.
+		var half_size : Vector2 = (reticle.size * reticle.scale) /2.0
+		reticle.set_global_position(reticle_position - half_size)
 		return true
 	else:
 		reticle.hide()

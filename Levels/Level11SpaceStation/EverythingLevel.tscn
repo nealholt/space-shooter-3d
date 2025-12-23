@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_lqyyp"]
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_wr6oo"]
-[ext_resource type="PackedScene" uid="uid://cbgprvcwh15qd" path="res://Levels/Level13Everything/star.tscn" id="2_2lnk5"]
+[ext_resource type="PackedScene" uid="uid://cbgprvcwh15qd" path="res://Levels/Level11SpaceStation/star.tscn" id="2_2lnk5"]
 [ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="3_eggcn"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="5_0jpk3"]
 [ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="6_xbcqs"]

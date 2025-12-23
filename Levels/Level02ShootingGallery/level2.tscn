@@ -232,5 +232,6 @@ disable_for_testing = true
 script = ExtResource("1_nau7t")
 team = "blue team"
 
-[node name="Fighter" parent="BlueTeam" instance=ExtResource("13_qb1ff")]
+[node name="PlayerFighter" parent="BlueTeam" instance=ExtResource("13_qb1ff")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 36.62413, 137.6766)
+impulse_std = 0.0

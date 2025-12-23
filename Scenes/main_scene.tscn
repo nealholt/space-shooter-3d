@@ -110,24 +110,10 @@ layout_mode = 2
 theme = ExtResource("3_iacmt")
 text = "Load 10: Asteroids"
 
-[node name="Load11DamageEffects" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
+[node name="Load11SpaceStationDefense" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 11: Damage Effects Test"
-
-[node name="Load12CollisionExperiment" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
-layout_mode = 2
-theme = ExtResource("3_iacmt")
-text = "Load 12: Collision Experiment"
-
-[node name="Load13SpaceStationDefense" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
-layout_mode = 2
-theme = ExtResource("3_iacmt")
-text = "Load 13: Space Station Defense"
-
-[node name="Load14DeleteMe" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
-layout_mode = 2
-text = "Level 14: Testing Ground"
+text = "Load 11: Space Station Defense"
 
 [node name="Settings" type="VBoxContainer" parent="Menu/HBoxContainer"]
 layout_mode = 2
@@ -533,10 +519,7 @@ script = ExtResource("3_jv6wh")
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load8NearMissSound" to="." method="_on_load_8_near_miss_sound_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load9Shield" to="." method="_on_load_9_shield_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load10Asteroids" to="." method="_on_load_10_asteroids_pressed"]
-[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load11DamageEffects" to="." method="_on_load_11_damage_effects_pressed"]
-[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load12CollisionExperiment" to="." method="_on_load_12_collision_experiment_pressed"]
-[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load13SpaceStationDefense" to="." method="_on_load_13_space_station_defense_pressed"]
-[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load14DeleteMe" to="." method="_on_load_14_delete_me_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load11SpaceStationDefense" to="." method="_on_load_11_space_station_defense_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/Settings/ToggleFullscreen" to="." method="_on_toggle_fullscreen_pressed"]
 [connection signal="toggled" from="Menu/HBoxContainer/Settings/ToggleControls" to="." method="_on_toggle_controls_toggled"]
 [connection signal="toggled" from="Menu/HBoxContainer/Settings/ToggleInverted" to="." method="_on_toggle_inverted_toggled"]

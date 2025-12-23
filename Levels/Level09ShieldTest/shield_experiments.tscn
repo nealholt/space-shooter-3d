@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="1_8h41v"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_66tts"]
-[ext_resource type="PackedScene" uid="uid://ctylowk0dxhp3" path="res://Assets/Particles/sparks.tscn" id="3_ok2ml"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="4_66tts"]
 [ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="6_ay6cs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oit57"]
@@ -52,33 +52,25 @@ max_health = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326245, 0, 10.8496)
 speed = 5.0
 time_out = 40.0
-sparks = ExtResource("3_ok2ml")
 shieldSparks = null
-bullet_hole_decal = 0
 
 [node name="Bullet2" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -37.9641)
 speed = 5.0
 time_out = 40.0
-sparks = ExtResource("3_ok2ml")
 shieldSparks = null
-bullet_hole_decal = 0
 
 [node name="Bullet3" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.7821, 0)
 speed = 5.0
 time_out = 40.0
-sparks = ExtResource("3_ok2ml")
 shieldSparks = null
-bullet_hole_decal = 0
 
 [node name="Bullet4" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 18.1145, 0, 0)
 speed = 5.0
 time_out = 40.0
-sparks = ExtResource("3_ok2ml")
 shieldSparks = null
-bullet_hole_decal = 0
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12.7172, 0, 0)
+[node name="CameraGroup" parent="." instance=ExtResource("4_66tts")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 12, 0, 0)

@@ -153,18 +153,8 @@ func _on_load_9_shield_pressed() -> void:
 func _on_load_10_asteroids_pressed() -> void:
 	load_level("Level10Asteroids/AsteroidField")
 
-func _on_load_11_damage_effects_pressed() -> void:
-	load_level("Level11DamageEffectTest/damage_effects_scene")
-
-func _on_load_12_collision_experiment_pressed() -> void:
-	load_level("Level12CollisionTest/collision_experiments")
-
-func _on_load_13_space_station_defense_pressed() -> void:
-	load_level("Level13Everything/EverythingLevel")
-
-func _on_load_14_delete_me_pressed() -> void:
-	load_level("Level14DeleteMe/delete_me")
-
+func _on_load_11_space_station_defense_pressed() -> void:
+	load_level("Level11SpaceStation/EverythingLevel")
 
 func _on_toggle_fullscreen_pressed() -> void:
 	fullscreen = !fullscreen

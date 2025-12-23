@@ -85,7 +85,8 @@ func _ready():
 func _process(_delta: float) -> void:
 	if reticle:
 		var position_ahead:Vector3 = global_position - global_transform.basis.z*500.0
-		Global.set_reticle(null, reticle, position_ahead)
+		#Global.set_reticle(null, reticle, position_ahead)
+		Global.set_reticle(reticle, position_ahead)
 
 
 func ready_to_fire() -> bool:

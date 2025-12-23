@@ -16,6 +16,7 @@ class_name TargetReticles extends Node3D
 #   -(Did I ever get this working?) Attempted to dynamically size and transparency the reticles
 #   -Added code and image for a special reticle when targeted
 #   -Added enum for different sets of reticles
+#   -Added an animation when target is selected
 # see "Scale reticle size and transparency with distance" below, but
 # couldn't get it working.
 
@@ -36,6 +37,8 @@ class_name TargetReticles extends Node3D
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 # Which set of reticle images to use
 enum ReticleSet {FIGHTER, TURRET, WEAKPOINT, REACTOR, MISSILE}
 @export var reticle_set:ReticleSet
@@ -49,15 +52,14 @@ var distance_cutoff_sqd : float
 # Squared distance to camera
 var cam_distance:float
 # Camera
-var camera:Camera3D
+#var camera:Camera3D
 
-# Reticles
-@onready var target_reticle = $TargetReticle
-@onready var offscreen_reticle = $OffscreenReticle
-@onready var distant_reticle: TextureRect = $DistantReticle
-@onready var targeted_reticle: TextureRect = $TargetedReticle
+# Node2Ds containing TextureRects for the reticles
+@onready var target_reticle := $TargetNode2D
+@onready var offscreen_reticle := $OffscreenNode2D
+@onready var distant_reticle := $DistantNode2D
+@onready var targeted_reticle := $TargetedNode2D
 
-# Attributes
 # reticle_offset is half the reticle width and height so
 # they can more easily be displayed centered.
 var offscreen_reticle_offset:Vector2
@@ -68,8 +70,12 @@ var max_reticle_position:Vector2
 var is_targeted:bool:
 	set(value):
 		is_targeted = value
+		# If targeted, play the animation
+		if value:
+			#print('is_targeted set')
+			just_targeted()
 		# If no longer targeted, hide distance to target
-		if !value:
+		else: #if !value:
 			Global.main_scene.hide_dist2targ()
 
 
@@ -79,8 +85,8 @@ func _ready():
 	distance_cutoff_sqd = distance_cutoff * distance_cutoff
 	is_targeted = false
 	hide_all()
-	camera = get_viewport().get_camera_3d()
-	offscreen_reticle_offset = offscreen_reticle.size/2.0
+	#camera = get_viewport().get_camera_3d()
+	offscreen_reticle_offset = $OffscreenNode2D/OffscreenReticle.size/2.0
 	# Get the center of the screen so we can calculate where
 	# to put offscreen indicator reticle by drawing a line
 	# from the offscreen position to the center:
@@ -94,16 +100,18 @@ func _process(_delta):
 	hide_all() # Reset all to hidden
 	# A significant chunk of the following is redundant with
 	# code in the Global.set_reticle function.
-	if !is_instance_valid(camera):
-		camera = get_viewport().get_camera_3d()
-	if !Global.targeting_hud_on or !is_instance_valid(camera):
+	#if !is_instance_valid(camera):
+		#camera = get_viewport().get_camera_3d()
+	#if !Global.targeting_hud_on or !is_instance_valid(camera):
+		#return
+	if !Global.targeting_hud_on:
 		return
 	# Try to put reticle on screen
-	if camera.is_position_in_frustum(global_position):
+	if Global.current_camera.is_position_in_frustum(global_position):
 		# Get distance to camera
-		cam_distance = global_position.distance_squared_to(camera.global_position)
+		cam_distance = global_position.distance_squared_to(Global.current_camera.global_position)
 		# Choose between near and far reticles
-		var reticle_to_use:TextureRect
+		var reticle_to_use:Node2D
 		if is_targeted:
 			reticle_to_use = targeted_reticle
 			# Set distance to target
@@ -127,7 +135,12 @@ func _process(_delta):
 		# Keep transparency between 0 and 255
 		#var alpha:int = 255 - int(percent*255)
 		#target_reticle.modulate = Color(target_reticle.modulate, alpha)
-		Global.set_reticle(camera, reticle_to_use, global_position)
+		
+		# Get position to put the reticle
+		var reticle_position = Global.current_camera.unproject_position(global_position)
+		reticle_to_use.visible = true # Show the reticle
+		reticle_to_use.set_global_position(reticle_position)
+		
 	elif is_targeted: # Show at most one offscreen reticle for targeted unit
 		display_offscreen_reticle()
 		Global.main_scene.hide_dist2targ()
@@ -140,25 +153,25 @@ func set_reticle_textures(rs:ReticleSet) -> void:
 	if rs == ReticleSet.FIGHTER:
 		pass # Use all defaults
 	elif rs == ReticleSet.TURRET:
-		target_reticle.texture = load('res://Assets/Images/crosshair121.png')
-		#offscreen_reticle.texture = load() # use default
-		distant_reticle.texture = load('res://Assets/Images/crosshair120.png')
-		targeted_reticle.texture = load('res://Assets/Images/crosshair134.png')
+		$TargetNode2D/TargetReticle.texture = load('res://Assets/Images/crosshair121.png')
+		#$OffscreenNode2D/OffscreenReticle.texture = load() # use default
+		$DistantNode2D/DistantReticle.texture = load('res://Assets/Images/crosshair120.png')
+		$TargetedNode2D/TargetedReticle.texture = load('res://Assets/Images/crosshair134.png')
 	elif rs == ReticleSet.WEAKPOINT:
-		target_reticle.texture = load('res://Assets/Images/crosshair044.png')
-		#offscreen_reticle.texture = load() # use default
-		distant_reticle.texture = load('res://Assets/Images/crosshair043.png')
-		targeted_reticle.texture = load('res://Assets/Images/crosshair050.png')
+		$TargetNode2D/TargetReticle.texture = load('res://Assets/Images/crosshair044.png')
+		#$OffscreenNode2D/OffscreenReticle.texture = load() # use default
+		$DistantNode2D/DistantReticle.texture = load('res://Assets/Images/crosshair043.png')
+		$TargetedNode2D/TargetedReticle.texture = load('res://Assets/Images/crosshair050.png')
 	elif rs == ReticleSet.REACTOR:
-		target_reticle.texture = load('res://Assets/Images/crosshair056.png')
-		#offscreen_reticle.texture = load() # use default
-		distant_reticle.texture = load('res://Assets/Images/crosshair057.png')
-		targeted_reticle.texture = load('res://Assets/Images/crosshair058.png')
+		$TargetNode2D/TargetReticle.texture = load('res://Assets/Images/crosshair056.png')
+		#$OffscreenNode2D/OffscreenReticle.texture = load() # use default
+		$DistantNode2D/DistantReticle.texture = load('res://Assets/Images/crosshair057.png')
+		$TargetedNode2D/TargetedReticle.texture = load('res://Assets/Images/crosshair058.png')
 	else: #if rs == ReticleSet.MISSILE:
-		target_reticle.texture = load('res://Assets/Images/crosshair085.png')
-		#offscreen_reticle.texture = load() # use default
-		distant_reticle.texture = load('res://Assets/Images/crosshair086.png')
-		targeted_reticle.texture = load('res://Assets/Images/crosshair101.png')
+		$TargetNode2D/TargetReticle.texture = load('res://Assets/Images/crosshair085.png')
+		#$OffscreenNode2D/OffscreenReticle.texture = load() # use default
+		$DistantNode2D/DistantReticle.texture = load('res://Assets/Images/crosshair086.png')
+		$TargetedNode2D/TargetedReticle.texture = load('res://Assets/Images/crosshair101.png')
 
 
 # This was moved into a function for organizational purposes
@@ -167,7 +180,7 @@ func display_offscreen_reticle() -> void:
 	# Calculations to keep the off screen reticle on the
 	# edge of the screen.
 	# https://www.youtube.com/watch?v=EKVYfF8oG0s&t=300s
-	var local_to_camera = camera.to_local(global_position)
+	var local_to_camera = Global.current_camera.to_local(global_position)
 	var reticle_position = Vector2(local_to_camera.x, -local_to_camera.y)
 	if reticle_position.abs().aspect() > max_reticle_position.aspect():
 		reticle_position *= max_reticle_position.x / abs(reticle_position.x)
@@ -179,10 +192,10 @@ func display_offscreen_reticle() -> void:
 
 
 func hide_all() -> void:
-	target_reticle.hide()
-	distant_reticle.hide()
-	offscreen_reticle.hide()
-	targeted_reticle.hide()
+	target_reticle.visible = false
+	distant_reticle.visible = false
+	offscreen_reticle.visible = false
+	targeted_reticle.visible = false
 
 
 func set_color(c:Color) -> void:
@@ -196,3 +209,24 @@ func set_color(c:Color) -> void:
 func die() -> void:
 	is_targeted = false
 	queue_free()
+
+
+func just_targeted() -> void:
+	#if animation_player.is_playing():
+		##print('animation stopped')
+		#animation_player.stop()
+	
+	animation_player.play('ZoomOnTarget')
+	
+	# Get distance to camera
+	#cam_distance = global_position.distance_squared_to(camera.global_position)
+	#if cam_distance > distance_cutoff_sqd:
+		#print('ZoomOnDistantTarget')
+		#distant_reticle.visible = true
+		#animation_player.play('ZoomOnDistantTarget')
+		#print(animation_player.is_playing())
+	#else:
+		#print('ZoomOnTarget')
+		#targeted_reticle.visible = true
+		#animation_player.play('ZoomOnTarget')
+		#print(animation_player.is_playing())
