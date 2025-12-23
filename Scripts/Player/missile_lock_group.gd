@@ -196,7 +196,9 @@ func npc_seeking_update(targeter:Node3D, delta:float) -> void:
 # If no target currently exists, the centermost
 # from targeter's perspective will be sought.
 func attempt_to_start_seeking(targeter:Node3D) -> void:
-	# Unset previous target if any
+	# Unset previous target if any.
+	# It would be better if we checked if the new target
+	# and old target are the same and didn't redo set_targeted
 	var old_target = null
 	if is_instance_valid(target):
 		target.set_targeted(targeter, false)
@@ -224,9 +226,7 @@ func attempt_to_start_seeking(targeter:Node3D) -> void:
 		# this differently. Currently, this is also
 		# called in the player's controller, but is
 		# not otherwise called by NPCs.
-		# I commented this out because it was fucking
-		# with my animation of the reticle.
-		#target.set_targeted(targeter, true)
+		target.set_targeted(targeter, true)
 		
 		# Create missile reticle and put it on the screen
 		# only if another missile is ready to fire

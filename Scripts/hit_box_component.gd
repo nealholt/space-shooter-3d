@@ -66,6 +66,7 @@ func add_damage_exception(s:Ship) -> void:
 # targeter so we can check if it's the player.
 func set_targeted(targeter:Node3D, value:bool) -> void:
 	if Global.player == targeter and reticle:
+		#print('hit box component set targeted ',value)
 		reticle.is_targeted = value
 	# In the future this should also signal to the
 	# object that owns this hitbox that it is

@@ -46,13 +46,9 @@ enum ReticleSet {FIGHTER, TURRET, WEAKPOINT, REACTOR, MISSILE}
 # Squared distance at which to use smaller reticle
 @export var distance_cutoff := 250.0
 var distance_cutoff_sqd : float
-# Factor for modifying transparency of reticle with distance
-#@export var scaling_factor:float = 25000.0
 
 # Squared distance to camera
 var cam_distance:float
-# Camera
-#var camera:Camera3D
 
 # Node2Ds containing TextureRects for the reticles
 @onready var target_reticle := $TargetNode2D
@@ -69,6 +65,7 @@ var max_reticle_position:Vector2
 
 var is_targeted:bool:
 	set(value):
+		#print(value)
 		is_targeted = value
 		# If targeted, play the animation
 		if value:
@@ -100,10 +97,6 @@ func _process(_delta):
 	hide_all() # Reset all to hidden
 	# A significant chunk of the following is redundant with
 	# code in the Global.set_reticle function.
-	#if !is_instance_valid(camera):
-		#camera = get_viewport().get_camera_3d()
-	#if !Global.targeting_hud_on or !is_instance_valid(camera):
-		#return
 	if !Global.targeting_hud_on:
 		return
 	# Try to put reticle on screen
@@ -121,21 +114,6 @@ func _process(_delta):
 			reticle_to_use = distant_reticle
 		else:
 			reticle_to_use = target_reticle
-		# Scale reticle size and transparency with distance,
-		# close up it should be large and transparent
-		# Percent is clamped between 0 and 1
-		#var percent:float = 1.0 - clamp(global_position.distance_squared_to(camera.global_position)/scaling_factor, 0.0, 1.0)
-		#print(percent)
-		#Keep it between 64 and 128 pixels
-		#var dimension:int = int(percent*(256-4)+4)
-		#dimension = clamp(dimension, 64, 128)
-		#target_reticle.set_size(Vector2(dimension, dimension))
-		#target_reticle.size = Vector2(dimension, dimension)
-		#reticle_offset = target_reticle.size/2.0
-		# Keep transparency between 0 and 255
-		#var alpha:int = 255 - int(percent*255)
-		#target_reticle.modulate = Color(target_reticle.modulate, alpha)
-		
 		# Get position to put the reticle
 		var reticle_position = Global.current_camera.unproject_position(global_position)
 		reticle_to_use.visible = true # Show the reticle
@@ -212,21 +190,9 @@ func die() -> void:
 
 
 func just_targeted() -> void:
-	#if animation_player.is_playing():
-		##print('animation stopped')
-		#animation_player.stop()
-	
+	if animation_player.is_playing():
+		#print('animation stopped')
+		animation_player.stop()
+	#print('ZoomOnDistantTarget')
+	#print(animation_player.is_playing())
 	animation_player.play('ZoomOnTarget')
-	
-	# Get distance to camera
-	#cam_distance = global_position.distance_squared_to(camera.global_position)
-	#if cam_distance > distance_cutoff_sqd:
-		#print('ZoomOnDistantTarget')
-		#distant_reticle.visible = true
-		#animation_player.play('ZoomOnDistantTarget')
-		#print(animation_player.is_playing())
-	#else:
-		#print('ZoomOnTarget')
-		#targeted_reticle.visible = true
-		#animation_player.play('ZoomOnTarget')
-		#print(animation_player.is_playing())

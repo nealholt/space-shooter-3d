@@ -191,7 +191,6 @@ func _physics_process(delta: float) -> void:
 			Global.player.global_position,
 			Global.player.weapon_handler.get_bullet_speed(),
 			Global.player.controller.target)
-		#Global.set_reticle(first_person_camera, current_targ_indicator, lead_pos)
 		Global.set_reticle(current_targ_indicator, lead_pos)
 		target_lead_visible = true
 	else:
