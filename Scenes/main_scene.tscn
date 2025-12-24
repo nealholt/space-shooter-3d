@@ -23,14 +23,6 @@ offset_bottom = 23.0
 theme_override_font_sizes/font_size = 32
 text = "Health or velocity or whatever"
 
-[node name="DistanceToTarget" type="Label" parent="HUD"]
-layout_mode = 0
-offset_right = 112.0
-offset_bottom = 45.0
-theme_override_colors/font_color = Color(0, 1, 0, 0.70000005)
-theme_override_font_sizes/font_size = 24
-text = "125 km"
-
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15

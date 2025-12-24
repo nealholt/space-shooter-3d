@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dp3ouf5e4fqhk"]
+[gd_scene load_steps=10 format=3 uid="uid://dp3ouf5e4fqhk"]
 
 [ext_resource type="Script" uid="uid://bnfpjo4h8hgp0" path="res://Scripts/target_reticles.gd" id="1_e3x8k"]
 [ext_resource type="Texture2D" uid="uid://c4n625lh665gm" path="res://Assets/Images/crosshair025.png" id="2_6ce1x"]
 [ext_resource type="Texture2D" uid="uid://bk4twivo4taum" path="res://Assets/Images/crosshair022.png" id="3_fi5sc"]
 [ext_resource type="Texture2D" uid="uid://bpdpseb3x2cbp" path="res://Assets/Images/crosshair026.png" id="4_pfbvf"]
 [ext_resource type="Texture2D" uid="uid://d1c22lm76ch5x" path="res://Assets/Images/crosshair028.png" id="5_82t2t"]
+[ext_resource type="PackedScene" uid="uid://brkg1p5mpjt7n" path="res://Scenes/UI/dynamic_panel.tscn" id="6_pfbvf"]
 
 [sub_resource type="Animation" id="Animation_pfbvf"]
 length = 0.001
@@ -110,3 +111,5 @@ texture = ExtResource("5_82t2t")
 libraries = {
 &"": SubResource("AnimationLibrary_82t2t")
 }
+
+[node name="DynamicPanel" parent="." instance=ExtResource("6_pfbvf")]

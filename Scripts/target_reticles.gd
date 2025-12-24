@@ -17,6 +17,7 @@ class_name TargetReticles extends Node3D
 #   -Added code and image for a special reticle when targeted
 #   -Added enum for different sets of reticles
 #   -Added an animation when target is selected
+#	-Added a line to a label on selected target which includes distance to target
 # see "Scale reticle size and transparency with distance" below, but
 # couldn't get it working.
 
@@ -37,7 +38,10 @@ class_name TargetReticles extends Node3D
 #OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #SOFTWARE.
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animation_player := $AnimationPlayer
+@onready var dynamic_panel := $DynamicPanel
+
+@export var target_text : String = '' ## Text label for this target when it is directly targeted by the player
 
 # Which set of reticle images to use
 enum ReticleSet {FIGHTER, TURRET, WEAKPOINT, REACTOR, MISSILE}
@@ -71,9 +75,8 @@ var is_targeted:bool:
 		if value:
 			#print('is_targeted set')
 			just_targeted()
-		# If no longer targeted, hide distance to target
-		else: #if !value:
-			Global.main_scene.hide_dist2targ()
+		# Show or hide dynamic panel
+		dynamic_panel.visible = value
 
 
 # Called when the node enters the scene tree for the first time.
@@ -91,6 +94,7 @@ func _ready():
 	# Get the max distance along x axis and along y that
 	# the reticle can go so that it's still visible:
 	max_reticle_position = viewport_center - offscreen_reticle_offset
+	dynamic_panel.set_target_text(target_text)
 
 
 func _process(_delta):
@@ -103,25 +107,28 @@ func _process(_delta):
 	if Global.current_camera.is_position_in_frustum(global_position):
 		# Get distance to camera
 		cam_distance = global_position.distance_squared_to(Global.current_camera.global_position)
+		# Get position to put the reticle
+		var reticle_position:Vector2 = Global.current_camera.unproject_position(global_position)
 		# Choose between near and far reticles
 		var reticle_to_use:Node2D
 		if is_targeted:
+			# Get distance to target
+			var dist:float = global_position.distance_to(Global.player.global_position)
+			# Set reticle
 			reticle_to_use = targeted_reticle
-			# Set distance to target
-			var dist = global_position.distance_to(Global.player.global_position)
-			Global.main_scene.set_dist2targ(str(int(dist))+' km')
+			# Position dynamic panel
+			dynamic_panel.visible = true
+			dynamic_panel.set_start_position(reticle_position, str(int(dist))+' km')
 		elif cam_distance > distance_cutoff_sqd:
 			reticle_to_use = distant_reticle
 		else:
 			reticle_to_use = target_reticle
-		# Get position to put the reticle
-		var reticle_position = Global.current_camera.unproject_position(global_position)
 		reticle_to_use.visible = true # Show the reticle
 		reticle_to_use.set_global_position(reticle_position)
 		
 	elif is_targeted: # Show at most one offscreen reticle for targeted unit
 		display_offscreen_reticle()
-		Global.main_scene.hide_dist2targ()
+		dynamic_panel.visible = false
 	#else:
 	# Otherwise reticle is neither on screen nor targeted.
 	# Don't display it.

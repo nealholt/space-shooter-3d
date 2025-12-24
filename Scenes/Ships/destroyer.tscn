@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjtrd5ktq5ypj"]
+[gd_scene load_steps=11 format=3 uid="uid://cjtrd5ktq5ypj"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_2su5o"]
 [ext_resource type="PackedScene" uid="uid://s17i1n8q4r44" path="res://Assets/Ships/destroyer_chassis.tscn" id="2_qpwbv"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="4_mjmit"]
 [ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_1ts7h"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_i0xpl"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="7_c4x8n"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jcj40"]
 points = PackedVector3Array(-5, -5, -14.5455, 5, 5, 14.5455, 5, -5, 14.5455, 5, 5, -14.5455, -5, 5, 14.5455, -5, -5, 14.5455, 5, -5, -14.5455, -5, 5, -14.5455)
@@ -65,3 +66,5 @@ target_capital_ships = true
 ideal_distance = 400.0
 ease_dist = 200.0
 keep_target_above = true
+
+[node name="TargetReticles" parent="." instance=ExtResource("7_c4x8n")]
