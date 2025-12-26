@@ -148,6 +148,7 @@ transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 mesh = SubResource("SphereMesh_2lbpm")
 
 [node name="TargetReticles" parent="." instance=ExtResource("18_g51j4")]
+target_text = "Corvette"
 
 [node name="WeaponHandler" parent="." instance=ExtResource("9_1xly7")]
 

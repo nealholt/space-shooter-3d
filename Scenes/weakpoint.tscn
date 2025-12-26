@@ -22,6 +22,9 @@ mesh = SubResource("SphereMesh_dknmi")
 health_component = NodePath("../HealthComponent")
 reticle_set = 2
 
+[node name="TargetReticles" parent="HitBoxComponent" index="0"]
+target_text = "Radiator"
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
 shape = SubResource("SphereShape3D_b2obo")
 
@@ -30,3 +33,5 @@ shape = SubResource("SphereShape3D_b2obo")
 [node name="HealthComponent" parent="." instance=ExtResource("5_w03n3")]
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+
+[editable path="HitBoxComponent"]

@@ -64,6 +64,7 @@ bullet_timeout = 5.0
 fire_rate = 0.033
 
 [node name="TargetReticles" parent="." instance=ExtResource("15_kfjug")]
+target_text = "Fighter"
 
 [node name="WeaponHandler" parent="." instance=ExtResource("4_dhpb0")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

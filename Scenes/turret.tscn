@@ -34,6 +34,9 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 health_component = NodePath("../HealthComponent")
 reticle_set = 1
 
+[node name="TargetReticles" parent="HitBoxComponent" index="0"]
+target_text = "Turret"
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
 shape = SubResource("SphereShape3D_g6fsi")
 
@@ -41,3 +44,4 @@ shape = SubResource("SphereShape3D_g6fsi")
 script = ExtResource("6_cy7vo")
 
 [editable path="TurretModel"]
+[editable path="HitBoxComponent"]

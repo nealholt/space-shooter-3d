@@ -68,3 +68,4 @@ ease_dist = 200.0
 keep_target_above = true
 
 [node name="TargetReticles" parent="." instance=ExtResource("7_c4x8n")]
+target_text = "Destroyer"

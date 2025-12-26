@@ -84,3 +84,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
 [node name="LaserGun" parent="WeaponHandler" instance=ExtResource("8_lmwtr")]
 
 [node name="TargetReticles" parent="." instance=ExtResource("9_lmwtr")]
+target_text = "Beam Destroyer"

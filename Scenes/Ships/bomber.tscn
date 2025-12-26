@@ -59,3 +59,4 @@ bullet_timeout = 20.0
 fire_rate = 0.1
 
 [node name="TargetReticles" parent="." instance=ExtResource("10_up24e")]
+target_text = "Bomber"

@@ -159,6 +159,9 @@ transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, -30, 0)
 health_component = NodePath("../HealthComponent")
 reticle_set = 3
 
+[node name="TargetReticles" parent="HitBoxComponent" index="0"]
+target_text = "Reactor Core"
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
 shape = SubResource("SphereShape3D_mdcux")
 
@@ -273,3 +276,5 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 60, -37.056, 0)
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 60, -37.056, 48)
 
 [connection signal="died" from="HealthComponent" to="." method="_on_reactor_died"]
+
+[editable path="HitBoxComponent"]
