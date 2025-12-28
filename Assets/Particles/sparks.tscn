@@ -1,9 +1,28 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctylowk0dxhp3"]
+[gd_scene load_steps=12 format=3 uid="uid://ctylowk0dxhp3"]
 
+[ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/ParticleImages/star_05.png" id="1_qgf74"]
 [ext_resource type="Script" uid="uid://btt6vbjkdafk7" path="res://Scripts/vfx/specific_effects/sparks.gd" id="1_wywr5"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvnn5"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_abhd1"]
+transparency = 1
+cull_mode = 2
 shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_qgf74")
+
+[sub_resource type="Gradient" id="Gradient_qgf74"]
+offsets = PackedFloat32Array(0, 0.33333334, 0.6602564)
+colors = PackedColorArray(1, 1, 1, 1, 0.988483, 0, 0.4811423, 1, 0.9776916, 0.9704087, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_abhd1"]
+gradient = SubResource("Gradient_qgf74")
+
+[sub_resource type="Curve" id="Curve_q070q"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_k218c"]
+curve = SubResource("Curve_q070q")
 
 [sub_resource type="Curve" id="Curve_vlsvh"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -15,25 +34,30 @@ curve = SubResource("Curve_vlsvh")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mbobl"]
 direction = Vector3(0, 0, 1)
 spread = 25.0
-initial_velocity_min = 6.0
-initial_velocity_max = 12.0
+initial_velocity_min = 40.0
+initial_velocity_max = 50.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.5
+attractor_interaction_enabled = false
+scale_min = 5.0
+scale_max = 8.0
 scale_curve = SubResource("CurveTexture_muvff")
+color_ramp = SubResource("GradientTexture1D_abhd1")
+emission_curve = SubResource("CurveTexture_k218c")
 
-[sub_resource type="BoxMesh" id="BoxMesh_q4wh2"]
-size = Vector3(0.1, 0.1, 0.1)
+[sub_resource type="QuadMesh" id="QuadMesh_q070q"]
 
 [node name="Sparks" type="GPUParticles3D"]
 top_level = true
-material_override = SubResource("StandardMaterial3D_lvnn5")
+material_override = SubResource("StandardMaterial3D_abhd1")
 cast_shadow = 0
 emitting = false
 amount = 40
+lifetime = 0.25
 one_shot = true
-explosiveness = 1.0
+explosiveness = 0.7
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_mbobl")
-draw_pass_1 = SubResource("BoxMesh_q4wh2")
+draw_pass_1 = SubResource("QuadMesh_q070q")
 script = ExtResource("1_wywr5")
 
 [connection signal="finished" from="." to="." method="_on_finished"]

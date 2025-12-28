@@ -5,8 +5,6 @@
 
 [node name="ProjectileRay" instance=ExtResource("1_8o1e8")]
 does_ricochet = false
-sparks = 0
-shieldSparks = 0
 
 [node name="Timer" parent="." index="0"]
 wait_time = 1.0
