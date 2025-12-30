@@ -3,6 +3,8 @@ ringed_gas_giant_planet.png
 https://space-spheremaps.itch.io/space-spheremaps
 
 purple_nebula_complex.png
-was made using http://alexcpeterson.com/spacescape/
+and
+pink_blue_path.png
+were made using http://alexcpeterson.com/spacescape/
 which I discovered here https://www.youtube.com/watch?v=NtVABru6OXE
 this converter was also used https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html

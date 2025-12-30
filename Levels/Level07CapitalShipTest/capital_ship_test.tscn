@@ -1,24 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwts5v3tvcwab"]
+[gd_scene load_steps=9 format=3 uid="uid://cwts5v3tvcwab"]
 
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="1_5h06f"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_e2ue2"]
 [ext_resource type="PackedScene" uid="uid://dp3w08p8gkd3p" path="res://Scenes/Ships/capital_ship_frigate.tscn" id="2_jciow"]
+[ext_resource type="Texture2D" uid="uid://dis3t0y2s7fn6" path="res://Assets/Skyboxes/pink_blue_path.png" id="2_syf3q"]
 [ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="4_vkmbw"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sg63n"]
-sky_top_color = Color(0.215686, 0.0235294, 0.490196, 1)
-sky_horizon_color = Color(0.565686, 0.531373, 0.701961, 1)
-ground_bottom_color = Color(0.0470588, 0.101961, 0.317647, 1)
-ground_horizon_color = Color(0.565686, 0.531373, 0.701961, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tk3ba"]
+panorama = ExtResource("2_syf3q")
+filter = false
 
 [sub_resource type="Sky" id="Sky_jjo5w"]
-sky_material = SubResource("ProceduralSkyMaterial_sg63n")
+sky_material = SubResource("PanoramaSkyMaterial_tk3ba")
 
 [sub_resource type="Environment" id="Environment_tss5r"]
 background_mode = 2
+background_energy_multiplier = 1.2
 sky = SubResource("Sky_jjo5w")
+ambient_light_source = 1
+reflected_light_source = 1
 tonemap_mode = 2
-glow_enabled = true
+glow_intensity = 0.5
+glow_bloom = 0.1
 
 [node name="CapitalShipTest" type="Node3D"]
 script = ExtResource("1_e2ue2")
