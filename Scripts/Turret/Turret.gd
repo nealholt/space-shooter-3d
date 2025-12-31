@@ -124,5 +124,5 @@ func _on_health_component_health_lost() -> void:
 
 
 func _on_health_component_died() -> void:
-	
+	VfxManager.play(VisualEffectSetting.VISUAL_EFFECT_TYPE.SINGLE_EXPLOSION_8X, global_position)
 	queue_free()

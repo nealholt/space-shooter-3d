@@ -90,13 +90,13 @@ shape = SubResource("ConvexPolygonShape3D_0bygj")
 [node name="TurretGroup" parent="." instance=ExtResource("4_h1ncn")]
 
 [node name="TopLeftFrontHardpoint" type="Node3D" parent="TurretGroup"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 53, -155)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 50, -155)
 script = ExtResource("5_cyiqs")
 min_elevation_deg = 5.0
 max_elevation_deg = 90.0
 
 [node name="TopRightFrontHardpoint2" type="Node3D" parent="TurretGroup"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 53, -155)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 50, -155)
 script = ExtResource("5_cyiqs")
 min_elevation_deg = 5.0
 max_elevation_deg = 90.0

@@ -127,7 +127,7 @@ func _ready() -> void:
 			reticle = child
 		# Remove turrets if we're just testing
 		elif child is TurretGroup and disable_for_testing:
-			child.queue_free()
+			child.disable_for_testing()
 		# Remove hangar if we're just testing
 		elif child is Hangar and disable_for_testing:
 			child.queue_free()
