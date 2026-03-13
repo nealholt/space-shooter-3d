@@ -2,6 +2,8 @@ class_name Turret extends Node3D
 
 const TURRET_SCENE:PackedScene = preload("res://Scenes/turret.tscn")
 
+@onready var line_of_sight := $TurretModel/Body/Head/RayCast3D
+
 # movement speeds and constraints in degrees
 @export var elevation_speed_deg: float = 5
 @export var rotation_speed_deg: float = 5
@@ -22,6 +24,11 @@ var orientation_data:TargetOrientationData
 # If angle to target is less than this number of degrees, then shoot
 @export var angle_to_shoot_deg : float = 5
 var angle_to_shoot : float = deg_to_rad(angle_to_shoot_deg)
+
+# So turrets know what team they are on. These
+# are set in team_setup.gd
+var ally_team:String
+var enemy_team:String
 
 
 static func new_turret(my_parent:TurretData) -> Turret:
@@ -115,6 +122,18 @@ func _physics_process(delta: float) -> void:
 	
 	# Shoot if within angle limit
 	if is_instance_valid(orientation_data.target) and Global.get_angle_to_target(head.global_position, orientation_data.target_pos, head.global_transform.basis.z) < angle_to_shoot:
+		# Prevent friendly fire.
+		# I'm not sure how much this is helping.
+		if line_of_sight.is_colliding():
+			var collider = line_of_sight.get_collider()
+			if is_instance_valid(collider) and 'ally_team' in collider and collider.ally_team == ally_team:
+				#print('\nturret seeing friendly ',collider)
+				return
+			#elif 'ally_team' in collider and collider.ally_team != ally_team:
+				#print('\nturret seeing enemy ',collider)
+			#else:
+				#print('\nturret seeing bogey ',collider)
+		# Fire ze guns!
 		for gun in guns:
 			gun.shoot(self, orientation_data.target)
 

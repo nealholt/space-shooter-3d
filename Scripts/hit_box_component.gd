@@ -30,6 +30,11 @@ var hit_feedback:HitFeedback
 # npcs from shooting down their own missiles.
 var damage_exception:Ship
 
+# So hitboxes know what team they are on. These
+# are set in team_setup.gd
+var ally_team:String
+var enemy_team:String
+
 
 func _ready() -> void:
 	# Search through children for various components
@@ -49,6 +54,7 @@ func damage(amount:float, damager=null):
 	if damager and is_instance_valid(damage_exception) and damager == damage_exception:
 		return
 	if health_component:
+		#Global.friendly_fire_checker(damager, get_parent()) #TESTING
 		health_component.health -= amount
 		if health_component.is_dead():
 			reticle.is_targeted = false

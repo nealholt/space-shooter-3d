@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://bk3gan1022wvm"]
+
+[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_c6nlv"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_ae0ut"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="3_cyvo1"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="4_2hehs"]
+[ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="5_8rk4t"]
+[ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="6_uy87i"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vwrj7"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_7srgs"]
+sky_material = SubResource("ProceduralSkyMaterial_vwrj7")
+
+[sub_resource type="Environment" id="Environment_o8mwe"]
+background_mode = 2
+sky = SubResource("Sky_7srgs")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_c6nlv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 1.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_o8mwe")
+
+[node name="RedTeam" type="Node3D" parent="."]
+script = ExtResource("2_ae0ut")
+
+[node name="Fighter" parent="RedTeam" instance=ExtResource("3_cyvo1")]
+transform = Transform3D(0.44026825, -5.8491732e-08, 0.8978663, 4.37114e-08, 1, 4.37114e-08, -0.8978663, 2.000225e-08, 0.44026825, 11.76483, 0, -11.182758)
+
+[node name="NPCController" parent="RedTeam/Fighter" instance=ExtResource("4_2hehs")]
+
+[node name="BlueTeam" type="Node3D" parent="."]
+script = ExtResource("2_ae0ut")
+team = "blue team"
+
+[node name="Fighter" parent="BlueTeam" instance=ExtResource("5_8rk4t")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 17.406166)
+
+[node name="VictoryLayer" parent="." instance=ExtResource("6_uy87i")]
+visible = false

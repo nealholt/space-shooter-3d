@@ -74,6 +74,11 @@ var got_hit_audio:AudioStreamPlayer
 var damage_exception:Ship
 var reticle:TargetReticles
 
+# So ships know what team they are on. These
+# are set in team_setup.gd
+var ally_team:String
+var enemy_team:String
+
 
 #I really like the idea of _ready functions
 # searching through and equipping components
@@ -239,6 +244,7 @@ func damage(amount:float, damager=null):
 	if damager and is_instance_valid(damage_exception) and damager == damage_exception:
 		return
 	if health_component:
+		#Global.friendly_fire_checker(damager, self) #TESTING
 		health_component.health -= amount
 	#if hit_feedback:
 		#hit_feedback.hit()

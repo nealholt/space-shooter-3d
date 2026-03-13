@@ -27,6 +27,13 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8
 [node name="GunHardpoint2" type="Node3D" parent="TurretModel/Body/Head/Barrel2" index="0" groups=["gun hardpoint"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0)
 
+[node name="RayCast3D" type="RayCast3D" parent="TurretModel/Body/Head" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
+exclude_parent = false
+target_position = Vector3(0, 0, 1000)
+collision_mask = 9
+collide_with_areas = true
+
 [node name="HealthComponent" parent="." instance=ExtResource("8_qikae")]
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_b5qkf")]

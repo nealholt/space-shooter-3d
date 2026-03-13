@@ -144,6 +144,12 @@ func _on_load_10_asteroids_pressed() -> void:
 func _on_load_11_space_station_defense_pressed() -> void:
 	load_level("Level11SpaceStation/EverythingLevel")
 
+func _on_load_12_race_course_pressed() -> void:
+	load_level("Level12RaceCourse/race_course")
+
+func _on_load_13_shooting_gallery_pressed() -> void:
+	load_level("Level13ShootingGallery/shooting_gallery")
+
 func _on_toggle_fullscreen_pressed() -> void:
 	fullscreen = !fullscreen
 	if fullscreen:

@@ -407,3 +407,29 @@ func player_feedback(collider, shoot_data) -> void:
 	else:
 		#print('hit but no damage') # bad_hit.wav
 		AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.HIT_NO_DAMAGE)
+
+
+# TESTING
+func friendly_fire_checker(damager, damagee) -> void:
+	if !is_instance_valid(damager):
+		return
+	if !is_instance_valid(damagee):
+		return
+	var damager_team = friendly_fire_helper(damager)
+	var damagee_team = friendly_fire_helper(damagee)
+	if damager_team == damagee_team:
+		print('\n', damager_team, ' friendly fire\n', damager, '\n', damagee)
+	if damager is Ship:
+		print('damager is ship')
+	if damager is Turret:
+		print('damager is turret')
+# This function is just begging for an infinite loop, but
+# it's just for TESTING for now.
+# Look for parents of n until you find a team setup.
+# Return the team.
+func friendly_fire_helper(n) -> String:
+	# Climb up the chain until you find a TeamSetup
+	var n_parent = n.get_parent()
+	while !(n_parent is TeamSetup):
+		n_parent = n_parent.get_parent()
+	return n_parent.team
