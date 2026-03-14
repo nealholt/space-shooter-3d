@@ -110,7 +110,7 @@ text = "Load 11: Space Station Defense"
 [node name="Load12RaceCourse" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 12: Race Course (TODO)"
+text = "Load 12: Race Course"
 
 [node name="Load13ShootingGallery" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
