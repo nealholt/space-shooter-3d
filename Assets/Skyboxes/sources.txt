@@ -8,3 +8,13 @@ pink_blue_path.png
 were made using http://alexcpeterson.com/spacescape/
 which I discovered here https://www.youtube.com/watch?v=NtVABru6OXE
 this converter was also used https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html
+
+moon_with_stars made using 
+http://alexcpeterson.com/spacescape/
+and this image
+https://www.space.com/jupiter-moon-io-juno-probe-photos-october-2023
+
+earth_with_stars made using 
+http://alexcpeterson.com/spacescape/
+and this image
+https://www.pexels.com/photo/earth-wallpaper-41953/

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cpbbcxhe4a1pv" path="res://Levels/Level12RaceCourse/race_course.gd" id="1_56dt1"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_56dt1"]
-[ext_resource type="Texture2D" uid="uid://ba1gb0dgunagh" path="res://Assets/Skyboxes/ringed_gas_giant_planet.png" id="2_va5od"]
+[ext_resource type="Texture2D" uid="uid://dnjgm2epla1cf" path="res://Assets/Skyboxes/earth_with_stars.png" id="2_va5od"]
 [ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="4_gnpxn"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="5_sc2p3"]
 [ext_resource type="PackedScene" uid="uid://dec2h3fkjfo0m" path="res://Scenes/race_checkpoint.tscn" id="6_56dt1"]
@@ -17,14 +17,14 @@ sky_material = SubResource("PanoramaSkyMaterial_gnpxn")
 background_mode = 2
 background_energy_multiplier = 1.5
 sky = SubResource("Sky_434m5")
-ambient_light_source = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.05
 reflected_light_source = 1
 tonemap_mode = 2
+tonemap_exposure = 0.5
+tonemap_white = 3.0
 glow_enabled = true
-glow_intensity = 1.2
-glow_bloom = 0.2
-glow_hdr_threshold = 0.5
-glow_hdr_scale = 0.5
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_56dt1")

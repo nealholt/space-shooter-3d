@@ -19,11 +19,11 @@ func position_randomly():
 	#Spawn orbs in random location:
 	#https://godotengine.org/qa/86921/random-spawning
 	var coord_range = Vector2(-MAX_COORD, MAX_COORD)
-
+	
 	var random_x = randi() % int(coord_range[1]- coord_range[0]) + 1 + coord_range[0]
 	var random_y =  randi() % int(coord_range[1]) + 1 #Minimum, is zero to not go below ground
 	var random_z =  randi() % int(coord_range[1]- coord_range[0]) + 1 + coord_range[0]
-
+	
 	global_position = Vector3(random_x, random_y, random_z)
 
 

@@ -1,22 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2p5fk853guwk"]
+[gd_scene load_steps=10 format=3 uid="uid://b2p5fk853guwk"]
 
 [ext_resource type="Script" uid="uid://d3i1pj3lavuuy" path="res://Levels/Level01Balloons/level1.gd" id="1_dflt6"]
+[ext_resource type="Texture2D" uid="uid://creoqhif83mdb" path="res://Assets/Skyboxes/moon_with_stars.png" id="2_0jw65"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_widnh"]
 [ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="3_e7dw1"]
+[ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="5_vsiph"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="8_b1kea"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p3vaa"]
-sky_top_color = Color(0.133333, 0.435294, 0.839216, 1)
-sky_horizon_color = Color(0.533333, 0.662745, 0.735294, 1)
-ground_bottom_color = Color(0, 0.215686, 0.101961, 1)
-ground_horizon_color = Color(0.533333, 0.662745, 0.735294, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qdonm"]
+panorama = ExtResource("2_0jw65")
 
-[sub_resource type="Sky" id="Sky_ga6dx"]
-sky_material = SubResource("ProceduralSkyMaterial_p3vaa")
+[sub_resource type="Sky" id="Sky_434m5"]
+sky_material = SubResource("PanoramaSkyMaterial_qdonm")
 
-[sub_resource type="Environment" id="Environment_xbysf"]
+[sub_resource type="Environment" id="Environment_80bpm"]
 background_mode = 2
-sky = SubResource("Sky_ga6dx")
+sky = SubResource("Sky_434m5")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.05
+reflected_light_source = 1
 tonemap_mode = 2
 glow_enabled = true
 
@@ -24,12 +27,11 @@ glow_enabled = true
 script = ExtResource("1_dflt6")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.75, -0.43301, 0, 12, 0)
-light_color = Color(1, 1, 0.745098, 1)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_xbysf")
+environment = SubResource("Environment_80bpm")
 
 [node name="RedTeam" type="Node3D" parent="."]
 script = ExtResource("2_widnh")
@@ -44,3 +46,6 @@ team = "blue team"
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -174.264, 30.6708, -286.437)
 speed = 50.0
 time_out = 20.0
+
+[node name="VictoryLayer" parent="." instance=ExtResource("5_vsiph")]
+visible = false

@@ -15,8 +15,7 @@ func activate_checkpoint() -> void:
 func deactivate_checkpoint() -> void:
 	particles.emitting = false
 	area_3d.monitoring = false
-	reticle.hide()
-	reticle.is_targeted = false
+	reticle.die()
 
 func _on_area_3d_body_entered(_body: Node3D) -> void:
 	# Play a sound
