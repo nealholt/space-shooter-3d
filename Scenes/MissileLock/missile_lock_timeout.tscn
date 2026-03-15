@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://clfeojpa5dckh"]
+
+[ext_resource type="Script" uid="uid://slfugligpsgm" path="res://Scripts/MissileLock/missile_lock_timeout.gd" id="1_3xrx8"]
+
+[node name="MissileLockTImeout" type="Node"]
+script = ExtResource("1_3xrx8")
