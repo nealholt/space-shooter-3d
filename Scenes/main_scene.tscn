@@ -55,62 +55,62 @@ alignment = 1
 [node name="Load1Balloons" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 1: Balloons"
+text = "Level: Shooting Gallery"
 
 [node name="Load2ShootingGallery" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 2: Shooting Gallery"
+text = "Test: Shipyard"
 
 [node name="Load31v5" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 3: 1 vs 5"
+text = "Level: 1 vs 5"
 
 [node name="Load4NPCTargeting" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 4: NPC vs Stationary target"
+text = "Test: NPC vs Stationary target"
 
 [node name="Load5Furball" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 5: Red vs Blue"
+text = "Level: Red vs Blue"
 
 [node name="Load6TurretTest" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 6: Turret Test"
+text = "Test: Turret"
 
 [node name="Load7CapitalShipTest" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 7: Capital Ship Test"
+text = "Test: Capital Ship"
 
 [node name="Load8NearMissSound" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 8: Near Miss Test"
+text = "Test: Near Miss"
 
 [node name="Load9Shield" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 9: Shield Test"
+text = "Test: Shield"
 
 [node name="Load10Asteroids" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 10: Asteroids"
+text = "Test: Asteroids"
 
 [node name="Load11SpaceStationDefense" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 11: Space Station Defense"
+text = "Level: Space Station Defense"
 
 [node name="Load12RaceCourse" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Load 12: Race Course"
+text = "Level: Race Course"
 
 [node name="Settings" type="VBoxContainer" parent="Menu/HBoxContainer"]
 layout_mode = 2
