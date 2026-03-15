@@ -27,15 +27,15 @@ func _ready() -> void:
 			else:
 				blue_team = c
 
-# This function is called after a ship dies.
-func check_win_loss(s:Ship) -> void:
+# This function is called after something dies.
+func check_win_loss(dead_thing) -> void:
 	# If there is no end screen or enemy team, return.
 	# There's nothing to do here.
 	if !(end_screen and red_team):
 		return
 	# If the player died. Show defeat.
 	# If the entire red team died. Show victory.
-	if Global.player == s:
+	if Global.player == dead_thing:
 		end_screen.defeat()
 		# Prevent reactivation of end_screen.
 		EventsBus.ship_died.disconnect(check_win_loss)

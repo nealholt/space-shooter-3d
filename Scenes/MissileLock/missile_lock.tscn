@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5srvi8rfrlkh"]
+
+[ext_resource type="Script" uid="uid://uc67uswnmbfy" path="res://Scripts/MissileLock/missile_lock.gd" id="1_38tbx"]
+
+[node name="MissileLock" type="Node"]
+script = ExtResource("1_38tbx")

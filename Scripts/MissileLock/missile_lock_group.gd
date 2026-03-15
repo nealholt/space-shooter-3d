@@ -1,5 +1,4 @@
-extends Node3D
-class_name MissileLockGroup
+class_name MissileLockGroup extends Node3D
 
 # This uses images from the kenney crosshair pack
 # https://kenney.nl/assets/crosshair-pack
@@ -25,6 +24,10 @@ var slower_lock_angle:float = 25.0 # degrees
 
 # Gun to fire when launch is triggered
 var missile_launcher:Gun
+# Scene that controls the style of missile lock
+# (How the reticle moves and if skill is required to
+# get the lock. Stuff like that.)
+var missile_lock:MissileLock
 
 @export var missile_range:float = 600.0 ## Range within which missile lock can be acquired.
 # Calculated from missile_range
@@ -42,42 +45,15 @@ var time_since_lock:float = 0.0
 var target:Node3D
 # TextureRect used for the reticle when still
 # acquiring target
-@onready var acquiring: TextureRect = $AcquiringTargetReticle
-# Half the width of the acquiring TextureRect to display it centered
-var acquiring_offset:Vector2
+@onready var acquiring:TextureRect = $AcquiringTargetReticle
 # TextureRect used for the reticle when lock is acquired
-@onready var lock: TextureRect = $TargetLockReticle
+@onready var lock:TextureRect = $TargetLockReticle
 # Half the width of the lock TextureRect to display it centered
 var lock_offset:Vector2
-# Current onscreen position of reticle
-var reticle_position:Vector2
 # Whether or not we are in the seeking state
 var seeking:bool = false
 # Whether or not we are in the locked state
 var locked:bool = false
-
-# Speed at which reticle approaches target when use_lerp
-# is false measured in onscreen pixels per second (I think)
-@export var speed:float = 250.0
-
-# Whether to lerp reticle to target or use move_toward
-@export var use_lerp:bool = false
-
-# Lerping reticle to target has a distinct feel and
-# it's not bad. I'm not sure which I prefer so I'm
-# keeping both for now.
-@export var lerp_modifier:float = 12.0
-# lerp_weight accumulates over time until it's at 100 percent
-var lerp_weight:float = 0.0
-
-# Distance multiplier for how far from onscreen position
-# of target to put the reticle when it's first shown
-# on screen.
-@export var distance_multiplier:float = 3.0
-
-# Squared distance at which to transition
-# into the locked state
-@export var lock_dist_sqd:float = 6.0
 
 # Both missile lock audio clips were created here:
 # https://sfxr.me/
@@ -96,10 +72,6 @@ var lerp_weight:float = 0.0
 # There's got to be a better way to repeat the seeking tone
 var repeat_tone_max_time:float = 0.5 # seconds
 var repeat_tone_min_time:float = 0.05 # seconds
-# Scale time between beeps with reticle distance to target
-var distance_scaling: = 70.0**2
-# Onscreen distance between reticle and target
-var dist_tween_reticles:float
 @onready var audio_timer: Timer = $AudioTimer
 
 # The following two variables get set by team_setup.gd
@@ -110,7 +82,6 @@ var enemy_team:String
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	missile_range_sqd = missile_range*missile_range
-	acquiring_offset = acquiring.size/2.0
 	acquiring.hide()
 	lock_offset = lock.size/2.0
 	lock.hide()
@@ -119,6 +90,13 @@ func _ready() -> void:
 	for child in get_children():
 		if child is Gun:
 			missile_launcher = child
+		elif child is MissileLock:
+			missile_lock = child
+			missile_lock.lock_acquired.connect(acquire_lock)
+			missile_lock.acquiring_offset = acquiring.size/2.0
+	# It's mandatory that missile lock be set
+	if !missile_lock:
+		push_error('ERROR in MissileLockGroup. There must be a MissileLock scene as a child.')
 	# If this is an NPC missile lock group, then
 	# queue free all children of this node EXCEPT
 	# for the gun / missile_launcher.
@@ -132,7 +110,7 @@ func _ready() -> void:
 # Ship that this scene is a child of ought to be the
 # targeter. This function will be called from
 # physics_process with delta as elapsed time.
-func update(targeter:Node3D, delta: float) -> void:
+func update(targeter:Node3D, delta:float) -> void:
 	# NPCs attempt to start seeking at all times
 	if npc_missile_lock and !seeking:
 		attempt_to_start_seeking(targeter)
@@ -161,11 +139,11 @@ func update(targeter:Node3D, delta: float) -> void:
 			if seeking:
 				# Move reticle into position and, if it's
 				# close enough, acquire lock
-				continue_seeking(delta, target_onscreen, targeter)
+				missile_lock.continue_seeking(delta, target_onscreen, targeter, acquiring)
 			# It seems like this should be an elif,
 			# but there's a messy little one frame
 			# flicker between the reticles if you
-			# make it an elid, so don't!
+			# make it an elif, so don't!
 			if locked:
 				time_since_lock += delta
 				lock.set_global_position(target_onscreen - lock_offset)
@@ -253,52 +231,14 @@ func start_seeking() -> void:
 	# Otherwise run the code for a player,
 	# which includes audio and visuals.
 	var target_onscreen:Vector2 = Global.current_camera.unproject_position(target.global_position)
-	# Make reticle approach the target from the far side of
-	# center screen relative to the target's on-screen position.
-	# First, get the position of the target as if 0,0 was center screen
-	reticle_position = (DisplayServer.window_get_size()/2.0) - target_onscreen
-	# Then adjust that position to the far side of center.
-	reticle_position = distance_multiplier*reticle_position + target_onscreen
+	# Position reticle
+	missile_lock.start_seeking(target_onscreen)
 	# Don't beep immediately. Don't show immediately and
 	# give max delay audio delay.
 	# The beep and flicker of the reticle are annoying when
 	# you're just retargeting. I moved acquiring.show() to
 	# the timeout of the audio timer.
 	audio_timer.start(repeat_tone_max_time)
-
-
-# Move reticle into position and, if it's close enough,
-# acquire lock
-func continue_seeking(delta:float, target_onscreen:Vector2, targeter:Node3D) -> void:
-	# Move reticle either with lerp or move_toward
-	if use_lerp:
-		lerp_weight += delta/lerp_modifier
-		reticle_position = lerp(reticle_position, target_onscreen, lerp_weight)
-	else:
-		reticle_position = reticle_position.move_toward(target_onscreen, delta*speed)
-	# "acquiring" is the reticle. Position it on screen
-	acquiring.set_global_position(reticle_position - acquiring_offset)
-	# Check if lock acquired
-	dist_tween_reticles = target_onscreen.distance_squared_to(reticle_position)
-	#print(int(sqrt(dist_tween_reticles)))
-	if dist_tween_reticles < lock_dist_sqd:
-		acquire_lock()
-		target.lock_acquired(targeter)
-		# Subract delta here because we're
-		# about to add delta in the "if locked"
-		#in the update function, but we
-		# don't want to actually count this
-		# delta time (on this frame where we
-		# only just acquired lock) as time
-		# since lock. So this cancels out
-		# the addition of delta in update.
-		time_since_lock -= delta
-
-
-# Scale the audio delay with distance to target.
-# Return a value between repeat_tone_min_time and repeat_tone_max_time
-func get_audio_delay() -> float:
-	return min(dist_tween_reticles/distance_scaling, 1.0) * (repeat_tone_max_time - repeat_tone_min_time) + repeat_tone_min_time
 
 
 func stop_seeking() -> void:
@@ -308,7 +248,7 @@ func stop_seeking() -> void:
 	if !npc_missile_lock:
 		acquiring.hide()
 		lock.hide()
-		lerp_weight = 0.0
+		missile_lock.stop_seeking()
 		seeking_audio.stop()
 		locked_audio.stop()
 
@@ -330,12 +270,13 @@ func launch(targeter:Node3D) -> void:
 		missile_launcher.shoot(targeter, target, is_quick_launch and !npc_missile_lock)
 
 
-func acquire_lock() -> void:
+func acquire_lock(targeter:Node3D) -> void:
 	acquiring.hide()
 	lock.show()
 	locked = true
 	locked_audio.play()
 	seeking = false
+	target.lock_acquired(targeter)
 
 
 # Replay the seeking audio
@@ -343,4 +284,4 @@ func _on_audio_timer_timeout() -> void:
 	if seeking and !locked:
 		acquiring.show()
 		seeking_audio.play()
-		audio_timer.start(get_audio_delay())
+		audio_timer.start(missile_lock.get_audio_delay(repeat_tone_min_time, repeat_tone_max_time))

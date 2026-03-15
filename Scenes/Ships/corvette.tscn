@@ -1,9 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=33 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="3_crlbv"]
-[ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/missile_lock_group.tscn" id="4_vmlm7"]
+[ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/MissileLock/missile_lock_group.tscn" id="4_vmlm7"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="7_vhcpa"]
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Assets/SoundEffects/lowFrequency_explosion_001.ogg" id="8_klb2b"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="9_1xly7"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Assets/Ships/fighter_chassis_diamond.tscn" id="12_a77x5"]
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Assets/Ships/engine_mesh_component.tscn" id="12_e20ac"]
 [ext_resource type="PackedScene" uid="uid://ddoyejlbh51s5" path="res://Scenes/Guns/hit_scan_gun.tscn" id="13_428na"]
+[ext_resource type="PackedScene" uid="uid://db74cban80pwd" path="res://Scenes/MissileLock/missile_lock_lerp.tscn" id="13_gmlsk"]
 [ext_resource type="PackedScene" uid="uid://dup57p4ygajr1" path="res://Scenes/Guns/laser_shotgun.tscn" id="15_ufo67"]
 [ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Assets/Guns/laser_beam.tscn" id="16_y2utm"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="18_g51j4"]
@@ -140,6 +141,8 @@ bullet = ExtResource("3_crlbv")
 damage = 50.0
 bullet_speed = 200.0
 fire_rate = 0.3
+
+[node name="MissileLockLerp" parent="MissileLockGroup" instance=ExtResource("13_gmlsk")]
 
 [node name="Shield" parent="." instance=ExtResource("21_5ow11")]
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)

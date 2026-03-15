@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d3i1pj3lavuuy" path="res://Levels/Level01Balloons/level1.gd" id="1_dflt6"]
 [ext_resource type="Texture2D" uid="uid://creoqhif83mdb" path="res://Assets/Skyboxes/moon_with_stars.png" id="2_0jw65"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_widnh"]
-[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="3_e7dw1"]
+[ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="5_0jw65"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="5_vsiph"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="8_b1kea"]
 
@@ -40,12 +40,28 @@ script = ExtResource("2_widnh")
 script = ExtResource("2_widnh")
 team = "blue team"
 
-[node name="Corvette" parent="BlueTeam" instance=ExtResource("3_e7dw1")]
-
 [node name="Missile1" parent="BlueTeam" instance=ExtResource("8_b1kea")]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -174.264, 30.6708, -286.437)
 speed = 50.0
 time_out = 20.0
 
+[node name="Fighter" parent="BlueTeam" instance=ExtResource("5_0jw65")]
+
+[node name="MissileLockGroup" parent="BlueTeam/Fighter" index="7"]
+npc_missile_lock = null
+lock_timeout = null
+missile_lock_max_angle = null
+quick_launch_interval = 0.2
+speed = 500.0
+use_lerp = null
+lerp_modifier = null
+distance_multiplier = null
+lock_dist_sqd = null
+
+[node name="MissileLauncher" parent="BlueTeam/Fighter/MissileLockGroup" index="7"]
+fire_rate = 2.0
+
 [node name="VictoryLayer" parent="." instance=ExtResource("5_vsiph")]
 visible = false
+
+[editable path="BlueTeam/Fighter"]

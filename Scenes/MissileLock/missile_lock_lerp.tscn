@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://db74cban80pwd"]
+
+[ext_resource type="Script" uid="uid://dhpiqnqia7dxi" path="res://Scripts/MissileLock/missile_lock_lerp.gd" id="1_ht1jl"]
+
+[node name="MissileLockLerp" type="Node"]
+script = ExtResource("1_ht1jl")

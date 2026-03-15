@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dct3loj10mg5k"]
+[gd_scene load_steps=13 format=3 uid="uid://dct3loj10mg5k"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_uw5oo"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="2_6e5lt"]
@@ -8,7 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="5_rgdmc"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="7_f8b5m"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="8_30gv8"]
-[ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/missile_lock_group.tscn" id="9_7wsae"]
+[ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/MissileLock/missile_lock_group.tscn" id="9_7wsae"]
+[ext_resource type="PackedScene" uid="uid://db74cban80pwd" path="res://Scenes/MissileLock/missile_lock_lerp.tscn" id="10_qsmaf"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="10_up24e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rfws3"]
@@ -48,7 +49,6 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, -1.35, 0.5, 3.3)
 npc_missile_lock = true
 lock_timeout = 0.2
 missile_range = 2000.0
-speed = 50.0
 
 [node name="MissileLauncher" parent="MissileLockGroup" instance=ExtResource("7_f8b5m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -1.1)
@@ -57,6 +57,8 @@ damage = 100.0
 bullet_speed = 80.0
 bullet_timeout = 20.0
 fire_rate = 0.1
+
+[node name="MissileLockLerp" parent="MissileLockGroup" instance=ExtResource("10_qsmaf")]
 
 [node name="TargetReticles" parent="." instance=ExtResource("10_up24e")]
 target_text = "Bomber"
