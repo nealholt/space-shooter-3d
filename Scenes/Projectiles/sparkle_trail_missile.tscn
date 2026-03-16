@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=3 uid="uid://b4028pkj7mmy4"]
+
+[ext_resource type="PackedScene" uid="uid://caody2m8xh0b6" path="res://Scenes/Projectiles/projectile_ray.tscn" id="1_rlhtu"]
+[ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="2_fvvr7"]
+[ext_resource type="PackedScene" uid="uid://dto664xfw5qbf" path="res://Scenes/MovementControllers/physics_seek_controller.tscn" id="3_prbgi"]
+[ext_resource type="Texture2D" uid="uid://ce6i4w30wrek0" path="res://Assets/ParticleImages/star_09.png" id="4_i1rx7"]
+[ext_resource type="Texture2D" uid="uid://cuth4s67j0brc" path="res://Assets/ParticleImages/star_08.png" id="5_i1rx7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6g5h8"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(0.8105349, 0.00064976513, 0.83492166, 1)
+albedo_texture = ExtResource("4_i1rx7")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="Curve" id="Curve_2ivyg"]
+_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.3), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rikje"]
+curve = SubResource("Curve_2ivyg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g6j8b"]
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_rikje")
+
+[sub_resource type="QuadMesh" id="QuadMesh_i1rx7"]
+size = Vector2(21, 21)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ri03y"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(0, 0.5052959, 0.6236176, 1)
+albedo_texture = ExtResource("5_i1rx7")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_2ivyg"]
+size = Vector2(30, 30)
+
+[node name="SparkleTrailMissile" instance=ExtResource("1_rlhtu")]
+time_out = 5.0
+deathExplosion = 8
+wrap_up_time = 5.0
+
+[node name="Contrail" parent="." index="2" instance=ExtResource("2_fvvr7")]
+_fromWidth = 5.0
+_lifeSpan = 20.0
+
+[node name="PhysicsSeekController" parent="." index="3" instance=ExtResource("3_prbgi")]
+steer_force = 2500.0
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="4"]
+material_override = SubResource("StandardMaterial3D_6g5h8")
+amount = 1
+lifetime = 0.2
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_g6j8b")
+draw_pass_1 = SubResource("QuadMesh_i1rx7")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="." index="5"]
+material_override = SubResource("StandardMaterial3D_ri03y")
+amount = 1
+lifetime = 0.3
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_g6j8b")
+draw_pass_1 = SubResource("QuadMesh_2ivyg")

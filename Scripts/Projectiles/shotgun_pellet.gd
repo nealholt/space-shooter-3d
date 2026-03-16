@@ -25,7 +25,7 @@ func set_up(start:Vector3, end:Vector3, collision_norm:Vector3, victim:Node3D) -
 	# Calculate time out so it looks like the bullet
 	# disappears at impact point
 	var dist = global_position.distance_to(target_position)
-	$Timer.start(dist/speed)
+	timer.start(dist/speed)
 
 # Override parent class's on_timer_timeout
 func _on_timer_timeout() -> void:
@@ -37,4 +37,4 @@ func _on_timer_timeout() -> void:
 		# Play feedback for player if relevant
 		Global.player_feedback(damagee, data)
 		damagee = null
-	queue_free()
+	wrap_up()

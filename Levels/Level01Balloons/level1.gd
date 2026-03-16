@@ -1,7 +1,7 @@
 extends Level
 
 # Orb properties
-const ORB_HEALTH:int = 3
+const ORB_HEALTH:int = 5
 const ORB_SCALE:Vector3 = Vector3(10,10,10)
 # Individual orb distribution
 const INDIVIDUAL_ORB_COUNT:int = 50

@@ -23,5 +23,5 @@ func damage_and_die(body, _collision_point=null):
 	# so I slapped on this if to try to avoid it.
 	if is_instance_valid(data.shooter):
 		explosion.shooter = data.shooter
-	# Wait until the end of the frame to execute queue_free
-	Callable(queue_free).call_deferred()
+	# Self destruct
+	wrap_up()

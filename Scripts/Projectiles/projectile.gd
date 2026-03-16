@@ -1,7 +1,8 @@
 class_name Projectile extends Node3D
-
 # Bullets and missiles and all projectiles inherit
 # from this class.
+
+@onready var timer: Timer = $Timer
 
 @export var speed:float = 1000.0
 var velocity : Vector3
@@ -38,10 +39,11 @@ var aim_assist_unhandled:bool = true
 # detectors or self-collisions.
 var frame_count := 0
 
-# Put a bullet image in bread crumb here
-# for testing purposes. I tested ricochet
-# using this.
-#@export var bread_crumb : PackedScene
+# Time after this projectile "dies" to let it linger
+# so its special effects, such as smoke trail, don't
+# instantaneously disappear.
+@export var wrap_up_time:float = 0.0
+var wrap_up_timer:Timer
 
 
 func _ready() -> void:
@@ -49,7 +51,7 @@ func _ready() -> void:
 	# Useful for testing even if the velocity
 	# is updated each frame
 	velocity = -global_transform.basis.z * speed
-	$Timer.start(time_out)
+	timer.start(time_out)
 	# Search through children for various components
 	# and save a reference to them.
 	for child in get_children():
@@ -86,7 +88,7 @@ func set_data(dat:ShootData) -> void:
 	if controller:
 		controller.set_data(dat)
 	# Set / reset timer
-	$Timer.start(time_out)
+	timer.start(time_out)
 	# Make it so a Ship can't shoot their own bullets
 	if hit_box_component:
 		hit_box_component.add_damage_exception(dat.shooter)
@@ -109,16 +111,6 @@ func apply_spread(dat:ShootData) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	# This was previously used for testing:
-	#var crumb = bread_crumb.instantiate()
-	# Add to main_3d, not root, otherwise the added
-	# node might not be properly cleared when
-	# transitioning to a new scene.
-	#Global.main_scene.main_3d.add_child(crumb)
-	#crumb.transform = transform
-	#crumb.transform.basis = transform.basis.rotated(transform.basis.x.normalized(), PI/2)
-	#crumb.global_position = global_position
-	
 	# Count elapsed "frames"
 	frame_count+=1
 	
@@ -216,7 +208,7 @@ func damage_and_die(body, collision_point=null) -> void:
 	stop_near_miss_audio()
 	VfxManager.play_with_transform(deathExplosion, global_position, transform)
 	#Delete bullets that strike a body
-	Callable(queue_free).call_deferred()
+	wrap_up()
 
 
 # Returns true if bullet should pass through
@@ -262,10 +254,45 @@ func stop_near_miss_audio() -> void:
 
 func _on_timer_timeout() -> void:
 	#print('bullet timed out')
-	queue_free()
+	wrap_up()
 
 
 func _on_health_component_died() -> void:
 	# Explode
 	VfxManager.play_with_transform(deathExplosion, global_position, transform)
-	Callable(queue_free).call_deferred()
+	wrap_up()
+
+
+# This function gives certain projectiles (mostly missiles)
+# an opportunity to wrap up their special effects, such as
+# smoke trails, before queue_freeing the projectile.
+func wrap_up() -> void:
+	if wrap_up_time <= 0.0:
+		Callable(queue_free).call_deferred()
+		return
+	# Turn off physics processes
+	set_physics_process(false)
+	set_process(false)
+	# Tell all GPU particle children to stop emitting
+	# Free RayCast3D children
+	# Free HitBoxComponent children
+	# Cut down the lifespan of Trail3D
+	# Anything else visible should hide (Stuff like
+	# the model of a torpedo)
+	for child in get_children():
+		if child is GPUParticles3D:
+			child.one_shot = true
+			child.emitting = false
+		elif child is RayCast3D:
+			Callable(child.queue_free).call_deferred()
+		elif child is HitBoxComponent:
+			Callable(child.queue_free).call_deferred()
+		elif child is Trail3D:
+			child._lifeSpan = child._lifeSpan/10.0
+		elif child.get('visible'):
+			child.hide()
+	# Start up a timer and queue_free all the rest when it goes off
+	wrap_up_timer = Timer.new()
+	add_child(wrap_up_timer)
+	wrap_up_timer.timeout.connect(queue_free)
+	wrap_up_timer.start(wrap_up_time)

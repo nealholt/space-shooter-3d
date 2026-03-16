@@ -36,10 +36,10 @@ func set_data(dat:ShootData) -> void:
 		var timeout := (dist/(speed*2))
 		# Add in a random +- to the timeout.
 		timeout += randf_range(-timeout*target_range_plus_minus, timeout*target_range_plus_minus)
-		$Timer.start(timeout)
+		timer.start(timeout)
 	else:
 		# If no target, just use default bullet timeout
-		$Timer.start(dat.bullet_timeout)
+		timer.start(dat.bullet_timeout)
 
 
 # Explode on timeout
@@ -54,5 +54,5 @@ func _on_timer_timeout() -> void:
 	# Set explosion's position and damage
 	explosion.global_position = global_position
 	explosion.damage_amt = damage
-	# Wait until the end of the frame to execute queue_free
-	Callable(queue_free).call_deferred()
+	# Self destruct
+	wrap_up()

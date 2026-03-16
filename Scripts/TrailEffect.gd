@@ -24,7 +24,7 @@ var _lifePoints = [] # Stores all the trail points lifespans
 @export var _toWidth : float = 0.0 ## End width of the trail
 @export_range(0.5,1.5) var _scaleAcceleration : float = 1.0 ## Speed of the scaling
 
-@export var _motionDelta : float = 0.1 ## Sets the smoothness of the trail, how long it will take for a new trail piece to be made
+#@export var _motionDelta : float = 0.1 ## Sets the smoothness of the trail, how long it will take for a new trail piece to be made
 @export var _lifeSpan : float = 1.0 ## Sets the duration until this trail piece is no longer used, and is thus removed
 
 @export var _startColor : Color = Color(1.0, 1.0, 1.0, 1.0) ## Starting color of the trail
@@ -49,11 +49,21 @@ func RemovePoint(i:int) -> void:
 	_lifePoints.remove_at(i)
 
 func _process(delta:float) -> void:
+	# PREVIOUSLY:
 	# If the distance between the previous
 	# position and the current position is
 	# more than the spawn threshold, and
 	# trails are allowed to be made:
-	if (_oldPos - get_global_transform().origin).length() > _motionDelta and _trailEnabled:
+	#if (_oldPos - get_global_transform().origin).length() > _motionDelta and _trailEnabled:
+	# NOW:
+	# So long as trails are allowed to be made, new
+	# points are added. This has the effect of fading
+	# out trails, even when the object the trail is
+	# attached to stops moving. This is particularly
+	# important when a Trail-using ship or missile dies,
+	# so the trail doesn't disappear instantaneously.
+	# It's still not perfect, but it's better.
+	if _trailEnabled:
 		AppendPoint() # Create a new point
 		_oldPos = get_global_transform().origin # Update the old position to the current position
 	

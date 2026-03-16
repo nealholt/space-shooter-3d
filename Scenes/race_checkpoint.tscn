@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://dec2h3fkjfo0m"]
+[gd_scene load_steps=13 format=3 uid="uid://dec2h3fkjfo0m"]
 
 [ext_resource type="Texture2D" uid="uid://ce6i4w30wrek0" path="res://Assets/ParticleImages/star_09.png" id="1_3b3r2"]
 [ext_resource type="Script" uid="uid://savoxhna208c" path="res://Scripts/race_checkpoint.gd" id="1_rikje"]
-[ext_resource type="Texture2D" uid="uid://c1bvvjqhk0qa6" path="res://Assets/ParticleImages/star_02.png" id="1_skbjm"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="4_flrl7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iv2jt"]
@@ -43,11 +42,7 @@ scale_min = 2.0
 scale_max = 2.0
 scale_curve = SubResource("CurveTexture_rikje")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xn2n"]
-albedo_texture = ExtResource("1_skbjm")
-
-[sub_resource type="QuadMesh" id="QuadMesh_x1rgi"]
-material = SubResource("StandardMaterial3D_1xn2n")
+[sub_resource type="QuadMesh" id="QuadMesh_rikje"]
 size = Vector2(10, 10)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3b3r2"]
@@ -67,7 +62,7 @@ material_override = SubResource("StandardMaterial3D_rikje")
 emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_flrl7")
-draw_pass_1 = SubResource("QuadMesh_x1rgi")
+draw_pass_1 = SubResource("QuadMesh_rikje")
 
 [node name="Area3D" type="Area3D" parent="."]
 monitoring = false

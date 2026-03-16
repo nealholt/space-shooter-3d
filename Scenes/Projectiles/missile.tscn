@@ -1,10 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://dt8e8r0ew3fjn"]
+[gd_scene load_steps=11 format=3 uid="uid://dt8e8r0ew3fjn"]
 
 [ext_resource type="PackedScene" uid="uid://caody2m8xh0b6" path="res://Scenes/Projectiles/projectile_ray.tscn" id="1_0lyqn"]
+[ext_resource type="PackedScene" uid="uid://ux6ivcx1ovdp" path="res://Assets/Particles/booster_particles.tscn" id="3_7d76i"]
 [ext_resource type="PackedScene" uid="uid://b8xwbrmhu8ybu" path="res://Assets/Projectiles/Missiles/gray_torpedo_body.tscn" id="4_4eh70"]
+[ext_resource type="Texture2D" uid="uid://dwhxx0f2kh1cu" path="res://Assets/Textures/kenney_particle-pack/smoke_07.png" id="4_g37v4"]
 [ext_resource type="PackedScene" uid="uid://dto664xfw5qbf" path="res://Scenes/MovementControllers/physics_seek_controller.tscn" id="5_m3n6r"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="6_g4iot"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="7_4ccg1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uudvm"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("4_g37v4")
+disable_receive_shadows = true
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_6sb4k"]
+material = SubResource("StandardMaterial3D_uudvm")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7sobq"]
 radius = 5.0
@@ -13,18 +26,23 @@ radius = 5.0
 deathExplosion = 8
 sparks = 0
 shieldSparks = 0
+wrap_up_time = 2.0
 
 [node name="GrayTorpedo" parent="." index="2" instance=ExtResource("4_4eh70")]
 
-[node name="PhysicsSeekController" parent="." index="3" instance=ExtResource("5_m3n6r")]
+[node name="BoosterParticles" parent="." index="3" instance=ExtResource("3_7d76i")]
+amount = 128
+draw_pass_1 = SubResource("QuadMesh_6sb4k")
+
+[node name="PhysicsSeekController" parent="." index="4" instance=ExtResource("5_m3n6r")]
 steer_force = 200.0
 
-[node name="HitBoxComponent" parent="." index="4" node_paths=PackedStringArray("health_component") instance=ExtResource("6_g4iot")]
+[node name="HitBoxComponent" parent="." index="5" node_paths=PackedStringArray("health_component") instance=ExtResource("6_g4iot")]
 health_component = NodePath("../HealthComponent")
 reticle_set = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent" index="1"]
 shape = SubResource("SphereShape3D_7sobq")
 
-[node name="HealthComponent" parent="." index="5" instance=ExtResource("7_4ccg1")]
+[node name="HealthComponent" parent="." index="6" instance=ExtResource("7_4ccg1")]
 max_health = 1
