@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://6qsftwvn1vr"]
 
-[ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_2nnjr"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_02qsi"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_20fsw"]
+[ext_resource type="Texture2D" uid="uid://d4npmvuohgbbo" path="res://Assets/Skyboxes/all_features_skybox_test.png" id="2_24hf6"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="2_wndl6"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_8iyj5"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="4_owcqu"]
@@ -11,19 +11,24 @@
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="9_24hf6"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hrnrq"]
-panorama = ExtResource("1_2nnjr")
+panorama = ExtResource("2_24hf6")
 
 [sub_resource type="Sky" id="Sky_txwv0"]
 sky_material = SubResource("PanoramaSkyMaterial_hrnrq")
 
 [sub_resource type="Environment" id="Environment_ehjee"]
 background_mode = 2
-background_energy_multiplier = 2.0
 sky = SubResource("Sky_txwv0")
 ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 2
-tonemap_white = 0.5
+glow_enabled = true
+glow_intensity = 2.0
+glow_bloom = 0.12
+adjustment_enabled = true
+adjustment_brightness = 0.9
+adjustment_contrast = 1.1
+adjustment_saturation = 1.3
 
 [node name="Level05" type="Node3D"]
 script = ExtResource("1_02qsi")

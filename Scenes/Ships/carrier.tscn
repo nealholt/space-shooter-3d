@@ -46,7 +46,6 @@ death_animation_duration_min = 0.0
 death_animation_duration_max = 0.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_r2d5f")]
-max_health = 1000.0
 weakpoint_damage = 50.0
 
 [node name="CarrierChassis" parent="." instance=ExtResource("1_67lmr")]

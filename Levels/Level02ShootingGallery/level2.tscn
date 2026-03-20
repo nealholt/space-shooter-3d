@@ -233,5 +233,5 @@ script = ExtResource("1_nau7t")
 team = "blue team"
 
 [node name="PlayerFighter" parent="BlueTeam" instance=ExtResource("13_qb1ff")]
-transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 36.62413, 137.6766)
+transform = Transform3D(0.2650863, 0.24691448, -0.93207437, -0.06754497, 0.9690373, 0.23749618, 0.961856, -5.40016e-08, 0.27355635, -475.61237, 276.48358, -445.65552)
 impulse_std = 0.0

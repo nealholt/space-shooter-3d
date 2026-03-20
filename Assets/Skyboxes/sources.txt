@@ -18,3 +18,100 @@ earth_with_stars made using
 http://alexcpeterson.com/spacescape/
 and this image
 https://www.pexels.com/photo/earth-wallpaper-41953/
+
+
+=== STEP BY STEP SKYBOX PIPELINE
+
+Open \Desktop\spacescape\Spacescape.exe
+
+Click "New Layer"
+
+*** STARS
+
+First we'll add in one or more layers of background stars. 
+Open the layer and name it "Stars00" or whatever.
+Keep the type "points" for random points.
+Pick a random seed
+Number of Points Put in something between 10K and 100K
+Point Size can/should be bigger than one pixel. Try 3 or 4.
+
+Consider a couple more star layers with different colors. Change color with "Near Color". Check this out for inspiration:
+https://neal.fun/constellation-draw/
+
+I don't really use the "mask" features with the background stars.
+
+*** BIGGER STARS
+
+Now add a new layer and change "Layer Type" to "billboard"
+This is for random images scattered throughout.
+Though you can set it to one image, no matter what I try, other layers are on top of it so this is NOT how to put a big planet on or whatever.
+
+Set the image to billboard at the bottom in "Billboard Texture".
+Pick a star image to billboard from this folder:
+\spacescape\media\materials\textures\
+or just look online for PNGs.
+
+Set "Number of Billboards" to something very low (like 1 or 2) if your image is largish.
+You can change billboard size with "Near Billboard Size" and "Far Billboard Size". Both change the size. I don't understand the difference.
+
+You can also scatter LOTS of small star PNGs using billboard. In the all_features example I billboarded flare-green1.png 1000 times at near size 0.01 and far size 0.05
+
+In point and billboard, you can enable "Mask" then set a mask random seed, noise to "ridged", and so on to only show stars in certain locations. I did this to the green stars. I don't notice much of an effect, but I think it makes the green stars appear only in noisy chains like how the nebulae below work, but I'm not sure it's worth it.
+
+*** NEBULAE
+
+Create a new layer and start with these settings:
+Layer type: noise
+Noise type: Ridged
+Octaves 5
+Power: 0.04
+Change the inner color, but not the outer.
+
+You can add a few nebulae.
+
+Finally export to high res png. (Exporting for Unity has been fine for me.)
+
+Close Spacescape.exe. That's all I know how to do with it.
+
+*** BIG PLANETS, STARS, OR OTHER IMAGES
+
+Find a royalty free image of some kind. For this example I used this (which may or may not be free):
+https://www.space.com/jupiter-moon-io-juno-probe-photos-october-2023
+
+In Krita I used the ellipse selection tool to cut out just the planet as accurately as I could.
+Then I right clicked on the selection mask in the far right panel with the layers and such and selected
+	Convert -> Convert to transparency mask
+
+After exporting to PNG, there were sill little white pixels on the edges so I got rid of those with this
+https://onlinepngtools.com/refine-png-edges
+
+Open up one of the the final exported Spacescape.exe images in krita and drag and drop the cutout image in as a new layer. Position and size to taste. Applying a filter can be fun. Play around with
+	Filter -> Adjust -> Color Balance
+to change the temperature of the image.
+	Filter -> Adjust -> Color Adjustment Curve
+is also a neat one.
+Then save/export back over the original image.
+
+*** FINAL PROCESSING
+
+Lastly go here:
+https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html
+Set ALL rotation degrees to zero then click update.
+Uncheck the "apply Mipmap" setting otherwise the image will be blurry.
+Change export resolution to 7680 x 4320
+Upload each image into the corresponding front/back up/down left/right button.
+Then click "Download(save) result"
+
+Rename the panorama image sent to downloads then drop it into Godot assets folder.
+
+
+=== NOTES AND RESOURCES
+
+Tutorial and how I discovered this:
+https://www.youtube.com/watch?v=NtVABru6OXE
+
+Source for the freeware.
+http://alexcpeterson.com/spacescape/
+
+Converter:
+https://danilw.github.io/GLSL-howto/cubemap_to_panorama_js/cubemap_to_panorama.html
