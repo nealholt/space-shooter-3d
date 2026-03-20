@@ -102,6 +102,7 @@ func _process(_delta):
 	# A significant chunk of the following is redundant with
 	# code in the Global.set_reticle function.
 	if !Global.targeting_hud_on:
+		dynamic_panel.visible = false
 		return
 	# Try to put reticle on screen
 	if Global.current_camera.is_position_in_frustum(global_position):
@@ -109,9 +110,11 @@ func _process(_delta):
 		cam_distance = global_position.distance_squared_to(Global.current_camera.global_position)
 		# Get position to put the reticle
 		var reticle_position:Vector2 = Global.current_camera.unproject_position(global_position)
-		# Choose between near and far reticles
 		var reticle_to_use:Node2D
-		if is_targeted:
+		# If targeted and targeting HUD on
+		# then show target reticle and label.
+		# Otherwise choose between near and far reticles.
+		if is_targeted and Global.targeting_hud_on:
 			# Get distance to target
 			var dist:float = global_position.distance_to(Global.player.global_position)
 			# Set reticle
