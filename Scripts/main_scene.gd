@@ -79,6 +79,10 @@ func set_hud_label(text:String) -> void:
 
 
 func unload_level() -> void:
+	# Shut off all audio and visual effects
+	AudioManager.stop_everything()
+	VfxManager.stop_everything()
+	# Free reference to the level
 	if(is_instance_valid(level_instance)):
 		level_instance.queue_free()
 	level_instance = null
