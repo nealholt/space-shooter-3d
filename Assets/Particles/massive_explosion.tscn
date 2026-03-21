@@ -87,4 +87,11 @@ draw_pass_1 = SubResource("QuadMesh_20t1u")
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="Node" type="Node" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="Node"]
+enabled = false
+debug_shape_custom_color = Color(0, 1, 0, 1)
+debug_shape_thickness = 5
+
 [connection signal="timeout" from="Timer" to="." method="_on_animation_finished"]
