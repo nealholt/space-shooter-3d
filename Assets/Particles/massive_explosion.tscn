@@ -13,14 +13,17 @@ vertex_color_use_as_albedo = true
 albedo_color = Color(5, 5, 5, 1)
 albedo_texture = ExtResource("1_f3jch")
 disable_receive_shadows = true
+billboard_mode = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jn4p2"]
 transparency = 1
+cull_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(5, 2, 1, 1)
 albedo_texture = ExtResource("3_6j2k2")
 disable_receive_shadows = true
+billboard_keep_scale = true
 
 [sub_resource type="Curve" id="Curve_jn4p2"]
 _data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.130435, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
@@ -68,7 +71,6 @@ texture = ExtResource("2_t7dhc")
 visible = false
 material_override = SubResource("StandardMaterial3D_jn4p2")
 cast_shadow = 0
-double_sided = false
 texture = ExtResource("3_6j2k2")
 
 [node name="FireflyParticles3D" type="GPUParticles3D" parent="."]

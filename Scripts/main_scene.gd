@@ -47,10 +47,10 @@ func _input(_event: InputEvent) -> void:
 	# on the main menu, exit game
 	if Input.is_action_just_released('exit'):
 		if menu.visible:
-			print('quitting')
+			#print('quitting')
 			get_tree().quit()
 		else:
-			print('to main menu')
+			#print('to main menu')
 			to_main_menu()
 	# "p" to pause the game, but not from the main menu
 	elif Input.is_action_just_pressed('pause') and !menu.visible:

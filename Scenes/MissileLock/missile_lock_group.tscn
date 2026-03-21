@@ -10,7 +10,6 @@
 
 [node name="MissileLockGroup" type="Node3D"]
 script = ExtResource("1_7e3a4")
-use_lerp = true
 
 [node name="AcquiringTargetReticle" type="TextureRect" parent="."]
 modulate = Color(1, 0.290196, 0.152941, 1)
@@ -26,17 +25,21 @@ texture = ExtResource("3_bjekp")
 
 [node name="SeekingAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_xbfs4")
+volume_db = -12.0
 
 [node name="LockedAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_rkado")
+volume_db = -12.0
 
 [node name="AudioTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="LaunchAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_iumxy")
+volume_db = -10.0
 
 [node name="QuickLaunchAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_grmgi")
+volume_db = -10.0
 
 [connection signal="timeout" from="AudioTimer" to="." method="_on_audio_timer_timeout"]

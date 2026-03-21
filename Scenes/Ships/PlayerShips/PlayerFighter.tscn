@@ -16,7 +16,7 @@ angle_assist_limit = 5.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
 stream = ExtResource("4_cq55v")
-volume_db = -20.0
+volume_db = -23.0
 pitch_scale = 0.5
 
 [node name="HealthComponent" parent="." index="6"]

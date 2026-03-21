@@ -14,6 +14,31 @@ extends VisualEffect
 # should be obscured (for instance by a large asteroid)
 # but the image gets put camera-side of the asteroid.
 
+# I made the explosion sprite and ring sprite
+# "Double Sided" under Flags and also under Geometry,
+# Material Override, Transparency, set Cull Mode to Disabled
+# This lets me add in random rotations, but it's possible
+# that the sprites will be viewed edge-on and be invisible.
+# To prevent this from happening to the Explosion Sprite
+# (aka the "flare") I enabled Billboard under Geometry,
+# Material Override, Billboard. This however, seems to make
+# rotation have no effect.
+# NOTE: I think I could just make the flare a 2D sprite
+# and then I could rotate it to my heart's content. I would
+# simply scale it up or down to fake it being distant.
+
+# Way too late into this, I realized it doesn't work
+# if the camera is moving. Both the ring and flare are
+# small 2D images put right in front of the camera. Even
+# a small movement and the camera is past them or through
+# them. They need to maintain their position to simulate
+# being further out in space. They need to update based
+# on the camera for their entire duration. Same principle
+# as reticles.
+# Now the process function
+# is turned on when the effect is active and keeps
+# the explosion sprites positioned relative to the camera.
+
 @onready var timer:=$Timer
 @onready var explosion_sprite:=$ExplosionSprite3D
 @onready var ring_sprite:=$RingSprite3D
@@ -93,6 +118,8 @@ func _ready() -> void:
 	# the world environment gets set (usually when the
 	# level is first created).
 	EventsBus.environment_set.connect(backup_environment_baselines)
+	# Default process function to off
+	set_process(false)
 
 
 func backup_environment_baselines() -> void:
@@ -110,18 +137,37 @@ func backup_environment_baselines() -> void:
 	baseline_saturation = Global.environment.adjustment_saturation
 
 
+# Continually update sprite positions as the camera moves
+# for the duration of the explosion effect.
+func _process(_delta: float) -> void:
+	explosion_sprite.visible = true
+	ring_sprite.visible = true
+	# Get distance to the camera
+	var cam_distance:float = global_position.distance_to(camera.global_position)
+	# Figure out where to put sprite so it's between
+	# camera and ship.
+	var direction := camera.global_position.direction_to(global_position)
+	# Determine how far away to place the sprite
+	# based on distance of explosion from the camera.
+	# These were experimentally determined
+	# https://docs.godotengine.org/en/latest/classes/class_@globalscope.html#class-globalscope-method-remap
+	var ideal_distance:float=clamp(remap(cam_distance, flare_distance_camera_min, flare_distance_camera_max, flare_distance_min_actual, flare_distance_max_actual), flare_distance_min_actual, flare_distance_max_actual)
+	# Update explosion sprite position
+	explosion_sprite.global_position = camera.global_position + direction * ideal_distance
+	# Update ring sprite position
+	ideal_distance=clamp(remap(cam_distance, ring_distance_camera_min, ring_distance_camera_max, ring_distance_min_actual, ring_distance_max_actual), ring_distance_min_actual, ring_distance_max_actual)
+	ring_sprite.global_position = camera.global_position + direction * ideal_distance
+
+
 func play() -> void:
 	# Update the camera
 	camera = get_viewport().get_camera_3d()
 	
-	# Get distance to camera
-	var cam_distance:float = global_position.distance_to(camera.global_position)
+	# Initiate explosion effects
+	flare_explosion()
+	ring_explosion()
 	
-	# Explosion effects
-	flare_explosion(cam_distance)
-	ring_explosion(cam_distance)
-	
-	# Angle from camera to self
+	# Angle from camera to this explosion
 	var cam_angle:float = rad_to_deg(Global.get_angle_to_target(camera.global_position, global_position, -camera.global_transform.basis.z))
 	# Change environment variables.
 	# remap from max to min angle because lowest values should
@@ -137,6 +183,9 @@ func play() -> void:
 	fireflies.emitting = true
 	effect_is_live = true
 	timer.start(max_time)
+	# Turn on process function to keep the images in the
+	# correct location on the screen
+	set_process(true)
 
 
 func is_playing() -> bool:
@@ -154,34 +203,12 @@ func _on_animation_finished() -> void:
 	fireflies.emitting = false
 	explosion_sprite.visible = false
 	ring_sprite.visible = false
+	set_process(false) # Turn off process function
 
 
-func flare_explosion(cam_distance:float) -> void:
+func flare_explosion() -> void:
 	# Reset sprite modulate value back to full
 	explosion_sprite.modulate.a8 = 255
-	# Figure out where to put sprite so it's between
-	# camera and ship.
-	var direction := camera.global_position.direction_to(global_position)
-	# Determine how far away to place the sprite
-	# based on distance of explosion from the camera.
-	# These were experimentally determined
-	# https://docs.godotengine.org/en/latest/classes/class_@globalscope.html#class-globalscope-method-remap
-	var ideal_distance:float=clamp(remap(cam_distance, flare_distance_camera_min, flare_distance_camera_max, flare_distance_min_actual, flare_distance_max_actual), flare_distance_min_actual, flare_distance_max_actual)
-	explosion_sprite.global_position = camera.global_position + direction * ideal_distance
-	explosion_sprite.look_at(camera.global_position)
-	# "look_at" puts the backside to the camera, so
-	# rotate it another 180
-	explosion_sprite.rotate_y(PI)
-	# Add some random rotation.
-	# I removed all the billboarding (it was both in
-	# flags and under materials process) and instead
-	# used look at so I could throw in this random
-	# rotation. I don't know if it really matters, 
-	# but that's what I did.
-	#explosion_sprite.rotate_z(randf_range(-PI/4, PI/4))
-	explosion_sprite.rotate_x(randf_range(-PI/2, PI/2))
-	
-	explosion_sprite.visible = true
 	# Modulate sprite's opacity until it disappears
 	var tween:Tween = create_tween()
 	tween.tween_property(explosion_sprite,
@@ -190,32 +217,26 @@ func flare_explosion(cam_distance:float) -> void:
 	# An animation player could be used to modify the
 	# sprite in other ways, per this suggestion:
 	# https://www.reddit.com/r/godot/comments/r4snzr/how_do_you_make_a_spotlight_have_a/
+	
+	# The following does nothing when billboarding is on
+	# however, I don't want the image to sometimes be
+	# invisible because by random chance it's rotated side-on.
+	# Add some random rotation for variety
+	#explosion_sprite.rotate_x(randf_range(-PI/2, PI/2))
+	#explosion_sprite.rotate_y(randf_range(-PI/2, PI/2))
+	#explosion_sprite.rotate_z(randf_range(-PI/2, PI/2))
 
 
-func ring_explosion(cam_distance:float) -> void:
+func ring_explosion() -> void:
 	# Reset sprite modulate back to full
 	ring_sprite.modulate.a8 = 255
-	# Figure out where to put sprite so it's between
-	# camera and ship.
-	var direction := camera.global_position.direction_to(global_position)
-	# Determine how far away to place the sprite
-	# based on distance of explosion from the camera.
-	# These were experimentally determined
-	# https://docs.godotengine.org/en/latest/classes/class_@globalscope.html#class-globalscope-method-remap
-	var ideal_distance:float=clamp(remap(cam_distance, ring_distance_camera_min, ring_distance_camera_max, ring_distance_min_actual, ring_distance_max_actual), flare_distance_min_actual, flare_distance_max_actual)
-	ring_sprite.global_position = camera.global_position + direction * ideal_distance
-	ring_sprite.look_at(camera.global_position)
-	# "look_at" puts the backside to the camera, so
-	# rotate it another 180
-	ring_sprite.rotate_y(PI)
 	# Add some random rotation
 	ring_sprite.rotate_y(randf_range(-PI/4, PI/4))
 	ring_sprite.rotate_x(randf_range(-PI/2, PI/2))
 	ring_sprite.rotate_z(randf_range(-PI/2, PI/2))
 	
-	# Reset scale and visibility
+	# Reset scale
 	ring_sprite.scale = Vector3(ring_scale_start,ring_scale_start,ring_scale_start)
-	ring_sprite.visible = true
 	
 	# Modulate sprite's scale and opacity until it disappears
 	var tween:Tween = create_tween()
