@@ -191,12 +191,13 @@ func shoot(shooter, delta:float) -> void:
 			shooter.weapon_handler.get_bullet_speed())
 	
 	# Trigger pulled. Try to shoot.
-	if shooter.weapon_handler.is_automatic():
-		if im.shoot_pressed:
-			shooter.weapon_handler.shoot(shooter, target)
-	else: # Semiautomatic
-		if im.shoot_just_pressed:
-			shooter.weapon_handler.shoot(shooter, target)
+	if shooter.weapon_handler:
+		if shooter.weapon_handler.is_automatic():
+			if im.shoot_pressed:
+				shooter.weapon_handler.shoot(shooter, target)
+		else: # Semiautomatic
+			if im.shoot_just_pressed:
+				shooter.weapon_handler.shoot(shooter, target)
 	
 	# Missile lock
 	if shooter.missile_lock:

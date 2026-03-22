@@ -37,9 +37,9 @@ func _process(_delta):
 	# Display player velocity
 	if Global.player and is_instance_valid(Global.player):
 		$HUD/Demo.text = "Velocity: %.0f" % Global.player.velocity.length()
-		$HUD/Demo.text += "\nHealth: %.d" % Global.player.health_component.health
+		if Global.player.health_component:
+			$HUD/Demo.text += "\nHealth: %.d" % Global.player.health_component.health
 		$HUD/Demo.text += "\nFPS: %d" % Engine.get_frames_per_second()
-
 
 
 func _input(_event: InputEvent) -> void:
@@ -150,6 +150,9 @@ func _on_load_11_space_station_defense_pressed() -> void:
 
 func _on_load_12_race_course_pressed() -> void:
 	load_level("Level12RaceCourse/race_course")
+
+func _on_load_13_collision_avoid_pressed() -> void:
+	load_level("Level13CollisionAvoid/CollisionAvoidTest")
 
 func _on_toggle_fullscreen_pressed() -> void:
 	fullscreen = !fullscreen

@@ -1,0 +1,121 @@
+[gd_scene load_steps=19 format=3 uid="uid://c0xrugrnh82s5"]
+
+[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_3kycw"]
+[ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="2_4w2qt"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="4_ero3n"]
+[ext_resource type="PackedScene" uid="uid://dtxyvqvpd4khl" path="res://Scenes/camera_spectator.tscn" id="5_3l0om"]
+[ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="5_puqp7"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="7_p5kkl"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="8_cm862"]
+[ext_resource type="PackedScene" uid="uid://diilp2vvcvj53" path="res://Scenes/Ships/carrier.tscn" id="13_1u6j8"]
+[ext_resource type="PackedScene" uid="uid://ct14xs5b052ay" path="res://Scenes/Asteroids/asteroid_brown.tscn" id="14_sa88o"]
+[ext_resource type="PackedScene" uid="uid://f5ns6ks1l1em" path="res://Scenes/Asteroids/asteroid_foam_and_blue.tscn" id="15_8nwrc"]
+[ext_resource type="PackedScene" uid="uid://bnme5l5dyvdaj" path="res://Scenes/Asteroids/asteroid_gray.tscn" id="16_hba6q"]
+[ext_resource type="PackedScene" uid="uid://h6qoukgaivr" path="res://Scenes/Asteroids/asteroid_gray_green.tscn" id="17_pckun"]
+[ext_resource type="PackedScene" uid="uid://dxb411gkh7mx6" path="res://Scenes/Asteroids/asteroid_green_purple.tscn" id="18_y1i4y"]
+[ext_resource type="PackedScene" uid="uid://cbgts8m0eeix7" path="res://Scenes/Asteroids/asteroid_purple.tscn" id="19_s6qqo"]
+[ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="20_sa5vr"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_er3bs"]
+panorama = ExtResource("2_4w2qt")
+
+[sub_resource type="Sky" id="Sky_8we3c"]
+sky_material = SubResource("PanoramaSkyMaterial_er3bs")
+
+[sub_resource type="Environment" id="Environment_x4e1d"]
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_8we3c")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.2
+reflected_light_source = 1
+tonemap_mode = 2
+glow_enabled = true
+glow_bloom = 0.35
+glow_blend_mode = 1
+adjustment_enabled = true
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_3kycw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_x4e1d")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.777146, 0.267952, -0.569426, 0, 0.904827, 0.42578, 0.62932, -0.330893, 0.703183, 0, 0, 0)
+light_color = Color(1, 0.643137, 1, 1)
+light_angular_distance = 2.0
+shadow_enabled = true
+shadow_opacity = 0.9
+shadow_blur = 0.4
+directional_shadow_mode = 0
+directional_shadow_max_distance = 1000.0
+
+[node name="BlueTeam" type="Node3D" parent="."]
+script = ExtResource("4_ero3n")
+team = "blue team"
+
+[node name="SpaceStation" parent="BlueTeam" instance=ExtResource("5_puqp7")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -133.42, 46.6032, 7)
+
+[node name="CameraSpectator" parent="BlueTeam" instance=ExtResource("5_3l0om")]
+roll_strength = 0.05
+pitch_strength = 0.03
+yaw_strength = 0.02
+roll_lerp = 1.5
+pitch_lerp = 3.5
+yaw_lerp = 3.0
+speed_lerp = 0.1
+brake_lerp = 2.0
+min_speed = -200.0
+max_speed = 600.0
+mouse_deadzone = 0.5
+
+[node name="RedTeam" type="Node3D" parent="."]
+script = ExtResource("4_ero3n")
+
+[node name="Carrier" parent="RedTeam" instance=ExtResource("13_1u6j8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 729.95)
+
+[node name="Fighter" parent="RedTeam" instance=ExtResource("7_p5kkl")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 409.42493, 253.05452, 1144.6332)
+
+[node name="NPCController" parent="RedTeam/Fighter" instance=ExtResource("8_cm862")]
+
+[node name="Fighter2" parent="RedTeam" instance=ExtResource("7_p5kkl")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -302.69543, 238.13297, 1018.2165)
+
+[node name="NPCController" parent="RedTeam/Fighter2" instance=ExtResource("8_cm862")]
+
+[node name="AsteroidGroup" type="Node3D" parent="."]
+
+[node name="AsteroidBrown" parent="AsteroidGroup" instance=ExtResource("14_sa88o")]
+transform = Transform3D(132.963, 2.23517e-06, 69.4318, -36.5535, 127.529, 70.0007, -59.0306, -78.9699, 113.045, 789.945, 213.932, 195.713)
+
+[node name="AsteroidFoamAndBlue" parent="AsteroidGroup" instance=ExtResource("15_8nwrc")]
+transform = Transform3D(85.2629, 118.52, 34.3983, -109.912, 91.9402, -44.3428, -56.1206, 0, 139.106, -316.427, 199.639, 598.091)
+
+[node name="AsteroidGray" parent="AsteroidGroup" instance=ExtResource("16_hba6q")]
+transform = Transform3D(136.881, 14.0901, 59.7075, 0, 145.99, -34.4514, -61.3475, 31.4383, 133.222, -460.431, -113.469, -783.136)
+
+[node name="AsteroidGrayGreen" parent="AsteroidGroup" instance=ExtResource("17_pckun")]
+transform = Transform3D(47.2773, 0, 16.2743, 0, 50, 0, -16.2743, 0, 47.2773, -107.879, -59.6615, 86.8361)
+
+[node name="AsteroidGrayGreen2" parent="AsteroidGroup" instance=ExtResource("17_pckun")]
+transform = Transform3D(50, 0, 0, 0, 46.4155, 18.5903, 0, -18.5903, 46.4155, 80.4728, 0, -194.298)
+
+[node name="AsteroidGreenPurple" parent="AsteroidGroup" instance=ExtResource("18_y1i4y")]
+transform = Transform3D(-36.5677, -34.0999, -1.59842e-06, -2.18557e-06, 9.55343e-14, 50, -34.0999, 36.5677, -1.49055e-06, -161.23, 19.8419, -119.049)
+
+[node name="AsteroidGreenPurple2" parent="AsteroidGroup" instance=ExtResource("18_y1i4y")]
+transform = Transform3D(-16.9369, -6.22187, -46.6308, 0, 49.5608, -6.61282, 47.044, -2.24001, -16.7881, 60.8297, -87.7114, 0)
+
+[node name="AsteroidPurple" parent="AsteroidGroup" instance=ExtResource("19_s6qqo")]
+transform = Transform3D(4.41094, 0, 54.8228, 0, 55, 0, -54.8228, 0, 4.41094, -37.5272, 155.403, 41.8384)
+
+[node name="AsteroidPurple2" parent="AsteroidGroup" instance=ExtResource("19_s6qqo")]
+transform = Transform3D(32.1127, 23.6395, -3.15418, 0, -5.29026, -39.6486, -23.849, 31.8306, -4.24711, -46.194, 181.993, 192.322)
+
+[node name="VictoryLayer" parent="." instance=ExtResource("20_sa5vr")]
+visible = false

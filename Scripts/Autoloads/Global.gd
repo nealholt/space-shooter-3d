@@ -4,17 +4,17 @@ extends Node
 # https://www.youtube.com/watch?v=a0UQ-t-vuzY
 # This is a location for anything we want to be globally accessible.
 
-var main_scene: MainScene
-var environment: Environment
-var red_team_group:TeamSetup # Node3D holding everything on team red
-var blue_team_group:TeamSetup # Node3D holding everything on team blue
+var main_scene : MainScene
+var environment : Environment
+var red_team_group : TeamSetup # Node3D holding everything on team red
+var blue_team_group : TeamSetup # Node3D holding everything on team blue
 var current_camera : Camera3D
 var camera_group : CameraGroup
-var player: CharacterBody3D
+var player : CharacterBody3D
 var input_man : InputManager
 # For now I'm globally turning off the hud when in
 # camera views other than first person.
-var targeting_hud_on:bool = true
+var targeting_hud_on : bool = true
 
 # Until I find a better home for these functions, I'm putting them here
 # Control-Shift-f to search for anywhere text is found
