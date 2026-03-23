@@ -93,8 +93,6 @@ func _ready() -> void:
 	# with mouse and ketboard controls.
 	var p = get_parent()
 	if p is Ship:
-		# Turn off _process, which handles spectator mode
-		set_process(false)
 		# We assume the parent is a ship with variables
 		# for positioning the FirstPerson and RearUnder
 		# cameras.
@@ -374,31 +372,3 @@ func _on_timer_hit_flicker_timeout() -> void:
 	# Determine whether or not to show lead indicator
 	if target_lead_visible:
 		current_targ_indicator.visible = true
-
-
-
-# All the following functions are for spectator mode
-# (mostly debugging)
-func _process(delta: float) -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	handle_camera_rotation()
-	var input_dir := Input.get_vector("ui_right", "ui_left", "ui_down", "ui_up")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED * delta
-		velocity.z = direction.z * SPEED * delta
-	else:
-		velocity = Vector3.ZERO
-	global_position += velocity
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		# Think of 0.001 as sensitivity to mouse motion
-		mouse_motion = -event.relative * 0.001
-
-func handle_camera_rotation() -> void:
-	rotate_y(mouse_motion.x)
-	# https://www.udemy.com/course/complete-godot-3d/learn/lecture/40979546#questions
-	head.rotate_x(-mouse_motion.y)
-	#head.rotation_degrees.x = clampf(head.rotation_degrees.x, -90.0, 90.0)
-	mouse_motion = Vector2.ZERO # Reset

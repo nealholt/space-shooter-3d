@@ -8,6 +8,11 @@ func play() -> void:
 	anim.play()
 	timer.start()
 
+func stop() -> void:
+	super()
+	anim.stop()
+	timer.stop()
+
 func _on_animation_finished() -> void:
 	super()
 	visible = false

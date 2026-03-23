@@ -4,16 +4,5 @@
 
 [node name="CameraSpectator" type="Node3D"]
 script = ExtResource("1_kemxa")
-roll_strength = null
-pitch_strength = null
-yaw_strength = null
-roll_lerp = null
-pitch_lerp = null
-yaw_lerp = null
-speed_lerp = null
-brake_lerp = null
-min_speed = null
-max_speed = null
-mouse_deadzone = null
 
 [node name="Camera3D" type="Camera3D" parent="."]
