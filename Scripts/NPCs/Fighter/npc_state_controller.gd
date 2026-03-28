@@ -39,9 +39,11 @@ var shooting_angle:float
 # here that just set variables in child state
 # nodes, but for now, this is the best I've come
 # up with.
-@export var too_far:float = 150.0 ## Distance at which to come in for another attack pass
-@export var too_close:float = 30.0 ## Distance at which to stop attack pass and peel off
+@export var too_far:float = 300.0 ## Distance at which to come in for another attack pass
+@export var too_close:float = 100.0 ## Distance at which to stop attack pass and peel off
 @export var keep_target_above:bool = false ## Default is to orient so target is ahead, but some capital ships want their target above
+
+var obstacle_detector:ObstacleDetector
 
 # Setting the following to true will cause the fighter label to
 # show the current state.
@@ -76,6 +78,19 @@ func _ready() -> void:
 				debug_label = c
 				c.visible = true
 				break
+
+
+func _process(delta: float) -> void:
+	# If an obstacle is detected ahead, transition
+	# to the avoid state. Also give the avoid state
+	# access to the obstacle detector.
+	if obstacle_detector and obstacle_detector.get_blocked_ahead() \
+	and !(current_state is Avoid):
+		$States/Avoid.obstacle_detector = obstacle_detector
+		current_state.avoid_now()
+		#print(obstacle_detector.get_blocked_above())
+		#print(obstacle_detector.get_blocked_ahead())
+		#print(obstacle_detector.get_blocked_below())
 
 
 func move_and_turn(mover, delta:float) -> void:

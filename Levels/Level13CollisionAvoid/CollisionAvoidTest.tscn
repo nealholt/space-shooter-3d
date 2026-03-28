@@ -60,17 +60,7 @@ team = "blue team"
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -133.42, 46.6032, 7)
 
 [node name="CameraSpectator" parent="BlueTeam" instance=ExtResource("5_3l0om")]
-roll_strength = 0.05
-pitch_strength = 0.02
-yaw_strength = 0.02
-roll_lerp = 1.5
-pitch_lerp = 3.0
-yaw_lerp = 3.0
-speed_lerp = 0.1
-brake_lerp = 2.0
-min_speed = -200.0
-max_speed = 600.0
-mouse_deadzone = 0.15
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -125.27484, 17.570091, 1648.4448)
 
 [node name="RedTeam" type="Node3D" parent="."]
 script = ExtResource("4_ero3n")
@@ -79,14 +69,9 @@ script = ExtResource("4_ero3n")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 729.95)
 
 [node name="Fighter" parent="RedTeam" instance=ExtResource("7_p5kkl")]
-transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 409.42493, 253.05452, 1144.6332)
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -102.170906, 11.04957, 1680.9513)
 
 [node name="NPCController" parent="RedTeam/Fighter" instance=ExtResource("8_cm862")]
-
-[node name="Fighter2" parent="RedTeam" instance=ExtResource("7_p5kkl")]
-transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -302.69543, 238.13297, 1018.2165)
-
-[node name="NPCController" parent="RedTeam/Fighter2" instance=ExtResource("8_cm862")]
 
 [node name="AsteroidGroup" type="Node3D" parent="."]
 

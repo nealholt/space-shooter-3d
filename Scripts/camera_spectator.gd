@@ -26,7 +26,7 @@ enum CameraMode {
 @export var pitch_lerp:float = 3.0
 @export var yaw_lerp:float = 3.0
 
-@export var speed_lerp:float = 0.1 # acceleration
+@export var speed_lerp:float = 0.2 # acceleration
 @export var brake_lerp:float = 2.0
 
 @export var min_speed:float = -200.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene load_steps=16 format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_dn8ab"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="4_57m73"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="5_70fr4"]
 [ext_resource type="PackedScene" uid="uid://clfeojpa5dckh" path="res://Scenes/MissileLock/missile_lock_timeout.tscn" id="10_g3b86"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="14_4fwow"]
+[ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Scenes/obstacle_detector.tscn" id="14_05dih"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="15_kfjug"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/MissileLock/missile_lock_group.tscn" id="17_563f5"]
 [ext_resource type="PackedScene" uid="uid://cvpd2ioksubgy" path="res://Assets/Ships/fighter_chassis_ring.tscn" id="19_x2ba7"]
@@ -81,3 +82,6 @@ spread_deg = 2.0
 fire_sound = 0
 reload_sound = 2
 magazine_size = 20
+
+[node name="ObstacleDetector" parent="." instance=ExtResource("14_05dih")]
+transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)

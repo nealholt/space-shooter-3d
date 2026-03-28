@@ -1,4 +1,4 @@
-extends State
+class_name Jink extends State
 # Transition to this state with a random chance when taking fire.
 # Switch back and forth between rolling and pitching.
 

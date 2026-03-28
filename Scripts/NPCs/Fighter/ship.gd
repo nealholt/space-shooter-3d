@@ -9,6 +9,7 @@ var controller:CharacterBodyControlParent
 var engineAV:EngineAV
 var health_component:HealthComponent
 var missile_lock:MissileLockGroup
+var obstacle_detector:ObstacleDetector
 var weapon_handler:WeaponHandler
 
 # For testing purposes, I want some ships to just sit there
@@ -121,6 +122,8 @@ func _ready() -> void:
 			health_component.died.connect(_on_health_component_died)
 		elif child is MissileLockGroup:
 			missile_lock = child
+		elif child is ObstacleDetector:
+			obstacle_detector = child
 		elif child is WeaponHandler:
 			weapon_handler = child
 		# The following are all from hit_box_component
@@ -136,6 +139,10 @@ func _ready() -> void:
 		# Remove hangar if we're just testing
 		elif child is Hangar and disable_for_testing:
 			child.queue_free()
+	# Attach the obstacle detector to the controller
+	# but only if this is an NPC ship
+	if controller and obstacle_detector and controller is NPCStateMachine:
+		controller.obstacle_detector = obstacle_detector
 
 
 func _physics_process(delta):

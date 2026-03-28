@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4bglopp7u44j"]
+
+[ext_resource type="Script" uid="uid://dymssp4r8bwat" path="res://Scripts/obstacle_detector.gd" id="1_75iud"]
+
+[node name="ObstacleDetector" type="Node3D"]
+script = ExtResource("1_75iud")
+
+[node name="RayAbove" type="RayCast3D" parent="."]
+enabled = false
+exclude_parent = false
+target_position = Vector3(0, 30, -300)
+hit_back_faces = false
+debug_shape_custom_color = Color(1, 0, 1, 1)
+debug_shape_thickness = 5
+
+[node name="RayAhead" type="RayCast3D" parent="."]
+enabled = false
+exclude_parent = false
+target_position = Vector3(0, 0, -300)
+hit_back_faces = false
+debug_shape_custom_color = Color(1, 0, 1, 1)
+debug_shape_thickness = 5
+
+[node name="RayBelow" type="RayCast3D" parent="."]
+enabled = false
+exclude_parent = false
+target_position = Vector3(0, -30, -300)
+hit_back_faces = false
+debug_shape_custom_color = Color(1, 0, 1, 1)
+debug_shape_thickness = 5

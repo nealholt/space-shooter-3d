@@ -83,6 +83,10 @@ func choose_random_evasion() -> void:
 			Transitioned.emit(self, 'corkscrew')
 
 
+func avoid_now() -> void:
+	Transitioned.emit(self, 'avoid')
+
+
 # Roll to get target above us.
 func roll_target_above() -> void:
 	if motion.orientation_data.target_is_right:
