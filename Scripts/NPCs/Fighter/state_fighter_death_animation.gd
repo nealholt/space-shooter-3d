@@ -20,3 +20,11 @@ func Enter() -> void:
 	# Motion for this state
 	motion.goal_pitch = random.randf_range(-1.0,1.0)
 	motion.goal_roll = random.randf_range(-1.0,1.0)
+
+
+# It's mandatory that each state implement this otherwise
+# abstract function, but since the motion parameters
+# are set in the Enter function, there's nothing else to
+# do for the loop state.
+func Physics_Update(_delta:float) -> void:
+	pass

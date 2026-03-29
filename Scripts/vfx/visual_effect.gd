@@ -1,10 +1,12 @@
+@abstract
 class_name VisualEffect extends Node3D
 ## Parent class for all visual effects
 
 var remote_transform:RemoteTransform3D
 
-func play() -> void:
-	pass
+@abstract func play() -> void
+
+@abstract func is_playing() -> bool
 
 func play_at(loc:Vector3) -> void:
 	global_position = loc
@@ -53,9 +55,6 @@ func play_remote_transform(remote_mover:Node3D, adjust:Vector3=Vector3.INF) -> v
 		remote_transform.position += adjust
 	# Play the effect
 	play()
-
-func is_playing() -> bool:
-	return false
 
 func stop() -> void:
 	_on_animation_finished()
