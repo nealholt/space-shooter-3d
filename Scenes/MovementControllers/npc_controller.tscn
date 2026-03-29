@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bnw6xd02yadui" path="res://Scripts/NPCs/Fighter/npc_state_controller.gd" id="1_bsujv"]
 [ext_resource type="Script" uid="uid://dpu7mi2acxa31" path="res://Scripts/NPCs/Fighter/movement_profile.gd" id="2_hkqme"]
-[ext_resource type="Script" uid="uid://c8d34u5vfldag" path="res://Scripts/NPCs/Fighter/state.gd" id="3_4u817"]
+[ext_resource type="Script" uid="uid://c8d34u5vfldag" path="res://Scripts/NPCs/Fighter/state_stop.gd" id="3_4u817"]
 [ext_resource type="Script" uid="uid://dtv874lfhiow6" path="res://Scripts/NPCs/Fighter/state_loop.gd" id="4_8so7c"]
 [ext_resource type="Script" uid="uid://dgehlpyp3pbc5" path="res://Scripts/NPCs/Fighter/state_seek.gd" id="5_g0pm5"]
 [ext_resource type="Script" uid="uid://beiyskfygh07q" path="res://Scripts/NPCs/Fighter/state_flee.gd" id="6_dfhat"]

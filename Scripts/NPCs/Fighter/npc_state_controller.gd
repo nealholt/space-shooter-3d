@@ -80,12 +80,12 @@ func _ready() -> void:
 				break
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# If an obstacle is detected ahead, transition
 	# to the avoid state. Also give the avoid state
 	# access to the obstacle detector.
 	if obstacle_detector and obstacle_detector.get_blocked_ahead() \
-	and !(current_state is Avoid):
+	and !(current_state is StateAvoid):
 		$States/Avoid.obstacle_detector = obstacle_detector
 		current_state.avoid_now()
 		#print(obstacle_detector.get_blocked_above())

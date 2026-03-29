@@ -1,4 +1,4 @@
-class_name Avoid extends State
+class_name StateAvoid extends State
 # Transition to this state to avoid an obstacle.
 
 # 3 different rays: ahead, above, and below

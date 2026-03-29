@@ -1,4 +1,4 @@
-extends State
+class_name StateFighterDeathAnimation extends State
 
 # This function should contain code to be
 # executed at the start of the state,

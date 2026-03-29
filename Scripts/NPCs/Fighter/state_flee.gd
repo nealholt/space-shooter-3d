@@ -1,4 +1,4 @@
-extends State
+class_name StateFlee extends State
 
 # This is basically going to be the inverse of seek
 # Roll/yaw/pitch away from target and accelerate to

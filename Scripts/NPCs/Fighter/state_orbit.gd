@@ -1,4 +1,4 @@
-extends State
+class_name StateOrbit extends State
 # Orbital strafing behavior.
 # Only capital ships do this for now.
 

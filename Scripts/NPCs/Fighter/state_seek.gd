@@ -1,4 +1,4 @@
-extends State
+class_name StateSeek extends State
 
 # This is working great but could be tweaked further.
 # Would a mild yaw make it more accurate? probably

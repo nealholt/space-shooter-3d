@@ -1,9 +1,8 @@
+@abstract
 class_name State extends Node
-# Source:
+# Finite state machine source:
 # https://www.youtube.com/watch?v=ow_Lum-Agbs&t=145s
 
-# This class is both an interface for all states and
-# also serves as the stop state.
 signal Transitioned
 
 # Reference to an intermediate script through which
@@ -43,25 +42,25 @@ var amt_right_left:float # zero is inbetween. pi/2 (90) is max right or left
 
 
 func _on_ready() -> void:
+	# Feed a time-based seed to the RNG.
 	random.randomize()
 
 # This function should contain code to be
 # executed at the start of the state,
-# any set up that needs performed.
+# including any set up that needs performed.
 func Enter() -> void:
 	motion.reset()
 	elapsed_time = 0.0
 
 # This function should contain code to be
 # executed at the end of the state,
-# any clean up that needs performed.
+# including any clean up that needs performed.
 func Exit() -> void:
 	motion.reset()
 
 # This function should be called on each
 # physics update frame.
-func Physics_Update(_delta:float) -> void:
-	pass # Replace with function body.
+@abstract func Physics_Update(_delta:float) -> void
 
 
 func enter_death_animation() -> void:

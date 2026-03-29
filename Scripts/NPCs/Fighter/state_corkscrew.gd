@@ -1,4 +1,4 @@
-extends State
+class_name StateCorkscrew extends State
 # Transition to this state with a random chance when taking fire.
 
 

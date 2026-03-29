@@ -1,4 +1,4 @@
-extends State
+class_name StateWave extends State
 # Transition to this state with a random chance when taking fire.
 
 var wave_count := 0
