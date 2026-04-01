@@ -46,9 +46,10 @@ shape = SubResource("SphereShape3D_ydoww")
 
 [node name="DebugLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-visible = false
 billboard = 1
 fixed_size = true
+font_size = 16
+outline_size = 4
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_1xytm")]
 max_health = 20

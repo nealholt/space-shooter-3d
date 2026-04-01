@@ -43,11 +43,9 @@ var shooting_angle:float
 @export var too_close:float = 100.0 ## Distance at which to stop attack pass and peel off
 @export var keep_target_above:bool = false ## Default is to orient so target is ahead, but some capital ships want their target above
 
-var obstacle_detector:ObstacleDetector
-
 # Setting the following to true will cause the fighter label to
 # show the current state.
-var DEBUG : bool = false #TESTING
+var DEBUG : bool = true #TESTING
 var debug_label:Label3D
 
 
@@ -80,17 +78,12 @@ func _ready() -> void:
 				break
 
 
-func _process(_delta: float) -> void:
-	# If an obstacle is detected ahead, transition
-	# to the avoid state. Also give the avoid state
-	# access to the obstacle detector.
-	if obstacle_detector and obstacle_detector.get_blocked_ahead() \
-	and !(current_state is StateAvoid):
-		$States/Avoid.obstacle_detector = obstacle_detector
-		current_state.avoid_now()
-		#print(obstacle_detector.get_blocked_above())
-		#print(obstacle_detector.get_blocked_ahead())
-		#print(obstacle_detector.get_blocked_below())
+func set_obstacle_detector(obstacle_detector:ObstacleDetector) -> void:
+	# Give every state a reference to the obstacle detector
+	for state_key in states:
+		var state:State = states[state_key]
+		state.obstacle_detector = obstacle_detector
+	pass
 
 
 func move_and_turn(mover, delta:float) -> void:

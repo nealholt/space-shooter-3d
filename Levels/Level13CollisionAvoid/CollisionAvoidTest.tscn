@@ -60,7 +60,7 @@ team = "blue team"
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -133.42, 46.6032, 7)
 
 [node name="CameraSpectator" parent="BlueTeam" instance=ExtResource("5_3l0om")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -125.27484, 17.570091, 1648.4448)
+transform = Transform3D(-0.14786121, 0, -0.9890081, 0, 1, 0, 0.9890081, 0, -0.14786121, -216.52014, 17.570091, 1194.982)
 
 [node name="RedTeam" type="Node3D" parent="."]
 script = ExtResource("4_ero3n")

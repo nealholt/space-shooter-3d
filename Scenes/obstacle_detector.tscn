@@ -8,7 +8,7 @@ script = ExtResource("1_75iud")
 [node name="RayAbove" type="RayCast3D" parent="."]
 enabled = false
 exclude_parent = false
-target_position = Vector3(0, 30, -300)
+target_position = Vector3(0, 60, -200)
 hit_back_faces = false
 debug_shape_custom_color = Color(1, 0, 1, 1)
 debug_shape_thickness = 5
@@ -16,7 +16,7 @@ debug_shape_thickness = 5
 [node name="RayAhead" type="RayCast3D" parent="."]
 enabled = false
 exclude_parent = false
-target_position = Vector3(0, 0, -300)
+target_position = Vector3(0, 0, -200)
 hit_back_faces = false
 debug_shape_custom_color = Color(1, 0, 1, 1)
 debug_shape_thickness = 5
@@ -24,7 +24,7 @@ debug_shape_thickness = 5
 [node name="RayBelow" type="RayCast3D" parent="."]
 enabled = false
 exclude_parent = false
-target_position = Vector3(0, -30, -300)
+target_position = Vector3(0, -60, -200)
 hit_back_faces = false
 debug_shape_custom_color = Color(1, 0, 1, 1)
 debug_shape_thickness = 5

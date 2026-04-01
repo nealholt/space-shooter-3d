@@ -2,7 +2,7 @@ class_name StateFighterDeathAnimation extends State
 
 # This function should contain code to be
 # executed at the start of the state,
-# any set up that needs performed.
+# including any set up that needs performed.
 func Enter() -> void:
 	super.Enter()
 	# Go ballistic. No "air" friction.

@@ -142,7 +142,7 @@ func _ready() -> void:
 	# Attach the obstacle detector to the controller
 	# but only if this is an NPC ship
 	if controller and obstacle_detector and controller is NPCStateMachine:
-		controller.obstacle_detector = obstacle_detector
+		controller.set_obstacle_detector(obstacle_detector)
 
 
 func _physics_process(delta):
