@@ -125,7 +125,7 @@ func _on_load_3_pressed() -> void:
 	load_level("Level03OneVsFive/level3")
 
 func _on_load_4_pressed() -> void:
-	load_level("Level04NPCTargeting/level04")
+	load_level("Level04CapitalShipBattle/level04")
 
 func _on_load_5_pressed() -> void:
 	load_level("Level05Furball/level_05")

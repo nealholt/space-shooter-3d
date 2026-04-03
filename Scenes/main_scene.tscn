@@ -67,10 +67,10 @@ layout_mode = 2
 theme = ExtResource("3_iacmt")
 text = "Level: 1 vs 5"
 
-[node name="Load4NPCTargeting" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
+[node name="Load4CapitalShipBattle" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Test: NPC vs Stationary target"
+text = "Test: CapitalShip Battle"
 
 [node name="Load5Furball" type="Button" parent="Menu/HBoxContainer/SceneOptions"]
 layout_mode = 2
@@ -514,7 +514,7 @@ script = ExtResource("3_jv6wh")
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load1Balloons" to="." method="_on_load_1_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load2ShootingGallery" to="." method="_on_load_2_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load31v5" to="." method="_on_load_3_pressed"]
-[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load4NPCTargeting" to="." method="_on_load_4_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load4CapitalShipBattle" to="." method="_on_load_4_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load5Furball" to="." method="_on_load_5_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load6TurretTest" to="." method="_on_load_6_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load7CapitalShipTest" to="." method="_on_load_7_pressed"]

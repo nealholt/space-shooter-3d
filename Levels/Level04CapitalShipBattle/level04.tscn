@@ -1,0 +1,111 @@
+[gd_scene load_steps=10 format=3 uid="uid://bofjsmexbmkkv"]
+
+[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_6xial"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_0liob"]
+[ext_resource type="PackedScene" uid="uid://dtxyvqvpd4khl" path="res://Scenes/camera_spectator.tscn" id="2_25llv"]
+[ext_resource type="Texture2D" uid="uid://creoqhif83mdb" path="res://Assets/Skyboxes/moon_with_stars.png" id="2_ci3xu"]
+[ext_resource type="PackedScene" uid="uid://byb8ya6fryjw0" path="res://Scenes/Ships/frigate.tscn" id="5_cn33r"]
+[ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Scenes/Ships/destroyer.tscn" id="6_8xsvq"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qcl2j"]
+panorama = ExtResource("2_ci3xu")
+
+[sub_resource type="Sky" id="Sky_bgqgu"]
+sky_material = SubResource("PanoramaSkyMaterial_qcl2j")
+
+[sub_resource type="Environment" id="Environment_1pi3i"]
+background_mode = 2
+sky = SubResource("Sky_bgqgu")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.05
+reflected_light_source = 1
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Level04" type="Node3D"]
+script = ExtResource("1_6xial")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(1, 1, 0.745098, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1pi3i")
+
+[node name="CameraSpectator" parent="." instance=ExtResource("2_25llv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0, 600)
+
+[node name="RedTeam" type="Node3D" parent="."]
+script = ExtResource("2_0liob")
+
+[node name="Frigate" parent="RedTeam" instance=ExtResource("5_cn33r")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -700, 0, 0)
+
+[node name="Frigate2" parent="RedTeam" instance=ExtResource("5_cn33r")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -810.38525, -27.914253, -140.46225)
+
+[node name="Frigate3" parent="RedTeam" instance=ExtResource("5_cn33r")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -812.11383, 31.739304, 120.49165)
+
+[node name="Destroyer" parent="RedTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -836.5836, -166.97095, 197.12692)
+
+[node name="Destroyer2" parent="RedTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -781.2112, 142.44188, 196.76468)
+
+[node name="Destroyer3" parent="RedTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -828.16364, -20.738022, 246.71507)
+
+[node name="Destroyer4" parent="RedTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1020.4547, -109.89906, 0)
+
+[node name="Destroyer5" parent="RedTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -781.2112, -191.00339, 0)
+
+[node name="Destroyer6" parent="RedTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -698.6608, -27.909431, -329.1593)
+
+[node name="Destroyer7" parent="RedTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -820.39655, 163.94272, 0)
+
+[node name="Destroyer8" parent="RedTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -841.48145, 124.244225, -176.58614)
+
+[node name="BlueTeam" type="Node3D" parent="."]
+script = ExtResource("2_0liob")
+team = "blue team"
+
+[node name="Frigate" parent="BlueTeam" instance=ExtResource("5_cn33r")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 400, -178.4696, 0)
+
+[node name="Frigate2" parent="BlueTeam" instance=ExtResource("5_cn33r")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 422.56793, -101.56839, 142.31613)
+
+[node name="Frigate3" parent="BlueTeam" instance=ExtResource("5_cn33r")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 400, -108.48731, -150.17404)
+
+[node name="Destroyer" parent="BlueTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 374.8954, 84.92717, -34.45926)
+
+[node name="Destroyer2" parent="BlueTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 363.6242, -28.716644, 311.53653)
+
+[node name="Destroyer3" parent="BlueTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 432.17517, -177.6576, 225.83417)
+
+[node name="Destroyer4" parent="BlueTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 355.78436, 48.930588, 191.50006)
+
+[node name="Destroyer5" parent="BlueTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 440.37616, -209.08057, -167.08919)
+
+[node name="Destroyer6" parent="BlueTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 442.11734, 72.129715, -101.76648)
+
+[node name="Destroyer7" parent="BlueTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 334.21725, 41.81684, -217.09991)
+
+[node name="Destroyer8" parent="BlueTeam" instance=ExtResource("6_8xsvq")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 444.41663, -111.990326, -325.8917)

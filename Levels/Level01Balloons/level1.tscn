@@ -48,6 +48,9 @@ time_out = 20.0
 
 [node name="Fighter" parent="BlueTeam" instance=ExtResource("5_0jw65")]
 
+[node name="DebugLabel" parent="BlueTeam/Fighter" index="5"]
+visible = true
+
 [node name="MissileLockGroup" parent="BlueTeam/Fighter" index="7"]
 npc_missile_lock = null
 lock_timeout = null

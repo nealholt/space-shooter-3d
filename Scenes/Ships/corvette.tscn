@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene load_steps=34 format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://cbyb5ysj3umaf" path="res://Scenes/Projectiles/shotgun_pellet.tscn" id="20_de7w0"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="21_5ow11"]
 [ext_resource type="PackedScene" uid="uid://bxdfmqb6p8cw6" path="res://Scenes/Projectiles/laser_guided_missile.tscn" id="21_uelja"]
+[ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Scenes/obstacle_detector.tscn" id="27_lbswy"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="29_3q0pi"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="29_w78kn"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="34_80okc"]
@@ -215,6 +216,9 @@ enabled = false
 target_position = Vector3(0, 0, -1000)
 collision_mask = 10
 collide_with_areas = true
+
+[node name="ObstacleDetector" parent="." instance=ExtResource("27_lbswy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.384907)
 
 [editable path="Shield"]
 [editable path="WeaponHandler/GatlingGun/GunModel"]

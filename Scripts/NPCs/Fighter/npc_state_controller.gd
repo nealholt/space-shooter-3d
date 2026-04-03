@@ -45,7 +45,7 @@ var shooting_angle:float
 
 # Setting the following to true will cause the fighter label to
 # show the current state.
-var DEBUG : bool = true #TESTING
+var DEBUG : bool = false #TESTING
 var debug_label:Label3D
 
 

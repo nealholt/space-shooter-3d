@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dct3loj10mg5k"]
+[gd_scene load_steps=14 format=3 uid="uid://dct3loj10mg5k"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_uw5oo"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="2_6e5lt"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/MissileLock/missile_lock_group.tscn" id="9_7wsae"]
 [ext_resource type="PackedScene" uid="uid://db74cban80pwd" path="res://Scenes/MissileLock/missile_lock_lerp.tscn" id="10_qsmaf"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="10_up24e"]
+[ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Scenes/obstacle_detector.tscn" id="12_e1i0b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rfws3"]
 size = Vector3(5.03894, 1.51178, 7.49753)
@@ -62,3 +63,6 @@ fire_rate = 0.1
 
 [node name="TargetReticles" parent="." instance=ExtResource("10_up24e")]
 target_text = "Bomber"
+
+[node name="ObstacleDetector" parent="." instance=ExtResource("12_e1i0b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.6661463)
