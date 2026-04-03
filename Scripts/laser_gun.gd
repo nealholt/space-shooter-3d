@@ -64,6 +64,12 @@ func _ready():
 	ray.enabled = false
 	# Reset progress_time
 	progress_time = power_off_time
+	
+	# Range is normally calculated according based on
+	# bullet speed and timeout in gun.gd's _ready function
+	# but overwrite that here to be based on beam length
+	# instead
+	range_sqd = ray_length*ray_length
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

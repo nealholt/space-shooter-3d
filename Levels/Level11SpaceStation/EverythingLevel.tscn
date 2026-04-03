@@ -91,7 +91,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -110.593, 102.674, 620.615)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 210.075)
 
 [node name="Frigate" parent="RedTeam" instance=ExtResource("10_d6xr2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 347.175)
+transform = Transform3D(0.71774966, 0, -0.6963012, 0, 1, 0, 0.6963012, 0, 0.71774966, -280.7508, 64.65765, 165.20132)
 
 [node name="Carrier" parent="RedTeam" instance=ExtResource("11_gd4i7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 729.95)

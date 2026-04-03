@@ -49,17 +49,17 @@ func move_and_turn(mover, delta:float) -> void:
 	var gun:Gun = mover.get_current_gun()
 	# Update profile.orientation_data ...
 	if target and is_instance_valid(target):
-		# ... to shoot the main gun at the target ...
+		# ... to shoot the main gun at the target.
+		# Default to using ship speed
+		var temp_speed:float = speed
+		# But if there is a gun, we want to lead the
+		# target using bullet speed.
 		if gun:
-			movement_profile.orientation_data.update_data(
-				mover.global_position, gun.bullet_speed,
-				target, mover.global_transform.basis)
-		# ... but if there is no main gun, as with some
-		# capital ships, we still want to move toward the target
-		else:
-			movement_profile.orientation_data.update_data(
-				mover.global_position, speed,
-				target, mover.global_transform.basis)
+			temp_speed = gun.bullet_speed
+		# Update profile.orientation_data
+		movement_profile.orientation_data.update_data(
+			mover.global_position, temp_speed,
+			target, mover.global_transform.basis)
 	# steer the craft
 	orbit_state.Physics_Update(delta)
 	# Move
@@ -85,7 +85,10 @@ func select_target(targeter:Node3D) -> void:
 func shoot(shooter, delta:float) -> void:
 	var gun = shooter.get_current_gun()
 	# Decide whether or not to fire
-	if gun and target and is_instance_valid(target) and movement_profile.orientation_data.dist_sqd < gun.range_sqd and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < shooting_angle:
+	if gun and target and is_instance_valid(target) and \
+	movement_profile.orientation_data.dist_sqd < gun.range_sqd \
+	and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < shooting_angle:
+		# Shoot
 		gun.shoot(shooter, target)
 	if shooter.missile_lock:
 		shooter.missile_lock.update(shooter, delta)
