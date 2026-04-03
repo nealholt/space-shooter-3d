@@ -136,7 +136,12 @@ func _physics_process(delta: float) -> void:
 		# Else if the shooter is the player and the player is
 		# using mouse controls, and the player is in first
 		# person...
-		elif data.shooter == Global.player and Global.input_man.use_mouse_and_keyboard and Global.player.camera_group.is_first_person():
+		# (I added in "if Global.player" because there is a
+		# rare error when there is no player, yet the first
+		# three conditions here are true. I think it can occur
+		# because null==null is true in Godot, so hopefully
+		# this fixes it.)
+		elif Global.player and data.shooter == Global.player and Global.input_man.use_mouse_and_keyboard and Global.player.camera_group.is_first_person():
 			#shoot at mouse / cursor
 			aim_self_at_cursor()
 		# Turn off aim assist. It's been handled

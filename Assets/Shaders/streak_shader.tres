@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=15 format=3 uid="uid://bee3mywubqp6k"]
+[gd_resource type="VisualShader" format=3 uid="uid://bee3mywubqp6k"]
 
 [ext_resource type="Texture2D" uid="uid://lngfwrkido0j" path="res://Assets/Textures/explosion_textures/T_4_streaks.png" id="1_xbhjt"]
 [ext_resource type="Texture2D" uid="uid://d3frksm1nx3pq" path="res://Assets/Textures/explosion_textures/T_PerlinNoise_46_inv.png" id="2_nnapr"]
@@ -48,71 +48,6 @@ texture = ExtResource("2_nnapr")
 texture_type = 1
 
 [resource]
-code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_disabled, diffuse_lambert, specular_schlick_ggx, unshaded;
-
-uniform vec4 streaks_color : source_color;
-uniform sampler2D curve_frg_6 : repeat_disable;
-uniform sampler2D tex_frg_2 : source_color;
-uniform sampler2D tex_frg_9 : source_color;
-
-
-
-void fragment() {
-// ColorParameter:8
-	vec4 n_out8p0 = streaks_color;
-
-
-// Input:3
-	vec2 n_out3p0 = UV;
-
-
-// Input:5
-	vec4 n_out5p0 = COLOR;
-	float n_out5p1 = n_out5p0.r;
-	float n_out5p4 = n_out5p0.a;
-
-
-// CurveTexture:6
-	float n_out6p0 = texture(curve_frg_6, vec2(n_out5p1)).r;
-
-
-// VectorCompose:7
-	float n_in7p1 = 0.00000;
-	vec2 n_out7p0 = vec2(n_out6p0, n_in7p1);
-
-
-// MultiplyAdd:4
-	vec2 n_in4p1 = vec2(0.25000, 1.00000);
-	vec2 n_out4p0 = (n_out3p0 * n_in4p1) + n_out7p0;
-
-
-// Texture2D:2
-	vec4 n_out2p0 = texture(tex_frg_2, n_out4p0);
-	float n_out2p1 = n_out2p0.r;
-
-
-// Texture2D:9
-	vec4 n_out9p0 = texture(tex_frg_9, UV);
-	float n_out9p1 = n_out9p0.r;
-
-
-// SmoothStep:10
-	float n_in10p1 = 1.00000;
-	float n_out10p0 = smoothstep(n_out5p4, n_in10p1, n_out9p1);
-
-
-// FloatOp:11
-	float n_out11p0 = n_out2p1 * n_out10p0;
-
-
-// Output:0
-	ALBEDO = vec3(n_out8p0.xyz);
-	ALPHA = n_out11p0;
-
-
-}
-"
 modes/cull = 2
 flags/unshaded = true
 nodes/fragment/0/position = Vector2(680, 140)
