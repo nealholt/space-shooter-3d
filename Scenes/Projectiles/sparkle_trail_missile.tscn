@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b4028pkj7mmy4"]
+[gd_scene format=3 uid="uid://b4028pkj7mmy4"]
 
 [ext_resource type="PackedScene" uid="uid://caody2m8xh0b6" path="res://Scenes/Projectiles/projectile_ray.tscn" id="1_rlhtu"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="2_fvvr7"]
@@ -49,19 +49,20 @@ billboard_keep_scale = true
 [sub_resource type="QuadMesh" id="QuadMesh_2ivyg"]
 size = Vector2(30, 30)
 
-[node name="SparkleTrailMissile" instance=ExtResource("1_rlhtu")]
+[node name="SparkleTrailMissile" unique_id=129856823 instance=ExtResource("1_rlhtu")]
+does_ricochet = false
 time_out = 5.0
 deathExplosion = 8
 wrap_up_time = 5.0
 
-[node name="Contrail" parent="." index="2" instance=ExtResource("2_fvvr7")]
+[node name="Contrail" parent="." index="2" unique_id=1795116073 instance=ExtResource("2_fvvr7")]
 _fromWidth = 5.0
 _lifeSpan = 20.0
 
-[node name="PhysicsSeekController" parent="." index="3" instance=ExtResource("3_prbgi")]
+[node name="PhysicsSeekController" parent="." index="3" unique_id=1806667651 instance=ExtResource("3_prbgi")]
 steer_force = 2500.0
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="4"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="4" unique_id=785334074]
 material_override = SubResource("StandardMaterial3D_6g5h8")
 amount = 1
 lifetime = 0.2
@@ -69,7 +70,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_g6j8b")
 draw_pass_1 = SubResource("QuadMesh_i1rx7")
 
-[node name="GPUParticles3D2" type="GPUParticles3D" parent="." index="5"]
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="." index="5" unique_id=284711756]
 material_override = SubResource("StandardMaterial3D_ri03y")
 amount = 1
 lifetime = 0.3

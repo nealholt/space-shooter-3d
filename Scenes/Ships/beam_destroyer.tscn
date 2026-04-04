@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bqvcfo7v6o6ip"]
+[gd_scene format=3 uid="uid://bqvcfo7v6o6ip"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_h4lox"]
 [ext_resource type="PackedScene" uid="uid://bvgxwc28k1fvx" path="res://Assets/Ships/beam_destroyer_chassis.tscn" id="2_vmkim"]
@@ -22,7 +22,7 @@ points = PackedVector3Array(-15, -3, -5, -15, 3, -5, 15, -3, -5, -15, -3, 5, -15
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dca3j"]
 points = PackedVector3Array(-15, -3, -5, -15, 3, -5, 15, -3, -5, -15, -3, 5, -15, 3, 5, 15, 3, -5, 15, -3, 5, 15, 3, 5)
 
-[node name="BeamDestroyer" type="CharacterBody3D" groups=["capital_ship", "damageable", "team member"]]
+[node name="BeamDestroyer" type="CharacterBody3D" unique_id=45072852 groups=["capital_ship", "damageable", "team member"]]
 collision_layer = 3
 collision_mask = 3
 motion_mode = 1
@@ -32,41 +32,42 @@ finalExplosion = 9
 death_animation_duration_min = 0.0
 death_animation_duration_max = 0.0
 
-[node name="BeamDestroyerChassis" parent="." instance=ExtResource("2_vmkim")]
+[node name="BeamDestroyerChassis" parent="." unique_id=1412828816 instance=ExtResource("2_vmkim")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1490160192]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_0do6w")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=460673982]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -25)
 shape = SubResource("ConvexPolygonShape3D_52s0y")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=456240233]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 14)
 shape = SubResource("ConvexPolygonShape3D_uw6xr")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=1410892843]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 14)
 shape = SubResource("ConvexPolygonShape3D_dca3j")
 
-[node name="HealthComponent" parent="." instance=ExtResource("3_ju2iv")]
+[node name="HealthComponent" parent="." unique_id=480907730 instance=ExtResource("3_ju2iv")]
+max_health = 100.0
 
-[node name="TurretGroup" parent="." instance=ExtResource("4_oimyf")]
+[node name="TurretGroup" parent="." unique_id=724303526 instance=ExtResource("4_oimyf")]
 
-[node name="TopHardpoint" type="Node3D" parent="TurretGroup"]
+[node name="TopHardpoint" type="Node3D" parent="TurretGroup" unique_id=62402200]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 15)
 script = ExtResource("5_1v2wc")
 min_elevation_deg = 15.0
 max_elevation_deg = 90.0
 
-[node name="BottomHardpoint" type="Node3D" parent="TurretGroup"]
+[node name="BottomHardpoint" type="Node3D" parent="TurretGroup" unique_id=36422470]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -8, 15)
 script = ExtResource("5_1v2wc")
 min_elevation_deg = 15.0
 max_elevation_deg = 90.0
 
-[node name="NPCCapitalShipController" parent="." instance=ExtResource("5_dr01k")]
+[node name="NPCCapitalShipController" parent="." unique_id=1984644260 instance=ExtResource("5_dr01k")]
 shooting_angle_degrees = 3.0
 speed = 10.0
 x_speed = 5.0
@@ -78,10 +79,10 @@ lerp_str = 1.0
 target_capital_ships = true
 ease_dist = 200.0
 
-[node name="WeaponHandler" parent="." instance=ExtResource("7_ravav")]
+[node name="WeaponHandler" parent="." unique_id=414523431 instance=ExtResource("7_ravav")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
 
-[node name="LaserGun" parent="WeaponHandler" instance=ExtResource("8_lmwtr")]
+[node name="LaserGun" parent="WeaponHandler" unique_id=151381903 instance=ExtResource("8_lmwtr")]
 
-[node name="TargetReticles" parent="." instance=ExtResource("9_lmwtr")]
+[node name="TargetReticles" parent="." unique_id=472861471 instance=ExtResource("9_lmwtr")]
 target_text = "Beam Destroyer"

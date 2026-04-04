@@ -1,15 +1,5 @@
 extends Node
 
-#const GUN_SCENE:PackedScene = preload("res://Scenes/Guns/gun.tscn")
-#const BURST_GUN_SCENE:PackedScene = preload("res://Scenes/Guns/burst_gun.tscn")
-#const HITSCAN_GUN_SCENE:PackedScene = preload("res://Scenes/Guns/hit_scan_gun.tscn")
-#const LASER_GUN_SCENE:PackedScene = preload("res://Scenes/Guns/laser_gun.tscn")
-#const LASER_SHOTGUN_SCENE:PackedScene = preload("res://Scenes/Guns/laser_shotgun.tscn")
-
-# TODO Is this all the gun types? Below, are those all
-# the bullet types? I don't know. I'm initially doing
-# this quick and sloppy.
-
 var gun_array:Array[PackedScene] = [
 	preload("res://Scenes/Guns/gun.tscn"),
 	preload("res://Scenes/Guns/burst_gun.tscn"),

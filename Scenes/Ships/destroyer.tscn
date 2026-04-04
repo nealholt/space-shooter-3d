@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjtrd5ktq5ypj"]
+[gd_scene format=3 uid="uid://cjtrd5ktq5ypj"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_2su5o"]
 [ext_resource type="PackedScene" uid="uid://s17i1n8q4r44" path="res://Assets/Ships/destroyer_chassis.tscn" id="2_qpwbv"]
@@ -17,7 +17,7 @@ points = PackedVector3Array(7.27259, 2.5, 4.88636, -7.27273, -2.5, -4.88636, -7.
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v5onn"]
 points = PackedVector3Array(12.6959, 0.888734, 5.11905, -12.6959, -0.698257, -5.19841, -12.6959, 0.888734, -5.19841, 12.6959, -0.698257, -5.19841, -12.6959, -0.698257, 5.11905, -12.6959, 0.888734, 5.11905, 12.6959, 0.888734, -5.19841, 12.6959, -0.698257, 5.11905)
 
-[node name="Destroyer" type="CharacterBody3D" groups=["capital_ship", "damageable", "team member"]]
+[node name="Destroyer" type="CharacterBody3D" unique_id=433808346 groups=["capital_ship", "damageable", "team member"]]
 collision_layer = 3
 collision_mask = 3
 motion_mode = 1
@@ -27,34 +27,35 @@ finalExplosion = 9
 death_animation_duration_min = 0.0
 death_animation_duration_max = 0.0
 
-[node name="DestroyerChassis" parent="." instance=ExtResource("2_qpwbv")]
+[node name="DestroyerChassis" parent="." unique_id=2083719542 instance=ExtResource("2_qpwbv")]
 
-[node name="CollisionShapeHull" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeHull" type="CollisionShape3D" parent="." unique_id=1268646588]
 shape = SubResource("ConvexPolygonShape3D_jcj40")
 
-[node name="CollisionShape3Bridge" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3Bridge" type="CollisionShape3D" parent="." unique_id=1759474659]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.508, 12.425)
 shape = SubResource("ConvexPolygonShape3D_ssu23")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=226962911]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.973, -9.827)
 shape = SubResource("ConvexPolygonShape3D_v5onn")
 
-[node name="HealthComponent" parent="." instance=ExtResource("3_2fe14")]
+[node name="HealthComponent" parent="." unique_id=946910222 instance=ExtResource("3_2fe14")]
+max_health = 100.0
 
-[node name="TurretGroup" parent="." instance=ExtResource("4_mjmit")]
+[node name="TurretGroup" parent="." unique_id=122433543 instance=ExtResource("4_mjmit")]
 
-[node name="LeftHardpoint" type="Node3D" parent="TurretGroup"]
+[node name="LeftHardpoint" type="Node3D" parent="TurretGroup" unique_id=1362490832]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3.5, -10)
 script = ExtResource("5_i0xpl")
 max_elevation_deg = 90.0
 
-[node name="RightHardpoint" type="Node3D" parent="TurretGroup"]
+[node name="RightHardpoint" type="Node3D" parent="TurretGroup" unique_id=388332348]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3.5, -10)
 script = ExtResource("5_i0xpl")
 max_elevation_deg = 90.0
 
-[node name="NPCCapitalShipController" parent="." instance=ExtResource("5_1ts7h")]
+[node name="NPCCapitalShipController" parent="." unique_id=1806682805 instance=ExtResource("5_1ts7h")]
 speed = 10.0
 x_speed = 5.0
 y_speed = 5.0
@@ -67,5 +68,5 @@ ideal_distance = 400.0
 ease_dist = 200.0
 keep_target_above = true
 
-[node name="TargetReticles" parent="." instance=ExtResource("7_c4x8n")]
+[node name="TargetReticles" parent="." unique_id=1644942671 instance=ExtResource("7_c4x8n")]
 target_text = "Destroyer"
