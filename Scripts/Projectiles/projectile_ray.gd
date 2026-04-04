@@ -5,7 +5,8 @@ class_name ProjectileRay extends Projectile
 # Raycast bullets in Godot 4 by ImmersiveRPG
 # https://www.youtube.com/watch?v=joMBVo_ZwKI
 
-const MIN_RAY_DISTANCE := 1.0
+# Ray should be distance traveled plus projectile_length
+@export var projectile_length := 1.0
 
 @onready var ray:RayCast3D = $RayCast3D
 
@@ -19,13 +20,15 @@ func _physics_process(delta: float) -> void:
 	# Change ray position and length to extend from
 	# previous bullet position to new position.
 	var distance := velocity.length() * delta
-	# Also make the ray at least minimum length
-	if distance < MIN_RAY_DISTANCE:
-		ray.target_position.z = -MIN_RAY_DISTANCE
-		ray.transform.origin.z = MIN_RAY_DISTANCE
-	else:
-		ray.target_position.z = -distance
-		ray.transform.origin.z = distance
+	
+	# Determine ray length
+	ray.target_position.z = -distance-projectile_length
+	# What is the point of this next line of code? It was
+	# in the original tutorial, but with it in my turrets hit
+	# themselves, and with it commented, everything seems to
+	# work great.
+	#ray.transform.origin.z = distance+projectile_length
+	
 	# Check for and handle collisions.
 	if ray.is_colliding():
 		var body := ray.get_collider()

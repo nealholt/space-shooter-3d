@@ -17,11 +17,13 @@ var bullet_array:Array[PackedScene] = [
 	preload("res://Scenes/Projectiles/laser_guided_missile.tscn"),
 	preload("res://Scenes/Projectiles/proximity_fuse_bullet.tscn"),
 	preload("res://Scenes/Projectiles/shotgun_pellet.tscn"),
-	preload("res://Scenes/Projectiles/timed_fuse_bullet.tscn")
+	preload("res://Scenes/Projectiles/timed_fuse_bullet.tscn"),
+	preload("res://Scenes/Projectiles/bullet_ray_big.tscn")
 	]
 
 enum BULLET_TYPE {BASIC_AREA, BASIC_RAY, SEEKING_MISSILE, 
-	LASER_GUIDED_MISSILE, PROXY_FUSE, SHOTGUN_PELLET, TIMED_FUSE}
+	LASER_GUIDED_MISSILE, PROXY_FUSE, SHOTGUN_PELLET, TIMED_FUSE,
+	GIANT_RAY}
 
 
 func new_gun(gt:GUN_TYPE, bt:BULLET_TYPE, my_parent:Node3D) -> Gun:

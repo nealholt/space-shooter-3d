@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://juku72fh3dl0"]
+[gd_scene format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_dn8ab"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="4_57m73"]
@@ -18,7 +18,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_ydoww"]
 radius = 2.3
 
-[node name="Fighter" type="CharacterBody3D" groups=["damageable", "team member"]]
+[node name="Fighter" type="CharacterBody3D" unique_id=1900985089 groups=["damageable", "team member"]]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
 collision_layer = 3
 collision_mask = 3
@@ -29,22 +29,22 @@ side_cam_position = Vector3(1.27, -0.2, -2)
 deathExplosion = 9
 finalExplosion = 8
 
-[node name="AimAssist" parent="." instance=ExtResource("19_xjc2u")]
+[node name="AimAssist" parent="." unique_id=936755743 instance=ExtResource("19_xjc2u")]
 angle_assist_limit = 10.0
 
-[node name="BurningTrail" parent="." instance=ExtResource("14_4fwow")]
+[node name="BurningTrail" parent="." unique_id=1537818326 instance=ExtResource("14_4fwow")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="FighterChassisRing" parent="." instance=ExtResource("19_x2ba7")]
+[node name="FighterChassisRing" parent="." unique_id=1843447486 instance=ExtResource("19_x2ba7")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2058118288]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("SphereShape3D_ydoww")
 
-[node name="Contrail" parent="." instance=ExtResource("20_a8xhu")]
+[node name="Contrail" parent="." unique_id=1872205333 instance=ExtResource("20_a8xhu")]
 
-[node name="DebugLabel" type="Label3D" parent="."]
+[node name="DebugLabel" type="Label3D" parent="." unique_id=1097695612]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 billboard = 1
@@ -52,14 +52,14 @@ fixed_size = true
 font_size = 16
 outline_size = 4
 
-[node name="HealthComponent" parent="." instance=ExtResource("5_1xytm")]
+[node name="HealthComponent" parent="." unique_id=535388883 instance=ExtResource("5_1xytm")]
 max_health = 20
 
-[node name="MissileLockGroup" parent="." instance=ExtResource("17_563f5")]
+[node name="MissileLockGroup" parent="." unique_id=756556192 instance=ExtResource("17_563f5")]
 npc_missile_lock = true
 missile_range = 1000.0
 
-[node name="MissileLauncher" parent="MissileLockGroup" instance=ExtResource("4_57m73")]
+[node name="MissileLauncher" parent="MissileLockGroup" unique_id=684312626 instance=ExtResource("4_57m73")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 bullet = ExtResource("5_70fr4")
 damage = 10.0
@@ -67,16 +67,16 @@ bullet_speed = 150.0
 bullet_timeout = 5.0
 fire_rate = 0.033
 
-[node name="MissileLockTImeout" parent="MissileLockGroup" instance=ExtResource("10_g3b86")]
+[node name="MissileLockTImeout" parent="MissileLockGroup" unique_id=1472885779 instance=ExtResource("10_g3b86")]
 
-[node name="TargetReticles" parent="." instance=ExtResource("15_kfjug")]
+[node name="TargetReticles" parent="." unique_id=1111105521 instance=ExtResource("15_kfjug")]
 target_text = "Fighter"
 
-[node name="WeaponHandler" parent="." instance=ExtResource("4_dhpb0")]
+[node name="WeaponHandler" parent="." unique_id=1131696451 instance=ExtResource("4_dhpb0")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Gun" parent="WeaponHandler" instance=ExtResource("4_57m73")]
-transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.2)
+[node name="Gun" parent="WeaponHandler" unique_id=2138703467 instance=ExtResource("4_57m73")]
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.2)
 bullet = ExtResource("5_6ou5s")
 bullet_speed = 600.0
 fire_rate = 8.0
@@ -85,5 +85,5 @@ fire_sound = 0
 reload_sound = 2
 magazine_size = 20
 
-[node name="ObstacleDetector" parent="." instance=ExtResource("14_05dih")]
+[node name="ObstacleDetector" parent="." unique_id=2089579086 instance=ExtResource("14_05dih")]
 transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)

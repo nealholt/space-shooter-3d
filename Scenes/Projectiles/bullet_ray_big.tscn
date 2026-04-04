@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cwjh4vkwqyupg"]
+
+[ext_resource type="PackedScene" uid="uid://caody2m8xh0b6" path="res://Scenes/Projectiles/projectile_ray.tscn" id="1_uctnf"]
+[ext_resource type="PackedScene" uid="uid://y8np60k8lojf" path="res://Assets/Projectiles/Bullets/green_laser_bolt_giant.tscn" id="2_m11n6"]
+
+[node name="ProjectileRay" unique_id=1183825172 instance=ExtResource("1_uctnf")]
+projectile_length = 30.0
+does_ricochet = false
+
+[node name="MeshInstance3D" parent="." index="2" unique_id=34375246 instance=ExtResource("2_m11n6")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -15)
