@@ -1,1 +1,4 @@
+Muzzle Cone and Muzzle Plane are from here:
 https://www.youtube.com/watch?v=YuCvAwZ3OlQ
+
+fighter_tri I (Neal) made in Blender

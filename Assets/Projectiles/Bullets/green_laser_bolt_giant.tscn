@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://y8np60k8lojf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fsau2"]
-albedo_color = Color(0.160784, 1, 0.141176, 1)
+albedo_color = Color(0, 1, 0, 1)
 emission_enabled = true
-emission = Color(0.160784, 1, 0.141176, 1)
-emission_energy_multiplier = 16.0
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 10.0
 disable_receive_shadows = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_yirot"]

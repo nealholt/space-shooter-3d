@@ -49,12 +49,14 @@ max_health = 100.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3.5, -10)
 script = ExtResource("5_i0xpl")
 max_elevation_deg = 90.0
+prefer_capital_ships = true
 bullet_type = 7
 
 [node name="RightHardpoint" type="Node3D" parent="TurretGroup" unique_id=388332348]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3.5, -10)
 script = ExtResource("5_i0xpl")
 max_elevation_deg = 90.0
+prefer_capital_ships = true
 bullet_type = 7
 
 [node name="NPCCapitalShipController" parent="." unique_id=1806682805 instance=ExtResource("5_1ts7h")]

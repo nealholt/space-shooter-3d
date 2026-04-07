@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d1vo3t17p8to3"]
+
+[ext_resource type="Texture2D" uid="uid://kwxc5kf3ef5" path="res://Assets/Models/fighter_tri_color_scheme.png" id="1_dgu74"]
+
+[resource]
+resource_name = "Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_dgu74")
+roughness = 0.5
+texture_filter = 2

@@ -6,6 +6,7 @@
 [node name="ProjectileRay" unique_id=1183825172 instance=ExtResource("1_uctnf")]
 projectile_length = 30.0
 does_ricochet = false
+speed = 600.0
 
 [node name="MeshInstance3D" parent="." index="2" unique_id=34375246 instance=ExtResource("2_m11n6")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -15)

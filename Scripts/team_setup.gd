@@ -9,6 +9,7 @@ class_name TeamSetup extends Node3D
 var color:Color = Color.RED
 var reticle_color:Color = Color.GREEN
 var enemy:String = "blue team"
+var team_material:String = "res://Assets/Materials/red_team_material.tres"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,6 +18,7 @@ func _ready() -> void:
 		color = Color.BLUE
 		reticle_color = Color.WHITE
 		enemy = "red team"
+		team_material = "res://Assets/Materials/blue_team_material.tres"
 	# Set team properties for all children of self
 	# and all their children and children's children,
 	# and so on
@@ -35,12 +37,17 @@ func set_team_properties(parent_node) -> void:
 		if child.is_in_group("team member"):
 			child.add_to_group(team)
 		
+		# This may be outdated and not needed now
+		# that I have the BlenderModel class (see below)
 		if child.is_in_group("team color"):
 			var newMaterial = StandardMaterial3D.new()
 			# Set color of new material
 			newMaterial.albedo_color = color
 			# Assign new material to material overrride
 			child.material_override = newMaterial
+		
+		if child is BlenderModel:
+			child.apply_material(team_material)
 		
 		# Set team properties. Everything with
 		# a variable named ally_team and enemy_team

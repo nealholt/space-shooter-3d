@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://hpvkerb8hmkp"]
+
+[ext_resource type="PackedScene" uid="uid://cplsah4wfwpo5" path="res://Assets/Models/fighter_tri.glb" id="1_ctxri"]
+[ext_resource type="Script" uid="uid://cr6v3j8voodfb" path="res://Scripts/material_setter.gd" id="2_e17n3"]
+[ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Assets/Ships/engine_mesh_component.tscn" id="2_p7ds7"]
+
+[node name="fighter_tri" unique_id=934030235 instance=ExtResource("1_ctxri")]
+script = ExtResource("2_e17n3")
+
+[node name="Cube" parent="." index="0" unique_id=2093087467]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="EngineMeshComponent" parent="." index="1" unique_id=642672322 instance=ExtResource("2_p7ds7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.253, -0.727)
