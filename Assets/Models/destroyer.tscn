@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cea1hyirvxk5n"]
+
+[ext_resource type="PackedScene" uid="uid://dxi6umigw1cvd" path="res://Assets/Models/destroyer.glb" id="1_k5ci0"]
+[ext_resource type="Script" uid="uid://cr6v3j8voodfb" path="res://Scripts/material_setter.gd" id="2_ehg2e"]
+[ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Assets/Ships/engine_mesh_component.tscn" id="2_ewwyr"]
+
+[node name="destroyer" unique_id=1871978161 instance=ExtResource("1_k5ci0")]
+script = ExtResource("2_ehg2e")
+
+[node name="EngineMeshComponent" parent="." index="1" unique_id=512230966 instance=ExtResource("2_ewwyr")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0.7, -20)

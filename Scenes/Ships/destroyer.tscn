@@ -1,21 +1,24 @@
 [gd_scene format=3 uid="uid://cjtrd5ktq5ypj"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_2su5o"]
-[ext_resource type="PackedScene" uid="uid://s17i1n8q4r44" path="res://Assets/Ships/destroyer_chassis.tscn" id="2_qpwbv"]
+[ext_resource type="PackedScene" uid="uid://cea1hyirvxk5n" path="res://Assets/Models/destroyer.tscn" id="2_c4x8n"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_2fe14"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="4_mjmit"]
 [ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_1ts7h"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_i0xpl"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="7_c4x8n"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jcj40"]
-points = PackedVector3Array(-5, -5, -14.5455, 5, 5, 14.5455, 5, -5, 14.5455, 5, 5, -14.5455, -5, 5, 14.5455, -5, -5, 14.5455, 5, -5, -14.5455, -5, 5, -14.5455)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c4x8n"]
+points = PackedVector3Array(11.482248, 4.2503576, 20.31643, -2.6437604, 1.9923999, 12.67453, -3.1086786, 5.519431, 12.069876, -11.358835, 4.2503576, 20.31643, 11.482248, 2.3478656, 13.338948, -11.358835, 2.3478656, 13.338948, 11.482248, 2.3478656, 20.31643, -3.1086786, 5.519431, 20.31643, 3.229856, 5.519431, 12.069876, -11.358835, 2.3478656, 20.31643, 11.482248, 4.2503576, 13.338948, -11.358835, 4.2503576, 13.338948, 2.9867253, 1.859373, 20, 3.229856, 5.519431, 20.31643, 2.7652657, 1.9923999, 12.67453)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ssu23"]
-points = PackedVector3Array(7.27259, 2.5, 4.88636, -7.27273, -2.5, -4.88636, -7.27273, -2.5, 4.88636, 7.27259, -2.5, -4.88636, -7.27273, 2.5, -4.88636, -7.27273, 2.5, 4.88636, 7.27259, -2.5, 4.88636, 7.27259, 2.5, -4.88636)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i0d2t"]
+points = PackedVector3Array(-3.109301, -5.8998694, 12.069876, 3.868305, 1.7121489, 20.31643, 3.868305, -5.2653327, 20.31643, -4.3796167, -1.4605345, 19.681894, 3.2335818, 1.0776124, 12.069876, -2.6469474, 1.9923999, 11.789652, 3.2335818, -5.8998694, 12.069876, -4.3796167, -6.5352135, 19.047358, -3.7448938, 1.7121489, 20.31643, 4.503028, -6.5352135, 17.143747, -3.7448938, -5.2653327, 20.31643, -4.3796167, -4.630796, 15.877095, 4.503028, -6.5352135, 19.047358, 3.2335818, 1.7121489, 12.7044115, -3.7448938, 0.44307566, 14.608022, 4.503028, -4.630796, 16.50921, -4.3796167, -6.5352135, 17.143747, -3.109301, 1.0776124, 12.069876, 4.503028, -2.727186, 18.41282, -3.7448938, 1.7121489, 17.778284, 3.868305, 1.7121489, 19.047358, 3.868305, -5.2653327, 13.973485, -4.3796167, -5.8998694, 15.877095, -4.3796167, -5.8998694, 19.681894, -4.3796167, -1.4605345, 19.047358, -3.109301, 1.7121489, 12.7044115, 4.503028, -2.727186, 19.047358, 3.868305, 0.44307566, 16.50921, 4.503028, -5.8998694, 16.50921)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v5onn"]
-points = PackedVector3Array(12.6959, 0.888734, 5.11905, -12.6959, -0.698257, -5.19841, -12.6959, 0.888734, -5.19841, 12.6959, -0.698257, -5.19841, -12.6959, -0.698257, 5.11905, -12.6959, 0.888734, 5.11905, 12.6959, 0.888734, -5.19841, 12.6959, -0.698257, 5.11905)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_iqh03"]
+points = PackedVector3Array(3.8675592, 5.5198035, 5.088108, -3.742906, 5.5198035, -20.289137, 3.2340784, -0.19046736, -20.289137, -3, -0.09194622, 11.51078, -3.109425, 5.5198035, 12.069067, 3, 0.020203201, 10.875267, 3.8675592, 5.5198035, -20.289137, -6.28304, 4.2504196, 1.2808876, -3.109425, -0.19046736, -20.289137, 3.2340784, 5.5198035, 12.069067, 6.406451, 4.2504196, 1.2808876, 6.406451, 4.8848324, -1.2562034, -3.742906, 1.7138879, -20.289137, 3.7035484, 0.32309046, 1.8724185, 3.8675592, 1.7138879, -20.289137, -3.640128, 0.2845187, 2.4990587, -6.28304, 4.2504196, -1.2562034, -3.742906, 5.5198035, 5.088108, 6.406451, 4.2504196, -1.2562034, 3.7035484, 0.32309046, -3.3307314)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3jh5d"]
+points = PackedVector3Array(-3.7448938, -2.7288628, -19.652489, 4.503028, -0.82506657, -14.57514, 3.57549, -8.1214, 4.3805594, -3, -0.33262047, 11.511392, -4.3796167, -8.438637, 5.088108, 3, -0.49417168, 10.877613, 3.457842, -7.99394, -5.520142, -4.3796167, -0.19046783, -18.385529, 3.2335818, -5.900242, 12.069067, -4.3796167, -8.438637, -5.69057, 3.2335818, -3.3634615, -20.289137, -3.109301, -5.900242, 12.069067, 3.0354548, -0.4480734, -19.27853, -3.109301, -3.3634615, -20.289137, 4.503028, -2.094264, -18.385529, -4.3796167, -0.19046783, -12.67153, 3.868305, -7.1694393, 5.088108, 3.2335818, -3.9980602, -19.019009, -2.9410062, -0.40934554, -19.430462, -3.109301, -3.9980602, -19.019009, -4.3796167, -7.804038, 5.088108, -4.3796167, -2.094264, -18.385529, 4.503028, -2.094264, -14.57514)
 
 [node name="Destroyer" type="CharacterBody3D" unique_id=433808346 groups=["capital_ship", "damageable", "team member"]]
 collision_layer = 3
@@ -27,18 +30,24 @@ finalExplosion = 9
 death_animation_duration_min = 0.0
 death_animation_duration_max = 0.0
 
-[node name="DestroyerChassis" parent="." unique_id=2083719542 instance=ExtResource("2_qpwbv")]
+[node name="destroyer" parent="." unique_id=1871978161 instance=ExtResource("2_c4x8n")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="CollisionShapeHull" type="CollisionShape3D" parent="." unique_id=1268646588]
-shape = SubResource("ConvexPolygonShape3D_jcj40")
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=329594527]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_c4x8n")
 
-[node name="CollisionShape3Bridge" type="CollisionShape3D" parent="." unique_id=1759474659]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.508, 12.425)
-shape = SubResource("ConvexPolygonShape3D_ssu23")
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1552933113]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_i0d2t")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=226962911]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.973, -9.827)
-shape = SubResource("ConvexPolygonShape3D_v5onn")
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1075931032]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_iqh03")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1771209807]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_3jh5d")
 
 [node name="HealthComponent" parent="." unique_id=946910222 instance=ExtResource("3_2fe14")]
 max_health = 100.0
@@ -46,14 +55,14 @@ max_health = 100.0
 [node name="TurretGroup" parent="." unique_id=122433543 instance=ExtResource("4_mjmit")]
 
 [node name="LeftHardpoint" type="Node3D" parent="TurretGroup" unique_id=1362490832]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3.5, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 4.5, -17)
 script = ExtResource("5_i0xpl")
 max_elevation_deg = 90.0
 prefer_capital_ships = true
 bullet_type = 7
 
 [node name="RightHardpoint" type="Node3D" parent="TurretGroup" unique_id=388332348]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 3.5, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 4.5, -17)
 script = ExtResource("5_i0xpl")
 max_elevation_deg = 90.0
 prefer_capital_ships = true
@@ -74,3 +83,5 @@ keep_target_above = true
 
 [node name="TargetReticles" parent="." unique_id=1644942671 instance=ExtResource("7_c4x8n")]
 target_text = "Destroyer"
+
+[editable path="destroyer"]

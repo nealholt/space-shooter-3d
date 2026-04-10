@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="1_5kq0i"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="2_28aj3"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="4_cq55v"]
-[ext_resource type="PackedScene" uid="uid://ls7l4tvcl8tb" path="res://Assets/Guns/gun_model_basic.tscn" id="5_01wq6"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="5_6av2j"]
 [ext_resource type="PackedScene" uid="uid://do50y2jdho5iq" path="res://Scenes/vfx/MuzzleFlash/muzzle_flash_green_monster.tscn" id="6_0a0ca"]
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/engine_audio_visuals.tscn" id="6_3ywou"]
@@ -29,7 +28,6 @@ npc_missile_lock = false
 damage = 20.0
 
 [node name="Gun" parent="WeaponHandler" parent_id_path=PackedInt32Array(1131696451) index="0" unique_id=2138703467 node_paths=PackedStringArray("muzzle_flash")]
-transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.96)
 bullet_speed = 1000.0
 fire_rate = 18.0
 spread_deg = 1.0
@@ -42,11 +40,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_28aj3")
 
-[node name="gun_model_basic" parent="WeaponHandler/Gun" index="3" unique_id=2017207014 instance=ExtResource("5_01wq6")]
-transform = Transform3D(1, 8.351873e-23, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0.723)
-
-[node name="MuzzleFlashGreenMonster" parent="WeaponHandler/Gun" index="4" unique_id=1217424774 instance=ExtResource("6_0a0ca")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+[node name="MuzzleFlashGreenMonster" parent="WeaponHandler/Gun" index="3" unique_id=1217424774 instance=ExtResource("6_0a0ca")]
+transform = Transform3D(-1, 8.3518774e-23, -8.742278e-08, -2.686581e-16, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="CameraGroup" parent="." index="10" unique_id=211830308 instance=ExtResource("5_6av2j")]
 

@@ -77,7 +77,7 @@ target_text = "Fighter"
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Gun" parent="WeaponHandler" unique_id=2138703467 instance=ExtResource("4_57m73")]
-transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -3.6)
+transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -3.5)
 bullet = ExtResource("5_6ou5s")
 bullet_speed = 600.0
 fire_rate = 8.0
