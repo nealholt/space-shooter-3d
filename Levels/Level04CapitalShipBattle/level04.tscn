@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://creoqhif83mdb" path="res://Assets/Skyboxes/moon_with_stars.png" id="2_ci3xu"]
 [ext_resource type="PackedScene" uid="uid://byb8ya6fryjw0" path="res://Scenes/Ships/frigate.tscn" id="5_cn33r"]
 [ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Scenes/Ships/destroyer.tscn" id="6_8xsvq"]
+[ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="7_3dyh5"]
+[ext_resource type="PackedScene" uid="uid://i7qxmq7hwdhc" path="res://Scenes/shield_generator.tscn" id="8_hv5oy"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qcl2j"]
 panorama = ExtResource("2_ci3xu")
@@ -60,6 +62,12 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -828
 
 [node name="Destroyer4" parent="RedTeam" unique_id=672902360 instance=ExtResource("6_8xsvq")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1020.4547, -109.89906, 0)
+
+[node name="Shield" parent="RedTeam/Destroyer4" unique_id=462814636 instance=ExtResource("7_3dyh5")]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+
+[node name="ShieldGenerator" parent="RedTeam/Destroyer4" unique_id=1564933571 instance=ExtResource("8_hv5oy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="Destroyer5" parent="RedTeam" unique_id=406786840 instance=ExtResource("6_8xsvq")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -781.2112, -191.00339, 0)

@@ -44,7 +44,7 @@ class_name TargetReticles extends Node3D
 @export var target_text : String = '' ## Text label for this target when it is directly targeted by the player
 
 # Which set of reticle images to use
-enum ReticleSet {FIGHTER, TURRET, WEAKPOINT, REACTOR, MISSILE}
+enum ReticleSet {FIGHTER, TURRET, WEAKPOINT, REACTOR, MISSILE, NONE}
 @export var reticle_set:ReticleSet
 
 # Squared distance at which to use smaller reticle
@@ -155,11 +155,16 @@ func set_reticle_textures(rs:ReticleSet) -> void:
 		#$OffscreenNode2D/OffscreenReticle.texture = load() # use default
 		$DistantNode2D/DistantReticle.texture = load('res://Assets/Images/crosshair057.png')
 		$TargetedNode2D/TargetedReticle.texture = load('res://Assets/Images/crosshair058.png')
-	else: #if rs == ReticleSet.MISSILE:
+	elif rs == ReticleSet.MISSILE:
 		$TargetNode2D/TargetReticle.texture = load('res://Assets/Images/crosshair085.png')
 		#$OffscreenNode2D/OffscreenReticle.texture = load() # use default
 		$DistantNode2D/DistantReticle.texture = load('res://Assets/Images/crosshair086.png')
 		$TargetedNode2D/TargetedReticle.texture = load('res://Assets/Images/crosshair101.png')
+	else: #if rs == ReticleSet.NONE:
+		# Not only should there be no reticle, but delete self.
+		# Last I checked, only shields do this. No independent
+		# reticle for shields.
+		Callable(queue_free).call_deferred()
 
 
 # This was moved into a function for organizational purposes

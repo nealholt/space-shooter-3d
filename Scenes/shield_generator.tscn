@@ -1,0 +1,185 @@
+[gd_scene format=3 uid="uid://i7qxmq7hwdhc"]
+
+[ext_resource type="Texture2D" uid="uid://doe5cj2wsyysc" path="res://Assets/ParticleImages/spark_01.png" id="1_3yt4p"]
+[ext_resource type="Script" uid="uid://qdnnawja4h08" path="res://Scripts/shield_generator.gd" id="1_dxfth"]
+[ext_resource type="Texture2D" uid="uid://bwfyyi3q8raw4" path="res://Assets/ParticleImages/spark_02.png" id="3_4nkei"]
+[ext_resource type="Texture2D" uid="uid://pa25y2mrbjiq" path="res://Assets/ParticleImages/spark_03.png" id="4_4nkei"]
+[ext_resource type="ArrayMesh" uid="uid://dmovo5tcqpbhn" path="res://Assets/Models/muzzle_cone01.obj" id="4_cvrrl"]
+[ext_resource type="Texture2D" uid="uid://cexs1xykv11rj" path="res://Assets/ParticleImages/spark_04.png" id="5_cvrrl"]
+[ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="7_cvrrl"]
+[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Scenes/hit_box_component.tscn" id="8_dxfth"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o0aob"]
+shading_mode = 2
+specular_mode = 2
+albedo_color = Color(0.28493494, 0.46963003, 0.6155507, 1)
+stencil_flags = 2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_u1p73"]
+material = SubResource("StandardMaterial3D_o0aob")
+top_radius = 0.01
+bottom_radius = 4.0
+height = 10.0
+radial_segments = 32
+rings = 2
+cap_bottom = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxfth"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("1_3yt4p")
+
+[sub_resource type="Curve" id="Curve_ovqv1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gciti"]
+curve = SubResource("Curve_ovqv1")
+
+[sub_resource type="Curve" id="Curve_i3gmn"]
+_data = [Vector2(0, 0), 0.0, 2.3927577, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ji0jx"]
+curve = SubResource("Curve_i3gmn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b7mb6"]
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_ji0jx")
+color = Color(0, 1, 1, 1)
+alpha_curve = SubResource("CurveTexture_gciti")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jk3ev"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("3_4nkei")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cvrrl"]
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_ji0jx")
+color = Color(0, 1, 0, 1)
+alpha_curve = SubResource("CurveTexture_gciti")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u1p73"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("4_4nkei")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dxfth"]
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 12.0
+scale_curve = SubResource("CurveTexture_ji0jx")
+color = Color(1, 0.735357, 0.6681772, 1)
+alpha_curve = SubResource("CurveTexture_gciti")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5e4do"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("5_cvrrl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u1p73"]
+gravity = Vector3(0, 0, 0)
+scale_min = 6.0
+scale_max = 12.0
+scale_curve = SubResource("CurveTexture_ji0jx")
+color = Color(1, 0, 1, 1)
+alpha_curve = SubResource("CurveTexture_gciti")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_u1p73"]
+points = PackedVector3Array(3.7537172, -4.7493224, -0.99589777, -3.783191, -4.7066464, -0.84034836, -3.8189576, -4.7515163, 0.7838243, 0.0435128, 4.8709326, 0.043513026, 0.94121695, -4.792722, 3.788312, 0.7838233, -4.7515116, -3.8189538, -2.6498613, -4.7610254, 3.2218804, 3.250382, -4.6669397, 2.0830312, -1.7019273, -4.647656, -3.4453552, 3.2218802, -4.7610254, -2.6506536, -2.8555577, -4.6330605, -2.5656579, 3.7878993, -4.7922044, 0.94185984, 1.7923765, -4.7610254, -3.7616093, -3.7616096, -4.7610254, 1.7923768, -0.81851363, -4.2935343, 3.618398, -0.10439748, 4.655124, -0.10439727, 2.0830204, -4.6669164, 3.2503657, -0.84035015, -4.7066555, -3.7831984, -3.445374, -4.647681, -1.7019361, 0.041489486, 4.7399673, -0.10572128, -0.105719715, 4.739853, 0.04148794, 3.4697924, -3.7162004, 0.18232816, 0.18232901, -3.7162187, 3.4698098, 2.5674934, -4.0752025, 2.5674934, -3.5216172, -3.8457086, 0.18090366, 0.18160601, -3.845553, -3.5214756, -2.065498, -4.209278, -3.0483963, 0.326598, 4.1623116, -0.10341474, 1.513377, -4.708555, 3.5735414, 3.5741644, -4.709369, 1.5129095, -0.10344069, 4.163807, 0.32600996, -1.4506129, -4.7807317, 3.628811)
+
+[node name="ShieldGenerator" type="Node3D" unique_id=1564933571]
+script = ExtResource("1_dxfth")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2072860184]
+mesh = SubResource("CylinderMesh_u1p73")
+
+[node name="MuzzleSpark1" type="GPUParticles3D" parent="." unique_id=1955921848]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+material_override = SubResource("StandardMaterial3D_dxfth")
+amount = 1
+lifetime = 0.55
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+local_coords = true
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_b7mb6")
+draw_pass_1 = ExtResource("4_cvrrl")
+
+[node name="MuzzleSpark2" type="GPUParticles3D" parent="." unique_id=1484397515]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+material_override = SubResource("StandardMaterial3D_jk3ev")
+amount = 1
+lifetime = 0.5
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+local_coords = true
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_cvrrl")
+draw_pass_1 = ExtResource("4_cvrrl")
+
+[node name="MuzzleSpark3" type="GPUParticles3D" parent="." unique_id=1169789633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+material_override = SubResource("StandardMaterial3D_u1p73")
+amount = 1
+lifetime = 0.4
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+local_coords = true
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_dxfth")
+draw_pass_1 = ExtResource("4_cvrrl")
+
+[node name="MuzzleSpark4" type="GPUParticles3D" parent="." unique_id=1091146015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+material_override = SubResource("StandardMaterial3D_5e4do")
+emitting = false
+amount = 1
+lifetime = 4.5
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+local_coords = true
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_u1p73")
+draw_pass_1 = ExtResource("4_cvrrl")
+
+[node name="HealthComponent" parent="." unique_id=1378699833 instance=ExtResource("7_cvrrl")]
+
+[node name="HitBoxComponent" parent="." unique_id=91352412 node_paths=PackedStringArray("health_component") instance=ExtResource("8_dxfth")]
+health_component = NodePath("../HealthComponent")
+reticle_set = 2
+
+[node name="TargetReticles" parent="HitBoxComponent" index="0"]
+target_text = "Shield Generator"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent" unique_id=600990507]
+shape = SubResource("ConvexPolygonShape3D_u1p73")
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+
+[editable path="HitBoxComponent"]

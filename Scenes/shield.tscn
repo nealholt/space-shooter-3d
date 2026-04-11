@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cruqo01kbn3ab"]
+[gd_scene format=3 uid="uid://cruqo01kbn3ab"]
 
 [ext_resource type="Script" uid="uid://7megq05mf7kt" path="res://Scripts/shield.gd" id="1_xlxvf"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_1831n"]
@@ -18,21 +18,22 @@ material = SubResource("ShaderMaterial_51wj8")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0x6dj"]
 
-[node name="Shield" type="Node3D" groups=["shield"]]
+[node name="Shield" type="Node3D" unique_id=1992904425 groups=["shield"]]
 script = ExtResource("1_xlxvf")
 explosion = 2
 
-[node name="FresnelAura" type="MeshInstance3D" parent="."]
+[node name="FresnelAura" type="MeshInstance3D" parent="." unique_id=556348261]
 mesh = SubResource("SphereMesh_n464a")
 
-[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["shield"] instance=ExtResource("3_6jkow")]
+[node name="HitBoxComponent" parent="." unique_id=1491391398 node_paths=PackedStringArray("health_component") groups=["shield"] instance=ExtResource("3_6jkow")]
 collision_layer = 8
 health_component = NodePath("../HealthComponent")
+reticle_set = 5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent" unique_id=1924844819]
 shape = SubResource("SphereShape3D_0x6dj")
 
-[node name="HealthComponent" parent="." instance=ExtResource("4_t4iu0")]
+[node name="HealthComponent" parent="." unique_id=2107912029 instance=ExtResource("4_t4iu0")]
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_lost" from="HealthComponent" to="." method="_on_health_component_health_lost"]

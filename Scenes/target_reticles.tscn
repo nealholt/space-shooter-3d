@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dp3ouf5e4fqhk"]
+[gd_scene format=3 uid="uid://dp3ouf5e4fqhk"]
 
 [ext_resource type="Script" uid="uid://bnfpjo4h8hgp0" path="res://Scripts/target_reticles.gd" id="1_e3x8k"]
 [ext_resource type="Texture2D" uid="uid://c4n625lh665gm" path="res://Assets/Images/crosshair025.png" id="2_6ce1x"]
@@ -68,48 +68,46 @@ _data = {
 &"ZoomOnTarget": SubResource("Animation_6ce1x")
 }
 
-[node name="TargetReticles" type="Node3D"]
+[node name="TargetReticles" type="Node3D" unique_id=2083337324]
 script = ExtResource("1_e3x8k")
 
-[node name="TargetNode2D" type="Node2D" parent="."]
+[node name="TargetNode2D" type="Node2D" parent="." unique_id=1114193458]
 
-[node name="TargetReticle" type="TextureRect" parent="TargetNode2D"]
+[node name="TargetReticle" type="TextureRect" parent="TargetNode2D" unique_id=1741292514]
 offset_left = -37.0
 offset_top = -37.0
 offset_right = 35.0
 offset_bottom = 35.0
 texture = ExtResource("2_6ce1x")
 
-[node name="OffscreenNode2D" type="Node2D" parent="."]
+[node name="OffscreenNode2D" type="Node2D" parent="." unique_id=491606515]
 
-[node name="OffscreenReticle" type="TextureRect" parent="OffscreenNode2D"]
+[node name="OffscreenReticle" type="TextureRect" parent="OffscreenNode2D" unique_id=892960208]
 offset_left = -64.0
 offset_top = -64.0
 offset_right = 64.0
 offset_bottom = 64.0
 texture = ExtResource("3_fi5sc")
 
-[node name="DistantNode2D" type="Node2D" parent="."]
+[node name="DistantNode2D" type="Node2D" parent="." unique_id=1399859787]
 
-[node name="DistantReticle" type="TextureRect" parent="DistantNode2D"]
+[node name="DistantReticle" type="TextureRect" parent="DistantNode2D" unique_id=1602136758]
 offset_left = -37.0
 offset_top = -37.0
 offset_right = 35.0
 offset_bottom = 35.0
 texture = ExtResource("4_pfbvf")
 
-[node name="TargetedNode2D" type="Node2D" parent="."]
+[node name="TargetedNode2D" type="Node2D" parent="." unique_id=1300720335]
 
-[node name="TargetedReticle" type="TextureRect" parent="TargetedNode2D"]
+[node name="TargetedReticle" type="TextureRect" parent="TargetedNode2D" unique_id=706632501]
 offset_left = -37.0
 offset_top = -37.0
 offset_right = 35.0
 offset_bottom = 35.0
 texture = ExtResource("5_82t2t")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_82t2t")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2067307828]
+libraries/ = SubResource("AnimationLibrary_82t2t")
 
-[node name="DynamicPanel" parent="." instance=ExtResource("6_pfbvf")]
+[node name="DynamicPanel" parent="." unique_id=347294285 instance=ExtResource("6_pfbvf")]

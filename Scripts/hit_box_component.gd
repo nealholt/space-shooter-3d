@@ -56,7 +56,7 @@ func damage(amount:float, damager=null):
 	if health_component:
 		#Global.friendly_fire_checker(damager, get_parent()) #TESTING
 		health_component.health -= amount
-		if health_component.is_dead():
+		if health_component.is_dead() and is_instance_valid(reticle):
 			reticle.is_targeted = false
 	if hit_feedback:
 		hit_feedback.hit()
