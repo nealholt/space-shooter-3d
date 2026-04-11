@@ -154,6 +154,10 @@ func _on_load_12_race_course_pressed() -> void:
 func _on_load_13_collision_avoid_pressed() -> void:
 	load_level("Level13CollisionAvoid/CollisionAvoidTest")
 
+func _on_load_14_race_course_alt_pressed() -> void:
+	load_level("Level14RaceCourseAlt/race_course_alt")
+
+
 func _on_toggle_fullscreen_pressed() -> void:
 	fullscreen = !fullscreen
 	if fullscreen:

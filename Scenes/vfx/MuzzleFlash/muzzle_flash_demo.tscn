@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://123jkwus4316"]
+[gd_scene format=3 uid="uid://123jkwus4316"]
 
 [ext_resource type="Texture2D" uid="uid://die8v8wcj1pfv" path="res://Assets/ParticleImages/muzzle_01_right.png" id="1_buv2n"]
 [ext_resource type="Script" uid="uid://d1rqjc3tf8k2u" path="res://Scripts/vfx/MuzzleFlash/muzzle_flash.gd" id="1_duwo1"]
@@ -114,10 +114,10 @@ alpha_curve = SubResource("CurveTexture_srd5a")
 [sub_resource type="QuadMesh" id="QuadMesh_0xguk"]
 size = Vector2(0.2, 1)
 
-[node name="MuzzleFlash" type="Node3D"]
+[node name="MuzzleFlash" type="Node3D" unique_id=1849458057]
 script = ExtResource("1_duwo1")
 
-[node name="MuzzlePlanes" type="GPUParticles3D" parent="."]
+[node name="MuzzlePlanes" type="GPUParticles3D" parent="." unique_id=127791307]
 material_override = SubResource("StandardMaterial3D_s22ts")
 emitting = false
 amount = 1
@@ -129,7 +129,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
 draw_pass_1 = ExtResource("2_duwo1")
 
-[node name="MuzzleCone" type="GPUParticles3D" parent="."]
+[node name="MuzzleCone" type="GPUParticles3D" parent="." unique_id=338769095]
 material_override = SubResource("StandardMaterial3D_k6rkm")
 emitting = false
 amount = 1
@@ -141,7 +141,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
 draw_pass_1 = ExtResource("4_s0idf")
 
-[node name="BeamFlash" type="GPUParticles3D" parent="."]
+[node name="BeamFlash" type="GPUParticles3D" parent="." unique_id=1694864778]
 material_override = SubResource("StandardMaterial3D_0xguk")
 emitting = false
 amount = 1
@@ -153,7 +153,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_46rhx")
 draw_pass_1 = SubResource("QuadMesh_rhr0g")
 
-[node name="Sparks" type="GPUParticles3D" parent="."]
+[node name="Sparks" type="GPUParticles3D" parent="." unique_id=82672879]
 material_override = SubResource("StandardMaterial3D_tyaal")
 emitting = false
 amount = 20

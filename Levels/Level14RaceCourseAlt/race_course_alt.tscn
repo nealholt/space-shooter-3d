@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://ejr1qtrkvbhu"]
+
+[ext_resource type="Script" uid="uid://cpbbcxhe4a1pv" path="res://Levels/Level12RaceCourse/race_course.gd" id="1_8c02b"]
+[ext_resource type="Texture2D" uid="uid://dnjgm2epla1cf" path="res://Assets/Skyboxes/earth_with_stars.png" id="2_ufjhp"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="3_gw6v5"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="4_dbd15"]
+[ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="5_1focs"]
+[ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/engine_audio_visuals.tscn" id="5_aq803"]
+[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="6_g048y"]
+[ext_resource type="PackedScene" uid="uid://dec2h3fkjfo0m" path="res://Scenes/race_checkpoint.tscn" id="6_kc8d4"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="7_aq803"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_gnpxn"]
+panorama = ExtResource("2_ufjhp")
+
+[sub_resource type="Sky" id="Sky_434m5"]
+sky_material = SubResource("PanoramaSkyMaterial_gnpxn")
+
+[sub_resource type="Environment" id="Environment_sc2p3"]
+background_mode = 2
+background_energy_multiplier = 1.5
+sky = SubResource("Sky_434m5")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.05
+reflected_light_source = 1
+tonemap_mode = 2
+tonemap_exposure = 0.5
+tonemap_white = 3.0
+glow_enabled = true
+
+[node name="Node3D" type="Node3D" unique_id=2083266772]
+script = ExtResource("1_8c02b")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=356946349]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 250, 0, 0)
+shadow_enabled = true
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1948872815]
+environment = SubResource("Environment_sc2p3")
+
+[node name="BlueTeam" type="Node3D" parent="." unique_id=1494164004]
+script = ExtResource("3_gw6v5")
+team = "blue team"
+
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("4_dbd15")]
+deathExplosion = 0
+finalExplosion = 0
+
+[node name="EngineAudioVisuals" parent="BlueTeam/Fighter" unique_id=1557527705 instance=ExtResource("5_aq803")]
+
+[node name="BallisticMovementV3" parent="BlueTeam/Fighter" unique_id=1573283271 instance=ExtResource("6_g048y")]
+
+[node name="CameraGroup" parent="BlueTeam/Fighter" unique_id=1678925824 instance=ExtResource("7_aq803")]
+
+[node name="VictoryLayer" parent="." unique_id=982250268 instance=ExtResource("5_1focs")]
+visible = false
+
+[node name="Checkpoints" type="Node3D" parent="." unique_id=1500498841]
+
+[node name="RaceCheckpoint" parent="Checkpoints" unique_id=1857321949 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -86.61155)
+
+[node name="RaceCheckpoint2" parent="Checkpoints" unique_id=1674565743 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(0.8544135, 0.51959366, -2.271216e-08, 0, -4.371139e-08, -1, -0.51959366, 0.8544135, -3.73476e-08, -87.11307, 0, -298.18146)
+
+[node name="RaceCheckpoint3" parent="Checkpoints" unique_id=1200007135 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(0.7934065, 0.60869217, -2.6606779e-08, 0, -4.371139e-08, -1, -0.60869217, 0.7934065, -3.4680898e-08, -293.1366, 0, -446.1473)
+
+[node name="RaceCheckpoint4" parent="Checkpoints" unique_id=931944814 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(0.8053967, -0.006642597, 0.59269893, 0.40626508, -0.72192883, -0.56014955, 0.43160734, 0.69193536, -0.5787404, -426.89636, 262.8083, -691.96423)
+
+[node name="RaceCheckpoint5" parent="Checkpoints" unique_id=759208904 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(0.8053967, -0.006642597, 0.59269893, 0.40626508, -0.72192883, -0.56014955, 0.43160734, 0.69193536, -0.5787404, -426.896, 462.808, -891.964)
+
+[node name="RaceCheckpoint6" parent="Checkpoints" unique_id=2096848614 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(0.8053967, -0.006642597, 0.59269893, 0.40626508, -0.72192883, -0.56014955, 0.43160734, 0.69193536, -0.5787404, -426.896, 662.808, -1091.964)
+
+[node name="RaceCheckpoint7" parent="Checkpoints" unique_id=1810284599 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(0.08354687, -0.9875107, -0.13357508, 0.5923578, 0.15700534, -0.79022896, 0.80133176, -0.013103131, 0.59807724, 158.81732, 817.5598, -1333.0186)
+
+[node name="RaceCheckpoint8" parent="Checkpoints" unique_id=1550487390 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(-0.027834445, -0.97625434, -0.21483032, 0.5923577, 0.15700532, -0.7902289, 0.80519414, -0.14925207, 0.573922, 485.8219, 735.60205, -1174.6302)
+
+[node name="RaceCheckpoint9" parent="Checkpoints" unique_id=1519740219 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(0.47612172, -0.8594525, 0.1861433, 0.59235775, 0.15700535, -0.790229, 0.6499389, 0.48650822, 0.5838573, 795.19025, 735.60205, -1505.8342)
+
+[node name="RaceCheckpoint10" parent="Checkpoints" unique_id=1731534679 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(-0.50908875, -0.68726677, -0.51816297, 0.59235775, 0.15700535, -0.790229, 0.62445265, -0.70923424, 0.32717845, 992.96606, 735.60205, -1228.7642)
+
+[node name="RaceCheckpoint11" parent="Checkpoints" unique_id=1133231756 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(-0.69273794, -0.59781677, -0.40339676, 0.6848911, -0.3701113, -0.6276479, 0.22591706, -0.71107817, 0.6658301, 1115.1066, 815.93134, -1096.856)
+
+[node name="RaceCheckpoint12" parent="Checkpoints" unique_id=267200201 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(-0.72714335, -0.29188573, -0.6213416, 0.6848911, -0.37011126, -0.6276479, -0.046763778, -0.8819409, 0.46903437, 1197.1321, 873.168, -948.5103)
+
+[node name="RaceCheckpoint13" parent="Checkpoints" unique_id=1626367250 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(-0.65106696, 0.07591955, -0.7552143, 0.2988003, -0.8890074, -0.34696352, -0.69773227, -0.45155442, 0.5561187, 1214.4869, 971.07007, -856.84735)
+
+[node name="RaceCheckpoint14" parent="Checkpoints" unique_id=1160583810 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(1, 0, 0, 0, 0.99999964, 0, 0, 0, 1.0000001, 1214.4869, 1101.637, -797.2385)
+
+[node name="RaceCheckpoint15" parent="Checkpoints" unique_id=2020199573 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(1, 0, 0, 0, 0.8981271, 0.43973547, 0, -0.43973526, 0.8981275, 1214.4869, 1239.163, -869.73804)
+
+[node name="RaceCheckpoint16" parent="Checkpoints" unique_id=2075295882 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(0.98190254, -0.13031007, 0.13742867, 0, 0.7256504, 0.68806344, -0.1893868, -0.67561096, 0.7125183, 1177.4066, 1352.7952, -979.6407)
+
+[node name="RaceCheckpoint17" parent="Checkpoints" unique_id=1342842352 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(0.9999999, 0, 0, 0, -4.3711374e-08, 1, 0, -0.9999997, -4.371139e-08, 1177.4066, 1440.8428, -1134.6158)
+
+[node name="RaceCheckpoint18" parent="Checkpoints" unique_id=1434096206 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(0.9999999, 0, 0, 0, -0.37084913, 0.9286931, 0, -0.9286928, -0.37084925, 1157.0015, 1416.3464, -1403.6501)
+
+[node name="RaceCheckpoint19" parent="Checkpoints" unique_id=647168489 instance=ExtResource("6_kc8d4")]
+transform = Transform3D(0.9999999, 0, 0, 0, -0.6996507, 0.71448493, 0, -0.7144847, -0.6996509, 1122.6394, 1282.1655, -1667.6157)
