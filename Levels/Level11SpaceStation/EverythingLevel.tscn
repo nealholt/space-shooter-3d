@@ -89,6 +89,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -110.593, 102.674, 620.615)
 
 [node name="Shield" parent="RedTeam/Destroyer" unique_id=595621168 instance=ExtResource("7_ka707")]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+recharge_delay = 3
 
 [node name="ShieldGenerator" parent="RedTeam/Destroyer" unique_id=1564933571 instance=ExtResource("11_waoi0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)

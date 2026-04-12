@@ -17,6 +17,6 @@ func _ready() -> void:
 func _on_health_component_died() -> void:
 	# Destroy the shield unless it's already dead
 	if is_instance_valid(shield):
-		shield._on_health_component_died()
+		shield.permanently_destroy()
 	# Destroy self
 	Callable(queue_free).call_deferred()

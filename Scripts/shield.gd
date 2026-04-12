@@ -8,9 +8,13 @@ const SHIELD_SCENE:PackedScene = preload("res://Scenes/shield.tscn")
 # shields to flicker.
 
 @export var explosion:VisualEffectSetting.VISUAL_EFFECT_TYPE
-
 @export var max_health := 10
+@export var recharge_delay := 15 ## seconds
 
+@onready var hit_box_component: HitBoxComponent = $HitBoxComponent
+@onready var health_component: HealthComponent = $HealthComponent
+@onready var fresnel_aura: MeshInstance3D = $FresnelAura
+@onready var timer: Timer = $Timer
 @onready var shader_ref : ShaderMaterial = $FresnelAura.mesh.surface_get_material(0)
 var fresnel_power_current := 2.0
 var fresnel_power_default := 2.0
@@ -59,14 +63,56 @@ func _on_health_component_health_lost() -> void:
 
 
 func _on_health_component_died() -> void:
-	# Disable further collisions and hide aura
+	# Disable further collisions
 	# Without set_deferred there's a "Function blocked
 	# during in/out signal" error.
-	set_deferred("$HitBoxComponent.monitoring", false)
-	set_deferred("$HitBoxComponent.monitorable", false)
-	$FresnelAura.visible = false
+	# Also, the monitorable = false doesn't seem to do
+	# anything. There are still collisions unless the
+	# collision layer is set to false. I'm not sure why,
+	# but for now I'll just turn off both.
+	hit_box_component.set_deferred('monitorable', false)
+	hit_box_component.call_deferred('set_collision_layer_value', 4, false)
+	# Hide aura
+	fresnel_aura.visible = false
+	# Turn off processing
 	set_physics_process(false)
-	# Start the fireworks!
+	# Start the fireworks
 	VfxManager.play(explosion, global_position)
-	# Delete self at the end of the frame
+	# Start a timer for shield to recharge
+	timer.start(recharge_delay)
+
+
+func _on_timer_timeout() -> void:
+	# Reset the shield
+	# Shrink shield way down and tween it back to full size
+	# https://www.reddit.com/r/godot/comments/14gt180/all_possible_tweening_transition_types_and_easing/
+	# Shrink-and-tween-back visuals:
+	fresnel_aura.scale = Vector3(0.1, 0.1, 0.1)
+	var tween:Tween = create_tween()
+	tween.tween_property(fresnel_aura,
+		'scale',
+		Vector3(1.0, 1.0, 1.0), 1.3).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	# Shrink-and-tween-back hitbox
+	hit_box_component.scale = Vector3(0.1, 0.1, 0.1)
+	tween = create_tween()
+	tween.tween_property(hit_box_component,
+		'scale',
+		Vector3(1.0, 1.0, 1.0), 1.3).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	# Re-enable collisions
+	hit_box_component.set_deferred('monitorable', true)
+	hit_box_component.call_deferred('set_collision_layer_value', 4, true)
+	# Make aura visible
+	fresnel_aura.visible = true
+	# Turn on processing
+	set_physics_process(true)
+	# Reset health
+	health_component.set_max_health(max_health)
+	# This must be reset for the died signal to trigger again
+	health_component.signalled_died = false
+
+
+func permanently_destroy() -> void:
+	# Start the fireworks
+	VfxManager.play(explosion, global_position)
+	# Self delete
 	Callable(queue_free).call_deferred()
