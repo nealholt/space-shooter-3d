@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="9_1xly7"]
 [ext_resource type="AudioStream" uid="uid://cvrvs2a12nuqr" path="res://Assets/SoundEffects/whoosh_medium_001.ogg" id="9_ktweb"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="10_shexg"]
-[ext_resource type="PackedScene" uid="uid://djj4vi4d1fq2m" path="res://Scenes/Projectiles/auto_seeking_missile.tscn" id="11_a8ss5"]
+[ext_resource type="PackedScene" uid="uid://dx7x4toieqaar" path="res://Scenes/Projectiles/auto_seeking_missile.tscn" id="11_a8ss5"]
 [ext_resource type="PackedScene" uid="uid://drm4t5i6exnhc" path="res://Assets/Guns/gatling_gun.tscn" id="11_kbwk7"]
 [ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Assets/Ships/fighter_chassis_diamond.tscn" id="12_a77x5"]
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Assets/Ships/engine_mesh_component.tscn" id="12_e20ac"]
@@ -50,16 +50,16 @@ radial_segments = 16
 [sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
 size = Vector3(6, 2.3, 10.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1j34j"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lbswy"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("34_80okc")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_f4jgf"]
+[sub_resource type="SphereMesh" id="SphereMesh_1j34j"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_1j34j")
+material = SubResource("ShaderMaterial_lbswy")
 
 [node name="Corvette" type="CharacterBody3D" unique_id=1134075911 groups=["damageable", "team member"]]
 collision_layer = 3
@@ -149,7 +149,7 @@ fire_rate = 0.3
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_f4jgf")
+mesh = SubResource("SphereMesh_1j34j")
 
 [node name="TargetReticles" parent="." unique_id=689096099 instance=ExtResource("18_g51j4")]
 target_text = "Corvette"

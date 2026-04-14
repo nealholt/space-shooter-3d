@@ -19,7 +19,7 @@ var health_component:HealthComponent
 var hit_box_component:HitBoxComponent
 # This is only for projectiles that use a ray to
 # detect collisions.
-var ray:RayCast3D
+var ray:RayCastForProjectiles
 
 # Damage dealt to target
 var damage:float = 1.0
@@ -74,7 +74,7 @@ func _ready() -> void:
 			health_component.died.connect(_on_health_component_died)
 		elif child is HitBoxComponent:
 			hit_box_component = child
-		elif child is RayCast3D:
+		elif child is RayCastForProjectiles:
 			ray = child
 
 
@@ -141,6 +141,9 @@ func apply_spread(dat:ShootData) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	# If there is a ray, it uses a special Physics_process
+	if ray:
+		ray.Physics_process(self, delta)
 	# Reorient on target intercept if aim assist is
 	# on, but only do so once and then turn it off.
 	# I do this here, rather than in set_data
@@ -179,6 +182,7 @@ func _physics_process(delta: float) -> void:
 	# that modify the velocity.
 	if controller:
 		controller.move_me(self, delta)
+	
 	# Move forward
 	global_position += velocity * delta
 
@@ -316,8 +320,36 @@ func _on_area_entered(area: Area3D) -> void:
 		# sparks or other particle effects
 		damage_and_die(area, global_position)
 
-
 func _on_body_entered(body: Node3D) -> void:
 	# Global position is where to show
 	# sparks or other particle effects
 	damage_and_die(body, global_position)
+
+
+# For now, only projectiles with rays can ricochet
+# Source at 6:30 here:
+# https://www.youtube.com/watch?v=joMBVo_ZwKI
+# It seems that the second ricochet is glitchy,
+# though the first bounce works as expected.
+# For now I'm moving on.
+func ricochet(delta:float):
+	# Move the bullet back to the point of collision
+	global_position = ray.get_collision_point()
+	# Remove 20% of the speed
+	#speed = clampf(speed - speed*0.2, 0.0, 100000.0)
+	#velocity = -transform.basis.z * speed
+	# Bounce
+	var norm := ray.get_collision_normal()
+	velocity = velocity.bounce(norm)
+	# In the video, the creator uses Global.safe_look_at
+	# which I assume is something he created after
+	# getting errors from using look_at
+	# You might consider creating your own
+	# based on the code in the stick_decal function
+	# which also had to deal with look_at bugs.
+	look_at(global_transform.origin - velocity)
+	# Move away from collision location to avoid
+	# touching it on the next frame.
+	# 1.1 to give that 10% extra assurance of not
+	# recolliding.
+	global_position += velocity * delta * 1.1

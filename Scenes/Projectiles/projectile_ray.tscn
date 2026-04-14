@@ -5,8 +5,13 @@
 
 [node name="ProjectileRay" unique_id=1104732044 instance=ExtResource("1_s006r")]
 script = ExtResource("2_e7gw1")
-projectile_length = 1.0
-does_ricochet = true
+projectile_length = null
+does_ricochet = null
+speed = null
+time_out = null
+deathExplosion = null
+bullet_hole_decal = null
+wrap_up_time = null
 
 [node name="RayCast3D" type="RayCast3D" parent="." index="1" unique_id=1088171207]
 target_position = Vector3(0, 0, -1)

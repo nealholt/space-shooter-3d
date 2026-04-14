@@ -5,6 +5,8 @@ class_name ProjectileRay extends Projectile
 # Raycast bullets in Godot 4 by ImmersiveRPG
 # https://www.youtube.com/watch?v=joMBVo_ZwKI
 
+@onready var my_ray: RayCast3D = $RayCast3D
+
 # Ray length should be distance traveled plus
 # projectile_length
 @export var projectile_length := 1.0
@@ -15,11 +17,11 @@ class_name ProjectileRay extends Projectile
 func _physics_process(delta: float) -> void:
 	# Change ray length to extend from previous bullet
 	# position through new position.
-	ray.target_position.z = -velocity.length() * delta - projectile_length
+	my_ray.target_position.z = -velocity.length() * delta - projectile_length
 	
 	# Check for and handle collisions.
-	if ray.is_colliding():
-		var body := ray.get_collider()
+	if my_ray.is_colliding():
+		var body := my_ray.get_collider()
 		if !is_instance_valid(body):
 			return
 		# If we hit a near-miss detector
@@ -28,13 +30,13 @@ func _physics_process(delta: float) -> void:
 			# https://forum.godotengine.org/t/possible-to-detect-multiple-collisions-with-raycast2d/27326/2
 			# Add body to ray's exception list. This way
 			# the ray can detect something behind the body.
-			ray.add_exception(body)
+			my_ray.add_exception(body)
 			# Update the ray's collision query.
-			ray.force_raycast_update()
+			my_ray.force_raycast_update()
 			# If it's still colliding...
-			if ray.is_colliding():
+			if my_ray.is_colliding():
 				# ...get the new collider
-				body = ray.get_collider()
+				body = my_ray.get_collider()
 			else: # Otherwise return
 				return
 		# Play feedback for player if relevant
@@ -43,8 +45,8 @@ func _physics_process(delta: float) -> void:
 			# Stick on a decal before damaging and dying
 			# Don't stick decals on shields
 			if !body.is_in_group("shield"):
-				VfxManager.play_at_angle(bullet_hole_decal, ray.get_collision_point(), ray.get_collision_normal())
-			damage_and_die(body, ray.get_collision_point())
+				VfxManager.play_at_angle(bullet_hole_decal, my_ray.get_collision_point(), my_ray.get_collision_normal())
+			damage_and_die(body, my_ray.get_collision_point())
 		# Ricochet
 		elif does_ricochet:
 			ricochet(delta)
@@ -59,12 +61,12 @@ func _physics_process(delta: float) -> void:
 # For now I'm moving on.
 func ricochet(delta:float):
 	# Move the bullet back to the point of collision
-	global_position = ray.get_collision_point()
+	global_position = my_ray.get_collision_point()
 	# Remove 20% of the speed
 	#speed = clampf(speed - speed*0.2, 0.0, 100000.0)
 	#velocity = -transform.basis.z * speed
 	# Bounce
-	var norm := ray.get_collision_normal()
+	var norm := my_ray.get_collision_normal()
 	velocity = velocity.bounce(norm)
 	# In the video, the creator uses Global.safe_look_at
 	# which I assume is something he created after

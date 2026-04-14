@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_widnh"]
 [ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="5_0jw65"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="5_vsiph"]
-[ext_resource type="PackedScene" uid="uid://b4028pkj7mmy4" path="res://Scenes/Projectiles/sparkle_trail_missile.tscn" id="6_qdonm"]
+[ext_resource type="PackedScene" uid="uid://ctqiw08prgev8" path="res://Scenes/Projectiles/sparkle_trail_missile.tscn" id="6_qdonm"]
 [ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="8_b1kea"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qdonm"]

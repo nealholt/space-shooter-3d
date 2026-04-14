@@ -1,0 +1,22 @@
+[gd_scene load_steps=7 format=3 uid="uid://djj4vi4d1fq2m"]
+
+[ext_resource type="PackedScene" uid="uid://caody2m8xh0b6" path="res://Scenes/Projectiles/projectile_ray.tscn" id="1_itntp"]
+[ext_resource type="Script" uid="uid://gaqw2pdiihs6" path="res://Scripts/Projectiles/auto_seeking_missile.gd" id="2_7v75c"]
+[ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="3_gg2fv"]
+[ext_resource type="PackedScene" uid="uid://domnb1m51i30x" path="res://Assets/Particles/ship_strike.tscn" id="3_hnowd"]
+[ext_resource type="PackedScene" uid="uid://loiql7x3ow62" path="res://Assets/Particles/shield_strike.tscn" id="4_rbl8q"]
+[ext_resource type="PackedScene" uid="uid://dto664xfw5qbf" path="res://Scenes/MovementControllers/physics_seek_controller.tscn" id="6_k01jq"]
+
+[node name="ProjectileRay" node_paths=PackedStringArray("controller") instance=ExtResource("1_itntp")]
+script = ExtResource("2_7v75c")
+roll_amount = 10.0
+speed = 250.0
+controller = NodePath("PhysicsSeekController")
+time_out = 4.0
+sparks = ExtResource("3_hnowd")
+shieldSparks = ExtResource("4_rbl8q")
+
+[node name="Contrail" parent="." index="2" instance=ExtResource("3_gg2fv")]
+
+[node name="PhysicsSeekController" parent="." index="3" instance=ExtResource("6_k01jq")]
+steer_force = 200.0
