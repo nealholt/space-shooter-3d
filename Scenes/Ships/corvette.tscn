@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://8dxylurtfwp1"]
+[gd_scene format=3 uid="uid://8dxylurtfwp1"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="10_shexg"]
 [ext_resource type="PackedScene" uid="uid://djj4vi4d1fq2m" path="res://Scenes/Projectiles/auto_seeking_missile.tscn" id="11_a8ss5"]
 [ext_resource type="PackedScene" uid="uid://drm4t5i6exnhc" path="res://Assets/Guns/gatling_gun.tscn" id="11_kbwk7"]
-[ext_resource type="PackedScene" uid="uid://cs8hx275hwfsf" path="res://Scenes/Projectiles/proximity_fuse_bullet.tscn" id="11_yl8fu"]
 [ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Assets/Ships/fighter_chassis_diamond.tscn" id="12_a77x5"]
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Assets/Ships/engine_mesh_component.tscn" id="12_e20ac"]
 [ext_resource type="PackedScene" uid="uid://ddoyejlbh51s5" path="res://Scenes/Guns/hit_scan_gun.tscn" id="13_428na"]
@@ -19,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dup57p4ygajr1" path="res://Scenes/Guns/laser_shotgun.tscn" id="15_ufo67"]
 [ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Assets/Guns/laser_beam.tscn" id="16_y2utm"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="18_g51j4"]
+[ext_resource type="PackedScene" uid="uid://behof1p47cflt" path="res://Scenes/Projectiles/proxy_fuse_bullet.tscn" id="18_lbswy"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="19_yfprc"]
 [ext_resource type="PackedScene" uid="uid://cbyb5ysj3umaf" path="res://Scenes/Projectiles/shotgun_pellet.tscn" id="20_de7w0"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="21_5ow11"]
@@ -50,18 +50,18 @@ radial_segments = 16
 [sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
 size = Vector3(6, 2.3, 10.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j4o42"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1j34j"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("34_80okc")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_2lbpm"]
+[sub_resource type="SphereMesh" id="SphereMesh_f4jgf"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_j4o42")
+material = SubResource("ShaderMaterial_1j34j")
 
-[node name="Corvette" type="CharacterBody3D" groups=["damageable", "team member"]]
+[node name="Corvette" type="CharacterBody3D" unique_id=1134075911 groups=["damageable", "team member"]]
 collision_layer = 3
 collision_mask = 3
 motion_mode = 1
@@ -71,96 +71,96 @@ side_cam_position = Vector3(2.3, -0.5, -3.5)
 deathExplosion = 9
 finalExplosion = 8
 
-[node name="AimAssist" parent="." instance=ExtResource("29_3q0pi")]
+[node name="AimAssist" parent="." unique_id=828639523 instance=ExtResource("29_3q0pi")]
 angle_assist_limit = 10.0
 
-[node name="BurningTrail" parent="." instance=ExtResource("29_w78kn")]
+[node name="BurningTrail" parent="." unique_id=1537826961 instance=ExtResource("29_w78kn")]
 
-[node name="FighterChassisDiamond" parent="." instance=ExtResource("12_a77x5")]
+[node name="FighterChassisDiamond" parent="." unique_id=1943236780 instance=ExtResource("12_a77x5")]
 
-[node name="EngineMeshComponent" parent="FighterChassisDiamond" instance=ExtResource("12_e20ac")]
+[node name="EngineMeshComponent" parent="FighterChassisDiamond" unique_id=1419575747 instance=ExtResource("12_e20ac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.7, -8)
 
-[node name="EngineMeshComponent2" parent="FighterChassisDiamond" instance=ExtResource("12_e20ac")]
+[node name="EngineMeshComponent2" parent="FighterChassisDiamond" unique_id=1920487520 instance=ExtResource("12_e20ac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.7, -8)
 
-[node name="EngineMeshComponent3" parent="FighterChassisDiamond" instance=ExtResource("12_e20ac")]
+[node name="EngineMeshComponent3" parent="FighterChassisDiamond" unique_id=953811274 instance=ExtResource("12_e20ac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.7, -8)
 
-[node name="EngineMeshComponent4" parent="FighterChassisDiamond" instance=ExtResource("12_e20ac")]
+[node name="EngineMeshComponent4" parent="FighterChassisDiamond" unique_id=820765205 instance=ExtResource("12_e20ac")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.7, -8)
 
-[node name="Cockpit3" type="Node3D" parent="FighterChassisDiamond"]
+[node name="Cockpit3" type="Node3D" parent="FighterChassisDiamond" unique_id=873237321]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.72759e-07, 0.6, 3.12)
 
-[node name="LeftStrut" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+[node name="LeftStrut" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3" unique_id=1810833219]
 transform = Transform3D(1, 0, 0, 0, 0.867297, -0.497792, 0, 0.497792, 0.867297, -0.17, -0.0907253, -0.0148683)
 mesh = SubResource("CylinderMesh_tbbj7")
 
-[node name="RightStrut" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+[node name="RightStrut" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3" unique_id=1531790844]
 transform = Transform3D(1, 0, 0, 0, 0.867297, -0.497792, 0, 0.497792, 0.867297, 0.17, -0.0907253, -0.0148683)
 mesh = SubResource("CylinderMesh_tbbj7")
 
-[node name="CrossBar" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+[node name="CrossBar" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3" unique_id=1293441731]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.207488, 0.157279)
 mesh = SubResource("CylinderMesh_s2gsa")
 
-[node name="LeftStrutBack" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+[node name="LeftStrutBack" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3" unique_id=412645789]
 transform = Transform3D(1, 0, 0, 0, -0.125299, -0.992119, 0, 0.992119, -0.125299, -0.17, 0.160132, 0.513052)
 mesh = SubResource("CylinderMesh_tbbj7")
 
-[node name="RightStrutBack" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3"]
+[node name="RightStrutBack" type="MeshInstance3D" parent="FighterChassisDiamond/Cockpit3" unique_id=1273828408]
 transform = Transform3D(1, 0, 0, 0, -0.125299, -0.992119, 0, 0.992119, -0.125299, 0.17, 0.16, 0.513)
 mesh = SubResource("CylinderMesh_tbbj7")
 
-[node name="Contrail" parent="." instance=ExtResource("10_shexg")]
+[node name="Contrail" parent="." unique_id=762623243 instance=ExtResource("10_shexg")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 _startColor = Color(0.537255, 0.152941, 1, 1)
 _endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1052211272]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.85)
 shape = SubResource("BoxShape3D_qx57m")
 
-[node name="HealthComponent" parent="." instance=ExtResource("7_vhcpa")]
+[node name="HealthComponent" parent="." unique_id=778683298 instance=ExtResource("7_vhcpa")]
 max_health = 20
 
-[node name="GotHitAudio" type="AudioStreamPlayer" parent="."]
+[node name="GotHitAudio" type="AudioStreamPlayer" parent="." unique_id=1306955454]
 stream = ExtResource("8_klb2b")
 
-[node name="Sounds" type="Node3D" parent="."]
+[node name="Sounds" type="Node3D" parent="." unique_id=1146936130]
 
-[node name="NearMissAudio" type="AudioStreamPlayer3D" parent="Sounds"]
+[node name="NearMissAudio" type="AudioStreamPlayer3D" parent="Sounds" unique_id=1015128538]
 stream = ExtResource("9_ktweb")
 
-[node name="MissileLockGroup" parent="." instance=ExtResource("4_vmlm7")]
+[node name="MissileLockGroup" parent="." unique_id=2132042412 instance=ExtResource("4_vmlm7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.5)
 npc_missile_lock = true
 
-[node name="MissileLauncher" parent="MissileLockGroup" instance=ExtResource("2_2p718")]
+[node name="MissileLauncher" parent="MissileLockGroup" unique_id=303582067 instance=ExtResource("2_2p718")]
 bullet = ExtResource("3_crlbv")
 damage = 50.0
 bullet_speed = 200.0
 fire_rate = 0.3
 
-[node name="MissileLockLerp" parent="MissileLockGroup" instance=ExtResource("13_gmlsk")]
+[node name="MissileLockLerp" parent="MissileLockGroup" unique_id=78171564 instance=ExtResource("13_gmlsk")]
 
-[node name="Shield" parent="." instance=ExtResource("21_5ow11")]
+[node name="Shield" parent="." unique_id=2025902563 instance=ExtResource("21_5ow11")]
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
-[node name="FresnelAura" parent="Shield" index="0"]
-mesh = SubResource("SphereMesh_2lbpm")
+[node name="FresnelAura" parent="Shield" index="0" unique_id=556348261]
+mesh = SubResource("SphereMesh_f4jgf")
 
-[node name="TargetReticles" parent="." instance=ExtResource("18_g51j4")]
+[node name="TargetReticles" parent="." unique_id=689096099 instance=ExtResource("18_g51j4")]
 target_text = "Corvette"
 
-[node name="WeaponHandler" parent="." instance=ExtResource("9_1xly7")]
+[node name="WeaponHandler" parent="." unique_id=370825666 instance=ExtResource("9_1xly7")]
 
-[node name="GatlingGun" parent="WeaponHandler" node_paths=PackedStringArray("gun_animation") instance=ExtResource("2_2p718")]
+[node name="GatlingGun" parent="WeaponHandler" unique_id=1123320670 node_paths=PackedStringArray("gun_animation") instance=ExtResource("2_2p718")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63, 0.14, -5)
 burst_total = 6
 burst_rate = 12.0
-bullet = ExtResource("11_yl8fu")
+bullet = ExtResource("18_lbswy")
 bullet_speed = 600.0
 fire_rate = 1.2
 spread_deg = 3.0
@@ -168,41 +168,41 @@ fire_sound = 2
 reload_sound = 1
 gun_animation = NodePath("GunModel/AnimationPlayer")
 
-[node name="GunModel" parent="WeaponHandler/GatlingGun" instance=ExtResource("11_kbwk7")]
+[node name="GunModel" parent="WeaponHandler/GatlingGun" unique_id=1901639962 instance=ExtResource("11_kbwk7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.132, 1.3)
 
-[node name="AutoSeekingMissileLauncher" parent="WeaponHandler" instance=ExtResource("19_yfprc")]
+[node name="AutoSeekingMissileLauncher" parent="WeaponHandler" unique_id=472321920 instance=ExtResource("19_yfprc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.33626)
 bullet = ExtResource("11_a8ss5")
 bullet_speed = 150.0
 bullet_timeout = 3.0
 fire_rate = 3.0
 
-[node name="HitScanGun" parent="WeaponHandler" node_paths=PackedStringArray("laser_mesh", "laser_mesh_pivot", "gun_animation") instance=ExtResource("13_428na")]
+[node name="HitScanGun" parent="WeaponHandler" unique_id=1687734169 node_paths=PackedStringArray("laser_mesh", "laser_mesh_pivot", "gun_animation") instance=ExtResource("13_428na")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14718, 0, -2.39168)
 laser_mesh = NodePath("Node/Head/LaserMesh")
 laser_mesh_pivot = NodePath("Node/Head")
 fire_rate = 5.0
 gun_animation = NodePath("Node/Head/LaserMesh/AnimationPlayer")
 
-[node name="RayCast3D" type="RayCast3D" parent="WeaponHandler/HitScanGun"]
+[node name="RayCast3D" type="RayCast3D" parent="WeaponHandler/HitScanGun" unique_id=1195964649]
 target_position = Vector3(0, 0, -1000)
 collision_mask = 10
 collide_with_areas = true
 
-[node name="Node" parent="WeaponHandler/HitScanGun" instance=ExtResource("16_y2utm")]
+[node name="Node" parent="WeaponHandler/HitScanGun" unique_id=2123640719 instance=ExtResource("16_y2utm")]
 
 [node name="LaserMesh" parent="WeaponHandler/HitScanGun/Node/Head" index="0"]
 visible = false
 
-[node name="LaserShotgun" parent="WeaponHandler" instance=ExtResource("15_ufo67")]
+[node name="LaserShotgun" parent="WeaponHandler" unique_id=1141187926 instance=ExtResource("15_ufo67")]
 bullet = ExtResource("20_de7w0")
 bullet_speed = 500.0
 fire_rate = 3.0
 spread_deg = 5.0
 simultaneous_shots = 8
 
-[node name="LaserGuidedLauncher" parent="WeaponHandler" instance=ExtResource("19_yfprc")]
+[node name="LaserGuidedLauncher" parent="WeaponHandler" unique_id=265477221 instance=ExtResource("19_yfprc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.40851)
 bullet = ExtResource("21_uelja")
 bullet_speed = 200.0
@@ -211,13 +211,13 @@ fire_rate = 2.0
 spread_deg = 90.0
 simultaneous_shots = 8
 
-[node name="RayCast3D" type="RayCast3D" parent="WeaponHandler/LaserGuidedLauncher"]
+[node name="RayCast3D" type="RayCast3D" parent="WeaponHandler/LaserGuidedLauncher" unique_id=511623843]
 enabled = false
 target_position = Vector3(0, 0, -1000)
 collision_mask = 10
 collide_with_areas = true
 
-[node name="ObstacleDetector" parent="." instance=ExtResource("27_lbswy")]
+[node name="ObstacleDetector" parent="." unique_id=735341060 instance=ExtResource("27_lbswy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.384907)
 
 [editable path="Shield"]

@@ -11,11 +11,11 @@ var gun_array:Array[PackedScene] = [
 enum GUN_TYPE {GUN, BURST, HITSCAN, LASER, LASER_SHOT, NO_GUN}
 
 var bullet_array:Array[PackedScene] = [
-	preload("res://Scenes/Projectiles/bullet_area_basic.tscn"),
+	preload("res://Scenes/Projectiles/bullet_area.tscn"),
 	preload("res://Scenes/Projectiles/bullet_ray_basic.tscn"),
 	preload("res://Scenes/Projectiles/auto_seeking_missile.tscn"),
 	preload("res://Scenes/Projectiles/laser_guided_missile.tscn"),
-	preload("res://Scenes/Projectiles/proximity_fuse_bullet.tscn"),
+	preload("res://Scenes/Projectiles/proxy_fuse_bullet.tscn"),
 	preload("res://Scenes/Projectiles/shotgun_pellet.tscn"),
 	preload("res://Scenes/Projectiles/timed_fuse_bullet.tscn"),
 	preload("res://Scenes/Projectiles/bullet_ray_big.tscn")

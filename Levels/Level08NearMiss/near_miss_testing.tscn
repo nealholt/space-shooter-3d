@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://jw5871doy4ch"]
+[gd_scene format=3 uid="uid://jw5871doy4ch"]
 
 [ext_resource type="Script" uid="uid://d3dhiktwvyhus" path="res://Levels/Level08NearMiss/near_miss_testing.gd" id="1_4q2ny"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_ba5yk"]
 [ext_resource type="Script" uid="uid://dct8roiqo6fdl" path="res://Levels/Level08NearMiss/bullet_spawner_testing.gd" id="2_00mhe"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_wmf1n"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="3_fyqj6"]
-[ext_resource type="PackedScene" uid="uid://dhe4jb3jefc7e" path="res://Scenes/Projectiles/bullet_area_basic.tscn" id="5_mmiro"]
+[ext_resource type="PackedScene" uid="uid://d3v8ygh3a3ea7" path="res://Scenes/Projectiles/bullet_area.tscn" id="6_wk44f"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="8_hmejg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vaoif"]
@@ -21,45 +21,44 @@ sky = SubResource("Sky_1ol1g")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_685wi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_14uj3"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_wmf1n")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_vns14"]
+[sub_resource type="SphereMesh" id="SphereMesh_wk44f"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_685wi")
+material = SubResource("ShaderMaterial_14uj3")
 
-[node name="NearMissTesting" type="Node3D"]
+[node name="NearMissTesting" type="Node3D" unique_id=1277549144]
 script = ExtResource("1_4q2ny")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1135518359]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1254345369]
 environment = SubResource("Environment_jia05")
 
-[node name="Player" parent="." instance=ExtResource("1_ba5yk")]
-fps_cam_position = Vector3(0, 0.6, -2.9)
+[node name="Player" parent="." unique_id=2073031264 instance=ExtResource("1_ba5yk")]
 
-[node name="FresnelAura" parent="Player/Shield" index="0"]
-mesh = SubResource("SphereMesh_vns14")
+[node name="FresnelAura" parent="Player/Shield" index="0" unique_id=556348261]
+mesh = SubResource("SphereMesh_wk44f")
 
-[node name="GunNode3D" type="Node3D" parent="Player"]
+[node name="GunNode3D" type="Node3D" parent="Player" unique_id=2133777041]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.85873, 0, -177.052)
 script = ExtResource("2_00mhe")
 
-[node name="Gun" parent="Player/GunNode3D" instance=ExtResource("3_fyqj6")]
+[node name="Gun" parent="Player/GunNode3D" unique_id=1302134213 instance=ExtResource("3_fyqj6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.273674, 0, 0)
-bullet = ExtResource("5_mmiro")
+bullet = ExtResource("6_wk44f")
 bullet_speed = 400.0
 fire_rate = 20.0
 automatic = false
 
-[node name="CameraGroup" parent="Player" instance=ExtResource("8_hmejg")]
+[node name="CameraGroup" parent="Player" unique_id=1985491293 instance=ExtResource("8_hmejg")]
 
 [editable path="Player"]
 [editable path="Player/Shield"]

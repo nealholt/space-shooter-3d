@@ -2,6 +2,10 @@ class_name Projectile extends Node3D
 # Bullets and missiles and all projectiles inherit
 # from this class.
 
+# You can add a Raycast3D or an Area3D as a child of
+# this node and either one will automatically be used
+# to detect if the bullet hit a target.
+
 @onready var timer: Timer = $Timer
 
 @export var speed:float = 1000.0
@@ -13,8 +17,8 @@ var controller:Controller
 # These are NOT for the projectile hitting its target.
 var health_component:HealthComponent
 var hit_box_component:HitBoxComponent
-# This is only for projectiles that use a ray to detect
-# collisions.
+# This is only for projectiles that use a ray to
+# detect collisions.
 var ray:RayCast3D
 
 # Damage dealt to target
@@ -58,7 +62,11 @@ func _ready() -> void:
 	# Search through children for various components
 	# and save a reference to them.
 	for child in get_children():
-		if child is Controller:
+		if child is Area3D:
+			# Connect to area and body entered signals
+			child.area_entered.connect(_on_area_entered)
+			child.body_entered.connect(_on_body_entered)
+		elif child is Controller:
 			controller = child
 		elif child is HealthComponent:
 			health_component = child
@@ -103,8 +111,16 @@ func set_data(dat:ShootData) -> void:
 	# Make any ray ignore the shooter and the shooter's shield.
 	# This will prevent self-hits.
 	if ray and dat.shooter:
-		ray.add_exception(dat.shooter)
-		if dat.shooter is Ship and dat.shooter.shield:
+		# If the shooter is collidable, ignore it
+		if dat.shooter is CollisionObject3D:
+			ray.add_exception(dat.shooter)
+		# Turrets are not inherently collidable the
+		# way CharacterBody3D is, so instead, check if
+		# there is a hitbox that should be ignored
+		elif 'hit_box_component' in dat.shooter and dat.shooter.hit_box_component:
+			ray.add_exception(dat.shooter.hit_box_component)
+		# Also check to see if there is a shield to be ignored
+		if 'shield' in dat.shooter and dat.shooter.shield:
 			ray.add_exception(dat.shooter.shield.hit_box_component)
 
 
@@ -287,3 +303,21 @@ func wrap_up() -> void:
 	add_child(wrap_up_timer)
 	wrap_up_timer.timeout.connect(queue_free)
 	wrap_up_timer.start(wrap_up_time)
+
+
+# The next two methods are only used by projectiles
+# that are using Area3Ds to detect collisions
+func _on_area_entered(area: Area3D) -> void:
+	# If we hit a near-miss detector
+	if area.is_in_group("near-miss detector"):
+		start_near_miss_audio()
+	else:
+		# Global position is where to show
+		# sparks or other particle effects
+		damage_and_die(area, global_position)
+
+
+func _on_body_entered(body: Node3D) -> void:
+	# Global position is where to show
+	# sparks or other particle effects
+	damage_and_die(body, global_position)

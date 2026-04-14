@@ -3,6 +3,7 @@ class_name Turret extends Node3D
 const TURRET_SCENE:PackedScene = preload("res://Scenes/turret.tscn")
 
 @onready var line_of_sight := $TurretModel/Body/Head/RayCast3D
+@onready var hit_box_component: HitBoxComponent = $HitBoxComponent
 
 # movement speeds and constraints in degrees
 @export var elevation_speed_deg: float = 5
