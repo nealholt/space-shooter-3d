@@ -121,7 +121,7 @@ func _process(_delta):
 			reticle_to_use = targeted_reticle
 			# Position dynamic panel
 			dynamic_panel.visible = true
-			dynamic_panel.set_start_position(reticle_position, str(int(dist))+' km')
+			dynamic_panel.set_start_position(reticle_position, str(int(dist))+' m')
 		elif cam_distance > distance_cutoff_sqd:
 			reticle_to_use = distant_reticle
 		else:

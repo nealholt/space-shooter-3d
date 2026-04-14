@@ -416,6 +416,16 @@ layout_mode = 2
 theme = ExtResource("4_6ev3c")
 text = "Right Mouse Click"
 
+[node name="ProfileCam" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=144682832]
+layout_mode = 2
+theme = ExtResource("4_6ev3c")
+text = "Profile Camera"
+
+[node name="Label18" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=1057091926]
+layout_mode = 2
+theme = ExtResource("4_6ev3c")
+text = "5"
+
 [node name="TargetCam" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=1002907994]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")

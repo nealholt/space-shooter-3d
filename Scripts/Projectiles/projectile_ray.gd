@@ -1,43 +1,26 @@
 class_name ProjectileRay extends Projectile
 
-# Improvements made to my code based on this
+# Improvements were made to my code based on this
 # excellent tutorial:
 # Raycast bullets in Godot 4 by ImmersiveRPG
 # https://www.youtube.com/watch?v=joMBVo_ZwKI
 
-# Ray should be distance traveled plus projectile_length
+# Ray length should be distance traveled plus
+# projectile_length
 @export var projectile_length := 1.0
-
-@onready var ray:RayCast3D = $RayCast3D
 
 @export var does_ricochet:bool = true
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	# Move bullet
-	super._physics_process(delta)
-	# Change ray position and length to extend from
-	# previous bullet position to new position.
-	var distance := velocity.length() * delta
-	
-	# Determine ray length
-	ray.target_position.z = -distance-projectile_length
-	# What is the point of this next line of code? It was
-	# in the original tutorial, but with it in my turrets hit
-	# themselves, and with it commented, everything seems to
-	# work great.
-	#ray.transform.origin.z = distance+projectile_length
+	# Change ray length to extend from previous bullet
+	# position through new position.
+	ray.target_position.z = -velocity.length() * delta - projectile_length
 	
 	# Check for and handle collisions.
 	if ray.is_colliding():
 		var body := ray.get_collider()
 		if !is_instance_valid(body):
-			return
-		# In order to fire from within a shield, we
-		# need to ignore immediate collisions.
-		if frame_count <= 1:
-			ray.add_exception(body)
 			return
 		# If we hit a near-miss detector
 		if body.is_in_group("near-miss detector"):
@@ -54,8 +37,6 @@ func _physics_process(delta: float) -> void:
 				body = ray.get_collider()
 			else: # Otherwise return
 				return
-		if passes_through(body):
-			return
 		# Play feedback for player if relevant
 		Global.player_feedback(body, data)
 		if body.is_in_group("damageable"):
@@ -67,7 +48,8 @@ func _physics_process(delta: float) -> void:
 		# Ricochet
 		elif does_ricochet:
 			ricochet(delta)
-
+	# Move bullet
+	super._physics_process(delta)
 
 
 # Source at 6:30 here:

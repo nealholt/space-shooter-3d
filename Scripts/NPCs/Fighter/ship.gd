@@ -10,6 +10,7 @@ var engineAV:EngineAV
 var health_component:HealthComponent
 var missile_lock:MissileLockGroup
 var obstacle_detector:ObstacleDetector
+var shield:Shield
 var weapon_handler:WeaponHandler
 
 # For testing purposes, I want some ships to just sit there
@@ -124,6 +125,8 @@ func _ready() -> void:
 			missile_lock = child
 		elif child is ObstacleDetector:
 			obstacle_detector = child
+		elif child is Shield:
+			shield = child
 		elif child is WeaponHandler:
 			weapon_handler = child
 		# The following are all from hit_box_component

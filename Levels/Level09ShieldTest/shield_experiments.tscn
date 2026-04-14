@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cj8oysen3h0g8"]
+[gd_scene format=3 uid="uid://cj8oysen3h0g8"]
 
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="1_8h41v"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_66tts"]
@@ -26,51 +26,47 @@ albedo_color = Color(0.278431, 0.243137, 1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_478a4"]
 material = SubResource("StandardMaterial3D_kw00b")
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=325359219]
 script = ExtResource("1_66tts")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=462771799]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=527701051]
 environment = SubResource("Environment_k0sv6")
 
-[node name="ShieldHaver" type="Node3D" parent="."]
+[node name="ShieldHaver" type="Node3D" parent="." unique_id=232050525]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ShieldHaver"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ShieldHaver" unique_id=461507932]
 transform = Transform3D(0.5, -0.5, 0.707107, 0.707107, 0.707107, 0, -0.5, 0.5, 0.707107, 0, 0, 0)
 mesh = SubResource("BoxMesh_478a4")
 
-[node name="Shield" parent="ShieldHaver" instance=ExtResource("1_8h41v")]
+[node name="Shield" parent="ShieldHaver" unique_id=658061503 instance=ExtResource("1_8h41v")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
-max_health = 2
+max_health = 3
 
-[node name="BulletGroup" type="Node3D" parent="."]
+[node name="BulletGroup" type="Node3D" parent="." unique_id=38151820]
 
-[node name="Bullet" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
+[node name="Bullet" parent="BulletGroup" unique_id=1655003498 instance=ExtResource("6_ay6cs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326245, 0, 10.8496)
 speed = 5.0
 time_out = 40.0
-shieldSparks = null
 
-[node name="Bullet2" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
+[node name="Bullet2" parent="BulletGroup" unique_id=93149691 instance=ExtResource("6_ay6cs")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -37.9641)
 speed = 5.0
 time_out = 40.0
-shieldSparks = null
 
-[node name="Bullet3" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
+[node name="Bullet3" parent="BulletGroup" unique_id=36788330 instance=ExtResource("6_ay6cs")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.7821, 0)
 speed = 5.0
 time_out = 40.0
-shieldSparks = null
 
-[node name="Bullet4" parent="BulletGroup" instance=ExtResource("6_ay6cs")]
+[node name="Bullet4" parent="BulletGroup" unique_id=91605782 instance=ExtResource("6_ay6cs")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 18.1145, 0, 0)
 speed = 5.0
 time_out = 40.0
-shieldSparks = null
 
-[node name="CameraGroup" parent="." instance=ExtResource("4_66tts")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 12, 0, 0)
+[node name="CameraGroup" parent="." unique_id=1967736326 instance=ExtResource("4_66tts")]
+transform = Transform3D(-0.54629207, 0, -0.8375948, 0, 1, 0, 0.8375948, 0, -0.54629207, 12, 0, 3.584043)

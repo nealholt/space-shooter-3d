@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cfiwadbmgx3up"]
+[gd_scene format=3 uid="uid://cfiwadbmgx3up"]
 
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="1_nau7t"]
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="1_qb1ff"]
@@ -57,181 +57,184 @@ glow_enabled = true
 glow_bloom = 0.35
 adjustment_enabled = true
 
-[node name="Node" type="Node3D"]
+[node name="Node" type="Node3D" unique_id=875617678]
 script = SubResource("GDScript_ulixo")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1089952643]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.75, -0.43301, 0, 12, 0)
 light_color = Color(1, 1, 0.745098, 1)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=970848477]
 environment = SubResource("Environment_285v5")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=389666159]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4268, 71.8786, -108.676)
 use_collision = true
 collision_layer = 3
 collision_mask = 2
 size = Vector3(30, 30, 30)
 
-[node name="Floor" type="CSGBox3D" parent="."]
+[node name="Floor" type="CSGBox3D" parent="." unique_id=1487130913]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
 use_collision = true
 collision_layer = 3
 collision_mask = 2
 size = Vector3(500, 10, 500)
 
-[node name="Building1" type="CSGBox3D" parent="Floor"]
+[node name="Building1" type="CSGBox3D" parent="Floor" unique_id=1339190438]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -110.074, 50, -81.0877)
 use_collision = true
 size = Vector3(20, 100, 20)
 
-[node name="Building2" type="CSGBox3D" parent="Floor"]
+[node name="Building2" type="CSGBox3D" parent="Floor" unique_id=1542051295]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88.0979, 50, -4.53397)
 use_collision = true
 size = Vector3(63.9531, 100, 20)
 
-[node name="Building3" type="CSGBox3D" parent="Floor"]
+[node name="Building3" type="CSGBox3D" parent="Floor" unique_id=622086722]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -104.347, 50, -130.305)
 use_collision = true
 size = Vector3(63.9531, 100, 20)
 
-[node name="Building4" type="CSGBox3D" parent="Floor"]
+[node name="Building4" type="CSGBox3D" parent="Floor" unique_id=1294966330]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -187.038, 50, -87.2107)
 use_collision = true
 size = Vector3(40, 100, 150)
 
-[node name="Building5" type="CSGBox3D" parent="Floor"]
+[node name="Building5" type="CSGBox3D" parent="Floor" unique_id=736612445]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 163.816, 50, 122.677)
 use_collision = true
 size = Vector3(20, 100, 20)
 
-[node name="Building9" type="CSGBox3D" parent="Floor"]
+[node name="Building9" type="CSGBox3D" parent="Floor" unique_id=857250140]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 239.288, 50, 104.528)
 use_collision = true
 size = Vector3(20, 100, 175.609)
 
-[node name="Building10" type="CSGBox3D" parent="Floor"]
+[node name="Building10" type="CSGBox3D" parent="Floor" unique_id=344040762]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 158.78, 112.516, 118.81)
 use_collision = true
 size = Vector3(175, 20, 175)
 
-[node name="Building6" type="CSGBox3D" parent="Floor"]
+[node name="Building6" type="CSGBox3D" parent="Floor" unique_id=1106268665]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 135.158, 50, 199.231)
 use_collision = true
 size = Vector3(231.142, 100, 20)
 
-[node name="Building7" type="CSGBox3D" parent="Floor"]
+[node name="Building7" type="CSGBox3D" parent="Floor" unique_id=673025094]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 169.543, 50, 73.46)
 use_collision = true
 size = Vector3(63.9531, 100, 20)
 
-[node name="Building8" type="CSGBox3D" parent="Floor"]
+[node name="Building8" type="CSGBox3D" parent="Floor" unique_id=1821063733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.8528, 50, 164.167)
 use_collision = true
 size = Vector3(40, 100, 49.4751)
 
-[node name="RedTeam" type="Node3D" parent="."]
+[node name="RedTeam" type="Node3D" parent="." unique_id=823023075]
 script = ExtResource("1_nau7t")
 
-[node name="Shield" parent="RedTeam" instance=ExtResource("3_6nm7s")]
+[node name="Shield" parent="RedTeam" unique_id=1675968972 instance=ExtResource("3_6nm7s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.9984, -310.259)
 max_health = 100
 
-[node name="Shield2" parent="RedTeam" instance=ExtResource("3_6nm7s")]
+[node name="Shield2" parent="RedTeam" unique_id=994214558 instance=ExtResource("3_6nm7s")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7.21336, 32.9984, -310.259)
 max_health = 100
 
-[node name="Shield3" parent="RedTeam" instance=ExtResource("3_6nm7s")]
+[node name="Shield3" parent="RedTeam" unique_id=1508946388 instance=ExtResource("3_6nm7s")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 17.8579, 32.9984, -310.259)
 max_health = 100
 
-[node name="Shield4" parent="RedTeam" instance=ExtResource("3_6nm7s")]
+[node name="Shield4" parent="RedTeam" unique_id=1315007266 instance=ExtResource("3_6nm7s")]
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 48.5387, 32.9984, -310.259)
 max_health = 100
 
-[node name="Orb" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb" parent="RedTeam" unique_id=2113066051 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 11.1917, 71.8786, -123.983)
 
-[node name="Orb2" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb2" parent="RedTeam" unique_id=671536009 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 108.314, 71.8786, 160.474)
 
-[node name="Orb3" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb3" parent="RedTeam" unique_id=1819408163 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 190.249, 2.92939, 160.474)
 
-[node name="Orb4" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb4" parent="RedTeam" unique_id=1549114411 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 211.075, 71.2348, 90.0709)
 
-[node name="Orb5" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb5" parent="RedTeam" unique_id=515920845 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 159.629, 3.19859, -123.983)
 
-[node name="Orb6" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb6" parent="RedTeam" unique_id=1895433650 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 138.886, 3.19859, -168.45)
 
-[node name="Orb7" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb7" parent="RedTeam" unique_id=472082389 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 184.256, 3.19859, -164.032)
 
-[node name="Orb8" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb8" parent="RedTeam" unique_id=229561732 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -118.287, 35.5529, -4.67925)
 
-[node name="Orb9" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb9" parent="RedTeam" unique_id=1676745946 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -139.03, 62.182, -49.1457)
 
-[node name="Orb10" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb10" parent="RedTeam" unique_id=1277448495 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -93.66, 35.5529, -44.7279)
 
-[node name="Orb11" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb11" parent="RedTeam" unique_id=2077668895 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -139.03, 62.182, -121.166)
 
-[node name="Orb12" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb12" parent="RedTeam" unique_id=355117069 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -111.825, 95.7376, -82.0041)
 
-[node name="Orb13" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb13" parent="RedTeam" unique_id=950438269 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 24.6039, 169.802, 45.1033)
 
-[node name="Orb14" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb14" parent="RedTeam" unique_id=1169766349 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 3.86089, 169.802, 0.636871)
 
-[node name="Orb15" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb15" parent="RedTeam" unique_id=360870756 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 49.2309, 202.131, 5.05472)
 
-[node name="Orb16" parent="RedTeam" instance=ExtResource("7_yxjtr")]
+[node name="Orb16" parent="RedTeam" unique_id=1264794447 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 143.357, 98.8829, 136.363)
 
-[node name="Fighter" parent="RedTeam" instance=ExtResource("4_s6g67")]
+[node name="Orb17" parent="RedTeam" unique_id=2121023897 instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 29.856186, 64.05452, -14.939216)
+
+[node name="Fighter" parent="RedTeam" unique_id=190729509 instance=ExtResource("4_s6g67")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -55.1471, 50.2299, -241.805)
 
-[node name="Bomber" parent="RedTeam" instance=ExtResource("5_1d1v4")]
+[node name="Bomber" parent="RedTeam" unique_id=211794352 instance=ExtResource("5_1d1v4")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 62.3887, -278.48553)
 
-[node name="Frigate" parent="RedTeam" instance=ExtResource("6_fva1o")]
+[node name="Frigate" parent="RedTeam" unique_id=1158135576 instance=ExtResource("6_fva1o")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -49.828262, 50.041294, -314.6223)
 disable_for_testing = true
 
-[node name="Destroyer" parent="RedTeam" instance=ExtResource("7_c40xb")]
+[node name="Destroyer" parent="RedTeam" unique_id=1953925304 instance=ExtResource("7_c40xb")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 24.987068, 64.963234, -300)
 disable_for_testing = true
 
-[node name="BeamDestroyer" parent="RedTeam" instance=ExtResource("8_qb1ff")]
+[node name="BeamDestroyer" parent="RedTeam" unique_id=703798648 instance=ExtResource("8_qb1ff")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 71.50366, -351.68787)
 disable_for_testing = true
 
-[node name="Corvette" parent="RedTeam" instance=ExtResource("9_1bvmw")]
+[node name="Corvette" parent="RedTeam" unique_id=58731431 instance=ExtResource("9_1bvmw")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 27.683277, 31.082478, -276.07568)
 
-[node name="Carrier" parent="RedTeam" instance=ExtResource("10_3xvk7")]
+[node name="Carrier" parent="RedTeam" unique_id=475055283 instance=ExtResource("10_3xvk7")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 239.18271, 0, -633.88086)
 disable_for_testing = true
 
-[node name="CapitalShipFrigate" parent="RedTeam" instance=ExtResource("11_c40xb")]
+[node name="CapitalShipFrigate" parent="RedTeam" unique_id=643016632 instance=ExtResource("11_c40xb")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -83.53566, 0, -490.16235)
 disable_for_testing = true
 
-[node name="BlueTeam" type="Node3D" parent="."]
+[node name="BlueTeam" type="Node3D" parent="." unique_id=126329178]
 script = ExtResource("1_nau7t")
 team = "blue team"
 
-[node name="PlayerFighter" parent="BlueTeam" instance=ExtResource("13_qb1ff")]
+[node name="PlayerFighter" parent="BlueTeam" unique_id=1388140746 instance=ExtResource("13_qb1ff")]
 transform = Transform3D(0.19537164, 0.7546787, 0.6263304, -0.9803418, 0.13232858, 0.14635281, 0.027567895, -0.64261085, 0.7656966, 38.351387, 65.31791, 0)
 impulse_std = 0.0

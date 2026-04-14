@@ -8,7 +8,7 @@ class_name CameraGroup extends Node3D
 @export var min_elevation_deg:float = 0.0
 @export var max_elevation_deg:float = 80.0
 
-enum CameraState {FIRSTPERSON, REAR, FLYBY, TARGETCLOSEUP, TARGETVIEW}
+enum CameraState {FIRSTPERSON, REAR, FLYBY, TARGETCLOSEUP, TARGETVIEW, PROFILE}
 var state : CameraState
 
 # free_camera has top_level set to true. Other cameras
@@ -16,6 +16,7 @@ var state : CameraState
 #@onready var first_person_camera: Camera3D = $FirstPersonCamera
 @onready var first_person_camera: Camera3D = $Body/Head/FirstPersonCamera
 @onready var rear_under_camera: Camera3D = $RearUnderCamera
+@onready var profile_camera: Camera3D = $ProfileCamera
 @onready var free_camera: Camera3D = $FreeCamera
 
 @onready var turret_motion:TurretMotionComponent = $turret_motion_component
@@ -102,6 +103,9 @@ func _ready() -> void:
 		body.rotation = p.fps_cam_rotation_deg
 		rear_under_camera.position = p.side_cam_position
 		rear_under_camera.rotation = p.side_cam_rotation_deg
+		# For now I'm just manually positioning the profile camera
+		profile_camera.position = Vector3(7,0,-4)
+		profile_camera.rotation_degrees = Vector3(0,90,0)
 	else:
 		# Turn off _physics_process, which handles gameplay mode
 		set_physics_process(false)
@@ -143,6 +147,9 @@ func _physics_process(delta: float) -> void:
 	# Turn off target look when right thumbstick is released
 	elif Input.is_action_just_released("POV_standard"):
 		look_at_target = false
+	# Profile camera initially used for testing
+	elif Input.is_action_just_released("POV_profile"):
+		set_profile_camera()
 	
 	# Adjust relevant camera based on the current pov
 	if state == CameraState.FLYBY:
@@ -269,6 +276,20 @@ func flyby_camera() -> void:
 	# Turn off near miss detectors for all but this camera.
 	shutdown_near_miss()
 	free_camera.turn_on_near_miss()
+
+
+# Transition to fly-by cinematic camera
+func set_profile_camera() -> void:
+	state = CameraState.PROFILE
+	profile_camera.make_current()
+	Global.current_camera = free_camera
+	Global.targeting_hud_on = false
+	mouse_guide.visible = false
+	near_center.visible = false
+	beyond_center.visible = false
+	# Turn off near miss detectors for all but this camera.
+	shutdown_near_miss()
+	profile_camera.turn_on_near_miss()
 
 
 # Transition to target closeup camera

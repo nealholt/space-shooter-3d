@@ -1,13 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bosxindk1alsp"]
+[gd_scene format=3 uid="uid://bosxindk1alsp"]
 
 [ext_resource type="Script" uid="uid://bny3bgxy3dvvq" path="res://Scripts/Projectiles/projectile.gd" id="1_y78aq"]
 
-[node name="Projectile" type="Node3D" groups=["bullet"]]
+[node name="Projectile" type="Node3D" unique_id=294693303 groups=["bullet"]]
 script = ExtResource("1_y78aq")
 sparks = 3
 shieldSparks = 1
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=728392120]
 wait_time = 2.0
 one_shot = true
 autostart = true

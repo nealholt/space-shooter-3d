@@ -4,7 +4,10 @@ extends ProjectileArea
 
 # Override
 func damage_and_die(body, _collision_point=null):
-	if passes_through(body):
+	# Null instance can occur when body dies
+	# from another source of damage while this
+	# projectile is still trying to damage it.
+	if !is_instance_valid(body):
 		return
 	# Play feedback for player if relevant
 	Global.player_feedback(body, data)

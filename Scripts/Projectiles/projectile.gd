@@ -7,11 +7,19 @@ class_name Projectile extends Node3D
 @export var speed:float = 1000.0
 var velocity : Vector3
 
+# This is for guided projectiles
 var controller:Controller
+# These next two are for projectiles that can be shot down.
+# These are NOT for the projectile hitting its target.
 var health_component:HealthComponent
 var hit_box_component:HitBoxComponent
+# This is only for projectiles that use a ray to detect
+# collisions.
+var ray:RayCast3D
 
+# Damage dealt to target
 var damage:float = 1.0
+# Duration before the projectile expires
 @export var time_out:float = 2.0 #seconds
 
 # Data on shooter and target:
@@ -24,6 +32,7 @@ var data:ShootData
 # Bullet hole decal
 @export var bullet_hole_decal:VisualEffectSetting.VISUAL_EFFECT_TYPE
 
+# Audio to play when entering a "near miss" area.
 var near_miss_audio: AudioStreamPlayer3D
 
 # This is needed because simultaneous shots
@@ -32,12 +41,6 @@ var near_miss_audio: AudioStreamPlayer3D
 # bool, otherwise only one of all the shots
 # will use the aim assist
 var aim_assist_unhandled:bool = true
-
-# Count elapsed "frames" this will be used
-# for ignoring immediate collisions such as
-# when bullets spawn within shields or near-miss
-# detectors or self-collisions.
-var frame_count := 0
 
 # Time after this projectile "dies" to let it linger
 # so its special effects, such as smoke trail, don't
@@ -63,6 +66,8 @@ func _ready() -> void:
 			health_component.died.connect(_on_health_component_died)
 		elif child is HitBoxComponent:
 			hit_box_component = child
+		elif child is RayCast3D:
+			ray = child
 
 
 # This is called by the gun that shoots the bullet.
@@ -89,9 +94,18 @@ func set_data(dat:ShootData) -> void:
 		controller.set_data(dat)
 	# Set / reset timer
 	timer.start(time_out)
-	# Make it so a Ship can't shoot their own bullets
+	# Make it so a Ship can't shoot their own bullets.
+	# More often this is making a shooter not shoot down
+	# their own missiles, because most projectiles don't
+	# have a hit_box_component, but missiles do.
 	if hit_box_component:
 		hit_box_component.add_damage_exception(dat.shooter)
+	# Make any ray ignore the shooter and the shooter's shield.
+	# This will prevent self-hits.
+	if ray and dat.shooter:
+		ray.add_exception(dat.shooter)
+		if dat.shooter is Ship and dat.shooter.shield:
+			ray.add_exception(dat.shooter.shield.hit_box_component)
 
 
 # Randomize heading of this bullet based on ShootData
@@ -111,9 +125,6 @@ func apply_spread(dat:ShootData) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	# Count elapsed "frames"
-	frame_count+=1
-	
 	# Reorient on target intercept if aim assist is
 	# on, but only do so once and then turn it off.
 	# I do this here, rather than in set_data
@@ -187,11 +198,10 @@ func aim_self_at_cursor() -> void:
 
 
 func damage_and_die(body, collision_point=null) -> void:
-	#print()
-	#print('damage_and_die called')
-	#print(passes_through(body))
-	#print(body.is_in_group("damageable"))
-	if passes_through(body):
+	# Null instance can occur when body dies
+	# from another source of damage while this
+	# projectile is still trying to damage it.
+	if !is_instance_valid(body):
 		return
 	# Play feedback for player if relevant
 	Global.player_feedback(body, data)
@@ -214,30 +224,6 @@ func damage_and_die(body, collision_point=null) -> void:
 	VfxManager.play_with_transform(deathExplosion, global_position, transform)
 	#Delete bullets that strike a body
 	wrap_up()
-
-
-# Returns true if bullet should pass through
-# the body
-func passes_through(body) -> bool:
-	#print("\nframe %d" % frame_count)
-	#print(body.get_parent())
-	# Null instance can occur when body dies
-	# from another source of damage while this
-	# projectile is still trying to damage it.
-	if !body:
-		return true
-	# In order to fire from within a shield, we need
-	# to ignore immediate collisions.
-	# Why the fuck does it need to be 2?!
-	# But I'm telling you, if it's 1 then the
-	# turrets are blowing themselves up with
-	# the area projectiles. They seem okay
-	# with the rays.
-	if frame_count <= 2:
-		#print("\nframe %d" % frame_count)
-		#print(body.get_parent())
-		return true
-	return false
 
 
 # Start near miss sound upon entering a near miss Area3D
