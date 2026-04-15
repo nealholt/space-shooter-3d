@@ -53,6 +53,16 @@ var aim_assist_unhandled:bool = true
 var wrap_up_timer:Timer
 
 
+# Flag for whether this projectile automatically finds a target
+@export var autotarget:bool = false
+# Constant roll looks pretty on projectiles with contrails.
+@export var roll_amount:float = 0.0
+# I thought that a little pitch might
+# cause a corkscrew pattern, but it doesn't
+# seem to work.
+#@export var pitch_amount:float = 10.0
+
+
 func _ready() -> void:
 	# Give the bullet a default velocity.
 	# Useful for testing even if the velocity
@@ -122,6 +132,13 @@ func set_data(dat:ShootData) -> void:
 		# Also check to see if there is a shield to be ignored
 		if 'shield' in dat.shooter and dat.shooter.shield:
 			ray.add_exception(dat.shooter.shield.hit_box_component)
+		# Override in order to set target to be
+		# centermost enemy.
+		if autotarget:
+			if dat.shooter.is_in_group("red_team"):
+				dat.target = Global.get_center_most_from_group("blue team",self)
+			else:
+				dat.target = Global.get_center_most_from_group("red team",self)
 
 
 # Randomize heading of this bullet based on ShootData
@@ -185,7 +202,11 @@ func _physics_process(delta: float) -> void:
 	
 	# Move forward
 	global_position += velocity * delta
-
+	
+	# Roll a little because it looks good with contrails
+	rotate_z(roll_amount*delta)
+	# Tried some pitch, but it didn't add anything.
+	#rotate_y(pitch_amount*delta)
 
 
 func aim_self_at_cursor() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dct3loj10mg5k"]
+[gd_scene format=3 uid="uid://dct3loj10mg5k"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_uw5oo"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="2_6e5lt"]
@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="4_40no2"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="5_rgdmc"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="7_f8b5m"]
-[ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="8_30gv8"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/MissileLock/missile_lock_group.tscn" id="9_7wsae"]
+[ext_resource type="PackedScene" uid="uid://bvbnfofl0d7vv" path="res://Scenes/Projectiles/missile.tscn" id="9_e1i0b"]
 [ext_resource type="PackedScene" uid="uid://db74cban80pwd" path="res://Scenes/MissileLock/missile_lock_lerp.tscn" id="10_qsmaf"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="10_up24e"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Scenes/obstacle_detector.tscn" id="12_e1i0b"]
@@ -16,7 +16,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_rfws3"]
 size = Vector3(5.03894, 1.51178, 7.49753)
 
-[node name="Bomber" type="CharacterBody3D" groups=["damageable", "team member"]]
+[node name="Bomber" type="CharacterBody3D" unique_id=1295567426 groups=["damageable", "team member"]]
 collision_layer = 3
 collision_mask = 3
 motion_mode = 1
@@ -26,43 +26,43 @@ finalExplosion = 8
 death_animation_duration_min = 1.0
 death_animation_duration_max = 3.2
 
-[node name="AimAssist" parent="." instance=ExtResource("2_120ti")]
+[node name="AimAssist" parent="." unique_id=1088375514 instance=ExtResource("2_120ti")]
 angle_assist_limit = 10.0
 
-[node name="BurningTrail" parent="." instance=ExtResource("2_6e5lt")]
+[node name="BurningTrail" parent="." unique_id=421092114 instance=ExtResource("2_6e5lt")]
 
-[node name="BomberChassis" parent="." instance=ExtResource("3_hrk35")]
+[node name="BomberChassis" parent="." unique_id=534531542 instance=ExtResource("3_hrk35")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1352769534]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0123901, 0.0948181, -0.755264)
 shape = SubResource("BoxShape3D_rfws3")
 
-[node name="Contrail" parent="." instance=ExtResource("5_rgdmc")]
+[node name="Contrail" parent="." unique_id=2032320292 instance=ExtResource("5_rgdmc")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 1.35, 0.5, 3.3)
 
-[node name="Contrail2" parent="." instance=ExtResource("5_rgdmc")]
+[node name="Contrail2" parent="." unique_id=183805356 instance=ExtResource("5_rgdmc")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, -1.35, 0.5, 3.3)
 
-[node name="HealthComponent" parent="." instance=ExtResource("4_40no2")]
+[node name="HealthComponent" parent="." unique_id=167873350 instance=ExtResource("4_40no2")]
 
-[node name="MissileLockGroup" parent="." instance=ExtResource("9_7wsae")]
+[node name="MissileLockGroup" parent="." unique_id=786493030 instance=ExtResource("9_7wsae")]
 npc_missile_lock = true
 lock_timeout = 0.2
 missile_range = 2000.0
 
-[node name="MissileLauncher" parent="MissileLockGroup" instance=ExtResource("7_f8b5m")]
+[node name="MissileLauncher" parent="MissileLockGroup" unique_id=908886794 instance=ExtResource("7_f8b5m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -1.1)
-bullet = ExtResource("8_30gv8")
+bullet = ExtResource("9_e1i0b")
 damage = 100.0
 bullet_speed = 80.0
 bullet_timeout = 20.0
 fire_rate = 0.1
 
-[node name="MissileLockLerp" parent="MissileLockGroup" instance=ExtResource("10_qsmaf")]
+[node name="MissileLockLerp" parent="MissileLockGroup" unique_id=1593307549 instance=ExtResource("10_qsmaf")]
 
-[node name="TargetReticles" parent="." instance=ExtResource("10_up24e")]
+[node name="TargetReticles" parent="." unique_id=1202960706 instance=ExtResource("10_up24e")]
 target_text = "Bomber"
 
-[node name="ObstacleDetector" parent="." instance=ExtResource("12_e1i0b")]
+[node name="ObstacleDetector" parent="." unique_id=1346467973 instance=ExtResource("12_e1i0b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.6661463)

@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="5_0jw65"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="5_vsiph"]
 [ext_resource type="PackedScene" uid="uid://ctqiw08prgev8" path="res://Scenes/Projectiles/sparkle_trail_missile.tscn" id="6_qdonm"]
-[ext_resource type="PackedScene" uid="uid://dt8e8r0ew3fjn" path="res://Scenes/Projectiles/missile.tscn" id="8_b1kea"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qdonm"]
 panorama = ExtResource("2_0jw65")
@@ -42,11 +41,6 @@ script = ExtResource("2_widnh")
 [node name="BlueTeam" type="Node3D" parent="." unique_id=1359345576]
 script = ExtResource("2_widnh")
 team = "blue team"
-
-[node name="Missile1" parent="BlueTeam" unique_id=441072632 instance=ExtResource("8_b1kea")]
-transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -174.264, 30.6708, -286.437)
-speed = 50.0
-time_out = 20.0
 
 [node name="Fighter" parent="BlueTeam" unique_id=2103248847 instance=ExtResource("5_0jw65")]
 

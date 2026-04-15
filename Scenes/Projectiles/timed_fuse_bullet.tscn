@@ -1,15 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcs6gvltbhd48"]
+[gd_scene format=3 uid="uid://cowq8qh6bnj33"]
 
-[ext_resource type="PackedScene" uid="uid://caody2m8xh0b6" path="res://Scenes/Projectiles/projectile_ray.tscn" id="1_crmv3"]
-[ext_resource type="Script" uid="uid://c6hp0a211nbca" path="res://Scripts/Projectiles/timed_fuse_bullet.gd" id="2_7x58s"]
+[ext_resource type="PackedScene" uid="uid://bosxindk1alsp" path="res://Scenes/Projectiles/projectile.tscn" id="1_i2aad"]
+[ext_resource type="Script" uid="uid://dj0llnj38cnmh" path="res://Scripts/Projectiles/timed_fuse_bullet.gd" id="2_7x58s"]
+[ext_resource type="PackedScene" uid="uid://co465f20rmnhd" path="res://Scenes/Projectiles/ray_cast_4_projectiles.tscn" id="3_dlala"]
 [ext_resource type="PackedScene" uid="uid://dbpuijlnfgmru" path="res://Scenes/explosion_damage_dealing.tscn" id="3_rvjog"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_3juk2"]
+[sub_resource type="SphereMesh" id="SphereMesh_m641g"]
 
-[node name="TimedFuseBullet" instance=ExtResource("1_crmv3")]
+[node name="TimedFuseBullet" unique_id=294693303 instance=ExtResource("1_i2aad")]
 script = ExtResource("2_7x58s")
 damaging_explosion = ExtResource("3_rvjog")
 target_range_plus_minus = 0.1
+speed = 0.0
+time_out = 0.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
-mesh = SubResource("SphereMesh_3juk2")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1" unique_id=1566588702]
+mesh = SubResource("SphereMesh_m641g")
+
+[node name="RayCast4Projectiles" parent="." index="2" unique_id=308028055 instance=ExtResource("3_dlala")]
+does_ricochet = false

@@ -1,4 +1,4 @@
-extends ProjectileRay
+extends Projectile
 
 @export var damaging_explosion:PackedScene
 

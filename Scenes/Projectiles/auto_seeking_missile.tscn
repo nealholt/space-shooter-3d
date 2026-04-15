@@ -10,6 +10,8 @@ speed = 250.0
 time_out = 4.0
 sparks = 0
 shieldSparks = 0
+autotarget = true
+roll_amount = 10.0
 
 [node name="RayCast4Projectiles" parent="." index="1" unique_id=308028055 instance=ExtResource("2_mvjow")]
 

@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="1_8h41v"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_66tts"]
+[ext_resource type="PackedScene" uid="uid://blfrt7ndbygg7" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="3_wvpem"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="4_66tts"]
-[ext_resource type="PackedScene" uid="uid://6aihaxnn6c6p" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="6_ay6cs"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oit57"]
 sky_top_color = Color(0.160784, 0.117647, 0.388235, 1)
@@ -48,23 +48,23 @@ max_health = 3
 
 [node name="BulletGroup" type="Node3D" parent="." unique_id=38151820]
 
-[node name="Bullet" parent="BulletGroup" unique_id=1655003498 instance=ExtResource("6_ay6cs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326245, 0, 10.8496)
+[node name="BulletRayBasic" parent="BulletGroup" unique_id=294693303 instance=ExtResource("3_wvpem")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326, 0, 10.85)
 speed = 5.0
 time_out = 40.0
 
-[node name="Bullet2" parent="BulletGroup" unique_id=93149691 instance=ExtResource("6_ay6cs")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -37.9641)
+[node name="BulletRayBasic2" parent="BulletGroup" unique_id=295374082 instance=ExtResource("3_wvpem")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -37)
 speed = 5.0
 time_out = 40.0
 
-[node name="Bullet3" parent="BulletGroup" unique_id=36788330 instance=ExtResource("6_ay6cs")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.7821, 0)
+[node name="BulletRayBasic3" parent="BulletGroup" unique_id=156468888 instance=ExtResource("3_wvpem")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -13.78, 0)
 speed = 5.0
 time_out = 40.0
 
-[node name="Bullet4" parent="BulletGroup" unique_id=91605782 instance=ExtResource("6_ay6cs")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 18.1145, 0, 0)
+[node name="BulletRayBasic4" parent="BulletGroup" unique_id=2084729605 instance=ExtResource("3_wvpem")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18.11, 0, 0)
 speed = 5.0
 time_out = 40.0
 
