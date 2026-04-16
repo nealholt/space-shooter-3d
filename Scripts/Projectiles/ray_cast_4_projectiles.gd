@@ -37,8 +37,6 @@ func Physics_process(proj:Projectile, delta:float) -> void:
 				body = get_collider()
 			else: # Otherwise return
 				return
-		# Play feedback for player if relevant
-		Global.player_feedback(body, proj.data)
 		if body.is_in_group("damageable"):
 			# Stick on a decal before damaging and dying
 			# Don't stick decals on shields
