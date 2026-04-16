@@ -53,6 +53,7 @@ var aim_assist_unhandled:bool = true
 @export var wrap_up_time:float = 0.0
 var wrap_up_timer:Timer
 
+@export var does_ricochet:bool = false
 
 # Flag for whether this projectile automatically finds a target
 @export var autotarget:bool = false
@@ -106,6 +107,7 @@ func _ready() -> void:
 			hit_box_component = child
 		elif child is RayCastForProjectiles:
 			ray = child
+			ray.does_ricochet = does_ricochet
 	# Error check
 	if explode_on_timeout and !damaging_explosion:
 		push_error('If explode_on_timeout is true then a damaging_explosion should be set.')
@@ -214,9 +216,10 @@ func apply_spread(dat:ShootData) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# If there is a ray, it uses a special Physics_process
-	if ray:
-		ray.Physics_process(self, delta)
+	# If there is a ray and it collided, then it will
+	# handle the rest.
+	if ray and ray.did_collide(self, delta):
+		return
 	# Reorient on target intercept if aim assist is
 	# on, but only do so once and then turn it off.
 	# I do this here, rather than in set_data
