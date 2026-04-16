@@ -26,13 +26,12 @@ radius = 5.0
 [node name="Missile" unique_id=294693303 instance=ExtResource("1_g37v4")]
 speed = 0.0
 time_out = 0.0
+deathExplosion = 8
 sparks = 0
 shieldSparks = 0
-bullet_hole_decal = 8
 wrap_up_time = 2.0
 
 [node name="RayCast4Projectiles" parent="." index="1" unique_id=308028055 instance=ExtResource("2_6sb4k")]
-does_ricochet = false
 
 [node name="GrayTorpedo" parent="." index="2" unique_id=1502860453 instance=ExtResource("4_4eh70")]
 
@@ -43,8 +42,7 @@ draw_pass_1 = SubResource("QuadMesh_5eo7h")
 [node name="PhysicsSeekController" parent="." index="4" unique_id=253226492 instance=ExtResource("5_m3n6r")]
 steer_force = 200.0
 
-[node name="HitBoxComponent" parent="." index="5" unique_id=1275164638 node_paths=PackedStringArray("health_component") instance=ExtResource("6_g4iot")]
-health_component = NodePath("")
+[node name="HitBoxComponent" parent="." index="5" unique_id=1275164638 instance=ExtResource("6_g4iot")]
 reticle_set = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent" index="1" unique_id=538652052]

@@ -40,13 +40,6 @@ var data:ShootData
 # Audio to play when entering a "near miss" area.
 var near_miss_audio: AudioStreamPlayer3D
 
-# This is needed because simultaneous shots
-# all reference the same shoot_data so we
-# don't want to modify the shoot_data.aim_assist
-# bool, otherwise only one of all the shots
-# will use the aim assist
-var aim_assist_unhandled:bool = true
-
 # Time after this projectile "dies" to let it linger
 # so its special effects, such as smoke trail, don't
 # instantaneously disappear.
@@ -121,13 +114,12 @@ func set_data(dat:ShootData) -> void:
 	damage = dat.damage
 	speed = dat.bullet_speed
 	time_out = dat.bullet_timeout
-	# Point the projectile in the direction faced
-	# by the gun and give the bullet the global
-	# position of the gun
+	# Position projectile, but defer aiming.
+	# ...I had an old comment saying that the deferred
+	# was important... I'm not sure why and I don't
+	# feel like removing it and testing that right now.
 	global_transform = dat.gun.global_transform
-	apply_spread(dat)
-	# Set velocity
-	velocity = -global_transform.basis.z * speed
+	aim_self.call_deferred()
 	# 'Super powered' doubles turn rate (which is done
 	# in the controller) and 10xs damage
 	if dat.super_powered:
@@ -220,38 +212,6 @@ func _physics_process(delta: float) -> void:
 	# handle the rest.
 	if ray and ray.did_collide(self, delta):
 		return
-	# Reorient on target intercept if aim assist is
-	# on, but only do so once and then turn it off.
-	# I do this here, rather than in set_data
-	# because the frame of delay between set_data
-	# and phyics_process can make the intercept
-	# outdated enough that it doesn't work.
-	# IMPORTANT: spread is still applied so that
-	# bullets look natural, but aim assist is still
-	# valuable because it centers the spread on
-	# the projected intercept position.
-	if aim_assist_unhandled and data:
-		# If aim assist is on and the target is valid, intercept
-		# the target.
-		if data.aim_assist and is_instance_valid(data.target):
-			var intercept:Vector3 = Global.get_intercept(
-				global_position, speed, data.target)
-			look_at(intercept, Vector3.UP)
-			apply_spread(data)
-			velocity = -global_transform.basis.z * speed
-		# Else if the shooter is the player and the player is
-		# using mouse controls, and the player is in first
-		# person...
-		# (I added in "if Global.player" because there is a
-		# rare error when there is no player, yet the first
-		# three conditions here are true. I think it can occur
-		# because null==null is true in Godot, so hopefully
-		# this fixes it.)
-		elif Global.player and data.shooter == Global.player and Global.input_man.use_mouse_and_keyboard and Global.player.camera_group.is_first_person():
-			#shoot at mouse / cursor
-			aim_self_at_cursor()
-		# Turn off aim assist. It's been handled
-		aim_assist_unhandled = false
 	
 	# Seeker missiles and other bullets might
 	# use one of a number of different controllers
@@ -266,6 +226,34 @@ func _physics_process(delta: float) -> void:
 	rotate_z(roll_amount*delta)
 	# Tried some pitch, but it didn't add anything.
 	#rotate_y(pitch_amount*delta)
+
+
+func aim_self() -> void:
+	# If aim assist is on and the target is valid, intercept
+	# the target.
+	if data.aim_assist and is_instance_valid(data.target):
+		var intercept:Vector3 = Global.get_intercept(
+			global_position, speed, data.target)
+		look_at(intercept, Vector3.UP)
+	# Else if the shooter is the player and the player is
+	# using mouse controls, and the player is in first
+	# person...
+	# (I added in "if Global.player" because there is a
+	# rare error when there is no player, yet the first
+	# three conditions here are true. I think it can occur
+	# because null==null is true in Godot, so hopefully
+	# this fixes it.)
+	elif Global.player and data.shooter == Global.player and Global.input_man.use_mouse_and_keyboard and Global.player.camera_group.is_first_person():
+		#shoot at mouse / cursor
+		aim_self_at_cursor()
+	else:
+		# Point the projectile in the direction faced
+		# by the gun and give the bullet the global
+		# position of the gun
+		global_transform = data.gun.global_transform
+	# Apply spread and set velocity
+	apply_spread(data)
+	velocity = -global_transform.basis.z * speed
 
 
 func aim_self_at_cursor() -> void:
@@ -293,8 +281,6 @@ func aim_self_at_cursor() -> void:
 	# Go to camera position + camera direction times 100000
 	var go_to_point := camera.project_ray_origin(mouse_pos) + camera.project_ray_normal(mouse_pos) * 100000
 	look_at(go_to_point, Vector3.UP)
-	apply_spread(data)
-	velocity = -global_transform.basis.z * speed
 
 
 func damage_and_die(body, collision_point=null) -> void:
