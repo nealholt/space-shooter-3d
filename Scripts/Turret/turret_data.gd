@@ -19,4 +19,4 @@ class_name TurretData extends Node3D
 @export var prefer_capital_ships:bool = false
 
 @export var gun_type:GunSpawner.GUN_TYPE = GunSpawner.GUN_TYPE.GUN
-@export var bullet_type:GunSpawner.BULLET_TYPE = GunSpawner.BULLET_TYPE.BASIC_RAY
+@export var bullet_type:BulletSpawner.BULLET_TYPE = BulletSpawner.BULLET_TYPE.BASIC_RAY

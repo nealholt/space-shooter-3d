@@ -141,7 +141,11 @@ func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
 func shoot_actual() -> void:
 	for i in range(simultaneous_shots):
 		# Create and fire bullet(s)
-		var b = bullet.instantiate()
+		#var b:Projectile = GunSpawner.new_bullet(GunSpawner.BULLET_TYPE.BASIC_RAY) #TODO TESTING
+		var b:Projectile = BulletSpawner.new_bullet(BulletSpawner.BULLET_TYPE.BASIC_RAY) #TODO TESTING
+		#var b = BulletSpawner.new_bullet(BulletSpawner.BULLET_TYPE.BASIC_RAY) #TODO TESTING
+		#var b = GunSpawner.new_bullet(GunSpawner.BULLET_TYPE.BASIC_RAY) #TODO TESTING
+		#var b = bullet.instantiate() #TODO TESTING
 		# Add to team group
 		Global.add_to_team_group(b, ally_team)
 		# Pass the bullet the data about the shooter,

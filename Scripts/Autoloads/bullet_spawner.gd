@@ -12,20 +12,21 @@ extends Node
 # gun spawner in order to request bullets... though I'm not
 # certain this separation was necessary. The change from preload
 # to load might have fixed the issue.
-var gun_array:Array[PackedScene] = [
-	load("res://Scenes/Guns/gun.tscn"),
-	load("res://Scenes/Guns/burst_gun.tscn"),
-	load("res://Scenes/Guns/hit_scan_gun.tscn"),
-	load("res://Scenes/Guns/laser_gun.tscn"),
-	load("res://Scenes/Guns/laser_shotgun.tscn")
+var bullet_array:Array[PackedScene] = [
+	load("res://Scenes/Projectiles/bullet_ray_basic.tscn"),
+	load("res://Scenes/Projectiles/auto_seeking_missile.tscn"),
+	load("res://Scenes/Projectiles/laser_guided_missile.tscn"),
+	load("res://Scenes/Projectiles/proxy_fuse_bullet.tscn"),
+	load("res://Scenes/Projectiles/shotgun_pellet.tscn"),
+	load("res://Scenes/Projectiles/timed_fuse_bullet.tscn"),
+	load("res://Scenes/Projectiles/bullet_ray_big.tscn")
 	]
 
-enum GUN_TYPE {GUN, BURST, HITSCAN, LASER, LASER_SHOT, NO_GUN}
+enum BULLET_TYPE {BASIC_RAY, SEEKING_MISSILE, 
+	LASER_GUIDED_MISSILE, PROXY_FUSE, SHOTGUN_PELLET, TIMED_FUSE,
+	GIANT_RAY}
 
-func new_gun(gt:GUN_TYPE, bt:BulletSpawner.BULLET_TYPE, my_parent:Node3D) -> Gun:
-	# Create a new gun
-	var g := gun_array[int(gt)].instantiate()
-	g.bullet = BulletSpawner.bullet_array[int(bt)]
-	# Attach it to parent
-	my_parent.add_child(g)
-	return g
+# Guns call this to get a made-to-order bullet
+func new_bullet(bt:BULLET_TYPE) -> Projectile:
+	var projectile := bullet_array[int(bt)].instantiate()
+	return projectile

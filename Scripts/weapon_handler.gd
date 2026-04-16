@@ -9,6 +9,10 @@ var index = -1
 var current_weapon: Gun
 
 func _ready() -> void:
+	# Error check
+	#for child in get_children():
+		#if !(child is Gun):
+			#push_error('All WeaponHandler children should be guns.')
 	# Initially deactivate all weapons
 	deactivate_all()
 	# Set index and equip first weapon
