@@ -67,6 +67,21 @@ var wrap_up_timer:Timer
 # in this array
 var collision_exceptions := Array()
 
+# Only set this if a damage-dealing explosion
+# should go off when the bullet hits something.
+@export var damaging_explosion:PackedScene
+
+
+# Use this for timed fuse explosives, explosives go
+# off when the bullet times out. If this is true
+# then damaging_explosion also needs to be set
+@export var explode_on_timeout:bool = false
+# Add a random amount in the range of
+# plus or minus this percent of bullet timeout
+# on the explosion timer for variety. This only
+# has an effect if explode_on_timeout is true.
+@export var target_range_plus_minus:float = 0.1
+
 
 func _ready() -> void:
 	# Give the bullet a default velocity.
@@ -91,6 +106,9 @@ func _ready() -> void:
 			hit_box_component = child
 		elif child is RayCastForProjectiles:
 			ray = child
+	# Error check
+	if explode_on_timeout and !damaging_explosion:
+		push_error('If explode_on_timeout is true then a damaging_explosion should be set.')
 
 
 # This is called by the gun that shoots the bullet.
@@ -115,8 +133,6 @@ func set_data(dat:ShootData) -> void:
 	# Set target for seeking munitions
 	if controller:
 		controller.set_data(dat)
-	# Set / reset timer
-	timer.start(time_out)
 	# Make it so a Ship can't shoot their own bullets.
 	# More often this is making a shooter not shoot down
 	# their own missiles, because most projectiles don't
@@ -154,6 +170,33 @@ func set_data(dat:ShootData) -> void:
 			dat.target = Global.get_center_most_from_group("blue team",self)
 		else:
 			dat.target = Global.get_center_most_from_group("red team",self)
+	# Set up timed fuse explosions and generally deal with timeout
+	if explode_on_timeout and dat.target and is_instance_valid(dat.target):
+		# Get distance to target intercept
+		var intercept:Vector3 = Global.get_intercept(
+					global_position, speed,
+					dat.target)
+		var dist := global_position.distance_to(intercept)
+		# I have no ducking clue why speed needs multiplied
+		# by 2, but I gathered data by manually adjusting
+		# the timeout and distance and got the following
+		# values to hit the player at a bullet speed of 500:
+		# distance, timeout
+		# (305.16226,0.295)
+		# (219.750885,0.215)
+		# (1368.4803,1.369)
+		# If you plot those on a line, the line is almost exactly
+		# y = x/1000
+		# What I'd expect is
+		# y = x/500   because speed was 500 for these tests
+		# Therefore I multiply the speed by 2 and by God
+		# that fixes the overshoot. Still don't know why.
+		time_out = (dist/(speed*2))
+		# Add in a random +- to the timeout.
+		time_out += randf_range(-time_out*target_range_plus_minus, time_out*target_range_plus_minus)
+	# Start the timer
+	timer.start(time_out)
+
 
 # Randomize heading of this bullet based on ShootData
 func apply_spread(dat:ShootData) -> void:
@@ -281,6 +324,9 @@ func damage_and_die(body, collision_point=null) -> void:
 			VfxManager.play_with_transform(sparks, collision_point, transform)
 	stop_near_miss_audio()
 	VfxManager.play_with_transform(deathExplosion, global_position, transform)
+	# Explode maybe
+	if damaging_explosion:
+		explode_with_damage()
 	#Delete bullets that strike a body
 	wrap_up()
 
@@ -303,7 +349,8 @@ func stop_near_miss_audio() -> void:
 
 
 func _on_timer_timeout() -> void:
-	#print('bullet timed out')
+	if explode_on_timeout:
+		explode_with_damage()
 	wrap_up()
 
 
@@ -392,3 +439,21 @@ func ricochet(delta:float):
 	# 1.1 to give that 10% extra assurance of not
 	# recolliding.
 	global_position += velocity * delta * 1.1
+
+
+func explode_with_damage() -> void:
+	# Add an explosion to main_3d and properly
+	# queue free this ship
+	var explosion = damaging_explosion.instantiate()
+	# Add to main_3d, not root, otherwise the added
+	# node might not be properly cleared when
+	# transitioning to a new scene.
+	Global.main_scene.main_3d.add_child(explosion)
+	# Set explosion's position and damage
+	explosion.global_position = global_position
+	explosion.damage_amt = damage
+	# I got an invalid assignment on 
+	# explosion.shooter = data.shooter
+	# so I slapped on this if to try to avoid it.
+	if is_instance_valid(data.shooter):
+		explosion.shooter = data.shooter

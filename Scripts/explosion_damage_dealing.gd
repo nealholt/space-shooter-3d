@@ -6,10 +6,10 @@ class_name ExplosionDamaging
 var damage_amt:float = 1.0
 
 # The shooter of this bullet. Could be a Ship or
-# a Turret, but for now I'm declaring a Ship.
+# a Turret.
 # This should be passed in so that ships can't
 # destroy their own missiles.
-var shooter:Ship
+var shooter
 
 # Use this to delete the scene after dealing
 # damage OR after two runs through _process.

@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://behof1p47cflt"]
 
 [ext_resource type="PackedScene" uid="uid://bosxindk1alsp" path="res://Scenes/Projectiles/projectile.tscn" id="1_5p8wn"]
-[ext_resource type="Script" uid="uid://cermkrqhukd6y" path="res://Scripts/Projectiles/proximity_fuse_bullet.gd" id="2_ftlgm"]
 [ext_resource type="PackedScene" uid="uid://dbpuijlnfgmru" path="res://Scenes/explosion_damage_dealing.tscn" id="3_fi58j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ftlgm"]
@@ -19,10 +18,9 @@ material = SubResource("StandardMaterial3D_h3xsq")
 [sub_resource type="SphereShape3D" id="SphereShape3D_opd5y"]
 
 [node name="ProxyFuseBullet" unique_id=294693303 instance=ExtResource("1_5p8wn")]
-script = ExtResource("2_ftlgm")
-damaging_explosion = ExtResource("3_fi58j")
 sparks = 0
 shieldSparks = 0
+damaging_explosion = ExtResource("3_fi58j")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1" unique_id=65098662]
 layers = 262145
