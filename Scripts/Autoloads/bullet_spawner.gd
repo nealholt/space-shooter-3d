@@ -35,6 +35,7 @@ var ray4projectiles:PackedScene = load('res://Scenes/Projectiles/ray_cast_4_proj
 var laser_bolt:PackedScene = load('res://Assets/Projectiles/Bullets/green_laser_bolt.tscn')
 var laser_bolt_giant:PackedScene = load('res://Assets/Projectiles/Bullets/green_laser_bolt_giant.tscn')
 var pellet:PackedScene = load('res://Assets/Projectiles/Bullets/pellet.tscn')
+var pellet_red:PackedScene = load('res://Assets/Projectiles/Bullets/pellet_red.tscn')
 # Contrails. Purely visual
 var contrail:PackedScene = load('res://Scenes/contrail.tscn')
 
@@ -56,8 +57,7 @@ func new_bullet(bt:BULLET_TYPE) -> Projectile:
 		BULLET_TYPE.LASER_GUIDED_MISSILE:
 			projectile = _get_seeking_contrail(bt)
 		BULLET_TYPE.PROXY_FUSE:
-			# TODO
-			projectile = bullet_array[int(bt)].instantiate()
+			projectile = _get_proxy_fuse()
 		BULLET_TYPE.SHOTGUN_PELLET:
 			projectile = bullet_array[int(bt)].instantiate()
 		BULLET_TYPE.TIMED_FUSE:
@@ -130,6 +130,7 @@ func _get_seeking_contrail(bt:BULLET_TYPE) -> Projectile:
 	return projectile
 
 
+# TODO There may be problems with this. More testing is needed.
 func _get_timed_fuse() -> Projectile:
 	var projectile := generic_projectile.instantiate()
 	var r := ray4projectiles.instantiate()
@@ -138,6 +139,24 @@ func _get_timed_fuse() -> Projectile:
 	projectile.add_child(r)
 	r.does_ricochet = false
 	# Attach mesh
+	projectile.add_child(mesh)
+	# Parameterize projectile
+	projectile.sparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
+	projectile.shieldSparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
+	projectile.damaging_explosion = load('res://Scenes/explosion_damage_dealing.tscn')
+	projectile.explode_on_timeout = true
+	return projectile
+
+
+# TODO There may be problems with this. More testing is needed.
+func _get_proxy_fuse() -> Projectile:
+	var projectile := generic_projectile.instantiate()
+	var a := Area3D.new()
+	var collision_shape = CollisionShape3D.new()
+	collision_shape.shape = SphereShape3D.new()
+	a.add_child(collision_shape)
+	projectile.add_child(a)
+	var mesh := pellet_red.instantiate()
 	projectile.add_child(mesh)
 	# Parameterize projectile
 	projectile.sparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT

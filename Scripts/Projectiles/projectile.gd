@@ -395,6 +395,7 @@ func _on_area_entered(area: Area3D) -> void:
 		# sparks or other particle effects
 		damage_and_die(area, global_position)
 
+
 func _on_body_entered(body: Node3D) -> void:
 	# Global position is where to show
 	# sparks or other particle effects

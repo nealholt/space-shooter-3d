@@ -142,7 +142,7 @@ func shoot_actual() -> void:
 	for i in range(simultaneous_shots):
 		# Create and fire bullet(s)
 		#var b:Projectile = GunSpawner.new_bullet(GunSpawner.BULLET_TYPE.BASIC_RAY) #TODO TESTING
-		var b:Projectile = BulletSpawner.new_bullet(BulletSpawner.BULLET_TYPE.SHOTGUN_PELLET) #TODO TESTING
+		var b:Projectile = BulletSpawner.new_bullet(BulletSpawner.BULLET_TYPE.PROXY_FUSE) #TODO TESTING
 		#var b = BulletSpawner.new_bullet(BulletSpawner.BULLET_TYPE.BASIC_RAY) #TODO TESTING
 		#var b = GunSpawner.new_bullet(GunSpawner.BULLET_TYPE.BASIC_RAY) #TODO TESTING
 		#var b = bullet.instantiate() #TODO TESTING

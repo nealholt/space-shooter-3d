@@ -2,18 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bosxindk1alsp" path="res://Scenes/Projectiles/projectile.tscn" id="1_5p8wn"]
 [ext_resource type="PackedScene" uid="uid://dbpuijlnfgmru" path="res://Scenes/explosion_damage_dealing.tscn" id="3_fi58j"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ftlgm"]
-albedo_color = Color(1, 0, 0.5, 1)
-emission_enabled = true
-emission = Color(20, 0, 0, 1)
-disable_receive_shadows = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h3xsq"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_fi58j"]
-material = SubResource("StandardMaterial3D_h3xsq")
+[ext_resource type="PackedScene" uid="uid://dnjnq0uxc8y57" path="res://Assets/Projectiles/Bullets/pellet_red.tscn" id="3_opd5y"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_opd5y"]
 
@@ -22,11 +11,7 @@ sparks = 0
 shieldSparks = 0
 damaging_explosion = ExtResource("3_fi58j")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1" unique_id=65098662]
-layers = 262145
-material_override = SubResource("StandardMaterial3D_ftlgm")
-cast_shadow = 0
-mesh = SubResource("SphereMesh_fi58j")
+[node name="MeshInstance3D" parent="." index="1" unique_id=530631677 instance=ExtResource("3_opd5y")]
 
 [node name="Area3D" type="Area3D" parent="." index="2" unique_id=410159951]
 collision_layer = 0
