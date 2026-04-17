@@ -16,4 +16,3 @@ explode_on_timeout = true
 mesh = SubResource("SphereMesh_m641g")
 
 [node name="RayCast4Projectiles" parent="." index="2" unique_id=308028055 instance=ExtResource("3_dlala")]
-does_ricochet = false

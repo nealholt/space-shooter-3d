@@ -136,20 +136,20 @@ size = Vector3(40, 100, 49.4751)
 script = ExtResource("1_nau7t")
 
 [node name="Shield" parent="RedTeam" unique_id=1675968972 instance=ExtResource("3_6nm7s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.9984, -310.259)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 32.9984, -310.259)
 max_health = 100
 
 [node name="Shield2" parent="RedTeam" unique_id=994214558 instance=ExtResource("3_6nm7s")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7.21336, 32.9984, -310.259)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 16.644108, 32.9984, -310.259)
 max_health = 100
 
 [node name="Shield3" parent="RedTeam" unique_id=1508946388 instance=ExtResource("3_6nm7s")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 17.8579, 32.9984, -310.259)
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 50.64336, 32.9984, -310.259)
 max_health = 100
 
 [node name="Shield4" parent="RedTeam" unique_id=1315007266 instance=ExtResource("3_6nm7s")]
-transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 48.5387, 32.9984, -310.259)
-max_health = 100
+transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 300, 233.74513, 32.9984, -310.259)
+recharge_delay = 5
 
 [node name="Orb" parent="RedTeam" unique_id=2113066051 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 11.1917, 71.8786, -123.983)

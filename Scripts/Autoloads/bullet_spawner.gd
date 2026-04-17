@@ -28,35 +28,48 @@ enum BULLET_TYPE {BASIC_RAY, SEEKING_MISSILE,
 
 var generic_projectile:PackedScene = load('res://Scenes/Projectiles/projectile.tscn')
 
+# All raycast projectiles need this attached
 var ray4projectiles:PackedScene = load('res://Scenes/Projectiles/ray_cast_4_projectiles.tscn')
 
+# Meshes. Purely visual.
 var laser_bolt:PackedScene = load('res://Assets/Projectiles/Bullets/green_laser_bolt.tscn')
 var laser_bolt_giant:PackedScene = load('res://Assets/Projectiles/Bullets/green_laser_bolt_giant.tscn')
+var pellet:PackedScene = load('res://Assets/Projectiles/Bullets/pellet.tscn')
+# Contrails. Purely visual
+var contrail:PackedScene = load('res://Scenes/contrail.tscn')
+
+# Controllers for seeking behaviors
+var physics_seek:PackedScene = load('res://Scenes/MovementControllers/physics_seek_controller.tscn')
+var simple_seek:PackedScene = load('res://Scenes/MovementControllers/simple_seek_controller.tscn')
 
 
 # Guns call this to get a made-to-order bullet
 func new_bullet(bt:BULLET_TYPE) -> Projectile:
+	var projectile : Projectile
 	match bt:
 		BULLET_TYPE.BASIC_RAY:
-			return _get_ray_bolt(bt)
+			projectile = _get_ray_bolt(bt)
 		BULLET_TYPE.GIANT_RAY:
-			return _get_ray_bolt(bt)
+			projectile = _get_ray_bolt(bt)
 		BULLET_TYPE.SEEKING_MISSILE:
-			pass # TODO LEFT OFF HERE
+			projectile = _get_seeking_contrail(bt)
 		BULLET_TYPE.LASER_GUIDED_MISSILE:
-			pass
+			projectile = _get_seeking_contrail(bt)
 		BULLET_TYPE.PROXY_FUSE:
-			pass
+			# TODO
+			projectile = bullet_array[int(bt)].instantiate()
 		BULLET_TYPE.SHOTGUN_PELLET:
-			pass
+			projectile = bullet_array[int(bt)].instantiate()
 		BULLET_TYPE.TIMED_FUSE:
-			pass
+			projectile = _get_timed_fuse()
 		_: # Default / Otherwise
-			pass
-	var projectile := bullet_array[int(bt)].instantiate()
+			push_error('Unrecognized bullet type ',bt)
 	return projectile
 
 
+# This gets one of two raycast bullet options. The only
+# difference is the mesh that is used, but the meshes come
+# in different sizes, which in turn effects the ray cast size.
 func _get_ray_bolt(bt:BULLET_TYPE) -> Projectile:
 	var projectile := generic_projectile.instantiate()
 	var r := ray4projectiles.instantiate()
@@ -79,4 +92,56 @@ func _get_ray_bolt(bt:BULLET_TYPE) -> Projectile:
 	r.does_ricochet = false
 	# Reposition mesh to start at the same origin as the ray
 	mesh.position = Vector3(0.0, 0.0, -mesh_height/2.0)
+	return projectile
+
+
+# This gets one of two seeking projectile options, both of
+# which only have a contrail as their visual component. The only
+# difference is that one auto-seeks a target and the other is
+# laser guided.
+func _get_seeking_contrail(bt:BULLET_TYPE) -> Projectile:
+	var projectile := generic_projectile.instantiate()
+	var r := ray4projectiles.instantiate()
+	var contra := contrail.instantiate()
+	var control := physics_seek.instantiate()
+	# Parameterize the physics_seek
+	match bt:
+		BULLET_TYPE.SEEKING_MISSILE:
+			control.is_laser_guided = false
+		BULLET_TYPE.LASER_GUIDED_MISSILE:
+			control.is_laser_guided = true
+		_: # Default / Otherwise
+			push_error('Unrecognized bullet type ',bt)
+	# Attach physics seek controller
+	projectile.add_child(control)
+	control.steer_force = 200.0
+	# Attach ray
+	projectile.add_child(r)
+	r.does_ricochet = false
+	# Attach contrail
+	projectile.add_child(contra)
+	# Parameterize projectile
+	projectile.speed = 250.0
+	projectile.time_out = 4.0
+	projectile.sparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
+	projectile.shieldSparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
+	projectile.autotarget = true
+	projectile.roll_amount = 10.0
+	return projectile
+
+
+func _get_timed_fuse() -> Projectile:
+	var projectile := generic_projectile.instantiate()
+	var r := ray4projectiles.instantiate()
+	var mesh := pellet.instantiate()
+	# Attach ray
+	projectile.add_child(r)
+	r.does_ricochet = false
+	# Attach mesh
+	projectile.add_child(mesh)
+	# Parameterize projectile
+	projectile.sparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
+	projectile.shieldSparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
+	projectile.damaging_explosion = load('res://Scenes/explosion_damage_dealing.tscn')
+	projectile.explode_on_timeout = true
 	return projectile
