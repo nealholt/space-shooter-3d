@@ -12,4 +12,3 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0
 
 [node name="RayCast4Projectiles" parent="." index="2" unique_id=308028055 instance=ExtResource("3_en5jc")]
 projectile_length = 30.0
-does_ricochet = false

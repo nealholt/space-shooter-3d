@@ -26,7 +26,57 @@ enum BULLET_TYPE {BASIC_RAY, SEEKING_MISSILE,
 	LASER_GUIDED_MISSILE, PROXY_FUSE, SHOTGUN_PELLET, TIMED_FUSE,
 	GIANT_RAY}
 
+var generic_projectile:PackedScene = load('res://Scenes/Projectiles/projectile.tscn')
+
+var ray4projectiles:PackedScene = load('res://Scenes/Projectiles/ray_cast_4_projectiles.tscn')
+
+var laser_bolt:PackedScene = load('res://Assets/Projectiles/Bullets/green_laser_bolt.tscn')
+var laser_bolt_giant:PackedScene = load('res://Assets/Projectiles/Bullets/green_laser_bolt_giant.tscn')
+
+
 # Guns call this to get a made-to-order bullet
 func new_bullet(bt:BULLET_TYPE) -> Projectile:
+	match bt:
+		BULLET_TYPE.BASIC_RAY:
+			return _get_ray_bolt(bt)
+		BULLET_TYPE.GIANT_RAY:
+			return _get_ray_bolt(bt)
+		BULLET_TYPE.SEEKING_MISSILE:
+			pass # TODO LEFT OFF HERE
+		BULLET_TYPE.LASER_GUIDED_MISSILE:
+			pass
+		BULLET_TYPE.PROXY_FUSE:
+			pass
+		BULLET_TYPE.SHOTGUN_PELLET:
+			pass
+		BULLET_TYPE.TIMED_FUSE:
+			pass
+		_: # Default / Otherwise
+			pass
 	var projectile := bullet_array[int(bt)].instantiate()
+	return projectile
+
+
+func _get_ray_bolt(bt:BULLET_TYPE) -> Projectile:
+	var projectile := generic_projectile.instantiate()
+	var r := ray4projectiles.instantiate()
+	# Choose the mesh
+	var mesh:MeshInstance3D
+	match bt:
+		BULLET_TYPE.BASIC_RAY:
+			mesh = laser_bolt.instantiate()
+		BULLET_TYPE.GIANT_RAY:
+			mesh = laser_bolt_giant.instantiate()
+		_: # Default / Otherwise
+			push_error('Unrecognized bullet type ',bt)
+	# Attach ray and mesh to projectile root
+	projectile.add_child(r)
+	projectile.add_child(mesh)
+	# Make the ray at least as long as the mesh
+	# print(mesh.get_mesh().get_height())
+	var mesh_height:float = mesh.get_mesh().get_height()
+	r.projectile_length = mesh_height
+	r.does_ricochet = false
+	# Reposition mesh to start at the same origin as the ray
+	mesh.position = Vector3(0.0, 0.0, -mesh_height/2.0)
 	return projectile
