@@ -1,54 +1,9 @@
 [gd_scene format=3 uid="uid://ctqiw08prgev8"]
 
 [ext_resource type="PackedScene" uid="uid://bosxindk1alsp" path="res://Scenes/Projectiles/projectile.tscn" id="1_6g5h8"]
-[ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="2_fvvr7"]
 [ext_resource type="PackedScene" uid="uid://co465f20rmnhd" path="res://Scenes/Projectiles/ray_cast_4_projectiles.tscn" id="2_ri03y"]
 [ext_resource type="PackedScene" uid="uid://dto664xfw5qbf" path="res://Scenes/MovementControllers/physics_seek_controller.tscn" id="3_prbgi"]
-[ext_resource type="Texture2D" uid="uid://ce6i4w30wrek0" path="res://Assets/ParticleImages/star_09.png" id="4_i1rx7"]
-[ext_resource type="Texture2D" uid="uid://cuth4s67j0brc" path="res://Assets/ParticleImages/star_08.png" id="5_i1rx7"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ivyg"]
-transparency = 1
-blend_mode = 1
-cull_mode = 2
-shading_mode = 0
-vertex_color_use_as_albedo = true
-vertex_color_is_srgb = true
-albedo_color = Color(0.8105349, 0.00064976513, 0.83492166, 1)
-albedo_texture = ExtResource("4_i1rx7")
-billboard_mode = 1
-billboard_keep_scale = true
-
-[sub_resource type="Curve" id="Curve_g6j8b"]
-_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.3), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_idad2"]
-curve = SubResource("Curve_g6j8b")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bqmaa"]
-gravity = Vector3(0, 0, 0)
-scale_min = 2.0
-scale_max = 2.0
-scale_curve = SubResource("CurveTexture_idad2")
-
-[sub_resource type="QuadMesh" id="QuadMesh_j86ib"]
-size = Vector2(21, 21)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pwm4o"]
-transparency = 1
-blend_mode = 1
-cull_mode = 2
-shading_mode = 0
-vertex_color_use_as_albedo = true
-vertex_color_is_srgb = true
-albedo_color = Color(0, 0.5052959, 0.6236176, 1)
-albedo_texture = ExtResource("5_i1rx7")
-billboard_mode = 1
-billboard_keep_scale = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_cyj17"]
-size = Vector2(30, 30)
+[ext_resource type="PackedScene" uid="uid://cj667or5wbyqi" path="res://Assets/Projectiles/sparkle.tscn" id="4_e6r74"]
 
 [node name="SparkleTrailMissile" unique_id=294693303 instance=ExtResource("1_6g5h8")]
 time_out = 5.0
@@ -56,27 +11,8 @@ deathExplosion = 8
 wrap_up_time = 5.0
 
 [node name="RayCast4Projectiles" parent="." index="1" unique_id=308028055 instance=ExtResource("2_ri03y")]
-does_ricochet = false
 
-[node name="Contrail" parent="." index="2" unique_id=600511501 instance=ExtResource("2_fvvr7")]
-_fromWidth = 5.0
-_lifeSpan = 20.0
-
-[node name="PhysicsSeekController" parent="." index="3" unique_id=1547410446 instance=ExtResource("3_prbgi")]
+[node name="PhysicsSeekController" parent="." index="2" unique_id=1547410446 instance=ExtResource("3_prbgi")]
 steer_force = 2500.0
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="4" unique_id=1911317405]
-material_override = SubResource("StandardMaterial3D_2ivyg")
-amount = 1
-lifetime = 0.2
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_bqmaa")
-draw_pass_1 = SubResource("QuadMesh_j86ib")
-
-[node name="GPUParticles3D2" type="GPUParticles3D" parent="." index="5" unique_id=352651394]
-material_override = SubResource("StandardMaterial3D_pwm4o")
-amount = 1
-lifetime = 0.3
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_bqmaa")
-draw_pass_1 = SubResource("QuadMesh_cyj17")
+[node name="Sparkle" parent="." index="3" unique_id=1238732924 instance=ExtResource("4_e6r74")]

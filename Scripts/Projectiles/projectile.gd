@@ -375,6 +375,8 @@ func wrap_up() -> void:
 			Callable(child.queue_free).call_deferred()
 		elif child is Trail3D:
 			child._lifeSpan = child._lifeSpan/10.0
+		elif child is SparkleTrailVisual:
+			child.wrap_up()
 		elif child.get('visible'):
 			child.hide()
 	# Start up a timer and queue_free all the rest when it goes off

@@ -19,12 +19,13 @@ var bullet_array:Array[PackedScene] = [
 	load("res://Scenes/Projectiles/proxy_fuse_bullet.tscn"),
 	load("res://Scenes/Projectiles/shotgun_pellet.tscn"),
 	load("res://Scenes/Projectiles/timed_fuse_bullet.tscn"),
-	load("res://Scenes/Projectiles/bullet_ray_big.tscn")
+	load("res://Scenes/Projectiles/bullet_ray_big.tscn"),
+	load('res://Scenes/Projectiles/sparkle_trail_missile.tscn')
 	]
 
 enum BULLET_TYPE {BASIC_RAY, SEEKING_MISSILE, 
 	LASER_GUIDED_MISSILE, PROXY_FUSE, SHOTGUN_PELLET, TIMED_FUSE,
-	GIANT_RAY}
+	GIANT_RAY, SPARKLE}
 
 var generic_projectile:PackedScene = load('res://Scenes/Projectiles/projectile.tscn')
 
@@ -38,6 +39,9 @@ var pellet:PackedScene = load('res://Assets/Projectiles/Bullets/pellet.tscn')
 var pellet_red:PackedScene = load('res://Assets/Projectiles/Bullets/pellet_red.tscn')
 # Contrails. Purely visual
 var contrail:PackedScene = load('res://Scenes/contrail.tscn')
+# Larger contrail and some flashing GPU particles
+var sparkle_trail:PackedScene = load('res://Assets/Projectiles/sparkle.tscn')
+
 
 # Controllers for seeking behaviors
 var physics_seek:PackedScene = load('res://Scenes/MovementControllers/physics_seek_controller.tscn')
@@ -62,6 +66,8 @@ func new_bullet(bt:BULLET_TYPE) -> Projectile:
 			projectile = bullet_array[int(bt)].instantiate()
 		BULLET_TYPE.TIMED_FUSE:
 			projectile = _get_timed_fuse()
+		BULLET_TYPE.SPARKLE:
+			projectile = _get_sparkle_trail()
 		_: # Default / Otherwise
 			push_error('Unrecognized bullet type ',bt)
 	return projectile
@@ -163,4 +169,24 @@ func _get_proxy_fuse() -> Projectile:
 	projectile.shieldSparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
 	projectile.damaging_explosion = load('res://Scenes/explosion_damage_dealing.tscn')
 	projectile.explode_on_timeout = true
+	return projectile
+
+
+func _get_sparkle_trail() -> Projectile:
+	var projectile := generic_projectile.instantiate()
+	var r := ray4projectiles.instantiate()
+	var visuals := sparkle_trail.instantiate()
+	var control := physics_seek.instantiate()
+	# Attach physics seek controller
+	projectile.add_child(control)
+	control.steer_force = 2500.0
+	# Attach ray
+	projectile.add_child(r)
+	r.does_ricochet = false
+	# Attach contrail and sparkle
+	projectile.add_child(visuals)
+	# Parameterize projectile
+	projectile.time_out = 5.0
+	projectile.deathExplosion = VisualEffectSetting.VISUAL_EFFECT_TYPE.SINGLE_EXPLOSION_8X
+	projectile.wrap_up_time = 5.0
 	return projectile
