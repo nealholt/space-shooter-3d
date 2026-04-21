@@ -54,7 +54,7 @@ missile_lock_max_angle = null
 quick_launch_interval = 0.2
 
 [node name="MissileLauncher" parent="BlueTeam/Fighter/MissileLockGroup" index="7" unique_id=684312626]
-bullet_type = 7
+bullet_type = 8
 bullet = ExtResource("6_qdonm")
 damage = 1.0
 bullet_speed = 1000.0

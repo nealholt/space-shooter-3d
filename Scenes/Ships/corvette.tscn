@@ -160,6 +160,7 @@ target_text = "Corvette"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63, 0.14, -5)
 burst_total = 6
 burst_rate = 12.0
+bullet_type = 5
 bullet = ExtResource("18_lbswy")
 bullet_speed = 600.0
 fire_rate = 1.2
@@ -173,6 +174,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.132, 1.3)
 
 [node name="AutoSeekingMissileLauncher" parent="WeaponHandler" unique_id=472321920 instance=ExtResource("19_yfprc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.33626)
+bullet_type = 3
 bullet = ExtResource("11_a8ss5")
 bullet_speed = 150.0
 bullet_timeout = 3.0
@@ -196,6 +198,7 @@ collide_with_areas = true
 visible = false
 
 [node name="LaserShotgun" parent="WeaponHandler" unique_id=1141187926 instance=ExtResource("15_ufo67")]
+bullet_type = 1
 bullet = ExtResource("20_de7w0")
 bullet_speed = 500.0
 fire_rate = 3.0
@@ -204,6 +207,7 @@ simultaneous_shots = 8
 
 [node name="LaserGuidedLauncher" parent="WeaponHandler" unique_id=265477221 instance=ExtResource("19_yfprc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.40851)
+bullet_type = 4
 bullet = ExtResource("21_uelja")
 bullet_speed = 200.0
 bullet_timeout = 5.0

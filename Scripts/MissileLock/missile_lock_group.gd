@@ -78,6 +78,9 @@ var repeat_tone_min_time:float = 0.05 # seconds
 var ally_team:String
 var enemy_team:String
 
+# Reference to parent ship
+var parent_ship:Ship
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -85,6 +88,9 @@ func _ready() -> void:
 	acquiring.hide()
 	lock_offset = lock.size/2.0
 	lock.hide()
+	# Get a reference to parent ship. This is used for
+	# passing along collision exception information
+	parent_ship = get_parent()
 	# Search through children for gun to use
 	# as missile launcher.
 	for child in get_children():
@@ -267,7 +273,7 @@ func launch(targeter:Node3D) -> void:
 	# I added the if statement here after getting an error when I
 	# launched a missile just as a target was getting queue_freed.
 	if is_instance_valid(target):
-		missile_launcher.shoot(targeter, target, is_quick_launch and !npc_missile_lock)
+		missile_launcher.shoot(targeter, parent_ship.collision_exceptions, target, is_quick_launch and !npc_missile_lock)
 
 
 func acquire_lock(targeter:Node3D) -> void:

@@ -3,7 +3,6 @@ class_name Turret extends Node3D
 const TURRET_SCENE:PackedScene = preload("res://Scenes/turret.tscn")
 
 @onready var line_of_sight := $TurretModel/Body/Head/RayCast3D
-@onready var hit_box_component: HitBoxComponent = $HitBoxComponent
 
 # movement speeds and constraints in degrees
 @export var elevation_speed_deg: float = 5
@@ -31,13 +30,21 @@ var angle_to_shoot : float = deg_to_rad(angle_to_shoot_deg)
 var ally_team:String
 var enemy_team:String
 
+# Bullets fired by this turret should ignore collisions
+# with anything in this array
+var collision_exceptions := Array()
 
-static func new_turret(my_parent:TurretData) -> Turret:
+# Reference to the ship this turret is attached to.
+var parent_ship:Ship
+
+
+# ship should be the ship this turret is attached to
+static func new_turret(my_parent:TurretData, ship:Ship) -> Turret:
 	var t := TURRET_SCENE.instantiate()
 	# Order matters for these next three lines of code
 	t.setup_turret_pre_tree(my_parent)
 	my_parent.add_child(t)
-	t.setup_turret_in_tree(my_parent)
+	t.setup_turret_in_tree(my_parent, ship)
 	return t
 
 
@@ -83,6 +90,10 @@ func _ready() -> void:
 		get_tree().quit()
 	for i in range(guns.size()):
 		guns[i].reparent(gun_hardpoints[i], false)
+	
+	# Add hit box component to collision exceptions to avoid
+	# shooting self
+	collision_exceptions.push_back($HitBoxComponent)
 
 
 func setup_turret_pre_tree(dat:TurretData) -> void:
@@ -94,7 +105,7 @@ func setup_turret_pre_tree(dat:TurretData) -> void:
 		GunSpawner.new_gun(dat.gun_type, dat.bullet_type, self)
 
 
-func setup_turret_in_tree(dat:TurretData) -> void:
+func setup_turret_in_tree(dat:TurretData, ship:Ship) -> void:
 	if turret_motion:
 		turret_motion.setup_values(dat)
 	
@@ -106,6 +117,8 @@ func setup_turret_in_tree(dat:TurretData) -> void:
 	
 	if target_selector:
 		target_selector.prefer_capital_ships = dat.prefer_capital_ships
+	
+	parent_ship = ship
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -136,7 +149,7 @@ func _physics_process(delta: float) -> void:
 				#print('\nturret seeing bogey ',collider)
 		# Fire ze guns!
 		for gun in guns:
-			gun.shoot(self, orientation_data.target)
+			gun.shoot(self, collision_exceptions+parent_ship.collision_exceptions, orientation_data.target)
 
 
 func _on_health_component_health_lost() -> void:

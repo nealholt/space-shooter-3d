@@ -17,3 +17,6 @@ var spread_deg:float # Bullet spread in degrees
 # adjust to face this location, it will be the
 # intercept returned by aim_assist.gd
 var aim_assist:bool = false
+# This projectile should ignore collisions with anything
+# in this array
+var collision_exceptions := Array()

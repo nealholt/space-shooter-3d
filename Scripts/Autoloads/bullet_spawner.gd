@@ -13,18 +13,19 @@ extends Node
 # certain this separation was necessary. The change from preload
 # to load might have fixed the issue.
 var bullet_array:Array[PackedScene] = [
+	load("res://Scenes/Projectiles/missile.tscn"),
+	load("res://Scenes/Projectiles/shotgun_pellet.tscn"),
 	load("res://Scenes/Projectiles/bullet_ray_basic.tscn"),
 	load("res://Scenes/Projectiles/auto_seeking_missile.tscn"),
 	load("res://Scenes/Projectiles/laser_guided_missile.tscn"),
 	load("res://Scenes/Projectiles/proxy_fuse_bullet.tscn"),
-	load("res://Scenes/Projectiles/shotgun_pellet.tscn"),
 	load("res://Scenes/Projectiles/timed_fuse_bullet.tscn"),
 	load("res://Scenes/Projectiles/bullet_ray_big.tscn"),
 	load('res://Scenes/Projectiles/sparkle_trail_missile.tscn')
 	]
 
-enum BULLET_TYPE {BASIC_RAY, SEEKING_MISSILE, 
-	LASER_GUIDED_MISSILE, PROXY_FUSE, SHOTGUN_PELLET, TIMED_FUSE,
+enum BULLET_TYPE {MISSILE, SHOTGUN_PELLET, BASIC_RAY, SEEKING_MISSILE, 
+	LASER_GUIDED_MISSILE, PROXY_FUSE, TIMED_FUSE,
 	GIANT_RAY, SPARKLE}
 
 var generic_projectile:PackedScene = load('res://Scenes/Projectiles/projectile.tscn')
@@ -52,6 +53,10 @@ var simple_seek:PackedScene = load('res://Scenes/MovementControllers/simple_seek
 func new_bullet(bt:BULLET_TYPE) -> Projectile:
 	var projectile : Projectile
 	match bt:
+		BULLET_TYPE.MISSILE:
+			projectile = bullet_array[int(bt)].instantiate()
+		BULLET_TYPE.SHOTGUN_PELLET:
+			projectile = bullet_array[int(bt)].instantiate()
 		BULLET_TYPE.BASIC_RAY:
 			projectile = _get_ray_bolt(bt)
 		BULLET_TYPE.GIANT_RAY:
@@ -62,8 +67,6 @@ func new_bullet(bt:BULLET_TYPE) -> Projectile:
 			projectile = _get_seeking_contrail(bt)
 		BULLET_TYPE.PROXY_FUSE:
 			projectile = _get_proxy_fuse()
-		BULLET_TYPE.SHOTGUN_PELLET:
-			projectile = bullet_array[int(bt)].instantiate()
 		BULLET_TYPE.TIMED_FUSE:
 			projectile = _get_timed_fuse()
 		BULLET_TYPE.SPARKLE:

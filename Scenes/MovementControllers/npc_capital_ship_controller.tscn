@@ -1,18 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbxmm661qby3d"]
+[gd_scene format=3 uid="uid://bbxmm661qby3d"]
 
 [ext_resource type="Script" uid="uid://bajgi6qkpu672" path="res://Scripts/NPCs/npc_capital_ship_controller.gd" id="1_7sab1"]
 [ext_resource type="Script" uid="uid://dpu7mi2acxa31" path="res://Scripts/NPCs/Fighter/movement_profile.gd" id="2_3gflc"]
 [ext_resource type="Script" uid="uid://c3gw1nt0lnjsu" path="res://Scripts/target_selector.gd" id="3_dofdh"]
 [ext_resource type="Script" uid="uid://bdsf0fc3mi1vk" path="res://Scripts/NPCs/Fighter/state_orbit.gd" id="4_dofdh"]
 
-[node name="NPCCapitalShipController" type="Node"]
+[node name="NPCCapitalShipController" type="Node" unique_id=1178442668]
 script = ExtResource("1_7sab1")
+shooting_angle_degrees = null
+speed = null
+x_speed = null
+y_speed = null
+pitch_amt = null
+roll_amt = null
+yaw_amt = null
+speed_lerp = null
+lerp_str = null
+target_capital_ships = null
+ideal_distance = null
+ease_dist = null
+keep_target_above = null
 
-[node name="MovementProfile" type="Node" parent="."]
+[node name="MovementProfile" type="Node" parent="." unique_id=2140226427]
 script = ExtResource("2_3gflc")
 
-[node name="TargetSelector" type="Node" parent="."]
+[node name="TargetSelector" type="Node" parent="." unique_id=2707380]
 script = ExtResource("3_dofdh")
 
-[node name="OrbitState" type="Node" parent="."]
+[node name="OrbitState" type="Node" parent="." unique_id=2138410555]
 script = ExtResource("4_dofdh")

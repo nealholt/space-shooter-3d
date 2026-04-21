@@ -95,7 +95,7 @@ func ready_to_fire() -> bool:
 	return (!firing_rate_timer or firing_rate_timer.is_stopped()) and current_mag > 0
 
 
-func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
+func shoot(shooter:Node3D, collision_exceptions:Array, target:Node3D=null, powered_up:bool=false) -> void:
 	if !ready_to_fire():
 		return
 	# Animate 'em if you got 'em
@@ -108,7 +108,7 @@ func shoot(shooter:Node3D, target:Node3D=null, powered_up:bool=false) -> void:
 	if fire_sound != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
 		fire_sound_active = AudioManager.play_remote_transform(fire_sound, self)
 	restart_timer()
-	setup_shoot_data(shooter,target,powered_up)
+	setup_shoot_data(shooter, collision_exceptions,target,powered_up)
 	shoot_actual()
 
 
@@ -117,7 +117,7 @@ func restart_timer() -> void:
 		firing_rate_timer.start(1.0/fire_rate)
 
 
-func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
+func setup_shoot_data(shooter:Node3D, collision_exceptions:Array, target:Node3D, powered_up:bool):
 	data = ShootData.new()
 	data.shooter = shooter
 	# Fire from the position of the gun
@@ -137,6 +137,8 @@ func setup_shoot_data(shooter:Node3D, target:Node3D, powered_up:bool):
 	# Spread shot weapons should not use aim assist.
 	if "aim_assist" in shooter and shooter.aim_assist and simultaneous_shots == 1 and target and is_instance_valid(target):
 		data.aim_assist = shooter.aim_assist.use_aim_assist(shooter, target, bullet_speed)
+	# Add in collision exceptions for the bullet
+	data.collision_exceptions = collision_exceptions
 
 
 func shoot_actual() -> void:

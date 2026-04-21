@@ -43,25 +43,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0, 600)
 script = ExtResource("2_0liob")
 
 [node name="Frigate" parent="RedTeam" unique_id=938972654 instance=ExtResource("5_cn33r")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -700, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -500, 0, 0)
 
 [node name="Frigate2" parent="RedTeam" unique_id=1457373884 instance=ExtResource("5_cn33r")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -810.38525, -27.914253, -140.46225)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -610.385, -27.914, -140.462)
 
 [node name="Frigate3" parent="RedTeam" unique_id=646952895 instance=ExtResource("5_cn33r")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -812.11383, 31.739304, 120.49165)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -612.114, 31.739, 120.492)
 
 [node name="Destroyer" parent="RedTeam" unique_id=676719916 instance=ExtResource("6_8xsvq")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -836.5836, -166.97095, 197.12692)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -636.584, -166.971, 197.127)
 
 [node name="Destroyer2" parent="RedTeam" unique_id=954350155 instance=ExtResource("6_8xsvq")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -781.2112, 142.44188, 196.76468)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -581.211, 142.442, 196.765)
 
 [node name="Destroyer3" parent="RedTeam" unique_id=1716804192 instance=ExtResource("6_8xsvq")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -828.16364, -20.738022, 246.71507)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -628.164, -20.738, 246.715)
 
 [node name="Destroyer4" parent="RedTeam" unique_id=672902360 instance=ExtResource("6_8xsvq")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1020.4547, -109.89906, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -820.455, -109.899, 0)
 
 [node name="Shield" parent="RedTeam/Destroyer4" unique_id=462814636 instance=ExtResource("7_3dyh5")]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
@@ -70,16 +70,16 @@ transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="Destroyer5" parent="RedTeam" unique_id=406786840 instance=ExtResource("6_8xsvq")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -781.2112, -191.00339, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -581.211, -191.003, 0)
 
 [node name="Destroyer6" parent="RedTeam" unique_id=1752177684 instance=ExtResource("6_8xsvq")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -698.6608, -27.909431, -329.1593)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -498.661, -27.909, -329.159)
 
 [node name="Destroyer7" parent="RedTeam" unique_id=1307866597 instance=ExtResource("6_8xsvq")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -820.39655, 163.94272, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -620.397, 163.943, 0)
 
 [node name="Destroyer8" parent="RedTeam" unique_id=1354791609 instance=ExtResource("6_8xsvq")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -841.48145, 124.244225, -176.58614)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -641.481, 124.244, -176.586)
 
 [node name="BlueTeam" type="Node3D" parent="." unique_id=838922433]
 script = ExtResource("2_0liob")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkwcr6mxtri7n"]
+[gd_scene format=3 uid="uid://bkwcr6mxtri7n"]
 
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="1_63oik"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_jvl32"]
@@ -12,67 +12,79 @@
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="9_0rmbx"]
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/engine_audio_visuals.tscn" id="10_t22nh"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_731x3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nksoy"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_jvl32")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_tw5gt"]
+[sub_resource type="SphereMesh" id="SphereMesh_2tkea"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_731x3")
+material = SubResource("ShaderMaterial_nksoy")
 
-[node name="Corvette" instance=ExtResource("1_63oik")]
+[node name="Corvette" unique_id=1087943080 instance=ExtResource("1_63oik")]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" index="0"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" parent_id_path=PackedInt32Array(828639523) index="0" unique_id=991184975]
 stream = ExtResource("8_vlve7")
 volume_db = -23.0
 pitch_scale = 0.5
 
-[node name="HealthComponent" parent="." index="5"]
+[node name="HealthComponent" parent="." index="5" unique_id=778683298]
 max_health = 100.0
 
-[node name="MissileLockGroup" parent="." index="8"]
+[node name="MissileLockGroup" parent="." index="8" unique_id=2132042412]
 npc_missile_lock = false
 
-[node name="FresnelAura" parent="Shield" index="0"]
-mesh = SubResource("SphereMesh_tw5gt")
+[node name="FresnelAura" parent="Shield" parent_id_path=PackedInt32Array(2025902563) index="0" unique_id=556348261]
+mesh = SubResource("SphereMesh_2tkea")
 
-[node name="TextureRect" type="TextureRect" parent="WeaponHandler/GatlingGun" index="3"]
+[node name="GatlingGun" parent="WeaponHandler" parent_id_path=PackedInt32Array(370825666) index="0" unique_id=1123320670]
+bullet_type = 5
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHandler/GatlingGun" index="3" unique_id=1428428271]
 self_modulate = Color(1, 1, 1, 0.607843)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_t24ck")
 
-[node name="HitScanGun" parent="WeaponHandler" index="2"]
+[node name="AutoSeekingMissileLauncher" parent="WeaponHandler" parent_id_path=PackedInt32Array(370825666) index="1" unique_id=472321920]
+bullet_type = 3
+
+[node name="HitScanGun" parent="WeaponHandler" parent_id_path=PackedInt32Array(370825666) index="2" unique_id=1687734169]
 fire_rate = 1.0
 
-[node name="TextureRect" type="TextureRect" parent="WeaponHandler/HitScanGun" index="3"]
+[node name="TextureRect" type="TextureRect" parent="WeaponHandler/HitScanGun" index="3" unique_id=1457670621]
 self_modulate = Color(1, 1, 1, 0.588235)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("3_0npbv")
 
-[node name="TextureRect" type="TextureRect" parent="WeaponHandler/LaserShotgun" index="2"]
+[node name="LaserShotgun" parent="WeaponHandler" parent_id_path=PackedInt32Array(370825666) index="3" unique_id=1141187926]
+bullet_type = 1
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHandler/LaserShotgun" index="2" unique_id=1333312560]
 self_modulate = Color(1, 1, 1, 0.529412)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("4_4gytk")
 
-[node name="TextureRect" type="TextureRect" parent="WeaponHandler/LaserGuidedLauncher" index="2"]
+[node name="LaserGuidedLauncher" parent="WeaponHandler" parent_id_path=PackedInt32Array(370825666) index="4" unique_id=265477221]
+bullet_type = 4
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHandler/LaserGuidedLauncher" index="2" unique_id=1579903434]
 self_modulate = Color(1, 1, 1, 0.529412)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("5_aeijj")
 
-[node name="LaserGun" parent="WeaponHandler" index="5" instance=ExtResource("6_itfr8")]
+[node name="LaserGun" parent="WeaponHandler" parent_id_path=PackedInt32Array(370825666) index="5" unique_id=1566657459 instance=ExtResource("6_itfr8")]
 
-[node name="BallisticMovementV3" parent="." index="12" instance=ExtResource("8_m18g3")]
+[node name="BallisticMovementV3" parent="." index="12" unique_id=1498286754 instance=ExtResource("8_m18g3")]
 
-[node name="CameraGroup" parent="." index="13" instance=ExtResource("9_0rmbx")]
+[node name="CameraGroup" parent="." index="13" unique_id=369240252 instance=ExtResource("9_0rmbx")]
 
-[node name="EngineAudioVisuals" parent="." index="14" instance=ExtResource("10_t22nh")]
+[node name="EngineAudioVisuals" parent="." index="14" unique_id=1254817710 instance=ExtResource("10_t22nh")]
 
 [editable path="Shield"]
 [editable path="WeaponHandler/GatlingGun/GunModel"]

@@ -133,30 +133,8 @@ func set_data(dat:ShootData) -> void:
 	# have a hit_box_component, but some missiles do.
 	if hit_box_component:
 		hit_box_component.add_damage_exception(dat.shooter)
-	# Add collision exceptions for the shooter, 
-	# shooter's hitbox and shield
-	if dat.shooter:
-		if dat.shooter is CollisionObject3D:
-			collision_exceptions.push_back(dat.shooter)
-		if 'hit_box_component' in dat.shooter and dat.shooter.hit_box_component:
-			collision_exceptions.push_back(dat.shooter.hit_box_component)
-		if 'shield' in dat.shooter and dat.shooter.shield:
-			collision_exceptions.push_back(dat.shooter.shield.hit_box_component)
-	# Make any ray ignore the shooter and the shooter's shield.
-	# This will prevent self-hits.
-	# I think this is redundant with the above.
-	#if ray and dat.shooter:
-		## If the shooter is collidable, ignore it
-		#if dat.shooter is CollisionObject3D:
-			#ray.add_exception(dat.shooter)
-		## Turrets are not inherently collidable the
-		## way CharacterBody3D is, so instead, check if
-		## there is a hitbox that should be ignored
-		#elif 'hit_box_component' in dat.shooter and dat.shooter.hit_box_component:
-			#ray.add_exception(dat.shooter.hit_box_component)
-		## Also check to see if there is a shield to be ignored
-		#if 'shield' in dat.shooter and dat.shooter.shield:
-			#ray.add_exception(dat.shooter.shield.hit_box_component)
+	# Add collision exceptions
+	collision_exceptions = dat.collision_exceptions
 	# Override target in order to set target to be
 	# centermost enemy.
 	if autotarget:

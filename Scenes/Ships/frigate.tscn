@@ -72,6 +72,7 @@ shape = SubResource("ConvexPolygonShape3D_si2lx")
 [node name="Hardpoint" type="Node3D" parent="TurretGroup" unique_id=443907705]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 6.5, -11)
 script = ExtResource("5_mh4mh")
+bullet_type = 7
 
 [node name="NPCCapitalShipController" parent="." unique_id=1171288791 instance=ExtResource("5_qfai7")]
 speed = 5.0

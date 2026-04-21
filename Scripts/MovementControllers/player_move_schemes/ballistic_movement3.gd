@@ -107,7 +107,7 @@ func handle_engine_audio(mover) -> void:
 
 
 # Override parent class function
-func shoot(shooter, delta:float) -> void:
+func shoot(shooter, delta:float, collision_exceptions:Array) -> void:
 	if is_dead:
 		return
 	
@@ -120,10 +120,10 @@ func shoot(shooter, delta:float) -> void:
 	# Trigger pulled. Try to shoot.
 	if shooter.weapon_handler.is_automatic():
 		if im.shoot_pressed:
-			shooter.weapon_handler.shoot(shooter, target)
+			shooter.weapon_handler.shoot(shooter, collision_exceptions, target)
 	else: # Semiautomatic
 		if im.shoot_just_pressed:
-			shooter.weapon_handler.shoot(shooter, target)
+			shooter.weapon_handler.shoot(shooter, collision_exceptions, target)
 	
 	# Missile lock
 	if shooter.missile_lock:

@@ -81,6 +81,10 @@ var reticle:TargetReticles
 var ally_team:String
 var enemy_team:String
 
+# Bullets fired by this ship should ignore collisions
+# with anything in this array
+var collision_exceptions := Array()
+
 
 #I really like the idea of _ready functions
 # searching through and equipping components
@@ -127,6 +131,9 @@ func _ready() -> void:
 			obstacle_detector = child
 		elif child is Shield:
 			shield = child
+			# Add shield hitbox to collision exceptions so
+			# bullets don't hit it.
+			collision_exceptions.push_back(shield.hit_box_component)
 		elif child is WeaponHandler:
 			weapon_handler = child
 		# The following are all from hit_box_component
@@ -146,6 +153,9 @@ func _ready() -> void:
 	# but only if this is an NPC ship
 	if controller and obstacle_detector and controller is NPCStateMachine:
 		controller.set_obstacle_detector(obstacle_detector)
+	# Add self (CharacterBody3D) to collision exceptions so
+	# bullets don't hit self.
+	collision_exceptions.push_back(self)
 
 
 func _physics_process(delta):
@@ -155,7 +165,7 @@ func _physics_process(delta):
 		# Select target
 		controller.select_target(self)
 		# Handle shooting of guns and missiles
-		controller.shoot(self, delta)
+		controller.shoot(self, delta, collision_exceptions)
 		# Miscellaneous action (for now just switch weapon)
 		controller.misc_actions(self)
 
