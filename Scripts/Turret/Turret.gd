@@ -34,17 +34,24 @@ var enemy_team:String
 # with anything in this array
 var collision_exceptions := Array()
 
-# Reference to the ship this turret is attached to.
-var parent_ship:Ship
+# Reference to the object this turret is attached to.
+# It is usually a ship, but not always (as in a testing
+# scene and potentially if we want to put turrets on
+# asteroids or simply out and about).
+# This is used for adding in collision exceptions
+# to bullets fired.
+var parent_ship
 
 
-# ship should be the ship this turret is attached to
-static func new_turret(my_parent:TurretData, ship:Ship) -> Turret:
+# owner should be the ship this turret is attached to,
+# but sometimes we want to test a turret all by itself
+# or even attach a turret to things other than a ship.
+static func new_turret(my_parent:TurretData, owner) -> Turret:
 	var t := TURRET_SCENE.instantiate()
 	# Order matters for these next three lines of code
 	t.setup_turret_pre_tree(my_parent)
 	my_parent.add_child(t)
-	t.setup_turret_in_tree(my_parent, ship)
+	t.setup_turret_in_tree(my_parent, owner)
 	return t
 
 
@@ -105,7 +112,7 @@ func setup_turret_pre_tree(dat:TurretData) -> void:
 		GunSpawner.new_gun(dat.gun_type, dat.bullet_type, self)
 
 
-func setup_turret_in_tree(dat:TurretData, ship:Ship) -> void:
+func setup_turret_in_tree(dat:TurretData, p) -> void:
 	if turret_motion:
 		turret_motion.setup_values(dat)
 	
@@ -118,7 +125,7 @@ func setup_turret_in_tree(dat:TurretData, ship:Ship) -> void:
 	if target_selector:
 		target_selector.prefer_capital_ships = dat.prefer_capital_ships
 	
-	parent_ship = ship
+	parent_ship = p
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -147,9 +154,13 @@ func _physics_process(delta: float) -> void:
 				#print('\nturret seeing enemy ',collider)
 			#else:
 				#print('\nturret seeing bogey ',collider)
+		# Get collision exceptions
+		var exempt_colliders:Array = collision_exceptions
+		if 'collision_exceptions' in parent_ship:
+			exempt_colliders = collision_exceptions+parent_ship.collision_exceptions
 		# Fire ze guns!
 		for gun in guns:
-			gun.shoot(self, collision_exceptions+parent_ship.collision_exceptions, orientation_data.target)
+			gun.shoot(self, exempt_colliders, orientation_data.target)
 
 
 func _on_health_component_health_lost() -> void:

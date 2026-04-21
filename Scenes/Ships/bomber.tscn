@@ -53,6 +53,7 @@ missile_range = 2000.0
 
 [node name="MissileLauncher" parent="MissileLockGroup" unique_id=908886794 instance=ExtResource("7_f8b5m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -1.1)
+bullet_type = 0
 bullet = ExtResource("9_e1i0b")
 damage = 100.0
 bullet_speed = 80.0

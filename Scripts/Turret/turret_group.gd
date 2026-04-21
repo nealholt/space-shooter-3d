@@ -2,9 +2,14 @@ class_name TurretGroup extends Node
 
 # Put a turret on every child of this node!
 func _ready() -> void:
-	var p:Ship = get_parent()
+	# Get a reference to the parent. It SHOULD be a ship.
+	# Except that it won't be a ship in testing scenario
+	# and later on we might want to put turrets out on
+	# asteroids or where ever
+	var p = get_parent()
 	for child in get_children():
 		if child is TurretData:
+			# Pass along the ship reference to the new turret.
 			Turret.new_turret(child, p)
 
 

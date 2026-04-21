@@ -4,6 +4,7 @@
 
 [node name="Gun" type="Node3D" unique_id=1609728349]
 script = ExtResource("1_c3s1i")
+bullet_type = 2
 
 [node name="FiringRateTimer" type="Timer" parent="." unique_id=1013382359]
 wait_time = 0.2
