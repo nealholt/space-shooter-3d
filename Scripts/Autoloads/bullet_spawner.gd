@@ -14,14 +14,7 @@ extends Node
 # to load might have fixed the issue.
 var bullet_array:Array[PackedScene] = [
 	load("res://Scenes/Projectiles/missile.tscn"),
-	load("res://Scenes/Projectiles/shotgun_pellet.tscn"),
-	load("res://Scenes/Projectiles/bullet_ray_basic.tscn"),
-	load("res://Scenes/Projectiles/auto_seeking_missile.tscn"),
-	load("res://Scenes/Projectiles/laser_guided_missile.tscn"),
-	load("res://Scenes/Projectiles/proxy_fuse_bullet.tscn"),
-	load("res://Scenes/Projectiles/timed_fuse_bullet.tscn"),
-	load("res://Scenes/Projectiles/bullet_ray_big.tscn"),
-	load('res://Scenes/Projectiles/sparkle_trail_missile.tscn')
+	load("res://Scenes/Projectiles/shotgun_pellet.tscn")
 	]
 
 enum BULLET_TYPE {MISSILE, SHOTGUN_PELLET, BASIC_RAY, SEEKING_MISSILE, 

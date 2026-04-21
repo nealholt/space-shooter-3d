@@ -2,14 +2,12 @@
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
-[ext_resource type="PackedScene" uid="uid://bvbnfofl0d7vv" path="res://Scenes/Projectiles/missile.tscn" id="3_crlbv"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/MissileLock/missile_lock_group.tscn" id="4_vmlm7"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="7_vhcpa"]
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Assets/SoundEffects/lowFrequency_explosion_001.ogg" id="8_klb2b"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="9_1xly7"]
 [ext_resource type="AudioStream" uid="uid://cvrvs2a12nuqr" path="res://Assets/SoundEffects/whoosh_medium_001.ogg" id="9_ktweb"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="10_shexg"]
-[ext_resource type="PackedScene" uid="uid://dx7x4toieqaar" path="res://Scenes/Projectiles/auto_seeking_missile.tscn" id="11_a8ss5"]
 [ext_resource type="PackedScene" uid="uid://drm4t5i6exnhc" path="res://Assets/Guns/gatling_gun.tscn" id="11_kbwk7"]
 [ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Assets/Ships/fighter_chassis_diamond.tscn" id="12_a77x5"]
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Assets/Ships/engine_mesh_component.tscn" id="12_e20ac"]
@@ -18,11 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://dup57p4ygajr1" path="res://Scenes/Guns/laser_shotgun.tscn" id="15_ufo67"]
 [ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Assets/Guns/laser_beam.tscn" id="16_y2utm"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="18_g51j4"]
-[ext_resource type="PackedScene" uid="uid://behof1p47cflt" path="res://Scenes/Projectiles/proxy_fuse_bullet.tscn" id="18_lbswy"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="19_yfprc"]
-[ext_resource type="PackedScene" uid="uid://cbyb5ysj3umaf" path="res://Scenes/Projectiles/shotgun_pellet.tscn" id="20_de7w0"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="21_5ow11"]
-[ext_resource type="PackedScene" uid="uid://c3k8rcylsewn3" path="res://Scenes/Projectiles/laser_guided_missile.tscn" id="21_uelja"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Scenes/obstacle_detector.tscn" id="27_lbswy"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="29_3q0pi"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="29_w78kn"]
@@ -50,16 +45,16 @@ radial_segments = 16
 [sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
 size = Vector3(6, 2.3, 10.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lbswy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61srb"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("34_80okc")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_1j34j"]
+[sub_resource type="SphereMesh" id="SphereMesh_yie06"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_lbswy")
+material = SubResource("ShaderMaterial_61srb")
 
 [node name="Corvette" type="CharacterBody3D" unique_id=1134075911 groups=["damageable", "team member"]]
 collision_layer = 3
@@ -138,7 +133,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.5)
 npc_missile_lock = true
 
 [node name="MissileLauncher" parent="MissileLockGroup" unique_id=303582067 instance=ExtResource("2_2p718")]
-bullet = ExtResource("3_crlbv")
+bullet_type = 0
 damage = 50.0
 bullet_speed = 200.0
 fire_rate = 0.3
@@ -149,7 +144,7 @@ fire_rate = 0.3
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_1j34j")
+mesh = SubResource("SphereMesh_yie06")
 
 [node name="TargetReticles" parent="." unique_id=689096099 instance=ExtResource("18_g51j4")]
 target_text = "Corvette"
@@ -161,7 +156,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63, 0.14, -5)
 burst_total = 6
 burst_rate = 12.0
 bullet_type = 5
-bullet = ExtResource("18_lbswy")
 bullet_speed = 600.0
 fire_rate = 1.2
 spread_deg = 3.0
@@ -175,7 +169,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.132, 1.3)
 [node name="AutoSeekingMissileLauncher" parent="WeaponHandler" unique_id=472321920 instance=ExtResource("19_yfprc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.33626)
 bullet_type = 3
-bullet = ExtResource("11_a8ss5")
 bullet_speed = 150.0
 bullet_timeout = 3.0
 fire_rate = 3.0
@@ -199,7 +192,6 @@ visible = false
 
 [node name="LaserShotgun" parent="WeaponHandler" unique_id=1141187926 instance=ExtResource("15_ufo67")]
 bullet_type = 1
-bullet = ExtResource("20_de7w0")
 bullet_speed = 500.0
 fire_rate = 3.0
 spread_deg = 5.0
@@ -208,7 +200,6 @@ simultaneous_shots = 8
 [node name="LaserGuidedLauncher" parent="WeaponHandler" unique_id=265477221 instance=ExtResource("19_yfprc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.40851)
 bullet_type = 4
-bullet = ExtResource("21_uelja")
 bullet_speed = 200.0
 bullet_timeout = 5.0
 fire_rate = 2.0

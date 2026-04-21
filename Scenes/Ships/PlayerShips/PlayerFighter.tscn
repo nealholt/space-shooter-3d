@@ -25,10 +25,10 @@ max_health = 100.0
 npc_missile_lock = false
 
 [node name="MissileLauncher" parent="MissileLockGroup" index="7" unique_id=684312626]
+bullet_type = 0
 damage = 20.0
 
 [node name="Gun" parent="WeaponHandler" parent_id_path=PackedInt32Array(1131696451) index="0" unique_id=2138703467 node_paths=PackedStringArray("muzzle_flash")]
-bullet_type = 2
 bullet_speed = 1000.0
 fire_rate = 18.0
 spread_deg = 1.0

@@ -25,7 +25,6 @@ enum GUN_TYPE {GUN, BURST, HITSCAN, LASER, LASER_SHOT, NO_GUN}
 func new_gun(gt:GUN_TYPE, bt:BulletSpawner.BULLET_TYPE, my_parent:Node3D) -> Gun:
 	# Create a new gun
 	var g := gun_array[int(gt)].instantiate()
-	g.bullet = BulletSpawner.bullet_array[int(bt)]
 	g.bullet_type = bt
 	# Attach it to parent
 	my_parent.add_child(g)

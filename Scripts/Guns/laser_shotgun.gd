@@ -4,10 +4,6 @@ class_name LaserShotgun extends Gun
 # (by which I mean a hitscan shotgun)
 # like house of the dying sun's blunderbuss
 
-# IMPORTANT NOTE:
-# Shotgun pellets should be put in place of any other
-# bullet in the "bullet" packed scene.
-
 # Damage is dealt in the bulletbits so that
 # it looks a little more realistic. The
 # bulletbits never miss and will deal damage when
@@ -74,7 +70,7 @@ func shoot_actual() -> void:
 				0.0)
 		ray.force_raycast_update() # Check for collisions
 		# Create a bullet
-		pellet = bullet.instantiate()
+		pellet = BulletSpawner.new_bullet(BulletSpawner.BULLET_TYPE.SHOTGUN_PELLET)
 		# Add to team group
 		Global.add_to_team_group(pellet, ally_team)
 		pellet.set_data(data)
