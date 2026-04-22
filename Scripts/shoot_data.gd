@@ -1,9 +1,5 @@
 class_name ShootData
 
-# This is basically just a struct.
-# I got the idea from 
-# https://www.youtube.com/watch?v=y3faMdIb2II&t=125s
-
 var target:Node3D # Used for seeking missiles
 var gun:Gun # For use positioning and orienting the bullet
 var shooter # Identifies shooter for kill attribution
@@ -20,3 +16,19 @@ var aim_assist:bool = false
 # This projectile should ignore collisions with anything
 # in this array
 var collision_exceptions := Array()
+
+# Player can shoot without a valid target, so this should
+# only be used for NPCs
+func can_shoot() -> bool:
+	return is_instance_valid(gun) and is_instance_valid(target)
+
+func shoot() -> void:
+	gun.shoot(self)
+
+func determine_aim_assist(simultaneous_shots:int) -> void:
+	# Only use aim assist if it's set up on the shooter
+	# and the target reference is valid
+	# AND the gun only fires one bullet at a time.
+	# Spread shot weapons should not use aim assist.
+	if "aim_assist" in shooter and shooter.aim_assist and simultaneous_shots == 1 and is_instance_valid(target):
+		aim_assist = shooter.aim_assist.use_aim_assist(self)

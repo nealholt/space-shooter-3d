@@ -126,11 +126,15 @@ func select_target(targeter:Node3D) -> void:
 	target = target_selector.get_target(targeter)
 
 
-func shoot(shooter, delta:float, collision_exceptions:Array) -> void:
-	var gun = shooter.get_current_gun()
+func shoot(shootDat:ShootData, delta:float) -> void:
+	var shooter = shootDat.shooter
+	shootDat.gun = shooter.get_current_gun()
+	shootDat.target = target
 	# Decide whether or not to fire
-	if gun and target and is_instance_valid(target) and movement_profile.orientation_data.dist_sqd < gun.range_sqd and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < shooting_angle:
-		gun.shoot(shooter, collision_exceptions, target)
+	if shootDat.can_shoot() and \
+	movement_profile.orientation_data.dist_sqd < shootDat.gun.range_sqd \
+	and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < shooting_angle:
+		shootDat.shoot()
 	if shooter.missile_lock:
 		shooter.missile_lock.update(shooter, delta)
 

@@ -141,7 +141,7 @@ func select_target_from_mouse(targeter:Ship) -> void:
 		# and merely modulates the reticle color (for now)
 		target.set_targeted(targeter, true)
 
-func shoot(_shooter:Ship, _delta:float, _collision_exceptions:Array) -> void:
+func shoot(shootDat:ShootData, _delta:float) -> void:
 	printerr('For the near future, shoot in character_body_control_parent should be overriden by child class.')
 
 func misc_actions(_actor:Ship) -> void:

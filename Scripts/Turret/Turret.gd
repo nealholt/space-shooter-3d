@@ -160,7 +160,12 @@ func _physics_process(delta: float) -> void:
 			exempt_colliders = collision_exceptions+parent_ship.collision_exceptions
 		# Fire ze guns!
 		for gun in guns:
-			gun.shoot(self, exempt_colliders, orientation_data.target)
+			var sd := ShootData.new()
+			sd.shooter = self
+			sd.gun = gun
+			sd.target = orientation_data.target
+			sd.collision_exceptions = exempt_colliders
+			sd.shoot()
 
 
 func _on_health_component_health_lost() -> void:

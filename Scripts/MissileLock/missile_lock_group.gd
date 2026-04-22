@@ -272,8 +272,15 @@ func launch(targeter:Node3D) -> void:
 	# Fire zee missile! (For now, don't let npcs use quick launch)
 	# I added the if statement here after getting an error when I
 	# launched a missile just as a target was getting queue_freed.
-	if is_instance_valid(target):
-		missile_launcher.shoot(targeter, parent_ship.collision_exceptions, target, is_quick_launch and !npc_missile_lock)
+	if !is_instance_valid(target):
+		return
+	var sd:=ShootData.new()
+	sd.shooter = targeter
+	sd.gun = missile_launcher
+	sd.target = target
+	sd.collision_exceptions = parent_ship.collision_exceptions
+	sd.super_powered = is_quick_launch and !npc_missile_lock
+	sd.shoot()
 
 
 func acquire_lock(targeter:Node3D) -> void:

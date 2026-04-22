@@ -159,15 +159,19 @@ func _ready() -> void:
 
 
 func _physics_process(delta):
-	if controller:
-		# Move and turn
-		controller.move_and_turn(self, delta)
-		# Select target
-		controller.select_target(self)
-		# Handle shooting of guns and missiles
-		controller.shoot(self, delta, collision_exceptions)
-		# Miscellaneous action (for now just switch weapon)
-		controller.misc_actions(self)
+	if !controller:
+		return
+	# Move and turn
+	controller.move_and_turn(self, delta)
+	# Select target
+	controller.select_target(self)
+	# Handle shooting of guns and missiles
+	var sd:=ShootData.new()
+	sd.shooter = self
+	sd.collision_exceptions = collision_exceptions
+	controller.shoot(sd, delta)
+	# Miscellaneous action (for now just switch weapon)
+	controller.misc_actions(self)
 
 
 func get_current_gun() -> Gun:

@@ -107,23 +107,24 @@ func handle_engine_audio(mover) -> void:
 
 
 # Override parent class function
-func shoot(shooter, delta:float, collision_exceptions:Array) -> void:
+func shoot(shootDat:ShootData, delta:float) -> void:
 	if is_dead:
 		return
 	
-	# Aim assist audio cue
-	if shooter.aim_assist and target and is_instance_valid(target):
-		shooter.aim_assist.use_aim_assist(
-			shooter, target,
-			shooter.weapon_handler.get_bullet_speed())
+	var shooter = shootDat.shooter
+	if is_instance_valid(target):
+		shootDat.target = target
+	shootDat.bullet_speed = shooter.weapon_handler.get_bullet_speed()
+	# Aim assist
+	shootDat.determine_aim_assist(1)
 	
 	# Trigger pulled. Try to shoot.
 	if shooter.weapon_handler.is_automatic():
 		if im.shoot_pressed:
-			shooter.weapon_handler.shoot(shooter, collision_exceptions, target)
+			shooter.weapon_handler.shoot(shootDat)
 	else: # Semiautomatic
 		if im.shoot_just_pressed:
-			shooter.weapon_handler.shoot(shooter, collision_exceptions, target)
+			shooter.weapon_handler.shoot(shootDat)
 	
 	# Missile lock
 	if shooter.missile_lock:
@@ -134,8 +135,8 @@ func shoot(shooter, delta:float, collision_exceptions:Array) -> void:
 		if im.retarget_just_released:
 			shooter.missile_lock.attempt_to_fire_missile(shooter)
 		shooter.missile_lock.update(shooter, delta)
-		# Without this next code, autoseeking missile
-		# won't work.
+		# This next part is needed to make autoseeking
+		# missiles work.
 		if is_instance_valid(shooter.missile_lock.target):
 			target = shooter.missile_lock.target
 

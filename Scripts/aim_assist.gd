@@ -41,8 +41,11 @@ func set_assist_limit_deg(angle_assist_limit_deg:float) -> void:
 	angle_assist_limit = angle_assist_limit_deg
 	angle_assist_limit_radians = deg_to_rad(angle_assist_limit)
 
-func use_aim_assist(shooter:Node3D, target:Node3D,
-					bullet_speed:float) -> bool:
+
+func use_aim_assist(sd:ShootData) -> bool:
+	var shooter:Node3D = sd.shooter
+	var target:Node3D = sd.target
+	var bullet_speed:float = sd.bullet_speed
 	# If shooter is the player and mouse controls are in use
 	# then this needs to be handled differently;
 	# do_use_aim_assist is true if angle from where mouse / camera
