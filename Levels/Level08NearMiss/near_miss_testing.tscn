@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://dct8roiqo6fdl" path="res://Levels/Level08NearMiss/bullet_spawner_testing.gd" id="2_00mhe"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_wmf1n"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="3_fyqj6"]
-[ext_resource type="PackedScene" uid="uid://blfrt7ndbygg7" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="6_wk44f"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="8_hmejg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vaoif"]
@@ -21,16 +20,16 @@ sky = SubResource("Sky_1ol1g")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_px3ph"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_14uj3"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_wmf1n")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_nym7l"]
+[sub_resource type="SphereMesh" id="SphereMesh_wk44f"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_px3ph")
+material = SubResource("ShaderMaterial_14uj3")
 
 [node name="NearMissTesting" type="Node3D" unique_id=1277549144]
 script = ExtResource("1_4q2ny")
@@ -45,7 +44,7 @@ environment = SubResource("Environment_jia05")
 [node name="Player" parent="." unique_id=2073031264 instance=ExtResource("1_ba5yk")]
 
 [node name="FresnelAura" parent="Player/Shield" parent_id_path=PackedInt32Array(2073031264, 2025902563) index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_nym7l")
+mesh = SubResource("SphereMesh_wk44f")
 
 [node name="GunNode3D" type="Node3D" parent="Player" unique_id=2133777041]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.85873, 0, -177.052)
@@ -53,7 +52,6 @@ script = ExtResource("2_00mhe")
 
 [node name="Gun" parent="Player/GunNode3D" unique_id=1302134213 instance=ExtResource("3_fyqj6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.273674, 0, 0)
-bullet = ExtResource("6_wk44f")
 bullet_speed = 400.0
 fire_rate = 20.0
 automatic = false

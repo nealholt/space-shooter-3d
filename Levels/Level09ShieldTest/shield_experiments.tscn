@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="1_8h41v"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_66tts"]
-[ext_resource type="PackedScene" uid="uid://blfrt7ndbygg7" path="res://Scenes/Projectiles/bullet_ray_basic.tscn" id="3_wvpem"]
+[ext_resource type="Script" uid="uid://ruhx4kxvti8k" path="res://Levels/Level09ShieldTest/shield_test_bullet_spawner.gd" id="3_amx1s"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="4_66tts"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oit57"]
@@ -47,26 +47,7 @@ transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 max_health = 3
 
 [node name="BulletGroup" type="Node3D" parent="." unique_id=38151820]
-
-[node name="BulletRayBasic" parent="BulletGroup" unique_id=294693303 instance=ExtResource("3_wvpem")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.326, 0, 10.85)
-speed = 5.0
-time_out = 40.0
-
-[node name="BulletRayBasic2" parent="BulletGroup" unique_id=295374082 instance=ExtResource("3_wvpem")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -37)
-speed = 5.0
-time_out = 40.0
-
-[node name="BulletRayBasic3" parent="BulletGroup" unique_id=156468888 instance=ExtResource("3_wvpem")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -13.78, 0)
-speed = 5.0
-time_out = 40.0
-
-[node name="BulletRayBasic4" parent="BulletGroup" unique_id=2084729605 instance=ExtResource("3_wvpem")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18.11, 0, 0)
-speed = 5.0
-time_out = 40.0
+script = ExtResource("3_amx1s")
 
 [node name="CameraGroup" parent="." unique_id=1967736326 instance=ExtResource("4_66tts")]
 transform = Transform3D(-0.54629207, 0, -0.8375948, 0, 1, 0, 0.8375948, 0, -0.54629207, 12, 0, 3.584043)
