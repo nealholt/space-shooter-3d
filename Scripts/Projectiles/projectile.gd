@@ -1,6 +1,5 @@
 class_name Projectile extends Node3D
-# Bullets and missiles and all projectiles inherit
-# from this class.
+# Projectiles includes bullets and missiles and laser bolts
 
 # You can add a Raycast3D or an Area3D as a child of
 # this node and either one will automatically be used
@@ -22,8 +21,6 @@ var hit_box_component:HitBoxComponent
 # detect collisions.
 var ray:RayCastForProjectiles
 
-# Damage dealt to target
-var damage:float = 1.0
 # Duration before the projectile expires
 @export var time_out:float = 2.0 #seconds
 
@@ -56,10 +53,6 @@ var wrap_up_timer:Timer
 # cause a corkscrew pattern, but it doesn't
 # seem to work.
 #@export var pitch_amount:float = 10.0
-
-# This projectile should ignore collisions with anything
-# in this array
-var collision_exceptions := Array()
 
 # Only set this if a damage-dealing explosion
 # should go off when the bullet hits something.
@@ -111,7 +104,6 @@ func _ready() -> void:
 # a variety of bullet attributes.
 func set_data(dat:ShootData) -> void:
 	data = dat
-	damage = dat.damage
 	speed = dat.bullet_speed
 	time_out = dat.bullet_timeout
 	# Position projectile, but defer aiming.
@@ -123,7 +115,7 @@ func set_data(dat:ShootData) -> void:
 	# 'Super powered' doubles turn rate (which is done
 	# in the controller) and 10xs damage
 	if dat.super_powered:
-		damage *= 10.0
+		data.damage *= 10.0
 	# Set target for seeking munitions
 	if controller:
 		controller.set_data(dat)
@@ -133,8 +125,6 @@ func set_data(dat:ShootData) -> void:
 	# have a hit_box_component, but some missiles do.
 	if hit_box_component:
 		hit_box_component.add_damage_exception(dat.shooter)
-	# Add collision exceptions
-	collision_exceptions = dat.collision_exceptions
 	# Override target in order to set target to be
 	# centermost enemy.
 	if autotarget:
@@ -270,19 +260,14 @@ func damage_and_die(body, collision_point=null) -> void:
 	# Stop early for other collision exceptions.
 	# This will be things like the shooter's hitbox
 	# and shields.
-	if collision_exceptions.has(body):
+	if data.collision_exceptions.has(body):
 		return
 	# Play feedback for player if relevant
 	Global.player_feedback(body, data)
 	# Damage what was hit
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
 	if body.is_in_group("damageable"):
-		# In rare circumstances (such as testing) there
-		# won't be a shooter. We need to work around that.
-		var shooter = null
-		if data:
-			shooter = data.shooter
-		body.damage(damage, shooter)
+		body.damage(data.damage, data.shooter)
 	# Make a spark at collision point
 	if collision_point:
 		if body.is_in_group("shield"):
@@ -421,7 +406,7 @@ func explode_with_damage() -> void:
 	Global.main_scene.main_3d.add_child(explosion)
 	# Set explosion's position and damage
 	explosion.global_position = global_position
-	explosion.damage_amt = damage
+	explosion.damage_amt = data.damage
 	# I got an invalid assignment on 
 	# explosion.shooter = data.shooter
 	# so I slapped on this if to try to avoid it.

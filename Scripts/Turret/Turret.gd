@@ -43,15 +43,15 @@ var collision_exceptions := Array()
 var parent_ship
 
 
-# owner should be the ship this turret is attached to,
+# 'maybe_ship' should be the ship this turret is attached to,
 # but sometimes we want to test a turret all by itself
 # or even attach a turret to things other than a ship.
-static func new_turret(my_parent:TurretData, owner) -> Turret:
+static func new_turret(my_parent:TurretData, maybe_ship) -> Turret:
 	var t := TURRET_SCENE.instantiate()
 	# Order matters for these next three lines of code
 	t.setup_turret_pre_tree(my_parent)
 	my_parent.add_child(t)
-	t.setup_turret_in_tree(my_parent, owner)
+	t.setup_turret_in_tree(my_parent, maybe_ship)
 	return t
 
 

@@ -33,7 +33,7 @@ func _on_timer_timeout() -> void:
 	if damagee != null:
 		VfxManager.play_at_angle(bullet_hole_decal, target_position, collision_normal)
 		if damagee.is_in_group("damageable"):
-			damagee.damage(damage, data.shooter)
+			damagee.damage(data.damage, data.shooter)
 		# Play feedback for player if relevant
 		Global.player_feedback(damagee, data)
 		damagee = null
