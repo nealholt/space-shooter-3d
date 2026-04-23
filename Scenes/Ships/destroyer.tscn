@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_2su5o"]
 [ext_resource type="PackedScene" uid="uid://cea1hyirvxk5n" path="res://Assets/Models/destroyer.tscn" id="2_c4x8n"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_2fe14"]
-[ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="4_mjmit"]
+[ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/Turret/turret_group.tscn" id="4_mjmit"]
 [ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_1ts7h"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_i0xpl"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="7_c4x8n"]

@@ -13,6 +13,12 @@ var obstacle_detector:ObstacleDetector
 var shield:Shield
 var weapon_handler:WeaponHandler
 
+# Previously I used a separate scene that inherited from
+# Ship for the player. I'd like to not do that. Setting
+# this variable to true should be all you need to make
+# this ship player-controlled.
+@export var is_player := false
+
 # For testing purposes, I want some ships to just sit there
 # and do nothing. This is easy for fighters and corvettes
 # because by default they do not have a controller attached
@@ -102,6 +108,14 @@ var collision_exceptions := Array()
 # little read, but acknowledges at the bottom
 # that it's best for simulation-type games.
 func _ready() -> void:
+	# Set this up differently if it's the player
+	if is_player:
+		# Attach a camera group
+		var cam_group_scene:PackedScene = load("res://Scenes/camera_group.tscn")
+		camera_group = cam_group_scene.instantiate()
+		add_child(camera_group)
+		#camera_group = CameraGroup.new_camera_group(self)
+		pass # TODO LEFT OFF HERE
 	# Search through children for various components
 	# and save a reference to them.
 	for child in get_children():
@@ -109,8 +123,6 @@ func _ready() -> void:
 			aim_assist = child
 		elif child is BurningTrail:
 			burning_trail = child
-		elif child is CameraGroup:
-			camera_group = child
 		elif child is CharacterBodyControlParent and !disable_for_testing:
 			controller = child
 			# Pass export var values to controller

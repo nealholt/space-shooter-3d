@@ -2,6 +2,16 @@ class_name CameraGroup extends Node3D
 
 # https://www.reddit.com/r/godot/comments/18w6prn/camera_considerations/
 
+# When I try to use this const, I get an error with the
+# turret_motion_component. This can occur with cyclic
+# dependencies, but since turret_motion_component
+# doesn't have ANY dependencies, that that's not the issue.
+# These two links seem relevant, but don't address the issue I'm
+# having.
+# https://forum.godotengine.org/t/parse-error-referenced-non-existent-resource/95356/6
+# https://github.com/godotengine/godot/issues/105021
+#const CAMERA_GROUP_SCENE:PackedScene = preload("res://Scenes/camera_group.tscn")
+
 # Controls for looking at target
 @export var elevation_speed_deg:float = 100.0
 @export var rotation_speed_deg:float = 100.0
@@ -58,6 +68,19 @@ const SPEED = 50.0
 var mouse_motion:=Vector2.ZERO
 var velocity:=Vector3.ZERO
 
+
+# When I try to use this static func (with the preload above)
+# I get an error with the turret_motion_component. This can
+# occur with cyclic dependencies, but since turret_motion_component
+# doesn't have ANY dependencies, that that's not the issue.
+# These two links seem relevant, but don't address the issue I'm
+# having.
+# https://forum.godotengine.org/t/parse-error-referenced-non-existent-resource/95356/6
+# https://github.com/godotengine/godot/issues/105021
+#static func new_camera_group(my_parent:Node3D) -> CameraGroup:
+	#var cg := CAMERA_GROUP_SCENE.instantiate()
+	#my_parent.add_child(cg)
+	#return cg
 
 
 func _ready() -> void:

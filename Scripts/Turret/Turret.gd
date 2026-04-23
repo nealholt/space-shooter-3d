@@ -1,6 +1,6 @@
 class_name Turret extends Node3D
 
-const TURRET_SCENE:PackedScene = preload("res://Scenes/turret.tscn")
+const TURRET_SCENE:PackedScene = preload("res://Scenes/Turret/turret.tscn")
 
 @onready var line_of_sight := $TurretModel/Body/Head/RayCast3D
 

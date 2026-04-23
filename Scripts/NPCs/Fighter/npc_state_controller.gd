@@ -126,6 +126,8 @@ func select_target(targeter:Node3D) -> void:
 	target = target_selector.get_target(targeter)
 
 
+# This function is identical in npc_capital_ship_controller
+# That's bad.
 func shoot(shootDat:ShootData, delta:float) -> void:
 	var shooter = shootDat.shooter
 	shootDat.gun = shooter.get_current_gun()

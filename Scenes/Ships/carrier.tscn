@@ -1,9 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://diilp2vvcvj53"]
+[gd_scene format=3 uid="uid://diilp2vvcvj53"]
 
 [ext_resource type="PackedScene" uid="uid://du1bwxbrh62at" path="res://Assets/Ships/carrier_chassis.tscn" id="1_67lmr"]
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_isj6t"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_r2d5f"]
-[ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="4_h1ncn"]
+[ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/Turret/turret_group.tscn" id="4_h1ncn"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_cyiqs"]
 [ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_pp34p"]
 [ext_resource type="PackedScene" uid="uid://cbhoikklwgc0c" path="res://Scenes/hangar.tscn" id="7_db1yb"]

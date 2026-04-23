@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://da5y8fkeokhyx"]
+[gd_scene format=3 uid="uid://da5y8fkeokhyx"]
 
 [ext_resource type="Script" uid="uid://ca1xpxadpwp5u" path="res://Levels/Level06TurretTest/TestCam.gd" id="1_qvatm"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_t2ssg"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_hpnlp"]
 [ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="6_7f63n"]
-[ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/turret_group.tscn" id="7_iacnd"]
+[ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/Turret/turret_group.tscn" id="7_iacnd"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="8_hu0ry"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gyuqi"]
