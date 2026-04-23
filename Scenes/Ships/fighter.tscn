@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_dn8ab"]
+[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="3_g3b86"]
 [ext_resource type="PackedScene" uid="uid://hpvkerb8hmkp" path="res://Assets/Models/fighter_tri.tscn" id="4_05dih"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="4_57m73"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="4_dhpb0"]
@@ -29,6 +30,11 @@ finalExplosion = 8
 
 [node name="AimAssist" parent="." unique_id=936755743 instance=ExtResource("19_xjc2u")]
 angle_assist_limit = 10.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" unique_id=1480253422]
+stream = ExtResource("3_g3b86")
+volume_db = -23.0
+pitch_scale = 0.5
 
 [node name="BurningTrail" parent="." unique_id=1537818326 instance=ExtResource("14_4fwow")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

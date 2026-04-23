@@ -8,27 +8,20 @@
 [ext_resource type="Texture2D" uid="uid://b7foqk2u8ykv3" path="res://Assets/Images/crosshair054.png" id="5_aeijj"]
 [ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Guns/laser_gun.tscn" id="6_itfr8"]
 [ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="8_m18g3"]
-[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="8_vlve7"]
-[ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Scenes/engine_audio_visuals.tscn" id="10_t22nh"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bw4lv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eoanq"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_jvl32")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_nksoy"]
+[sub_resource type="SphereMesh" id="SphereMesh_ks3mt"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_bw4lv")
+material = SubResource("ShaderMaterial_eoanq")
 
 [node name="Corvette" unique_id=1087943080 instance=ExtResource("1_63oik")]
 is_player = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" parent_id_path=PackedInt32Array(828639523) index="0" unique_id=991184975]
-stream = ExtResource("8_vlve7")
-volume_db = -23.0
-pitch_scale = 0.5
 
 [node name="HealthComponent" parent="." index="5" unique_id=778683298]
 max_health = 100.0
@@ -37,7 +30,7 @@ max_health = 100.0
 npc_missile_lock = false
 
 [node name="FresnelAura" parent="Shield" parent_id_path=PackedInt32Array(2025902563) index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_nksoy")
+mesh = SubResource("SphereMesh_ks3mt")
 
 [node name="TextureRect" type="TextureRect" parent="WeaponHandler/GatlingGun" parent_id_path=PackedInt32Array(1123320670) index="3" unique_id=1428428271]
 self_modulate = Color(1, 1, 1, 0.607843)
@@ -69,8 +62,6 @@ texture = ExtResource("5_aeijj")
 [node name="LaserGun" parent="WeaponHandler" parent_id_path=PackedInt32Array(370825666) index="5" unique_id=1566657459 instance=ExtResource("6_itfr8")]
 
 [node name="BallisticMovementV3" parent="." index="12" unique_id=1498286754 instance=ExtResource("8_m18g3")]
-
-[node name="EngineAudioVisuals" parent="." index="13" unique_id=1254817710 instance=ExtResource("10_t22nh")]
 
 [editable path="Shield"]
 [editable path="WeaponHandler/GatlingGun/GunModel"]

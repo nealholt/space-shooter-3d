@@ -108,14 +108,6 @@ var collision_exceptions := Array()
 # little read, but acknowledges at the bottom
 # that it's best for simulation-type games.
 func _ready() -> void:
-	# Set this up differently if it's the player
-	if is_player:
-		# Attach a camera group
-		var cam_group_scene:PackedScene = load("res://Scenes/Camera/camera_group.tscn")
-		camera_group = cam_group_scene.instantiate()
-		add_child(camera_group)
-		#camera_group = CameraGroup.new_camera_group(self)
-		pass # TODO LEFT OFF HERE
 	# Search through children for various components
 	# and save a reference to them.
 	for child in get_children():
@@ -165,6 +157,29 @@ func _ready() -> void:
 	# but only if this is an NPC ship
 	if controller and obstacle_detector and controller is NPCStateMachine:
 		controller.set_obstacle_detector(obstacle_detector)
+	# Set this ship up differently if it's the player
+	if is_player:
+		# Attach a camera group
+		var cam_group_scene:PackedScene = load("res://Scenes/Camera/camera_group.tscn")
+		camera_group = cam_group_scene.instantiate()
+		add_child(camera_group)
+		# Attach engine audio visuals
+		var engAV_scene:PackedScene = load("res://Scenes/engine_audio_visuals.tscn")
+		engineAV = engAV_scene.instantiate()
+		add_child(engineAV)
+	else: # This is not a player
+		# Remove children of the aim assist. This should just
+		# be removing one AudioStreamPlayer
+		if aim_assist and 0 < aim_assist.get_child_count():
+			# Error check
+			if aim_assist.get_child_count() != 1:
+				push_error('Why does aim assist have multiple children? Should be at most one audio player')
+			var aim_child = aim_assist.get_child(0)
+			# Error check
+			if !(aim_child is AudioStreamPlayer):
+				push_error('Aim assist\'s only child should be audio player')
+			aim_child.queue_free()
+		pass # TODO LEFT OFF HERE
 	# Add self (CharacterBody3D) to collision exceptions so
 	# bullets don't hit self.
 	collision_exceptions.push_back(self)

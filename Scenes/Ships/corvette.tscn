@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
+[ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="3_yie06"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/MissileLock/missile_lock_group.tscn" id="4_vmlm7"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="7_vhcpa"]
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Assets/SoundEffects/lowFrequency_explosion_001.ogg" id="8_klb2b"]
@@ -45,16 +46,16 @@ radial_segments = 16
 [sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
 size = Vector3(6, 2.3, 10.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_61srb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_38b6n"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("34_80okc")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_yie06"]
+[sub_resource type="SphereMesh" id="SphereMesh_mbdv2"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_61srb")
+material = SubResource("ShaderMaterial_38b6n")
 
 [node name="Corvette" type="CharacterBody3D" unique_id=1134075911 groups=["damageable", "team member"]]
 collision_layer = 3
@@ -68,6 +69,11 @@ finalExplosion = 8
 
 [node name="AimAssist" parent="." unique_id=828639523 instance=ExtResource("29_3q0pi")]
 angle_assist_limit = 10.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" unique_id=478810736]
+stream = ExtResource("3_yie06")
+volume_db = -23.0
+pitch_scale = 0.5
 
 [node name="BurningTrail" parent="." unique_id=1537826961 instance=ExtResource("29_w78kn")]
 
@@ -144,7 +150,7 @@ fire_rate = 0.3
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_yie06")
+mesh = SubResource("SphereMesh_mbdv2")
 
 [node name="TargetReticles" parent="." unique_id=689096099 instance=ExtResource("18_g51j4")]
 target_text = "Corvette"
