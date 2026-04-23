@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dtxyvqvpd4khl"]
+
+[ext_resource type="Script" uid="uid://cl5ajt3gimlhb" path="res://Scripts/Camera/camera_spectator.gd" id="1_kemxa"]
+
+[node name="CameraSpectator" type="Node3D"]
+script = ExtResource("1_kemxa")
+
+[node name="Camera3D" type="Camera3D" parent="."]

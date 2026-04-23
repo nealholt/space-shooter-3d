@@ -1,6 +1,6 @@
 class_name Shield extends Node3D
 
-const SHIELD_SCENE:PackedScene = preload("res://Scenes/shield.tscn")
+const SHIELD_SCENE:PackedScene = preload("res://Scenes/Shield/shield.tscn")
 
 # NOTE: Under the FresnelAura mesh, under Resource,
 # Set "Local to Scene" to "On"

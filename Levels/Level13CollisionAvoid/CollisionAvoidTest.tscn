@@ -1,9 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://c0xrugrnh82s5"]
+[gd_scene format=3 uid="uid://c0xrugrnh82s5"]
 
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_3kycw"]
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="2_4w2qt"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="4_ero3n"]
-[ext_resource type="PackedScene" uid="uid://dtxyvqvpd4khl" path="res://Scenes/camera_spectator.tscn" id="5_3l0om"]
+[ext_resource type="PackedScene" uid="uid://dtxyvqvpd4khl" path="res://Scenes/Camera/camera_spectator.tscn" id="5_3l0om"]
 [ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="5_puqp7"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="7_p5kkl"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="8_cm862"]

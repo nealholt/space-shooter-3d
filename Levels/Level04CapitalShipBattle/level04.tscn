@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_6xial"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_0liob"]
-[ext_resource type="PackedScene" uid="uid://dtxyvqvpd4khl" path="res://Scenes/camera_spectator.tscn" id="2_25llv"]
+[ext_resource type="PackedScene" uid="uid://dtxyvqvpd4khl" path="res://Scenes/Camera/camera_spectator.tscn" id="2_25llv"]
 [ext_resource type="Texture2D" uid="uid://creoqhif83mdb" path="res://Assets/Skyboxes/moon_with_stars.png" id="2_ci3xu"]
 [ext_resource type="PackedScene" uid="uid://byb8ya6fryjw0" path="res://Scenes/Ships/frigate.tscn" id="5_cn33r"]
 [ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Scenes/Ships/destroyer.tscn" id="6_8xsvq"]
-[ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="7_3dyh5"]
-[ext_resource type="PackedScene" uid="uid://i7qxmq7hwdhc" path="res://Scenes/shield_generator.tscn" id="8_hv5oy"]
+[ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/Shield/shield.tscn" id="7_3dyh5"]
+[ext_resource type="PackedScene" uid="uid://i7qxmq7hwdhc" path="res://Scenes/Shield/shield_generator.tscn" id="8_hv5oy"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qcl2j"]
 panorama = ExtResource("2_ci3xu")

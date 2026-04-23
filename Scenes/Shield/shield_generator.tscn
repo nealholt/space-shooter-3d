@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://i7qxmq7hwdhc"]
 
 [ext_resource type="Texture2D" uid="uid://doe5cj2wsyysc" path="res://Assets/ParticleImages/spark_01.png" id="1_3yt4p"]
-[ext_resource type="Script" uid="uid://qdnnawja4h08" path="res://Scripts/shield_generator.gd" id="1_dxfth"]
+[ext_resource type="Script" uid="uid://qdnnawja4h08" path="res://Scripts/Shield/shield_generator.gd" id="1_dxfth"]
 [ext_resource type="Texture2D" uid="uid://bwfyyi3q8raw4" path="res://Assets/ParticleImages/spark_02.png" id="3_4nkei"]
 [ext_resource type="Texture2D" uid="uid://pa25y2mrbjiq" path="res://Assets/ParticleImages/spark_03.png" id="4_4nkei"]
 [ext_resource type="ArrayMesh" uid="uid://dmovo5tcqpbhn" path="res://Assets/Models/muzzle_cone01.obj" id="4_cvrrl"]

@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4j6tlub3lnw4"]
+[gd_scene format=3 uid="uid://c4j6tlub3lnw4"]
 
-[ext_resource type="Script" uid="uid://dv8m6n2u8qec7" path="res://Scripts/custom_camera.gd" id="1_tgeqx"]
+[ext_resource type="Script" uid="uid://dv8m6n2u8qec7" path="res://Scripts/Camera/custom_camera.gd" id="1_tgeqx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wtdqg"]
 radius = 15.0

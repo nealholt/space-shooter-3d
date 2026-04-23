@@ -10,7 +10,7 @@ class_name CameraGroup extends Node3D
 # having.
 # https://forum.godotengine.org/t/parse-error-referenced-non-existent-resource/95356/6
 # https://github.com/godotengine/godot/issues/105021
-#const CAMERA_GROUP_SCENE:PackedScene = preload("res://Scenes/camera_group.tscn")
+#const CAMERA_GROUP_SCENE:PackedScene = preload("res://Scenes/Camera/camera_group.tscn")
 
 # Controls for looking at target
 @export var elevation_speed_deg:float = 100.0

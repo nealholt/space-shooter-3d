@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dct8roiqo6fdl" path="res://Levels/Level08NearMiss/bullet_spawner_testing.gd" id="2_00mhe"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="2_wmf1n"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="3_fyqj6"]
-[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="8_hmejg"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Camera/camera_group.tscn" id="8_hmejg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vaoif"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)

@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cj8oysen3h0g8"]
 
-[ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/shield.tscn" id="1_8h41v"]
+[ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/Shield/shield.tscn" id="1_8h41v"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_66tts"]
 [ext_resource type="Script" uid="uid://ruhx4kxvti8k" path="res://Levels/Level09ShieldTest/shield_test_bullet_spawner.gd" id="3_amx1s"]
-[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/camera_group.tscn" id="4_66tts"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Camera/camera_group.tscn" id="4_66tts"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oit57"]
 sky_top_color = Color(0.160784, 0.117647, 0.388235, 1)

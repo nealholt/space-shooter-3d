@@ -111,7 +111,7 @@ func _ready() -> void:
 	# Set this up differently if it's the player
 	if is_player:
 		# Attach a camera group
-		var cam_group_scene:PackedScene = load("res://Scenes/camera_group.tscn")
+		var cam_group_scene:PackedScene = load("res://Scenes/Camera/camera_group.tscn")
 		camera_group = cam_group_scene.instantiate()
 		add_child(camera_group)
 		#camera_group = CameraGroup.new_camera_group(self)
