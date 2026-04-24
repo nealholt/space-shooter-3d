@@ -49,4 +49,6 @@ func did_collide(proj:Projectile, delta:float) -> bool:
 	# Ricochet
 	elif does_ricochet:
 		proj.ricochet(delta)
+	else: # Body is not damageable, but projectile should die anyway
+		proj.die_without_damaging(body, get_collision_point())
 	return true # Did collide with something.

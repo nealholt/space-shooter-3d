@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="4_dhpb0"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="5_1xytm"]
 [ext_resource type="PackedScene" uid="uid://clfeojpa5dckh" path="res://Scenes/MissileLock/missile_lock_timeout.tscn" id="10_g3b86"]
+[ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="13_yu6ls"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="14_4fwow"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Scenes/obstacle_detector.tscn" id="14_05dih"]
+[ext_resource type="PackedScene" uid="uid://do50y2jdho5iq" path="res://Scenes/vfx/MuzzleFlash/muzzle_flash_green_monster.tscn" id="14_uh0vy"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="15_kfjug"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/MissileLock/missile_lock_group.tscn" id="17_563f5"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="19_xjc2u"]
@@ -61,7 +63,6 @@ outline_size = 4
 max_health = 20
 
 [node name="MissileLockGroup" parent="." unique_id=756556192 instance=ExtResource("17_563f5")]
-npc_missile_lock = true
 missile_range = 1000.0
 
 [node name="MissileLauncher" parent="MissileLockGroup" unique_id=684312626 instance=ExtResource("4_57m73")]
@@ -80,7 +81,7 @@ target_text = "Fighter"
 [node name="WeaponHandler" parent="." unique_id=1131696451 instance=ExtResource("4_dhpb0")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Gun" parent="WeaponHandler" unique_id=2138703467 instance=ExtResource("4_57m73")]
+[node name="Gun" parent="WeaponHandler" unique_id=2138703467 node_paths=PackedStringArray("muzzle_flash") instance=ExtResource("4_57m73")]
 transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -3.5)
 bullet_speed = 600.0
 fire_rate = 8.0
@@ -88,6 +89,16 @@ spread_deg = 2.0
 fire_sound = 0
 reload_sound = 2
 magazine_size = 20
+muzzle_flash = NodePath("MuzzleFlashGreenMonster")
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHandler/Gun" unique_id=811588361]
+self_modulate = Color(1, 1, 1, 0.607843)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("13_yu6ls")
+
+[node name="MuzzleFlashGreenMonster" parent="WeaponHandler/Gun" unique_id=439744858 instance=ExtResource("14_uh0vy")]
+transform = Transform3D(-1, 8.3518774e-23, -1.509958e-07, 5.051895e-16, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
 
 [node name="ObstacleDetector" parent="." unique_id=2089579086 instance=ExtResource("14_05dih")]
 transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)

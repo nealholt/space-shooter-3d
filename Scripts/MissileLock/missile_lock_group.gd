@@ -13,7 +13,7 @@ class_name MissileLockGroup extends Node3D
 # angle to target. Lock can still be broken
 # by target leaving range missile_range_sqd
 # or by angle to target exceeding missile_lock_max_angle
-@export var npc_missile_lock:bool = false ## True if for npc use. Eliminates a lot of audio visual stuff that only humans need.
+var npc_missile_lock:bool = false # True if for npc use. Eliminates a lot of audio visual stuff that only humans need.
 @export var lock_timeout:float = 4.0 ## Time in seconds needed to acquire lock
 # Used to count down time to lock
 var lock_timer:float = 0.0
@@ -103,14 +103,18 @@ func _ready() -> void:
 	# It's mandatory that missile lock be set
 	if !missile_lock:
 		push_error('ERROR in MissileLockGroup. There must be a MissileLock scene as a child.')
-	# If this is an NPC missile lock group, then
+
+
+func set_as_NPC() -> void:
+	npc_missile_lock = true
+	# If this is an NPC missile lock group, as
+	# opposed to a player's missile lock group, then
 	# queue free all children of this node EXCEPT
 	# for the gun / missile_launcher.
 	# They aren't needed.
-	if npc_missile_lock:
-		for c in get_children():
-			if missile_launcher != c:
-				c.queue_free()
+	for c in get_children():
+		if missile_launcher != c:
+			c.queue_free()
 
 
 # Ship that this scene is a child of ought to be the

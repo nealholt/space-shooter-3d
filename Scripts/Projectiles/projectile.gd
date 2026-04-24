@@ -252,22 +252,24 @@ func aim_self_at_cursor() -> void:
 
 
 func damage_and_die(body, collision_point=null) -> void:
-	# Null instance can occur when body dies
-	# from another source of damage while this
-	# projectile is still trying to damage it.
-	if !is_instance_valid(body):
+	if should_skip_body(body):
 		return
-	# Stop early for other collision exceptions.
-	# This will be things like the shooter's hitbox
-	# and shields.
-	if data.collision_exceptions.has(body):
-		return
-	# Play feedback for player if relevant
-	Global.player_feedback(body, data)
 	# Damage what was hit
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
 	if body.is_in_group("damageable"):
 		body.damage(data.damage, data.shooter)
+	# Previous was the damage part. Now do the dieing part.
+	die_without_damaging(body, collision_point)
+
+
+# Called by projectile.damage_and_die, but also called
+# by RayCastForProjectiles.did_collide when collided with
+# a non-damageable object
+func die_without_damaging(body, collision_point=null) -> void:
+	if should_skip_body(body):
+		return
+	# Play feedback for player if relevant
+	Global.player_feedback(body, data)
 	# Make a spark at collision point
 	if collision_point:
 		if body.is_in_group("shield"):
@@ -281,6 +283,23 @@ func damage_and_die(body, collision_point=null) -> void:
 		explode_with_damage()
 	#Delete bullets that strike a body
 	wrap_up()
+
+
+# If the given body should not be collided with for any
+# reason, then return true
+func should_skip_body(body) -> bool:
+	# Null instance can occur when body dies
+	# from another source of damage while this
+	# projectile is still trying to damage it.
+	if !is_instance_valid(body):
+		return true
+	# Stop early for other collision exceptions.
+	# This will be things like the shooter's hitbox
+	# and shields.
+	elif data.collision_exceptions.has(body):
+		return true
+	else:
+		return false
 
 
 # Start near miss sound upon entering a near miss Area3D
@@ -317,7 +336,7 @@ func _on_health_component_died() -> void:
 # smoke trails, before queue_freeing the projectile.
 func wrap_up() -> void:
 	if wrap_up_time <= 0.0:
-		Callable(queue_free).call_deferred()
+		queue_free.call_deferred()
 		return
 	# Turn off physics processes
 	set_physics_process(false)

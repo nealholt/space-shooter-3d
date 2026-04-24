@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="9_1bvmw"]
 [ext_resource type="PackedScene" uid="uid://diilp2vvcvj53" path="res://Scenes/Ships/carrier.tscn" id="10_3xvk7"]
 [ext_resource type="PackedScene" uid="uid://dp3w08p8gkd3p" path="res://Scenes/Ships/capital_ship_frigate.tscn" id="11_c40xb"]
-[ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="13_qb1ff"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="13_qb1ff"]
 
 [sub_resource type="GDScript" id="GDScript_ulixo"]
 script/source = "extends Level
@@ -235,6 +235,16 @@ disable_for_testing = true
 script = ExtResource("1_nau7t")
 team = "blue team"
 
-[node name="PlayerFighter" parent="BlueTeam" unique_id=1388140746 instance=ExtResource("13_qb1ff")]
-transform = Transform3D(0.19537164, 0.7546787, 0.6263304, -0.9803418, 0.13232858, 0.14635281, 0.027567895, -0.64261085, 0.7656966, 38.351387, 65.31791, 0)
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("4_s6g67")]
+transform = Transform3D(0.19537577, 0.7544654, 0.6265862, -0.9803523, 0.1325488, 0.14608303, 0.027161345, -0.64281625, 0.7655387, 38.351, 65.318, 0)
+is_player = true
 impulse_std = 0.0
+
+[node name="Gun" parent="BlueTeam/Fighter/WeaponHandler" parent_id_path=PackedInt32Array(1900985089, 1131696451) index="0" unique_id=2138703467]
+bullet_speed = 800.0
+fire_rate = 16.0
+reload_sound = 1
+
+[node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=396859238 instance=ExtResource("13_qb1ff")]
+
+[editable path="BlueTeam/Fighter"]

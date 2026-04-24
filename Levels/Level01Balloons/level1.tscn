@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://d3i1pj3lavuuy" path="res://Levels/Level01Balloons/level1.gd" id="1_dflt6"]
 [ext_resource type="Texture2D" uid="uid://creoqhif83mdb" path="res://Assets/Skyboxes/moon_with_stars.png" id="2_0jw65"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_widnh"]
-[ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="5_0jw65"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="4_0jw65"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="5_qdonm"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="5_vsiph"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qdonm"]
@@ -41,15 +42,15 @@ script = ExtResource("2_widnh")
 script = ExtResource("2_widnh")
 team = "blue team"
 
-[node name="Fighter" parent="BlueTeam" unique_id=2103248847 instance=ExtResource("5_0jw65")]
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("4_0jw65")]
+is_player = true
 
-[node name="DebugLabel" parent="BlueTeam/Fighter" index="5" unique_id=1097695612]
-visible = true
+[node name="AimAssist" parent="BlueTeam/Fighter" index="0" unique_id=936755743]
+angle_assist_limit = 5.0
 
 [node name="MissileLockGroup" parent="BlueTeam/Fighter" index="7" unique_id=756556192]
-npc_missile_lock = null
-lock_timeout = null
-missile_lock_max_angle = null
+lock_timeout = 0.0
+missile_lock_max_angle = 20.0
 quick_launch_interval = 0.2
 
 [node name="MissileLauncher" parent="BlueTeam/Fighter/MissileLockGroup" index="7" unique_id=684312626]
@@ -59,6 +60,14 @@ bullet_speed = 1000.0
 fire_rate = 2.0
 spread_deg = 60.0
 simultaneous_shots = 5
+
+[node name="Gun" parent="BlueTeam/Fighter/WeaponHandler" parent_id_path=PackedInt32Array(1900985089, 1131696451) index="0" unique_id=2138703467]
+bullet_speed = 1000.0
+fire_rate = 18.0
+spread_deg = 1.0
+reload_sound = 1
+
+[node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=882451378 instance=ExtResource("5_qdonm")]
 
 [node name="VictoryLayer" parent="." unique_id=2016557169 instance=ExtResource("5_vsiph")]
 visible = false

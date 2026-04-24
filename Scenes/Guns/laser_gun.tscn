@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cwvjmhlcv8ry7"]
+[gd_scene format=3 uid="uid://cwvjmhlcv8ry7"]
 
 [ext_resource type="Script" uid="uid://baxrmmxjl3l63" path="res://Scripts/laser_gun.gd" id="1_d84oy"]
 
@@ -77,23 +77,23 @@ scale_curve = SubResource("CurveTexture_qb0v4")
 [sub_resource type="QuadMesh" id="QuadMesh_so0lm"]
 size = Vector2(0.4, 0.4)
 
-[node name="LaserGun" type="Node3D"]
+[node name="LaserGun" type="Node3D" unique_id=1307497484]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 visible = false
 script = ExtResource("1_d84oy")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1562967462]
 enabled = false
 collision_mask = 10
 hit_back_faces = false
 collide_with_areas = true
 
-[node name="BeamMesh" type="MeshInstance3D" parent="."]
+[node name="BeamMesh" type="MeshInstance3D" parent="." unique_id=1987758815]
 mesh = SubResource("CylinderMesh_7m7xi")
 skeleton = NodePath("../RayCast3D")
 surface_material_override/0 = SubResource("StandardMaterial3D_gownm")
 
-[node name="BeamParticles" type="GPUParticles3D" parent="."]
+[node name="BeamParticles" type="GPUParticles3D" parent="." unique_id=1323323803]
 material_override = SubResource("StandardMaterial3D_nmbug")
 emitting = false
 amount = 50
@@ -101,7 +101,7 @@ lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_bb428")
 draw_pass_1 = SubResource("QuadMesh_luys4")
 
-[node name="EndParticles" type="GPUParticles3D" parent="."]
+[node name="EndParticles" type="GPUParticles3D" parent="." unique_id=776550408]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_2n48u")
 emitting = false

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwts5v3tvcwab"]
+[gd_scene format=3 uid="uid://cwts5v3tvcwab"]
 
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="1_5h06f"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_e2ue2"]
 [ext_resource type="PackedScene" uid="uid://dp3w08p8gkd3p" path="res://Scenes/Ships/capital_ship_frigate.tscn" id="2_jciow"]
 [ext_resource type="Texture2D" uid="uid://dis3t0y2s7fn6" path="res://Assets/Skyboxes/pink_blue_path.png" id="2_syf3q"]
-[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="4_vkmbw"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="5_tk3ba"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="6_jbkr8"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tk3ba"]
 panorama = ExtResource("2_syf3q")
@@ -23,26 +24,38 @@ tonemap_mode = 2
 glow_intensity = 0.5
 glow_bloom = 0.1
 
-[node name="CapitalShipTest" type="Node3D"]
+[node name="CapitalShipTest" type="Node3D" unique_id=256524358]
 script = ExtResource("1_e2ue2")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1742693848]
 environment = SubResource("Environment_tss5r")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1587513661]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 light_color = Color(0.462745, 0.592157, 0.431373, 1)
 light_energy = 2.0
 shadow_enabled = true
 
-[node name="RedTeam" type="Node3D" parent="."]
+[node name="RedTeam" type="Node3D" parent="." unique_id=1847787211]
 script = ExtResource("1_5h06f")
 
-[node name="CapitalShipTest1" parent="RedTeam" instance=ExtResource("2_jciow")]
+[node name="CapitalShipTest1" parent="RedTeam" unique_id=30493555 instance=ExtResource("2_jciow")]
 
-[node name="BlueTeam" type="Node3D" parent="."]
+[node name="BlueTeam" type="Node3D" parent="." unique_id=563845766]
 script = ExtResource("1_5h06f")
 team = "blue team"
 
-[node name="Corvette" parent="BlueTeam" instance=ExtResource("4_vkmbw")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -500)
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("5_tk3ba")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -500)
+is_player = true
+
+[node name="AimAssist" parent="BlueTeam/Fighter" index="0" unique_id=936755743]
+angle_assist_limit = 5.0
+
+[node name="Gun" parent="BlueTeam/Fighter/WeaponHandler" parent_id_path=PackedInt32Array(1900985089, 1131696451) index="0" unique_id=2138703467]
+fire_rate = 18.0
+reload_sound = 1
+
+[node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=2093590034 instance=ExtResource("6_jbkr8")]
+
+[editable path="BlueTeam/Fighter"]

@@ -239,3 +239,7 @@ func deactivate() -> void:
 		state = LaserState.POWERING_ON
 		beam_off(0.01)
 	super.deactivate()
+
+# Override parent class
+func reload() -> void:
+	pass

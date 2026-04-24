@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://ca1xpxadpwp5u" path="res://Levels/Level06TurretTest/TestCam.gd" id="1_qvatm"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_t2ssg"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_hpnlp"]
-[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="6_7f63n"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="6_of7ud"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="7_2dgup"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/Turret/turret_group.tscn" id="7_iacnd"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="8_hu0ry"]
 
@@ -22,36 +23,39 @@ sky = SubResource("Sky_c1gdl")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=453168758]
 script = ExtResource("1_t2ssg")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1284882203]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 light_color = Color(1, 1, 0.745098, 1)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=584133653]
 environment = SubResource("Environment_g7lfc")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=589425188]
 transform = Transform3D(0.999552, 0.009135, 0.0285123, -0.0103141, 0.999086, 0.0414846, -0.0281072, -0.0417601, 0.998732, 3.43069, 2.72001, -1.75286)
 script = ExtResource("1_qvatm")
 
-[node name="RedTeam" type="Node3D" parent="."]
+[node name="RedTeam" type="Node3D" parent="." unique_id=460767585]
 script = ExtResource("2_hpnlp")
 
-[node name="TurretGroup" parent="RedTeam" instance=ExtResource("7_iacnd")]
+[node name="TurretGroup" parent="RedTeam" unique_id=1420550834 instance=ExtResource("7_iacnd")]
 
-[node name="TurretA" type="Node3D" parent="RedTeam/TurretGroup"]
+[node name="TurretA" type="Node3D" parent="RedTeam/TurretGroup" unique_id=958075200]
 script = ExtResource("8_hu0ry")
 elevation_speed_deg = 20.0
 rotation_speed_deg = 20.0
 gun_type = 1
 bullet_type = 6
 
-[node name="BlueTeam" type="Node3D" parent="."]
+[node name="BlueTeam" type="Node3D" parent="." unique_id=331800158]
 script = ExtResource("2_hpnlp")
 team = "blue team"
 
-[node name="Corvette" parent="BlueTeam" instance=ExtResource("6_7f63n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 600)
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("6_of7ud")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 315.07828)
+is_player = true
+
+[node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=2089624442 instance=ExtResource("7_2dgup")]

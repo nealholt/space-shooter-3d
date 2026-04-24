@@ -1,11 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bobitrhkbf3c3"]
+[gd_scene format=3 uid="uid://bobitrhkbf3c3"]
 
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_trw21"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="2_6b8c8"]
 [ext_resource type="Texture2D" uid="uid://ba1gb0dgunagh" path="res://Assets/Skyboxes/ringed_gas_giant_planet.png" id="2_fykje"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_i6ru0"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="5_o18a7"]
-[ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="6_csw5y"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="6_trw21"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="7_trw21"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_trw21"]
@@ -29,51 +29,67 @@ glow_bloom = 0.2
 glow_hdr_threshold = 0.5
 glow_hdr_scale = 0.5
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=1367515792]
 script = ExtResource("1_trw21")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1099043579]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 250, 0, 0)
 shadow_enabled = true
 sky_mode = 1
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1357968258]
 environment = SubResource("Environment_eupmo")
 
-[node name="RedTeam" type="Node3D" parent="."]
+[node name="RedTeam" type="Node3D" parent="." unique_id=820750482]
 script = ExtResource("2_i6ru0")
 
-[node name="FighterNPC1" parent="RedTeam" instance=ExtResource("2_6b8c8")]
+[node name="FighterNPC1" parent="RedTeam" unique_id=279156360 instance=ExtResource("2_6b8c8")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -30, -3.050682, -200)
 
-[node name="NPCController" parent="RedTeam/FighterNPC1" instance=ExtResource("5_o18a7")]
+[node name="NPCController" parent="RedTeam/FighterNPC1" unique_id=916711724 instance=ExtResource("5_o18a7")]
 
-[node name="FighterNPC2" parent="RedTeam" instance=ExtResource("2_6b8c8")]
+[node name="FighterNPC2" parent="RedTeam" unique_id=1610773603 instance=ExtResource("2_6b8c8")]
 transform = Transform3D(-1, 4.3711402e-08, -8.742278e-08, 4.37114e-08, 1, 4.3711353e-08, 8.742278e-08, 4.371135e-08, -1, -15, 7.342024, -200)
 
-[node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC2" instance=ExtResource("5_o18a7")]
+[node name="NPCFighterStateMachine" parent="RedTeam/FighterNPC2" unique_id=874748457 instance=ExtResource("5_o18a7")]
 
-[node name="FighterNPC3" parent="RedTeam" instance=ExtResource("2_6b8c8")]
+[node name="FighterNPC3" parent="RedTeam" unique_id=933345787 instance=ExtResource("2_6b8c8")]
 transform = Transform3D(-1, 4.3711402e-08, -8.742278e-08, 4.37114e-08, 1, 4.3711353e-08, 8.742278e-08, 4.371135e-08, -1, 0, 3.0645924, -200)
 
-[node name="NPCController" parent="RedTeam/FighterNPC3" instance=ExtResource("5_o18a7")]
+[node name="NPCController" parent="RedTeam/FighterNPC3" unique_id=1087114275 instance=ExtResource("5_o18a7")]
 
-[node name="FighterNPC4" parent="RedTeam" instance=ExtResource("2_6b8c8")]
+[node name="FighterNPC4" parent="RedTeam" unique_id=798424204 instance=ExtResource("2_6b8c8")]
 transform = Transform3D(-1, 4.3711402e-08, -8.742278e-08, 4.37114e-08, 1, 4.3711353e-08, 8.742278e-08, 4.371135e-08, -1, 15, -3.866909, -200)
 
-[node name="NPCController" parent="RedTeam/FighterNPC4" instance=ExtResource("5_o18a7")]
+[node name="NPCController" parent="RedTeam/FighterNPC4" unique_id=890995827 instance=ExtResource("5_o18a7")]
 
-[node name="FighterNPC5" parent="RedTeam" instance=ExtResource("2_6b8c8")]
+[node name="FighterNPC5" parent="RedTeam" unique_id=58593719 instance=ExtResource("2_6b8c8")]
 transform = Transform3D(-1, 4.3711402e-08, -8.742278e-08, 4.37114e-08, 1, 4.3711353e-08, 8.742278e-08, 4.371135e-08, -1, 30, 9.4671135, -200)
 
-[node name="NPCController" parent="RedTeam/FighterNPC5" instance=ExtResource("5_o18a7")]
+[node name="NPCController" parent="RedTeam/FighterNPC5" unique_id=1699321229 instance=ExtResource("5_o18a7")]
 
-[node name="BlueTeam" type="Node3D" parent="."]
+[node name="BlueTeam" type="Node3D" parent="." unique_id=2009069252]
 script = ExtResource("2_i6ru0")
 team = "blue team"
 
-[node name="PlayerFighter" parent="BlueTeam" instance=ExtResource("6_csw5y")]
-transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 18.8762, 0, 47.6905)
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("2_6b8c8")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 19, 0, 48)
+is_player = true
 
-[node name="VictoryLayer" parent="." instance=ExtResource("7_trw21")]
+[node name="AimAssist" parent="BlueTeam/Fighter" index="0" unique_id=936755743]
+angle_assist_limit = 5.0
+
+[node name="HealthComponent" parent="BlueTeam/Fighter" index="6" unique_id=535388883]
+max_health = 100.0
+
+[node name="Gun" parent="BlueTeam/Fighter/WeaponHandler" parent_id_path=PackedInt32Array(1900985089, 1131696451) index="0" unique_id=2138703467]
+bullet_speed = 800.0
+fire_rate = 16.0
+reload_sound = 1
+
+[node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=392117838 instance=ExtResource("6_trw21")]
+
+[node name="VictoryLayer" parent="." unique_id=119027071 instance=ExtResource("7_trw21")]
 visible = false
+
+[editable path="BlueTeam/Fighter"]

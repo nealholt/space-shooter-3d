@@ -179,7 +179,14 @@ func _ready() -> void:
 			if !(aim_child is AudioStreamPlayer):
 				push_error('Aim assist\'s only child should be audio player')
 			aim_child.queue_free()
-		pass # TODO LEFT OFF HERE
+		# Set as a missile lock for NPCs
+		if missile_lock:
+			missile_lock.set_as_NPC()
+		# Remove texture rects beneath the guns beneath the
+		# weapon handler. These are reticles for use by
+		# players only.
+		if weapon_handler:
+			weapon_handler.remove_texture_rects()
 	# Add self (CharacterBody3D) to collision exceptions so
 	# bullets don't hit self.
 	collision_exceptions.push_back(self)

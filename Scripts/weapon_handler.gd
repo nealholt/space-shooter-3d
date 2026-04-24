@@ -9,14 +9,19 @@ var index = -1
 var current_weapon: Gun
 
 func _ready() -> void:
-	# Error check
-	#for child in get_children():
-		#if !(child is Gun):
-			#push_error('All WeaponHandler children should be guns.')
 	# Initially deactivate all weapons
 	deactivate_all()
 	# Set index and equip first weapon
 	change_weapon()
+
+
+# This is called on NPC ships' weapon handlers so
+# that targeting reticles can be removed.
+func remove_texture_rects() -> void:
+	for weapon in get_children():
+		for gun_child in weapon.get_children():
+			if gun_child is TextureRect:
+				gun_child.queue_free()
 
 
 func deactivate_all() -> void:

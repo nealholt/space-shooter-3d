@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://do50y2jdho5iq"]
+[gd_scene format=3 uid="uid://do50y2jdho5iq"]
 
 [ext_resource type="Script" uid="uid://b5eecujjbgqeh" path="res://Scripts/vfx/MuzzleFlash/muzzle_flash_rand.gd" id="1_50lh3"]
 [ext_resource type="Texture2D" uid="uid://cevjv4lsemkac" path="res://Assets/Textures/kenney_particle-pack/circle_05.png" id="2_tbda7"]
@@ -194,10 +194,10 @@ vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("14_52qps")
 
-[node name="MuzzleFlashGreenMonster" type="Node3D"]
+[node name="MuzzleFlashGreenMonster" type="Node3D" unique_id=334970442]
 script = ExtResource("1_50lh3")
 
-[node name="BeamFlash" type="GPUParticles3D" parent="."]
+[node name="BeamFlash" type="GPUParticles3D" parent="." unique_id=202883686]
 material_override = SubResource("StandardMaterial3D_0xguk")
 emitting = false
 amount = 1
@@ -209,7 +209,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_46rhx")
 draw_pass_1 = SubResource("QuadMesh_rhr0g")
 
-[node name="Sparks" type="GPUParticles3D" parent="."]
+[node name="Sparks" type="GPUParticles3D" parent="." unique_id=1261862351]
 material_override = SubResource("StandardMaterial3D_50lh3")
 emitting = false
 amount = 20
@@ -222,9 +222,9 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_dhcul")
 draw_pass_1 = SubResource("QuadMesh_iba8p")
 
-[node name="PlanesGroup" type="Node3D" parent="."]
+[node name="PlanesGroup" type="Node3D" parent="." unique_id=207182473]
 
-[node name="MuzzlePlane00" type="GPUParticles3D" parent="PlanesGroup"]
+[node name="MuzzlePlane00" type="GPUParticles3D" parent="PlanesGroup" unique_id=1282608257]
 material_override = SubResource("StandardMaterial3D_s22ts")
 emitting = false
 amount = 1
@@ -236,7 +236,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
 draw_pass_1 = ExtResource("4_iba8p")
 
-[node name="MuzzlePlane01" type="GPUParticles3D" parent="PlanesGroup"]
+[node name="MuzzlePlane01" type="GPUParticles3D" parent="PlanesGroup" unique_id=1551614023]
 material_override = SubResource("StandardMaterial3D_frx31")
 emitting = false
 amount = 1
@@ -248,7 +248,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
 draw_pass_1 = ExtResource("4_iba8p")
 
-[node name="MuzzlePlane02" type="GPUParticles3D" parent="PlanesGroup"]
+[node name="MuzzlePlane02" type="GPUParticles3D" parent="PlanesGroup" unique_id=1639973269]
 material_override = SubResource("StandardMaterial3D_prung")
 emitting = false
 amount = 1
@@ -260,7 +260,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
 draw_pass_1 = ExtResource("4_iba8p")
 
-[node name="MuzzlePlane03" type="GPUParticles3D" parent="PlanesGroup"]
+[node name="MuzzlePlane03" type="GPUParticles3D" parent="PlanesGroup" unique_id=1537493469]
 material_override = SubResource("StandardMaterial3D_bmxqy")
 emitting = false
 amount = 1
@@ -272,7 +272,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
 draw_pass_1 = ExtResource("4_iba8p")
 
-[node name="MuzzlePlane04" type="GPUParticles3D" parent="PlanesGroup"]
+[node name="MuzzlePlane04" type="GPUParticles3D" parent="PlanesGroup" unique_id=2140448410]
 material_override = SubResource("StandardMaterial3D_ivdx1")
 emitting = false
 amount = 1
@@ -284,9 +284,9 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
 draw_pass_1 = ExtResource("4_iba8p")
 
-[node name="ConesGroup" type="Node3D" parent="."]
+[node name="ConesGroup" type="Node3D" parent="." unique_id=1620570511]
 
-[node name="MuzzleCone00" type="GPUParticles3D" parent="ConesGroup"]
+[node name="MuzzleCone00" type="GPUParticles3D" parent="ConesGroup" unique_id=1056967788]
 material_override = SubResource("StandardMaterial3D_k6rkm")
 emitting = false
 amount = 1
@@ -298,7 +298,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
 draw_pass_1 = ExtResource("10_f5i4y")
 
-[node name="MuzzleCone01" type="GPUParticles3D" parent="ConesGroup"]
+[node name="MuzzleCone01" type="GPUParticles3D" parent="ConesGroup" unique_id=814446240]
 material_override = SubResource("StandardMaterial3D_koa05")
 emitting = false
 amount = 1
@@ -310,7 +310,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
 draw_pass_1 = ExtResource("10_f5i4y")
 
-[node name="MuzzleCone02" type="GPUParticles3D" parent="ConesGroup"]
+[node name="MuzzleCone02" type="GPUParticles3D" parent="ConesGroup" unique_id=1252447935]
 material_override = SubResource("StandardMaterial3D_h8v7r")
 emitting = false
 amount = 1
@@ -322,7 +322,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
 draw_pass_1 = ExtResource("10_f5i4y")
 
-[node name="MuzzleCone03" type="GPUParticles3D" parent="ConesGroup"]
+[node name="MuzzleCone03" type="GPUParticles3D" parent="ConesGroup" unique_id=1842006144]
 material_override = SubResource("StandardMaterial3D_b3dea")
 emitting = false
 amount = 1
@@ -334,7 +334,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tyaal")
 draw_pass_1 = ExtResource("10_f5i4y")
 
-[node name="MuzzleCone04" type="GPUParticles3D" parent="ConesGroup"]
+[node name="MuzzleCone04" type="GPUParticles3D" parent="ConesGroup" unique_id=1967142960]
 material_override = SubResource("StandardMaterial3D_f3ovb")
 emitting = false
 amount = 1
