@@ -5,11 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://cbgprvcwh15qd" path="res://Levels/Level11SpaceStation/star.tscn" id="2_2lnk5"]
 [ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="3_eggcn"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="5_0jpk3"]
-[ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="6_xbcqs"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="6_67ulr"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/Shield/shield.tscn" id="7_ka707"]
 [ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Scenes/Ships/bomber.tscn" id="7_m10fo"]
 [ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Scenes/Ships/destroyer.tscn" id="8_5shl4"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="8_isq32"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="8_tcc1m"]
 [ext_resource type="PackedScene" uid="uid://bqvcfo7v6o6ip" path="res://Scenes/Ships/beam_destroyer.tscn" id="9_kc2e1"]
 [ext_resource type="PackedScene" uid="uid://byb8ya6fryjw0" path="res://Scenes/Ships/frigate.tscn" id="10_d6xr2"]
 [ext_resource type="PackedScene" uid="uid://diilp2vvcvj53" path="res://Scenes/Ships/carrier.tscn" id="11_gd4i7"]
@@ -67,11 +68,22 @@ team = "blue team"
 [node name="SpaceStation" parent="BlueTeam" unique_id=2096872349 instance=ExtResource("3_eggcn")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -133.42, 46.6032, 7)
 
-[node name="Fighter" parent="BlueTeam" unique_id=13683281 instance=ExtResource("6_xbcqs")]
-transform = Transform3D(-0.274882, -3.00121e-08, 0.961478, 4.37114e-08, 1, 4.37114e-08, -0.961478, 5.4043e-08, -0.274882, 219.253, 0, 0)
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("6_67ulr")]
+transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 220, 0, 0)
+is_player = true
 
-[node name="Shield" parent="BlueTeam/Fighter" unique_id=800932660 instance=ExtResource("7_ka707")]
+[node name="AimAssist" parent="BlueTeam/Fighter" index="0" unique_id=936755743]
+angle_assist_limit = 5.0
+
+[node name="Gun" parent="BlueTeam/Fighter/WeaponHandler" parent_id_path=PackedInt32Array(1900985089, 1131696451) index="0" unique_id=2138703467]
+bullet_speed = 800.0
+fire_rate = 16.0
+reload_sound = 1
+
+[node name="Shield" parent="BlueTeam/Fighter" unique_id=1992904425 instance=ExtResource("7_ka707")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=1314607642 instance=ExtResource("8_tcc1m")]
 
 [node name="RedTeam" type="Node3D" parent="." unique_id=381603895]
 script = ExtResource("5_0jpk3")
@@ -134,3 +146,5 @@ transform = Transform3D(32.1127, 23.6395, -3.15418, 0, -5.29026, -39.6486, -23.8
 
 [node name="VictoryLayer" parent="." unique_id=260037237 instance=ExtResource("20_hxa7u")]
 visible = false
+
+[editable path="BlueTeam/Fighter"]

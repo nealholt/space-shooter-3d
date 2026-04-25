@@ -5,4 +5,4 @@ extends Level
 func _ready() -> void:
 	super()
 	# This is needed for the camera to work
-	Global.player = $Player
+	Global.player = $Fighter

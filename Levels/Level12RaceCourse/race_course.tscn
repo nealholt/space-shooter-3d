@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://doft0apl83wrd"]
+[gd_scene format=3 uid="uid://doft0apl83wrd"]
 
 [ext_resource type="Script" uid="uid://cpbbcxhe4a1pv" path="res://Levels/Level12RaceCourse/race_course.gd" id="1_56dt1"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_56dt1"]
 [ext_resource type="Texture2D" uid="uid://dnjgm2epla1cf" path="res://Assets/Skyboxes/earth_with_stars.png" id="2_va5od"]
-[ext_resource type="PackedScene" uid="uid://conb7kdfab3ks" path="res://Scenes/Ships/PlayerShips/PlayerFighter.tscn" id="4_gnpxn"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="4_va5od"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="5_gnpxn"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="5_sc2p3"]
 [ext_resource type="PackedScene" uid="uid://dec2h3fkjfo0m" path="res://Scenes/race_checkpoint.tscn" id="6_56dt1"]
 
@@ -26,82 +27,85 @@ tonemap_exposure = 0.5
 tonemap_white = 3.0
 glow_enabled = true
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=1379621601]
 script = ExtResource("1_56dt1")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=233786208]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 250, 0, 0)
 shadow_enabled = true
 sky_mode = 1
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=966629672]
 environment = SubResource("Environment_sc2p3")
 
-[node name="BlueTeam" type="Node3D" parent="."]
+[node name="BlueTeam" type="Node3D" parent="." unique_id=630044149]
 script = ExtResource("2_56dt1")
 team = "blue team"
 
-[node name="Fighter" parent="BlueTeam" instance=ExtResource("4_gnpxn")]
-transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 17.406166)
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("4_va5od")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 17)
+is_player = true
 
-[node name="VictoryLayer" parent="." instance=ExtResource("5_sc2p3")]
+[node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=485550130 instance=ExtResource("5_gnpxn")]
+
+[node name="VictoryLayer" parent="." unique_id=2058679128 instance=ExtResource("5_sc2p3")]
 visible = false
 
-[node name="Checkpoints" type="Node3D" parent="."]
+[node name="Checkpoints" type="Node3D" parent="." unique_id=770009881]
 
-[node name="RaceCheckpoint" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint" parent="Checkpoints" unique_id=539893301 instance=ExtResource("6_56dt1")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -86.61155)
 
-[node name="RaceCheckpoint2" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint2" parent="Checkpoints" unique_id=63816067 instance=ExtResource("6_56dt1")]
 transform = Transform3D(0.8544135, 0.51959366, -2.271216e-08, 0, -4.371139e-08, -1, -0.51959366, 0.8544135, -3.73476e-08, -87.11307, 0, -298.18146)
 
-[node name="RaceCheckpoint3" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint3" parent="Checkpoints" unique_id=1173893715 instance=ExtResource("6_56dt1")]
 transform = Transform3D(0.7934065, 0.60869217, -2.6606779e-08, 0, -4.371139e-08, -1, -0.60869217, 0.7934065, -3.4680898e-08, -293.1366, 0, -446.1473)
 
-[node name="RaceCheckpoint4" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint4" parent="Checkpoints" unique_id=492922352 instance=ExtResource("6_56dt1")]
 transform = Transform3D(0.8053967, -0.006642597, 0.59269893, 0.40626508, -0.72192883, -0.56014955, 0.43160734, 0.69193536, -0.5787404, -426.89636, 262.8083, -691.96423)
 
-[node name="RaceCheckpoint5" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint5" parent="Checkpoints" unique_id=166831719 instance=ExtResource("6_56dt1")]
 transform = Transform3D(0.8053967, -0.006642597, 0.59269893, 0.40626508, -0.72192883, -0.56014955, 0.43160734, 0.69193536, -0.5787404, -426.896, 462.808, -891.964)
 
-[node name="RaceCheckpoint6" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint6" parent="Checkpoints" unique_id=1906007207 instance=ExtResource("6_56dt1")]
 transform = Transform3D(0.8053967, -0.006642597, 0.59269893, 0.40626508, -0.72192883, -0.56014955, 0.43160734, 0.69193536, -0.5787404, -426.896, 662.808, -1091.964)
 
-[node name="RaceCheckpoint7" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint7" parent="Checkpoints" unique_id=310307786 instance=ExtResource("6_56dt1")]
 transform = Transform3D(0.08354687, -0.9875107, -0.13357508, 0.5923578, 0.15700534, -0.79022896, 0.80133176, -0.013103131, 0.59807724, 158.81732, 817.5598, -1333.0186)
 
-[node name="RaceCheckpoint8" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint8" parent="Checkpoints" unique_id=1831544549 instance=ExtResource("6_56dt1")]
 transform = Transform3D(-0.027834445, -0.97625434, -0.21483032, 0.5923577, 0.15700532, -0.7902289, 0.80519414, -0.14925207, 0.573922, 485.8219, 735.60205, -1174.6302)
 
-[node name="RaceCheckpoint9" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint9" parent="Checkpoints" unique_id=866710275 instance=ExtResource("6_56dt1")]
 transform = Transform3D(0.47612172, -0.8594525, 0.1861433, 0.59235775, 0.15700535, -0.790229, 0.6499389, 0.48650822, 0.5838573, 795.19025, 735.60205, -1505.8342)
 
-[node name="RaceCheckpoint10" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint10" parent="Checkpoints" unique_id=2114627307 instance=ExtResource("6_56dt1")]
 transform = Transform3D(-0.50908875, -0.68726677, -0.51816297, 0.59235775, 0.15700535, -0.790229, 0.62445265, -0.70923424, 0.32717845, 992.96606, 735.60205, -1228.7642)
 
-[node name="RaceCheckpoint11" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint11" parent="Checkpoints" unique_id=1491106339 instance=ExtResource("6_56dt1")]
 transform = Transform3D(-0.69273794, -0.59781677, -0.40339676, 0.6848911, -0.3701113, -0.6276479, 0.22591706, -0.71107817, 0.6658301, 1115.1066, 815.93134, -1096.856)
 
-[node name="RaceCheckpoint12" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint12" parent="Checkpoints" unique_id=422736060 instance=ExtResource("6_56dt1")]
 transform = Transform3D(-0.72714335, -0.29188573, -0.6213416, 0.6848911, -0.37011126, -0.6276479, -0.046763778, -0.8819409, 0.46903437, 1197.1321, 873.168, -948.5103)
 
-[node name="RaceCheckpoint13" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint13" parent="Checkpoints" unique_id=1747017402 instance=ExtResource("6_56dt1")]
 transform = Transform3D(-0.65106696, 0.07591955, -0.7552143, 0.2988003, -0.8890074, -0.34696352, -0.69773227, -0.45155442, 0.5561187, 1214.4869, 971.07007, -856.84735)
 
-[node name="RaceCheckpoint14" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint14" parent="Checkpoints" unique_id=1586451952 instance=ExtResource("6_56dt1")]
 transform = Transform3D(1, 0, 0, 0, 0.99999964, 0, 0, 0, 1.0000001, 1214.4869, 1101.637, -797.2385)
 
-[node name="RaceCheckpoint15" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint15" parent="Checkpoints" unique_id=1817973323 instance=ExtResource("6_56dt1")]
 transform = Transform3D(1, 0, 0, 0, 0.8981271, 0.43973547, 0, -0.43973526, 0.8981275, 1214.4869, 1239.163, -869.73804)
 
-[node name="RaceCheckpoint16" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint16" parent="Checkpoints" unique_id=322591967 instance=ExtResource("6_56dt1")]
 transform = Transform3D(0.98190254, -0.13031007, 0.13742867, 0, 0.7256504, 0.68806344, -0.1893868, -0.67561096, 0.7125183, 1177.4066, 1352.7952, -979.6407)
 
-[node name="RaceCheckpoint17" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint17" parent="Checkpoints" unique_id=618817602 instance=ExtResource("6_56dt1")]
 transform = Transform3D(0.9999999, 0, 0, 0, -4.3711374e-08, 1, 0, -0.9999997, -4.371139e-08, 1177.4066, 1440.8428, -1134.6158)
 
-[node name="RaceCheckpoint18" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint18" parent="Checkpoints" unique_id=234454521 instance=ExtResource("6_56dt1")]
 transform = Transform3D(0.9999999, 0, 0, 0, -0.37084913, 0.9286931, 0, -0.9286928, -0.37084925, 1157.0015, 1416.3464, -1403.6501)
 
-[node name="RaceCheckpoint19" parent="Checkpoints" instance=ExtResource("6_56dt1")]
+[node name="RaceCheckpoint19" parent="Checkpoints" unique_id=454916084 instance=ExtResource("6_56dt1")]
 transform = Transform3D(0.9999999, 0, 0, 0, -0.6996507, 0.71448493, 0, -0.7144847, -0.6996509, 1122.6394, 1282.1655, -1667.6157)

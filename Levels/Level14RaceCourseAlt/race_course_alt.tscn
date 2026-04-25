@@ -45,6 +45,7 @@ script = ExtResource("3_gw6v5")
 team = "blue team"
 
 [node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("4_dbd15")]
+is_player = true
 deathExplosion = 0
 finalExplosion = 0
 
