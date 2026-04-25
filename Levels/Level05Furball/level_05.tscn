@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="2_wndl6"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Scenes/Ships/corvette.tscn" id="3_8iyj5"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="4_owcqu"]
-[ext_resource type="PackedScene" uid="uid://bkwcr6mxtri7n" path="res://Scenes/Ships/PlayerShips/PlayerCorvette.tscn" id="6_t0qrf"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/Shield/shield.tscn" id="6_to6tu"]
+[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="8_x3qal"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="9_24hf6"]
+[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="9_vskk7"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hrnrq"]
 panorama = ExtResource("2_24hf6")
@@ -29,6 +30,17 @@ adjustment_enabled = true
 adjustment_brightness = 0.9
 adjustment_contrast = 1.1
 adjustment_saturation = 1.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wosky"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("8_x3qal")
+shader_parameter/FresnelPower = 2.0
+shader_parameter/EmissionStrength = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_jhttu"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_wosky")
 
 [node name="Level05" type="Node3D" unique_id=781614166]
 script = ExtResource("1_02qsi")
@@ -137,8 +149,22 @@ transform = Transform3D(0.9999995, -0.0009773843, 0, 0.0009773843, 0.9999995, 0,
 
 [node name="NPCFighterController" parent="BlueTeam/Corvette" unique_id=84206167 instance=ExtResource("4_owcqu")]
 
-[node name="Corvette2" parent="BlueTeam" unique_id=1087943080 instance=ExtResource("6_t0qrf")]
+[node name="PlayerCorvette" parent="BlueTeam" unique_id=1134075911 instance=ExtResource("3_8iyj5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 165)
+is_player = true
+
+[node name="FresnelAura" parent="BlueTeam/PlayerCorvette/Shield" parent_id_path=PackedInt32Array(1134075911, 2025902563) index="0" unique_id=556348261]
+mesh = SubResource("SphereMesh_jhttu")
+
+[node name="HitScanGun" parent="BlueTeam/PlayerCorvette/WeaponHandler" parent_id_path=PackedInt32Array(1134075911, 370825666) index="2" unique_id=1687734169]
+fire_rate = 1.0
+
+[node name="BallisticMovementV3" parent="BlueTeam/PlayerCorvette" unique_id=452116034 instance=ExtResource("9_vskk7")]
 
 [node name="VictoryLayer" parent="." unique_id=1967853426 instance=ExtResource("9_24hf6")]
 visible = false
+
+[editable path="BlueTeam/PlayerCorvette"]
+[editable path="BlueTeam/PlayerCorvette/Shield"]
+[editable path="BlueTeam/PlayerCorvette/WeaponHandler/GatlingGun/GunModel"]
+[editable path="BlueTeam/PlayerCorvette/WeaponHandler/HitScanGun/Node"]

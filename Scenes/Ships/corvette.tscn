@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/Shield/shield.tscn" id="21_5ow11"]
 [ext_resource type="Texture2D" uid="uid://yqry61o8jiwb" path="res://Assets/Images/crosshair177.png" id="23_lbswy"]
 [ext_resource type="Texture2D" uid="uid://bpdpseb3x2cbp" path="res://Assets/Images/crosshair026.png" id="25_1j34j"]
+[ext_resource type="Texture2D" uid="uid://b7foqk2u8ykv3" path="res://Assets/Images/crosshair054.png" id="26_1j34j"]
 [ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Guns/laser_gun.tscn" id="26_lbswy"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Scenes/obstacle_detector.tscn" id="27_lbswy"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="29_3q0pi"]
@@ -238,6 +239,12 @@ enabled = false
 target_position = Vector3(0, 0, -1000)
 collision_mask = 10
 collide_with_areas = true
+
+[node name="TextureRect" type="TextureRect" parent="WeaponHandler/LaserGuidedLauncher" unique_id=27785365]
+self_modulate = Color(1, 1, 1, 0.5)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("26_1j34j")
 
 [node name="LaserGun" parent="WeaponHandler" unique_id=2066163890 instance=ExtResource("26_lbswy")]
 
