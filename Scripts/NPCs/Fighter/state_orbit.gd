@@ -11,6 +11,12 @@ var ideal_distance_sqd := 450.0**2 # Squared for efficiency
 var ease_dist_sqd := 300.0**2 # Squared for efficiency
 
 
+func Enter() -> void:
+	super.Enter()
+	# Disable interrupt
+	motion.can_interrupt_state = false
+
+
 # This function should be called on each
 # physics update frame.
 func Physics_Update(_delta:float) -> void:
@@ -47,3 +53,8 @@ func Physics_Update(_delta:float) -> void:
 			# Small random strafe around
 			motion.goal_strafe_y = clamp(motion.goal_strafe_y+randf_range(-0.1,0.1), -1.0, 1.0)
 			motion.goal_strafe_x = clamp(motion.goal_strafe_x+randf_range(-0.1,0.1), -1.0, 1.0)
+
+
+# No death animation for now
+func enter_death_animation() -> void:
+	pass

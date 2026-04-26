@@ -7,6 +7,8 @@ class_name NPCStateMachine extends CharacterBodyControlParent
 # Source:
 # https://www.youtube.com/watch?v=ow_Lum-Agbs&t=300s
 
+@export var use_capital_ship_controls : bool = false
+
 @onready var target_selector := $TargetSelector
 
 # Reference to an intermediate script through which
@@ -35,6 +37,7 @@ var shooting_angle:float
 
 @export var target_capital_ships : bool = false
 
+# THESE ARE NOT CAPITAL SHIP VARIABLES.
 # I'm anxious about the wisdom of adding variables
 # here that just set variables in child state
 # nodes, but for now, this is the best I've come
@@ -48,9 +51,34 @@ var shooting_angle:float
 var DEBUG : bool = false #TESTING
 var debug_label:Label3D
 
+# Distance at which to reduce speed as we ease toward
+# ideal attack distance. This is currently only used
+# by capital ships.
+@export var ease_dist := 300.0 # Squared for efficiency
+
 
 func _ready() -> void:
 	shooting_angle = deg_to_rad(shooting_angle_degrees)
+	# Tell target selector to prefer capital ships
+	target_selector.prefer_capital_ships = target_capital_ships
+	if use_capital_ship_controls:
+		# Delete all states
+		for child in $States.get_children():
+			child.queue_free()
+		# Add in orbit state
+		var packed_s:PackedScene = load("res://Scenes/MovementControllers/state_orbit.tscn")
+		initial_state = packed_s.instantiate()
+		$States.add_child(initial_state)
+		# Adjust orbit state parameters
+		initial_state.keep_target_above = keep_target_above
+		var ideal_distance:float = (too_far + too_close) / 2.0
+		initial_state.ideal_distance_sqd = ideal_distance * ideal_distance
+		initial_state.ease_dist_sqd = ease_dist * ease_dist
+		initial_state.motion = movement_profile
+		# Make orbit our current state
+		initial_state.Enter()
+		current_state = initial_state
+		return # Don't do anything else. The rest is for small ships.
 	#print('In StateMachine _ready adding children:')
 	for child in $States.get_children():
 		if child is State:
@@ -61,8 +89,6 @@ func _ready() -> void:
 	if initial_state:
 		initial_state.Enter()
 		current_state = initial_state
-	# Tell target selector to prefer capital ships
-	target_selector.prefer_capital_ships = target_capital_ships
 	# Set state parameters. Squared for efficiency.
 	$States/Seek.too_close_sqd = too_close * too_close
 	$States/Flee.distance_limit_sqd = too_far * too_far
@@ -91,16 +117,16 @@ func move_and_turn(mover, delta:float) -> void:
 	# Update profile.orientation_data ...
 	if target and is_instance_valid(target):
 		# ... to shoot the main gun at the target ...
+		# Default to using ship speed
+		var temp_speed:float = speed
+		# But if there is a gun, we want to lead the
+		# target using bullet speed.
 		if gun:
-			movement_profile.orientation_data.update_data(
-				mover.global_position, gun.bullet_speed,
-				target, mover.global_transform.basis)
-		# ... but if there is no main gun, as with some
-		# capital ships, we still want to move toward the target
-		else:
-			movement_profile.orientation_data.update_data(
-				mover.global_position, speed,
-				target, mover.global_transform.basis)
+			temp_speed = gun.bullet_speed
+		# Update profile.orientation_data
+		movement_profile.orientation_data.update_data(
+			mover.global_position, temp_speed,
+			target, mover.global_transform.basis)
 	# Update the current state, which updates
 	# the movement profile, which is used below
 	# to steer the craft

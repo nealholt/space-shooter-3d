@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://2v35x0ll080j"]
+
+[ext_resource type="Script" uid="uid://bdsf0fc3mi1vk" path="res://Scripts/NPCs/Fighter/state_orbit.gd" id="1_pob6d"]
+
+[node name="StateOrbit" type="Node" unique_id=525397029]
+script = ExtResource("1_pob6d")

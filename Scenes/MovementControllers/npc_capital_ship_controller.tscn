@@ -7,19 +7,6 @@
 
 [node name="NPCCapitalShipController" type="Node" unique_id=1178442668]
 script = ExtResource("1_7sab1")
-shooting_angle_degrees = null
-speed = null
-x_speed = null
-y_speed = null
-pitch_amt = null
-roll_amt = null
-yaw_amt = null
-speed_lerp = null
-lerp_str = null
-target_capital_ships = null
-ideal_distance = null
-ease_dist = null
-keep_target_above = null
 
 [node name="MovementProfile" type="Node" parent="." unique_id=2140226427]
 script = ExtResource("2_3gflc")

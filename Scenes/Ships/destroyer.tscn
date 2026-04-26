@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://cea1hyirvxk5n" path="res://Assets/Models/destroyer.tscn" id="2_c4x8n"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="3_2fe14"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/Turret/turret_group.tscn" id="4_mjmit"]
-[ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_1ts7h"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_i0xpl"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="7_c4x8n"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="7_i0d2t"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c4x8n"]
 points = PackedVector3Array(11.482248, 4.2503576, 20.31643, -2.6437604, 1.9923999, 12.67453, -3.1086786, 5.519431, 12.069876, -11.358835, 4.2503576, 20.31643, 11.482248, 2.3478656, 13.338948, -11.358835, 2.3478656, 13.338948, 11.482248, 2.3478656, 20.31643, -3.1086786, 5.519431, 20.31643, 3.229856, 5.519431, 12.069876, -11.358835, 2.3478656, 20.31643, 11.482248, 4.2503576, 13.338948, -11.358835, 4.2503576, 13.338948, 2.9867253, 1.859373, 20, 3.229856, 5.519431, 20.31643, 2.7652657, 1.9923999, 12.67453)
@@ -68,7 +68,11 @@ max_elevation_deg = 90.0
 prefer_capital_ships = true
 bullet_type = 7
 
-[node name="NPCCapitalShipController" parent="." unique_id=1806682805 instance=ExtResource("5_1ts7h")]
+[node name="TargetReticles" parent="." unique_id=1644942671 instance=ExtResource("7_c4x8n")]
+target_text = "Destroyer"
+
+[node name="NPCController" parent="." unique_id=1852644041 instance=ExtResource("7_i0d2t")]
+use_capital_ship_controls = true
 speed = 10.0
 x_speed = 5.0
 y_speed = 5.0
@@ -77,11 +81,9 @@ roll_amt = 0.2
 speed_lerp = 1.0
 lerp_str = 1.0
 target_capital_ships = true
-ideal_distance = 400.0
-ease_dist = 200.0
+too_far = 400.0
+too_close = 400.0
 keep_target_above = true
-
-[node name="TargetReticles" parent="." unique_id=1644942671 instance=ExtResource("7_c4x8n")]
-target_text = "Destroyer"
+ease_dist = 200.0
 
 [editable path="destroyer"]

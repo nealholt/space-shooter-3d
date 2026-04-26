@@ -7,6 +7,8 @@ class_name NPCCapitalShipController extends CharacterBodyControlParent
 # Reference to an intermediate script through which
 # states and the npc moved by the state can communicate.
 @onready var movement_profile := $MovementProfile
+
+# THIS IS NOT IN NPC STATE CONTROLLER.
 @onready var orbit_state := $OrbitState
 
 # Within this angle of the target, the NPC
@@ -27,6 +29,7 @@ var shooting_angle:float
 
 @export var target_capital_ships : bool = false
 
+# THESE ARE NOT FIGHTER VARIABLES. BUT THE IDEAL DIST IS SIMILAR ENOUGH
 # Ideal attack distance squared
 @export var ideal_distance := 450.0
 # Distance at which to reduce speed as we ease toward
@@ -35,6 +38,7 @@ var shooting_angle:float
 @export var keep_target_above:bool = false ## Default is to orient so target is ahead, but some capital ships want their target above
 
 
+# THIS IS JUST COPYING DATA INTO CAPITAL SHIP-SPECIFIC STATE VARIABLES
 func _ready() -> void:
 	shooting_angle = deg_to_rad(shooting_angle_degrees)
 	orbit_state.keep_target_above = keep_target_above
