@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_2gkw6"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/Turret/turret_group.tscn" id="4_7ugl6"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_mh4mh"]
-[ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_qfai7"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="7_qbhaa"]
 [ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Guns/laser_gun.tscn" id="8_14glc"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="9_6rpyf"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="9_14glc"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qmjcj"]
@@ -74,7 +74,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 6.5, -11)
 script = ExtResource("5_mh4mh")
 bullet_type = 7
 
-[node name="NPCCapitalShipController" parent="." unique_id=1171288791 instance=ExtResource("5_qfai7")]
+[node name="WeaponHandler" parent="." unique_id=233234706 instance=ExtResource("7_qbhaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -46.5)
+
+[node name="LaserGun" parent="WeaponHandler" unique_id=24048760 instance=ExtResource("8_14glc")]
+
+[node name="TargetReticles" parent="." unique_id=1772289334 instance=ExtResource("9_14glc")]
+target_text = "Frigate"
+
+[node name="NPCController" parent="." unique_id=1852644041 instance=ExtResource("9_6rpyf")]
+use_capital_ship_controls = true
 speed = 5.0
 x_speed = 3.0
 y_speed = 3.0
@@ -84,12 +93,5 @@ yaw_amt = 0.05
 speed_lerp = 1.0
 lerp_str = 1.0
 target_capital_ships = true
-ideal_distance = 600.0
-
-[node name="WeaponHandler" parent="." unique_id=233234706 instance=ExtResource("7_qbhaa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -46.5)
-
-[node name="LaserGun" parent="WeaponHandler" unique_id=24048760 instance=ExtResource("8_14glc")]
-
-[node name="TargetReticles" parent="." unique_id=1772289334 instance=ExtResource("9_14glc")]
-target_text = "Frigate"
+too_far = 600.0
+too_close = 600.0

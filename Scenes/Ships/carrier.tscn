@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_r2d5f"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/Turret/turret_group.tscn" id="4_h1ncn"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_cyiqs"]
-[ext_resource type="PackedScene" uid="uid://bbxmm661qby3d" path="res://Scenes/MovementControllers/npc_capital_ship_controller.tscn" id="5_pp34p"]
 [ext_resource type="PackedScene" uid="uid://cbhoikklwgc0c" path="res://Scenes/hangar.tscn" id="7_db1yb"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="8_2hhpl"]
 [ext_resource type="PackedScene" uid="uid://dk6y2tyoo25sn" path="res://Scenes/weakpoint.tscn" id="8_sqmai"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sqmai"]
@@ -36,7 +36,7 @@ points = PackedVector3Array(-50, -40, -50, -50, -40, 50, 0, 40, -50, 50, -40, -5
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0bygj"]
 points = PackedVector3Array(-50, -40, -50, -50, -40, 50, 0, 40, -50, 50, -40, -50, 50, -40, 50, 0, 40, 50)
 
-[node name="Carrier" type="CharacterBody3D" groups=["capital_ship", "damageable", "team member"]]
+[node name="Carrier" type="CharacterBody3D" unique_id=1412780802 groups=["capital_ship", "damageable", "team member"]]
 collision_layer = 3
 collision_mask = 3
 motion_mode = 1
@@ -45,87 +45,111 @@ finalExplosion = 10
 death_animation_duration_min = 0.0
 death_animation_duration_max = 0.0
 
-[node name="HealthComponent" parent="." instance=ExtResource("2_r2d5f")]
+[node name="HealthComponent" parent="." unique_id=2093890187 instance=ExtResource("2_r2d5f")]
 max_health = 1000.0
 weakpoint_damage = 50.0
 
-[node name="CarrierChassis" parent="." instance=ExtResource("1_67lmr")]
+[node name="CarrierChassis" parent="." unique_id=1239768847 instance=ExtResource("1_67lmr")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=182511338]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35, 30)
 shape = SubResource("ConvexPolygonShape3D_sqmai")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1744204941]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 30)
 shape = SubResource("ConvexPolygonShape3D_2hhpl")
 
-[node name="CollisionRightHull" type="CollisionShape3D" parent="."]
+[node name="CollisionRightHull" type="CollisionShape3D" parent="." unique_id=132506995]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_qq0cr")
 
-[node name="CollisionLeftHull" type="CollisionShape3D" parent="."]
+[node name="CollisionLeftHull" type="CollisionShape3D" parent="." unique_id=542821792]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_nye65")
 
-[node name="CollisionCore" type="CollisionShape3D" parent="."]
+[node name="CollisionCore" type="CollisionShape3D" parent="." unique_id=1054785712]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 150)
 shape = SubResource("ConvexPolygonShape3D_mkuc3")
 
-[node name="CollisionHangarGuard1" type="CollisionShape3D" parent="."]
+[node name="CollisionHangarGuard1" type="CollisionShape3D" parent="." unique_id=2111360922]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38, 85)
 shape = SubResource("ConvexPolygonShape3D_ggicq")
 
-[node name="CollisionHangarGuard2" type="CollisionShape3D" parent="."]
+[node name="CollisionHangarGuard2" type="CollisionShape3D" parent="." unique_id=253606837]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 38, 215)
 shape = SubResource("ConvexPolygonShape3D_a6pf0")
 
-[node name="CollisionRightFang" type="CollisionShape3D" parent="."]
+[node name="CollisionRightFang" type="CollisionShape3D" parent="." unique_id=1105755396]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -100, -90, -200)
 shape = SubResource("ConvexPolygonShape3D_62fux")
 
-[node name="CollisionLeftFang" type="CollisionShape3D" parent="."]
+[node name="CollisionLeftFang" type="CollisionShape3D" parent="." unique_id=827694493]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 100, -90, -200)
 shape = SubResource("ConvexPolygonShape3D_0bygj")
 
-[node name="TurretGroup" parent="." instance=ExtResource("4_h1ncn")]
+[node name="TurretGroup" parent="." unique_id=375642965 instance=ExtResource("4_h1ncn")]
 
-[node name="TopLeftFrontHardpoint" type="Node3D" parent="TurretGroup"]
+[node name="TopLeftFrontHardpoint" type="Node3D" parent="TurretGroup" unique_id=62294754]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 50, -155)
 script = ExtResource("5_cyiqs")
 min_elevation_deg = 5.0
 max_elevation_deg = 90.0
 
-[node name="TopRightFrontHardpoint2" type="Node3D" parent="TurretGroup"]
+[node name="TopRightFrontHardpoint2" type="Node3D" parent="TurretGroup" unique_id=2143419728]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 50, -155)
 script = ExtResource("5_cyiqs")
 min_elevation_deg = 5.0
 max_elevation_deg = 90.0
 
-[node name="LeftFangOutside" type="Node3D" parent="TurretGroup"]
+[node name="LeftFangOutside" type="Node3D" parent="TurretGroup" unique_id=526285739]
 transform = Transform3D(-0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1, -120, -100, -200)
 script = ExtResource("5_cyiqs")
 min_elevation_deg = 5.0
 max_elevation_deg = 90.0
 
-[node name="LeftFangInside" type="Node3D" parent="TurretGroup"]
+[node name="LeftFangInside" type="Node3D" parent="TurretGroup" unique_id=397629107]
 transform = Transform3D(-0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 0, 0, 1, -80, -100, -200)
 script = ExtResource("5_cyiqs")
 min_elevation_deg = 5.0
 max_elevation_deg = 90.0
 
-[node name="RightFangInside" type="Node3D" parent="TurretGroup"]
+[node name="RightFangInside" type="Node3D" parent="TurretGroup" unique_id=1984745591]
 transform = Transform3D(-0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1, 80, -100, -200)
 script = ExtResource("5_cyiqs")
 min_elevation_deg = 5.0
 max_elevation_deg = 90.0
 
-[node name="RightFangOutside" type="Node3D" parent="TurretGroup"]
+[node name="RightFangOutside" type="Node3D" parent="TurretGroup" unique_id=531714066]
 transform = Transform3D(-0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 0, 0, 1, 120, -100, -200)
 script = ExtResource("5_cyiqs")
 min_elevation_deg = 5.0
 max_elevation_deg = 90.0
 
-[node name="NPCCapitalShipController" parent="." instance=ExtResource("5_pp34p")]
+[node name="Hangar" parent="." unique_id=1909997687 instance=ExtResource("7_db1yb")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 40, 150)
+
+[node name="WeakpointGroup" type="Node3D" parent="." unique_id=739711451]
+
+[node name="LeftWeakpoint" parent="WeakpointGroup" unique_id=775263599 instance=ExtResource("8_sqmai")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 150, 0, 0)
+
+[node name="LeftWeakpoint2" parent="WeakpointGroup" unique_id=359475401 instance=ExtResource("8_sqmai")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 150, 0, -45)
+
+[node name="LeftWeakpoint3" parent="WeakpointGroup" unique_id=491543291 instance=ExtResource("8_sqmai")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 150, 0, 45)
+
+[node name="RightWeakpoint" parent="WeakpointGroup" unique_id=297506981 instance=ExtResource("8_sqmai")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -150, 0, 0)
+
+[node name="RightWeakpoint2" parent="WeakpointGroup" unique_id=511193128 instance=ExtResource("8_sqmai")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -150, 0, 45)
+
+[node name="RightWeakpoint3" parent="WeakpointGroup" unique_id=1340486010 instance=ExtResource("8_sqmai")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -150, 0, -45)
+
+[node name="NPCController" parent="." unique_id=1852644041 instance=ExtResource("8_2hhpl")]
+use_capital_ship_controls = true
 speed = 3.0
 x_speed = 1.0
 y_speed = 1.0
@@ -135,27 +159,5 @@ yaw_amt = 0.01
 speed_lerp = 1.0
 lerp_str = 1.0
 target_capital_ships = true
-ideal_distance = 800.0
-
-[node name="Hangar" parent="." instance=ExtResource("7_db1yb")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 40, 150)
-
-[node name="WeakpointGroup" type="Node3D" parent="."]
-
-[node name="LeftWeakpoint" parent="WeakpointGroup" instance=ExtResource("8_sqmai")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 150, 0, 0)
-
-[node name="LeftWeakpoint2" parent="WeakpointGroup" instance=ExtResource("8_sqmai")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 150, 0, -45)
-
-[node name="LeftWeakpoint3" parent="WeakpointGroup" instance=ExtResource("8_sqmai")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 150, 0, 45)
-
-[node name="RightWeakpoint" parent="WeakpointGroup" instance=ExtResource("8_sqmai")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -150, 0, 0)
-
-[node name="RightWeakpoint2" parent="WeakpointGroup" instance=ExtResource("8_sqmai")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -150, 0, 45)
-
-[node name="RightWeakpoint3" parent="WeakpointGroup" instance=ExtResource("8_sqmai")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -150, 0, -45)
+too_far = 800.0
+too_close = 800.0
