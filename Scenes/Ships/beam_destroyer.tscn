@@ -71,12 +71,12 @@ max_elevation_deg = 90.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
 
 [node name="LaserGun" parent="WeaponHandler" unique_id=151381903 instance=ExtResource("8_lmwtr")]
+ray_length = 500.0
 
 [node name="TargetReticles" parent="." unique_id=472861471 instance=ExtResource("9_lmwtr")]
 target_text = "Beam Destroyer"
 
 [node name="NPCController" parent="." unique_id=1852644041 node_paths=PackedStringArray("initial_state") instance=ExtResource("9_u0pe6")]
-use_capital_ship_controls = true
 initial_state = NodePath("States/Orbit")
 shooting_angle_degrees = 3.0
 speed = 10.0

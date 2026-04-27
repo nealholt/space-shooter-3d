@@ -78,12 +78,12 @@ bullet_type = 7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -46.5)
 
 [node name="LaserGun" parent="WeaponHandler" unique_id=24048760 instance=ExtResource("8_14glc")]
+ray_length = 700.0
 
 [node name="TargetReticles" parent="." unique_id=1772289334 instance=ExtResource("9_14glc")]
 target_text = "Frigate"
 
 [node name="NPCController" parent="." unique_id=1852644041 node_paths=PackedStringArray("initial_state") instance=ExtResource("9_6rpyf")]
-use_capital_ship_controls = true
 initial_state = NodePath("States/Orbit")
 speed = 5.0
 x_speed = 3.0
