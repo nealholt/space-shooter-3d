@@ -7,8 +7,6 @@ class_name NPCStateMachine extends CharacterBodyControlParent
 # Source:
 # https://www.youtube.com/watch?v=ow_Lum-Agbs&t=300s
 
-@export var use_capital_ship_controls : bool = false
-
 @onready var target_selector := $TargetSelector
 
 # Reference to an intermediate script through which
@@ -61,24 +59,6 @@ func _ready() -> void:
 	shooting_angle = deg_to_rad(shooting_angle_degrees)
 	# Tell target selector to prefer capital ships
 	target_selector.prefer_capital_ships = target_capital_ships
-	if use_capital_ship_controls:
-		# Delete all states
-		for child in $States.get_children():
-			child.queue_free()
-		# Add in orbit state
-		var packed_s:PackedScene = load("res://Scenes/MovementControllers/state_orbit.tscn")
-		initial_state = packed_s.instantiate()
-		$States.add_child(initial_state)
-		# Adjust orbit state parameters
-		initial_state.keep_target_above = keep_target_above
-		var ideal_distance:float = (too_far + too_close) / 2.0
-		initial_state.ideal_distance_sqd = ideal_distance * ideal_distance
-		initial_state.ease_dist_sqd = ease_dist * ease_dist
-		initial_state.motion = movement_profile
-		# Make orbit our current state
-		initial_state.Enter()
-		current_state = initial_state
-		return # Don't do anything else. The rest is for small ships.
 	#print('In StateMachine _ready adding children:')
 	for child in $States.get_children():
 		if child is State:
@@ -92,8 +72,11 @@ func _ready() -> void:
 	# Set state parameters. Squared for efficiency.
 	$States/Seek.too_close_sqd = too_close * too_close
 	$States/Flee.distance_limit_sqd = too_far * too_far
-	$States/Orbit.ideal_distance_sqd = (too_far * too_far + too_close * too_close) / 2
-	$States/Orbit.keep_target_above = keep_target_above
+	var ideal_distance:float = (too_far + too_close) / 2.0
+	var orbit_state:State = $States/Orbit
+	orbit_state.ideal_distance_sqd = ideal_distance * ideal_distance
+	orbit_state.keep_target_above = keep_target_above
+	orbit_state.ease_dist_sqd = ease_dist * ease_dist
 	#TESTING
 	if DEBUG:
 		var p = get_parent()

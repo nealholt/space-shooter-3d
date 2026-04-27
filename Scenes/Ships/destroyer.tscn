@@ -71,8 +71,8 @@ bullet_type = 7
 [node name="TargetReticles" parent="." unique_id=1644942671 instance=ExtResource("7_c4x8n")]
 target_text = "Destroyer"
 
-[node name="NPCController" parent="." unique_id=1852644041 instance=ExtResource("7_i0d2t")]
-use_capital_ship_controls = true
+[node name="NPCController" parent="." unique_id=1852644041 node_paths=PackedStringArray("initial_state") instance=ExtResource("7_i0d2t")]
+initial_state = NodePath("States/Orbit")
 speed = 10.0
 x_speed = 5.0
 y_speed = 5.0
@@ -87,3 +87,4 @@ keep_target_above = true
 ease_dist = 200.0
 
 [editable path="destroyer"]
+[editable path="NPCController"]

@@ -148,8 +148,9 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -150, 0, 45)
 [node name="RightWeakpoint3" parent="WeakpointGroup" unique_id=1340486010 instance=ExtResource("8_sqmai")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -150, 0, -45)
 
-[node name="NPCController" parent="." unique_id=1852644041 instance=ExtResource("8_2hhpl")]
+[node name="NPCController" parent="." unique_id=1852644041 node_paths=PackedStringArray("initial_state") instance=ExtResource("8_2hhpl")]
 use_capital_ship_controls = true
+initial_state = NodePath("States/Orbit")
 speed = 3.0
 x_speed = 1.0
 y_speed = 1.0
@@ -161,3 +162,5 @@ lerp_str = 1.0
 target_capital_ships = true
 too_far = 800.0
 too_close = 800.0
+
+[editable path="NPCController"]

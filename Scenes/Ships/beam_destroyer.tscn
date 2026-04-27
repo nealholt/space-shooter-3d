@@ -75,8 +75,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
 [node name="TargetReticles" parent="." unique_id=472861471 instance=ExtResource("9_lmwtr")]
 target_text = "Beam Destroyer"
 
-[node name="NPCController" parent="." unique_id=1852644041 instance=ExtResource("9_u0pe6")]
+[node name="NPCController" parent="." unique_id=1852644041 node_paths=PackedStringArray("initial_state") instance=ExtResource("9_u0pe6")]
 use_capital_ship_controls = true
+initial_state = NodePath("States/Orbit")
 shooting_angle_degrees = 3.0
 speed = 10.0
 x_speed = 5.0
@@ -89,3 +90,5 @@ target_capital_ships = true
 too_far = 450.0
 too_close = 450.0
 ease_dist = 200.0
+
+[editable path="NPCController"]

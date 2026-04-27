@@ -82,8 +82,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -46.5)
 [node name="TargetReticles" parent="." unique_id=1772289334 instance=ExtResource("9_14glc")]
 target_text = "Frigate"
 
-[node name="NPCController" parent="." unique_id=1852644041 instance=ExtResource("9_6rpyf")]
+[node name="NPCController" parent="." unique_id=1852644041 node_paths=PackedStringArray("initial_state") instance=ExtResource("9_6rpyf")]
 use_capital_ship_controls = true
+initial_state = NodePath("States/Orbit")
 speed = 5.0
 x_speed = 3.0
 y_speed = 3.0
@@ -95,3 +96,5 @@ lerp_str = 1.0
 target_capital_ships = true
 too_far = 600.0
 too_close = 600.0
+
+[editable path="NPCController"]
