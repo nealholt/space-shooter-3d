@@ -383,6 +383,7 @@ func view_target_from_player() -> void:
 func shutdown_near_miss() -> void:
 	first_person_camera.turn_off_near_miss()
 	rear_under_camera.turn_off_near_miss()
+	profile_camera.turn_off_near_miss()
 	free_camera.turn_off_near_miss()
 
 func is_mouse_near_center() -> bool:
@@ -416,3 +417,7 @@ func _on_timer_hit_flicker_timeout() -> void:
 	# Determine whether or not to show lead indicator
 	if target_lead_visible:
 		current_targ_indicator.visible = true
+
+
+func get_first_person_near_miss() -> Area3D:
+	return first_person_camera.get_near_miss_area()

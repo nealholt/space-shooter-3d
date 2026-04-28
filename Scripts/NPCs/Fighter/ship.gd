@@ -163,6 +163,9 @@ func _ready() -> void:
 		var cam_group_scene:PackedScene = load("res://Scenes/Camera/camera_group.tscn")
 		camera_group = cam_group_scene.instantiate()
 		add_child(camera_group)
+		# Add first person camera's near miss detector to collision exceptions
+		# so one's own bullets don't trigger it
+		collision_exceptions.push_back(camera_group.get_first_person_near_miss())
 		# Attach engine audio visuals
 		var engAV_scene:PackedScene = load("res://Scenes/engine_audio_visuals.tscn")
 		engineAV = engAV_scene.instantiate()

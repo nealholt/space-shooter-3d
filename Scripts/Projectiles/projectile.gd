@@ -371,8 +371,10 @@ func wrap_up() -> void:
 # The next two methods are only used by projectiles
 # that are using Area3Ds to detect collisions
 func _on_area_entered(area: Area3D) -> void:
+	if should_skip_body(area):
+		return
 	# If we hit a near-miss detector
-	if area.is_in_group("near-miss detector"):
+	elif area.is_in_group("near-miss detector"):
 		start_near_miss_audio()
 	else:
 		# Global position is where to show

@@ -7,3 +7,6 @@ func turn_on_near_miss() -> void:
 
 func turn_off_near_miss() -> void:
 	near_miss_detector.process_mode = Node.PROCESS_MODE_DISABLED
+
+func get_near_miss_area() -> Area3D:
+	return near_miss_detector
