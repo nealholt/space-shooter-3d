@@ -26,6 +26,9 @@ var generic_projectile:PackedScene = load('res://Scenes/Projectiles/projectile.t
 # All raycast projectiles need this attached
 var ray4projectiles:PackedScene = load('res://Scenes/Projectiles/ray_cast_4_projectiles.tscn')
 
+# Damage-dealing explosion
+var damaging_explosion:PackedScene = load('res://Scenes/explosion_damage_dealing.tscn')
+
 # Meshes. Purely visual.
 var laser_bolt:PackedScene = load('res://Assets/Projectiles/Bullets/green_laser_bolt.tscn')
 var laser_bolt_giant:PackedScene = load('res://Assets/Projectiles/Bullets/green_laser_bolt_giant.tscn')
@@ -35,7 +38,6 @@ var pellet_red:PackedScene = load('res://Assets/Projectiles/Bullets/pellet_red.t
 var contrail:PackedScene = load('res://Scenes/contrail.tscn')
 # Larger contrail and some flashing GPU particles
 var sparkle_trail:PackedScene = load('res://Assets/Projectiles/sparkle.tscn')
-
 
 # Controllers for seeking behaviors
 var physics_seek:PackedScene = load('res://Scenes/MovementControllers/physics_seek_controller.tscn')
@@ -132,7 +134,6 @@ func _get_seeking_contrail(bt:BULLET_TYPE) -> Projectile:
 	return projectile
 
 
-# TODO There may be problems with this. More testing is needed.
 func _get_timed_fuse() -> Projectile:
 	var projectile := generic_projectile.instantiate()
 	var r := ray4projectiles.instantiate()
@@ -145,25 +146,29 @@ func _get_timed_fuse() -> Projectile:
 	# Parameterize projectile
 	projectile.sparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
 	projectile.shieldSparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
-	projectile.damaging_explosion = load('res://Scenes/explosion_damage_dealing.tscn')
+	projectile.damaging_explosion = damaging_explosion #load('res://Scenes/explosion_damage_dealing.tscn')
 	projectile.explode_on_timeout = true
 	return projectile
 
 
-# TODO There may be problems with this. More testing is needed.
 func _get_proxy_fuse() -> Projectile:
 	var projectile := generic_projectile.instantiate()
+	# Create area with collision shape
 	var a := Area3D.new()
 	var collision_shape = CollisionShape3D.new()
 	collision_shape.shape = SphereShape3D.new()
 	a.add_child(collision_shape)
+	a.monitorable = false # The area monitors, it doesn't need others monitoring it
+	a.collision_layer = 0
+	a.collision_mask = 2+4+8
 	projectile.add_child(a)
+	# Create mesh
 	var mesh := pellet_red.instantiate()
 	projectile.add_child(mesh)
 	# Parameterize projectile
 	projectile.sparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
 	projectile.shieldSparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
-	projectile.damaging_explosion = load('res://Scenes/explosion_damage_dealing.tscn')
+	projectile.damaging_explosion = damaging_explosion #load('res://Scenes/explosion_damage_dealing.tscn')
 	projectile.explode_on_timeout = true
 	return projectile
 
