@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://brec5vmygtijo"]
+[gd_scene format=3 uid="uid://brec5vmygtijo"]
 
 [ext_resource type="Script" uid="uid://cmlc387hydgbl" path="res://Scripts/Orb.gd" id="1_1lixd"]
 [ext_resource type="PackedScene" uid="uid://d3pdq381luwwg" path="res://Scenes/pop_player.tscn" id="2_2ard2"]
@@ -13,29 +13,29 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gsmaa"]
 albedo_color = Color(1, 1, 0, 1)
 
-[node name="Orb" type="StaticBody3D"]
+[node name="Orb" type="StaticBody3D" unique_id=776008870]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 disable_mode = 1
 collision_mask = 0
 script = ExtResource("1_1lixd")
 pop_player = ExtResource("2_2ard2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=246013889]
 shape = SubResource("SphereShape3D_rhun0")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1198023207]
 mesh = SubResource("SphereMesh_iwjq6")
 surface_material_override/0 = SubResource("StandardMaterial3D_gsmaa")
 
-[node name="HealthComponent" parent="." instance=ExtResource("4_5ba2v")]
+[node name="HealthComponent" parent="." unique_id=505686953 instance=ExtResource("4_5ba2v")]
 max_health = 20
 
-[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_e1bac")]
+[node name="HitBoxComponent" parent="." unique_id=188704207 node_paths=PackedStringArray("health_component") instance=ExtResource("5_e1bac")]
 health_component = NodePath("../HealthComponent")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBoxComponent"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBoxComponent" unique_id=155428891]
 shape = SubResource("SphereShape3D_rhun0")
 
-[node name="HitFeedback" parent="HitBoxComponent" instance=ExtResource("2_if2x6")]
+[node name="HitFeedback" parent="HitBoxComponent" unique_id=944455592 instance=ExtResource("2_if2x6")]
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

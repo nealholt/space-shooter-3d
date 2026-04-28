@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbpuijlnfgmru"]
+[gd_scene format=3 uid="uid://dbpuijlnfgmru"]
 
 [ext_resource type="Script" uid="uid://cpfldav2nu16c" path="res://Scripts/explosion_damage_dealing.gd" id="1_fbhag"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jvc8v"]
 
-[node name="ExplosionDamageDealing" type="Node3D"]
+[node name="ExplosionDamageDealing" type="Node3D" unique_id=997873992]
 script = ExtResource("1_fbhag")
 explosion_vfx = 5
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=367838182]
 transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, 0, 0, 0)
 collision_layer = 0
 collision_mask = 10
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=871833112]
 shape = SubResource("SphereShape3D_jvc8v")

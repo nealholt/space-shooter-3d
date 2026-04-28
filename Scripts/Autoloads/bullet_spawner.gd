@@ -146,7 +146,7 @@ func _get_timed_fuse() -> Projectile:
 	# Parameterize projectile
 	projectile.sparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
 	projectile.shieldSparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
-	projectile.damaging_explosion = damaging_explosion #load('res://Scenes/explosion_damage_dealing.tscn')
+	projectile.damaging_explosion = damaging_explosion
 	projectile.explode_on_timeout = true
 	return projectile
 
@@ -161,6 +161,7 @@ func _get_proxy_fuse() -> Projectile:
 	a.monitorable = false # The area monitors, it doesn't need others monitoring it
 	a.collision_layer = 0
 	a.collision_mask = 2+4+8
+	a.scale = Vector3(3.0, 3.0, 3.0)
 	projectile.add_child(a)
 	# Create mesh
 	var mesh := pellet_red.instantiate()
@@ -168,7 +169,7 @@ func _get_proxy_fuse() -> Projectile:
 	# Parameterize projectile
 	projectile.sparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
 	projectile.shieldSparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
-	projectile.damaging_explosion = damaging_explosion #load('res://Scenes/explosion_damage_dealing.tscn')
+	projectile.damaging_explosion = damaging_explosion
 	projectile.explode_on_timeout = true
 	return projectile
 
