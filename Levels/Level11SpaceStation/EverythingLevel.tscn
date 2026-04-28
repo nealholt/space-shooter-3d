@@ -107,7 +107,7 @@ recharge_delay = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="Frigate" parent="RedTeam" unique_id=560906150 instance=ExtResource("10_d6xr2")]
-transform = Transform3D(0.71774966, 0, -0.6963012, 0, 1, 0, 0.6963012, 0, 0.71774966, -280.751, 64.658, 16500.201)
+transform = Transform3D(0.71774966, 0, -0.6963012, 0, 1, 0, 0.6963012, 0, 0.71774966, -280.751, 64.658, 165.201)
 
 [node name="Carrier" parent="RedTeam" unique_id=1014448483 instance=ExtResource("11_gd4i7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 729.95)

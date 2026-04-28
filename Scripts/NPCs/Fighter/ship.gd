@@ -346,12 +346,14 @@ func missile_inbound(_targeter:Node3D) -> void:
 
 
 func _on_shield_entered(area: Area3D) -> void:
+	if shield and shield.hit_box_component == area: # Don't enter your own shield
+		return
 	collision_exceptions.push_back(area)
-	print('_on_shield_entered in ship')
-	if got_hit_audio:
-		got_hit_audio.play()
+	AudioManager.play_remote_transform(SoundEffectSetting.SOUND_EFFECT_TYPE.ENTER_SHIELD, self)
+	#AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.ENTER_SHIELD)
 func _on_shield_exited(area: Area3D) -> void:
+	if shield and shield.hit_box_component == area: # Don't exit your own shield
+		return
 	collision_exceptions.erase(area)
-	print('_on_shield_exited in ship')
-	if got_hit_audio:
-		got_hit_audio.play()
+	AudioManager.play_remote_transform(SoundEffectSetting.SOUND_EFFECT_TYPE.EXIT_SHIELD, self)
+	#AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.EXIT_SHIELD)
