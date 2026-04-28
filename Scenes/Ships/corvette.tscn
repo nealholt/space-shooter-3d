@@ -62,13 +62,18 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_1j34j")
 
-[node name="Corvette" type="CharacterBody3D" unique_id=1134075911 groups=["damageable", "team member"]]
+[sub_resource type="SphereShape3D" id="SphereShape3D_1j34j"]
+margin = 0.5
+radius = 2.5
+
+[node name="Corvette" type="CharacterBody3D" unique_id=1134075911 node_paths=PackedStringArray("shield_detector") groups=["damageable", "team member"]]
 motion_mode = 1
 script = ExtResource("1_bfcrw")
 fps_cam_position = Vector3(0, 0.6, -2.9)
 side_cam_position = Vector3(2.3, -0.5, -3.5)
 deathExplosion = 9
 finalExplosion = 8
+shield_detector = NodePath("ShieldDetector")
 
 [node name="AimAssist" parent="." unique_id=828639523 instance=ExtResource("29_3q0pi")]
 angle_assist_limit = 10.0
@@ -126,11 +131,11 @@ _endColor = Color(9.62615e-07, 0.813047, 0.817459, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.85)
 shape = SubResource("BoxShape3D_qx57m")
 
-[node name="HealthComponent" parent="." unique_id=778683298 instance=ExtResource("7_vhcpa")]
-max_health = 20
-
 [node name="GotHitAudio" type="AudioStreamPlayer" parent="." unique_id=1306955454]
 stream = ExtResource("8_klb2b")
+
+[node name="HealthComponent" parent="." unique_id=778683298 instance=ExtResource("7_vhcpa")]
+max_health = 20
 
 [node name="Sounds" type="Node3D" parent="." unique_id=1146936130]
 
@@ -248,6 +253,11 @@ texture = ExtResource("26_1j34j")
 
 [node name="ObstacleDetector" parent="." unique_id=735341060 instance=ExtResource("27_lbswy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.384907)
+
+[node name="ShieldDetector" type="Area3D" parent="." unique_id=1815484552]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShieldDetector" unique_id=2027433021]
+shape = SubResource("SphereShape3D_1j34j")
 
 [editable path="Shield"]
 [editable path="WeaponHandler/GatlingGun/GunModel"]

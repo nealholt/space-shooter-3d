@@ -63,6 +63,8 @@ var death_animation_timer:Timer
 @export var death_animation_duration_min:float = 1.5
 @export var death_animation_duration_max:float = 4.5
 
+@export var shield_detector:Area3D
+
 # Since ships are CharacterBody3Ds and those require
 # collision shapes to handle phyics of collisions,
 # I'm faced with the choice of either duplicate code
@@ -73,9 +75,6 @@ var death_animation_timer:Timer
 # in hit_box_component.
 # This will be populated probably only for the player
 var got_hit_audio:AudioStreamPlayer
-# I'll need some other system if I want different
-# audio cues for taking damage or whatever.
-#var hit_feedback:HitFeedback
 # Anyone can damage this hitbox except for
 # this ship. Currently this is used to prevent
 # npcs from shooting down their own missiles.
@@ -143,8 +142,6 @@ func _ready() -> void:
 		# The following are all from hit_box_component
 		elif child is AudioStreamPlayer:
 			got_hit_audio = child
-		#elif child is HitFeedback:
-			#hit_feedback = child
 		elif child is TargetReticles:
 			reticle = child
 		# Remove turrets if we're just testing
@@ -190,9 +187,15 @@ func _ready() -> void:
 		# players only.
 		if weapon_handler:
 			weapon_handler.remove_texture_rects()
+		# Nullify the got_hit_audio
+		got_hit_audio = null
 	# Add self (CharacterBody3D) to collision exceptions so
 	# bullets don't hit self.
 	collision_exceptions.push_back(self)
+	# Detect when entering or exiting shields
+	if shield_detector:
+		shield_detector.area_entered.connect(_on_shield_entered)
+		shield_detector.area_exited.connect(_on_shield_exited)
 
 
 func _physics_process(delta):
@@ -307,8 +310,9 @@ func damage(amount:float, damager=null):
 	if health_component:
 		#Global.friendly_fire_checker(damager, self) #TESTING
 		health_component.health -= amount
-	#if hit_feedback:
-		#hit_feedback.hit()
+	# Play a got_hit sound effect
+	if got_hit_audio:
+		got_hit_audio.play()
 
 
 func add_damage_exception(s:Ship) -> void:
@@ -341,15 +345,13 @@ func missile_inbound(_targeter:Node3D) -> void:
 	pass
 
 
-# Of the following, currently only _on_body_entered
-# is triggering and only when the hitbox crashes
-# into a body like the side of the capital ship.
-# This is fine for now, but if you want more audio
-# on the hitbox side, you'll also need to adjust
-# the collision bitmask.
-func _on_area_entered(_area: Area3D) -> void:
+func _on_shield_entered(area: Area3D) -> void:
+	collision_exceptions.push_back(area)
+	print('_on_shield_entered in ship')
 	if got_hit_audio:
 		got_hit_audio.play()
-func _on_body_entered(_body: Node3D) -> void:
+func _on_shield_exited(area: Area3D) -> void:
+	collision_exceptions.erase(area)
+	print('_on_shield_exited in ship')
 	if got_hit_audio:
 		got_hit_audio.play()
