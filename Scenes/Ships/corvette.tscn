@@ -255,6 +255,9 @@ texture = ExtResource("26_1j34j")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.384907)
 
 [node name="ShieldDetector" type="Area3D" parent="." unique_id=1815484552]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ShieldDetector" unique_id=2027433021]
 shape = SubResource("SphereShape3D_1j34j")

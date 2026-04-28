@@ -77,6 +77,10 @@ scale_curve = SubResource("CurveTexture_qb0v4")
 [sub_resource type="QuadMesh" id="QuadMesh_so0lm"]
 size = Vector2(0.4, 0.4)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_cak10"]
+margin = 0.5
+radius = 1.0
+
 [node name="LaserGun" type="Node3D" unique_id=1307497484]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 visible = false
@@ -109,3 +113,11 @@ amount = 25
 lifetime = 0.3
 process_material = SubResource("ParticleProcessMaterial_r8sb5")
 draw_pass_1 = SubResource("QuadMesh_so0lm")
+
+[node name="ShieldDetector" type="Area3D" parent="." unique_id=1154232701]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShieldDetector" unique_id=856750945]
+shape = SubResource("SphereShape3D_cak10")

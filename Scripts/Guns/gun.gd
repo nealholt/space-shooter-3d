@@ -1,5 +1,13 @@
 class_name Gun extends Node3D
 
+# Detects shields that this gun has entered
+# in order to exempt them from collisions.
+# In short, let this gun fire from within shields.
+@onready var shield_detector: Area3D = $ShieldDetector
+# Bullets fired by this gun should ignore collisions
+# with anything in this array
+var collision_exceptions := Array()
+
 # What sort of bullet to fire:
 @export var bullet_type:BulletSpawner.BULLET_TYPE
 
@@ -81,6 +89,9 @@ func _ready():
 			reticle = child
 	# Calculate bullet range
 	range_sqd = (bullet_speed*bullet_timeout)*(bullet_speed*bullet_timeout)
+	# Detect when entering or exiting shields
+	shield_detector.area_entered.connect(_on_shield_entered)
+	shield_detector.area_exited.connect(_on_shield_exited)
 
 
 func _process(_delta: float) -> void:
@@ -123,6 +134,8 @@ func shoot(shootDat:ShootData) -> void:
 	# Set the aim assist bool based on the data
 	# provided to ShootData. 
 	data.determine_aim_assist(simultaneous_shots)
+	# Add in collision exceptions
+	data.collision_exceptions = data.collision_exceptions + collision_exceptions
 	# Actually shoot
 	shoot_actual()
 
@@ -189,3 +202,9 @@ func reload() -> void:
 	reload_timer.start(reload_time)
 	if reload_sound != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
 		AudioManager.play_remote_transform(reload_sound, self)
+
+
+func _on_shield_entered(area: Area3D) -> void:
+	collision_exceptions.push_back(area)
+func _on_shield_exited(area: Area3D) -> void:
+	collision_exceptions.erase(area)

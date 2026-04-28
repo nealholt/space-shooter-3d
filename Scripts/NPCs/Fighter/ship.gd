@@ -134,9 +134,6 @@ func _ready() -> void:
 			obstacle_detector = child
 		elif child is Shield:
 			shield = child
-			# Add shield hitbox to collision exceptions so
-			# bullets don't hit it.
-			collision_exceptions.push_back(shield.hit_box_component)
 		elif child is WeaponHandler:
 			weapon_handler = child
 		# The following are all from hit_box_component
@@ -348,12 +345,10 @@ func missile_inbound(_targeter:Node3D) -> void:
 func _on_shield_entered(area: Area3D) -> void:
 	if shield and shield.hit_box_component == area: # Don't enter your own shield
 		return
-	collision_exceptions.push_back(area)
 	AudioManager.play_remote_transform(SoundEffectSetting.SOUND_EFFECT_TYPE.ENTER_SHIELD, self)
 	#AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.ENTER_SHIELD)
 func _on_shield_exited(area: Area3D) -> void:
 	if shield and shield.hit_box_component == area: # Don't exit your own shield
 		return
-	collision_exceptions.erase(area)
 	AudioManager.play_remote_transform(SoundEffectSetting.SOUND_EFFECT_TYPE.EXIT_SHIELD, self)
 	#AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.EXIT_SHIELD)
