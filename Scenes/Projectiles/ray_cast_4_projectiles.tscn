@@ -5,7 +5,7 @@
 [node name="RayCast4Projectiles" type="RayCast3D" unique_id=308028055]
 enabled = false
 target_position = Vector3(0, 0, -1)
-collision_mask = 14
+collision_mask = 31
 collide_with_areas = true
 debug_shape_custom_color = Color(1, 1, 0, 1)
 debug_shape_thickness = 5

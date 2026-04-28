@@ -11,7 +11,8 @@ explosion_vfx = 5
 [node name="Area3D" type="Area3D" parent="." unique_id=367838182]
 transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, 0, 0, 0)
 collision_layer = 0
-collision_mask = 10
+collision_mask = 27
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=871833112]
 shape = SubResource("SphereShape3D_jvc8v")

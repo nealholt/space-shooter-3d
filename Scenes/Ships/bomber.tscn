@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://Scenes/contrail.tscn" id="5_rgdmc"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="7_f8b5m"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/MissileLock/missile_lock_group.tscn" id="9_7wsae"]
-[ext_resource type="PackedScene" uid="uid://bvbnfofl0d7vv" path="res://Scenes/Projectiles/missile.tscn" id="9_e1i0b"]
 [ext_resource type="PackedScene" uid="uid://db74cban80pwd" path="res://Scenes/MissileLock/missile_lock_lerp.tscn" id="10_qsmaf"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="10_up24e"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Scenes/obstacle_detector.tscn" id="12_e1i0b"]
@@ -17,8 +16,6 @@
 size = Vector3(5.03894, 1.51178, 7.49753)
 
 [node name="Bomber" type="CharacterBody3D" unique_id=1295567426 groups=["damageable", "team member"]]
-collision_layer = 3
-collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_uw5oo")
 deathExplosion = 9
@@ -47,14 +44,12 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, -1.35, 0.5, 3.3)
 [node name="HealthComponent" parent="." unique_id=167873350 instance=ExtResource("4_40no2")]
 
 [node name="MissileLockGroup" parent="." unique_id=786493030 instance=ExtResource("9_7wsae")]
-npc_missile_lock = true
 lock_timeout = 0.2
 missile_range = 2000.0
 
 [node name="MissileLauncher" parent="MissileLockGroup" unique_id=908886794 instance=ExtResource("7_f8b5m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -1.1)
 bullet_type = 0
-bullet = ExtResource("9_e1i0b")
 damage = 100.0
 bullet_speed = 80.0
 bullet_timeout = 20.0

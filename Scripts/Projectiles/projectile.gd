@@ -97,6 +97,11 @@ func _ready() -> void:
 	# Error check
 	if explode_on_timeout and !damaging_explosion:
 		push_error('If explode_on_timeout is true then a damaging_explosion should be set.')
+	# Add an exception to prevent self collisions.
+	# Very few projectiles have both a hitbox and a raycast,
+	# but missiles do.
+	if hit_box_component and ray:
+		ray.add_exception(hit_box_component)
 
 
 # This is called by the gun that shoots the bullet.

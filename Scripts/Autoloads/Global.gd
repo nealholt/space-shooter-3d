@@ -4,6 +4,14 @@ extends Node
 # https://www.youtube.com/watch?v=a0UQ-t-vuzY
 # This is a location for anything we want to be globally accessible.
 
+# Collision layers
+const BODY_COLL_LAYER:int = 1
+const BULLET_COLL_LAYER:int = 2
+const NEARMISS_COLL_LAYER:int = 4
+const SHIELD_COLL_LAYER:int = 8
+const HITBOX_COLL_LAYER:int = 16
+const EVERYTHING_COLL_LAYER:int = 1+2+4+8+16
+
 var main_scene : MainScene
 var environment : Environment
 var red_team_group : TeamSetup # Node3D holding everything on team red

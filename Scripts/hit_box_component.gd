@@ -18,11 +18,6 @@ class_name HitBoxComponent extends Area3D
 @export var reticle_set:TargetReticles.ReticleSet
 var reticle:TargetReticles
 
-# This will be populated probably only for the player
-var got_hit_audio:AudioStreamPlayer
-# I'll need some other system if I want different
-# audio cues for taking damage or whatever.
-
 var hit_feedback:HitFeedback
 
 # Anyone can damage this hitbox except for
@@ -40,9 +35,7 @@ func _ready() -> void:
 	# Search through children for various components
 	# and save a reference to them.
 	for child in get_children():
-		if child is AudioStreamPlayer:
-			got_hit_audio = child
-		elif child is HitFeedback:
+		if child is HitFeedback:
 			hit_feedback = child
 		elif child is TargetReticles:
 			reticle = child
@@ -90,17 +83,3 @@ func lock_acquired(_targeter:Node3D) -> void:
 	pass
 func missile_inbound(_targeter:Node3D) -> void:
 	pass
-
-
-# Of the following, currently only _on_body_entered
-# is triggering and only when the hitbox crashes
-# into a body like the side of the capital ship.
-# This is fine for now, but if you want more audio
-# on the hitbox side, you'll also need to adjust
-# the collision bitmask.
-func _on_area_entered(_area: Area3D) -> void:
-	if got_hit_audio:
-		got_hit_audio.play()
-func _on_body_entered(_body: Node3D) -> void:
-	if got_hit_audio:
-		got_hit_audio.play()

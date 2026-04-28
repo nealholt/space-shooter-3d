@@ -174,7 +174,7 @@ draw_pass_1 = ExtResource("4_cvrrl")
 health_component = NodePath("../HealthComponent")
 reticle_set = 2
 
-[node name="TargetReticles" parent="HitBoxComponent" index="0"]
+[node name="TargetReticles" parent="HitBoxComponent" index="0" unique_id=1056906650]
 target_text = "Shield Generator"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent" unique_id=600990507]

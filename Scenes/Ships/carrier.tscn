@@ -37,8 +37,6 @@ points = PackedVector3Array(-50, -40, -50, -50, -40, 50, 0, 40, -50, 50, -40, -5
 points = PackedVector3Array(-50, -40, -50, -50, -40, 50, 0, 40, -50, 50, -40, -50, 50, -40, 50, 0, 40, 50)
 
 [node name="Carrier" type="CharacterBody3D" unique_id=1412780802 groups=["capital_ship", "damageable", "team member"]]
-collision_layer = 3
-collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_isj6t")
 finalExplosion = 10
@@ -149,7 +147,6 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -150, 0, 45)
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -150, 0, -45)
 
 [node name="NPCController" parent="." unique_id=1852644041 node_paths=PackedStringArray("initial_state") instance=ExtResource("8_2hhpl")]
-use_capital_ship_controls = true
 initial_state = NodePath("States/Orbit")
 speed = 3.0
 x_speed = 1.0

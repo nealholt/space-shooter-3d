@@ -159,8 +159,8 @@ func _get_proxy_fuse() -> Projectile:
 	collision_shape.shape = SphereShape3D.new()
 	a.add_child(collision_shape)
 	a.monitorable = false # The area monitors, it doesn't need others monitoring it
-	a.collision_layer = 0
-	a.collision_mask = 2+4+8
+	a.collision_layer = 0 # I am
+	a.collision_mask = Global.EVERYTHING_COLL_LAYER # I hit
 	a.scale = Vector3(3.0, 3.0, 3.0)
 	projectile.add_child(a)
 	# Create mesh

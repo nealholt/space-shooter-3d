@@ -1,6 +1,8 @@
 extends Node3D
 class_name ExplosionDamaging
 
+@onready var area_3d: Area3D = $Area3D
+
 @export var explosion_vfx:VisualEffectSetting.VISUAL_EFFECT_TYPE
 
 var damage_amt:float = 1.0
@@ -19,16 +21,16 @@ func _process(_delta: float) -> void:
 	if !delete_me:
 		VfxManager.play_with_transform(explosion_vfx, global_position, transform)
 	# Damage all overlapping bodies
-	for body in $Area3D.get_overlapping_bodies():
+	for body in area_3d.get_overlapping_bodies():
 		if body.is_in_group("damageable"):
 			body.damage(damage_amt, shooter)
 			delete_me = true
 	# Damage all overlapping areas
-	for area in $Area3D.get_overlapping_areas():
+	for area in area_3d.get_overlapping_areas():
 		if area.is_in_group("damageable"):
 			area.damage(damage_amt, shooter)
 			delete_me = true
 	# Wait until the end of the frame to execute queue_free
 	if delete_me:
-		Callable(queue_free).call_deferred()
+		queue_free.call_deferred()
 	delete_me = true

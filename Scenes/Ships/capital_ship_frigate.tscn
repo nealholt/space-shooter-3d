@@ -148,131 +148,127 @@ _data = {
 &"RESET": SubResource("Animation_3iay6")
 }
 
-[node name="CapitalShipFrigate" type="CharacterBody3D" groups=["capital_ship", "team member"]]
-collision_layer = 3
-collision_mask = 3
+[node name="CapitalShipFrigate" type="CharacterBody3D" unique_id=1054647733 groups=["capital_ship", "team member"]]
 motion_mode = 1
 script = ExtResource("1_dp23i")
 
-[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_ffelx")]
+[node name="HitBoxComponent" parent="." unique_id=868661198 node_paths=PackedStringArray("health_component") instance=ExtResource("2_ffelx")]
 transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, -30, 0)
 health_component = NodePath("../HealthComponent")
 reticle_set = 3
 
-[node name="TargetReticles" parent="HitBoxComponent" index="0"]
+[node name="TargetReticles" parent="HitBoxComponent" index="0" unique_id=1056906650]
 target_text = "Reactor Core"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent" unique_id=95413568]
 shape = SubResource("SphereShape3D_mdcux")
 
-[node name="HealthComponent" parent="." instance=ExtResource("3_ac6d0")]
+[node name="HealthComponent" parent="." unique_id=703616632 instance=ExtResource("3_ac6d0")]
 
-[node name="FrigateModel" parent="." instance=ExtResource("1_ukj0d")]
+[node name="FrigateModel" parent="." unique_id=1575939514 instance=ExtResource("1_ukj0d")]
 
-[node name="CollisionShapeBody" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeBody" type="CollisionShape3D" parent="." unique_id=554587624]
 transform = Transform3D(75, 0, 0, 0, -3.27835e-06, -75, 0, 75, -3.27835e-06, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_dmlp4")
 
-[node name="CollisionShapeStrutLeft1" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeStrutLeft1" type="CollisionShape3D" parent="." unique_id=1397173388]
 transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -46, -23, -48)
 shape = SubResource("CylinderShape3D_0qa2v")
 
-[node name="CollisionShapeStrutLeft2" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeStrutLeft2" type="CollisionShape3D" parent="." unique_id=927369616]
 transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -46, -23, 0)
 shape = SubResource("CylinderShape3D_0qa2v")
 
-[node name="CollisionShapeStrutLeft3" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeStrutLeft3" type="CollisionShape3D" parent="." unique_id=1373180020]
 transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -46, -23, 48)
 shape = SubResource("CylinderShape3D_0qa2v")
 
-[node name="CollisionShapeStrutRight1" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeStrutRight1" type="CollisionShape3D" parent="." unique_id=1406190783]
 transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 46, -23, -48)
 shape = SubResource("CylinderShape3D_0qa2v")
 
-[node name="CollisionShapeStrutRight2" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeStrutRight2" type="CollisionShape3D" parent="." unique_id=1365452468]
 transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 46, -23, 0)
 shape = SubResource("CylinderShape3D_0qa2v")
 
-[node name="CollisionShapeStrutRight3" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeStrutRight3" type="CollisionShape3D" parent="." unique_id=293324996]
 transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 46, -23, 48)
 shape = SubResource("CylinderShape3D_0qa2v")
 
-[node name="CollisionShapeBridge" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeBridge" type="CollisionShape3D" parent="." unique_id=1762449887]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, -70)
 shape = SubResource("BoxShape3D_nej24")
 
-[node name="CollisionShapeEngineLeft" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeEngineLeft" type="CollisionShape3D" parent="." unique_id=1334476923]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -18, 0, 80)
 shape = SubResource("ConvexPolygonShape3D_1rq3q")
 
-[node name="CollisionShapeEngineRight" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeEngineRight" type="CollisionShape3D" parent="." unique_id=1960233817]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 18, 0, 80)
 shape = SubResource("ConvexPolygonShape3D_pjnlb")
 
-[node name="CollisionShapeColorMe" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeColorMe" type="CollisionShape3D" parent="." unique_id=828244925]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 32, 20, 0)
 shape = SubResource("ConvexPolygonShape3D_wfxmv")
 
-[node name="CollisionShapeColorMe2" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeColorMe2" type="CollisionShape3D" parent="." unique_id=609509362]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -32, 20, 0)
 shape = SubResource("ConvexPolygonShape3D_w81vi")
 
-[node name="ReactorCollisionShapeLeft" type="CollisionShape3D" parent="."]
+[node name="ReactorCollisionShapeLeft" type="CollisionShape3D" parent="." unique_id=951494824]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -37, 0)
 shape = SubResource("BoxShape3D_0hrgw")
 
-[node name="ReactorCollisionShapeRigt" type="CollisionShape3D" parent="."]
+[node name="ReactorCollisionShapeRigt" type="CollisionShape3D" parent="." unique_id=523187559]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -37, 0)
 shape = SubResource("BoxShape3D_45crj")
 
-[node name="TurretGroup" parent="." instance=ExtResource("7_bof2b")]
+[node name="TurretGroup" parent="." unique_id=290211152 instance=ExtResource("7_bof2b")]
 
-[node name="Turret1" type="Node3D" parent="TurretGroup"]
+[node name="Turret1" type="Node3D" parent="TurretGroup" unique_id=1631471865]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 31, -76)
 script = ExtResource("8_ejvar")
 
-[node name="Turret2" type="Node3D" parent="TurretGroup"]
+[node name="Turret2" type="Node3D" parent="TurretGroup" unique_id=1999629967]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 38, -35)
 script = ExtResource("8_ejvar")
 
-[node name="Turret3" type="Node3D" parent="TurretGroup"]
+[node name="Turret3" type="Node3D" parent="TurretGroup" unique_id=1295925781]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 38, 35)
 script = ExtResource("8_ejvar")
 
-[node name="Turret4" type="Node3D" parent="TurretGroup"]
+[node name="Turret4" type="Node3D" parent="TurretGroup" unique_id=1796163841]
 transform = Transform3D(4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, 0, 3.82137e-15, 8.74228e-08, -1, 37, 0, 0)
 script = ExtResource("8_ejvar")
 
-[node name="Turret5" type="Node3D" parent="TurretGroup"]
+[node name="Turret5" type="Node3D" parent="TurretGroup" unique_id=367305831]
 transform = Transform3D(4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 3.82137e-15, -8.74228e-08, -1, -37, 0, 0)
 script = ExtResource("8_ejvar")
 
-[node name="ScriptHolder" type="Node" parent="."]
+[node name="ScriptHolder" type="Node" parent="." unique_id=1019828200]
 script = ExtResource("7_3qdq6")
 
-[node name="ReactorOpenAnimation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_vnrft")
-}
+[node name="ReactorOpenAnimation" type="AnimationPlayer" parent="." unique_id=915308807]
+libraries/ = SubResource("AnimationLibrary_vnrft")
 
-[node name="WeakpointGroup" type="Node3D" parent="."]
+[node name="WeakpointGroup" type="Node3D" parent="." unique_id=271164157]
 
-[node name="Weakpoint" parent="WeakpointGroup" instance=ExtResource("8_3qdq6")]
+[node name="Weakpoint" parent="WeakpointGroup" unique_id=1356231207 instance=ExtResource("8_3qdq6")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -60, -37.056, -48)
 
-[node name="Weakpoint2" parent="WeakpointGroup" instance=ExtResource("8_3qdq6")]
+[node name="Weakpoint2" parent="WeakpointGroup" unique_id=1468150135 instance=ExtResource("8_3qdq6")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -60, -37.056, 0)
 
-[node name="Weakpoint3" parent="WeakpointGroup" instance=ExtResource("8_3qdq6")]
+[node name="Weakpoint3" parent="WeakpointGroup" unique_id=1762128284 instance=ExtResource("8_3qdq6")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -60, -37.056, 48)
 
-[node name="Weakpoint4" parent="WeakpointGroup" instance=ExtResource("8_3qdq6")]
+[node name="Weakpoint4" parent="WeakpointGroup" unique_id=2010113169 instance=ExtResource("8_3qdq6")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 60, -37.056, -48)
 
-[node name="Weakpoint5" parent="WeakpointGroup" instance=ExtResource("8_3qdq6")]
+[node name="Weakpoint5" parent="WeakpointGroup" unique_id=1853894941 instance=ExtResource("8_3qdq6")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 60, -37.056, 0)
 
-[node name="Weakpoint6" parent="WeakpointGroup" instance=ExtResource("8_3qdq6")]
+[node name="Weakpoint6" parent="WeakpointGroup" unique_id=55340335 instance=ExtResource("8_3qdq6")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 60, -37.056, 48)
 
 [connection signal="died" from="HealthComponent" to="." method="_on_reactor_died"]

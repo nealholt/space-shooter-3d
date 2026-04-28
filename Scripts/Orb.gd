@@ -4,6 +4,7 @@ const ORB_SCENE : PackedScene = preload("res://Scenes/orb.tscn")
 
 signal destroyed
 
+@onready var hit_box_component: HitBoxComponent = $HitBoxComponent
 @onready var health_component: HealthComponent = $HealthComponent
 
 # Sound to be played on death. Self-freeing.
@@ -28,3 +29,6 @@ func _on_health_component_died() -> void:
 	on_death_sound.play_then_delete(global_position)
 	# Wait until the end of the frame to execute queue_free
 	Callable(queue_free).call_deferred()
+
+func damage(amount:float, damager=null):
+	hit_box_component.damage(amount, damager)

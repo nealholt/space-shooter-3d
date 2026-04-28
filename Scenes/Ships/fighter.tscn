@@ -21,8 +21,6 @@ radius = 2.3
 
 [node name="Fighter" type="CharacterBody3D" unique_id=1900985089 groups=["damageable", "team member"]]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
-collision_layer = 3
-collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_dn8ab")
 fps_cam_position = Vector3(0, 1, -1)

@@ -43,6 +43,7 @@ draw_pass_1 = SubResource("QuadMesh_5eo7h")
 steer_force = 200.0
 
 [node name="HitBoxComponent" parent="." index="5" unique_id=1275164638 instance=ExtResource("6_g4iot")]
+collision_layer = 2
 reticle_set = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent" index="1" unique_id=538652052]

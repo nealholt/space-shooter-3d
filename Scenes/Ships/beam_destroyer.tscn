@@ -23,8 +23,6 @@ points = PackedVector3Array(-15, -3, -5, -15, 3, -5, 15, -3, -5, -15, -3, 5, -15
 points = PackedVector3Array(-15, -3, -5, -15, 3, -5, 15, -3, -5, -15, -3, 5, -15, 3, 5, 15, 3, -5, 15, -3, 5, 15, 3, 5)
 
 [node name="BeamDestroyer" type="CharacterBody3D" unique_id=45072852 groups=["capital_ship", "damageable", "team member"]]
-collision_layer = 3
-collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_h4lox")
 deathExplosion = 8
