@@ -6,6 +6,7 @@ class_name Gun extends Node3D
 @export var damage:float = 1.0
 @export var bullet_speed:float = 1000.0
 @export var bullet_timeout:float = 2.0 ## Seconds
+@export var timeout_vary_percent:float = 0.05 ## Randomly vary the timeout by this percent
 
 @export var fire_rate:= 1.0 ## Shots per second
 var firing_rate_timer: Timer
@@ -114,6 +115,7 @@ func shoot(shootDat:ShootData) -> void:
 	data.damage = damage
 	data.bullet_speed = bullet_speed
 	data.bullet_timeout = bullet_timeout
+	data.timeout_vary_percent = timeout_vary_percent
 	data.spread_deg = spread_deg
 	# Add the raycast to the shoot_data for
 	# reference by laser-guided projectiles

@@ -138,29 +138,9 @@ func set_data(dat:ShootData) -> void:
 		else:
 			dat.target = Global.get_center_most_from_group("red team",self)
 	# Set up timed fuse explosions and generally deal with timeout
-	if explode_on_timeout and dat.target and is_instance_valid(dat.target):
-		# Get distance to target intercept
-		var intercept:Vector3 = Global.get_intercept(
-					global_position, speed,
-					dat.target)
-		var dist := global_position.distance_to(intercept)
-		# I have no ducking clue why speed needs multiplied
-		# by 2, but I gathered data by manually adjusting
-		# the timeout and distance and got the following
-		# values to hit the player at a bullet speed of 500:
-		# distance, timeout
-		# (305.16226,0.295)
-		# (219.750885,0.215)
-		# (1368.4803,1.369)
-		# If you plot those on a line, the line is almost exactly
-		# y = x/1000
-		# What I'd expect is
-		# y = x/500   because speed was 500 for these tests
-		# Therefore I multiply the speed by 2 and by God
-		# that fixes the overshoot. Still don't know why.
-		time_out = (dist/(speed*2))
+	if explode_on_timeout:
 		# Add in a random +- to the timeout.
-		time_out += randf_range(-time_out*target_range_plus_minus, time_out*target_range_plus_minus)
+		time_out += randf_range(-time_out*dat.timeout_vary_percent, time_out*dat.timeout_vary_percent)
 	# Start the timer
 	timer.start(time_out)
 
