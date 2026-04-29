@@ -4,6 +4,11 @@ const ORB_SCENE : PackedScene = preload("res://Scenes/orb.tscn")
 
 signal destroyed
 
+# Orbs need a collision shape for physics, but also
+# need to take damage. The solution is a hitbox component
+# that is only used to pass damage along to.
+# Collision detection is disabled for the hitbox
+# component.
 @onready var hit_box_component: HitBoxComponent = $HitBoxComponent
 @onready var health_component: HealthComponent = $HealthComponent
 
@@ -30,5 +35,8 @@ func _on_health_component_died() -> void:
 	# Wait until the end of the frame to execute queue_free
 	Callable(queue_free).call_deferred()
 
+# Pass damage along to the hit box component.
+# Hit box component is disabled from detecting
+# collisions so that double collisions are never detected.
 func damage(amount:float, damager=null):
 	hit_box_component.damage(amount, damager)

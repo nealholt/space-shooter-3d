@@ -31,10 +31,13 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gsmaa")
 max_health = 20
 
 [node name="HitBoxComponent" parent="." unique_id=188704207 node_paths=PackedStringArray("health_component") instance=ExtResource("5_e1bac")]
+collision_layer = 0
+monitorable = false
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBoxComponent" unique_id=155428891]
 shape = SubResource("SphereShape3D_rhun0")
+disabled = true
 
 [node name="HitFeedback" parent="HitBoxComponent" unique_id=944455592 instance=ExtResource("2_if2x6")]
 

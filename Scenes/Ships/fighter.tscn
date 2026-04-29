@@ -59,9 +59,6 @@ fixed_size = true
 font_size = 16
 outline_size = 4
 
-[node name="GotHitAudio" type="AudioStreamPlayer" parent="." unique_id=245140248]
-stream = ExtResource("16_uh0vy")
-
 [node name="HealthComponent" parent="." unique_id=535388883 instance=ExtResource("5_1xytm")]
 max_health = 20
 
@@ -77,9 +74,6 @@ bullet_timeout = 5.0
 fire_rate = 0.033
 
 [node name="MissileLockTImeout" parent="MissileLockGroup" unique_id=1472885779 instance=ExtResource("10_g3b86")]
-
-[node name="TargetReticles" parent="." unique_id=1111105521 instance=ExtResource("15_kfjug")]
-target_text = "Fighter"
 
 [node name="WeaponHandler" parent="." unique_id=1131696451 instance=ExtResource("4_dhpb0")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -107,3 +101,9 @@ transform = Transform3D(-1, 8.3518774e-23, -1.509958e-07, 5.051895e-16, 1, 0, 1.
 transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
 
 [node name="ShieldTransitAudio" parent="." unique_id=992133318 instance=ExtResource("17_y44vr")]
+
+[node name="GotHitAudio" type="AudioStreamPlayer" parent="." unique_id=245140248]
+stream = ExtResource("16_uh0vy")
+
+[node name="TargetReticles" parent="." unique_id=2083337324 instance=ExtResource("15_kfjug")]
+target_text = "Fighter"

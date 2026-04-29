@@ -15,9 +15,11 @@ class_name HitBoxComponent extends Area3D
 # Until I resolve this, I'm going to duplicate code.
 
 @export var health_component:HealthComponent
+@export var target_text : String = '' ## Text label for this target when it is directly targeted by the player
 @export var reticle_set:TargetReticles.ReticleSet
 var reticle:TargetReticles
 
+var got_hit_audio:AudioStreamPlayer
 var hit_feedback:HitFeedback
 
 # Anyone can damage this hitbox except for
@@ -40,6 +42,9 @@ func _ready() -> void:
 		elif child is TargetReticles:
 			reticle = child
 			reticle.set_reticle_textures(reticle_set)
+			reticle.target_text = target_text
+		elif child is AudioStreamPlayer:
+			got_hit_audio = child
 
 
 func damage(amount:float, damager=null):
@@ -53,6 +58,8 @@ func damage(amount:float, damager=null):
 			reticle.is_targeted = false
 	if hit_feedback:
 		hit_feedback.hit()
+	if got_hit_audio:
+		got_hit_audio.play()
 
 
 func add_damage_exception(s:Ship) -> void:
@@ -71,6 +78,17 @@ func set_targeted(targeter:Node3D, value:bool) -> void:
 	# object that owns this hitbox that it is
 	# being targeted
 
+
+func remove_audio() -> void:
+	if hit_feedback:
+		hit_feedback.queue_free.call_deferred()
+	if got_hit_audio:
+		got_hit_audio.queue_free.call_deferred()
+
+
+func remove_reticle() -> void:
+	reticle.die()
+	reticle = null
 
 # These are called by the missile lock group when
 # targeter is seeking lock on this hitbox,
