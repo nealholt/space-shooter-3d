@@ -163,6 +163,12 @@ func _get_proxy_fuse() -> Projectile:
 	a.collision_mask = Global.EVERYTHING_COLL_LAYER # I hit
 	a.scale = Vector3(3.0, 3.0, 3.0)
 	projectile.add_child(a)
+	# Area3D does not collide with static bodies.
+	# Asteroids are static bodies and so are CSG boxes.
+	# All bullets should also use the raycast
+	var r := ray4projectiles.instantiate()
+	projectile.add_child(r)
+	r.does_ricochet = false
 	# Create mesh
 	var mesh := pellet_red.instantiate()
 	projectile.add_child(mesh)
