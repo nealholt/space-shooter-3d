@@ -27,6 +27,11 @@ func set_up(start:Vector3, end:Vector3, collision_norm:Vector3, victim:Node3D) -
 	var dist = global_position.distance_to(target_position)
 	timer.start(dist/speed)
 
+# Override parent class's did_collide.
+# These pellets don't use the raycast like normal projectiles
+func did_collide(_delta:float) -> bool:
+	return false
+
 # Override parent class's on_timer_timeout
 func _on_timer_timeout() -> void:
 	# Damage target if there is one

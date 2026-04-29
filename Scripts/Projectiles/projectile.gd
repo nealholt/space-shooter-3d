@@ -1,11 +1,11 @@
 class_name Projectile extends Node3D
 # Projectiles includes bullets and missiles and laser bolts
 
-# You can add a Raycast3D or an Area3D as a child of
-# this node and either one will automatically be used
-# to detect if the bullet hit a target.
-
 @onready var timer: Timer = $Timer
+# Area3D does not collide with static bodies.
+# Asteroids are static bodies and so are CSG boxes.
+# All bullets should also use the raycast, so here it is
+@onready var ray: RayCast3D = $RayCast3D
 
 @export var speed:float = 1000.0
 var velocity : Vector3
@@ -17,9 +17,6 @@ var controller:Controller
 # These are NOT for the projectile hitting its target.
 var health_component:HealthComponent
 var hit_box_component:HitBoxComponent
-# This is only for projectiles that use a ray to
-# detect collisions.
-var ray:RayCastForProjectiles
 
 # Duration before the projectile expires
 @export var time_out:float = 2.0 #seconds
@@ -43,6 +40,9 @@ var near_miss_audio: AudioStreamPlayer3D
 @export var wrap_up_time:float = 0.0
 var wrap_up_timer:Timer
 
+# Ray length should be distance traveled plus
+# projectile_length
+@export var projectile_length := 1.0
 @export var does_ricochet:bool = false
 
 # Flag for whether this projectile automatically finds a target
@@ -91,16 +91,13 @@ func _ready() -> void:
 			health_component.died.connect(_on_health_component_died)
 		elif child is HitBoxComponent:
 			hit_box_component = child
-		elif child is RayCastForProjectiles:
-			ray = child
-			ray.does_ricochet = does_ricochet
 	# Error check
 	if explode_on_timeout and !damaging_explosion:
 		push_error('If explode_on_timeout is true then a damaging_explosion should be set.')
 	# Add an exception to prevent self collisions.
 	# Very few projectiles have both a hitbox and a raycast,
 	# but missiles do.
-	if hit_box_component and ray:
+	if hit_box_component:
 		ray.add_exception(hit_box_component)
 
 
@@ -161,9 +158,9 @@ func apply_spread(dat:ShootData) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# If there is a ray and it collided, then it will
+	# If ray collided then stop. did_collide will
 	# handle the rest.
-	if ray and ray.did_collide(self, delta):
+	if did_collide(delta):
 		return
 	
 	# Seeker missiles and other bullets might
@@ -234,6 +231,48 @@ func aim_self_at_cursor() -> void:
 	# Go to camera position + camera direction times 100000
 	var go_to_point := camera.project_ray_origin(mouse_pos) + camera.project_ray_normal(mouse_pos) * 100000
 	look_at(go_to_point, Vector3.UP)
+
+
+func did_collide(delta:float) -> bool:
+	# Change ray length to extend from previous bullet
+	# position through new position.
+	ray.target_position.z = -velocity.length() * delta - projectile_length
+	# Update the ray based on its new target_position.z.
+	# We can't just let the ray update on its physics frame
+	# because then the target_position.z will give the ray
+	# the wrong length.
+	ray.force_raycast_update()
+	# Check for and handle collisions.
+	if !ray.is_colliding():
+		return false
+	var body := ray.get_collider()
+	# If we hit a near-miss detector
+	if body.is_in_group("near-miss detector"):
+		start_near_miss_audio()
+		# https://forum.godotengine.org/t/possible-to-detect-multiple-collisions-with-raycast2d/27326/2
+		# Add body to ray's exception list. This way
+		# the ray can detect something behind the body.
+		ray.add_exception(body)
+		# Update the ray's collision query.
+		ray.force_raycast_update()
+		# If it's still colliding...
+		if ray.is_colliding():
+			# ...get the new collider
+			body = ray.get_collider()
+		else: # Otherwise return
+			return false
+	if body.is_in_group("damageable"):
+		# Stick on a decal before damaging and dying
+		# Don't stick decals on shields
+		if !body.is_in_group("shield"):
+			VfxManager.play_at_angle(bullet_hole_decal, ray.get_collision_point(), ray.get_collision_normal())
+		damage_and_die(body, ray.get_collision_point())
+	# Ricochet
+	elif does_ricochet:
+		ricochet(delta)
+	else: # Body is not damageable, but projectile should die anyway
+		die_without_damaging(body, ray.get_collision_point())
+	return true # Did collide with something.
 
 
 func damage_and_die(body, collision_point=null) -> void:

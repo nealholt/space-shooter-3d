@@ -23,9 +23,6 @@ enum BULLET_TYPE {MISSILE, SHOTGUN_PELLET, BASIC_RAY, SEEKING_MISSILE,
 
 var generic_projectile:PackedScene = load('res://Scenes/Projectiles/projectile.tscn')
 
-# All raycast projectiles need this attached
-var ray4projectiles:PackedScene = load('res://Scenes/Projectiles/ray_cast_4_projectiles.tscn')
-
 # Damage-dealing explosion
 var damaging_explosion:PackedScene = load('res://Scenes/explosion_damage_dealing.tscn')
 
@@ -76,7 +73,6 @@ func new_bullet(bt:BULLET_TYPE) -> Projectile:
 # in different sizes, which in turn effects the ray cast size.
 func _get_ray_bolt(bt:BULLET_TYPE) -> Projectile:
 	var projectile := generic_projectile.instantiate()
-	var r := ray4projectiles.instantiate()
 	# Choose the mesh
 	var mesh:MeshInstance3D
 	match bt:
@@ -86,14 +82,13 @@ func _get_ray_bolt(bt:BULLET_TYPE) -> Projectile:
 			mesh = laser_bolt_giant.instantiate()
 		_: # Default / Otherwise
 			push_error('Unrecognized bullet type ',bt)
-	# Attach ray and mesh to projectile root
-	projectile.add_child(r)
+	# Attach mesh to projectile root
 	projectile.add_child(mesh)
 	# Make the ray at least as long as the mesh
 	# print(mesh.get_mesh().get_height())
 	var mesh_height:float = mesh.get_mesh().get_height()
-	r.projectile_length = mesh_height
-	r.does_ricochet = false
+	projectile.projectile_length = mesh_height
+	projectile.does_ricochet = false
 	# Reposition mesh to start at the same origin as the ray
 	mesh.position = Vector3(0.0, 0.0, -mesh_height/2.0)
 	return projectile
@@ -105,7 +100,6 @@ func _get_ray_bolt(bt:BULLET_TYPE) -> Projectile:
 # laser guided.
 func _get_seeking_contrail(bt:BULLET_TYPE) -> Projectile:
 	var projectile := generic_projectile.instantiate()
-	var r := ray4projectiles.instantiate()
 	var contra := contrail.instantiate()
 	var control := physics_seek.instantiate()
 	# Parameterize the physics_seek
@@ -119,9 +113,7 @@ func _get_seeking_contrail(bt:BULLET_TYPE) -> Projectile:
 	# Attach physics seek controller
 	projectile.add_child(control)
 	control.steer_force = 200.0
-	# Attach ray
-	projectile.add_child(r)
-	r.does_ricochet = false
+	projectile.does_ricochet = false
 	# Attach contrail
 	projectile.add_child(contra)
 	# Parameterize projectile
@@ -136,11 +128,8 @@ func _get_seeking_contrail(bt:BULLET_TYPE) -> Projectile:
 
 func _get_timed_fuse() -> Projectile:
 	var projectile := generic_projectile.instantiate()
-	var r := ray4projectiles.instantiate()
 	var mesh := pellet.instantiate()
-	# Attach ray
-	projectile.add_child(r)
-	r.does_ricochet = false
+	projectile.does_ricochet = false
 	# Attach mesh
 	projectile.add_child(mesh)
 	# Parameterize projectile
@@ -163,12 +152,7 @@ func _get_proxy_fuse() -> Projectile:
 	a.collision_mask = Global.EVERYTHING_COLL_LAYER # I hit
 	a.scale = Vector3(3.0, 3.0, 3.0)
 	projectile.add_child(a)
-	# Area3D does not collide with static bodies.
-	# Asteroids are static bodies and so are CSG boxes.
-	# All bullets should also use the raycast
-	var r := ray4projectiles.instantiate()
-	projectile.add_child(r)
-	r.does_ricochet = false
+	projectile.does_ricochet = false
 	# Create mesh
 	var mesh := pellet_red.instantiate()
 	projectile.add_child(mesh)
@@ -182,15 +166,12 @@ func _get_proxy_fuse() -> Projectile:
 
 func _get_sparkle_trail() -> Projectile:
 	var projectile := generic_projectile.instantiate()
-	var r := ray4projectiles.instantiate()
 	var visuals := sparkle_trail.instantiate()
 	var control := physics_seek.instantiate()
 	# Attach physics seek controller
 	projectile.add_child(control)
 	control.steer_force = 2500.0
-	# Attach ray
-	projectile.add_child(r)
-	r.does_ricochet = false
+	projectile.does_ricochet = false
 	# Attach contrail and sparkle
 	projectile.add_child(visuals)
 	# Parameterize projectile

@@ -12,4 +12,12 @@ wait_time = 2.0
 one_shot = true
 autostart = true
 
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1460306429]
+enabled = false
+target_position = Vector3(0, 0, -1)
+collision_mask = 31
+collide_with_areas = true
+debug_shape_custom_color = Color(1, 1, 0, 1)
+debug_shape_thickness = 5
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
