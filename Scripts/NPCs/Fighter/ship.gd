@@ -73,10 +73,6 @@ var death_animation_timer:Timer
 # in hit_box_component.
 # This will be populated probably only for the player
 var got_hit_audio:AudioStreamPlayer
-# Anyone can damage this hitbox except for
-# this ship. Currently this is used to prevent
-# npcs from shooting down their own missiles.
-var damage_exception:Ship
 var reticle:TargetReticles
 
 # So ships know what team they are on. These
@@ -293,11 +289,8 @@ func get_mouse_center_radius() -> float:
 	return 0.0
 
 # ALL THE FOLLOWING CODE IS duplicated from hit_box_component
-
+# With minor changes because ships don't need the damage_exception
 func damage(amount:float, damager=null):
-	# A Ship shouldn't shoot down their own missiles
-	if damager and is_instance_valid(damage_exception) and damager == damage_exception:
-		return
 	if health_component:
 		#Global.friendly_fire_checker(damager, self) #TESTING
 		health_component.health -= amount
@@ -305,9 +298,6 @@ func damage(amount:float, damager=null):
 	if got_hit_audio:
 		got_hit_audio.play()
 
-
-func add_damage_exception(s:Ship) -> void:
-	damage_exception = s
 
 
 # This is called when the player targets this hitbox
