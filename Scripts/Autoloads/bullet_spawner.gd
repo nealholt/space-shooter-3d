@@ -1,5 +1,13 @@
 extends Node
 
+# The DUMMY_PLACEHOLDER below is used so the enums
+# don't all get messed up / re-ordered.
+# If / when you ever add in a new bullet, replace the
+# dummy variable.
+enum BULLET_TYPE {MISSILE, DUMMY_PLACEHOLDER, BASIC_RAY, SEEKING_MISSILE, 
+	LASER_GUIDED_MISSILE, PROXY_FUSE, TIMED_FUSE,
+	GIANT_RAY, SPARKLE}
+
 # According to this: https://forum.godotengine.org/t/parse-error-referenced-non-existent-resource/95356/5
 # "you shouldn’t use preload in autoload script because there will
 # be a 'race' of loading files and your program will try to load
@@ -12,16 +20,9 @@ extends Node
 # gun spawner in order to request bullets... though I'm not
 # certain this separation was necessary. The change from preload
 # to load might have fixed the issue.
-var bullet_array:Array[PackedScene] = [
-	load("res://Scenes/Projectiles/missile.tscn"),
-	load("res://Scenes/Projectiles/shotgun_pellet.tscn")
-	]
-
-enum BULLET_TYPE {MISSILE, SHOTGUN_PELLET, BASIC_RAY, SEEKING_MISSILE, 
-	LASER_GUIDED_MISSILE, PROXY_FUSE, TIMED_FUSE,
-	GIANT_RAY, SPARKLE}
-
 var generic_projectile:PackedScene = load('res://Scenes/Projectiles/projectile.tscn')
+
+var missile_scene:PackedScene = load("res://Scenes/Projectiles/missile.tscn")
 
 # Damage-dealing explosion
 var damaging_explosion:PackedScene = load('res://Scenes/explosion_damage_dealing.tscn')
@@ -46,9 +47,9 @@ func new_bullet(bt:BULLET_TYPE) -> Projectile:
 	var projectile : Projectile
 	match bt:
 		BULLET_TYPE.MISSILE:
-			projectile = bullet_array[int(bt)].instantiate()
-		BULLET_TYPE.SHOTGUN_PELLET:
-			projectile = bullet_array[int(bt)].instantiate()
+			projectile = missile_scene.instantiate()
+		BULLET_TYPE.DUMMY_PLACEHOLDER: # Replace me when you have a chance
+			projectile = null
 		BULLET_TYPE.BASIC_RAY:
 			projectile = _get_ray_bolt(bt)
 		BULLET_TYPE.GIANT_RAY:

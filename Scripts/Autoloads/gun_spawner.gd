@@ -16,11 +16,10 @@ var gun_array:Array[PackedScene] = [
 	load("res://Scenes/Guns/gun.tscn"),
 	load("res://Scenes/Guns/burst_gun.tscn"),
 	load("res://Scenes/Guns/hit_scan_gun.tscn"),
-	load("res://Scenes/Guns/laser_gun.tscn"),
-	load("res://Scenes/Guns/laser_shotgun.tscn")
+	load("res://Scenes/Guns/laser_gun.tscn")
 	]
 
-enum GUN_TYPE {GUN, BURST, HITSCAN, LASER, LASER_SHOT, NO_GUN}
+enum GUN_TYPE {GUN, BURST, HITSCAN, LASER, NO_GUN}
 
 func new_gun(gt:GUN_TYPE, bt:BulletSpawner.BULLET_TYPE, my_parent:Node3D) -> Gun:
 	# Create a new gun

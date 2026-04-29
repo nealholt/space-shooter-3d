@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Assets/Ships/engine_mesh_component.tscn" id="12_e20ac"]
 [ext_resource type="PackedScene" uid="uid://ddoyejlbh51s5" path="res://Scenes/Guns/hit_scan_gun.tscn" id="13_428na"]
 [ext_resource type="PackedScene" uid="uid://db74cban80pwd" path="res://Scenes/MissileLock/missile_lock_lerp.tscn" id="13_gmlsk"]
-[ext_resource type="PackedScene" uid="uid://dup57p4ygajr1" path="res://Scenes/Guns/laser_shotgun.tscn" id="15_ufo67"]
 [ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Assets/Guns/laser_beam.tscn" id="16_y2utm"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="18_g51j4"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://Assets/Images/crosshair012.png" id="19_gmlsk"]
@@ -52,16 +51,16 @@ radial_segments = 16
 [sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
 size = Vector3(6, 2.3, 10.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f4jgf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1j34j"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("34_80okc")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_tst1b"]
+[sub_resource type="SphereMesh" id="SphereMesh_f4jgf"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_f4jgf")
+material = SubResource("ShaderMaterial_1j34j")
 
 [node name="Corvette" type="CharacterBody3D" unique_id=1134075911 groups=["damageable", "team member"]]
 motion_mode = 1
@@ -153,7 +152,7 @@ fire_rate = 0.3
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_tst1b")
+mesh = SubResource("SphereMesh_f4jgf")
 
 [node name="TargetReticles" parent="." unique_id=689096099 instance=ExtResource("18_g51j4")]
 target_text = "Corvette"
@@ -210,19 +209,6 @@ self_modulate = Color(1, 1, 1, 0.588235)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("23_lbswy")
-
-[node name="LaserShotgun" parent="WeaponHandler" unique_id=1141187926 instance=ExtResource("15_ufo67")]
-bullet_type = 1
-bullet_speed = 500.0
-fire_rate = 3.0
-spread_deg = 5.0
-simultaneous_shots = 8
-
-[node name="TextureRect" type="TextureRect" parent="WeaponHandler/LaserShotgun" unique_id=385374657]
-self_modulate = Color(1, 1, 1, 0.529412)
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("25_1j34j")
 
 [node name="Gun" parent="WeaponHandler" unique_id=1609728349 instance=ExtResource("19_yfprc")]
 bullet_speed = 500.0
