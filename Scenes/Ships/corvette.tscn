@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Guns/laser_gun.tscn" id="26_lbswy"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Scenes/obstacle_detector.tscn" id="27_lbswy"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Scenes/aim_assist.tscn" id="29_3q0pi"]
+[ext_resource type="PackedScene" uid="uid://yp51kcujfd4s" path="res://Scenes/Shield/shield_transit_audio.tscn" id="29_f4jgf"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="29_w78kn"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="34_80okc"]
 
@@ -62,18 +63,13 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_1j34j")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_1j34j"]
-margin = 0.5
-radius = 2.5
-
-[node name="Corvette" type="CharacterBody3D" unique_id=1134075911 node_paths=PackedStringArray("shield_detector") groups=["damageable", "team member"]]
+[node name="Corvette" type="CharacterBody3D" unique_id=1134075911 groups=["damageable", "team member"]]
 motion_mode = 1
 script = ExtResource("1_bfcrw")
 fps_cam_position = Vector3(0, 0.6, -2.9)
 side_cam_position = Vector3(2.3, -0.5, -3.5)
 deathExplosion = 9
 finalExplosion = 8
-shield_detector = NodePath("ShieldDetector")
 
 [node name="AimAssist" parent="." unique_id=828639523 instance=ExtResource("29_3q0pi")]
 angle_assist_limit = 10.0
@@ -254,13 +250,7 @@ texture = ExtResource("26_1j34j")
 [node name="ObstacleDetector" parent="." unique_id=735341060 instance=ExtResource("27_lbswy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.384907)
 
-[node name="ShieldDetector" type="Area3D" parent="." unique_id=1815484552]
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ShieldDetector" unique_id=2027433021]
-shape = SubResource("SphereShape3D_1j34j")
+[node name="ShieldTransitAudio" parent="." unique_id=992133318 instance=ExtResource("29_f4jgf")]
 
 [editable path="Shield"]
 [editable path="WeaponHandler/GatlingGun/GunModel"]

@@ -116,3 +116,9 @@ func permanently_destroy() -> void:
 	VfxManager.play(explosion, global_position)
 	# Self delete
 	Callable(queue_free).call_deferred()
+
+
+# Returns true if the given area is the same as
+# this shield's area. Useful for collision exceptions
+func is_same_area(area:Area3D) -> bool:
+	return hit_box_component == area

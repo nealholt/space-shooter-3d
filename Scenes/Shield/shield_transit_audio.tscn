@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://yp51kcujfd4s"]
+
+[ext_resource type="Script" uid="uid://cc4cugvf41n5m" path="res://Scripts/Shield/shield_transit_audio.gd" id="1_md4xu"]
+[ext_resource type="AudioStream" uid="uid://2nl4rdec278s" path="res://Assets/SoundEffects/entering_shield2.wav" id="2_0stg7"]
+[ext_resource type="AudioStream" uid="uid://2xnhe0tb7h0x" path="res://Assets/SoundEffects/exiting_shield2.wav" id="3_64egw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_md4xu"]
+margin = 0.5
+radius = 1.0
+
+[node name="ShieldTransitAudio" type="Area3D" unique_id=992133318]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("1_md4xu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=384006131]
+shape = SubResource("SphereShape3D_md4xu")
+
+[node name="EnterShieldAudio" type="AudioStreamPlayer3D" parent="." unique_id=2059440716]
+stream = ExtResource("2_0stg7")
+
+[node name="ExitShieldAudio" type="AudioStreamPlayer3D" parent="." unique_id=1086746646]
+stream = ExtResource("3_64egw")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

@@ -63,8 +63,6 @@ var death_animation_timer:Timer
 @export var death_animation_duration_min:float = 1.5
 @export var death_animation_duration_max:float = 4.5
 
-@export var shield_detector:Area3D
-
 # Since ships are CharacterBody3Ds and those require
 # collision shapes to handle phyics of collisions,
 # I'm faced with the choice of either duplicate code
@@ -189,10 +187,6 @@ func _ready() -> void:
 	# Add self (CharacterBody3D) to collision exceptions so
 	# bullets don't hit self.
 	collision_exceptions.push_back(self)
-	# Detect when entering or exiting shields
-	if shield_detector:
-		shield_detector.area_entered.connect(_on_shield_entered)
-		shield_detector.area_exited.connect(_on_shield_exited)
 
 
 func _physics_process(delta):
@@ -340,15 +334,3 @@ func lock_acquired(_targeter:Node3D) -> void:
 	pass
 func missile_inbound(_targeter:Node3D) -> void:
 	pass
-
-
-func _on_shield_entered(area: Area3D) -> void:
-	if shield and shield.hit_box_component == area: # Don't enter your own shield
-		return
-	AudioManager.play_remote_transform(SoundEffectSetting.SOUND_EFFECT_TYPE.ENTER_SHIELD, self)
-	#AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.ENTER_SHIELD)
-func _on_shield_exited(area: Area3D) -> void:
-	if shield and shield.hit_box_component == area: # Don't exit your own shield
-		return
-	AudioManager.play_remote_transform(SoundEffectSetting.SOUND_EFFECT_TYPE.EXIT_SHIELD, self)
-	#AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.EXIT_SHIELD)
