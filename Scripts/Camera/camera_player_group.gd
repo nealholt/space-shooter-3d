@@ -421,3 +421,7 @@ func _on_timer_hit_flicker_timeout() -> void:
 
 func get_first_person_near_miss() -> Area3D:
 	return first_person_camera.get_near_miss_area()
+
+
+func get_first_person_camera() -> Camera3D:
+	return first_person_camera

@@ -36,6 +36,9 @@ func _ready() -> void:
 	for c in get_children():
 		if c is AudioStreamPlayer:
 			audio = c
+		else:
+			push_error('Unexpected child of aim assist: ', c)
+
 
 func set_assist_limit_deg(angle_assist_limit_deg:float) -> void:
 	angle_assist_limit = angle_assist_limit_deg
@@ -46,16 +49,16 @@ func use_aim_assist(sd:ShootData) -> bool:
 	var shooter:Node3D = sd.shooter
 	var target:Node3D = sd.target
 	var bullet_speed:float = sd.bullet_speed
+	var intercept:Vector3 = Global.get_intercept(
+		shooter.global_position, bullet_speed, target)
 	# If shooter is the player and mouse controls are in use
 	# then this needs to be handled differently;
 	# do_use_aim_assist is true if angle from where mouse / camera
 	# is looking is within limit, not from where shooter is looking.
 	if shooter == Global.player and Global.input_man.use_mouse_and_keyboard:
-		return use_aim_assist_mouse(shooter, target, bullet_speed)
+		return use_aim_assist_mouse(shooter, target, intercept)
 	# Otherwise calculate whether or not to use aim assist
 	# from the shooter's perspective.
-	var intercept:Vector3 = Global.get_intercept(
-		shooter.global_position, bullet_speed, target)
 	var angle_to:float = Global.get_angle_to_target(
 		shooter.global_position, intercept,
 		-shooter.global_basis.z)
@@ -69,10 +72,18 @@ func use_aim_assist(sd:ShootData) -> bool:
 # camera to mouse) is less than angle_assist_limit_radians
 # then return true for do_use_aim_assist
 func use_aim_assist_mouse(shooter:Node3D, target:Node3D,
-					bullet_speed:float) -> bool:
-	var intercept:Vector3 = Global.get_intercept(
-		shooter.global_position, bullet_speed, target)
-	var camera := Global.input_man.current_viewport.get_camera_3d()
+					intercept:Vector3) -> bool:
+	# Use the first person camera! If you use any other
+	# camera, then you'll be able to shoot from a weird angle.
+	# HOWEVER if you use the "look" feature (hold control)
+	# you will rotate the first person camera to face the
+	# target and you'll still be able to shoot at it while
+	# flying a different direction. This is honestly so
+	# cool that I don't want to fix it yet. The fix would
+	# be to make sure "looking" takes place from the
+	# shooter (ship or gun) perspective, not the camera
+	# perspective.
+	var camera := Global.camera_group.get_first_person_camera()
 	var vect_to_cursor := camera.project_ray_normal(Global.input_man.mouse_pos)
 	var vect_to_intercept := intercept - camera.global_position
 	var angle_to:float = vect_to_cursor.angle_to(vect_to_intercept)
@@ -82,6 +93,9 @@ func use_aim_assist_mouse(shooter:Node3D, target:Node3D,
 
 func play_audio(do_use_aim_assist:bool) -> void:
 	if !audio:
+		return
+	# Only play the noise in first person camera
+	if !Global.camera_group.is_first_person():
 		return
 	if do_use_aim_assist and !audio.playing:
 		audio.play()
