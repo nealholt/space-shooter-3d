@@ -14,7 +14,7 @@ class_name HitBoxComponent extends Area3D
 # (as children of CharacterBody3D ships and hit box area).
 # Until I resolve this, I'm going to duplicate code.
 
-@export var health_component:HealthComponent
+var health_component:HealthComponent
 @export var target_text : String = '' ## Text label for this target when it is directly targeted by the player
 @export var reticle_set:TargetReticles.ReticleSet
 var reticle:TargetReticles
@@ -45,6 +45,14 @@ func _ready() -> void:
 			reticle.target_text = target_text
 		elif child is AudioStreamPlayer:
 			got_hit_audio = child
+	# Search peers for a HealthComponent.
+	# Throw an error if not found
+	var p = get_parent()
+	for child in p.get_children():
+		if child is HealthComponent:
+			health_component = child
+	if !health_component:
+		push_error('No peer HealthComponent found for HitBoxComponent.')
 
 
 func damage(amount:float, damager=null):
@@ -89,6 +97,7 @@ func remove_audio() -> void:
 func remove_reticle() -> void:
 	reticle.die()
 	reticle = null
+
 
 # These are called by the missile lock group when
 # targeter is seeking lock on this hitbox,

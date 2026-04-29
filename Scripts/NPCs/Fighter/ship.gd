@@ -290,7 +290,7 @@ func get_mouse_center_radius() -> float:
 
 # ALL THE FOLLOWING CODE IS duplicated from hit_box_component
 # With minor changes because ships don't need the damage_exception
-func damage(amount:float, damager=null):
+func damage(amount:float, _damager=null):
 	if health_component:
 		#Global.friendly_fire_checker(damager, self) #TESTING
 		health_component.health -= amount
