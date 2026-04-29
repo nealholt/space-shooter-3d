@@ -56,7 +56,7 @@ func use_aim_assist(sd:ShootData) -> bool:
 	# do_use_aim_assist is true if angle from where mouse / camera
 	# is looking is within limit, not from where shooter is looking.
 	if shooter == Global.player and Global.input_man.use_mouse_and_keyboard:
-		return use_aim_assist_mouse(shooter, target, intercept)
+		return use_aim_assist_mouse(intercept)
 	# Otherwise calculate whether or not to use aim assist
 	# from the shooter's perspective.
 	var angle_to:float = Global.get_angle_to_target(
@@ -71,8 +71,7 @@ func use_aim_assist(sd:ShootData) -> bool:
 # If angle between two vectors (camera to intercept versus
 # camera to mouse) is less than angle_assist_limit_radians
 # then return true for do_use_aim_assist
-func use_aim_assist_mouse(shooter:Node3D, target:Node3D,
-					intercept:Vector3) -> bool:
+func use_aim_assist_mouse(intercept:Vector3) -> bool:
 	# Use the first person camera! If you use any other
 	# camera, then you'll be able to shoot from a weird angle.
 	# HOWEVER if you use the "look" feature (hold control)
