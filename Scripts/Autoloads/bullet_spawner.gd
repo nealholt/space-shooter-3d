@@ -30,7 +30,6 @@ var damaging_explosion:PackedScene = load('res://Scenes/explosion_damage_dealing
 # Meshes. Purely visual.
 var laser_bolt:PackedScene = load('res://Assets/Projectiles/Bullets/green_laser_bolt.tscn')
 var laser_bolt_giant:PackedScene = load('res://Assets/Projectiles/Bullets/green_laser_bolt_giant.tscn')
-var pellet:PackedScene = load('res://Assets/Projectiles/Bullets/pellet.tscn')
 var pellet_red:PackedScene = load('res://Assets/Projectiles/Bullets/pellet_red.tscn')
 # Contrails. Purely visual
 var contrail:PackedScene = load('res://Scenes/contrail.tscn')
@@ -129,7 +128,7 @@ func _get_seeking_contrail(bt:BULLET_TYPE) -> Projectile:
 
 func _get_timed_fuse() -> Projectile:
 	var projectile := generic_projectile.instantiate()
-	var mesh := pellet.instantiate()
+	var mesh := pellet_red.instantiate()
 	projectile.does_ricochet = false
 	# Attach mesh
 	projectile.add_child(mesh)
