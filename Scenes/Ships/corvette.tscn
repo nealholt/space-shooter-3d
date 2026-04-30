@@ -210,13 +210,14 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("23_lbswy")
 
-[node name="Gun" parent="WeaponHandler" unique_id=1609728349 instance=ExtResource("19_yfprc")]
+[node name="Shotgun" parent="WeaponHandler" unique_id=1609728349 instance=ExtResource("19_yfprc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.455)
 bullet_speed = 500.0
 fire_rate = 3.0
 spread_deg = 5.0
 simultaneous_shots = 8
 
-[node name="TextureRect" type="TextureRect" parent="WeaponHandler/Gun" unique_id=1759730832]
+[node name="TextureRect" type="TextureRect" parent="WeaponHandler/Shotgun" unique_id=1759730832]
 self_modulate = Color(1, 1, 1, 0.529412)
 offset_right = 40.0
 offset_bottom = 40.0
