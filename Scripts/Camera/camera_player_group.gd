@@ -103,12 +103,12 @@ func _ready() -> void:
 	mouse_guide.visible = false
 	# Set cursor images
 	near_center = Sprite2D.new()
-	near_center.texture = load("res://Assets/Images/crosshair177.png")
+	near_center.texture = preload("res://Assets/Images/crosshair177.png")
 	#near_center.scale = Vector2(0.5, 0.5) # Shrink
 	near_center.visible = false
 	add_child(near_center)
 	beyond_center = Sprite2D.new()
-	beyond_center.texture = load("res://Assets/Images/crosshair180.png")
+	beyond_center.texture = preload("res://Assets/Images/crosshair180.png")
 	#beyond_center.scale = Vector2(0.5, 0.5) # Shrink
 	beyond_center.visible = false
 	add_child(beyond_center)

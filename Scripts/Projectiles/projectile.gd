@@ -331,7 +331,7 @@ func start_near_miss_audio() -> void:
 	# If it doesn't exist yet, create it
 	if !near_miss_audio:
 		near_miss_audio = AudioStreamPlayer3D.new()
-		var audiostream = load("res://Assets/SoundEffects/whoosh_medium_001.ogg")
+		var audiostream = preload("res://Assets/SoundEffects/whoosh_medium_001.ogg")
 		near_miss_audio.set_stream(audiostream)
 		add_child(near_miss_audio)
 		near_miss_audio.play()

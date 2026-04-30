@@ -141,25 +141,25 @@ func set_reticle_textures(rs:ReticleSet) -> void:
 	if rs == ReticleSet.FIGHTER:
 		pass # Use all defaults
 	elif rs == ReticleSet.TURRET:
-		$TargetNode2D/TargetReticle.texture = load('res://Assets/Images/crosshair121.png')
-		#$OffscreenNode2D/OffscreenReticle.texture = load() # use default
-		$DistantNode2D/DistantReticle.texture = load('res://Assets/Images/crosshair120.png')
-		$TargetedNode2D/TargetedReticle.texture = load('res://Assets/Images/crosshair134.png')
+		$TargetNode2D/TargetReticle.texture = preload('res://Assets/Images/crosshair121.png')
+		#$OffscreenNode2D/OffscreenReticle.texture = preload() # use default
+		$DistantNode2D/DistantReticle.texture = preload('res://Assets/Images/crosshair120.png')
+		$TargetedNode2D/TargetedReticle.texture = preload('res://Assets/Images/crosshair134.png')
 	elif rs == ReticleSet.WEAKPOINT:
-		$TargetNode2D/TargetReticle.texture = load('res://Assets/Images/crosshair044.png')
-		#$OffscreenNode2D/OffscreenReticle.texture = load() # use default
-		$DistantNode2D/DistantReticle.texture = load('res://Assets/Images/crosshair043.png')
-		$TargetedNode2D/TargetedReticle.texture = load('res://Assets/Images/crosshair050.png')
+		$TargetNode2D/TargetReticle.texture = preload('res://Assets/Images/crosshair044.png')
+		#$OffscreenNode2D/OffscreenReticle.texture = preload() # use default
+		$DistantNode2D/DistantReticle.texture = preload('res://Assets/Images/crosshair043.png')
+		$TargetedNode2D/TargetedReticle.texture = preload('res://Assets/Images/crosshair050.png')
 	elif rs == ReticleSet.REACTOR:
-		$TargetNode2D/TargetReticle.texture = load('res://Assets/Images/crosshair056.png')
-		#$OffscreenNode2D/OffscreenReticle.texture = load() # use default
-		$DistantNode2D/DistantReticle.texture = load('res://Assets/Images/crosshair057.png')
-		$TargetedNode2D/TargetedReticle.texture = load('res://Assets/Images/crosshair058.png')
+		$TargetNode2D/TargetReticle.texture = preload('res://Assets/Images/crosshair056.png')
+		#$OffscreenNode2D/OffscreenReticle.texture = preload() # use default
+		$DistantNode2D/DistantReticle.texture = preload('res://Assets/Images/crosshair057.png')
+		$TargetedNode2D/TargetedReticle.texture = preload('res://Assets/Images/crosshair058.png')
 	elif rs == ReticleSet.MISSILE:
-		$TargetNode2D/TargetReticle.texture = load('res://Assets/Images/crosshair085.png')
-		#$OffscreenNode2D/OffscreenReticle.texture = load() # use default
-		$DistantNode2D/DistantReticle.texture = load('res://Assets/Images/crosshair086.png')
-		$TargetedNode2D/TargetedReticle.texture = load('res://Assets/Images/crosshair101.png')
+		$TargetNode2D/TargetReticle.texture = preload('res://Assets/Images/crosshair085.png')
+		#$OffscreenNode2D/OffscreenReticle.texture = preload() # use default
+		$DistantNode2D/DistantReticle.texture = preload('res://Assets/Images/crosshair086.png')
+		$TargetedNode2D/TargetedReticle.texture = preload('res://Assets/Images/crosshair101.png')
 	else: #if rs == ReticleSet.NONE:
 		# Not only should there be no reticle, but delete self.
 		# Last I checked, only shields do this. No independent
