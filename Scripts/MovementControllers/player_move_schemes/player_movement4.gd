@@ -27,7 +27,8 @@ class_name PlayerMovement4 extends CharacterBodyControlParent
 # "asteroids" controls.
 #     No brakes (EXCEPT WE KEPT THEM IN FOR TESTING PURPOSES)
 
-#Strength of movements under standard motion
+# Strength of movements for the right stick. This is
+# an experiment to fly with both sticks.
 var roll_std_right_stick: float = 2.0
 var pitch_std_right_stick: float = 0.4
 #Standard air friction and forward impulse
@@ -43,18 +44,6 @@ var impulse_brake: float = 0.0
 # If turn_reduction_factor is 10, then every 10 difference
 # between speed and default speed will divide turn rate by 1 more.
 var turn_reduction_factor:float = 40.0
-
-# Can't accelerate forever. These variables control how
-# long ship can accelerate and how long it takes for the
-# acceleration bar to refill.
-var accel_max_duration:float = 500.0 # seconds Used to be 5.0, but I didn't like the "feature"
-var accel_available:float = 500.0 # seconds Used to be 5.0, but I didn't like the "feature"
-# accel_regen_rate will be multiplied by delta. The result
-# will be added to accel_available
-var accel_regen_rate:float = 100.0 #Used to be 1.0, but I didn't like the "feature"
-# Can't accelerate if accel_available is less than accel_min
-var accel_min:float = 1.5
-var is_accelerating:bool
 
 var is_dead := false
 
@@ -77,19 +66,11 @@ func move_and_turn(mover, delta:float) -> void:
 	
 	im.update()
 	
-	is_accelerating = false
 	friction = friction_std
 	
 	var pitch_modifier: float = 1.0
 	var roll_modifier: float = 1.0
 	var yaw_modifier: float = 1.0
-	
-	# Can't start to accelerate unless sufficient "fuel"
-	# is available. Can continue to accelerate down to
-	# zero if accel button is already held down.
-	var can_accelerate = true
-	if im.accelerate:
-		can_accelerate = accel_available > accel_min
 	
 	#Brake
 	if im.brake:
@@ -100,14 +81,9 @@ func move_and_turn(mover, delta:float) -> void:
 		roll_modifier = 1.5
 		yaw_modifier = 1.5
 	#Accelerate
-	elif im.accelerate and can_accelerate:
-		# Acceleration is now limited by a rechargeable resource
-		# stored in the accel_available variable.
-		is_accelerating = accel_available > 0
-		if is_accelerating:
-			impulse = lerp(impulse, stats.impulse_accel, stats.impulse_lerp*delta)
-			#impulse = impulse_accel
-			accel_available -= delta
+	elif im.accelerate:
+		impulse = lerp(impulse, stats.impulse_accel, stats.impulse_lerp*delta)
+		#impulse = impulse_accel
 		# Reduced maneuverability while accelerating
 		pitch_modifier = stats.pitch_accel
 		roll_modifier = stats.roll_accel
@@ -123,10 +99,6 @@ func move_and_turn(mover, delta:float) -> void:
 		yaw_modifier = 0.7
 	else:
 		impulse = lerp(impulse, stats.impulse_std, stats.impulse_lerp*delta)
-	
-	# Recharge acceleration "fuel"
-	if !im.accelerate:
-		accel_available = min(accel_available+accel_regen_rate*delta, accel_max_duration)
 	
 	# Calculate reduced turn rate based on difference
 	# between speed and default speed.
