@@ -36,12 +36,6 @@ var weapon_handler:WeaponHandler
 @export var side_cam_position := Vector3(0, 0, 0)
 @export var side_cam_rotation_deg := Vector3(0, -135, 0)
 
-# I added the following in so I could parameterize the
-# PlayerCorvette differently on the asteroids level.
-# This is probably hacky and bad, but whatever.
-@export var impulse_std:float = -1.0 ## standard impulse. If -1 is used, default controller values will be used.
-@export var impulse_accel:float = -1.0 ## acceleration impulse. If -1 is used, default controller values will be used.
-
 # Maximum collision damage is received at 180 degree
 # collisions (head on). Collision damage drops off
 # linearly down to 1 at the minimum at 90 degrees or less.
@@ -110,11 +104,6 @@ func _ready() -> void:
 			burning_trail = child
 		elif child is CharacterBodyControlParent and !disable_for_testing:
 			controller = child
-			# Pass export var values to controller
-			if impulse_std != -1.0:
-				controller.impulse_std = impulse_std
-			if impulse_accel != -1.0:
-				controller.impulse_accel = impulse_accel
 		elif child is EngineAV:
 			engineAV = child
 		elif child is HealthComponent:

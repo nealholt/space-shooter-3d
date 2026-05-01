@@ -28,19 +28,15 @@ class_name PlayerMovement4 extends CharacterBodyControlParent
 #     No brakes (EXCEPT WE KEPT THEM IN FOR TESTING PURPOSES)
 
 #Strength of movements under standard motion
-var pitch_std: float = 1.8
-var roll_std_left_stick: float = 0.6
 var roll_std_right_stick: float = 2.0
 var pitch_std_right_stick: float = 0.4
-var yaw_std: float = 0.6
 #Standard air friction and forward impulse
-var friction_std: float = 0.8 # Lower is closer "asteroids" controls
+var friction_std: float = 0.8 # Lower is closer to "asteroids" controls
 #var friction_lerp: float =  2.4
 
-#forward motion
-var impulse_std: float = 60.0
-var impulse_accel: float = 6500.0
+# impulse while braking
 var impulse_brake: float = 0.0
+# amount to lerp the impulse
 var impulse_lerp: float = 1.0
 
 # Scaling factor for reducing turn rate as a function of speed
@@ -68,7 +64,7 @@ var im : InputManager
 
 
 func _ready() -> void:
-	impulse = impulse_std
+	impulse = stats.impulse_std
 	im = Global.input_man
 	# Tell the global script who the player is.
 	# Since this is a player controller, it SHOULD
@@ -85,8 +81,6 @@ func move_and_turn(mover, delta:float) -> void:
 	
 	is_accelerating = false
 	friction = friction_std
-	
-	impulse = impulse_std
 	
 	var pitch_modifier: float = 1.0
 	var roll_modifier: float = 1.0
@@ -113,13 +107,13 @@ func move_and_turn(mover, delta:float) -> void:
 		# stored in the accel_available variable.
 		is_accelerating = accel_available > 0
 		if is_accelerating:
-			impulse = lerp(impulse, impulse_accel, impulse_lerp*delta)
+			impulse = lerp(impulse, stats.impulse_accel, impulse_lerp*delta)
 			#impulse = impulse_accel
 			accel_available -= delta
 		# Reduced maneuverability while accelerating
-		pitch_modifier = 0.3
-		roll_modifier = 0.3
-		yaw_modifier = 0.3
+		pitch_modifier = stats.pitch_accel
+		roll_modifier = stats.roll_accel
+		yaw_modifier = stats.yaw_accel
 	#Drift
 	elif im.drift:
 		# I like that drift snaps straight to zero impulse and friction
@@ -129,6 +123,8 @@ func move_and_turn(mover, delta:float) -> void:
 		pitch_modifier = 0.7
 		roll_modifier = 0.7
 		yaw_modifier = 0.7
+	else:
+		impulse = lerp(impulse, stats.impulse_std, impulse_lerp*delta)
 	
 	handle_engine_audio(mover)
 	
@@ -141,24 +137,24 @@ func move_and_turn(mover, delta:float) -> void:
 	# Don't apply if drifting.
 	if !im.drift:
 		var speed:float = mover.velocity.length()
-		var turn_reduction:float = max(abs(speed-impulse_std/friction_std) / turn_reduction_factor, 1.0)
+		var turn_reduction:float = max(abs(speed-stats.impulse_std/friction_std) / turn_reduction_factor, 1.0)
 		pitch_modifier /= turn_reduction
 		roll_modifier /= turn_reduction
 		yaw_modifier /= turn_reduction
 	
 	# Get pitch
 	pitch_input = lerp(pitch_input,
-		(im.up_down1*pitch_std + im.up_down2*pitch_std_right_stick) * pitch_modifier,
+		(im.up_down1*stats.pitch_std + im.up_down2*pitch_std_right_stick) * pitch_modifier,
 		lerp_strength*delta)
 	
 	# Get Roll
 	# Right stick's roll is not affected by roll modifiers
 	roll_input = lerp(roll_input,
-		(im.left_right1*roll_std_left_stick + im.left_right2*roll_std_right_stick) * roll_modifier,
+		(im.left_right1*stats.roll_std + im.left_right2*roll_std_right_stick) * roll_modifier,
 		lerp_strength*delta)
 	# Get yaw using same left stick input as roll
 	yaw_input = lerp(yaw_input,
-		im.left_right1*yaw_std*yaw_modifier,
+		im.left_right1*stats.yaw_std*yaw_modifier,
 		lerp_strength*delta)
 	
 	super.move_and_turn(mover, delta)

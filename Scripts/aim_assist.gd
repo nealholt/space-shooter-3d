@@ -94,7 +94,7 @@ func play_audio(do_use_aim_assist:bool) -> void:
 	if !audio:
 		return
 	# Only play the noise in first person camera
-	if !Global.camera_group.is_first_person():
+	if !is_instance_valid(Global.camera_group) or !Global.camera_group.is_first_person():
 		return
 	if do_use_aim_assist and !audio.playing:
 		audio.play()

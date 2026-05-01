@@ -23,12 +23,8 @@ var states : Dictionary = {}
 var shooting_angle:float
 
 # Modifiers for movement amount
-@export var speed: float = 70.0 ## z axis speed. Forward / backward
 @export var x_speed: float = 0.0 ## Left / right speed.
 @export var y_speed: float = 0.0 ## Up / down speed.
-@export var pitch_amt: float = 0.8
-@export var roll_amt: float = 0.8
-@export var yaw_amt: float = 0.1
 
 @export var speed_lerp: float = 10.0
 @export var lerp_str: float = 3.0 # for turning
@@ -101,7 +97,7 @@ func move_and_turn(mover, delta:float) -> void:
 	if target and is_instance_valid(target):
 		# ... to shoot the main gun at the target ...
 		# Default to using ship speed
-		var temp_speed:float = speed
+		var temp_speed:float = mover.velocity.length()
 		# But if there is a gun, we want to lead the
 		# target using bullet speed.
 		if gun:
@@ -117,10 +113,10 @@ func move_and_turn(mover, delta:float) -> void:
 		current_state.Physics_Update(delta)
 	# Move
 	# Lerp toward desired settings
-	pitch_input = lerp(pitch_input, movement_profile.goal_pitch * pitch_amt, lerp_str*delta)
-	roll_input = lerp(roll_input, movement_profile.goal_roll * roll_amt, lerp_str*delta)
-	yaw_input = lerp(yaw_input, movement_profile.goal_yaw * yaw_amt, lerp_str*delta)
-	impulse = lerp(impulse, movement_profile.goal_speed * speed, speed_lerp*delta)
+	pitch_input = lerp(pitch_input, movement_profile.goal_pitch * stats.pitch_std, lerp_str*delta)
+	roll_input = lerp(roll_input, movement_profile.goal_roll * stats.roll_std, lerp_str*delta)
+	yaw_input = lerp(yaw_input, movement_profile.goal_yaw * stats.yaw_std, lerp_str*delta)
+	impulse = lerp(impulse, movement_profile.goal_speed * stats.impulse_std, speed_lerp*delta)
 	x_impulse = lerp(x_impulse, movement_profile.goal_strafe_x * x_speed, speed_lerp*delta)
 	y_impulse = lerp(y_impulse, movement_profile.goal_strafe_y * y_speed, speed_lerp*delta)
 	

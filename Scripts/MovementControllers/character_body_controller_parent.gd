@@ -3,6 +3,8 @@ class_name CharacterBodyControlParent extends Node
 # Parent class for movement controllers for fighters,
 # whether NPC or player
 
+@export var stats:ControllerStats
+
 # Currently targeted hitbox
 var target:Node3D
 
