@@ -20,14 +20,6 @@ var y_impulse: float = 0.0 # strafe up / down
 
 var ballistic:bool = false # When true, friction goes to zero
 
-#This is the strength of the lerp.
-# 0.01 is incredibly sluggish and floaty
-# Even 0.1 is quite responsive, but a bit gradual
-# 1.0 is no lerp at all. aka immediate snap to target value.
-# but these values are relevant AFTER multiplying by delta
-# so typically 1/60th of this value
-var lerp_strength: float =  4.0
-
 # The following two variables get set by team_setup.gd
 var ally_team:String
 var enemy_team:String

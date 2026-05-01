@@ -26,9 +26,6 @@ var shooting_angle:float
 @export var x_speed: float = 0.0 ## Left / right speed.
 @export var y_speed: float = 0.0 ## Up / down speed.
 
-@export var speed_lerp: float = 10.0
-@export var lerp_str: float = 3.0 # for turning
-
 @export var target_capital_ships : bool = false
 
 # THESE ARE NOT CAPITAL SHIP VARIABLES.
@@ -113,12 +110,12 @@ func move_and_turn(mover, delta:float) -> void:
 		current_state.Physics_Update(delta)
 	# Move
 	# Lerp toward desired settings
-	pitch_input = lerp(pitch_input, movement_profile.goal_pitch * stats.pitch_std, lerp_str*delta)
-	roll_input = lerp(roll_input, movement_profile.goal_roll * stats.roll_std, lerp_str*delta)
-	yaw_input = lerp(yaw_input, movement_profile.goal_yaw * stats.yaw_std, lerp_str*delta)
-	impulse = lerp(impulse, movement_profile.goal_speed * stats.impulse_std, speed_lerp*delta)
-	x_impulse = lerp(x_impulse, movement_profile.goal_strafe_x * x_speed, speed_lerp*delta)
-	y_impulse = lerp(y_impulse, movement_profile.goal_strafe_y * y_speed, speed_lerp*delta)
+	pitch_input = lerp(pitch_input, movement_profile.goal_pitch * stats.pitch_std, stats.turning_lerp*delta)
+	roll_input = lerp(roll_input, movement_profile.goal_roll * stats.roll_std, stats.turning_lerp*delta)
+	yaw_input = lerp(yaw_input, movement_profile.goal_yaw * stats.yaw_std, stats.turning_lerp*delta)
+	impulse = lerp(impulse, movement_profile.goal_speed * stats.impulse_std, stats.impulse_lerp*delta)
+	x_impulse = lerp(x_impulse, movement_profile.goal_strafe_x * x_speed, stats.impulse_lerp*delta)
+	y_impulse = lerp(y_impulse, movement_profile.goal_strafe_y * y_speed, stats.impulse_lerp*delta)
 	
 	ballistic = movement_profile.ballistic
 	

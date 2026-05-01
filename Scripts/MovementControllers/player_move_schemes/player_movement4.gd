@@ -36,8 +36,6 @@ var friction_std: float = 0.8 # Lower is closer to "asteroids" controls
 
 # impulse while braking
 var impulse_brake: float = 0.0
-# amount to lerp the impulse
-var impulse_lerp: float = 1.0
 
 # Scaling factor for reducing turn rate as a function of speed
 # The smaller this number is, the more turn rate will be
@@ -107,7 +105,7 @@ func move_and_turn(mover, delta:float) -> void:
 		# stored in the accel_available variable.
 		is_accelerating = accel_available > 0
 		if is_accelerating:
-			impulse = lerp(impulse, stats.impulse_accel, impulse_lerp*delta)
+			impulse = lerp(impulse, stats.impulse_accel, stats.impulse_lerp*delta)
 			#impulse = impulse_accel
 			accel_available -= delta
 		# Reduced maneuverability while accelerating
@@ -124,7 +122,7 @@ func move_and_turn(mover, delta:float) -> void:
 		roll_modifier = 0.7
 		yaw_modifier = 0.7
 	else:
-		impulse = lerp(impulse, stats.impulse_std, impulse_lerp*delta)
+		impulse = lerp(impulse, stats.impulse_std, stats.impulse_lerp*delta)
 	
 	# Recharge acceleration "fuel"
 	if !im.accelerate:
@@ -143,16 +141,16 @@ func move_and_turn(mover, delta:float) -> void:
 	# Get pitch
 	pitch_input = lerp(pitch_input,
 		(im.up_down1*stats.pitch_std + im.up_down2*pitch_std_right_stick) * pitch_modifier,
-		lerp_strength*delta)
+		stats.turning_lerp*delta)
 	
 	# Get Roll
 	roll_input = lerp(roll_input,
 		(im.left_right1*stats.roll_std + im.left_right2*roll_std_right_stick) * roll_modifier,
-		lerp_strength*delta)
+		stats.turning_lerp*delta)
 	# Get yaw using same left stick input as roll
 	yaw_input = lerp(yaw_input,
 		im.left_right1*stats.yaw_std*yaw_modifier,
-		lerp_strength*delta)
+		stats.turning_lerp*delta)
 	
 	super.move_and_turn(mover, delta)
 
