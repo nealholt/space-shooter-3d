@@ -1,17 +1,12 @@
 class_name BallisticMovement3 extends CharacterBodyControlParent
 
 #Strength of movements under standard motion
-var pitch_std: float = 1.0
-var roll_std_left_stick: float = 0.6
 var roll_std_right_stick: float = 1.2
-var yaw_std: float = 0.6
 #Standard air friction and forward impulse
 var friction_std: float = 0.99
 #var friction_lerp: float =  2.4
 
 #forward motion
-var impulse_std: float = 70.0
-var impulse_accel: float = 100.0
 var impulse_brake: float = 0.0
 var impulse_lerp: float =  0.2
 
@@ -21,7 +16,7 @@ var im : InputManager
 
 
 func _ready() -> void:
-	impulse = impulse_std
+	impulse = stats.impulse_std
 	im = Global.input_man
 	# Tell the global script who the player is.
 	# Since this is a player controller, it SHOULD
@@ -55,7 +50,7 @@ func move_and_turn(mover, delta:float) -> void:
 	#Accelerate
 	elif im.accelerate:
 		#impulse = lerp(impulse, impulse_accel, impulse_lerp*delta)
-		impulse = impulse_accel
+		impulse = stats.impulse_accel
 		# Reduced maneuverability while accelerating
 		pitch_modifier = 0.9
 		roll_modifier = 0.9
@@ -71,21 +66,21 @@ func move_and_turn(mover, delta:float) -> void:
 		yaw_modifier = 1.3
 	else:
 		#impulse = lerp(impulse, impulse_std, impulse_lerp*delta)
-		impulse = impulse_std
+		impulse = stats.impulse_std
 
 	# Get pitch
 	pitch_input = lerp(pitch_input,
-		im.up_down1*pitch_std*pitch_modifier,
+		im.up_down1*stats.pitch_std*pitch_modifier,
 		lerp_strength*delta)
 
 	# Get Roll
 	# Right stick's roll is not effected by roll modifiers
 	roll_input = lerp(roll_input,
-		im.left_right1*roll_std_left_stick*roll_modifier + im.left_right2*roll_std_right_stick,
+		im.left_right1*stats.roll_std*roll_modifier + im.left_right2*roll_std_right_stick,
 		lerp_strength*delta)
 	# Get yaw using same left stick input as roll
 	yaw_input = lerp(yaw_input,
-		im.left_right1*yaw_std*yaw_modifier,
+		im.left_right1*stats.yaw_std*yaw_modifier,
 		lerp_strength*delta)
 	
 	super.move_and_turn(mover, delta)

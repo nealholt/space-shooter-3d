@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://d16idtxuqv0yq"]
 
 [ext_resource type="Script" uid="uid://luvhoyel52t" path="res://Scripts/MovementControllers/player_move_schemes/ballistic_movement3.gd" id="1_nn7bi"]
+[ext_resource type="Script" uid="uid://c4rebesbspn8" path="res://Resources/Ships/controller_stats.gd" id="2_78sy1"]
+
+[sub_resource type="Resource" id="Resource_tyfas"]
+script = ExtResource("2_78sy1")
+metadata/_custom_type_script = "uid://c4rebesbspn8"
 
 [node name="BallisticMovementV3" type="Node" unique_id=452116034]
 script = ExtResource("1_nn7bi")
+stats = SubResource("Resource_tyfas")
