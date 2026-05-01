@@ -146,7 +146,6 @@ func move_and_turn(mover, delta:float) -> void:
 		lerp_strength*delta)
 	
 	# Get Roll
-	# Right stick's roll is not affected by roll modifiers
 	roll_input = lerp(roll_input,
 		(im.left_right1*stats.roll_std + im.left_right2*roll_std_right_stick) * roll_modifier,
 		lerp_strength*delta)

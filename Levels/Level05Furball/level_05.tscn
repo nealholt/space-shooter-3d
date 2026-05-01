@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/Shield/shield.tscn" id="6_to6tu"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="8_x3qal"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="9_24hf6"]
-[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="9_vskk7"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="9_x3qal"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hrnrq"]
 panorama = ExtResource("2_24hf6")
@@ -31,16 +31,16 @@ adjustment_brightness = 0.9
 adjustment_contrast = 1.1
 adjustment_saturation = 1.3
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wosky"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_24hf6"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("8_x3qal")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_jhttu"]
+[sub_resource type="SphereMesh" id="SphereMesh_x3qal"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_wosky")
+material = SubResource("ShaderMaterial_24hf6")
 
 [node name="Level05" type="Node3D" unique_id=781614166]
 script = ExtResource("1_02qsi")
@@ -154,12 +154,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 165)
 is_player = true
 
 [node name="FresnelAura" parent="BlueTeam/PlayerCorvette/Shield" parent_id_path=PackedInt32Array(1134075911, 2025902563) index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_jhttu")
+mesh = SubResource("SphereMesh_x3qal")
 
 [node name="HitScanGun" parent="BlueTeam/PlayerCorvette/WeaponHandler" parent_id_path=PackedInt32Array(1134075911, 370825666) index="2" unique_id=1687734169]
 fire_rate = 1.0
 
-[node name="BallisticMovementV3" parent="BlueTeam/PlayerCorvette" unique_id=452116034 instance=ExtResource("9_vskk7")]
+[node name="PlayerMovementV4" parent="BlueTeam/PlayerCorvette" unique_id=1908608534 instance=ExtResource("9_x3qal")]
 
 [node name="VictoryLayer" parent="." unique_id=1967853426 instance=ExtResource("9_24hf6")]
 visible = false

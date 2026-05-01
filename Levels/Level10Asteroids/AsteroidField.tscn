@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="4_wdfow"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="5_pnlws"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="6_xl1h2"]
-[ext_resource type="PackedScene" uid="uid://d16idtxuqv0yq" path="res://Scenes/MovementControllers/player_move_schemes/ballistic_movement_v_3.tscn" id="7_pnlws"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="7_pnlws"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1cmtw"]
 panorama = ExtResource("2_xl1h2")
@@ -50,8 +50,6 @@ team = "blue team"
 
 [node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("5_pnlws")]
 is_player = true
-impulse_std = 0.0
-impulse_accel = 1000.0
 
 [node name="AimAssist" parent="BlueTeam/Fighter" index="0" unique_id=936755743]
 angle_assist_limit = 5.0
@@ -61,6 +59,6 @@ bullet_speed = 800.0
 fire_rate = 16.0
 reload_sound = 1
 
-[node name="BallisticMovementV3" parent="BlueTeam/Fighter" unique_id=452116034 instance=ExtResource("7_pnlws")]
+[node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=1908608534 instance=ExtResource("7_pnlws")]
 
 [editable path="BlueTeam/Fighter"]
