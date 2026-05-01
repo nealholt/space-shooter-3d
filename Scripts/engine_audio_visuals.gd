@@ -35,14 +35,45 @@ enum EngineState {
 	BRAKE
 }
 
+# This will refer to the global input manager IF the
+# parent of this scene is the player.
+var im : InputManager
+
 
 func _ready() -> void:
 	engine_audio.play()
+	set_process(false) # Don't run the process function
+	setup_engine_av.call_deferred()
 
 
 # Testing
 #func _process(_delta: float) -> void:
 	#print(engine_audio.pitch_scale)
+
+
+func setup_engine_av() -> void:
+	# Only connect to the input manager and run
+	# the process function if parent of this
+	# scene is the player
+	var p = get_parent()
+	if p == Global.player:
+		im = Global.input_man
+		set_process(true)
+
+
+func _process(_delta: float) -> void:
+	# Modulate sounds based on player's inputs.
+	
+	# NOTE! These transition time numbers
+	# are based on nothing in particular!
+	if im.brake:
+		shift2brake(0.0)
+	elif im.accelerate:
+		shift2afterburners(4.0)
+	elif im.drift:
+		shift2drift(1.0)
+	else:
+		shift2default(2.0)
 
 
 func shift2afterburners(time:float) -> void:

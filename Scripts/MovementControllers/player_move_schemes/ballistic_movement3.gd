@@ -37,8 +37,6 @@ func move_and_turn(mover, delta:float) -> void:
 	var roll_modifier: float = 1.0
 	var yaw_modifier: float = 1.0
 	
-	handle_engine_audio(mover)
-	
 	#Brake
 	if im.brake:
 		#impulse = lerp(impulse, impulse_brake, impulse_lerp*delta)
@@ -84,21 +82,6 @@ func move_and_turn(mover, delta:float) -> void:
 		lerp_strength*delta)
 	
 	super.move_and_turn(mover, delta)
-
-
-func handle_engine_audio(mover) -> void:
-	if !mover.engineAV:
-		return
-	# NOTE! These transition time numbers
-	# are based on nothing in particular!
-	if im.brake:
-		mover.engineAV.shift2brake(0.0)
-	elif im.accelerate:
-		mover.engineAV.shift2afterburners(4.0)
-	elif im.drift:
-		mover.engineAV.shift2drift(1.0)
-	else:
-		mover.engineAV.shift2default(2.0)
 
 
 # Override parent class function
