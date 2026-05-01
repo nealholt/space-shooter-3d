@@ -110,10 +110,10 @@ func move_and_turn(mover, delta:float) -> void:
 		current_state.Physics_Update(delta)
 	# Move
 	# Lerp toward desired settings
-	pitch_input = lerp(pitch_input, movement_profile.goal_pitch * stats.pitch_std, stats.turning_lerp*delta)
-	roll_input = lerp(roll_input, movement_profile.goal_roll * stats.roll_std, stats.turning_lerp*delta)
-	yaw_input = lerp(yaw_input, movement_profile.goal_yaw * stats.yaw_std, stats.turning_lerp*delta)
-	impulse = lerp(impulse, movement_profile.goal_speed * stats.impulse_std, stats.impulse_lerp*delta)
+	pitch_input = lerp(pitch_input, movement_profile.goal_pitch * stats.pitch, stats.turning_lerp*delta)
+	roll_input = lerp(roll_input, movement_profile.goal_roll * stats.roll, stats.turning_lerp*delta)
+	yaw_input = lerp(yaw_input, movement_profile.goal_yaw * stats.yaw, stats.turning_lerp*delta)
+	impulse = lerp(impulse, movement_profile.goal_speed * stats.impulse, stats.impulse_lerp*delta)
 	x_impulse = lerp(x_impulse, movement_profile.goal_strafe_x * x_speed, stats.impulse_lerp*delta)
 	y_impulse = lerp(y_impulse, movement_profile.goal_strafe_y * y_speed, stats.impulse_lerp*delta)
 	

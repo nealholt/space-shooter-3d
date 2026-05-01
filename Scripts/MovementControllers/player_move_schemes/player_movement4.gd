@@ -33,10 +33,17 @@ var roll_std_right_stick: float = 2.0
 var pitch_std_right_stick: float = 0.4
 #Standard air friction and forward impulse
 var friction_std: float = 0.8 # Lower is closer to "asteroids" controls
-#var friction_lerp: float =  2.4
 
 # impulse while braking
 var impulse_brake: float = 0.0
+
+# Amount of forward impulse, pitch, roll, and yaw
+# under acceleration. Typically maneuverability is
+# reduced under acceleration.
+var impulse_accel := 200.0
+var pitch_accel := 0.6
+var roll_accel := 0.6
+var yaw_accel := 0.3
 
 # Scaling factor for reducing turn rate as a function of speed
 # The smaller this number is, the more turn rate will be
@@ -51,7 +58,7 @@ var im : InputManager
 
 
 func _ready() -> void:
-	impulse = stats.impulse_std
+	impulse = stats.impulse
 	im = Global.input_man
 	# Tell the global script who the player is.
 	# Since this is a player controller, it SHOULD
@@ -82,12 +89,12 @@ func move_and_turn(mover, delta:float) -> void:
 		yaw_modifier = 1.5
 	#Accelerate
 	elif im.accelerate:
-		impulse = lerp(impulse, stats.impulse_accel, stats.impulse_lerp*delta)
+		impulse = lerp(impulse, impulse_accel, stats.impulse_lerp*delta)
 		#impulse = impulse_accel
 		# Reduced maneuverability while accelerating
-		pitch_modifier = stats.pitch_accel
-		roll_modifier = stats.roll_accel
-		yaw_modifier = stats.yaw_accel
+		pitch_modifier = pitch_accel
+		roll_modifier = roll_accel
+		yaw_modifier = yaw_accel
 	#Drift
 	elif im.drift:
 		# I like that drift snaps straight to zero impulse and friction
@@ -98,30 +105,30 @@ func move_and_turn(mover, delta:float) -> void:
 		roll_modifier = 0.7
 		yaw_modifier = 0.7
 	else:
-		impulse = lerp(impulse, stats.impulse_std, stats.impulse_lerp*delta)
+		impulse = lerp(impulse, stats.impulse, stats.impulse_lerp*delta)
 	
 	# Calculate reduced turn rate based on difference
 	# between speed and default speed.
 	# Don't apply if drifting.
 	if !im.drift:
 		var speed:float = mover.velocity.length()
-		var turn_reduction:float = max(abs(speed-stats.impulse_std/friction_std) / turn_reduction_factor, 1.0)
+		var turn_reduction:float = max(abs(speed-stats.impulse/friction_std) / turn_reduction_factor, 1.0)
 		pitch_modifier /= turn_reduction
 		roll_modifier /= turn_reduction
 		yaw_modifier /= turn_reduction
 	
 	# Get pitch
 	pitch_input = lerp(pitch_input,
-		(im.up_down1*stats.pitch_std + im.up_down2*pitch_std_right_stick) * pitch_modifier,
+		(im.up_down1*stats.pitch + im.up_down2*pitch_std_right_stick) * pitch_modifier,
 		stats.turning_lerp*delta)
 	
 	# Get Roll
 	roll_input = lerp(roll_input,
-		(im.left_right1*stats.roll_std + im.left_right2*roll_std_right_stick) * roll_modifier,
+		(im.left_right1*stats.roll + im.left_right2*roll_std_right_stick) * roll_modifier,
 		stats.turning_lerp*delta)
 	# Get yaw using same left stick input as roll
 	yaw_input = lerp(yaw_input,
-		im.left_right1*stats.yaw_std*yaw_modifier,
+		im.left_right1*stats.yaw*yaw_modifier,
 		stats.turning_lerp*delta)
 	
 	super.move_and_turn(mover, delta)
