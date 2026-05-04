@@ -117,8 +117,6 @@ func move_and_turn(mover, delta:float) -> void:
 	x_impulse = lerp(x_impulse, movement_profile.goal_strafe_x * x_speed, stats.impulse_lerp*delta)
 	y_impulse = lerp(y_impulse, movement_profile.goal_strafe_y * y_speed, stats.impulse_lerp*delta)
 	
-	ballistic = movement_profile.ballistic
-	
 	# Call parent class method
 	super.move_and_turn(mover, delta)
 

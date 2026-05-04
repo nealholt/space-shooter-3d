@@ -18,8 +18,6 @@ var impulse: float = 70.0 # z-axis impulse / speed
 var x_impulse: float = 0.0 # strafe left / right
 var y_impulse: float = 0.0 # strafe up / down
 
-var ballistic:bool = false # When true, friction goes to zero
-
 # The following two variables get set by team_setup.gd
 var ally_team:String
 var enemy_team:String
@@ -37,12 +35,8 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 	turn(mover, delta)
 	# New velocity is old velocity * friction + impulse in current direction
 	var new_dir = (-mover.transform.basis.z * impulse + mover.transform.basis.x * x_impulse + mover.transform.basis.y * y_impulse) * delta
-	if ballistic:
-		# No friction
-		mover.velocity = mover.velocity + new_dir
-	else:
-		# Apply friction on a per unit time basis
-		mover.velocity = mover.velocity * (1-clamp(friction*delta,0,1)) + new_dir
+	# Apply friction on a per unit time basis
+	mover.velocity = mover.velocity * (1-clamp(friction*delta,0,1)) + new_dir
 	
 	# Move, collide, and bounce off
 	# Resources used:

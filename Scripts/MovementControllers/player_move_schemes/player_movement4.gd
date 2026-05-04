@@ -27,15 +27,17 @@ class_name PlayerMovement4 extends CharacterBodyControlParent
 # "asteroids" controls.
 #     No brakes (EXCEPT WE KEPT THEM IN FOR TESTING PURPOSES)
 
+# Stats while no inputs are given
+var stats_standard:ControllerStats
+# Stats while braking
+@export var stats_brake:ControllerStats
+
 # Strength of movements for the right stick. This is
 # an experiment to fly with both sticks.
 var roll_std_right_stick: float = 2.0
 var pitch_std_right_stick: float = 0.4
 #Standard air friction and forward impulse
 var friction_std: float = 0.8 # Lower is closer to "asteroids" controls
-
-# impulse while braking
-var impulse_brake: float = 0.0
 
 # Amount of forward impulse, pitch, roll, and yaw
 # under acceleration. Typically maneuverability is
@@ -58,6 +60,8 @@ var im : InputManager
 
 
 func _ready() -> void:
+	# Get a backup reference to the default settings
+	stats_standard = stats
 	impulse = stats.impulse
 	im = Global.input_man
 	# Tell the global script who the player is.
@@ -73,20 +77,13 @@ func move_and_turn(mover, delta:float) -> void:
 	
 	im.update()
 	
-	friction = friction_std
-	
 	var pitch_modifier: float = 1.0
 	var roll_modifier: float = 1.0
 	var yaw_modifier: float = 1.0
 	
 	#Brake
 	if im.brake:
-		#impulse = lerp(impulse, impulse_brake, impulse_lerp*delta)
-		impulse = impulse_brake
-		# Sharper turning while braking
-		pitch_modifier = 1.5
-		roll_modifier = 1.5
-		yaw_modifier = 1.5
+		stats = stats_brake
 	#Accelerate
 	elif im.accelerate:
 		impulse = lerp(impulse, impulse_accel, stats.impulse_lerp*delta)
@@ -105,7 +102,9 @@ func move_and_turn(mover, delta:float) -> void:
 		roll_modifier = 0.7
 		yaw_modifier = 0.7
 	else:
-		impulse = lerp(impulse, stats.impulse, stats.impulse_lerp*delta)
+		stats = stats_standard
+	
+	impulse = lerp(impulse, stats.impulse, stats.impulse_lerp*delta)
 	
 	# Calculate reduced turn rate based on difference
 	# between speed and default speed.
@@ -119,17 +118,18 @@ func move_and_turn(mover, delta:float) -> void:
 	
 	# Get pitch
 	pitch_input = lerp(pitch_input,
-		(im.up_down1*stats.pitch + im.up_down2*pitch_std_right_stick) * pitch_modifier,
+		(im.up_down1*stats.pitch + im.up_down2*pitch_std_right_stick),
 		stats.turning_lerp*delta)
-	
 	# Get Roll
 	roll_input = lerp(roll_input,
-		(im.left_right1*stats.roll + im.left_right2*roll_std_right_stick) * roll_modifier,
+		(im.left_right1*stats.roll + im.left_right2*roll_std_right_stick),
 		stats.turning_lerp*delta)
 	# Get yaw using same left stick input as roll
 	yaw_input = lerp(yaw_input,
-		im.left_right1*stats.yaw*yaw_modifier,
+		im.left_right1*stats.yaw,
 		stats.turning_lerp*delta)
+	
+	friction = stats.friction_std
 	
 	super.move_and_turn(mover, delta)
 

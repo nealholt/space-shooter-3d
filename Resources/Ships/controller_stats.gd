@@ -6,6 +6,10 @@ class_name ControllerStats extends Resource
 @export var pitch := 1.8
 @export var roll := 0.6
 @export var yaw := 0.6
+
+# Standard friction. Zero is "asteroids" controls
+@export var friction_std: float = 0.99
+
 # Amount to lerp the impulse and turning.
 # 0.01 is incredibly sluggish and floaty
 # Even 0.1 is quite responsive, but a bit gradual

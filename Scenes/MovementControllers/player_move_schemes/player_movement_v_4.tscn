@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b0njxo02nbcsu" path="res://Scripts/MovementControllers/player_move_schemes/player_movement4.gd" id="1_4gte8"]
 [ext_resource type="Resource" uid="uid://dsbn6d8px28gd" path="res://Resources/Ships/controller_stats_player.tres" id="2_1sp8d"]
+[ext_resource type="Resource" uid="uid://b26m2tlup8r2t" path="res://Resources/Ships/controller_stats_player_brake.tres" id="2_6is2p"]
 
 [node name="PlayerMovementV4" type="Node" unique_id=1908608534]
 script = ExtResource("1_4gte8")
+stats_brake = ExtResource("2_6is2p")
 stats = ExtResource("2_1sp8d")

@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_liqeq")
+friction_std = 0.8
 metadata/_custom_type_script = "uid://c4rebesbspn8"
