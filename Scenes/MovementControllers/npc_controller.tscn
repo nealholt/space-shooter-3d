@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dpv3fsfu1trkj"]
 
 [ext_resource type="Script" uid="uid://bnw6xd02yadui" path="res://Scripts/NPCs/Fighter/npc_state_controller.gd" id="1_bsujv"]
-[ext_resource type="Script" uid="uid://c4rebesbspn8" path="res://Resources/Ships/controller_stats.gd" id="2_2qc78"]
+[ext_resource type="Resource" uid="uid://ds82ojb1dpxaj" path="res://Resources/Ships/controller_stats_fighter.tres" id="2_2qc78"]
 [ext_resource type="Script" uid="uid://dpu7mi2acxa31" path="res://Scripts/NPCs/Fighter/movement_profile.gd" id="2_hkqme"]
 [ext_resource type="Script" uid="uid://c8d34u5vfldag" path="res://Scripts/NPCs/Fighter/state_stop.gd" id="3_4u817"]
 [ext_resource type="Script" uid="uid://dtv874lfhiow6" path="res://Scripts/NPCs/Fighter/state_loop.gd" id="4_8so7c"]
@@ -15,14 +15,10 @@
 [ext_resource type="Script" uid="uid://bdsf0fc3mi1vk" path="res://Scripts/NPCs/Fighter/state_orbit.gd" id="11_ahqse"]
 [ext_resource type="Script" uid="uid://bhyoavq034h6m" path="res://Scripts/NPCs/Fighter/state_avoid.gd" id="12_kws6a"]
 
-[sub_resource type="Resource" id="Resource_v1biq"]
-script = ExtResource("2_2qc78")
-metadata/_custom_type_script = "uid://c4rebesbspn8"
-
 [node name="NPCController" type="Node" unique_id=1852644041 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_bsujv")
 initial_state = NodePath("States/Seek")
-stats = SubResource("Resource_v1biq")
+stats = ExtResource("2_2qc78")
 
 [node name="MovementProfile" type="Node" parent="." unique_id=1273875585]
 script = ExtResource("2_hkqme")

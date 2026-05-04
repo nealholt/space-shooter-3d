@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ControllerStats" format=3 uid="uid://dick38j62uhh4"]
+
+[ext_resource type="Script" uid="uid://c4rebesbspn8" path="res://Resources/Ships/controller_stats.gd" id="1_n37jf"]
+
+[resource]
+script = ExtResource("1_n37jf")
+impulse = 10.0
+pitch = 0.3
+roll = 0.05
+yaw = 0.05
+impulse_lerp = 0.5
+turning_lerp = 0.5
+metadata/_custom_type_script = "uid://c4rebesbspn8"

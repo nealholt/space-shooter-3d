@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cbhoikklwgc0c" path="res://Scenes/hangar.tscn" id="7_db1yb"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="8_2hhpl"]
 [ext_resource type="PackedScene" uid="uid://dk6y2tyoo25sn" path="res://Scenes/weakpoint.tscn" id="8_sqmai"]
+[ext_resource type="Resource" uid="uid://j7qi0q8tmupn" path="res://Resources/Ships/controller_stats_capship_forward.tres" id="9_2hhpl"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sqmai"]
 points = PackedVector3Array(-50, -30, -50, -50, 29.999996, -50, 50, -30, -50, -50, -30, 50, -50, 29.999996, 50, 50, 29.999996, -50, 50, -30, 50, 50, 29.999996, 50)
@@ -148,16 +149,11 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -150, 0, -45)
 
 [node name="NPCController" parent="." unique_id=1852644041 node_paths=PackedStringArray("initial_state") instance=ExtResource("8_2hhpl")]
 initial_state = NodePath("States/Orbit")
-speed = 3.0
 x_speed = 1.0
 y_speed = 1.0
-pitch_amt = 0.01
-roll_amt = 0.01
-yaw_amt = 0.01
-speed_lerp = 1.0
-lerp_str = 1.0
 target_capital_ships = true
 too_far = 800.0
 too_close = 800.0
+stats = ExtResource("9_2hhpl")
 
 [editable path="NPCController"]
