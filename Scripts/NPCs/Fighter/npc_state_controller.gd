@@ -172,3 +172,5 @@ func go_evasive() -> void:
 # Override parent class function
 func enter_death_animation() -> void:
 	current_state.enter_death_animation()
+	# Go ballistic. No "air" friction.
+	friction = 0.0

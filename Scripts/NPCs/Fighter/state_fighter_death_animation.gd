@@ -5,8 +5,6 @@ class_name StateFighterDeathAnimation extends State
 # including any set up that needs performed.
 func Enter() -> void:
 	super.Enter()
-	# Go ballistic. No "air" friction.
-	motion.ballistic = true
 	# Zero speed because ballistic turns off
 	# friction and the extra speed makes it
 	# go too fast.
