@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dry7yodrwl18u"]
+[gd_scene format=3 uid="uid://dry7yodrwl18u"]
 
-[ext_resource type="Script" uid="uid://c4uiyyj8pln8x" path="res://Scripts/vfx/specific_effects/flak_explosion.gd" id="1_31pgu"]
+[ext_resource type="Script" uid="uid://c4uiyyj8pln8x" path="res://vfx/specific_effects/flak_explosion.gd" id="1_31pgu"]
 [ext_resource type="Material" uid="uid://ck6a2ts7de74c" path="res://Assets/Shaders/material_explosion_cloud.tres" id="1_iyipg"]
 [ext_resource type="AudioStream" uid="uid://bf7kbki88ftmw" path="res://Assets/SoundEffects/flak_explosion.wav" id="2_kbmoq"]
 

@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://58nrpfbay3lf"]
+[gd_scene format=3 uid="uid://58nrpfbay3lf"]
 
-[ext_resource type="Script" uid="uid://btt6vbjkdafk7" path="res://Scripts/vfx/specific_effects/sparks.gd" id="1_fsefw"]
+[ext_resource type="Script" uid="uid://btt6vbjkdafk7" path="res://vfx/specific_effects/sparks.gd" id="1_fsefw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h6vuq"]
 emission_enabled = true

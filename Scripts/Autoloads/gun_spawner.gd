@@ -13,10 +13,10 @@ extends Node
 # certain this separation was necessary. The change from preload
 # to load might have fixed the issue.
 var gun_array:Array[PackedScene] = [
-	load("res://Scenes/Guns/gun.tscn"),
-	load("res://Scenes/Guns/burst_gun.tscn"),
-	load("res://Scenes/Guns/hit_scan_gun.tscn"),
-	load("res://Scenes/Guns/laser_gun.tscn")
+	load("res://Weapons/Guns/gun.tscn"),
+	load("res://Weapons/Guns/burst_gun.tscn"),
+	load("res://Weapons/Guns/hit_scan_gun.tscn"),
+	load("res://Weapons/Guns/laser_gun.tscn")
 	]
 
 enum GUN_TYPE {GUN, BURST, HITSCAN, LASER, NO_GUN}

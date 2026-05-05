@@ -6,7 +6,7 @@ extends Node
 # non referenced file or things like that."
 # The error is this "Parse Error: referenced non-existent resource"
 # and it can be caused by circular references.
-var FIGHTER_SCENE:PackedScene = load("res://Scenes/Ships/fighter.tscn")
+var FIGHTER_SCENE:PackedScene = load("res://Ships/fighter.tscn")
 var NPC_CONTROLLER_SCENE:PackedScene = load("res://Scenes/MovementControllers/npc_controller.tscn")
 
 

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://d3dhiktwvyhus" path="res://Levels/Level08NearMiss/near_miss_testing.gd" id="1_4q2ny"]
 [ext_resource type="Script" uid="uid://dct8roiqo6fdl" path="res://Levels/Level08NearMiss/bullet_spawner_testing.gd" id="2_00mhe"]
-[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="2_yema8"]
-[ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Scenes/Guns/gun.tscn" id="3_fyqj6"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="2_yema8"]
+[ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Weapons/Guns/gun.tscn" id="3_fyqj6"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/Shield/shield.tscn" id="5_h5iwy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vaoif"]

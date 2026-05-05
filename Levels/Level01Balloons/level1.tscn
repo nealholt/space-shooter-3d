@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://d3i1pj3lavuuy" path="res://Levels/Level01Balloons/level1.gd" id="1_dflt6"]
 [ext_resource type="Texture2D" uid="uid://creoqhif83mdb" path="res://Assets/Skyboxes/moon_with_stars.png" id="2_0jw65"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_widnh"]
-[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="4_0jw65"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="4_0jw65"]
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="5_qdonm"]
-[ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="5_vsiph"]
+[ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://UI/victory_layer.tscn" id="5_vsiph"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qdonm"]
 panorama = ExtResource("2_0jw65")

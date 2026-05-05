@@ -60,5 +60,5 @@ func set_team_properties(parent_node) -> void:
 		if child is TargetReticles:
 			child.set_color(reticle_color)
 		
-		if child is Trail3D: # Contrail
+		if child is Contrail:
 			child._startColor = color

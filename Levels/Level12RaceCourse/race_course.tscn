@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://cpbbcxhe4a1pv" path="res://Levels/Level12RaceCourse/race_course.gd" id="1_56dt1"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_56dt1"]
 [ext_resource type="Texture2D" uid="uid://dnjgm2epla1cf" path="res://Assets/Skyboxes/earth_with_stars.png" id="2_va5od"]
-[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="4_va5od"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="4_va5od"]
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="5_gnpxn"]
-[ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://Scenes/UI/victory_layer.tscn" id="5_sc2p3"]
+[ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://UI/victory_layer.tscn" id="5_sc2p3"]
 [ext_resource type="PackedScene" uid="uid://dec2h3fkjfo0m" path="res://Scenes/race_checkpoint.tscn" id="6_56dt1"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_gnpxn"]

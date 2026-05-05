@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://coy483f2kf274" path="res://Scenes/input_manager.tscn" id="2_6l7je"]
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="2_x6ack"]
 [ext_resource type="Theme" uid="uid://b1uy61qicurbh" path="res://Assets/Themes/button_theme.tres" id="3_iacmt"]
-[ext_resource type="Script" uid="uid://csj0vmdw4ljl8" path="res://Scripts/UI/pause_script.gd" id="3_jv6wh"]
+[ext_resource type="Script" uid="uid://csj0vmdw4ljl8" path="res://UI/pause_script.gd" id="3_jv6wh"]
 [ext_resource type="Theme" uid="uid://cgxfk4t3qm477" path="res://Assets/Themes/label_theme.tres" id="4_6ev3c"]
 
 [node name="MainScene" type="Node" unique_id=2077342344]

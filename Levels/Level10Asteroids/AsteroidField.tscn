@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dwtyyrj0kw84u"]
 
-[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Scripts/level.gd" id="1_pnlws"]
+[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Levels/level.gd" id="1_pnlws"]
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Assets/Skyboxes/purple_nebula_complex.png" id="2_xl1h2"]
 [ext_resource type="Script" uid="uid://cggtpwln60668" path="res://Scripts/asteroid_field.gd" id="4_po0pu"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="4_wdfow"]
-[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Scenes/Ships/fighter.tscn" id="5_pnlws"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="5_pnlws"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="6_xl1h2"]
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="7_pnlws"]
 

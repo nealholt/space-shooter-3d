@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://br3bb2mewavvc"]
 
-[ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_usm2i"]
+[ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Ships/ship.gd" id="1_usm2i"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_eniao"]
 [ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Resources/Ships/ship_stats.gd" id="2_pb2je"]
 

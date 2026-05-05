@@ -20,21 +20,21 @@ enum BULLET_TYPE {MISSILE, DUMMY_PLACEHOLDER, BASIC_RAY, SEEKING_MISSILE,
 # gun spawner in order to request bullets... though I'm not
 # certain this separation was necessary. The change from preload
 # to load might have fixed the issue.
-var generic_projectile:PackedScene = load('res://Scenes/Projectiles/projectile.tscn')
+var generic_projectile:PackedScene = load('res://Weapons/Projectiles/projectile.tscn')
 
-var missile_scene:PackedScene = load("res://Scenes/Projectiles/missile.tscn")
+var missile_scene:PackedScene = load("res://Weapons/Projectiles/missile.tscn")
 
 # Damage-dealing explosion
 var damaging_explosion:PackedScene = load('res://Scenes/explosion_damage_dealing.tscn')
 
 # Meshes. Purely visual.
-var laser_bolt:PackedScene = load('res://Assets/Projectiles/Bullets/green_laser_bolt.tscn')
-var laser_bolt_giant:PackedScene = load('res://Assets/Projectiles/Bullets/green_laser_bolt_giant.tscn')
-var pellet_red:PackedScene = load('res://Assets/Projectiles/Bullets/pellet_red.tscn')
+var laser_bolt:PackedScene = load('res://Weapons/Visuals/green_laser_bolt.tscn')
+var laser_bolt_giant:PackedScene = load('res://Weapons/Visuals/green_laser_bolt_giant.tscn')
+var pellet_red:PackedScene = load('res://Weapons/Visuals/pellet_red.tscn')
 # Contrails. Purely visual
-var contrail:PackedScene = load('res://Scenes/contrail.tscn')
+var contrail:PackedScene = load('res://vfx/contrail.tscn')
 # Larger contrail and some flashing GPU particles
-var sparkle_trail:PackedScene = load('res://Assets/Projectiles/sparkle.tscn')
+var sparkle_trail:PackedScene = load('res://Weapons/Visuals/sparkle.tscn')
 
 # Controllers for seeking behaviors
 var physics_seek:PackedScene = load('res://Scenes/MovementControllers/physics_seek_controller.tscn')

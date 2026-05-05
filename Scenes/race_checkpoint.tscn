@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dec2h3fkjfo0m"]
+[gd_scene format=3 uid="uid://dec2h3fkjfo0m"]
 
 [ext_resource type="Texture2D" uid="uid://ce6i4w30wrek0" path="res://Assets/ParticleImages/star_09.png" id="1_3b3r2"]
 [ext_resource type="Script" uid="uid://savoxhna208c" path="res://Scripts/race_checkpoint.gd" id="1_rikje"]
-[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="4_flrl7"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/target_reticles.tscn" id="4_flrl7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iv2jt"]
 albedo_color = Color(1.3945211, 0.7250152, 0.4862042, 1)
