@@ -2,6 +2,8 @@ class_name Ship extends CharacterBody3D
 
 signal destroyed
 
+@export var stats:ShipStats
+
 var aim_assist:AimAssist
 var burning_trail:BurningTrail # This is a visual effect
 var camera_group:CameraGroup
@@ -108,6 +110,7 @@ func _ready() -> void:
 			engineAV = child
 		elif child is HealthComponent:
 			health_component = child
+			health_component.set_max_health(stats.max_health)
 			# Connect signals with code
 			health_component.health_lost.connect(_on_health_component_health_lost)
 			health_component.died.connect(_on_health_component_died)

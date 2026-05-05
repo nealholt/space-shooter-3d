@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://gmbtqjscbh5w"]
 
 [ext_resource type="Script" uid="uid://b0njxo02nbcsu" path="res://Scripts/MovementControllers/player_move_schemes/player_movement4.gd" id="1_4gte8"]
-[ext_resource type="Resource" uid="uid://dsbn6d8px28gd" path="res://Resources/Ships/controller_stats_player.tres" id="2_1sp8d"]
-[ext_resource type="Resource" uid="uid://b26m2tlup8r2t" path="res://Resources/Ships/controller_stats_player_brake.tres" id="2_6is2p"]
-[ext_resource type="Resource" uid="uid://bqbx0xg0mtbcv" path="res://Resources/Ships/controller_stats_player_accel.tres" id="3_jfh1d"]
-[ext_resource type="Resource" uid="uid://dk1smrla75xye" path="res://Resources/Ships/controller_stats_player_drift.tres" id="4_pvlsl"]
+[ext_resource type="Resource" uid="uid://dsbn6d8px28gd" path="res://Resources/Controllers/controller_stats_player.tres" id="2_1sp8d"]
+[ext_resource type="Resource" uid="uid://b26m2tlup8r2t" path="res://Resources/Controllers/controller_stats_player_brake.tres" id="2_6is2p"]
+[ext_resource type="Resource" uid="uid://bqbx0xg0mtbcv" path="res://Resources/Controllers/controller_stats_player_accel.tres" id="3_jfh1d"]
+[ext_resource type="Resource" uid="uid://dk1smrla75xye" path="res://Resources/Controllers/controller_stats_player_drift.tres" id="4_pvlsl"]
 
 [node name="PlayerMovementV4" type="Node" unique_id=1908608534]
 script = ExtResource("1_4gte8")

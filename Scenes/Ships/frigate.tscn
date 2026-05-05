@@ -3,13 +3,19 @@
 [ext_resource type="PackedScene" uid="uid://cxd7ahrv8vrys" path="res://Assets/Ships/frigate_chassis.tscn" id="1_18ao0"]
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_veikt"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_2gkw6"]
+[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Resources/Ships/ship_stats.gd" id="2_yj57s"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/Turret/turret_group.tscn" id="4_7ugl6"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_mh4mh"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Scenes/weapon_handler.tscn" id="7_qbhaa"]
 [ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Scenes/Guns/laser_gun.tscn" id="8_14glc"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="9_6rpyf"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://Scenes/target_reticles.tscn" id="9_14glc"]
-[ext_resource type="Resource" uid="uid://j7qi0q8tmupn" path="res://Resources/Ships/controller_stats_capship_forward.tres" id="10_6rpyf"]
+[ext_resource type="Resource" uid="uid://j7qi0q8tmupn" path="res://Resources/Controllers/controller_stats_capship_forward.tres" id="10_6rpyf"]
+
+[sub_resource type="Resource" id="Resource_ajspe"]
+script = ExtResource("2_yj57s")
+max_health = 400.0
+metadata/_custom_type_script = "uid://llcl4ev3hi63"
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qmjcj"]
 points = PackedVector3Array(-9.53674e-07, 45, 17.5, -9.53674e-07, 45, -17.5, -15, -45, 17.5, 15, -45, 17.5, 15, -45, -17.5, -15, -45, -17.5)
@@ -32,6 +38,7 @@ points = PackedVector3Array(-9.98867, -0.477684, 0, -9.94174, -0.477684, 0.97774
 [node name="Frigate" type="CharacterBody3D" unique_id=584156115 groups=["capital_ship", "damageable", "team member"]]
 motion_mode = 1
 script = ExtResource("1_veikt")
+stats = SubResource("Resource_ajspe")
 deathExplosion = 8
 finalExplosion = 9
 death_animation_duration_min = 0.0

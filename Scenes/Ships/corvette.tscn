@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Scripts/NPCs/Fighter/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Scenes/Guns/burst_gun.tscn" id="2_2p718"]
+[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Resources/Ships/ship_stats.gd" id="2_f4jgf"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="3_yie06"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Scenes/MissileLock/missile_lock_group.tscn" id="4_vmlm7"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="7_vhcpa"]
@@ -29,6 +30,10 @@
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://Scenes/burning_trail.tscn" id="29_w78kn"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="34_80okc"]
 
+[sub_resource type="Resource" id="Resource_tst1b"]
+script = ExtResource("2_f4jgf")
+metadata/_custom_type_script = "uid://llcl4ev3hi63"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyjhj"]
 albedo_color = Color(0.282353, 0.282353, 0.282353, 1)
 metallic = 0.51
@@ -51,20 +56,21 @@ radial_segments = 16
 [sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
 size = Vector3(6, 2.3, 10.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1j34j"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4h8o6"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("34_80okc")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_f4jgf"]
+[sub_resource type="SphereMesh" id="SphereMesh_gxolo"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_1j34j")
+material = SubResource("ShaderMaterial_4h8o6")
 
 [node name="Corvette" type="CharacterBody3D" unique_id=1134075911 groups=["damageable", "team member"]]
 motion_mode = 1
 script = ExtResource("1_bfcrw")
+stats = SubResource("Resource_tst1b")
 fps_cam_position = Vector3(0, 0.6, -2.9)
 side_cam_position = Vector3(2.3, -0.5, -3.5)
 deathExplosion = 9
@@ -152,7 +158,7 @@ fire_rate = 0.3
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_f4jgf")
+mesh = SubResource("SphereMesh_gxolo")
 
 [node name="TargetReticles" parent="." unique_id=689096099 instance=ExtResource("18_g51j4")]
 target_text = "Corvette"
