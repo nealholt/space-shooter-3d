@@ -2,7 +2,7 @@ class_name SoundQueue extends Node
 ## Inspiration came from this tutorial:
 ## Organize Sound In Godot 4 by Cadoink (Mar 6, 2023): https://www.youtube.com/watch?v=bdsHf08QmZ4
 
-const SOUNDQUEUE_SCENE:PackedScene = preload("res://Scenes/audio/sound_queue.tscn")
+const SOUNDQUEUE_SCENE:PackedScene = preload("res://Audio/AudioManager/sound_queue.tscn")
 
 
 var next:int = 0

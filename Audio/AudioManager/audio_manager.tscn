@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cm762fx68amrb"]
 
-[ext_resource type="Script" uid="uid://dn6tsow1n8pb4" path="res://Scripts/Audio/AudioManager.gd" id="1_7o6mq"]
-[ext_resource type="Script" uid="uid://cr1an6d85yksa" path="res://Scripts/Audio/SoundEffectSetting.gd" id="2_lu82t"]
+[ext_resource type="Script" uid="uid://dn6tsow1n8pb4" path="res://Audio/AudioManager/AudioManager.gd" id="1_7o6mq"]
+[ext_resource type="Script" uid="uid://cr1an6d85yksa" path="res://Audio/AudioManager/SoundEffectSetting.gd" id="2_lu82t"]
 [ext_resource type="AudioStream" uid="uid://btsaxnl2sg05y" path="res://Assets/SoundEffects/shot.wav" id="3_ft5o5"]
 [ext_resource type="AudioStream" uid="uid://yjaoqj8agxus" path="res://Assets/SoundEffects/industrial-mechanic-using-rattle-gun-compressed-air-socket-wrench-9944.wav" id="4_2wtmb"]
 [ext_resource type="AudioStream" uid="uid://dcyrwnxgv5hgy" path="res://Assets/SoundEffects/clean-machine-gun-burst-98224.wav" id="5_7nmqq"]

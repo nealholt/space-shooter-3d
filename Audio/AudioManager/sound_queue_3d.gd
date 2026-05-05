@@ -2,7 +2,7 @@ class_name SoundQueue3D extends SoundQueue
 ## Inspiration came from this tutorial:
 ## Organize Sound In Godot 4 by Cadoink (Mar 6, 2023): https://www.youtube.com/watch?v=bdsHf08QmZ4
 
-const SOUNDQUEUE3D_SCENE:PackedScene = preload("res://Scenes/audio/sound_queue_3d.tscn")
+const SOUNDQUEUE3D_SCENE:PackedScene = preload("res://Audio/AudioManager/sound_queue_3d.tscn")
 
 # An array of remote transforms for longer-playing sounds
 # that need to follow an object rather than play briefly

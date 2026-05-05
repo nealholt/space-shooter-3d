@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://2nl4rdec278s"
-path="res://.godot/imported/entering_shield2.wav-74477fd201c99c4f85a8d601d019a1c6.sample"
+path="res://.godot/imported/entering_shield2.wav-0e69a199b441b70d548bece7cd131c6a.sample"
 
 [deps]
 
-source_file="res://Assets/SoundEffects/entering_shield2.wav"
-dest_files=["res://.godot/imported/entering_shield2.wav-74477fd201c99c4f85a8d601d019a1c6.sample"]
+source_file="res://Audio/ShieldTransitAudio/entering_shield2.wav"
+dest_files=["res://.godot/imported/entering_shield2.wav-0e69a199b441b70d548bece7cd131c6a.sample"]
 
 [params]
 

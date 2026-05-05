@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://yp51kcujfd4s"]
 
-[ext_resource type="Script" uid="uid://cc4cugvf41n5m" path="res://Scripts/Shield/shield_transit_audio.gd" id="1_md4xu"]
-[ext_resource type="AudioStream" uid="uid://2nl4rdec278s" path="res://Assets/SoundEffects/entering_shield2.wav" id="2_0stg7"]
-[ext_resource type="AudioStream" uid="uid://2xnhe0tb7h0x" path="res://Assets/SoundEffects/exiting_shield2.wav" id="3_64egw"]
+[ext_resource type="Script" uid="uid://cc4cugvf41n5m" path="res://Audio/ShieldTransitAudio/shield_transit_audio.gd" id="1_md4xu"]
+[ext_resource type="AudioStream" uid="uid://2nl4rdec278s" path="res://Audio/ShieldTransitAudio/entering_shield2.wav" id="2_0stg7"]
+[ext_resource type="AudioStream" uid="uid://2xnhe0tb7h0x" path="res://Audio/ShieldTransitAudio/exiting_shield2.wav" id="3_64egw"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_md4xu"]
 margin = 0.5

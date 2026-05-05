@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bgo5tnwqfjult"
-path="res://.godot/imported/cockpit_ambiance.wav-854b95ef6f324d483a1c37ff2678eeb9.sample"
+path="res://.godot/imported/cockpit_ambiance.wav-f82d2fb9d3a1a109dbc7f8f9b1481995.sample"
 
 [deps]
 
-source_file="res://Assets/SoundEffects/cockpit_ambiance.wav"
-dest_files=["res://.godot/imported/cockpit_ambiance.wav-854b95ef6f324d483a1c37ff2678eeb9.sample"]
+source_file="res://Audio/EngineAudio/cockpit_ambiance.wav"
+dest_files=["res://.godot/imported/cockpit_ambiance.wav-f82d2fb9d3a1a109dbc7f8f9b1481995.sample"]
 
 [params]
 
