@@ -32,15 +32,20 @@ var stats_standard:ControllerStats
 # an experiment to fly with both sticks.
 var roll_std_right_stick: float = 2.0
 var pitch_std_right_stick: float = 0.4
-#Standard air friction and forward impulse
-var friction_std: float = 0.8 # Lower is closer to "asteroids" controls
 
 # Scaling factor for reducing turn rate as a function of speed
 # The smaller this number is, the more turn rate will be
 # reduced at high speed.
 # If turn_reduction_factor is 10, then every 10 difference
 # between speed and default speed will divide turn rate by 1 more.
-var turn_reduction_factor:float = 40.0
+# The practical effect of this is that you can't turn sharply
+# immediately just because you let off the accelerator.
+# You have to wait until your speed goes back down.
+# I'm not sure I like this much. Higher values essentially
+# make this meaningless.
+# The initial impetus was to do something like X-Wing
+# where the best turn rate is at 1/3 max velocity.
+@export_range(1,5000, 10) var turn_reduction_factor:float = 100.0
 
 var is_dead := false
 
@@ -91,7 +96,7 @@ func move_and_turn(mover, delta:float) -> void:
 	# Don't apply if drifting.
 	if !im.drift:
 		var speed:float = mover.velocity.length()
-		var turn_reduction:float = max(abs(speed-stats.impulse/friction_std) / turn_reduction_factor, 1.0)
+		var turn_reduction:float = max(abs(speed-stats.impulse/stats.friction_std) / turn_reduction_factor, 1.0)
 		pitch_modifier /= turn_reduction
 		roll_modifier /= turn_reduction
 		yaw_modifier /= turn_reduction
