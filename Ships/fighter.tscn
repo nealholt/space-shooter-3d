@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Ships/ship.gd" id="1_dn8ab"]
-[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Resources/Ships/ship_stats.gd" id="2_vjc4m"]
+[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="2_vjc4m"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Assets/SoundEffects/aim_assist.wav" id="3_g3b86"]
 [ext_resource type="PackedScene" uid="uid://hpvkerb8hmkp" path="res://Assets/Models/fighter_tri.tscn" id="4_05dih"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Weapons/Guns/gun.tscn" id="4_57m73"]

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dtxyvqvpd4khl" path="res://Scenes/Camera/camera_spectator.tscn" id="5_3l0om"]
 [ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="5_puqp7"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="7_p5kkl"]
-[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="8_cm862"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://MovementControllers/npc_controller.tscn" id="8_cm862"]
 [ext_resource type="PackedScene" uid="uid://diilp2vvcvj53" path="res://Ships/carrier.tscn" id="13_1u6j8"]
 [ext_resource type="PackedScene" uid="uid://ct14xs5b052ay" path="res://Scenes/Asteroids/asteroid_brown.tscn" id="14_sa88o"]
 [ext_resource type="PackedScene" uid="uid://f5ns6ks1l1em" path="res://Scenes/Asteroids/asteroid_foam_and_blue.tscn" id="15_8nwrc"]

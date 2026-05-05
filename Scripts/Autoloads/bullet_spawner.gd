@@ -37,8 +37,8 @@ var contrail:PackedScene = load('res://vfx/contrail.tscn')
 var sparkle_trail:PackedScene = load('res://Weapons/Visuals/sparkle.tscn')
 
 # Controllers for seeking behaviors
-var physics_seek:PackedScene = load('res://Scenes/MovementControllers/physics_seek_controller.tscn')
-var simple_seek:PackedScene = load('res://Scenes/MovementControllers/simple_seek_controller.tscn')
+var physics_seek:PackedScene = load('res://MovementControllers/Seekers/physics_seek_controller.tscn')
+var simple_seek:PackedScene = load('res://MovementControllers/Seekers/simple_seek_controller.tscn')
 
 
 # Guns call this to get a made-to-order bullet

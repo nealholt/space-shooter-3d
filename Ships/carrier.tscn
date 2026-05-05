@@ -3,13 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://du1bwxbrh62at" path="res://Assets/Ships/carrier_chassis.tscn" id="1_67lmr"]
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Ships/ship.gd" id="1_isj6t"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_r2d5f"]
-[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Resources/Ships/ship_stats.gd" id="2_shuyx"]
+[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="2_shuyx"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Scenes/Turret/turret_group.tscn" id="4_h1ncn"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Scripts/Turret/turret_data.gd" id="5_cyiqs"]
 [ext_resource type="PackedScene" uid="uid://cbhoikklwgc0c" path="res://Scenes/hangar.tscn" id="7_db1yb"]
-[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Scenes/MovementControllers/npc_controller.tscn" id="8_2hhpl"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://MovementControllers/npc_controller.tscn" id="8_2hhpl"]
 [ext_resource type="PackedScene" uid="uid://dk6y2tyoo25sn" path="res://Scenes/weakpoint.tscn" id="8_sqmai"]
-[ext_resource type="Resource" uid="uid://j7qi0q8tmupn" path="res://Resources/Controllers/controller_stats_capship_forward.tres" id="9_2hhpl"]
+[ext_resource type="Resource" uid="uid://j7qi0q8tmupn" path="res://MovementControllers/Resources/controller_stats_capship_forward.tres" id="9_2hhpl"]
 
 [sub_resource type="Resource" id="Resource_0kdli"]
 script = ExtResource("2_shuyx")

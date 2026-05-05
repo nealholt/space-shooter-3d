@@ -34,6 +34,14 @@ BulletSpawner="*uid://d0r6c7kklyj38"
 window/size/mode=4
 window/size/borderless=true
 
+[file_customization]
+
+folder_colors={
+"res://Assets/": "yellow",
+"res://Scenes/": "red",
+"res://Scripts/": "red"
+}
+
 [global_group]
 
 "team color"=""

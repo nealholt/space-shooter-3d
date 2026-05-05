@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dp3w08p8gkd3p" path="res://Ships/capital_ship_frigate.tscn" id="2_jciow"]
 [ext_resource type="Texture2D" uid="uid://dis3t0y2s7fn6" path="res://Assets/Skyboxes/pink_blue_path.png" id="2_syf3q"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="5_tk3ba"]
-[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="6_jbkr8"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://MovementControllers/player_movement_v_4.tscn" id="6_jbkr8"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tk3ba"]
 panorama = ExtResource("2_syf3q")

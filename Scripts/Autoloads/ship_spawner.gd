@@ -7,7 +7,7 @@ extends Node
 # The error is this "Parse Error: referenced non-existent resource"
 # and it can be caused by circular references.
 var FIGHTER_SCENE:PackedScene = load("res://Ships/fighter.tscn")
-var NPC_CONTROLLER_SCENE:PackedScene = load("res://Scenes/MovementControllers/npc_controller.tscn")
+var NPC_CONTROLLER_SCENE:PackedScene = load("res://MovementControllers/npc_controller.tscn")
 
 
 func new_npc_fighter(team:String, pos:Vector3, direction:Vector3) -> Ship:

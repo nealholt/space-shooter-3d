@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Audio/EngineAudio/engine_audio_visuals.tscn" id="5_aq803"]
 [ext_resource type="PackedScene" uid="uid://dec2h3fkjfo0m" path="res://Scenes/race_checkpoint.tscn" id="6_kc8d4"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Camera/camera_group.tscn" id="7_aq803"]
-[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Scenes/MovementControllers/player_move_schemes/player_movement_v_4.tscn" id="7_g048y"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://MovementControllers/player_movement_v_4.tscn" id="7_g048y"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_gnpxn"]
 panorama = ExtResource("2_ufjhp")
