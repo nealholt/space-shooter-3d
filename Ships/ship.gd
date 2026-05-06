@@ -140,7 +140,7 @@ func _ready() -> void:
 	# Set this ship up differently if it's the player
 	if is_player:
 		# Attach a camera group
-		var cam_group_scene:PackedScene = preload("res://Scenes/Camera/camera_group.tscn")
+		var cam_group_scene:PackedScene = preload("res://Cameras/camera_group.tscn")
 		camera_group = cam_group_scene.instantiate()
 		add_child(camera_group)
 		# Add first person camera's near miss detector to collision exceptions

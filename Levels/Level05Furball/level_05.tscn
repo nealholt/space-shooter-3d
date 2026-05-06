@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://6qsftwvn1vr"]
 
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Levels/level.gd" id="1_02qsi"]
-[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_20fsw"]
-[ext_resource type="Texture2D" uid="uid://d4npmvuohgbbo" path="res://Assets/Skyboxes/all_features_skybox_test.png" id="2_24hf6"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Features/TeamSetup/team_setup.gd" id="2_20fsw"]
+[ext_resource type="Texture2D" uid="uid://d4npmvuohgbbo" path="res://Features/Skyboxes/all_features_skybox_test.png" id="2_24hf6"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="2_wndl6"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Ships/corvette.tscn" id="3_8iyj5"]
-[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://MovementControllers/npc_controller.tscn" id="4_owcqu"]
-[ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Scenes/Shield/shield.tscn" id="6_to6tu"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Assets/Shaders/FresnelAura.tres" id="8_x3qal"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="4_owcqu"]
+[ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Attachments/Shield/shield.tscn" id="6_to6tu"]
+[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Attachments/Shield/FresnelAura.tres" id="8_x3qal"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://UI/victory_layer.tscn" id="9_24hf6"]
-[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://MovementControllers/player_movement_v_4.tscn" id="9_x3qal"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Controllers/player_movement_v_4.tscn" id="9_x3qal"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hrnrq"]
 panorama = ExtResource("2_24hf6")

@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://dpv3fsfu1trkj"]
+
+[ext_resource type="Script" uid="uid://bnw6xd02yadui" path="res://Controllers/npc_state_controller.gd" id="1_bsujv"]
+[ext_resource type="Resource" uid="uid://ds82ojb1dpxaj" path="res://Controllers/Resources/controller_stats_fighter.tres" id="2_2qc78"]
+[ext_resource type="Script" uid="uid://dpu7mi2acxa31" path="res://Controllers/movement_profile.gd" id="2_hkqme"]
+[ext_resource type="Script" uid="uid://c8d34u5vfldag" path="res://Controllers/States/state_stop.gd" id="3_4u817"]
+[ext_resource type="Script" uid="uid://dtv874lfhiow6" path="res://Controllers/States/state_loop.gd" id="4_8so7c"]
+[ext_resource type="Script" uid="uid://dgehlpyp3pbc5" path="res://Controllers/States/state_seek.gd" id="5_g0pm5"]
+[ext_resource type="Script" uid="uid://beiyskfygh07q" path="res://Controllers/States/state_flee.gd" id="6_dfhat"]
+[ext_resource type="Script" uid="uid://cc2ar16a8fbkb" path="res://Controllers/States/state_corkscrew.gd" id="7_41md1"]
+[ext_resource type="Script" uid="uid://crjovchlt2grr" path="res://Controllers/States/state_wave.gd" id="8_4aecr"]
+[ext_resource type="Script" uid="uid://xric4kglnjbe" path="res://Controllers/States/state_jink.gd" id="9_m06hc"]
+[ext_resource type="Script" uid="uid://bwic7uvlkd66r" path="res://Controllers/States/state_fighter_death_animation.gd" id="10_cp4qn"]
+[ext_resource type="Script" uid="uid://c3gw1nt0lnjsu" path="res://Controllers/target_selector.gd" id="10_kh3qm"]
+[ext_resource type="Script" uid="uid://bdsf0fc3mi1vk" path="res://Controllers/States/state_orbit.gd" id="11_ahqse"]
+[ext_resource type="Script" uid="uid://bhyoavq034h6m" path="res://Controllers/States/state_avoid.gd" id="12_kws6a"]
+
+[node name="NPCController" type="Node" unique_id=1852644041 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_bsujv")
+initial_state = NodePath("States/Seek")
+stats = ExtResource("2_2qc78")
+
+[node name="MovementProfile" type="Node" parent="." unique_id=1273875585]
+script = ExtResource("2_hkqme")
+
+[node name="States" type="Node" parent="." unique_id=1339827534]
+
+[node name="Stop" type="Node" parent="States" unique_id=442592184]
+script = ExtResource("3_4u817")
+
+[node name="Loop" type="Node" parent="States" unique_id=1769707865]
+script = ExtResource("4_8so7c")
+
+[node name="Seek" type="Node" parent="States" unique_id=189753527]
+script = ExtResource("5_g0pm5")
+
+[node name="Flee" type="Node" parent="States" unique_id=541868400]
+script = ExtResource("6_dfhat")
+
+[node name="Corkscrew" type="Node" parent="States" unique_id=360861947]
+script = ExtResource("7_41md1")
+
+[node name="Wave" type="Node" parent="States" unique_id=2026480514]
+script = ExtResource("8_4aecr")
+
+[node name="Jink" type="Node" parent="States" unique_id=379785705]
+script = ExtResource("9_m06hc")
+
+[node name="DeathAnimation" type="Node" parent="States" unique_id=1951376284]
+script = ExtResource("10_cp4qn")
+
+[node name="Orbit" type="Node" parent="States" unique_id=1826316037]
+script = ExtResource("11_ahqse")
+
+[node name="Avoid" type="Node" parent="States" unique_id=104670257]
+script = ExtResource("12_kws6a")
+
+[node name="TargetSelector" type="Node" parent="." unique_id=2019266898]
+script = ExtResource("10_kh3qm")

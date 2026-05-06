@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://ejr1qtrkvbhu"]
 
 [ext_resource type="Script" uid="uid://cpbbcxhe4a1pv" path="res://Levels/Level12RaceCourse/race_course.gd" id="1_8c02b"]
-[ext_resource type="Texture2D" uid="uid://dnjgm2epla1cf" path="res://Assets/Skyboxes/earth_with_stars.png" id="2_ufjhp"]
-[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="3_gw6v5"]
+[ext_resource type="Texture2D" uid="uid://dnjgm2epla1cf" path="res://Features/Skyboxes/earth_with_stars.png" id="2_ufjhp"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Features/TeamSetup/team_setup.gd" id="3_gw6v5"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="4_dbd15"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://UI/victory_layer.tscn" id="5_1focs"]
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Audio/EngineAudio/engine_audio_visuals.tscn" id="5_aq803"]
-[ext_resource type="PackedScene" uid="uid://dec2h3fkjfo0m" path="res://Scenes/race_checkpoint.tscn" id="6_kc8d4"]
-[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Scenes/Camera/camera_group.tscn" id="7_aq803"]
-[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://MovementControllers/player_movement_v_4.tscn" id="7_g048y"]
+[ext_resource type="PackedScene" uid="uid://dec2h3fkjfo0m" path="res://Features/RaceCheckpoint/race_checkpoint.tscn" id="6_kc8d4"]
+[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Cameras/camera_group.tscn" id="7_aq803"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Controllers/player_movement_v_4.tscn" id="7_g048y"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_gnpxn"]
 panorama = ExtResource("2_ufjhp")

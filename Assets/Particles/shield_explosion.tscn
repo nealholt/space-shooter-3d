@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ci83rhvh14wov" path="res://vfx/specific_effects/shield_explosion.gd" id="1_ao3mx"]
 [ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/ParticleImages/star_04.png" id="1_eaxiw"]
-[ext_resource type="AudioStream" uid="uid://bt2ywlugnn3ji" path="res://Assets/SoundEffects/shield_explosion.wav" id="2_ya06w"]
+[ext_resource type="AudioStream" uid="uid://bt2ywlugnn3ji" path="res://Audio/SoundEffects/shield_explosion.wav" id="2_ya06w"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46d27"]
 transparency = 1

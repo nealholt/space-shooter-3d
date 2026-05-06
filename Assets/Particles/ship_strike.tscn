@@ -1,8 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://domnb1m51i30x"]
+[gd_scene format=3 uid="uid://domnb1m51i30x"]
 
 [ext_resource type="Texture2D" uid="uid://cgs2blq7xbju4" path="res://Assets/ParticleImages/trace_01.png" id="1_0cdd1"]
 [ext_resource type="Texture2D" uid="uid://ce6i4w30wrek0" path="res://Assets/ParticleImages/star_09.png" id="2_weuwo"]
-[ext_resource type="AudioStream" uid="uid://bnvv2m1sdy00w" path="res://Assets/SoundEffects/ship_strike.wav" id="3_mb3w1"]
+[ext_resource type="AudioStream" uid="uid://bnvv2m1sdy00w" path="res://Audio/SoundEffects/ship_strike.wav" id="3_mb3w1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvud0"]
 transparency = 1

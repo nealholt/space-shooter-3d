@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://w2dnuhc55w32" path="res://Assets/Particles/shield_explosion.tscn" id="4_levs1"]
 [ext_resource type="Script" uid="uid://dxavjpjg06j5w" path="res://Assets/Particles/visual_effect_setting.gd" id="4_vbg6y"]
 [ext_resource type="PackedScene" uid="uid://ctylowk0dxhp3" path="res://Assets/Particles/sparks.tscn" id="6_8do65"]
-[ext_resource type="PackedScene" uid="uid://dgfgr1a12mn0l" path="res://Assets/Decals/bullet_hole.tscn" id="7_levs1"]
+[ext_resource type="PackedScene" uid="uid://dgfgr1a12mn0l" path="res://Attachments/Decals/bullet_hole.tscn" id="7_levs1"]
 [ext_resource type="PackedScene" uid="uid://dry7yodrwl18u" path="res://Assets/Particles/vfx_explosion_lelu_single.tscn" id="8_le2sy"]
 [ext_resource type="PackedScene" uid="uid://58nrpfbay3lf" path="res://Assets/Particles/muzzle_flash.tscn" id="9_14doy"]
 [ext_resource type="PackedScene" uid="uid://wvqr1nvfc2u1" path="res://Assets/Particles/vfx_explosion_lelu_tutorial.tscn" id="10_ptu8o"]

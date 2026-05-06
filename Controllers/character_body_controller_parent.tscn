@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://byhpmoqr785kk"]
+
+[ext_resource type="Script" uid="uid://be41hc7451fnc" path="res://Controllers/character_body_controller_parent.gd" id="1_ho7ga"]
+[ext_resource type="Script" uid="uid://c4rebesbspn8" path="res://Controllers/Resources/controller_stats.gd" id="2_tv36b"]
+
+[sub_resource type="Resource" id="Resource_twv5a"]
+script = ExtResource("2_tv36b")
+metadata/_custom_type_script = "uid://c4rebesbspn8"
+
+[node name="character_body_controller_parent" type="Node" unique_id=398443822]
+script = ExtResource("1_ho7ga")
+control_stats = SubResource("Resource_twv5a")

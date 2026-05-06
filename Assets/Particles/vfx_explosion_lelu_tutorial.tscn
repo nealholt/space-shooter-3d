@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://ck6a2ts7de74c" path="res://Assets/Shaders/material_explosion_cloud.tres" id="1_ite73"]
 [ext_resource type="Shader" uid="uid://bee3mywubqp6k" path="res://Assets/Shaders/streak_shader.tres" id="2_3q7cl"]
 [ext_resource type="Texture2D" uid="uid://dr5x7m3c1x4pw" path="res://Assets/Textures/explosion_textures/T_vfx_hit122.jpg" id="3_jxvm6"]
-[ext_resource type="AudioStream" uid="uid://wqqcngisdu7g" path="res://Assets/SoundEffects/explosion_audio_deep.wav" id="4_n4s7i"]
+[ext_resource type="AudioStream" uid="uid://wqqcngisdu7g" path="res://Audio/SoundEffects/explosion_audio_deep.wav" id="4_n4s7i"]
 
 [sub_resource type="Curve" id="Curve_0j7rd"]
 _data = [Vector2(0.639175, 0.0219779), 0.0, 0.261045, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

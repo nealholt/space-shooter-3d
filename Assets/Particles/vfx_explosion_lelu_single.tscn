@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c4uiyyj8pln8x" path="res://vfx/specific_effects/flak_explosion.gd" id="1_31pgu"]
 [ext_resource type="Material" uid="uid://ck6a2ts7de74c" path="res://Assets/Shaders/material_explosion_cloud.tres" id="1_iyipg"]
-[ext_resource type="AudioStream" uid="uid://bf7kbki88ftmw" path="res://Assets/SoundEffects/flak_explosion.wav" id="2_kbmoq"]
+[ext_resource type="AudioStream" uid="uid://bf7kbki88ftmw" path="res://Audio/SoundEffects/flak_explosion.wav" id="2_kbmoq"]
 
 [sub_resource type="Curve" id="Curve_0j7rd"]
 _data = [Vector2(0.639175, 0.0219779), 0.0, 0.261045, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

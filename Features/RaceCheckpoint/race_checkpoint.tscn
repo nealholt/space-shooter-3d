@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://dec2h3fkjfo0m"]
+
+[ext_resource type="Texture2D" uid="uid://ce6i4w30wrek0" path="res://Assets/ParticleImages/star_09.png" id="1_3b3r2"]
+[ext_resource type="Script" uid="uid://savoxhna208c" path="res://Features/RaceCheckpoint/race_checkpoint.gd" id="1_rikje"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="4_flrl7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iv2jt"]
+albedo_color = Color(1.3945211, 0.7250152, 0.4862042, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_skbjm"]
+material = SubResource("StandardMaterial3D_iv2jt")
+inner_radius = 12.0
+outer_radius = 15.0
+rings = 8
+ring_segments = 4
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rikje"]
+data = PackedVector3Array(-8.4853, 0, -8.4853, 0, 1.5, -13.5, 0, 0, -12, -8.4853, 0, -8.4853, -9.545899, 1.5, -9.545899, 0, 1.5, -13.5, -9.545899, 1.5, -9.545899, 0, 0, -15, 0, 1.5, -13.5, -9.545899, 1.5, -9.545899, -10.6066, 0, -10.6066, 0, 0, -15, -10.6066, 0, -10.6066, 0, -1.5, -13.5, 0, 0, -15, -10.6066, 0, -10.6066, -9.545899, -1.5, -9.545899, 0, -1.5, -13.5, -9.545899, -1.5, -9.545899, 0, 0, -12, 0, -1.5, -13.5, -9.545899, -1.5, -9.545899, -8.4853, 0, -8.4853, 0, 0, -12, -12, 0, 0, -9.545899, 1.5, -9.545899, -8.4853, 0, -8.4853, -12, 0, 0, -13.5, 1.5, 0, -9.545899, 1.5, -9.545899, -13.5, 1.5, 0, -10.6066, 0, -10.6066, -9.545899, 1.5, -9.545899, -13.5, 1.5, 0, -15, 0, 0, -10.6066, 0, -10.6066, -15, 0, 0, -9.545899, -1.5, -9.545899, -10.6066, 0, -10.6066, -15, 0, 0, -13.5, -1.5, 0, -9.545899, -1.5, -9.545899, -13.5, -1.5, 0, -8.4853, 0, -8.4853, -9.545899, -1.5, -9.545899, -13.5, -1.5, 0, -12, 0, 0, -8.4853, 0, -8.4853, -8.4853, 0, 8.4853, -13.5, 1.5, 0, -12, 0, 0, -8.4853, 0, 8.4853, -9.545899, 1.5, 9.545899, -13.5, 1.5, 0, -9.545899, 1.5, 9.545899, -15, 0, 0, -13.5, 1.5, 0, -9.545899, 1.5, 9.545899, -10.6066, 0, 10.6066, -15, 0, 0, -10.6066, 0, 10.6066, -13.5, -1.5, 0, -15, 0, 0, -10.6066, 0, 10.6066, -9.545899, -1.5, 9.545899, -13.5, -1.5, 0, -9.545899, -1.5, 9.545899, -12, 0, 0, -13.5, -1.5, 0, -9.545899, -1.5, 9.545899, -8.4853, 0, 8.4853, -12, 0, 0, 0, 0, 12, -9.545899, 1.5, 9.545899, -8.4853, 0, 8.4853, 0, 0, 12, 0, 1.5, 13.5, -9.545899, 1.5, 9.545899, 0, 1.5, 13.5, -10.6066, 0, 10.6066, -9.545899, 1.5, 9.545899, 0, 1.5, 13.5, 0, 0, 15, -10.6066, 0, 10.6066, 0, 0, 15, -9.545899, -1.5, 9.545899, -10.6066, 0, 10.6066, 0, 0, 15, 0, -1.5, 13.5, -9.545899, -1.5, 9.545899, 0, -1.5, 13.5, -8.4853, 0, 8.4853, -9.545899, -1.5, 9.545899, 0, -1.5, 13.5, 0, 0, 12, -8.4853, 0, 8.4853, 8.4853, 0, 8.4853, 0, 1.5, 13.5, 0, 0, 12, 8.4853, 0, 8.4853, 9.545899, 1.5, 9.545899, 0, 1.5, 13.5, 9.545899, 1.5, 9.545899, 0, 0, 15, 0, 1.5, 13.5, 9.545899, 1.5, 9.545899, 10.6066, 0, 10.6066, 0, 0, 15, 10.6066, 0, 10.6066, 0, -1.5, 13.5, 0, 0, 15, 10.6066, 0, 10.6066, 9.545899, -1.5, 9.545899, 0, -1.5, 13.5, 9.545899, -1.5, 9.545899, 0, 0, 12, 0, -1.5, 13.5, 9.545899, -1.5, 9.545899, 8.4853, 0, 8.4853, 0, 0, 12, 12, 0, 0, 9.545899, 1.5, 9.545899, 8.4853, 0, 8.4853, 12, 0, 0, 13.5, 1.5, 0, 9.545899, 1.5, 9.545899, 13.5, 1.5, 0, 10.6066, 0, 10.6066, 9.545899, 1.5, 9.545899, 13.5, 1.5, 0, 15, 0, 0, 10.6066, 0, 10.6066, 15, 0, 0, 9.545899, -1.5, 9.545899, 10.6066, 0, 10.6066, 15, 0, 0, 13.5, -1.5, 0, 9.545899, -1.5, 9.545899, 13.5, -1.5, 0, 8.4853, 0, 8.4853, 9.545899, -1.5, 9.545899, 13.5, -1.5, 0, 12, 0, 0, 8.4853, 0, 8.4853, 8.4853, 0, -8.4853, 13.5, 1.5, 0, 12, 0, 0, 8.4853, 0, -8.4853, 9.545899, 1.5, -9.545899, 13.5, 1.5, 0, 9.545899, 1.5, -9.545899, 15, 0, 0, 13.5, 1.5, 0, 9.545899, 1.5, -9.545899, 10.6066, 0, -10.6066, 15, 0, 0, 10.6066, 0, -10.6066, 13.5, -1.5, 0, 15, 0, 0, 10.6066, 0, -10.6066, 9.545899, -1.5, -9.545899, 13.5, -1.5, 0, 9.545899, -1.5, -9.545899, 12, 0, 0, 13.5, -1.5, 0, 9.545899, -1.5, -9.545899, 8.4853, 0, -8.4853, 12, 0, 0, 0, 0, -12, 9.545899, 1.5, -9.545899, 8.4853, 0, -8.4853, 0, 0, -12, 0, 1.5, -13.5, 9.545899, 1.5, -9.545899, 0, 1.5, -13.5, 10.6066, 0, -10.6066, 9.545899, 1.5, -9.545899, 0, 1.5, -13.5, 0, 0, -15, 10.6066, 0, -10.6066, 0, 0, -15, 9.545899, -1.5, -9.545899, 10.6066, 0, -10.6066, 0, 0, -15, 0, -1.5, -13.5, 9.545899, -1.5, -9.545899, 0, -1.5, -13.5, 8.4853, 0, -8.4853, 9.545899, -1.5, -9.545899, 0, -1.5, -13.5, 0, 0, -12, 8.4853, 0, -8.4853)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rikje"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(0.83832675, 1.3596052, 1.3814713, 1)
+albedo_texture = ExtResource("1_3b3r2")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="Curve" id="Curve_3b3r2"]
+_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.3), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rikje"]
+curve = SubResource("Curve_3b3r2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_flrl7"]
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_rikje")
+
+[sub_resource type="QuadMesh" id="QuadMesh_rikje"]
+size = Vector2(10, 10)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3b3r2"]
+radius = 6.0
+
+[node name="RaceCheckpoint" type="StaticBody3D"]
+script = ExtResource("1_rikje")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_skbjm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_rikje")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_rikje")
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_flrl7")
+draw_pass_1 = SubResource("QuadMesh_rikje")
+
+[node name="Area3D" type="Area3D" parent="."]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_3b3r2")
+
+[node name="TargetReticles" parent="." instance=ExtResource("4_flrl7")]
+visible = false
+reticle_set = 3
+distance_cutoff = 500.0
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

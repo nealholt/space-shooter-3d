@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://jce54cs8xhg1" path="res://vfx/specific_effects/explosion_single.gd" id="1_0y3pu"]
 [ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/ParticleImages/star_04.png" id="1_xbms3"]
 [ext_resource type="Material" uid="uid://covsu58qwnqru" path="res://Assets/Materials/flare00.tres" id="2_ggp7v"]
-[ext_resource type="AudioStream" uid="uid://cdvuqhwbklq3c" path="res://Assets/SoundEffects/explosion_pow.wav" id="3_ehf7x"]
+[ext_resource type="AudioStream" uid="uid://cdvuqhwbklq3c" path="res://Audio/SoundEffects/explosion_pow.wav" id="3_ehf7x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46d27"]
 transparency = 1

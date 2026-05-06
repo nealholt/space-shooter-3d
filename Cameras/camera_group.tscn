@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://cungbhnq1r7av"]
+
+[ext_resource type="Script" uid="uid://b0vteh3cq1l8k" path="res://Cameras/camera_player_group.gd" id="1_sad13"]
+[ext_resource type="PackedScene" uid="uid://ymilutrw63dv" path="res://Attachments/Turret/turret_motion_component.tscn" id="2_tdt0o"]
+[ext_resource type="PackedScene" uid="uid://c4j6tlub3lnw4" path="res://Cameras/custom_camera.tscn" id="3_0u455"]
+[ext_resource type="Texture2D" uid="uid://gbelwe6g4lw" path="res://UI/ReticlesCrosshairs/Images/crosshair005.png" id="4_0u455"]
+[ext_resource type="Texture2D" uid="uid://chst4okbah5c3" path="res://UI/ReticlesCrosshairs/Images/crosshair016.png" id="5_j0nyn"]
+[ext_resource type="Texture2D" uid="uid://dg6nq8bphea2n" path="res://UI/ReticlesCrosshairs/Images/crosshair046.png" id="6_daip3"]
+
+[node name="CameraGroup" type="Node3D" unique_id=582326403]
+script = ExtResource("1_sad13")
+
+[node name="turret_motion_component" parent="." unique_id=1075167541 instance=ExtResource("2_tdt0o")]
+
+[node name="RearUnderCamera" parent="." unique_id=1844376467 instance=ExtResource("3_0u455")]
+fov = 100.0
+
+[node name="ProfileCamera" parent="." unique_id=1888872519 instance=ExtResource("3_0u455")]
+
+[node name="FreeCamera" parent="." unique_id=1681996162 instance=ExtResource("3_0u455")]
+top_level = true
+
+[node name="Body" type="Node3D" parent="." unique_id=713808017]
+
+[node name="Head" type="Node3D" parent="Body" unique_id=1748785488]
+
+[node name="FirstPersonCamera" parent="Body/Head" unique_id=819057046 instance=ExtResource("3_0u455")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+current = true
+
+[node name="TargetLeadIndicator" type="TextureRect" parent="." unique_id=1525297249]
+visible = false
+modulate = Color(1, 1, 0, 1)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_0u455")
+
+[node name="TargLeadHit" type="TextureRect" parent="." unique_id=1569567064]
+visible = false
+modulate = Color(1, 0, 0, 1)
+offset_right = 72.0
+offset_bottom = 72.0
+texture = ExtResource("5_j0nyn")
+
+[node name="TargLeadStrongHit" type="TextureRect" parent="." unique_id=160091811]
+visible = false
+modulate = Color(1, 0, 0, 1)
+offset_right = 72.0
+offset_bottom = 72.0
+texture = ExtResource("6_daip3")
+
+[node name="TargLeadShieldHit" type="TextureRect" parent="." unique_id=780904420]
+visible = false
+modulate = Color(0, 0.8613044, 1, 1)
+offset_right = 72.0
+offset_bottom = 72.0
+texture = ExtResource("5_j0nyn")
+
+[node name="TimerHitFlicker" type="Timer" parent="." unique_id=1027923274]
+wait_time = 0.08
+one_shot = true
+
+[connection signal="timeout" from="TimerHitFlicker" to="." method="_on_timer_hit_flicker_timeout"]

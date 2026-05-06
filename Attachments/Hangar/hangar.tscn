@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cbhoikklwgc0c"]
+
+[ext_resource type="Script" uid="uid://d1hwpigxm8im7" path="res://Attachments/Hangar/hangar.gd" id="1_nbb7t"]
+
+[node name="Hangar" type="Node3D"]
+script = ExtResource("1_nbb7t")
+
+[node name="TimerMacro" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[node name="TimerMicro" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="TimerMacro" to="." method="_on_timermacro_timeout"]
+[connection signal="timeout" from="TimerMicro" to="." method="_on_timermicro_timeout"]

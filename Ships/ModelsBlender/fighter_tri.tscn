@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://hpvkerb8hmkp"]
 
 [ext_resource type="PackedScene" uid="uid://cplsah4wfwpo5" path="res://Ships/ModelsBlender/fighter_tri.glb" id="1_ctxri"]
-[ext_resource type="Script" uid="uid://cr6v3j8voodfb" path="res://Scripts/material_setter.gd" id="2_e17n3"]
+[ext_resource type="Script" uid="uid://cr6v3j8voodfb" path="res://Ships/ModelsBlender/material_setter.gd" id="2_e17n3"]
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Ships/Models/engine_mesh_component.tscn" id="2_p7ds7"]
 
 [node name="fighter_tri" unique_id=934030235 instance=ExtResource("1_ctxri")]

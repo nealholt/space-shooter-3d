@@ -15,17 +15,17 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Wedge Wars"
-run/main_scene="res://Scenes/main_scene.tscn"
+run/main_scene="res://Menus/main_scene.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://Scripts/Autoloads/Global.gd"
+Global="*res://Autoloads/Global.gd"
 VfxManager="*res://vfx/vfx_manager.tscn"
-EventsBus="*res://Scripts/Autoloads/events_bus.gd"
-ShipSpawner="*res://Scripts/Autoloads/ship_spawner.gd"
-GunSpawner="*res://Scripts/Autoloads/gun_spawner.gd"
+EventsBus="*res://Autoloads/events_bus.gd"
+ShipSpawner="*res://Autoloads/ship_spawner.gd"
+GunSpawner="*res://Autoloads/gun_spawner.gd"
 AudioManager="*res://Audio/AudioManager/audio_manager.tscn"
 BulletSpawner="*uid://d0r6c7kklyj38"
 
@@ -33,14 +33,6 @@ BulletSpawner="*uid://d0r6c7kklyj38"
 
 window/size/mode=4
 window/size/borderless=true
-
-[file_customization]
-
-folder_colors={
-"res://Assets/": "yellow",
-"res://Scenes/": "red",
-"res://Scripts/": "red"
-}
 
 [global_group]
 

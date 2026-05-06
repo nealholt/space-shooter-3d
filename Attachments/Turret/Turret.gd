@@ -1,0 +1,177 @@
+class_name Turret extends Node3D
+
+const TURRET_SCENE:PackedScene = preload("res://Attachments/Turret/turret.tscn")
+
+@onready var line_of_sight := $TurretModel/Body/Head/RayCast3D
+
+# movement speeds and constraints in degrees
+@export var elevation_speed_deg: float = 5
+@export var rotation_speed_deg: float = 5
+@export var min_elevation_deg: float = 0
+@export var max_elevation_deg: float = 60
+
+var aim_assist:AimAssist
+var guns: Array
+var health_component:HealthComponent
+var target_selector:TargetSelector
+var turret_motion:TurretMotionComponent
+
+# Turret components necessary for rotation toward target
+var head: Node3D
+var body: Node3D
+var orientation_data:TargetOrientationData
+
+# If angle to target is less than this number of degrees, then shoot
+@export var angle_to_shoot_deg : float = 5
+var angle_to_shoot : float = deg_to_rad(angle_to_shoot_deg)
+
+# So turrets know what team they are on. These
+# are set in team_setup.gd
+var ally_team:String
+var enemy_team:String
+
+# Bullets fired by this turret should ignore collisions
+# with anything in this array
+var collision_exceptions := Array()
+
+# Reference to the object this turret is attached to.
+# It is usually a ship, but not always (as in a testing
+# scene and potentially if we want to put turrets on
+# asteroids or simply out and about).
+# This is used for adding in collision exceptions
+# to bullets fired.
+var parent_ship
+
+
+# 'maybe_ship' should be the ship this turret is attached to,
+# but sometimes we want to test a turret all by itself
+# or even attach a turret to things other than a ship.
+static func new_turret(my_parent:TurretData, maybe_ship) -> Turret:
+	var t := TURRET_SCENE.instantiate()
+	# Order matters for these next three lines of code
+	t.setup_turret_pre_tree(my_parent)
+	my_parent.add_child(t)
+	t.setup_turret_in_tree(my_parent, maybe_ship)
+	return t
+
+
+func _ready() -> void:
+	# Setup head and body
+	var nodes_in_group_head = Global.get_group_nodes_on_branch("turret head", self)
+	var nodes_in_group_body = Global.get_group_nodes_on_branch("turret body", self)
+	# Sanity checks
+	if nodes_in_group_head.size() != 1:
+		printerr("More than one turret head node detected in turret.gd")
+		get_tree().quit()
+	if nodes_in_group_body.size() != 1:
+		printerr("More than one turret body node detected in turret.gd")
+		get_tree().quit()
+	head = nodes_in_group_head[0]
+	body = nodes_in_group_body[0]
+	
+	# Setup orientation data
+	orientation_data = TargetOrientationData.new()
+	
+	# Search through children for various components
+	# and save a reference to them.
+	for child in get_children():
+		if child is AimAssist:
+			aim_assist = child
+		elif child is Gun:
+			guns.append(child)
+		elif child is HealthComponent:
+			health_component = child
+			# Connect signals with code
+			health_component.health_lost.connect(_on_health_component_health_lost)
+			health_component.died.connect(_on_health_component_died)
+		elif child is TargetSelector:
+			target_selector = child
+		elif child is TurretMotionComponent:
+			turret_motion = child
+	
+	# Position all the guns at all the hardpoints
+	var gun_hardpoints = Global.get_group_nodes_on_branch("gun hardpoint", self)
+	# Sanity check
+	if gun_hardpoints.size() != guns.size():
+		printerr("Mismatch between number of guns %d and number of hardpoints %d" % [guns.size(), gun_hardpoints.size()])
+		get_tree().quit()
+	for i in range(guns.size()):
+		guns[i].reparent(gun_hardpoints[i], false)
+	
+	# Add hit box component to collision exceptions to avoid
+	# shooting self
+	collision_exceptions.push_back($HitBoxComponent)
+
+
+func setup_turret_pre_tree(dat:TurretData) -> void:
+	# Guns have to be put on the turret before adding to the
+	# tree because of gun-related stuff taken care of in _ready
+	if dat.gun_type != GunSpawner.GUN_TYPE.NO_GUN:
+		# Attach two guns as children of this turret
+		GunSpawner.new_gun(dat.gun_type, dat.bullet_type, self)
+		GunSpawner.new_gun(dat.gun_type, dat.bullet_type, self)
+
+
+func setup_turret_in_tree(dat:TurretData, p) -> void:
+	if turret_motion:
+		turret_motion.setup_values(dat)
+	
+	angle_to_shoot_deg = dat.angle_to_shoot_deg
+	angle_to_shoot = deg_to_rad(angle_to_shoot_deg)
+	
+	if dat.use_aim_assist:
+		aim_assist = AimAssist.new_aim_assist(self, dat.angle_assist_limit)
+	
+	if target_selector:
+		target_selector.prefer_capital_ships = dat.prefer_capital_ships
+	
+	parent_ship = p
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta: float) -> void:
+	# Get target from the target selector
+	var target = target_selector.get_target(self)
+	# Update profile.orientation_data
+	if target:
+		orientation_data.update_data(global_position,
+			guns[0].bullet_speed, target, global_transform.basis)
+	
+	# if components are installed, then move the turret
+	if turret_motion and orientation_data.target_pos != Vector3.ZERO:
+		turret_motion.rotate_and_elevate(body, head, delta, orientation_data.target_pos)
+	
+	# Shoot if within angle limit
+	if is_instance_valid(orientation_data.target) and Global.get_angle_to_target(head.global_position, orientation_data.target_pos, head.global_transform.basis.z) < angle_to_shoot:
+		# Prevent friendly fire.
+		# I'm not sure how much this is helping.
+		if line_of_sight.is_colliding():
+			var collider = line_of_sight.get_collider()
+			if is_instance_valid(collider) and 'ally_team' in collider and collider.ally_team == ally_team:
+				#print('\nturret seeing friendly ',collider)
+				return
+			#elif 'ally_team' in collider and collider.ally_team != ally_team:
+				#print('\nturret seeing enemy ',collider)
+			#else:
+				#print('\nturret seeing bogey ',collider)
+		# Get collision exceptions
+		var exempt_colliders:Array = collision_exceptions
+		if 'collision_exceptions' in parent_ship:
+			exempt_colliders = collision_exceptions+parent_ship.collision_exceptions
+		# Fire ze guns!
+		for gun in guns:
+			var sd := ShootData.new()
+			sd.shooter = self
+			sd.gun = gun
+			sd.target = orientation_data.target
+			sd.collision_exceptions = exempt_colliders
+			sd.shoot()
+
+
+func _on_health_component_health_lost() -> void:
+	pass # nothing for now
+
+
+func _on_health_component_died() -> void:
+	VfxManager.play(VisualEffectSetting.VISUAL_EFFECT_TYPE.SINGLE_EXPLOSION_8X, global_position)
+	queue_free()

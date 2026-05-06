@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://gmbtqjscbh5w"]
+
+[ext_resource type="Script" uid="uid://b0njxo02nbcsu" path="res://Controllers/player_movement4.gd" id="1_8ukca"]
+[ext_resource type="Resource" uid="uid://b26m2tlup8r2t" path="res://Controllers/Resources/controller_stats_player_brake.tres" id="2_vi3r1"]
+[ext_resource type="Resource" uid="uid://bqbx0xg0mtbcv" path="res://Controllers/Resources/controller_stats_player_accel.tres" id="3_m2o7n"]
+[ext_resource type="Resource" uid="uid://dk1smrla75xye" path="res://Controllers/Resources/controller_stats_player_drift.tres" id="4_6gmsm"]
+[ext_resource type="Resource" uid="uid://dsbn6d8px28gd" path="res://Controllers/Resources/controller_stats_player.tres" id="5_8ge1l"]
+
+[node name="PlayerMovementV4" type="Node" unique_id=1908608534]
+script = ExtResource("1_8ukca")
+stats_brake = ExtResource("2_vi3r1")
+stats_accel = ExtResource("3_m2o7n")
+stats_drift = ExtResource("4_6gmsm")
+stats = ExtResource("5_8ge1l")

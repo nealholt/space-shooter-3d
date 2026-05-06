@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Levels/level.gd" id="1_trw21"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="2_6b8c8"]
-[ext_resource type="Texture2D" uid="uid://ba1gb0dgunagh" path="res://Assets/Skyboxes/ringed_gas_giant_planet.png" id="2_fykje"]
-[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Scripts/team_setup.gd" id="2_i6ru0"]
-[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://MovementControllers/npc_controller.tscn" id="5_o18a7"]
+[ext_resource type="Texture2D" uid="uid://ba1gb0dgunagh" path="res://Features/Skyboxes/ringed_gas_giant_planet.png" id="2_fykje"]
+[ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Features/TeamSetup/team_setup.gd" id="2_i6ru0"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="5_o18a7"]
 [ext_resource type="Resource" uid="uid://ukpbvp5m6q0l" path="res://Ships/Resources/ship_stats_player.tres" id="6_oiq64"]
-[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://MovementControllers/player_movement_v_4.tscn" id="6_trw21"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Controllers/player_movement_v_4.tscn" id="6_trw21"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://UI/victory_layer.tscn" id="7_trw21"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_trw21"]
