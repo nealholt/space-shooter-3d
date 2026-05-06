@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://die8v8wcj1pfv" path="res://Assets/ParticleImages/muzzle_01_right.png" id="1_buv2n"]
 [ext_resource type="Script" uid="uid://d1rqjc3tf8k2u" path="res://vfx/MuzzleFlash/muzzle_flash.gd" id="1_duwo1"]
-[ext_resource type="ArrayMesh" uid="uid://phyrt75f30w8" path="res://Assets/Models/MuzzlePlane01.obj" id="2_duwo1"]
+[ext_resource type="ArrayMesh" uid="uid://phyrt75f30w8" path="res://Ships/ModelsBlender/MuzzlePlane01.obj" id="2_duwo1"]
 [ext_resource type="Texture2D" uid="uid://bwfyyi3q8raw4" path="res://Assets/ParticleImages/spark_02.png" id="3_f5x7n"]
-[ext_resource type="ArrayMesh" uid="uid://dmovo5tcqpbhn" path="res://Assets/Models/muzzle_cone01.obj" id="4_s0idf"]
+[ext_resource type="ArrayMesh" uid="uid://dmovo5tcqpbhn" path="res://Ships/ModelsBlender/muzzle_cone01.obj" id="4_s0idf"]
 [ext_resource type="Texture2D" uid="uid://cevjv4lsemkac" path="res://Assets/Textures/kenney_particle-pack/circle_05.png" id="5_7153f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s22ts"]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dc6ukdkam24n"]
 
 [ext_resource type="Script" uid="uid://dj2iogg4gh8e8" path="res://Scripts/hit_box_component.gd" id="1_03eoi"]
-[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/target_reticles.tscn" id="2_dephd"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="2_dephd"]
 
 [node name="HitBoxComponent" type="Area3D" unique_id=393424243 groups=["damageable", "team member"]]
 collision_layer = 16

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dfni57jntnnk8"]
 
 [ext_resource type="Script" uid="uid://bodqi8lyc5jbs" path="res://Weapons/MissileLock/missile_lock_group.gd" id="1_7e3a4"]
-[ext_resource type="Texture2D" uid="uid://wtd3a0xuq1ka" path="res://Assets/Images/crosshair051.png" id="2_5b5nn"]
-[ext_resource type="Texture2D" uid="uid://de4d0mo0rnf5o" path="res://Assets/Images/crosshair052.png" id="3_bjekp"]
+[ext_resource type="Texture2D" uid="uid://wtd3a0xuq1ka" path="res://UI/ReticlesCrosshairs/Images/crosshair051.png" id="2_5b5nn"]
+[ext_resource type="Texture2D" uid="uid://de4d0mo0rnf5o" path="res://UI/ReticlesCrosshairs/Images/crosshair052.png" id="3_bjekp"]
 [ext_resource type="AudioStream" uid="uid://cgwsk2ovf5fgt" path="res://Assets/SoundEffects/missile/acquiring_lock.wav" id="4_xbfs4"]
 [ext_resource type="AudioStream" uid="uid://d1rurti8e68f7" path="res://Assets/SoundEffects/missile/missile_lock.wav" id="5_rkado"]
 [ext_resource type="AudioStream" uid="uid://dr6bn0u22ke7d" path="res://Assets/SoundEffects/missile/launch.wav" id="6_iumxy"]

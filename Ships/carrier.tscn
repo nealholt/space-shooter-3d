@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://diilp2vvcvj53"]
 
-[ext_resource type="PackedScene" uid="uid://du1bwxbrh62at" path="res://Assets/Ships/carrier_chassis.tscn" id="1_67lmr"]
+[ext_resource type="PackedScene" uid="uid://du1bwxbrh62at" path="res://Ships/Models/carrier_chassis.tscn" id="1_67lmr"]
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Ships/ship.gd" id="1_isj6t"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Scenes/health_component.tscn" id="2_r2d5f"]
 [ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="2_shuyx"]
