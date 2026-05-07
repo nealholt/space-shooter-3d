@@ -91,7 +91,7 @@ func _ready() -> void:
 	add_child(beyond_center)
 	# Camera group should typically be attached to ships
 	# but if not, use the camera group in spectator mode
-	# with mouse and ketboard controls.
+	# with mouse and keyboard controls.
 	var p = get_parent()
 	if p is Ship:
 		# We assume the parent is a ship with variables
@@ -111,9 +111,6 @@ func _ready() -> void:
 		set_physics_process(false)
 	# Register self with global
 	Global.camera_group = self
-
-
-
 
 
 # For gameplay mode
@@ -152,18 +149,19 @@ func _physics_process(delta: float) -> void:
 		set_profile_camera()
 	
 	# Adjust relevant camera based on the current pov
-	if state == CameraState.FLYBY:
-		free_camera.look_at(global_position, Vector3.UP)
-	elif state == CameraState.TARGETCLOSEUP:
-		if is_instance_valid(target):
-			view_target_close()
-		else:
-			first_person()
-	elif state == CameraState.TARGETVIEW:
-		if is_instance_valid(target):
-			view_target_from_player()
-		else:
-			first_person()
+	match state:
+		CameraState.FLYBY:
+			free_camera.look_at(global_position, Vector3.UP)
+		CameraState.TARGETCLOSEUP:
+			if is_instance_valid(target):
+				view_target_close()
+			else:
+				first_person()
+		CameraState.TARGETVIEW:
+			if is_instance_valid(target):
+				view_target_from_player()
+			else:
+				first_person()
 	# Look at target with first-person cam
 	if look_at_target and state == CameraState.FIRSTPERSON and is_instance_valid(target):
 		turret_motion.rotate_and_elevate(body, head, delta, target.global_position)
@@ -191,7 +189,12 @@ func _physics_process(delta: float) -> void:
 	# "velocity" in Global.player.controller.target
 	# and the target has not yet instantiated a death_animation_timer
 	# !Global.player.controller.target.death_animation_timer
-	if state == CameraState.FIRSTPERSON and Global.player and Global.player.controller and is_instance_valid(Global.player.controller.target) and Global.player.weapon_handler and "velocity" in Global.player.controller.target and !Global.player.controller.target.death_animation_timer:
+	if state == CameraState.FIRSTPERSON and \
+	Global.player and Global.player.controller and \
+	is_instance_valid(Global.player.controller.target) and \
+	Global.player.weapon_handler and \
+	"velocity" in Global.player.controller.target and \
+	!Global.player.controller.target.death_animation_timer:
 		var lead_pos:Vector3 = Global.get_intercept(
 			Global.player.global_position,
 			Global.player.weapon_handler.get_bullet_speed(),

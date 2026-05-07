@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cungbhnq1r7av"]
 
-[ext_resource type="Script" uid="uid://b0vteh3cq1l8k" path="res://Cameras/camera_player_group.gd" id="1_sad13"]
+[ext_resource type="Script" uid="uid://b0vteh3cq1l8k" path="res://Cameras/camera_group.gd" id="1_sad13"]
 [ext_resource type="PackedScene" uid="uid://c4j6tlub3lnw4" path="res://Cameras/custom_camera.tscn" id="3_0u455"]
 [ext_resource type="Texture2D" uid="uid://gbelwe6g4lw" path="res://UI/ReticlesCrosshairs/Images/crosshair005.png" id="4_0u455"]
 [ext_resource type="Texture2D" uid="uid://chst4okbah5c3" path="res://UI/ReticlesCrosshairs/Images/crosshair016.png" id="5_j0nyn"]
