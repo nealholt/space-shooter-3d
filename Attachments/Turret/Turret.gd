@@ -86,8 +86,6 @@ func _ready() -> void:
 			health_component.died.connect(_on_health_component_died)
 		elif child is TargetSelector:
 			target_selector = child
-		elif child is TurretMotionComponent:
-			turret_motion = child
 	
 	# Position all the guns at all the hardpoints
 	var gun_hardpoints = Global.get_group_nodes_on_branch("gun hardpoint", self)
@@ -113,8 +111,8 @@ func setup_turret_pre_tree(dat:TurretData) -> void:
 
 
 func setup_turret_in_tree(dat:TurretData, p) -> void:
-	if turret_motion:
-		turret_motion.setup_values(dat)
+	turret_motion = TurretMotionComponent.new()
+	turret_motion.setup_values(dat)
 	
 	angle_to_shoot_deg = dat.angle_to_shoot_deg
 	angle_to_shoot = deg_to_rad(angle_to_shoot_deg)
@@ -138,7 +136,7 @@ func _physics_process(delta: float) -> void:
 			guns[0].bullet_speed, target, global_transform.basis)
 	
 	# if components are installed, then move the turret
-	if turret_motion and orientation_data.target_pos != Vector3.ZERO:
+	if orientation_data.target_pos != Vector3.ZERO:
 		turret_motion.rotate_and_elevate(body, head, delta, orientation_data.target_pos)
 	
 	# Shoot if within angle limit

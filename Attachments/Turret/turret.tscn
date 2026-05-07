@@ -5,15 +5,12 @@
 [ext_resource type="Script" uid="uid://c3gw1nt0lnjsu" path="res://Controllers/target_selector.gd" id="6_cy7vo"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="8_qikae"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="9_b5qkf"]
-[ext_resource type="PackedScene" uid="uid://ymilutrw63dv" path="res://Attachments/Turret/turret_motion_component.tscn" id="9_x6y6e"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g6fsi"]
 radius = 1.0
 
 [node name="Turret" type="Node3D" unique_id=817027845]
 script = ExtResource("1_cbt5p")
-
-[node name="turret_motion_component" parent="." unique_id=1760395453 instance=ExtResource("9_x6y6e")]
 
 [node name="TurretModel" parent="." unique_id=121223985 instance=ExtResource("2_xuhpe")]
 
@@ -36,12 +33,11 @@ collide_with_areas = true
 
 [node name="HealthComponent" parent="." unique_id=871332090 instance=ExtResource("8_qikae")]
 
-[node name="HitBoxComponent" parent="." unique_id=790939857 node_paths=PackedStringArray("health_component") instance=ExtResource("9_b5qkf")]
+[node name="HitBoxComponent" parent="." unique_id=790939857 instance=ExtResource("9_b5qkf")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-health_component = NodePath("../HealthComponent")
 reticle_set = 1
 
-[node name="TargetReticles" parent="HitBoxComponent" index="0"]
+[node name="TargetReticles" parent="HitBoxComponent" index="0" unique_id=1056906650]
 target_text = "Turret"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent" unique_id=1621617879]

@@ -10,6 +10,8 @@ class_name CameraGroup extends Node3D
 # having.
 # https://forum.godotengine.org/t/parse-error-referenced-non-existent-resource/95356/6
 # https://github.com/godotengine/godot/issues/105021
+# HOWEVER, turret motion component is no longer a scene, it's
+# just a script, so this may now be fine?
 #const CAMERA_GROUP_SCENE:PackedScene = preload("res://Scenes/Camera/camera_group.tscn")
 
 # Controls for looking at target
@@ -29,7 +31,6 @@ var state : CameraState
 @onready var profile_camera: Camera3D = $ProfileCamera
 @onready var free_camera: Camera3D = $FreeCamera
 
-@onready var turret_motion:TurretMotionComponent = $turret_motion_component
 @onready var body:Node3D = $Body
 @onready var head:Node3D = $Body/Head
 
@@ -39,6 +40,8 @@ var state : CameraState
 @onready var targ_shield_hit: TextureRect = $TargLeadShieldHit
 @onready var timer_hit_flicker: Timer = $TimerHitFlicker
 @onready var current_targ_indicator: TextureRect = targ_indicator
+
+var turret_motion:TurretMotionComponent
 var target_lead_visible := false
 enum HIT_TYPE {STANDARD, STRONG, SHIELD}
 
@@ -77,6 +80,8 @@ var velocity:=Vector3.ZERO
 # having.
 # https://forum.godotengine.org/t/parse-error-referenced-non-existent-resource/95356/6
 # https://github.com/godotengine/godot/issues/105021
+# HOWEVER, turret motion component is no longer a scene, it's
+# just a script, so this may now be fine?
 #static func new_camera_group(my_parent:Node3D) -> CameraGroup:
 	#var cg := CAMERA_GROUP_SCENE.instantiate()
 	#my_parent.add_child(cg)
@@ -84,6 +89,7 @@ var velocity:=Vector3.ZERO
 
 
 func _ready() -> void:
+	turret_motion = TurretMotionComponent.new()
 	turret_motion.elevation_speed = deg_to_rad(elevation_speed_deg)
 	turret_motion.rotation_speed = deg_to_rad(rotation_speed_deg)
 	turret_motion.min_elevation = deg_to_rad(min_elevation_deg)
