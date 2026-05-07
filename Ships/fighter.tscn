@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Weapons/Guns/gun.tscn" id="4_57m73"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Weapons/weapon_handler.tscn" id="4_dhpb0"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="5_1xytm"]
-[ext_resource type="PackedScene" uid="uid://clfeojpa5dckh" path="res://Weapons/MissileLock/missile_lock_timeout.tscn" id="10_g3b86"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://UI/ReticlesCrosshairs/Images/crosshair012.png" id="13_yu6ls"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://vfx/burning_trail.tscn" id="14_4fwow"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Attachments/ObstacleDetector/obstacle_detector.tscn" id="14_05dih"]
@@ -69,6 +68,7 @@ outline_size = 4
 max_health = 20
 
 [node name="MissileLockGroup" parent="." unique_id=756556192 instance=ExtResource("17_563f5")]
+lock_style = 2
 missile_range = 1000.0
 
 [node name="MissileLauncher" parent="MissileLockGroup" unique_id=684312626 instance=ExtResource("4_57m73")]
@@ -78,8 +78,6 @@ damage = 10.0
 bullet_speed = 150.0
 bullet_timeout = 5.0
 fire_rate = 0.033
-
-[node name="MissileLockTImeout" parent="MissileLockGroup" unique_id=1472885779 instance=ExtResource("10_g3b86")]
 
 [node name="WeaponHandler" parent="." unique_id=1131696451 instance=ExtResource("4_dhpb0")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Ships/Models/fighter_chassis_diamond.tscn" id="12_a77x5"]
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Ships/Models/engine_mesh_component.tscn" id="12_e20ac"]
 [ext_resource type="PackedScene" uid="uid://ddoyejlbh51s5" path="res://Weapons/Guns/hit_scan_gun.tscn" id="13_428na"]
-[ext_resource type="PackedScene" uid="uid://db74cban80pwd" path="res://Weapons/MissileLock/missile_lock_lerp.tscn" id="13_gmlsk"]
 [ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Weapons/Visuals/laser_beam.tscn" id="16_y2utm"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="18_g51j4"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://UI/ReticlesCrosshairs/Images/crosshair012.png" id="19_gmlsk"]
@@ -56,16 +55,16 @@ radial_segments = 16
 [sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
 size = Vector3(6, 2.3, 10.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4h8o6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pe4ok"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("34_80okc")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_gxolo"]
+[sub_resource type="SphereMesh" id="SphereMesh_mamsf"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_4h8o6")
+material = SubResource("ShaderMaterial_pe4ok")
 
 [node name="Corvette" type="CharacterBody3D" unique_id=1134075911 groups=["damageable", "team member"]]
 motion_mode = 1
@@ -145,6 +144,7 @@ stream = ExtResource("9_ktweb")
 
 [node name="MissileLockGroup" parent="." unique_id=2132042412 instance=ExtResource("4_vmlm7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5.5)
+lock_style = 1
 
 [node name="MissileLauncher" parent="MissileLockGroup" unique_id=303582067 instance=ExtResource("2_2p718")]
 bullet_type = 0
@@ -152,13 +152,11 @@ damage = 50.0
 bullet_speed = 200.0
 fire_rate = 0.3
 
-[node name="MissileLockLerp" parent="MissileLockGroup" unique_id=78171564 instance=ExtResource("13_gmlsk")]
-
 [node name="Shield" parent="." unique_id=2025902563 instance=ExtResource("21_5ow11")]
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_gxolo")
+mesh = SubResource("SphereMesh_mamsf")
 
 [node name="TargetReticles" parent="." unique_id=689096099 instance=ExtResource("18_g51j4")]
 target_text = "Corvette"

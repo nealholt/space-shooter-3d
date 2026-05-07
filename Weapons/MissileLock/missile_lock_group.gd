@@ -3,6 +3,12 @@ class_name MissileLockGroup extends Node3D
 # This uses images from the kenney crosshair pack
 # https://kenney.nl/assets/crosshair-pack
 
+# Determines how the reticle moves and if skill is required
+# to get the lock.
+enum LockStyle {STANDARD, LERP, TIMEOUT}
+@export var lock_style:LockStyle = LockStyle.STANDARD
+var missile_lock:MissileLock
+
 # If this is true, then this missile lock group
 # is intended for npc use only. It will not
 # use any targeting reticles or audio, and
@@ -24,10 +30,6 @@ var slower_lock_angle:float = 25.0 # degrees
 
 # Gun to fire when launch is triggered
 var missile_launcher:Gun
-# Scene that controls the style of missile lock
-# (How the reticle moves and if skill is required to
-# get the lock. Stuff like that.)
-var missile_lock:MissileLock
 
 @export var missile_range:float = 600.0 ## Range within which missile lock can be acquired.
 # Calculated from missile_range
@@ -96,13 +98,16 @@ func _ready() -> void:
 	for child in get_children():
 		if child is Gun:
 			missile_launcher = child
-		elif child is MissileLock:
-			missile_lock = child
-			missile_lock.lock_acquired.connect(acquire_lock)
-			missile_lock.acquiring_offset = acquiring.size/2.0
-	# It's mandatory that missile lock be set
-	if !missile_lock:
-		push_error('ERROR in MissileLockGroup. There must be a MissileLock scene as a child.')
+	# Set up the style of missile lock
+	match lock_style:
+		LockStyle.STANDARD:
+			missile_lock = MissileLock.new()
+		LockStyle.LERP:
+			missile_lock = MissileLockLerp.new()
+		LockStyle.TIMEOUT:
+			missile_lock = MissileLockTimeout.new()
+	missile_lock.lock_acquired.connect(acquire_lock)
+	missile_lock.acquiring_offset = acquiring.size/2.0
 
 
 func set_as_NPC() -> void:

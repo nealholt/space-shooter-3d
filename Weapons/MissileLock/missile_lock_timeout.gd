@@ -1,4 +1,4 @@
-extends MissileLock
+class_name MissileLockTimeout extends MissileLock
 # Under this missile lock setup, there's a fixed time to
 # acquire lock no matter what you do. No skill involved
 # besides keeping the target within the maximum angle of

@@ -1,4 +1,4 @@
-extends MissileLock
+class_name MissileLockLerp extends MissileLock
 # Under this missile lock setup, the reticle approaches the
 # target rapidly at first then more slowly as it gets close.
 # Screen-centered locks are still basically instantaneous.
