@@ -18,5 +18,4 @@ func disable_for_testing() -> void:
 	for child in get_children():
 		if child is TurretData:
 			var t:Turret = child.get_child(0)
-			t.turret_motion.queue_free()
-			t.turret_motion = null
+			t.set_physics_process(false)
