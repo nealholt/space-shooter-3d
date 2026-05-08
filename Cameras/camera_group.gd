@@ -29,6 +29,7 @@ var state : CameraState
 @onready var timer_hit_flicker: Timer = $TimerHitFlicker
 @onready var current_targ_indicator: TextureRect = targ_indicator
 
+var current_camera:Camera3D
 var turret_motion:TurretMotionComponent
 var target_lead_visible := false
 enum HIT_TYPE {STANDARD, STRONG, SHIELD}
@@ -65,8 +66,6 @@ func _ready() -> void:
 	turret_motion.rotation_speed = deg_to_rad(rotation_speed_deg)
 	turret_motion.min_elevation = deg_to_rad(min_elevation_deg)
 	turret_motion.max_elevation = deg_to_rad(max_elevation_deg)
-	# Start off in first=person
-	first_person()
 	# Set the first two points in the mouse_guide line to
 	# be center screen. Two points are added because 
 	# _physics_process always resets the second point,
@@ -111,6 +110,8 @@ func _ready() -> void:
 		set_physics_process(false)
 	# Register self with global
 	Global.camera_group = self
+	# Start off in firstperson
+	switch_cameras(CameraState.FIRSTPERSON)
 
 
 # For gameplay mode
@@ -119,49 +120,58 @@ func _physics_process(delta: float) -> void:
 	# and as long as right stick is held in, look at
 	# current target.
 	if Input.is_action_just_pressed("POV_standard"):
-		first_person()
+		switch_cameras(CameraState.FIRSTPERSON)
 		turn_on_look()
 	# Target view. Look towards the target, but from the far
 	# side of the player so the player can turn to face target.
-	# D-Pad up
-	elif Input.is_action_just_pressed("POV_target_look"):
-		target_camera()
+	# D-Pad up.
+	# Don't use this if there is no target.
+	elif Input.is_action_just_pressed("POV_target_look") and \
+	is_instance_valid(Global.player.controller.target):
+		switch_cameras(CameraState.TARGETVIEW)
 	# Target close up. Launch the camera out toward the target.
 	# D-Pad right
-	elif Input.is_action_just_pressed("POV_target_closeup"):
-		#camera.top_level = true # Don't inherit parent's transform
-		target_closeup_camera()
+	# Don't use this if there is no target.
+	elif Input.is_action_just_pressed("POV_target_closeup") and \
+	is_instance_valid(Global.player.controller.target):
+		switch_cameras(CameraState.TARGETCLOSEUP)
 	# Fixed underslung rear view showing the belly and tail
 	# of player's ship looking backwards.
 	# D-Pad down
 	elif Input.is_action_just_pressed("POV_rear"):
-		rear_camera()
+		switch_cameras(CameraState.REAR)
 	# Cinematic fly-by view. Launch the camera out of ahead
 	# of the player and watch the player fly be.
 	# D-Pad left
-	elif Input.is_action_just_pressed("POV_flyby"):
-		flyby_camera()
+	# In some testing scenes, there is not a player.
+	# Don't use this camera if there's no player.
+	elif Input.is_action_just_pressed("POV_flyby") and Global.player:
+		switch_cameras(CameraState.FLYBY)
 	# Turn off target look when right thumbstick is released
 	elif Input.is_action_just_released("POV_standard"):
 		look_at_target = false
 	# Profile camera initially used for testing
 	elif Input.is_action_just_released("POV_profile"):
-		set_profile_camera()
+		switch_cameras(CameraState.PROFILE)
 	
 	# Adjust relevant camera based on the current pov
 	match state:
 		CameraState.FLYBY:
 			free_camera.look_at(global_position, Vector3.UP)
 		CameraState.TARGETCLOSEUP:
+			# Position camera, but if target is lost,
+			# switch back to first person camera.
 			if is_instance_valid(target):
 				view_target_close()
 			else:
-				first_person()
+				switch_cameras(CameraState.FIRSTPERSON)
 		CameraState.TARGETVIEW:
+			# Position camera, but if target is lost,
+			# switch back to first person camera.
 			if is_instance_valid(target):
 				view_target_from_player()
 			else:
-				first_person()
+				switch_cameras(CameraState.FIRSTPERSON)
 	# Look at target with first-person cam
 	if look_at_target and state == CameraState.FIRSTPERSON and is_instance_valid(target):
 		turret_motion.rotate_and_elevate(body, head, delta, target.global_position)
@@ -220,8 +230,8 @@ func _physics_process(delta: float) -> void:
 			beyond_center.visible = true
 			beyond_center.global_position = mouse_pos
 		else:
-			beyond_center.visible = false
 			near_center.visible = true
+			beyond_center.visible = false
 			near_center.global_position = mouse_pos
 
 
@@ -232,105 +242,43 @@ func turn_on_look() -> void:
 		target = Global.player.controller.target
 
 
-# Transition to first person camera
-func first_person() -> void:
-	state = CameraState.FIRSTPERSON
-	first_person_camera.make_current()
-	Global.current_camera = first_person_camera
-	Global.targeting_hud_on = true
-	# Turn off near miss detectors for all but this camera.
-	shutdown_near_miss()
-	first_person_camera.turn_on_near_miss()
-
-
-# Transition to rear underbelly camera
-func rear_camera() -> void:
-	state = CameraState.REAR
-	rear_under_camera.make_current()
-	Global.current_camera = rear_under_camera
+func switch_cameras(cs:CameraState) -> void:
 	Global.targeting_hud_on = false
 	mouse_guide.visible = false
 	near_center.visible = false
 	beyond_center.visible = false
+	state = cs
+	match state:
+		CameraState.FIRSTPERSON:
+			current_camera = first_person_camera
+			Global.targeting_hud_on = true
+		CameraState.REAR:
+			current_camera = rear_under_camera
+		CameraState.FLYBY:
+			current_camera = free_camera
+			# Reposition to ahead and off to the side of the player
+			current_camera.global_position = global_position - \
+				Global.player.transform.basis.z*50.0 + \
+				Global.player.transform.basis.y*rng.randf_range(-20.0,20.0)+ \
+				Global.player.transform.basis.x*rng.randf_range(-20.0,20.0)
+			current_camera.look_at(global_position, Vector3.UP)
+		CameraState.PROFILE:
+			current_camera = profile_camera
+		CameraState.TARGETCLOSEUP:
+			target = Global.player.controller.target
+			current_camera = free_camera
+			view_target_close()
+		CameraState.TARGETVIEW:
+			# This is where we are looking at target but "over the shoulder"
+			# from the player themself.
+			target = Global.player.controller.target
+			current_camera = free_camera
+			view_target_from_player()
+	current_camera.make_current()
+	Global.current_camera = current_camera
 	# Turn off near miss detectors for all but this camera.
 	shutdown_near_miss()
-	rear_under_camera.turn_on_near_miss()
-
-
-# Transition to fly-by cinematic camera
-func flyby_camera() -> void:
-	# In some testing scenes, there is not a player
-	# but there is a camera
-	if !Global.player:
-		return
-	state = CameraState.FLYBY
-	free_camera.make_current()
-	Global.current_camera = free_camera
-	# Reposition to ahead and off to the side of the player
-	free_camera.global_position = global_position - \
-		Global.player.transform.basis.z*50.0 + \
-		Global.player.transform.basis.y*rng.randf_range(-20.0,20.0)+ \
-		Global.player.transform.basis.x*rng.randf_range(-20.0,20.0)
-	free_camera.look_at(global_position, Vector3.UP)
-	Global.targeting_hud_on = false
-	mouse_guide.visible = false
-	near_center.visible = false
-	beyond_center.visible = false
-	# Turn off near miss detectors for all but this camera.
-	shutdown_near_miss()
-	free_camera.turn_on_near_miss()
-
-
-# Transition to fly-by cinematic camera
-func set_profile_camera() -> void:
-	state = CameraState.PROFILE
-	profile_camera.make_current()
-	Global.current_camera = free_camera
-	Global.targeting_hud_on = false
-	mouse_guide.visible = false
-	near_center.visible = false
-	beyond_center.visible = false
-	# Turn off near miss detectors for all but this camera.
-	shutdown_near_miss()
-	profile_camera.turn_on_near_miss()
-
-
-# Transition to target closeup camera
-func target_closeup_camera() -> void:
-	if !(Global.player and Global.player.controller.target and is_instance_valid(Global.player.controller.target)):
-		return
-	target = Global.player.controller.target
-	state = CameraState.TARGETCLOSEUP
-	free_camera.make_current()
-	Global.current_camera = free_camera
-	view_target_close()
-	Global.targeting_hud_on = false
-	mouse_guide.visible = false
-	near_center.visible = false
-	beyond_center.visible = false
-	# Turn off near miss detectors for all but this camera.
-	shutdown_near_miss()
-	free_camera.turn_on_near_miss()
-
-
-# Transition to target view camera.
-# This is where we are looking at target but "over the shoulder"
-# from the player themself.
-func target_camera() -> void:
-	if !is_instance_valid(Global.player.controller.target):
-		return
-	state = CameraState.TARGETVIEW
-	target = Global.player.controller.target
-	free_camera.make_current()
-	Global.current_camera = free_camera
-	view_target_from_player()
-	Global.targeting_hud_on = false
-	mouse_guide.visible = false
-	near_center.visible = false
-	beyond_center.visible = false
-	# Turn off near miss detectors for all but this camera.
-	shutdown_near_miss()
-	free_camera.turn_on_near_miss()
+	current_camera.turn_on_near_miss()
 
 
 # Pre: target is valid
@@ -338,7 +286,7 @@ func target_camera() -> void:
 func view_target_close() -> void:
 	# To avoid this error:
 	# "Node origin and target are in the same position, look_at() failed."
-	# Make sure to position the camera before calling look_at.
+	# Make sure to position the camera BEFORE calling look_at.
 	
 	# Reposition to at target position, but back up
 	# the camera to get a better view
