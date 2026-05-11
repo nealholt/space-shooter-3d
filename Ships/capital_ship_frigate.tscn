@@ -2,18 +2,13 @@
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Ships/ship.gd" id="1_dp23i"]
 [ext_resource type="PackedScene" uid="uid://bh2v67l31a2lg" path="res://Ships/Models/frigate_model.tscn" id="1_ukj0d"]
-[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="2_dp23i"]
+[ext_resource type="Resource" uid="uid://bfhl52uipkbq3" path="res://Ships/Resources/ship_stats_capitalshipfrigate.tres" id="2_7erqg"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="2_ffelx"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="3_ac6d0"]
 [ext_resource type="Script" uid="uid://nmvuwja71fox" path="res://Attachments/Weakpoint/weakpoint_opener.gd" id="7_3qdq6"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Attachments/Turret/turret_group.tscn" id="7_bof2b"]
 [ext_resource type="PackedScene" uid="uid://dk6y2tyoo25sn" path="res://Attachments/Weakpoint/weakpoint.tscn" id="8_3qdq6"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Attachments/Turret/turret_data.gd" id="8_ejvar"]
-
-[sub_resource type="Resource" id="Resource_nfwkw"]
-script = ExtResource("2_dp23i")
-max_health = 10.0
-metadata/_custom_type_script = "uid://llcl4ev3hi63"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mdcux"]
 
@@ -157,7 +152,7 @@ _data = {
 [node name="CapitalShipFrigate" type="CharacterBody3D" unique_id=1054647733 groups=["capital_ship", "team member"]]
 motion_mode = 1
 script = ExtResource("1_dp23i")
-stats = SubResource("Resource_nfwkw")
+stats = ExtResource("2_7erqg")
 
 [node name="HitBoxComponent" parent="." unique_id=868661198 instance=ExtResource("2_ffelx")]
 transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, -30, 0)

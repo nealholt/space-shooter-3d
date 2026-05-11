@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_stmd2")
 max_health = 100.0
+aim_assist_angle = 5.0
 metadata/_custom_type_script = "uid://llcl4ev3hi63"

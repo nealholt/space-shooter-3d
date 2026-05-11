@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://juku72fh3dl0"]
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Ships/ship.gd" id="1_dn8ab"]
-[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="2_vjc4m"]
+[ext_resource type="Resource" uid="uid://dtpn51rkaubwl" path="res://Ships/Resources/ship_stats_fighter.tres" id="2_s55gh"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Audio/SoundEffects/aim_assist.wav" id="3_g3b86"]
 [ext_resource type="PackedScene" uid="uid://hpvkerb8hmkp" path="res://Ships/ModelsBlender/fighter_tri.tscn" id="4_05dih"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Weapons/Guns/gun.tscn" id="4_57m73"]
@@ -11,16 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://vfx/burning_trail.tscn" id="14_4fwow"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Attachments/ObstacleDetector/obstacle_detector.tscn" id="14_05dih"]
 [ext_resource type="PackedScene" uid="uid://do50y2jdho5iq" path="res://vfx/MuzzleFlash/muzzle_flash_green_monster.tscn" id="14_uh0vy"]
-[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="15_kfjug"]
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Audio/SoundEffects/lowFrequency_explosion_001.ogg" id="16_uh0vy"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Weapons/MissileLock/missile_lock_group.tscn" id="17_563f5"]
 [ext_resource type="PackedScene" uid="uid://yp51kcujfd4s" path="res://Audio/ShieldTransitAudio/shield_transit_audio.tscn" id="17_y44vr"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Weapons/aim_assist.tscn" id="19_xjc2u"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://vfx/contrail.tscn" id="20_a8xhu"]
-
-[sub_resource type="Resource" id="Resource_np0ec"]
-script = ExtResource("2_vjc4m")
-metadata/_custom_type_script = "uid://llcl4ev3hi63"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ydoww"]
 radius = 2.3
@@ -29,7 +24,7 @@ radius = 2.3
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
 motion_mode = 1
 script = ExtResource("1_dn8ab")
-stats = SubResource("Resource_np0ec")
+stats = ExtResource("2_s55gh")
 fps_cam_position = Vector3(0, 1, -1)
 side_cam_position = Vector3(1.27, -0.2, -2)
 deathExplosion = 9
@@ -108,6 +103,3 @@ transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
 
 [node name="GotHitAudio" type="AudioStreamPlayer" parent="." unique_id=245140248]
 stream = ExtResource("16_uh0vy")
-
-[node name="TargetReticles" parent="." unique_id=2083337324 instance=ExtResource("15_kfjug")]
-target_text = "Fighter"

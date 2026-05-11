@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ShipStats" format=3 uid="uid://g610si3hen87"]
+
+[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="1_ktj8y"]
+
+[resource]
+script = ExtResource("1_ktj8y")
+target_reticle_text = "Corvette"
+metadata/_custom_type_script = "uid://llcl4ev3hi63"

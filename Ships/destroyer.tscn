@@ -2,18 +2,12 @@
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Ships/ship.gd" id="1_2su5o"]
 [ext_resource type="PackedScene" uid="uid://cea1hyirvxk5n" path="res://Ships/ModelsBlender/destroyer.tscn" id="2_c4x8n"]
-[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="2_iqh03"]
+[ext_resource type="Resource" uid="uid://bs3315b8o6lda" path="res://Ships/Resources/ship_stats_destroyer.tres" id="2_sorjn"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="3_2fe14"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Attachments/Turret/turret_group.tscn" id="4_mjmit"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Attachments/Turret/turret_data.gd" id="5_i0xpl"]
-[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="7_c4x8n"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="7_i0d2t"]
 [ext_resource type="Resource" uid="uid://dick38j62uhh4" path="res://Controllers/Resources/controller_stats_capship_above.tres" id="8_i0d2t"]
-
-[sub_resource type="Resource" id="Resource_3jh5d"]
-script = ExtResource("2_iqh03")
-max_health = 100.0
-metadata/_custom_type_script = "uid://llcl4ev3hi63"
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c4x8n"]
 points = PackedVector3Array(11.482248, 4.2503576, 20.31643, -2.6437604, 1.9923999, 12.67453, -3.1086786, 5.519431, 12.069876, -11.358835, 4.2503576, 20.31643, 11.482248, 2.3478656, 13.338948, -11.358835, 2.3478656, 13.338948, 11.482248, 2.3478656, 20.31643, -3.1086786, 5.519431, 20.31643, 3.229856, 5.519431, 12.069876, -11.358835, 2.3478656, 20.31643, 11.482248, 4.2503576, 13.338948, -11.358835, 4.2503576, 13.338948, 2.9867253, 1.859373, 20, 3.229856, 5.519431, 20.31643, 2.7652657, 1.9923999, 12.67453)
@@ -30,7 +24,7 @@ points = PackedVector3Array(-3.7448938, -2.7288628, -19.652489, 4.503028, -0.825
 [node name="Destroyer" type="CharacterBody3D" unique_id=433808346 groups=["capital_ship", "damageable", "team member"]]
 motion_mode = 1
 script = ExtResource("1_2su5o")
-stats = SubResource("Resource_3jh5d")
+stats = ExtResource("2_sorjn")
 deathExplosion = 8
 finalExplosion = 9
 death_animation_duration_min = 0.0
@@ -73,9 +67,6 @@ script = ExtResource("5_i0xpl")
 max_elevation_deg = 90.0
 prefer_capital_ships = true
 bullet_type = 7
-
-[node name="TargetReticles" parent="." unique_id=1644942671 instance=ExtResource("7_c4x8n")]
-target_text = "Destroyer"
 
 [node name="NPCController" parent="." unique_id=1852644041 node_paths=PackedStringArray("initial_state") instance=ExtResource("7_i0d2t")]
 initial_state = NodePath("States/Orbit")

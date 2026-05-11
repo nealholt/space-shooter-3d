@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Ships/ship.gd" id="1_bfcrw"]
 [ext_resource type="PackedScene" uid="uid://dco5cmfrb87bx" path="res://Weapons/Guns/burst_gun.tscn" id="2_2p718"]
-[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="2_f4jgf"]
+[ext_resource type="Resource" uid="uid://g610si3hen87" path="res://Ships/Resources/ship_stats_corvette.tres" id="2_pe4ok"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Audio/SoundEffects/aim_assist.wav" id="3_yie06"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Weapons/MissileLock/missile_lock_group.tscn" id="4_vmlm7"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="7_vhcpa"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Ships/Models/engine_mesh_component.tscn" id="12_e20ac"]
 [ext_resource type="PackedScene" uid="uid://ddoyejlbh51s5" path="res://Weapons/Guns/hit_scan_gun.tscn" id="13_428na"]
 [ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Weapons/Visuals/laser_beam.tscn" id="16_y2utm"]
-[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="18_g51j4"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://UI/ReticlesCrosshairs/Images/crosshair012.png" id="19_gmlsk"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Weapons/Guns/gun.tscn" id="19_yfprc"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Attachments/Shield/shield.tscn" id="21_5ow11"]
@@ -28,10 +27,6 @@
 [ext_resource type="PackedScene" uid="uid://yp51kcujfd4s" path="res://Audio/ShieldTransitAudio/shield_transit_audio.tscn" id="29_f4jgf"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://vfx/burning_trail.tscn" id="29_w78kn"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Attachments/Shield/FresnelAura.tres" id="34_80okc"]
-
-[sub_resource type="Resource" id="Resource_tst1b"]
-script = ExtResource("2_f4jgf")
-metadata/_custom_type_script = "uid://llcl4ev3hi63"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyjhj"]
 albedo_color = Color(0.282353, 0.282353, 0.282353, 1)
@@ -55,21 +50,21 @@ radial_segments = 16
 [sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
 size = Vector3(6, 2.3, 10.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pe4ok"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_whyjy"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("34_80okc")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_mamsf"]
+[sub_resource type="SphereMesh" id="SphereMesh_pe4ok"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_pe4ok")
+material = SubResource("ShaderMaterial_whyjy")
 
 [node name="Corvette" type="CharacterBody3D" unique_id=1134075911 groups=["damageable", "team member"]]
 motion_mode = 1
 script = ExtResource("1_bfcrw")
-stats = SubResource("Resource_tst1b")
+stats = ExtResource("2_pe4ok")
 fps_cam_position = Vector3(0, 0.6, -2.9)
 side_cam_position = Vector3(2.3, -0.5, -3.5)
 deathExplosion = 9
@@ -156,10 +151,7 @@ fire_rate = 0.3
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_mamsf")
-
-[node name="TargetReticles" parent="." unique_id=689096099 instance=ExtResource("18_g51j4")]
-target_text = "Corvette"
+mesh = SubResource("SphereMesh_pe4ok")
 
 [node name="WeaponHandler" parent="." unique_id=370825666 instance=ExtResource("9_1xly7")]
 

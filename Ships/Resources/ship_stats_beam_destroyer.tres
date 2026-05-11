@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ShipStats" format=3 uid="uid://doawhtb0emdoa"]
+
+[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="1_iisrd"]
+
+[resource]
+script = ExtResource("1_iisrd")
+max_health = 100.0
+target_reticle_text = "Beam Destroyer"
+metadata/_custom_type_script = "uid://llcl4ev3hi63"

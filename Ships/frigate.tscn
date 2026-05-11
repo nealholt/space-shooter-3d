@@ -3,19 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://cxd7ahrv8vrys" path="res://Ships/Models/frigate_chassis.tscn" id="1_18ao0"]
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Ships/ship.gd" id="1_veikt"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="2_2gkw6"]
-[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="2_yj57s"]
+[ext_resource type="Resource" uid="uid://dupgpxdl4bnxc" path="res://Ships/Resources/ship_stats_frigate.tres" id="2_or537"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Attachments/Turret/turret_group.tscn" id="4_7ugl6"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Attachments/Turret/turret_data.gd" id="5_mh4mh"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Weapons/weapon_handler.tscn" id="7_qbhaa"]
 [ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Weapons/Guns/laser_gun.tscn" id="8_14glc"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="9_6rpyf"]
-[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="9_14glc"]
 [ext_resource type="Resource" uid="uid://j7qi0q8tmupn" path="res://Controllers/Resources/controller_stats_capship_forward.tres" id="10_6rpyf"]
-
-[sub_resource type="Resource" id="Resource_ajspe"]
-script = ExtResource("2_yj57s")
-max_health = 400.0
-metadata/_custom_type_script = "uid://llcl4ev3hi63"
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qmjcj"]
 points = PackedVector3Array(-9.53674e-07, 45, 17.5, -9.53674e-07, 45, -17.5, -15, -45, 17.5, 15, -45, 17.5, 15, -45, -17.5, -15, -45, -17.5)
@@ -38,7 +32,7 @@ points = PackedVector3Array(-9.98867, -0.477684, 0, -9.94174, -0.477684, 0.97774
 [node name="Frigate" type="CharacterBody3D" unique_id=584156115 groups=["capital_ship", "damageable", "team member"]]
 motion_mode = 1
 script = ExtResource("1_veikt")
-stats = SubResource("Resource_ajspe")
+stats = ExtResource("2_or537")
 deathExplosion = 8
 finalExplosion = 9
 death_animation_duration_min = 0.0
@@ -85,9 +79,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -46.5)
 
 [node name="LaserGun" parent="WeaponHandler" unique_id=24048760 instance=ExtResource("8_14glc")]
 ray_length = 700.0
-
-[node name="TargetReticles" parent="." unique_id=1772289334 instance=ExtResource("9_14glc")]
-target_text = "Frigate"
 
 [node name="NPCController" parent="." unique_id=1852644041 node_paths=PackedStringArray("initial_state") instance=ExtResource("9_6rpyf")]
 initial_state = NodePath("States/Orbit")

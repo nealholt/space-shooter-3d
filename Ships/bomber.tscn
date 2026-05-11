@@ -3,19 +3,13 @@
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Ships/ship.gd" id="1_uw5oo"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://vfx/burning_trail.tscn" id="2_6e5lt"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Weapons/aim_assist.tscn" id="2_120ti"]
-[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="2_e1i0b"]
+[ext_resource type="Resource" uid="uid://tsq88dkqw3bf" path="res://Ships/Resources/ship_stats_bomber.tres" id="2_te66f"]
 [ext_resource type="PackedScene" uid="uid://ctw16pilpn8rk" path="res://Ships/Models/bomber_chassis.tscn" id="3_hrk35"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="4_40no2"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://vfx/contrail.tscn" id="5_rgdmc"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Weapons/Guns/gun.tscn" id="7_f8b5m"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Weapons/MissileLock/missile_lock_group.tscn" id="9_7wsae"]
-[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="10_up24e"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Attachments/ObstacleDetector/obstacle_detector.tscn" id="12_e1i0b"]
-
-[sub_resource type="Resource" id="Resource_lct8m"]
-script = ExtResource("2_e1i0b")
-max_health = 10.0
-metadata/_custom_type_script = "uid://llcl4ev3hi63"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rfws3"]
 size = Vector3(5.03894, 1.51178, 7.49753)
@@ -23,7 +17,7 @@ size = Vector3(5.03894, 1.51178, 7.49753)
 [node name="Bomber" type="CharacterBody3D" unique_id=1295567426 groups=["damageable", "team member"]]
 motion_mode = 1
 script = ExtResource("1_uw5oo")
-stats = SubResource("Resource_lct8m")
+stats = ExtResource("2_te66f")
 deathExplosion = 9
 finalExplosion = 8
 death_animation_duration_min = 1.0
@@ -61,9 +55,6 @@ damage = 100.0
 bullet_speed = 80.0
 bullet_timeout = 20.0
 fire_rate = 0.1
-
-[node name="TargetReticles" parent="." unique_id=1202960706 instance=ExtResource("10_up24e")]
-target_text = "Bomber"
 
 [node name="ObstacleDetector" parent="." unique_id=1346467973 instance=ExtResource("12_e1i0b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.6661463)

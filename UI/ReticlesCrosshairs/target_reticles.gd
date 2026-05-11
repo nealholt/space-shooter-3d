@@ -96,7 +96,7 @@ func _ready():
 	# Get the max distance along x axis and along y that
 	# the reticle can go so that it's still visible:
 	max_reticle_position = viewport_center - offscreen_reticle_offset
-	dynamic_panel.set_target_text(target_text)
+	set_target_text.call_deferred(target_text)
 
 
 func _process(_delta):
@@ -213,3 +213,8 @@ func just_targeted() -> void:
 	#print('ZoomOnDistantTarget')
 	#print(animation_player.is_playing())
 	animation_player.play('ZoomOnTarget')
+
+
+func set_target_text(s:String) -> void:
+	target_text = s
+	dynamic_panel.set_target_text(s)

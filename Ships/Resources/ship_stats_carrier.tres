@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ShipStats" format=3 uid="uid://d1gc4b23ortpx"]
+
+[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="1_t86fs"]
+
+[resource]
+script = ExtResource("1_t86fs")
+max_health = 1000.0
+target_reticle_text = "Carrier"
+metadata/_custom_type_script = "uid://llcl4ev3hi63"

@@ -59,14 +59,6 @@ var death_animation_timer:Timer
 @export var death_animation_duration_min:float = 1.5
 @export var death_animation_duration_max:float = 4.5
 
-# Since ships are CharacterBody3Ds and those require
-# collision shapes to handle phyics of collisions,
-# I'm faced with the choice of either duplicate code
-# (here and in ship.gd) or duplicate collision shapes
-# (as children of CharacterBody3D ships and hit box area).
-# Until I resolve this, I'm going to duplicate code.
-# The following 4 variables are duplicates of the code
-# in hit_box_component.
 # This will be populated probably only for the player
 var got_hit_audio:AudioStreamPlayer
 var reticle:TargetReticles
@@ -102,6 +94,7 @@ func _ready() -> void:
 	for child in get_children():
 		if child is AimAssist:
 			aim_assist = child
+			aim_assist.set_assist_limit_deg(stats.aim_assist_angle)
 		elif child is BurningTrail:
 			burning_trail = child
 		elif child is CharacterBodyControlParent and !disable_for_testing:
@@ -125,8 +118,6 @@ func _ready() -> void:
 		# The following are all from hit_box_component
 		elif child is AudioStreamPlayer:
 			got_hit_audio = child
-		elif child is TargetReticles:
-			reticle = child
 		# Remove turrets if we're just testing
 		elif child is TurretGroup and disable_for_testing:
 			child.disable_for_testing()
@@ -166,12 +157,18 @@ func _ready() -> void:
 		if missile_lock:
 			missile_lock.set_as_NPC()
 		# Remove texture rects beneath the guns beneath the
-		# weapon handler. These are reticles for use by
-		# players only.
+		# weapon handler. These are crosshairs for use by
+		# the player only.
 		if weapon_handler:
 			weapon_handler.remove_texture_rects()
 		# Nullify the got_hit_audio
 		got_hit_audio = null
+		# Attach target reticle
+		if stats.target_reticle_text != 'NONE':
+			var reticle_scene:PackedScene = preload("res://UI/ReticlesCrosshairs/target_reticles.tscn")
+			reticle = reticle_scene.instantiate()
+			add_child(reticle)
+			reticle.set_target_text.call_deferred(stats.target_reticle_text)
 	# Add self (CharacterBody3D) to collision exceptions so
 	# bullets don't hit self.
 	collision_exceptions.push_back(self)
