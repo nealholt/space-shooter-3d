@@ -79,7 +79,12 @@ func _ready() -> void:
 	# Search through children for various components
 	# and save a reference to them.
 	for child in get_children():
-		if child is Area3D:
+		# HitBoxComponents are ALSO Area3Ds, but not all
+		# Area3Ds are HitBoxComponents. That's why this
+		# check must go before the check for Area3D
+		if child is HitBoxComponent:
+			hit_box_component = child
+		elif child is Area3D:
 			# Connect to area and body entered signals
 			child.area_entered.connect(_on_area_entered)
 			child.body_entered.connect(_on_body_entered)
@@ -89,8 +94,6 @@ func _ready() -> void:
 			health_component = child
 			# Connect signals with code
 			health_component.died.connect(_on_health_component_died)
-		elif child is HitBoxComponent:
-			hit_box_component = child
 	# Error check
 	if explode_on_timeout and !damaging_explosion:
 		push_error('If explode_on_timeout is true then a damaging_explosion should be set.')
@@ -126,7 +129,7 @@ func set_data(dat:ShootData) -> void:
 	# their own missiles, because most projectiles don't
 	# have a hit_box_component, but some missiles do.
 	if hit_box_component:
-		hit_box_component.add_damage_exception(dat.shooter)
+		hit_box_component.add_damage_exception(data.shooter)
 	# Override target in order to set target to be
 	# centermost enemy.
 	if autotarget:

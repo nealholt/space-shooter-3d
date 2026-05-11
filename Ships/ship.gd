@@ -306,10 +306,14 @@ func set_targeted(targeter:Node3D, value:bool) -> void:
 # targeter is seeking lock on this hitbox,
 # loses lock, acquires lock, or fires a missile.
 func seeking_lock(_targeter:Node3D) -> void:
+	#print('seeking_lock')
 	pass
 func lost_lock(_targeter:Node3D) -> void:
+	#print('lost_lock')
 	pass
 func lock_acquired(_targeter:Node3D) -> void:
+	print('lock_acquired')
 	pass
 func missile_inbound(_targeter:Node3D) -> void:
+	print('missile_inbound')
 	pass
