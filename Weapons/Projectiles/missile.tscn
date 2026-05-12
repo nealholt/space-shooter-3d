@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bvbnfofl0d7vv"]
 
 [ext_resource type="PackedScene" uid="uid://bosxindk1alsp" path="res://Weapons/Projectiles/projectile.tscn" id="1_g37v4"]
+[ext_resource type="PackedScene" uid="uid://dbpuijlnfgmru" path="res://Features/Explosion/explosion_damage_dealing.tscn" id="2_nu5nk"]
 [ext_resource type="PackedScene" uid="uid://ux6ivcx1ovdp" path="res://Assets/Particles/booster_particles.tscn" id="3_7d76i"]
 [ext_resource type="PackedScene" uid="uid://b8xwbrmhu8ybu" path="res://Weapons/Visuals/gray_torpedo_body.tscn" id="4_4eh70"]
 [ext_resource type="Texture2D" uid="uid://dwhxx0f2kh1cu" path="res://Assets/Textures/kenney_particle-pack/smoke_07.png" id="4_g37v4"]
@@ -29,6 +30,8 @@ deathExplosion = 8
 sparks = 0
 shieldSparks = 0
 wrap_up_time = 2.0
+damaging_explosion = ExtResource("2_nu5nk")
+explode_on_timeout = true
 
 [node name="GrayTorpedo" parent="." index="1" unique_id=1502860453 instance=ExtResource("4_4eh70")]
 

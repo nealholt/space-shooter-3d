@@ -247,14 +247,7 @@ transform = Transform3D(0.19537577, 0.7544654, 0.6265862, -0.9803523, 0.1325488,
 is_player = true
 
 [node name="MissileLockGroup" parent="BlueTeam/Fighter" index="7" unique_id=756556192]
-missile_range = 5000.0
 quick_launch_interval = 0.01
-
-[node name="MissileLauncher" parent="BlueTeam/Fighter/MissileLockGroup" index="7" unique_id=684312626]
-bullet_speed = 10.0
-bullet_timeout = 25.0
-timeout_vary_percent = 0.0
-spread_deg = 40.0
 
 [node name="Gun" parent="BlueTeam/Fighter/WeaponHandler" parent_id_path=PackedInt32Array(1900985089, 1131696451) index="0" unique_id=2138703467]
 bullet_speed = 800.0
