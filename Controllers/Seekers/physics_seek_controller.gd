@@ -40,8 +40,9 @@ func move_me(body:Node3D, delta:float) -> void:
 # to make it work in 3d
 func get_velocity_adjustment(body) -> Vector3:
 	var target_pos := get_target_pos(body)
-	# Calculate the desired velocity, normalized and then
-	# multiplied by speed.
-	var desired : Vector3 = (target_pos - body.global_position).normalized() * body.speed
+	# Calculate the desired direction
+	var desired : Vector3 = body.global_position.direction_to(target_pos)
+	# This does the exact same thing
+	#var desired : Vector3 = (target_pos - body.global_position).normalized()
 	# Return an adjustment to velocity based on the steer force.
-	return (desired - body.velocity).normalized() * steer_force
+	return (desired - body.velocity.normalized()) * steer_force

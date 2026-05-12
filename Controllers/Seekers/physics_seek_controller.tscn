@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://db8pt4e2ctg7o" path="res://Controllers/Seekers/physics_seek_controller.gd" id="1_54mgj"]
 
-[node name="PhysicsSeekController" type="Node"]
+[node name="PhysicsSeekController" type="Node" unique_id=2142669986]
 script = ExtResource("1_54mgj")

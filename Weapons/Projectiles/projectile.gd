@@ -269,32 +269,32 @@ func did_collide(delta:float) -> bool:
 		# Don't stick decals on shields
 		if !body.is_in_group("shield"):
 			VfxManager.play_at_angle(bullet_hole_decal, ray.get_collision_point(), ray.get_collision_normal())
-		damage_and_die(body, ray.get_collision_point())
+		return damage_and_die(body, ray.get_collision_point())
 	# Ricochet
 	elif does_ricochet:
 		ricochet(delta)
 	else: # Body is not damageable, but projectile should die anyway
-		die_without_damaging(body, ray.get_collision_point())
+		return die_without_damaging(body, ray.get_collision_point())
 	return true # Did collide with something.
 
 
-func damage_and_die(body, collision_point=null) -> void:
+func damage_and_die(body, collision_point=null) -> bool:
 	if should_skip_body(body):
-		return
+		return false
 	# Damage what was hit
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
 	if body.is_in_group("damageable"):
 		body.damage(data.damage, data.shooter)
 	# Previous was the damage part. Now do the dieing part.
-	die_without_damaging(body, collision_point)
+	return die_without_damaging(body, collision_point)
 
 
 # Called by projectile.damage_and_die, but also called
 # by RayCastForProjectiles.did_collide when collided with
 # a non-damageable object
-func die_without_damaging(body, collision_point=null) -> void:
+func die_without_damaging(body, collision_point=null) -> bool:
 	if should_skip_body(body):
-		return
+		return false
 	# Play feedback for player if relevant
 	Global.player_feedback(body, data)
 	# Make a spark at collision point
@@ -310,6 +310,7 @@ func die_without_damaging(body, collision_point=null) -> void:
 		explode_with_damage()
 	#Delete bullets that strike a body
 	wrap_up()
+	return true
 
 
 # If the given body should not be collided with for any
@@ -323,10 +324,16 @@ func should_skip_body(body) -> bool:
 	# Stop early for other collision exceptions.
 	# This will be things like the shooter's hitbox
 	# and shields.
-	elif data.collision_exceptions.has(body):
+	if data.collision_exceptions.has(body):
 		return true
-	else:
-		return false
+	# If the body has a damage_exception (as hit box component does)
+	# and that exception is the shooter, then skip it.
+	# This is used to avoid shooting down one's own missiles
+	# and to avoid missiles blocking one's own shots.
+	if body is HitBoxComponent and is_instance_valid(body.damage_exception) and body.damage_exception == data.shooter:
+		return true
+	
+	return false
 
 
 # Start near miss sound upon entering a near miss Area3D
