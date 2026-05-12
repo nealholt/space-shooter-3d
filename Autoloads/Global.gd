@@ -18,14 +18,20 @@ var red_team_group : TeamSetup # Node3D holding everything on team red
 var blue_team_group : TeamSetup # Node3D holding everything on team blue
 var current_camera : Camera3D
 var camera_group : CameraGroup
-var player : CharacterBody3D
+var player : Ship
 var input_man : InputManager
+var missile_cues : MissileCues
 # For now I'm globally turning off the hud when in
 # camera views other than first person.
 var targeting_hud_on : bool = true
 
 # Until I find a better home for these functions, I'm putting them here
 # Control-Shift-f to search for anywhere text is found
+
+
+func register_player(p:Ship) -> void:
+	player = p
+	missile_cues.connect_to_player(p)
 
 
 # Get the member of the given groups who is nearest to

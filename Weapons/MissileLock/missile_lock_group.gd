@@ -20,6 +20,9 @@ var missile_lock:MissileLock
 # by target leaving range missile_range_sqd
 # or by angle to target exceeding missile_lock_max_angle
 var npc_missile_lock:bool = false # True if for npc use. Eliminates a lot of audio visual stuff that only humans need.
+# This bool is used to trigger an alert the first time the NPC's lock countdown begins
+var npc_seeking_began:bool = false
+
 @export var lock_timeout:float = 4.0 ## Time in seconds needed to acquire lock
 # Used to count down time to lock
 var lock_timer:float = 0.0
@@ -166,20 +169,29 @@ func update(targeter:Node3D, delta:float) -> void:
 
 func npc_seeking_update(targeter:Node3D, delta:float) -> void:
 	var angle_to:float = rad_to_deg(Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z))
-	if angle_to < faster_lock_angle:
-		# lock timer goes twice as fast
-		lock_timer -= 2.0*delta
-	elif slower_lock_angle < angle_to:
+	# Target is at a bad angle
+	if slower_lock_angle < angle_to:
 		# lock timer increases rather than decreases
 		# up to the lock_timeout amount
 		lock_timer = min(lock_timer+delta, lock_timeout)
 	else:
-		# Normal amount of time passes
-		lock_timer -= delta
+		# If seeking had not already begun, alert target
+		if !npc_seeking_began:
+			target.seeking_lock(targeter)
+			npc_seeking_began = true
+		# Target is at an okay angle
+		if faster_lock_angle < angle_to:
+			# Normal amount of time passes
+			lock_timer -= delta
+		# Target is at a great angle
+		else:
+			# lock timer goes twice as fast
+			lock_timer -= 2.0*delta
 	# Check for lock on
 	if lock_timer < 0.0:
 		locked = true
 		seeking = false
+		npc_seeking_began = false # Reset
 		target.lock_acquired(targeter)
 
 
@@ -225,7 +237,9 @@ func attempt_to_start_seeking(targeter:Node3D) -> void:
 		# only if another missile is ready to fire
 		if missile_launcher.ready_to_fire():
 			start_seeking()
-			target.seeking_lock(targeter)
+			# NPC's do this differently
+			if !npc_missile_lock:
+				target.seeking_lock(targeter)
 
 
 # Fire missile if lock is acquired
@@ -259,6 +273,7 @@ func start_seeking() -> void:
 func stop_seeking() -> void:
 	seeking = false
 	locked = false
+	npc_seeking_began = false # Reset
 	time_since_lock = 0.0
 	if !npc_missile_lock:
 		acquiring.hide()

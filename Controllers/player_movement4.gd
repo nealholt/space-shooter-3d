@@ -57,10 +57,6 @@ func _ready() -> void:
 	stats_standard = stats
 	impulse = stats.impulse
 	im = Global.input_man
-	# Tell the global script who the player is.
-	# Since this is a player controller, it SHOULD
-	# be an immediate child of the player.
-	Global.player = get_parent()
 
 
 # Override parent class function

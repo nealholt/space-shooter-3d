@@ -1,6 +1,8 @@
 class_name Ship extends CharacterBody3D
 
-signal destroyed
+signal missile_locked # Emitted when an enemy acquires missile lock on this ship
+signal missile_fired_inbound # Emitted when a missile is fired at this ship
+signal destroyed # Emitted when this ship is destroyed
 
 @export var stats:ShipStats
 
@@ -130,6 +132,7 @@ func _ready() -> void:
 		controller.set_obstacle_detector(obstacle_detector)
 	# Set this ship up differently if it's the player
 	if is_player:
+		Global.register_player(self)
 		# Attach a camera group
 		var cam_group_scene:PackedScene = preload("res://Cameras/camera_group.tscn")
 		camera_group = cam_group_scene.instantiate()
@@ -306,14 +309,15 @@ func set_targeted(targeter:Node3D, value:bool) -> void:
 # targeter is seeking lock on this hitbox,
 # loses lock, acquires lock, or fires a missile.
 func seeking_lock(_targeter:Node3D) -> void:
-	#print('seeking_lock')
+	# This is actually triggered when the enemy starts
+	# its countdown to missile lock, which is what I want
+	missile_locked.emit()
 	pass
 func lost_lock(_targeter:Node3D) -> void:
 	#print('lost_lock')
 	pass
 func lock_acquired(_targeter:Node3D) -> void:
-	print('lock_acquired')
 	pass
 func missile_inbound(_targeter:Node3D) -> void:
-	print('missile_inbound')
+	missile_fired_inbound.emit()
 	pass

@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dlvbwry0kyq35"]
+
+[ext_resource type="Script" uid="uid://dvsc7jwgp47x5" path="res://Audio/MissileCues/missile_cues.gd" id="1_wtj17"]
+[ext_resource type="AudioStream" uid="uid://cpoavs0lbbi2g" path="res://Audio/MissileCues/AudioFiles/bandit_has_lock.wav" id="2_3rxna"]
+[ext_resource type="AudioStream" uid="uid://cia8w2sh6uc3" path="res://Audio/MissileCues/AudioFiles/hostile_tracking.wav" id="3_jgk7j"]
+[ext_resource type="AudioStream" uid="uid://d1d6ej1buv13g" path="res://Audio/MissileCues/AudioFiles/targeted.wav" id="4_lp42i"]
+[ext_resource type="AudioStream" uid="uid://c08heab32nds8" path="res://Audio/MissileCues/AudioFiles/youre_being_painted.wav" id="5_8fm57"]
+[ext_resource type="AudioStream" uid="uid://c5tvceame5jff" path="res://Audio/MissileCues/AudioFiles/missile_inbound.wav" id="6_ayc02"]
+[ext_resource type="AudioStream" uid="uid://ca7tomwvg6l7f" path="res://Audio/MissileCues/AudioFiles/youve_got_incoming.wav" id="7_dljw1"]
+[ext_resource type="AudioStream" uid="uid://buyg10fogdoua" path="res://Audio/MissileCues/AudioFiles/seeker_inbound.wav" id="8_o1tv2"]
+[ext_resource type="AudioStream" uid="uid://bo15y6s55o7lk" path="res://Audio/MissileCues/AudioFiles/fish_in_the_water.wav" id="9_ps82c"]
+
+[node name="MissileCues" type="Node" unique_id=940800843]
+script = ExtResource("1_wtj17")
+
+[node name="LockAudio" type="Node" parent="." unique_id=917981882]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LockAudio" unique_id=1310020990]
+stream = ExtResource("2_3rxna")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="LockAudio" unique_id=1270223299]
+stream = ExtResource("3_jgk7j")
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="LockAudio" unique_id=1988027829]
+stream = ExtResource("4_lp42i")
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="LockAudio" unique_id=741561315]
+stream = ExtResource("5_8fm57")
+
+[node name="FiredAudio" type="Node" parent="." unique_id=1127319665]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FiredAudio" unique_id=431925242]
+stream = ExtResource("6_ayc02")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="FiredAudio" unique_id=1631737856]
+stream = ExtResource("7_dljw1")
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="FiredAudio" unique_id=490925191]
+stream = ExtResource("8_o1tv2")
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="FiredAudio" unique_id=2039538284]
+stream = ExtResource("9_ps82c")

@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://b1uy61qicurbh" path="res://Assets/Themes/button_theme.tres" id="3_iacmt"]
 [ext_resource type="Script" uid="uid://csj0vmdw4ljl8" path="res://UI/pause_script.gd" id="3_jv6wh"]
 [ext_resource type="Theme" uid="uid://cgxfk4t3qm477" path="res://Assets/Themes/label_theme.tres" id="4_6ev3c"]
+[ext_resource type="PackedScene" uid="uid://dlvbwry0kyq35" path="res://Audio/MissileCues/missile_cues.tscn" id="5_3noim"]
 
 [node name="MainScene" type="Node" unique_id=2077342344]
 script = ExtResource("1_ke176")
@@ -498,6 +499,10 @@ theme = ExtResource("4_6ev3c")
 text = "Escape"
 
 [node name="Main3D" type="Node3D" parent="." unique_id=1346861883]
+
+[node name="AudioCues" type="Node" parent="." unique_id=1253366240]
+
+[node name="MissileCues" parent="AudioCues" unique_id=940800843 instance=ExtResource("5_3noim")]
 
 [node name="InputManager" parent="." unique_id=1938263342 instance=ExtResource("2_6l7je")]
 
