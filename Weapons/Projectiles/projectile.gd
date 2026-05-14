@@ -147,13 +147,7 @@ func set_data(dat:ShootData) -> void:
 	# targeting the player, then we want to create a special scene
 	# to change the reticle based on distance to target
 	if controller and hit_box_component and data.target == Global.player:
-		var mopr := preload('res://Weapons/Visuals/missile_on_player_reticle.tscn')
-		var mopr_obj:MissileOnPlayerReticle = mopr.instantiate()
-		add_child(mopr_obj)
-		mopr_obj.projectile = self
-		mopr_obj.reticle = hit_box_component.get_reticle()
-		mopr_obj.reticle.always_show = true
-		mopr_obj.reticle.set_target_text('Missile')
+		MissileOnPlayerReticle.new_missile_on_player(self, hit_box_component.get_reticle())
 
 
 # Randomize heading of this bullet based on ShootData
