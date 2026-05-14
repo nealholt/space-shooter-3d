@@ -1,5 +1,6 @@
-extends Node
-class_name Controller
+class_name Controller extends Node
+# This class is used by seeking projectiles to guide them
+# to the target.
 
 @export var is_laser_guided:bool = false
 var target:Node3D

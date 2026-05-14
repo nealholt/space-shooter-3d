@@ -68,6 +68,10 @@ var offscreen_reticle_offset:Vector2
 var viewport_center:Vector2
 var max_reticle_position:Vector2
 
+# If true, reticle will be shown whether or not it's targeted.
+# This is used for missiles that are targeting the player.
+var always_show:bool = false
+
 
 var is_targeted:bool:
 	set(value):
@@ -93,9 +97,10 @@ func _ready():
 	# to put offscreen indicator reticle by drawing a line
 	# from the offscreen position to the center:
 	viewport_center = Vector2(get_viewport().size) / 2.0
-	# Get the max distance along x axis and along y that
-	# the reticle can go so that it's still visible:
-	max_reticle_position = viewport_center - offscreen_reticle_offset
+	# Get the max distance along x and y axes that
+	# the reticle can go so that it's still visible,
+	# but then bring it in a little with the 0.95
+	max_reticle_position = (viewport_center-offscreen_reticle_offset) * 0.95
 	set_target_text.call_deferred(target_text)
 
 
@@ -116,7 +121,7 @@ func _process(_delta):
 		# If targeted and targeting HUD on
 		# then show target reticle and label.
 		# Otherwise choose between near and far reticles.
-		if is_targeted and Global.targeting_hud_on:
+		if (is_targeted or always_show) and Global.targeting_hud_on:
 			# Get distance to target
 			var dist:float = global_position.distance_to(Global.player.global_position)
 			# Set reticle
@@ -130,8 +135,8 @@ func _process(_delta):
 			reticle_to_use = target_reticle
 		reticle_to_use.visible = true # Show the reticle
 		reticle_to_use.set_global_position(reticle_position)
-		
-	elif is_targeted: # Show at most one offscreen reticle for targeted unit
+	# Reticle is off screen
+	elif is_targeted or always_show:
 		display_offscreen_reticle()
 		dynamic_panel.visible = false
 	#else:
@@ -218,3 +223,11 @@ func just_targeted() -> void:
 func set_target_text(s:String) -> void:
 	target_text = s
 	dynamic_panel.set_target_text(s)
+
+
+func set_reticle_scale(percent:float) -> void:
+	var scl := Vector2(percent, percent)
+	target_reticle.scale = scl
+	offscreen_reticle.scale = scl
+	distant_reticle.scale = scl
+	targeted_reticle.scale = scl

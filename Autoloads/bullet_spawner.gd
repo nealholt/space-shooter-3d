@@ -170,7 +170,7 @@ func _get_sparkle_trail() -> Projectile:
 	var control := physics_seek.instantiate()
 	# Attach physics seek controller
 	projectile.add_child(control)
-	control.steer_force = 2500.0
+	control.steer_force = 5000.0
 	projectile.does_ricochet = false
 	# Attach contrail and sparkle
 	projectile.add_child(visuals)

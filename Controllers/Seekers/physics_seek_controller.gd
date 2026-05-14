@@ -1,6 +1,6 @@
-extends Controller
-class_name PhysicsController
-
+class_name PhysicsController extends Controller
+# This class is used by seeking projectiles to guide them
+# to the target.
 
 var acceleration := Vector3.ZERO
 @export var steer_force: float = 50.0

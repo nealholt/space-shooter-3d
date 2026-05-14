@@ -99,6 +99,10 @@ func remove_reticle() -> void:
 	reticle = null
 
 
+func get_reticle() -> TargetReticles:
+	return reticle
+
+
 # These are called by the missile lock group when
 # targeter is seeking lock on this hitbox,
 # loses lock, acquires lock, or fires a missile.

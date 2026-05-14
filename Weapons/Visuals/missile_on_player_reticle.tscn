@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://yhn36rsfme20"]
+
+[ext_resource type="Script" uid="uid://btt3r1fy4xbhg" path="res://Weapons/Visuals/missile_on_player_reticle.gd" id="1_cc3pp"]
+
+[node name="MissileOnPlayerReticle" type="Node" unique_id=843386886]
+script = ExtResource("1_cc3pp")

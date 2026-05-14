@@ -143,6 +143,17 @@ func set_data(dat:ShootData) -> void:
 		time_out += randf_range(-time_out*dat.timeout_vary_percent, time_out*dat.timeout_vary_percent)
 	# Start the timer
 	timer.start(time_out)
+	# If there is a controller, a hit box, and this projectile is
+	# targeting the player, then we want to create a special scene
+	# to change the reticle based on distance to target
+	if controller and hit_box_component and data.target == Global.player:
+		var mopr := preload('res://Weapons/Visuals/missile_on_player_reticle.tscn')
+		var mopr_obj:MissileOnPlayerReticle = mopr.instantiate()
+		add_child(mopr_obj)
+		mopr_obj.projectile = self
+		mopr_obj.reticle = hit_box_component.get_reticle()
+		mopr_obj.reticle.always_show = true
+		mopr_obj.reticle.set_target_text('Missile')
 
 
 # Randomize heading of this bullet based on ShootData
@@ -382,17 +393,20 @@ func wrap_up() -> void:
 	# Anything else visible should hide (Stuff like
 	# the model of a torpedo)
 	for child in get_children():
-		if child is GPUParticles3D:
-			child.one_shot = true
-			child.emitting = false
-		elif child is RayCast3D:
-			Callable(child.queue_free).call_deferred()
-		elif child is HitBoxComponent:
-			Callable(child.queue_free).call_deferred()
+		if child is HitBoxComponent:
+			child.queue_free.call_deferred()
 		elif child is Contrail:
 			child._lifeSpan = child._lifeSpan/10.0
 		elif child is SparkleTrailVisual:
 			child.wrap_up()
+		elif child is MissileOnPlayerReticle:
+			child.set_process(false)
+			child.queue_free.call_deferred()
+		elif child is GPUParticles3D:
+			child.one_shot = true
+			child.emitting = false
+		elif child is RayCast3D:
+			child.queue_free.call_deferred()
 		elif child.get('visible'):
 			child.hide()
 	# Start up a timer and queue_free all the rest when it goes off
