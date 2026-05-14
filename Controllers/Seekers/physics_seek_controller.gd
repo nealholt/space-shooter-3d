@@ -1,6 +1,13 @@
 class_name PhysicsController extends Controller
 # This class is used by seeking projectiles to guide them
 # to the target.
+# This has some weird behavior.
+# It's modifying velocity by adding a goal velocity times a
+# steer force, but when the projectile needs to adjust its
+# direction by 180 degrees, this additive calculation can cause
+# a projectile to appear to merely slow down before eventually
+# accelerating in the opposite direction, which looks weird.
+# I don't know why I'd use this over fixed rotation seek.
 
 var acceleration := Vector3.ZERO
 @export var steer_force: float = 50.0

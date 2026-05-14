@@ -39,6 +39,7 @@ var sparkle_trail:PackedScene = load('res://Weapons/Visuals/sparkle.tscn')
 # Controllers for seeking behaviors
 var physics_seek:PackedScene = load('res://Controllers/Seekers/physics_seek_controller.tscn')
 var simple_seek:PackedScene = load('res://Controllers/Seekers/simple_seek_controller.tscn')
+var fixed_rotation_seek:PackedScene = load('res://Controllers/Seekers/fixed_rotation_seek_controller.tscn')
 
 
 # Guns call this to get a made-to-order bullet
@@ -167,10 +168,13 @@ func _get_proxy_fuse() -> Projectile:
 func _get_sparkle_trail() -> Projectile:
 	var projectile := generic_projectile.instantiate()
 	var visuals := sparkle_trail.instantiate()
-	var control := physics_seek.instantiate()
-	# Attach physics seek controller
+	var control := fixed_rotation_seek.instantiate()
+	# Attach seek controller
 	projectile.add_child(control)
-	control.steer_force = 5000.0
+	control.rotation_speed_deg = 180 # Degrees of rotation per second
+	# I used to use physics_seek with steer force of 5000,
+	# but I didn't like the look of the behavior. Read the note
+	# at the top of the physics seek script for more info on this.
 	projectile.does_ricochet = false
 	# Attach contrail and sparkle
 	projectile.add_child(visuals)

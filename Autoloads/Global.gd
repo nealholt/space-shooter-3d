@@ -149,22 +149,22 @@ func get_angle_to_target(seeker_pos:Vector3, target_pos:Vector3, facing_dir:Vect
 
 # This is just a helper function to organize interpolated
 # turning toward target.
-# I'm pretty sure this is just used in Enemy
-# If delta is zero then no change will be made.
-# If delta is one then seeker will snap to face target.
-# If delta is 0.5 the seeker will cover half the angle
+# If percent is 0 then no change will be made.
+# If percent is 1 then seeker will snap to face target.
+# If percent is 0.5 the seeker will cover half the angle
 # to the target. You've got to be careful with how you
 # use this otherwise you'll end up with a Xeno's
 # paradox of forever covering half the distance and
 # never reaching the target.
+# The fixed rotation seek controller uses this well.
 # To learn more, see 9 min into this video:
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/40979546
-func interp_face_target(seeker:Node3D, target:Vector3, delta:float) -> Transform3D:
-	#https://kidscancode.org/godot_recipes/4.x/3d/rotate_interpolate/index.html
-	#I use transform.basis.y as relative "up" rather than Vector3.UP
-	#So the object doesn't roll over when the target crosses past high noon
-	var new_transform = seeker.transform.looking_at(target,seeker.global_transform.basis.y)
-	return seeker.transform.interpolate_with(new_transform, delta)
+func interp_face_target(seeker:Node3D, target_pos:Vector3, percent:float) -> Transform3D:
+	# https://kidscancode.org/godot_recipes/4.x/3d/rotate_interpolate/index.html
+	# I use transform.basis.y as relative "up" rather than Vector3.UP
+	# So the object doesn't roll over when the target crosses past high noon
+	var new_transform = seeker.transform.looking_at(target_pos,seeker.global_transform.basis.y)
+	return seeker.transform.interpolate_with(new_transform, percent)
 
 
 # Original source/inspiration:
