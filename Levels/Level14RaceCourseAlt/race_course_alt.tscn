@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Audio/EngineAudio/engine_audio_visuals.tscn" id="5_aq803"]
 [ext_resource type="PackedScene" uid="uid://dec2h3fkjfo0m" path="res://Features/RaceCheckpoint/race_checkpoint.tscn" id="6_kc8d4"]
 [ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Cameras/camera_group.tscn" id="7_aq803"]
-[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Controllers/player_movement_v_4.tscn" id="7_g048y"]
+[ext_resource type="PackedScene" uid="uid://dqtdw47fdrqg" path="res://Controllers/player_controller_v_5.tscn" id="7_g048y"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_gnpxn"]
 panorama = ExtResource("2_ufjhp")
@@ -53,7 +53,7 @@ finalExplosion = 0
 
 [node name="CameraGroup" parent="BlueTeam/Fighter" unique_id=1678925824 instance=ExtResource("7_aq803")]
 
-[node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=1908608534 instance=ExtResource("7_g048y")]
+[node name="PlayerControllerV5" parent="BlueTeam/Fighter" unique_id=103839730 instance=ExtResource("7_g048y")]
 
 [node name="VictoryLayer" parent="." unique_id=982250268 instance=ExtResource("5_1focs")]
 visible = false

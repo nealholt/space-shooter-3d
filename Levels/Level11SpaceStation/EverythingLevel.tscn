@@ -9,8 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Attachments/Shield/shield.tscn" id="7_ka707"]
 [ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Ships/bomber.tscn" id="7_m10fo"]
 [ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Ships/destroyer.tscn" id="8_5shl4"]
+[ext_resource type="PackedScene" uid="uid://dqtdw47fdrqg" path="res://Controllers/player_controller_v_5.tscn" id="8_67ulr"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="8_isq32"]
-[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Controllers/player_movement_v_4.tscn" id="8_tcc1m"]
 [ext_resource type="PackedScene" uid="uid://bqvcfo7v6o6ip" path="res://Ships/beam_destroyer.tscn" id="9_kc2e1"]
 [ext_resource type="PackedScene" uid="uid://byb8ya6fryjw0" path="res://Ships/frigate.tscn" id="10_d6xr2"]
 [ext_resource type="PackedScene" uid="uid://diilp2vvcvj53" path="res://Ships/carrier.tscn" id="11_gd4i7"]
@@ -83,7 +83,7 @@ reload_sound = 1
 [node name="Shield" parent="BlueTeam/Fighter" unique_id=1992904425 instance=ExtResource("7_ka707")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
-[node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=1314607642 instance=ExtResource("8_tcc1m")]
+[node name="PlayerControllerV5" parent="BlueTeam/Fighter" unique_id=103839730 instance=ExtResource("8_67ulr")]
 
 [node name="RedTeam" type="Node3D" parent="." unique_id=381603895]
 script = ExtResource("5_0jpk3")

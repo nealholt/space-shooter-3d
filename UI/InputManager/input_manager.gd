@@ -15,6 +15,7 @@ var shoot_pressed := false
 var shoot_just_pressed := false
 var brake := false
 var drift := false
+var drift_just_released := false
 var accelerate := false
 var accelerate_just_pressed := false
 var left_right1 := 0.0 # Left stick
@@ -50,8 +51,7 @@ func toggle_mouse_and_keyboard(toggled_on: bool) -> void:
 	use_mouse_and_keyboard = toggled_on
 
 
-# This is called by player_movement4 and ballistic_movement3,
-# the two player control scripts, as im.update().
+# This is called by player controllers as im.update().
 # I believe it is called every physics update.
 func update() -> void:
 	switch_weapons = Input.is_action_just_pressed("switch_weapons")
@@ -61,6 +61,7 @@ func update() -> void:
 	shoot_just_pressed = Input.is_action_just_pressed("shoot")
 	brake = Input.is_action_pressed("brake")
 	drift = Input.is_action_pressed("drift")
+	drift_just_released = Input.is_action_just_released("drift")
 	accelerate = Input.is_action_pressed("accelerate")
 	accelerate_just_pressed = Input.is_action_just_pressed("accelerate")
 	
