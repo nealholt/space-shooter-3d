@@ -6,6 +6,7 @@
 script = ExtResource("1_hl0fv")
 impulse = 0.0
 pitch = 2.0
+roll = 2.0
 friction_std = 0.0
 impulse_lerp = 100.0
 turning_lerp = 8.0

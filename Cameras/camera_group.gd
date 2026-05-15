@@ -35,6 +35,9 @@ enum HIT_TYPE {STANDARD, STRONG, SHIELD}
 var target:Node3D
 
 var look_at_target : bool = false
+# If true, player is manually swiveling and pitching
+# the body and head of the first person camera
+var fp_manual_override : bool = false
 
 var mouse_guide:Line2D
 # Custom images for the mouse cursor.
@@ -156,7 +159,7 @@ func _physics_process(delta: float) -> void:
 	# Look at target with first-person cam
 	if look_at_target and state == CameraState.FIRSTPERSON and is_instance_valid(target):
 		turret_motion.rotate_and_elevate(body, head, delta, target.global_position)
-	elif Global.player:
+	elif Global.player and !fp_manual_override:
 		# Return to facing forward, or at least way far
 		# forward of the nose of the player.
 		# Alternatively, maybe I should have a Node3D
@@ -294,3 +297,14 @@ func get_first_person_near_miss() -> Area3D:
 
 func get_first_person_camera() -> Camera3D:
 	return first_person_camera
+
+
+func set_fp_manual_override(b:bool) -> void:
+	fp_manual_override = b
+
+# Rotate the first person camera
+# roty is the swivel
+# rotx is the pitch
+func rotate_fp_cam(roty:float, rotx:float, delta:float) -> void:
+	turret_motion.swivel_toward(body, roty, delta)
+	turret_motion.pitch_toward(head, rotx, delta)

@@ -10,6 +10,10 @@ var rotation_speed:float
 var min_elevation:float
 var max_elevation:float
 
+# ROTATION_LIMIT_DEG is only used for manual "head turning"
+const ROTATION_LIMIT_DEG:float = 60 # 60 degrees
+
+
 func setup_values(dat:TurretData) -> void:
 	elevation_speed = deg_to_rad(dat.elevation_speed_deg)
 	rotation_speed = deg_to_rad(dat.rotation_speed_deg)
@@ -92,3 +96,29 @@ func get_projected(pos:Vector3, normal:Vector3) -> Vector3:
 	# By subtracting projection from position, we get the
 	# projected point.
 	return pos - projection
+
+
+# Rotate the given body around the y axis toward the goal percent rotation
+func swivel_toward(body:Node3D, rotation_percent:float, delta:float) -> void:
+	# Calculate sign to rotate left or right.
+	var rotation_sign:float = sign(rotation_percent)
+	# Because straight ahead is both 180 and -180, the following if else
+	# is needed to not have lerp take the long way around the circle.
+	# For instance 170 and -170 are only 20 degrees apart, but if you
+	# try to lerp from 170 to -170, it goes 160, 150, 140 ...
+	# instead of 170, 180, -170.
+	if rotation_percent < 0: # Right
+		if body.rotation_degrees.y < 0:
+			body.rotation_degrees.y += 360
+	else: # Left
+		if 0 < body.rotation_degrees.y:
+			body.rotation_degrees.y -= 360
+	# Lerp by delta toward the goal angle
+	var goal_angle:float = -rotation_sign*180+rotation_percent*ROTATION_LIMIT_DEG
+	body.rotation_degrees.y = lerp(body.rotation_degrees.y, goal_angle, delta)
+
+
+# Rotate the given body around the x axis toward the goal percent rotation
+func pitch_toward(head:Node3D, rotation_percent:float, delta:float) -> void:
+	pass
+# TODO TESTING LEFT OFF HERE

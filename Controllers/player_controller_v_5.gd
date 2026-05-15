@@ -2,7 +2,7 @@ class_name PlayerController5 extends CharacterBodyControlParent
 
 # When drift is just released, lerp heading
 # toward velocity for this duration.
-@export var heading_reset_duration:float = 1.0 ## Seconds
+@export var heading_reset_duration:float = 0.7 ## Seconds
 var heading_reset_countdown:float = 0.0
 @export var heading_reset_strength:float = 5.0
 
@@ -12,25 +12,6 @@ var stats_standard:ControllerStats
 @export var stats_accel:ControllerStats
 # Stats while drifting
 @export var stats_drift:ControllerStats
-
-# Strength of movements for the right stick. This is
-# an experiment to fly with both sticks.
-var roll_std_right_stick: float = 2.0
-var pitch_std_right_stick: float = 0.4
-
-# Scaling factor for reducing turn rate as a function of speed
-# The smaller this number is, the more turn rate will be
-# reduced at high speed.
-# If turn_reduction_factor is 10, then every 10 difference
-# between speed and default speed will divide turn rate by 1 more.
-# The practical effect of this is that you can't turn sharply
-# immediately just because you let off the accelerator.
-# You have to wait until your speed goes back down.
-# I'm not sure I like this much. Higher values essentially
-# make this meaningless.
-# The initial impetus was to do something like X-Wing
-# where the best turn rate is at 1/3 max velocity.
-@export_range(1,5000, 10) var turn_reduction_factor:float = 100.0
 
 var is_dead := false
 
@@ -61,10 +42,11 @@ func move_and_turn(mover, delta:float) -> void:
 	if heading_reset_countdown > 0.0:
 		heading_reset_countdown -= delta
 		# lerp heading toward velocity
-		var target:Vector3 = mover.global_position + mover.velocity
-		mover.transform = Global.interp_face_target(mover, target, delta*heading_reset_strength)
-		# If you don't like the yaw, you might rewrite
-		# this to steer like an NPC's seek function
+		var pos:Vector3 = mover.global_position + mover.velocity
+		mover.transform = Global.interp_face_target(mover, pos, delta*heading_reset_strength)
+		# Consider rewriting the above to steer
+		# like an NPC's seek function, otherwise it will
+		# yaw unnaturally.
 	
 	#Brake
 	#if im.brake:
@@ -86,35 +68,30 @@ func move_and_turn(mover, delta:float) -> void:
 	impulse = lerp(impulse, stats.impulse,
 			min(1.0, stats.impulse_lerp*delta))
 	
-	# Calculate reduced turn rate based on difference
-	# between current speed and default speed.
-	var pitch_modifier: float = 1.0
-	var roll_modifier: float = 1.0
-	var yaw_modifier: float = 1.0
-	# Don't apply if drifting.
-	if !im.drift:
-		var speed:float = mover.velocity.length()
-		var turn_reduction:float = max(abs(speed-stats.impulse/stats.friction_std) / turn_reduction_factor, 1.0)
-		pitch_modifier /= turn_reduction
-		roll_modifier /= turn_reduction
-		yaw_modifier /= turn_reduction
-	
 	# If you lerp more than 100% weird bad behavior occurs.
 	# Use min to avoid this.
 	# Get pitch
 	pitch_input = lerp(pitch_input,
-		(im.up_down1*stats.pitch + im.up_down2*pitch_std_right_stick) * pitch_modifier,
+		im.up_down1 * stats.pitch,
 		min(1.0, stats.turning_lerp*delta))
 	# Get Roll
 	roll_input = lerp(roll_input,
-		(im.left_right1*stats.roll + im.left_right2*roll_std_right_stick) * roll_modifier,
+		im.left_right1 * stats.roll,
 		min(1.0, stats.turning_lerp*delta))
 	# Get yaw using same left stick input as roll
 	yaw_input = lerp(yaw_input,
-		im.left_right1*stats.yaw * yaw_modifier,
+		im.left_right1*stats.yaw,
 		min(1.0, stats.turning_lerp*delta))
 	
 	friction = stats.friction_std
+	
+	# Turn "head" and "neck"
+	var manual_look:bool = im.left_right2 != 0.0 or im.up_down2 != 0.0
+	Global.camera_group.set_fp_manual_override(manual_look)
+	if manual_look:
+		Global.camera_group.rotate_fp_cam(im.left_right2, im.up_down2, delta)
+		#print(im.left_right2)
+		#print(im.up_down2)
 	
 	super.move_and_turn(mover, delta)
 

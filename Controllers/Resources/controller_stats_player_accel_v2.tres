@@ -6,8 +6,7 @@
 script = ExtResource("1_0asjm")
 impulse = 150.0
 pitch = 1.0
-roll = 0.3
-yaw = 0.2
+roll = 1.2
 friction_std = 0.8
 impulse_lerp = 0.5
 turning_lerp = 2.0

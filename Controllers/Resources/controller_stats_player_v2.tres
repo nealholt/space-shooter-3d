@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_8alct")
 pitch = 1.5
-roll = 0.4
+roll = 1.5
 friction_std = 0.8
 metadata/_custom_type_script = "uid://c4rebesbspn8"
