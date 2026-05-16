@@ -87,11 +87,19 @@ func move_and_turn(mover, delta:float) -> void:
 	
 	# Turn "head" and "neck"
 	var manual_look:bool = im.left_right2 != 0.0 or im.up_down2 != 0.0
-	Global.camera_group.set_fp_manual_override(manual_look)
+	# TODO TESTING LEFT OFF HERE
+	#Global.camera_group.set_fp_manual_override(manual_look)
 	if manual_look:
 		Global.camera_group.rotate_fp_cam(im.left_right2, im.up_down2, delta)
 		#print(im.left_right2)
 		#print(im.up_down2)
+	# TODO TESTING LEFT OFF HERE
+	#else:
+		#var lean_in:bool = im.left_right1 != 0.0 or im.up_down1 != 0.0
+		#Global.camera_group.set_fp_manual_override(lean_in)
+		## Lean into turns
+		#if lean_in:
+			#Global.camera_group.rotate_fp_cam(im.left_right1*0.1, im.up_down1*0.1, delta)
 	
 	super.move_and_turn(mover, delta)
 

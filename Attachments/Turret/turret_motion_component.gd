@@ -100,6 +100,8 @@ func get_projected(pos:Vector3, normal:Vector3) -> Vector3:
 
 # Rotate the given body around the y axis toward the goal percent rotation
 func swivel_toward(body:Node3D, rotation_percent:float, delta:float) -> void:
+	if rotation_percent==0.0:
+		return
 	# Calculate sign to rotate left or right.
 	var rotation_sign:float = sign(rotation_percent)
 	# Because straight ahead is both 180 and -180, the following if else
@@ -121,6 +123,8 @@ func swivel_toward(body:Node3D, rotation_percent:float, delta:float) -> void:
 # Rotate the given body(head) around the x axis toward the goal
 # percent rotation
 func pitch_toward(head:Node3D, rotation_percent:float, delta:float) -> void:
+	if rotation_percent==0.0:
+		return
 	# This makes up == up. As opposed to looking inverted
 	rotation_percent = -rotation_percent
 	# For now, don't pitch downward

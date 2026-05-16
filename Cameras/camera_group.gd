@@ -306,5 +306,7 @@ func set_fp_manual_override(b:bool) -> void:
 # roty is the swivel
 # rotx is the pitch
 func rotate_fp_cam(roty:float, rotx:float, delta:float) -> void:
-	turret_motion.swivel_toward(body, roty, delta)
-	turret_motion.pitch_toward(head, rotx, delta)
+	if roty!=0.0:
+		turret_motion.swivel_toward(body, roty, delta)
+	if rotx!=0.0:
+		turret_motion.pitch_toward(head, rotx, delta)
