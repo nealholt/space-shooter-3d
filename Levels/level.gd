@@ -26,6 +26,11 @@ func _ready() -> void:
 				red_team = c
 			else:
 				blue_team = c
+	# This is nice to prevent a jarring pull to the side
+	# at the start of each level when mouse and keyboard
+	# are in use.
+	center_the_mouse()
+
 
 # This function is called after something dies.
 func check_win_loss(dead_thing) -> void:
@@ -50,3 +55,8 @@ func check_win_loss(dead_thing) -> void:
 		var child:HealthComponent = red_team.get_child(0).health_component
 		if child.is_dead():
 			end_screen.victory(Array())
+
+
+func center_the_mouse() -> void:
+	var center_screen := Vector2(get_viewport().size) / 2.0
+	get_viewport().warp_mouse(center_screen)

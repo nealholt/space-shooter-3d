@@ -97,7 +97,7 @@ func _ready() -> void:
 		if !('fps_cam_position' in p and 'fps_cam_rotation_deg' in p and 'side_cam_position' in p and 'side_cam_rotation_deg' in p):
 			push_error('ERROR in CameraGroup _ready. Expect parent to be a ship with certain attributes for positioning camera.')
 		body.position = p.fps_cam_position
-		body.rotation = p.fps_cam_rotation_deg
+		body.rotation_degrees = p.fps_cam_rotation_deg
 		rear_under_camera.position = p.side_cam_position
 		rear_under_camera.rotation = p.side_cam_rotation_deg
 		# For now I'm just manually positioning the profile camera

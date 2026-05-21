@@ -108,6 +108,16 @@ func rotate_and_elevate_lerp(body:Node3D, head:Node3D, delta:float, current_targ
 	# the direction of rotation_sign.
 	# Lerp toward goal angle
 	body.rotation.y = lerp(body.rotation.y, body.rotation.y+rotation_sign*y_angle, delta)
+	# Clamp rotation within limits.
+	body.rotation.y = clamp(
+		body.rotation.y,
+		-PI, PI
+	)
+	#print()
+	#print('y_angle ', rad_to_deg(y_angle))
+	#print('rotation_sign ', rotation_sign)
+	#print('body.rotation.y ', rad_to_deg(body.rotation.y))
+	
 	
 	# Rotation is complete, now we elevate.
 	# Project the target onto the ZY plane of the head
