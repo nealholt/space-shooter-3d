@@ -150,7 +150,7 @@ func rotate_and_elevate_lerp(body:Node3D, head:Node3D, delta:float, current_targ
 	# down is positive.
 	head.rotation.x = clamp(
 		head.rotation.x,
-		-max_elevation, min_elevation
+		-max_elevation, -min_elevation
 	)
 
 

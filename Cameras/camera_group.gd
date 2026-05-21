@@ -160,12 +160,12 @@ func _physics_process(delta: float) -> void:
 	# Look at target with first-person cam
 	if look_at_target and state == CameraState.FIRSTPERSON and is_instance_valid(target):
 		turret_motion.rotate_and_elevate(body, head, delta, target.global_position)
+	# Return to facing forward, or at least way far
+	# forward of the nose of the player.
+	# Alternatively, maybe I should have a Node3D
+	# attached to the player straight ahead that the
+	# camera looks at instead.
 	elif Global.player and !fp_manual_override:
-		# Return to facing forward, or at least way far
-		# forward of the nose of the player.
-		# Alternatively, maybe I should have a Node3D
-		# attached to the player straight ahead that the
-		# camera looks at instead.
 		# The 10000.0 is simply to indicate "far ahead." Is it needed?
 		var temp_targ_pos : Vector3 = first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0
 		# Old version

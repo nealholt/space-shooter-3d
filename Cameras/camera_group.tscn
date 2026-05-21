@@ -8,6 +8,7 @@
 
 [node name="CameraGroup" type="Node3D" unique_id=582326403]
 script = ExtResource("1_sad13")
+min_elevation_deg = -30.0
 
 [node name="RearUnderCamera" parent="." unique_id=1844376467 instance=ExtResource("3_0u455")]
 fov = 100.0
