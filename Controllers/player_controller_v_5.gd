@@ -6,6 +6,10 @@ class_name PlayerController5 extends CharacterBodyControlParent
 var heading_reset_countdown:float = 0.0
 @export var heading_reset_strength:float = 5.0
 
+# Amount to lean into turns. This makes the camera rotate in the
+# direction of the turn.
+@export var lean_amount:float = 0.2 ## Percent
+
 # Stats while no inputs are given
 var stats_standard:ControllerStats
 # Stats while accelerating
@@ -86,20 +90,22 @@ func move_and_turn(mover, delta:float) -> void:
 	friction = stats.friction_std
 	
 	# Turn "head" and "neck"
-	var manual_look:bool = im.left_right2 != 0.0 or im.up_down2 != 0.0
-	# TODO TESTING LEFT OFF HERE
-	#Global.camera_group.set_fp_manual_override(manual_look)
+	# For now there is no looking down so just check that 
+	# im.up_down2 is negative (which is up)
+	var manual_look:bool = im.left_right2 != 0.0 or im.up_down2 < 0.0
+	Global.camera_group.set_fp_manual_override(manual_look)
 	if manual_look:
 		Global.camera_group.rotate_fp_cam(im.left_right2, im.up_down2, delta)
 		#print(im.left_right2)
 		#print(im.up_down2)
-	# TODO TESTING LEFT OFF HERE
-	#else:
-		#var lean_in:bool = im.left_right1 != 0.0 or im.up_down1 != 0.0
-		#Global.camera_group.set_fp_manual_override(lean_in)
-		## Lean into turns
-		#if lean_in:
-			#Global.camera_group.rotate_fp_cam(im.left_right1*0.1, im.up_down1*0.1, delta)
+	else:
+		var lean_in:bool = im.left_right1 != 0.0 or im.up_down1 != 0.0
+		Global.camera_group.set_fp_manual_override(lean_in)
+		# Lean into turns
+		if lean_in:
+			var horz_lean:=im.left_right1*lean_amount
+			var vert_lean:=im.up_down1*lean_amount * im.inverted
+			Global.camera_group.rotate_fp_cam(horz_lean, vert_lean, delta)
 	
 	super.move_and_turn(mover, delta)
 

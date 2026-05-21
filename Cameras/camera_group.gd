@@ -37,6 +37,7 @@ var target:Node3D
 var look_at_target : bool = false
 # If true, player is manually swiveling and pitching
 # the body and head of the first person camera
+# Short for First-Person Manual Override
 var fp_manual_override : bool = false
 
 var mouse_guide:Line2D
@@ -167,7 +168,10 @@ func _physics_process(delta: float) -> void:
 		# camera looks at instead.
 		# The 10000.0 is simply to indicate "far ahead." Is it needed?
 		var temp_targ_pos : Vector3 = first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0
-		turret_motion.rotate_and_elevate(body, head, delta, temp_targ_pos)
+		# Old version
+		#turret_motion.rotate_and_elevate(body, head, delta, temp_targ_pos)
+		# New version with lerp
+		turret_motion.rotate_and_elevate_lerp(body, head, delta, temp_targ_pos)
 	
 	# Show target lead indicator and center crosshair
 	# if in first person view

@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://ljjk0k0l3ciq"]
+
+[ext_resource type="Material" uid="uid://34abp865u0qu" path="res://Testing/blue_gray_pale.tres" id="2_0qikk"]
+[ext_resource type="Texture2D" uid="uid://ba1gb0dgunagh" path="res://Features/Skyboxes/ringed_gas_giant_planet.png" id="2_bym4a"]
+[ext_resource type="Material" uid="uid://djlvouny6bdt7" path="res://Testing/blue_gray_dark.tres" id="3_rm5y4"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_trw21"]
+panorama = ExtResource("2_bym4a")
+
+[sub_resource type="Sky" id="Sky_434m5"]
+sky_material = SubResource("PanoramaSkyMaterial_trw21")
+
+[sub_resource type="Environment" id="Environment_eupmo"]
+background_mode = 2
+background_energy_multiplier = 1.5
+sky = SubResource("Sky_434m5")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.2
+reflected_light_source = 1
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 1.2
+glow_bloom = 0.2
+glow_hdr_threshold = 0.5
+glow_hdr_scale = 0.5
+
+[sub_resource type="PrismMesh" id="PrismMesh_nqbdn"]
+material = ExtResource("2_0qikk")
+left_to_right = 0.0
+size = Vector3(1, 1, 5)
+
+[sub_resource type="PrismMesh" id="PrismMesh_j5837"]
+material = ExtResource("3_rm5y4")
+left_to_right = 0.0
+size = Vector3(1, 1, 5)
+
+[node name="Node3D" type="Node3D" unique_id=1367515792]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1099043579]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 250, 0, 0)
+shadow_enabled = true
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1357968258]
+environment = SubResource("Environment_eupmo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1038784360]
+transform = Transform3D(0.99920905, 0.039765567, 0, -0.039765567, 0.99920905, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PrismMesh_nqbdn")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=671976946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.027319789, -0.69401014, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1847156653]
+transform = Transform3D(0.99920905, 0.039765567, 0, -0.039765567, 0.99920905, 0, 0, 0, 1, -11.629344, 3.172316, 0)
+mesh = SubResource("PrismMesh_j5837")
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="." unique_id=1790751488]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.602024, 2.586941, 0)

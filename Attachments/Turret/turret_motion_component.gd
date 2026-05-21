@@ -86,6 +86,64 @@ func rotate_and_elevate(body:Node3D, head:Node3D, delta:float, current_target:Ve
 	)
 
 
+# Just like the above function, but lerps to goal rotations by delta
+func rotate_and_elevate_lerp(body:Node3D, head:Node3D, delta:float, current_target:Vector3) -> void:
+	# Project the target onto the XZ plane of the turret
+	# but first adjust by the global position because
+	# the global basis is purely orientation, not position.
+	var rotation_targ:Vector3 = get_projected(current_target - body.global_position, body.global_basis.y)
+	# But! You also need to account for changes in position,
+	# so add back in the global position adjustment.
+	rotation_targ = rotation_targ + body.global_position
+
+	# Get the angle from the body's facing direction (z)
+	# to the projected point. Since the point is projected
+	# onto the plane, this should be the angle the body
+	# should rotate to face along only one axis.
+	var y_angle:float = Global.get_angle_to_target(body.global_position, rotation_targ, body.global_basis.z)
+	# Calculate sign to rotate left or right.
+	var rotation_sign:float = sign(body.to_local(current_target).x)
+	
+	# Goal is to change body.rotation.y by y_angle in
+	# the direction of rotation_sign.
+	# Lerp toward goal angle
+	body.rotation.y = lerp(body.rotation.y, body.rotation.y+rotation_sign*y_angle, delta)
+	
+	# Rotation is complete, now we elevate.
+	# Project the target onto the ZY plane of the head
+	# but first adjust by the global position because
+	# the global basis is purely orientation, not position.
+	var elevation_targ:Vector3 = get_projected(current_target - head.global_position, head.global_basis.x)
+	# But! You also need to account for changes in position,
+	# so add back in the global position adjustment.
+	elevation_targ = elevation_targ + head.global_position
+	
+	# Get the angle from the head's facing direction (z)
+	# to the projected point. Since the point is projected
+	# onto the plane, this should be the angle the head
+	# should rotate to face along only one axis.
+	var x_angle:float = Global.get_angle_to_target(head.global_position, elevation_targ, head.global_basis.z)
+	
+	# The following is consistent with how rotation is
+	# calculated above.
+	# There's an extra negative sign because pitching up is negative.
+	var elevation_sign:float = -sign(head.to_local(current_target).y)
+	# Lerp toward goal angle
+	head.rotation.x = lerp(head.rotation.x, head.rotation.x+elevation_sign*x_angle, delta)
+	
+	# The following is INCONSISTENT with how rotation is
+	# calculated above, but weirdly also seems to work?!
+	#head.rotation.x = lerp(head.rotation.x, x_angle, delta)
+	
+	# Clamp elevation within limits.
+	# Reverse and negate max and min because up is negative and
+	# down is positive.
+	head.rotation.x = clamp(
+		head.rotation.x,
+		-max_elevation, min_elevation
+	)
+
+
 func get_projected(pos:Vector3, normal:Vector3) -> Vector3:
 	# Project position "pos" onto the plane with the given normal vector.
 	# https://math.stackexchange.com/questions/728481/3d-projection-onto-a-plane

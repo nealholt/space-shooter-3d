@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://bsf6oq26vbj3s"]
+
+[ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Features/Skyboxes/purple_nebula_complex.png" id="2_h1aog"]
+[ext_resource type="PackedScene" uid="uid://cbgprvcwh15qd" path="res://Levels/Level11SpaceStation/star.tscn" id="3_locdr"]
+[ext_resource type="PackedScene" uid="uid://ct14xs5b052ay" path="res://Features/Asteroids/asteroid_brown.tscn" id="16_6nl32"]
+[ext_resource type="PackedScene" uid="uid://f5ns6ks1l1em" path="res://Features/Asteroids/asteroid_foam_and_blue.tscn" id="17_2yqar"]
+[ext_resource type="PackedScene" uid="uid://bnme5l5dyvdaj" path="res://Features/Asteroids/asteroid_gray.tscn" id="18_mq4e4"]
+[ext_resource type="PackedScene" uid="uid://h6qoukgaivr" path="res://Features/Asteroids/asteroid_gray_green.tscn" id="19_02to6"]
+[ext_resource type="PackedScene" uid="uid://dxb411gkh7mx6" path="res://Features/Asteroids/asteroid_green_purple.tscn" id="20_oajw2"]
+[ext_resource type="PackedScene" uid="uid://cbgts8m0eeix7" path="res://Features/Asteroids/asteroid_purple.tscn" id="21_tomqj"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_er3bs"]
+panorama = ExtResource("2_h1aog")
+
+[sub_resource type="Sky" id="Sky_8we3c"]
+sky_material = SubResource("PanoramaSkyMaterial_er3bs")
+
+[sub_resource type="Environment" id="Environment_x4e1d"]
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_8we3c")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.2
+reflected_light_source = 1
+tonemap_mode = 2
+glow_enabled = true
+glow_bloom = 0.35
+adjustment_enabled = true
+
+[node name="Node3D" type="Node3D" unique_id=223083899]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=236689135]
+environment = SubResource("Environment_x4e1d")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1123009675]
+transform = Transform3D(0.777146, 0.267952, -0.569426, 0, 0.904827, 0.42578, 0.62932, -0.330893, 0.703183, 0, 0, 0)
+light_color = Color(1, 0.643137, 1, 1)
+light_angular_distance = 2.0
+shadow_enabled = true
+shadow_opacity = 0.9
+shadow_blur = 0.4
+directional_shadow_mode = 0
+directional_shadow_max_distance = 1000.0
+
+[node name="Star" parent="." unique_id=1932487604 instance=ExtResource("3_locdr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8000, 3000, 10000)
+
+[node name="AsteroidGroup" type="Node3D" parent="." unique_id=1347326789]
+
+[node name="AsteroidBrown" parent="AsteroidGroup" unique_id=966902278 instance=ExtResource("16_6nl32")]
+transform = Transform3D(132.963, 2.23517e-06, 69.4318, -36.5535, 127.529, 70.0007, -59.0306, -78.9699, 113.045, 789.945, 213.932, 195.713)
+
+[node name="AsteroidFoamAndBlue" parent="AsteroidGroup" unique_id=188422976 instance=ExtResource("17_2yqar")]
+transform = Transform3D(85.2629, 118.52, 34.3983, -109.912, 91.9402, -44.3428, -56.1206, 0, 139.106, -316.427, 199.639, 598.091)
+
+[node name="AsteroidGray" parent="AsteroidGroup" unique_id=697029431 instance=ExtResource("18_mq4e4")]
+transform = Transform3D(136.881, 14.0901, 59.7075, 0, 145.99, -34.4514, -61.3475, 31.4383, 133.222, -460.431, -113.469, -783.136)
+
+[node name="AsteroidGrayGreen" parent="AsteroidGroup" unique_id=1115279786 instance=ExtResource("19_02to6")]
+transform = Transform3D(47.2773, 0, 16.2743, 0, 50, 0, -16.2743, 0, 47.2773, -107.879, -59.6615, 86.8361)
+
+[node name="AsteroidGrayGreen2" parent="AsteroidGroup" unique_id=1091338233 instance=ExtResource("19_02to6")]
+transform = Transform3D(50, 0, 0, 0, 46.4155, 18.5903, 0, -18.5903, 46.4155, 80.4728, 0, -194.298)
+
+[node name="AsteroidGreenPurple" parent="AsteroidGroup" unique_id=637811506 instance=ExtResource("20_oajw2")]
+transform = Transform3D(-36.5677, -34.0999, -1.59842e-06, -2.18557e-06, 9.55343e-14, 50, -34.0999, 36.5677, -1.49055e-06, -161.23, 19.8419, -119.049)
+
+[node name="AsteroidGreenPurple2" parent="AsteroidGroup" unique_id=589732066 instance=ExtResource("20_oajw2")]
+transform = Transform3D(-16.9369, -6.22187, -46.6308, 0, 49.5608, -6.61282, 47.044, -2.24001, -16.7881, 60.8297, -87.7114, 0)
+
+[node name="AsteroidPurple" parent="AsteroidGroup" unique_id=47312958 instance=ExtResource("21_tomqj")]
+transform = Transform3D(4.41094, 0, 54.8228, 0, 55, 0, -54.8228, 0, 4.41094, -37.5272, 155.403, 41.8384)
+
+[node name="AsteroidPurple2" parent="AsteroidGroup" unique_id=2056150128 instance=ExtResource("21_tomqj")]
+transform = Transform3D(32.1127, 23.6395, -3.15418, 0, -5.29026, -39.6486, -23.849, 31.8306, -4.24711, -46.194, 181.993, 192.322)

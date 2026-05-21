@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://d0fsgvywh22kd"]
+
+[ext_resource type="Texture2D" uid="uid://creoqhif83mdb" path="res://Features/Skyboxes/moon_with_stars.png" id="2_6xtpb"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qdonm"]
+panorama = ExtResource("2_6xtpb")
+
+[sub_resource type="Sky" id="Sky_434m5"]
+sky_material = SubResource("PanoramaSkyMaterial_qdonm")
+
+[sub_resource type="Environment" id="Environment_80bpm"]
+background_mode = 2
+sky = SubResource("Sky_434m5")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.05
+reflected_light_source = 1
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="MainScene" type="Node3D" unique_id=1095946905]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=79870322]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_max_distance = 1.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1857405886]
+environment = SubResource("Environment_80bpm")
