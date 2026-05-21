@@ -104,7 +104,7 @@ func move_and_turn(mover, delta:float) -> void:
 		# Lean into turns
 		if lean_in:
 			var horz_lean:=im.left_right1*lean_amount
-			var vert_lean:=im.up_down1*lean_amount * im.inverted
+			var vert_lean:=im.up_down1*lean_amount
 			Global.camera_group.rotate_fp_cam(horz_lean, vert_lean, delta)
 	
 	super.move_and_turn(mover, delta)

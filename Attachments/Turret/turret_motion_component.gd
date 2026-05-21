@@ -193,11 +193,6 @@ func swivel_toward(body:Node3D, rotation_percent:float, delta:float) -> void:
 func pitch_toward(head:Node3D, rotation_percent:float, delta:float) -> void:
 	if rotation_percent==0.0:
 		return
-	# This makes up == up. As opposed to looking inverted
-	rotation_percent = -rotation_percent
-	# For now, don't pitch downward
-	if rotation_percent < 0.0:
-		return
 	# Get goal angle
 	var goal_angle:float = -rotation_percent*rad_to_deg(max_elevation)
 	# Lerp by delta toward the goal angle
