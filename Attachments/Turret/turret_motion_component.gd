@@ -78,11 +78,11 @@ func rotate_and_elevate(body:Node3D, head:Node3D, delta:float, current_target:Ve
 	var final_x:float = elevation_sign * min(elevation_speed * delta, x_angle)
 	head.rotate_x(final_x)
 	# Clamp elevation within limits.
-	# Reverse and negate max and min because up is negative and
+	# Swap and negate max and min because up is negative and
 	# down is positive.
 	head.rotation.x = clamp(
 		head.rotation.x,
-		-max_elevation, min_elevation
+		-max_elevation, -min_elevation
 	)
 
 
@@ -146,7 +146,7 @@ func rotate_and_elevate_lerp(body:Node3D, head:Node3D, delta:float, current_targ
 	#head.rotation.x = lerp(head.rotation.x, x_angle, delta)
 	
 	# Clamp elevation within limits.
-	# Reverse and negate max and min because up is negative and
+	# Swap and negate max and min because up is negative and
 	# down is positive.
 	head.rotation.x = clamp(
 		head.rotation.x,

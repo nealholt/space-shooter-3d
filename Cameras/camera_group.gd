@@ -159,7 +159,10 @@ func _physics_process(delta: float) -> void:
 	
 	# Look at target with first-person cam
 	if look_at_target and state == CameraState.FIRSTPERSON and is_instance_valid(target):
+		# Old version
 		turret_motion.rotate_and_elevate(body, head, delta, target.global_position)
+		# New version with lerp
+		#turret_motion.rotate_and_elevate_lerp(body, head, delta, target.global_position)
 	# Return to facing forward, or at least way far
 	# forward of the nose of the player.
 	# Alternatively, maybe I should have a Node3D
@@ -310,6 +313,9 @@ func set_fp_manual_override(b:bool) -> void:
 # roty is the swivel
 # rotx is the pitch
 func rotate_fp_cam(roty:float, rotx:float, delta:float) -> void:
+	# if current camera is not first person OR using target look then return
+	if !is_first_person() or look_at_target:
+		return
 	if roty!=0.0:
 		turret_motion.swivel_toward(body, roty, delta)
 	if rotx!=0.0:
