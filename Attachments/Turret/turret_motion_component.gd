@@ -52,6 +52,13 @@ func rotate_and_elevate(body:Node3D, head:Node3D, delta:float, current_target:Ve
 	# less than what we would rotate this frame.
 	var final_y:float = rotation_sign * min(rotation_speed * delta, y_angle)
 	body.rotate_y(final_y)
+	# Keep the rotation in the range -PI to PI. Clamp is NOT the solution
+	# because it will prevent rotation across the -180 to 180 edge
+	# of the circle
+	while body.rotation.y < -PI: # -180
+		body.rotation.y += 2*PI # 360
+	while PI < body.rotation.y: # 180
+		body.rotation.y -= 2*PI # -360
 	
 	# Rotation is complete, now we elevate.
 	# Project the target onto the ZY plane of the head
@@ -101,6 +108,8 @@ func rotate_and_elevate_lerp(body:Node3D, head:Node3D, delta:float, current_targ
 	# onto the plane, this should be the angle the body
 	# should rotate to face along only one axis.
 	var y_angle:float = Global.get_angle_to_target(body.global_position, rotation_targ, body.global_basis.z)
+	#print()
+	#print('y_angle ', rad_to_deg(y_angle))
 	# Calculate sign to rotate left or right.
 	var rotation_sign:float = sign(body.to_local(current_target).x)
 	
@@ -108,12 +117,15 @@ func rotate_and_elevate_lerp(body:Node3D, head:Node3D, delta:float, current_targ
 	# the direction of rotation_sign.
 	# Lerp toward goal angle
 	body.rotation.y = lerp(body.rotation.y, body.rotation.y+rotation_sign*y_angle, delta)
-	# Clamp rotation within limits.
-	body.rotation.y = clamp(
-		body.rotation.y,
-		-PI, PI
-	)
-	#print()
+	# Keep the rotation in the range -PI to PI. Clamp is NOT the solution
+	# because it will prevent rotation across the -180 to 180 edge
+	# of the circle
+	#print('body.rotation.y ', rad_to_deg(body.rotation.y))
+	while body.rotation.y < -PI: # -180
+		body.rotation.y += 2*PI # 360
+	while PI < body.rotation.y: # 180
+		body.rotation.y -= 2*PI # -360
+	
 	#print('y_angle ', rad_to_deg(y_angle))
 	#print('rotation_sign ', rotation_sign)
 	#print('body.rotation.y ', rad_to_deg(body.rotation.y))
