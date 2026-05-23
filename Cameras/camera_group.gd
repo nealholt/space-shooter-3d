@@ -7,6 +7,9 @@ class_name CameraGroup extends Node3D
 @export var rotation_speed_deg:float = 100.0
 @export var min_elevation_deg:float = 0.0
 @export var max_elevation_deg:float = 80.0
+# This is used for the lerp involved with leaning into turns
+# as well as snapping back after looking at a target
+@export var lerp_str:float = 3.0
 
 enum CameraState {FIRSTPERSON, REAR, FLYBY, TARGETCLOSEUP, TARGETVIEW, PROFILE}
 var state : CameraState
@@ -168,7 +171,7 @@ func _physics_process(delta: float) -> void:
 	# Alternatively, maybe I should have a Node3D
 	# attached to the player straight ahead that the
 	# camera looks at instead.
-	elif Global.player and !fp_manual_override:
+	elif !fp_manual_override and Global.player:
 		# The 10000.0 is simply to indicate "far ahead." Is it needed?
 		var temp_targ_pos : Vector3 = first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0
 		# Old version
@@ -312,11 +315,11 @@ func set_fp_manual_override(b:bool) -> void:
 # Rotate the first person camera
 # roty is the swivel
 # rotx is the pitch
-func rotate_fp_cam(roty:float, rotx:float, delta:float) -> void:
+func rotate_fp_cam(rotx:float, roty:float, delta:float) -> void:
 	# if current camera is not first person OR using target look then return
 	if !is_first_person() or look_at_target:
 		return
-	if roty!=0.0:
-		turret_motion.swivel_toward(body, roty, delta)
 	if rotx!=0.0:
-		turret_motion.pitch_toward(head, rotx, delta)
+		turret_motion.swivel_toward(body, rotx, delta*lerp_str)
+	if roty!=0.0:
+		turret_motion.pitch_toward(head, roty, delta*lerp_str)
