@@ -1,10 +1,20 @@
 class_name PlayerController5 extends CharacterBodyControlParent
 
+# It turns out I don't like the following, so I'm commenting it out for now.
+# Maybe there is a different way to limit abuse
+# of drift, like make it a powerup akin to gap 
+# drive and put something else on the drift button?
+# Alternatively, let the player abuse drift.
+# If enemies shoot more accurately it might not
+# even be an abusable feature.
+#    -Maybe do put a brake on the current drift button, but it only slows you down a little while increasing turn rate.
+#    -Maybe allow the player to drift, but the turn rate is sluggish
+#    -Maybe allow the player to drift, but emerging out of it is sluggish
 # When drift is just released, lerp heading
 # toward velocity for this duration.
-@export var heading_reset_duration:float = 0.7 ## Seconds
-var heading_reset_countdown:float = 0.0
-@export var heading_reset_strength:float = 5.0
+#@export var heading_reset_duration:float = 0.7 ## Seconds
+#var heading_reset_countdown:float = 0.0
+#@export var heading_reset_strength:float = 5.0
 
 # Amount to lean into turns. This makes the camera rotate in the
 # direction of the turn.
@@ -21,6 +31,10 @@ var stats_standard:ControllerStats
 var is_dead := false
 
 var im : InputManager
+
+# Reference to engine audiovisuals. ship.gd is responsible for
+# setting up this reference.
+var engineAV:EngineAV
 
 
 func _ready() -> void:
@@ -42,13 +56,13 @@ func move_and_turn(mover, delta:float) -> void:
 	# seconds.
 	# The idea is to use drift to do strafing attacks,
 	# but NOT to change direction.
-	if im.drift_just_released:
-		heading_reset_countdown = heading_reset_duration
-	if heading_reset_countdown > 0.0:
-		heading_reset_countdown -= delta
-		# lerp heading toward velocity
-		var pos:Vector3 = mover.global_position + mover.velocity
-		mover.transform = Global.interp_face_target(mover, pos, delta*heading_reset_strength)
+	#if im.drift_just_released:
+		#heading_reset_countdown = heading_reset_duration
+	#if heading_reset_countdown > 0.0:
+		#heading_reset_countdown -= delta
+		## lerp heading toward velocity
+		#var pos:Vector3 = mover.global_position + mover.velocity
+		#mover.transform = Global.interp_face_target(mover, pos, delta*heading_reset_strength)
 		# Consider rewriting the above to steer
 		# like an NPC's seek function, otherwise it will
 		# yaw unnaturally.
@@ -59,13 +73,16 @@ func move_and_turn(mover, delta:float) -> void:
 	#Accelerate
 	if im.accelerate:
 		stats = stats_accel
+		engineAV.shift2afterburners(4.0)
 	#Drift
 	elif im.drift:
 		stats = stats_drift
+		engineAV.shift2drift(1.0)
 		# Drifting cancels heading reset
-		heading_reset_countdown = 0.0
+		#heading_reset_countdown = 0.0
 	else:
 		stats = stats_standard
+		engineAV.shift2default(2.0)
 	
 	# Lerp current impulse toward goal impulse.
 	# If you lerp more than 100% weird bad behavior occurs.

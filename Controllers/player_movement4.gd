@@ -51,6 +51,10 @@ var is_dead := false
 
 var im : InputManager
 
+# Reference to engine audiovisuals. ship.gd is responsible for
+# setting up this reference.
+var engineAV:EngineAV
+
 
 func _ready() -> void:
 	# Get a backup reference to the default settings
@@ -69,14 +73,18 @@ func move_and_turn(mover, delta:float) -> void:
 	#Brake
 	if im.brake:
 		stats = stats_brake
+		engineAV.shift2brake(0.0)
 	#Accelerate
 	elif im.accelerate:
 		stats = stats_accel
+		engineAV.shift2afterburners(4.0)
 	#Drift
 	elif im.drift:
 		stats = stats_drift
+		engineAV.shift2drift(1.0)
 	else:
 		stats = stats_standard
+		engineAV.shift2default(2.0)
 	
 	# Lerp current impulse toward goal impulse.
 	# If you lerp more than 100% weird bad behavior occurs.

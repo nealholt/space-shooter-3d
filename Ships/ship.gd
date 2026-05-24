@@ -10,7 +10,6 @@ var aim_assist:AimAssist
 var burning_trail:BurningTrail # This is a visual effect
 var camera_group:CameraGroup
 var controller:CharacterBodyControlParent
-var engineAV:EngineAV
 var health_component:HealthComponent
 var missile_lock:MissileLockGroup
 var obstacle_detector:ObstacleDetector
@@ -99,8 +98,6 @@ func _ready() -> void:
 			burning_trail = child
 		elif child is CharacterBodyControlParent and !disable_for_testing:
 			controller = child
-		elif child is EngineAV:
-			engineAV = child
 		elif child is HealthComponent:
 			health_component = child
 			health_component.set_max_health(stats.max_health)
@@ -140,8 +137,12 @@ func _ready() -> void:
 		collision_exceptions.push_back(camera_group.get_first_person_near_miss())
 		# Attach engine audio visuals
 		var engAV_scene:PackedScene = preload("res://Audio/EngineAudio/engine_audio_visuals.tscn")
-		engineAV = engAV_scene.instantiate()
+		var engineAV:EngineAV = engAV_scene.instantiate()
 		add_child(engineAV)
+		if 'engineAV' in controller:
+			controller.engineAV = engineAV
+		else:
+			push_error('Every player controller should have an engineAV variable.')
 	else: # This is not a player
 		# Remove children of the aim assist. This should just
 		# be removing one AudioStreamPlayer
