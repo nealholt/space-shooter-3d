@@ -106,7 +106,8 @@ text = "Test: Asteroids"
 [node name="Load11SpaceStationDefense" type="Button" parent="Menu/HBoxContainer/SceneOptions" unique_id=2088013761]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Level: Space Station Defense"
+text = "Level: Space Station Defense
+(Uses Controller V5)"
 
 [node name="Load12RaceCourse" type="Button" parent="Menu/HBoxContainer/SceneOptions" unique_id=1231827328]
 layout_mode = 2
@@ -121,7 +122,8 @@ text = "Test: Collision Avoid"
 [node name="Load14RaceCourseAlt" type="Button" parent="Menu/HBoxContainer/SceneOptions" unique_id=1793509139]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Level: Race Course Alt"
+text = "Level: Race Course Alt
+(Uses Controller V5)"
 
 [node name="Settings" type="VBoxContainer" parent="Menu/HBoxContainer" unique_id=812709221]
 layout_mode = 2
@@ -168,7 +170,7 @@ text = "Pitch"
 [node name="Label" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=462811593]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "Both thumbsticks"
+text = "Left thumbstick up/down"
 
 [node name="YawRoll" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=595036783]
 layout_mode = 2
@@ -178,7 +180,17 @@ text = "Yaw + Roll"
 [node name="Label2" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=544516425]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "Both thumbsticks"
+text = "Left thumbstick left/right"
+
+[node name="Look" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=1770046949]
+layout_mode = 2
+theme = ExtResource("4_6ev3c")
+text = "Look"
+
+[node name="Label16" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=848160055]
+layout_mode = 2
+theme = ExtResource("4_6ev3c")
+text = "Right thumbstick"
 
 [node name="Accelerate" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=1769314165]
 layout_mode = 2
@@ -349,7 +361,7 @@ text = "Mouse left / right"
 [node name="Roll" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=934587055]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "Roll"
+text = "Roll (Look left/right on V5)"
 
 [node name="Label16" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=1833941837]
 layout_mode = 2
