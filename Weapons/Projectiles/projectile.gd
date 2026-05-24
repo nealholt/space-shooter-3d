@@ -101,7 +101,7 @@ func _ready() -> void:
 	# Very few projectiles have both a hitbox and a raycast,
 	# but missiles do.
 	if hit_box_component:
-		ray.add_exception(hit_box_component)
+		ray.add_exception(hit_box_component.collidable)
 
 
 # This is called by the gun that shoots the bullet.
@@ -143,7 +143,7 @@ func set_data(dat:ShootData) -> void:
 		time_out += randf_range(-time_out*dat.timeout_vary_percent, time_out*dat.timeout_vary_percent)
 	# Start the timer
 	timer.start(time_out)
-	# If there is a controller, a hit box, and this projectile is
+	# If there is a controller, a hitbox, and this projectile is
 	# targeting the player, then we want to create a special scene
 	# to change the reticle based on distance to target
 	if controller and hit_box_component and data.target == Global.player:

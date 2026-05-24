@@ -3,6 +3,7 @@ class_name Ship extends CharacterBody3D
 signal missile_locked # Emitted when an enemy acquires missile lock on this ship
 signal missile_fired_inbound # Emitted when a missile is fired at this ship
 signal destroyed # Emitted when this ship is destroyed
+signal damaged(amount:float, damager)
 
 @export var stats:ShipStats
 
@@ -279,12 +280,9 @@ func get_mouse_center_radius() -> float:
 		return sqrt(camera_group.MOUSE_CENTER_RADIUS)
 	return 0.0
 
-# ALL THE FOLLOWING CODE IS duplicated from hit_box_component
-# With minor changes because ships don't need the damage_exception
-func damage(amount:float, _damager=null):
-	if health_component:
-		#Global.friendly_fire_checker(damager, self) #TESTING
-		health_component.health -= amount
+
+func damage(amount:float, damager=null):
+	damaged.emit(amount, damager)
 	# Play a got_hit sound effect
 	if got_hit_audio:
 		got_hit_audio.play()

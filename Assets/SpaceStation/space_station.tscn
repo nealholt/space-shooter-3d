@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Ships/ship.gd" id="1_usm2i"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="2_eniao"]
 [ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="2_pb2je"]
+[ext_resource type="Script" uid="uid://dj2iogg4gh8e8" path="res://Attachments/Hitbox/hit_box_component.gd" id="4_0040n"]
 
 [sub_resource type="Resource" id="Resource_0040n"]
 script = ExtResource("2_pb2je")
@@ -586,6 +587,11 @@ finalExplosion = 10
 
 [node name="HealthComponent" parent="." unique_id=77346943 instance=ExtResource("2_eniao")]
 max_health = 100000.0
+
+[node name="HitBoxComponent" type="Area3D" parent="." unique_id=1488034418 node_paths=PackedStringArray("collidable")]
+script = ExtResource("4_0040n")
+collidable = NodePath("..")
+metadata/_custom_type_script = "uid://dj2iogg4gh8e8"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1941465445]
 libraries/ = SubResource("AnimationLibrary_yt4lk")

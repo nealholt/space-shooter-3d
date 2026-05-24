@@ -1,4 +1,4 @@
-class_name HitBoxComponent extends Area3D
+class_name HitBoxComponent extends Node3D
 # Inspired by this:
 # https://www.youtube.com/watch?v=74y6zWZfQKk&t=184s
 
@@ -13,6 +13,8 @@ class_name HitBoxComponent extends Area3D
 # (here and in ship.gd) or duplicate collision shapes
 # (as children of CharacterBody3D ships and hit box area).
 # Until I resolve this, I'm going to duplicate code.
+
+@export var collidable:CollisionObject3D
 
 var health_component:HealthComponent
 @export var target_text : String = '' ## Text label for this target when it is directly targeted by the player
@@ -53,6 +55,11 @@ func _ready() -> void:
 			health_component = child
 	if !health_component:
 		push_error('No peer HealthComponent found for HitBoxComponent.')
+	# Connect to collidable's damaged signal
+	if collidable:
+		collidable.damaged.connect(damage)
+	#else:
+		#push_error('Why isn\'t your hitbox connect to a CollisionObject3D such as a CharacterBody3D, StaticBody3D or Area3D? It should be.')
 
 
 func damage(amount:float, damager=null):

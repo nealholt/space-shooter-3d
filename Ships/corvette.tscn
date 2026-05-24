@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cvrvs2a12nuqr" path="res://Audio/SoundEffects/whoosh_medium_001.ogg" id="9_ktweb"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://vfx/contrail.tscn" id="10_shexg"]
 [ext_resource type="PackedScene" uid="uid://drm4t5i6exnhc" path="res://Weapons/Visuals/gatling_gun.tscn" id="11_kbwk7"]
+[ext_resource type="Script" uid="uid://dj2iogg4gh8e8" path="res://Attachments/Hitbox/hit_box_component.gd" id="11_pe4ok"]
 [ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Ships/Models/fighter_chassis_diamond.tscn" id="12_a77x5"]
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Ships/Models/engine_mesh_component.tscn" id="12_e20ac"]
 [ext_resource type="PackedScene" uid="uid://ddoyejlbh51s5" path="res://Weapons/Guns/hit_scan_gun.tscn" id="13_428na"]
@@ -50,16 +51,16 @@ radial_segments = 16
 [sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
 size = Vector3(6, 2.3, 10.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_whyjy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mamsf"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("34_80okc")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_pe4ok"]
+[sub_resource type="SphereMesh" id="SphereMesh_hjd52"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_whyjy")
+material = SubResource("ShaderMaterial_mamsf")
 
 [node name="Corvette" type="CharacterBody3D" unique_id=1134075911 groups=["damageable", "team member"]]
 motion_mode = 1
@@ -132,6 +133,11 @@ stream = ExtResource("8_klb2b")
 [node name="HealthComponent" parent="." unique_id=778683298 instance=ExtResource("7_vhcpa")]
 max_health = 20
 
+[node name="HitBoxComponent" type="Area3D" parent="." unique_id=978789828 node_paths=PackedStringArray("collidable")]
+script = ExtResource("11_pe4ok")
+collidable = NodePath("..")
+metadata/_custom_type_script = "uid://dj2iogg4gh8e8"
+
 [node name="Sounds" type="Node3D" parent="." unique_id=1146936130]
 
 [node name="NearMissAudio" type="AudioStreamPlayer3D" parent="Sounds" unique_id=1015128538]
@@ -151,7 +157,7 @@ fire_rate = 0.3
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_pe4ok")
+mesh = SubResource("SphereMesh_hjd52")
 
 [node name="WeaponHandler" parent="." unique_id=370825666 instance=ExtResource("9_1xly7")]
 

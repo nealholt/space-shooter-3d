@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://bfhl52uipkbq3" path="res://Ships/Resources/ship_stats_capitalshipfrigate.tres" id="2_7erqg"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="2_ffelx"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="3_ac6d0"]
+[ext_resource type="PackedScene" uid="uid://cmg5hwgtanvoi" path="res://Attachments/Hitbox/damageable_area.tscn" id="4_a64g1"]
 [ext_resource type="Script" uid="uid://nmvuwja71fox" path="res://Attachments/Weakpoint/weakpoint_opener.gd" id="7_3qdq6"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Attachments/Turret/turret_group.tscn" id="7_bof2b"]
 [ext_resource type="PackedScene" uid="uid://dk6y2tyoo25sn" path="res://Attachments/Weakpoint/weakpoint.tscn" id="8_3qdq6"]
@@ -154,15 +155,19 @@ motion_mode = 1
 script = ExtResource("1_dp23i")
 stats = ExtResource("2_7erqg")
 
-[node name="HitBoxComponent" parent="." unique_id=868661198 instance=ExtResource("2_ffelx")]
+[node name="HitBoxComponent" parent="." unique_id=868661198 node_paths=PackedStringArray("collidable") instance=ExtResource("2_ffelx")]
 transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, -30, 0)
+monitorable = false
+collidable = NodePath("DamageableArea")
 reticle_set = 3
 
-[node name="TargetReticles" parent="HitBoxComponent" index="0" unique_id=1056906650]
-target_text = "Reactor Core"
+[node name="DamageableArea" parent="HitBoxComponent" unique_id=2096581842 instance=ExtResource("4_a64g1")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent" unique_id=95413568]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent/DamageableArea" unique_id=95413568]
 shape = SubResource("SphereShape3D_mdcux")
+
+[node name="TargetReticles" parent="HitBoxComponent" index="1" unique_id=1056906650]
+target_text = "Reactor Core"
 
 [node name="HealthComponent" parent="." unique_id=703616632 instance=ExtResource("3_ac6d0")]
 

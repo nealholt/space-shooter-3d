@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="4_40no2"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://vfx/contrail.tscn" id="5_rgdmc"]
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Weapons/Guns/gun.tscn" id="7_f8b5m"]
+[ext_resource type="Script" uid="uid://dj2iogg4gh8e8" path="res://Attachments/Hitbox/hit_box_component.gd" id="8_te66f"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Weapons/MissileLock/missile_lock_group.tscn" id="9_7wsae"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Attachments/ObstacleDetector/obstacle_detector.tscn" id="12_e1i0b"]
 
@@ -42,6 +43,11 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 1.35, 0.5, 3.3)
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, -1.35, 0.5, 3.3)
 
 [node name="HealthComponent" parent="." unique_id=167873350 instance=ExtResource("4_40no2")]
+
+[node name="HitBoxComponent" type="Area3D" parent="." unique_id=1167254236 node_paths=PackedStringArray("collidable")]
+script = ExtResource("8_te66f")
+collidable = NodePath("..")
+metadata/_custom_type_script = "uid://dj2iogg4gh8e8"
 
 [node name="MissileLockGroup" parent="." unique_id=786493030 instance=ExtResource("9_7wsae")]
 lock_style = 1

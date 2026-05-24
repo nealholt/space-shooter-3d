@@ -3,17 +3,12 @@ class_name Orb extends StaticBody3D
 const ORB_SCENE : PackedScene = preload("res://Features/Orbs/orb.tscn")
 
 signal destroyed
-
-# Orbs need a collision shape for physics, but also
-# need to take damage. The solution is a hitbox component
-# that is only used to pass damage along to.
-# Collision detection is disabled for the hitbox
-# component.
-@onready var hit_box_component: HitBoxComponent = $HitBoxComponent
-@onready var health_component: HealthComponent = $HealthComponent
+signal damaged(amount:float, damager)
 
 # Sound to be played on death. Self-freeing.
 @export var pop_player: PackedScene
+
+@onready var health_component: HealthComponent = $HealthComponent
 
 const MAX_COORD: int = 200
 
@@ -36,7 +31,5 @@ func _on_health_component_died() -> void:
 	Callable(queue_free).call_deferred()
 
 # Pass damage along to the hit box component.
-# Hit box component is disabled from detecting
-# collisions so that double collisions are never detected.
 func damage(amount:float, damager=null):
-	hit_box_component.damage(amount, damager)
+	damaged.emit(amount, damager)

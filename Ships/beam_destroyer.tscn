@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="3_ju2iv"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Attachments/Turret/turret_group.tscn" id="4_oimyf"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Attachments/Turret/turret_data.gd" id="5_1v2wc"]
+[ext_resource type="Script" uid="uid://dj2iogg4gh8e8" path="res://Attachments/Hitbox/hit_box_component.gd" id="5_rax4g"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Weapons/weapon_handler.tscn" id="7_ravav"]
 [ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Weapons/Guns/laser_gun.tscn" id="8_lmwtr"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="9_u0pe6"]
@@ -52,6 +53,11 @@ shape = SubResource("ConvexPolygonShape3D_dca3j")
 
 [node name="HealthComponent" parent="." unique_id=480907730 instance=ExtResource("3_ju2iv")]
 max_health = 100.0
+
+[node name="HitBoxComponent" type="Area3D" parent="." unique_id=285479238 node_paths=PackedStringArray("collidable")]
+script = ExtResource("5_rax4g")
+collidable = NodePath("..")
+metadata/_custom_type_script = "uid://dj2iogg4gh8e8"
 
 [node name="TurretGroup" parent="." unique_id=724303526 instance=ExtResource("4_oimyf")]
 
