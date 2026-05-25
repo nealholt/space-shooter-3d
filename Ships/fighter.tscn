@@ -26,17 +26,10 @@ transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.3
 motion_mode = 1
 script = ExtResource("1_dn8ab")
 stats = ExtResource("2_s55gh")
-is_player = null
-disable_for_testing = null
 fps_cam_position = Vector3(0, 1, -1)
-fps_cam_rotation_deg = null
 side_cam_position = Vector3(1.27, -0.2, -2)
-side_cam_rotation_deg = null
-max_collision_damage = null
 deathExplosion = 9
 finalExplosion = 8
-death_animation_duration_min = null
-death_animation_duration_max = null
 
 [node name="AimAssist" parent="." unique_id=936755743 instance=ExtResource("19_xjc2u")]
 angle_assist_limit = 10.0
@@ -70,8 +63,7 @@ outline_size = 4
 [node name="HealthComponent" parent="." unique_id=535388883 instance=ExtResource("5_1xytm")]
 max_health = 20
 
-[node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("collidable") instance=ExtResource("9_s55gh")]
-collidable = NodePath("..")
+[node name="HitBoxComponent" parent="." unique_id=1463959918 instance=ExtResource("9_s55gh")]
 
 [node name="GotHitAudio" type="AudioStreamPlayer" parent="HitBoxComponent" unique_id=245140248]
 stream = ExtResource("16_uh0vy")

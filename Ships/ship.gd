@@ -1,10 +1,8 @@
 class_name Ship extends CharacterBody3D
 
-@onready var hit_box_component: HitBoxComponent = $HitBoxComponent
-
-signal missile_locked # Emitted when an enemy acquires missile lock on this ship
-signal missile_fired_inbound # Emitted when a missile is fired at this ship
 signal destroyed # Emitted when this ship is destroyed
+
+@onready var hit_box_component: HitBoxComponent = $HitBoxComponent
 
 @export var stats:ShipStats
 
@@ -296,19 +294,5 @@ func set_targeted(targeter:Node3D, value:bool) -> void:
 	# being targeted
 
 
-# These are called by the missile lock group when
-# targeter is seeking lock on this hitbox,
-# loses lock, acquires lock, or fires a missile.
-func seeking_lock(_targeter:Node3D) -> void:
-	# This is actually triggered when the enemy starts
-	# its countdown to missile lock, which is what I want
-	missile_locked.emit()
-	pass
-func lost_lock(_targeter:Node3D) -> void:
-	#print('lost_lock')
-	pass
-func lock_acquired(_targeter:Node3D) -> void:
-	pass
-func missile_inbound(_targeter:Node3D) -> void:
-	missile_fired_inbound.emit()
-	pass
+func get_hitbox() -> HitBoxComponent:
+	return hit_box_component

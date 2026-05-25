@@ -22,8 +22,9 @@ func setup_missile_cues() -> void:
 	Global.missile_cues = self
 
 func connect_to_player(p:Ship) -> void:
-	p.missile_locked.connect(missile_lock_on_player)
-	p.missile_fired_inbound.connect(missile_inbound)
+	var hitbox:HitBoxComponent = p.get_hitbox()
+	hitbox.missile_locked.connect(missile_lock_on_player)
+	hitbox.missile_fired_inbound.connect(missile_inbound)
 
 # This is actually triggered when the enemy starts
 # its countdown to missile lock

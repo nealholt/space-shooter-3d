@@ -14,6 +14,9 @@ class_name HitBoxComponent extends Node3D
 # (as children of CharacterBody3D ships and hit box area).
 # Until I resolve this, I'm going to duplicate code.
 
+signal missile_locked # Emitted when an enemy acquires missile lock on this ship
+signal missile_fired_inbound # Emitted when a missile is fired at this ship
+
 var collidable:DamageableArea
 
 var health_component:HealthComponent
@@ -120,11 +123,15 @@ func turn_off_audio() -> void:
 # targeter is seeking lock on this hitbox,
 # loses lock, acquires lock, or fires a missile.
 func seeking_lock(_targeter:Node3D) -> void:
-	print('seeking lock in hit box componenent. Is this working?')
+	# This is actually triggered when the enemy starts
+	# its countdown to missile lock, which is what I want
+	missile_locked.emit()
 	pass
 func lost_lock(_targeter:Node3D) -> void:
+	#print('lost_lock')
 	pass
 func lock_acquired(_targeter:Node3D) -> void:
 	pass
 func missile_inbound(_targeter:Node3D) -> void:
+	missile_fired_inbound.emit()
 	pass
