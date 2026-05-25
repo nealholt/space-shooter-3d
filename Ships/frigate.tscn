@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="2_2gkw6"]
 [ext_resource type="Resource" uid="uid://dupgpxdl4bnxc" path="res://Ships/Resources/ship_stats_frigate.tres" id="2_or537"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Attachments/Turret/turret_group.tscn" id="4_7ugl6"]
-[ext_resource type="Script" uid="uid://dj2iogg4gh8e8" path="res://Attachments/Hitbox/hit_box_component.gd" id="4_or537"]
+[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="4_or537"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Attachments/Turret/turret_data.gd" id="5_mh4mh"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Weapons/weapon_handler.tscn" id="7_qbhaa"]
 [ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Weapons/Guns/laser_gun.tscn" id="8_14glc"]
@@ -42,10 +42,8 @@ death_animation_duration_max = 0.0
 [node name="HealthComponent" parent="." unique_id=1090263283 instance=ExtResource("2_2gkw6")]
 max_health = 400.0
 
-[node name="HitBoxComponent" type="Area3D" parent="." unique_id=307154896 node_paths=PackedStringArray("collidable")]
-script = ExtResource("4_or537")
+[node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("collidable") instance=ExtResource("4_or537")]
 collidable = NodePath("..")
-metadata/_custom_type_script = "uid://dj2iogg4gh8e8"
 
 [node name="FrigateChassis" parent="." unique_id=275995599 instance=ExtResource("1_18ao0")]
 

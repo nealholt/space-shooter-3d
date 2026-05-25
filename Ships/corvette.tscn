@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cvrvs2a12nuqr" path="res://Audio/SoundEffects/whoosh_medium_001.ogg" id="9_ktweb"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://vfx/contrail.tscn" id="10_shexg"]
 [ext_resource type="PackedScene" uid="uid://drm4t5i6exnhc" path="res://Weapons/Visuals/gatling_gun.tscn" id="11_kbwk7"]
-[ext_resource type="Script" uid="uid://dj2iogg4gh8e8" path="res://Attachments/Hitbox/hit_box_component.gd" id="11_pe4ok"]
+[ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="11_pe4ok"]
 [ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Ships/Models/fighter_chassis_diamond.tscn" id="12_a77x5"]
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Ships/Models/engine_mesh_component.tscn" id="12_e20ac"]
 [ext_resource type="PackedScene" uid="uid://ddoyejlbh51s5" path="res://Weapons/Guns/hit_scan_gun.tscn" id="13_428na"]
@@ -133,10 +133,7 @@ stream = ExtResource("8_klb2b")
 [node name="HealthComponent" parent="." unique_id=778683298 instance=ExtResource("7_vhcpa")]
 max_health = 20
 
-[node name="HitBoxComponent" type="Area3D" parent="." unique_id=978789828 node_paths=PackedStringArray("collidable")]
-script = ExtResource("11_pe4ok")
-collidable = NodePath("..")
-metadata/_custom_type_script = "uid://dj2iogg4gh8e8"
+[node name="HitBoxComponent" parent="." unique_id=1463959918 instance=ExtResource("11_pe4ok")]
 
 [node name="Sounds" type="Node3D" parent="." unique_id=1146936130]
 

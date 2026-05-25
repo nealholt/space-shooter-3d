@@ -14,7 +14,7 @@ class_name HitBoxComponent extends Node3D
 # (as children of CharacterBody3D ships and hit box area).
 # Until I resolve this, I'm going to duplicate code.
 
-@export var collidable:CollisionObject3D
+var collidable:DamageableArea
 
 var health_component:HealthComponent
 @export var target_text : String = '' ## Text label for this target when it is directly targeted by the player
@@ -39,7 +39,9 @@ func _ready() -> void:
 	# Search through children for various components
 	# and save a reference to them.
 	for child in get_children():
-		if child is HitFeedback:
+		if child is DamageableArea:
+			collidable = child
+		elif child is HitFeedback:
 			hit_feedback = child
 		elif child is TargetReticles:
 			reticle = child
@@ -58,17 +60,15 @@ func _ready() -> void:
 	# Connect to collidable's damaged signal
 	if collidable:
 		collidable.damaged.connect(damage)
-	#else:
-		#push_error('Why isn\'t your hitbox connect to a CollisionObject3D such as a CharacterBody3D, StaticBody3D or Area3D? It should be.')
 
 
-func damage(amount:float, damager=null):
+func damage(dat:ShootData):
 	# A Ship shouldn't shoot down their own missiles
-	if damager and is_instance_valid(damage_exception) and damager == damage_exception:
+	if dat.shooter and is_instance_valid(damage_exception) and dat.shooter == damage_exception:
 		return
 	if health_component:
-		#Global.friendly_fire_checker(damager, get_parent()) #TESTING
-		health_component.health -= amount
+		#Global.friendly_fire_checker(dat.shooter, get_parent()) #TESTING
+		health_component.health -= dat.damage
 		if health_component.is_dead() and is_instance_valid(reticle):
 			reticle.is_targeted = false
 	if hit_feedback:
@@ -110,10 +110,17 @@ func get_reticle() -> TargetReticles:
 	return reticle
 
 
+func turn_off_audio() -> void:
+	if got_hit_audio:
+		got_hit_audio.queue_free()
+		got_hit_audio = null
+
+
 # These are called by the missile lock group when
 # targeter is seeking lock on this hitbox,
 # loses lock, acquires lock, or fires a missile.
 func seeking_lock(_targeter:Node3D) -> void:
+	print('seeking lock in hit box componenent. Is this working?')
 	pass
 func lost_lock(_targeter:Node3D) -> void:
 	pass

@@ -9,6 +9,7 @@ signal damaged(amount:float, damager)
 @export var pop_player: PackedScene
 
 @onready var health_component: HealthComponent = $HealthComponent
+@onready var hit_box_component: HitBoxComponent = $HitBoxComponent
 
 const MAX_COORD: int = 200
 
@@ -31,5 +32,5 @@ func _on_health_component_died() -> void:
 	Callable(queue_free).call_deferred()
 
 # Pass damage along to the hit box component.
-func damage(amount:float, damager=null):
-	damaged.emit(amount, damager)
+func damage(dat:ShootData):
+	hit_box_component.damage(dat)

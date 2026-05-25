@@ -289,7 +289,7 @@ func damage_and_die(body, collision_point=null) -> bool:
 	# Damage what was hit
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
 	if body.is_in_group("damageable"):
-		body.damage(data.damage, data.shooter)
+		body.damage(data)
 	# Previous was the damage part. Now do the dieing part.
 	return die_without_damaging(body, collision_point)
 

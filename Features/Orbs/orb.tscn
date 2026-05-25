@@ -30,10 +30,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gsmaa")
 [node name="HealthComponent" parent="." unique_id=505686953 instance=ExtResource("4_5ba2v")]
 max_health = 20
 
-[node name="HitBoxComponent" parent="." unique_id=188704207 node_paths=PackedStringArray("collidable") instance=ExtResource("5_e1bac")]
-collision_layer = 0
-monitorable = false
-collidable = NodePath("..")
+[node name="HitBoxComponent" parent="." unique_id=188704207 instance=ExtResource("5_e1bac")]
 
 [node name="HitFeedback" parent="HitBoxComponent" unique_id=944455592 instance=ExtResource("2_if2x6")]
 

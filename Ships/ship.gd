@@ -1,9 +1,10 @@
 class_name Ship extends CharacterBody3D
 
+@onready var hit_box_component: HitBoxComponent = $HitBoxComponent
+
 signal missile_locked # Emitted when an enemy acquires missile lock on this ship
 signal missile_fired_inbound # Emitted when a missile is fired at this ship
 signal destroyed # Emitted when this ship is destroyed
-signal damaged(amount:float, damager)
 
 @export var stats:ShipStats
 
@@ -60,7 +61,6 @@ var death_animation_timer:Timer
 @export var death_animation_duration_max:float = 4.5
 
 # This will be populated probably only for the player
-var got_hit_audio:AudioStreamPlayer
 var reticle:TargetReticles
 
 # So ships know what team they are on. These
@@ -113,9 +113,6 @@ func _ready() -> void:
 			shield = child
 		elif child is WeaponHandler:
 			weapon_handler = child
-		# The following are all from hit_box_component
-		elif child is AudioStreamPlayer:
-			got_hit_audio = child
 		# Remove turrets if we're just testing
 		elif child is TurretGroup and disable_for_testing:
 			child.disable_for_testing()
@@ -164,8 +161,8 @@ func _ready() -> void:
 		# the player only.
 		if weapon_handler:
 			weapon_handler.remove_texture_rects()
-		# Nullify the got_hit_audio
-		got_hit_audio = null
+		# Turn off the "got hit" audio
+		hit_box_component.turn_off_audio()
 		# Attach target reticle
 		if stats.target_reticle_text != 'NONE':
 			var reticle_scene:PackedScene = preload("res://UI/ReticlesCrosshairs/target_reticles.tscn")
@@ -281,12 +278,9 @@ func get_mouse_center_radius() -> float:
 	return 0.0
 
 
-func damage(amount:float, damager=null):
-	damaged.emit(amount, damager)
-	# Play a got_hit sound effect
-	if got_hit_audio:
-		got_hit_audio.play()
-
+# Pass along damage to the hitbox component
+func damage(dat:ShootData):
+	hit_box_component.damage(dat)
 
 
 # This is called when the player targets this hitbox

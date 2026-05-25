@@ -20,15 +20,19 @@ var delete_me:bool = false
 func _process(_delta: float) -> void:
 	if !delete_me:
 		VfxManager.play_with_transform(explosion_vfx, global_position, transform)
+	# Create shoot data
+	var sd := ShootData.new()
+	sd.shooter = shooter
+	sd.damage = damage_amt
 	# Damage all overlapping bodies
 	for body in area_3d.get_overlapping_bodies():
 		if body.is_in_group("damageable"):
-			body.damage(damage_amt, shooter)
+			body.damage(sd)
 			delete_me = true
 	# Damage all overlapping areas
 	for area in area_3d.get_overlapping_areas():
 		if area.is_in_group("damageable"):
-			area.damage(damage_amt, shooter)
+			area.damage(sd)
 			delete_me = true
 	# Wait until the end of the frame to execute queue_free
 	if delete_me:
