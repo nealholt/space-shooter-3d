@@ -142,6 +142,7 @@ func update(targeter:Node3D, delta:float) -> void:
 	(targeter.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
 	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > deg_to_rad(missile_lock_max_angle)):
 		stop_seeking()
+		print(target.name) # TODO TESTING
 		target.lost_lock(targeter)
 	# Otherwise target is valid and we're either seeking
 	# or locked.
@@ -239,6 +240,9 @@ func attempt_to_start_seeking(targeter:Node3D) -> void:
 			start_seeking()
 			# NPC's do this differently
 			if !npc_missile_lock:
+				#print()
+				#for g in target.get_groups():
+					#print(g)
 				target.seeking_lock(targeter)
 
 

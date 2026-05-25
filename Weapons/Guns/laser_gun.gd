@@ -123,7 +123,8 @@ func shoot_actual() -> void:
 func deal_damage(collider, delta:float) -> void:
 	if is_instance_valid(collider) and collider.is_in_group("damageable"):
 		#print("dealing damage %f" % (damage*delta))
-		collider.damage(damage*delta, data.shooter)
+		data.damage = damage*delta
+		collider.damage(data)
 
 
 # Time is the duration of the activation animation.

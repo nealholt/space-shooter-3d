@@ -39,7 +39,7 @@ points = PackedVector3Array(-50, -40, -50, -50, -40, 50, 0, 40, -50, 50, -40, -5
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0bygj"]
 points = PackedVector3Array(-50, -40, -50, -50, -40, 50, 0, 40, -50, 50, -40, -50, 50, -40, 50, 0, 40, 50)
 
-[node name="Carrier" type="CharacterBody3D" unique_id=1412780802 groups=["capital_ship", "damageable", "team member"]]
+[node name="Carrier" type="CharacterBody3D" unique_id=1412780802 groups=["capital_ship", "damageable"]]
 motion_mode = 1
 script = ExtResource("1_isj6t")
 stats = ExtResource("2_wnudi")
@@ -51,8 +51,7 @@ death_animation_duration_max = 0.0
 max_health = 1000.0
 weakpoint_damage = 50.0
 
-[node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("collidable") instance=ExtResource("4_gxsaf")]
-collidable = NodePath("..")
+[node name="HitBoxComponent" parent="." unique_id=1463959918 instance=ExtResource("4_gxsaf")]
 
 [node name="CarrierChassis" parent="." unique_id=1239768847 instance=ExtResource("1_67lmr")]
 

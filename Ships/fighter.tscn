@@ -21,7 +21,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_ydoww"]
 radius = 2.3
 
-[node name="Fighter" type="CharacterBody3D" unique_id=1900985089 groups=["damageable", "team member"]]
+[node name="Fighter" type="CharacterBody3D" unique_id=1900985089 groups=["damageable"]]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
 motion_mode = 1
 script = ExtResource("1_dn8ab")

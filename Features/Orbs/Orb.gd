@@ -3,7 +3,6 @@ class_name Orb extends StaticBody3D
 const ORB_SCENE : PackedScene = preload("res://Features/Orbs/orb.tscn")
 
 signal destroyed
-signal damaged(amount:float, damager)
 
 # Sound to be played on death. Self-freeing.
 @export var pop_player: PackedScene

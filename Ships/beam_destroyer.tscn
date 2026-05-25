@@ -24,7 +24,7 @@ points = PackedVector3Array(-15, -3, -5, -15, 3, -5, 15, -3, -5, -15, -3, 5, -15
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dca3j"]
 points = PackedVector3Array(-15, -3, -5, -15, 3, -5, 15, -3, -5, -15, -3, 5, -15, 3, 5, 15, 3, -5, 15, -3, 5, 15, 3, 5)
 
-[node name="BeamDestroyer" type="CharacterBody3D" unique_id=45072852 groups=["capital_ship", "damageable", "team member"]]
+[node name="BeamDestroyer" type="CharacterBody3D" unique_id=45072852 groups=["capital_ship", "damageable"]]
 motion_mode = 1
 script = ExtResource("1_h4lox")
 stats = ExtResource("2_rax4g")
@@ -54,8 +54,7 @@ shape = SubResource("ConvexPolygonShape3D_dca3j")
 [node name="HealthComponent" parent="." unique_id=480907730 instance=ExtResource("3_ju2iv")]
 max_health = 100.0
 
-[node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("collidable") instance=ExtResource("5_rax4g")]
-collidable = NodePath("..")
+[node name="HitBoxComponent" parent="." unique_id=1463959918 instance=ExtResource("5_rax4g")]
 
 [node name="TurretGroup" parent="." unique_id=724303526 instance=ExtResource("4_oimyf")]
 

@@ -34,19 +34,17 @@ collide_with_areas = true
 
 [node name="HealthComponent" parent="." unique_id=871332090 instance=ExtResource("8_qikae")]
 
-[node name="HitBoxComponent" parent="." unique_id=790939857 node_paths=PackedStringArray("collidable") instance=ExtResource("9_b5qkf")]
+[node name="HitBoxComponent" parent="." unique_id=790939857 instance=ExtResource("9_b5qkf")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-monitorable = false
-collidable = NodePath("DamageableArea")
 reticle_set = 1
+
+[node name="TargetReticles" parent="HitBoxComponent" index="0" unique_id=1056906650]
+target_text = "Turret"
 
 [node name="DamageableArea" parent="HitBoxComponent" unique_id=2096581842 instance=ExtResource("5_h2pi2")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent/DamageableArea" unique_id=1621617879]
 shape = SubResource("SphereShape3D_g6fsi")
-
-[node name="TargetReticles" parent="HitBoxComponent" index="1" unique_id=1056906650]
-target_text = "Turret"
 
 [node name="TargetSelector" type="Node" parent="." unique_id=1615818936]
 script = ExtResource("6_cy7vo")

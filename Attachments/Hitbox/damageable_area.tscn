@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://drduvlkbnx6sl" path="res://Attachments/Hitbox/damageable_area.gd" id="1_4lfq3"]
 
-[node name="DamageableArea" type="Area3D" unique_id=2096581842 groups=["damageable", "team member"]]
+[node name="DamageableArea" type="Area3D" unique_id=2096581842 groups=["damageable"]]
 collision_layer = 16
 collision_mask = 0
 monitoring = false

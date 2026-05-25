@@ -150,24 +150,20 @@ _data = {
 &"RESET": SubResource("Animation_3iay6")
 }
 
-[node name="CapitalShipFrigate" type="CharacterBody3D" unique_id=1054647733 groups=["capital_ship", "team member"]]
+[node name="CapitalShipFrigate" type="CharacterBody3D" unique_id=1054647733 groups=["capital_ship"]]
 motion_mode = 1
 script = ExtResource("1_dp23i")
 stats = ExtResource("2_7erqg")
 
-[node name="HitBoxComponent" parent="." unique_id=868661198 node_paths=PackedStringArray("collidable") instance=ExtResource("2_ffelx")]
+[node name="HitBoxComponent" parent="." unique_id=868661198 instance=ExtResource("2_ffelx")]
 transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, -30, 0)
-monitorable = false
-collidable = NodePath("DamageableArea")
+target_text = "Reactor Core"
 reticle_set = 3
 
 [node name="DamageableArea" parent="HitBoxComponent" unique_id=2096581842 instance=ExtResource("4_a64g1")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent/DamageableArea" unique_id=95413568]
 shape = SubResource("SphereShape3D_mdcux")
-
-[node name="TargetReticles" parent="HitBoxComponent" index="1" unique_id=1056906650]
-target_text = "Reactor Core"
 
 [node name="HealthComponent" parent="." unique_id=703616632 instance=ExtResource("3_ac6d0")]
 
@@ -278,5 +274,3 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 60, -37.056, 0)
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 60, -37.056, 48)
 
 [connection signal="died" from="HealthComponent" to="." method="_on_reactor_died"]
-
-[editable path="HitBoxComponent"]

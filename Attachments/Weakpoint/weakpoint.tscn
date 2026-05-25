@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://df54n8rhbsk88" path="res://Attachments/Weakpoint/weakpoint.gd" id="1_v3ei0"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="3_mpr5y"]
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Features/HitFeedback/hit_feedback.tscn" id="4_goev0"]
+[ext_resource type="PackedScene" uid="uid://cmg5hwgtanvoi" path="res://Attachments/Hitbox/damageable_area.tscn" id="5_dv5db"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="5_w03n3"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_dknmi"]
@@ -12,26 +13,23 @@ radial_segments = 32
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_b2obo"]
 
-[node name="Weakpoint" type="Node3D"]
+[node name="Weakpoint" type="Node3D" unique_id=1617451498]
 script = ExtResource("1_v3ei0")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=255535639]
 mesh = SubResource("SphereMesh_dknmi")
 
-[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_mpr5y")]
-health_component = NodePath("../HealthComponent")
+[node name="HitBoxComponent" parent="." unique_id=1512570400 instance=ExtResource("3_mpr5y")]
+target_text = "Radiator"
 reticle_set = 2
 
-[node name="TargetReticles" parent="HitBoxComponent" index="0"]
-target_text = "Radiator"
+[node name="HitFeedback" parent="HitBoxComponent" unique_id=975945709 instance=ExtResource("4_goev0")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent"]
+[node name="DamageableArea" parent="HitBoxComponent" unique_id=2096581842 instance=ExtResource("5_dv5db")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent/DamageableArea" unique_id=1290055267]
 shape = SubResource("SphereShape3D_b2obo")
 
-[node name="HitFeedback" parent="HitBoxComponent" instance=ExtResource("4_goev0")]
-
-[node name="HealthComponent" parent="." instance=ExtResource("5_w03n3")]
+[node name="HealthComponent" parent="." unique_id=1213936259 instance=ExtResource("5_w03n3")]
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
-
-[editable path="HitBoxComponent"]
