@@ -3,6 +3,7 @@ class_name Ship extends CharacterBody3D
 signal destroyed # Emitted when this ship is destroyed
 
 @onready var hit_box_component: HitBoxComponent = $HitBoxComponent
+@onready var target_reticles: TargetReticles = $TargetReticles
 
 @export var stats:ShipStats
 
@@ -57,9 +58,6 @@ var death_animation_timer:Timer
 
 @export var death_animation_duration_min:float = 1.5
 @export var death_animation_duration_max:float = 4.5
-
-# This will be populated probably only for the player
-var reticle:TargetReticles
 
 # So ships know what team they are on. These
 # are set in team_setup.gd
@@ -139,6 +137,8 @@ func _ready() -> void:
 			controller.engineAV = engineAV
 		else:
 			push_error('Every player controller should have an engineAV variable.')
+		# Remove player's target reticle
+		target_reticles.queue_free.call_deferred()
 	else: # This is not a player
 		# Remove children of the aim assist. This should just
 		# be removing one AudioStreamPlayer
@@ -162,11 +162,10 @@ func _ready() -> void:
 		# Turn off the "got hit" audio
 		hit_box_component.turn_off_audio()
 		# Attach target reticle
-		if stats.target_reticle_text != 'NONE':
-			var reticle_scene:PackedScene = preload("res://UI/ReticlesCrosshairs/target_reticles.tscn")
-			reticle = reticle_scene.instantiate()
-			add_child(reticle)
-			reticle.set_target_text.call_deferred(stats.target_reticle_text)
+		if stats.target_reticle_text == 'NONE':
+			target_reticles.queue_free.call_deferred()
+		else:
+			target_reticles.setup_from_stats.call_deferred(stats)
 	# Add self (CharacterBody3D) to collision exceptions so
 	# bullets don't hit self.
 	collision_exceptions.push_back(self)
@@ -218,9 +217,9 @@ func _on_health_component_died() -> void:
 	if controller:
 		controller.enter_death_animation()
 	# Delete targeting reticle
-	if reticle:
-		reticle.die()
-		reticle = null
+	if target_reticles:
+		target_reticles.die()
+		target_reticles = null
 	# Create and start a timer, if you haven't
 	# already done so.
 	# Go into death animation for this duration.
@@ -279,19 +278,6 @@ func get_mouse_center_radius() -> float:
 # Pass along damage to the hitbox component
 func damage(dat:ShootData):
 	hit_box_component.damage(dat)
-
-
-# This is called when the player targets this hitbox
-# component. However, in the future, I'd like it to
-# be more flexible, so now I'm passing in the
-# targeter so we can check if it's the player.
-func set_targeted(targeter:Node3D, value:bool) -> void:
-	if Global.player == targeter and reticle:
-		#print('ship set targeted ',value)
-		reticle.is_targeted = value
-	# In the future this should also signal to the
-	# object that owns this hitbox that it is
-	# being targeted
 
 
 func get_hitbox() -> HitBoxComponent:

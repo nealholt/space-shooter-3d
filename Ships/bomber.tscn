@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="8_te66f"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Weapons/MissileLock/missile_lock_group.tscn" id="9_7wsae"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Attachments/ObstacleDetector/obstacle_detector.tscn" id="12_e1i0b"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="12_kx6lg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rfws3"]
 size = Vector3(5.03894, 1.51178, 7.49753)
@@ -61,3 +62,7 @@ fire_rate = 0.1
 
 [node name="ObstacleDetector" parent="." unique_id=1346467973 instance=ExtResource("12_e1i0b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.6661463)
+
+[node name="TargetReticles" parent="." unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("12_kx6lg")]
+target_text = "Bomber"
+hitbox = NodePath("../HitBoxComponent")

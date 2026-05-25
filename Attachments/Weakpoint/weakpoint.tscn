@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Features/HitFeedback/hit_feedback.tscn" id="4_goev0"]
 [ext_resource type="PackedScene" uid="uid://cmg5hwgtanvoi" path="res://Attachments/Hitbox/damageable_area.tscn" id="5_dv5db"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="5_w03n3"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="7_knkpu"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_dknmi"]
 material = ExtResource("1_mj5u5")
@@ -20,8 +21,6 @@ script = ExtResource("1_v3ei0")
 mesh = SubResource("SphereMesh_dknmi")
 
 [node name="HitBoxComponent" parent="." unique_id=1512570400 instance=ExtResource("3_mpr5y")]
-target_text = "Radiator"
-reticle_set = 2
 
 [node name="HitFeedback" parent="HitBoxComponent" unique_id=975945709 instance=ExtResource("4_goev0")]
 
@@ -31,5 +30,9 @@ reticle_set = 2
 shape = SubResource("SphereShape3D_b2obo")
 
 [node name="HealthComponent" parent="." unique_id=1213936259 instance=ExtResource("5_w03n3")]
+
+[node name="TargetReticles" parent="." unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("7_knkpu")]
+target_text = "Radiator"
+hitbox = NodePath("../HitBoxComponent")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

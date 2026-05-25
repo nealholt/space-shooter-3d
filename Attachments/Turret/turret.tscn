@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://deuokls15ey84" path="res://Attachments/Turret/turret_model.tscn" id="2_xuhpe"]
 [ext_resource type="PackedScene" uid="uid://cmg5hwgtanvoi" path="res://Attachments/Hitbox/damageable_area.tscn" id="5_h2pi2"]
 [ext_resource type="Script" uid="uid://c3gw1nt0lnjsu" path="res://Controllers/target_selector.gd" id="6_cy7vo"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="7_pvre8"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="8_qikae"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="9_b5qkf"]
 
@@ -36,10 +37,6 @@ collide_with_areas = true
 
 [node name="HitBoxComponent" parent="." unique_id=790939857 instance=ExtResource("9_b5qkf")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-reticle_set = 1
-
-[node name="TargetReticles" parent="HitBoxComponent" index="0" unique_id=1056906650]
-target_text = "Turret"
 
 [node name="DamageableArea" parent="HitBoxComponent" unique_id=2096581842 instance=ExtResource("5_h2pi2")]
 
@@ -48,6 +45,11 @@ shape = SubResource("SphereShape3D_g6fsi")
 
 [node name="TargetSelector" type="Node" parent="." unique_id=1615818936]
 script = ExtResource("6_cy7vo")
+
+[node name="TargetReticles" parent="." unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("7_pvre8")]
+target_text = "Turret"
+reticle_set = 1
+hitbox = NodePath("../HitBoxComponent")
 
 [editable path="TurretModel"]
 [editable path="HitBoxComponent"]

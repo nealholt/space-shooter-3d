@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Attachments/Turret/turret_group.tscn" id="7_bof2b"]
 [ext_resource type="PackedScene" uid="uid://dk6y2tyoo25sn" path="res://Attachments/Weakpoint/weakpoint.tscn" id="8_3qdq6"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Attachments/Turret/turret_data.gd" id="8_ejvar"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="11_xgv7f"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mdcux"]
 
@@ -157,13 +158,16 @@ stats = ExtResource("2_7erqg")
 
 [node name="HitBoxComponent" parent="." unique_id=868661198 instance=ExtResource("2_ffelx")]
 transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, -30, 0)
-target_text = "Reactor Core"
-reticle_set = 3
 
 [node name="DamageableArea" parent="HitBoxComponent" unique_id=2096581842 instance=ExtResource("4_a64g1")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent/DamageableArea" unique_id=95413568]
 shape = SubResource("SphereShape3D_mdcux")
+
+[node name="TargetReticles" parent="HitBoxComponent" unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("11_xgv7f")]
+target_text = "Reactor"
+reticle_set = 3
+hitbox = NodePath("..")
 
 [node name="HealthComponent" parent="." unique_id=703616632 instance=ExtResource("3_ac6d0")]
 
@@ -272,5 +276,9 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 60, -37.056, 0)
 
 [node name="Weakpoint6" parent="WeakpointGroup" unique_id=55340335 instance=ExtResource("8_3qdq6")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 60, -37.056, 48)
+
+[node name="TargetReticles" parent="." unique_id=86748902 node_paths=PackedStringArray("hitbox") instance=ExtResource("11_xgv7f")]
+target_text = "Heavy Frigate"
+hitbox = NodePath("../HitBoxComponent")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_reactor_died"]

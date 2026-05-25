@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Features/HitFeedback/hit_feedback.tscn" id="2_if2x6"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="4_5ba2v"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="5_e1bac"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="6_nff2f"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rhun0"]
 
@@ -30,8 +31,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gsmaa")
 [node name="HealthComponent" parent="." unique_id=505686953 instance=ExtResource("4_5ba2v")]
 max_health = 20
 
-[node name="HitBoxComponent" parent="." unique_id=188704207 groups=["team member"] instance=ExtResource("5_e1bac")]
+[node name="HitBoxComponent" parent="." unique_id=188704207 instance=ExtResource("5_e1bac")]
 
 [node name="HitFeedback" parent="HitBoxComponent" unique_id=944455592 instance=ExtResource("2_if2x6")]
+
+[node name="TargetReticles" parent="." unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("6_nff2f")]
+hitbox = NodePath("../HitBoxComponent")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

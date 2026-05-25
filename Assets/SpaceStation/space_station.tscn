@@ -4,10 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="2_eniao"]
 [ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="2_pb2je"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="4_0040n"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="5_lxr52"]
 
 [sub_resource type="Resource" id="Resource_0040n"]
 script = ExtResource("2_pb2je")
 max_health = 100000.0
+target_reticle_text = ""
 metadata/_custom_type_script = "uid://llcl4ev3hi63"
 
 [sub_resource type="Animation" id="Animation_tgpxr"]
@@ -589,6 +591,10 @@ finalExplosion = 10
 max_health = 100000.0
 
 [node name="HitBoxComponent" parent="." unique_id=1463959918 instance=ExtResource("4_0040n")]
+
+[node name="TargetReticles" parent="." unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("5_lxr52")]
+target_text = "Space Station"
+hitbox = NodePath("../HitBoxComponent")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1941465445]
 libraries/ = SubResource("AnimationLibrary_yt4lk")

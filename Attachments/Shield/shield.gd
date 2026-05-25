@@ -64,14 +64,7 @@ func _on_health_component_health_lost() -> void:
 
 func _on_health_component_died() -> void:
 	# Disable further collisions
-	# Without set_deferred there's a "Function blocked
-	# during in/out signal" error.
-	# Also, the monitorable = false doesn't seem to do
-	# anything. There are still collisions unless the
-	# collision layer is set to false. I'm not sure why,
-	# but for now I'll just turn off both.
-	hit_box_component.set_deferred('monitorable', false)
-	hit_box_component.call_deferred('set_collision_layer_value', 4, false)
+	hit_box_component.call_deferred('set_collisions', 4, false)
 	# Hide aura
 	fresnel_aura.visible = false
 	# Turn off processing
@@ -99,8 +92,7 @@ func _on_timer_timeout() -> void:
 		'scale',
 		Vector3(1.0, 1.0, 1.0), 1.3).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	# Re-enable collisions
-	hit_box_component.set_deferred('monitorable', true)
-	hit_box_component.call_deferred('set_collision_layer_value', 4, true)
+	hit_box_component.call_deferred('set_collisions', 4, true)
 	# Make aura visible
 	fresnel_aura.visible = true
 	# Turn on processing

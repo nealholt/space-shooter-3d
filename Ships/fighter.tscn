@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Audio/SoundEffects/lowFrequency_explosion_001.ogg" id="16_uh0vy"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Weapons/MissileLock/missile_lock_group.tscn" id="17_563f5"]
 [ext_resource type="PackedScene" uid="uid://yp51kcujfd4s" path="res://Audio/ShieldTransitAudio/shield_transit_audio.tscn" id="17_y44vr"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="18_bef5k"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Weapons/aim_assist.tscn" id="19_xjc2u"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://vfx/contrail.tscn" id="20_a8xhu"]
 
@@ -26,10 +27,17 @@ transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.3
 motion_mode = 1
 script = ExtResource("1_dn8ab")
 stats = ExtResource("2_s55gh")
+is_player = null
+disable_for_testing = null
 fps_cam_position = Vector3(0, 1, -1)
+fps_cam_rotation_deg = null
 side_cam_position = Vector3(1.27, -0.2, -2)
+side_cam_rotation_deg = null
+max_collision_damage = null
 deathExplosion = 9
 finalExplosion = 8
+death_animation_duration_min = null
+death_animation_duration_max = null
 
 [node name="AimAssist" parent="." unique_id=936755743 instance=ExtResource("19_xjc2u")]
 angle_assist_limit = 10.0
@@ -106,3 +114,7 @@ transform = Transform3D(-1, 8.3518774e-23, -1.509958e-07, 5.051895e-16, 1, 0, 1.
 transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
 
 [node name="ShieldTransitAudio" parent="." unique_id=992133318 instance=ExtResource("17_y44vr")]
+
+[node name="TargetReticles" parent="." unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("18_bef5k")]
+target_text = "Fighter"
+hitbox = NodePath("../HitBoxComponent")

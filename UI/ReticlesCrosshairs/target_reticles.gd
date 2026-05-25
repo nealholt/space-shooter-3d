@@ -17,9 +17,10 @@ class_name TargetReticles extends Node3D
 #   -Added code and image for a special reticle when targeted
 #   -Added enum for different sets of reticles
 #   -Added an animation when target is selected
-#	-Added a line to a label on selected target which includes distance to target
+#   -Added a line to a label on selected target which includes distance to target
 # see "Scale reticle size and transparency with distance" below, but
 # couldn't get it working.
+#   -I've added even more and have not kept up with noting all my changes
 
 # Copyright (c) 2023 Legion Games Inc.
 #Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -72,6 +73,8 @@ var max_reticle_position:Vector2
 # This is used for missiles that are targeting the player.
 var always_show:bool = false
 
+@export var hitbox:HitBoxComponent
+
 
 var is_targeted:bool:
 	set(value):
@@ -102,6 +105,11 @@ func _ready():
 	# but then bring it in a little with the 0.95
 	max_reticle_position = (viewport_center-offscreen_reticle_offset) * 0.95
 	set_target_text.call_deferred(target_text)
+	# Connect to hitbox signal:
+	if hitbox:
+		hitbox.is_targeted.connect(set_targeted)
+	else:
+		push_error('It looks like you forgot to connect this target reticle to a hitbox')
 
 
 func _process(_delta):
@@ -220,6 +228,11 @@ func just_targeted() -> void:
 	animation_player.play('ZoomOnTarget')
 
 
+func setup_from_stats(stats:ShipStats) -> void:
+	set_target_text(stats.target_reticle_text)
+	set_reticle_textures(stats.reticle_set)
+
+
 func set_target_text(s:String) -> void:
 	target_text = s
 	dynamic_panel.set_target_text(s)
@@ -231,3 +244,7 @@ func set_reticle_scale(percent:float) -> void:
 	offscreen_reticle.scale = scl
 	distant_reticle.scale = scl
 	targeted_reticle.scale = scl
+
+
+func set_targeted(b:bool) -> void:
+	is_targeted = b

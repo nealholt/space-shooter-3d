@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="5_sorjn"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="7_i0d2t"]
 [ext_resource type="Resource" uid="uid://dick38j62uhh4" path="res://Controllers/Resources/controller_stats_capship_above.tres" id="8_i0d2t"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="10_xi73q"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_c4x8n"]
 points = PackedVector3Array(11.482248, 4.2503576, 20.31643, -2.6437604, 1.9923999, 12.67453, -3.1086786, 5.519431, 12.069876, -11.358835, 4.2503576, 20.31643, 11.482248, 2.3478656, 13.338948, -11.358835, 2.3478656, 13.338948, 11.482248, 2.3478656, 20.31643, -3.1086786, 5.519431, 20.31643, 3.229856, 5.519431, 12.069876, -11.358835, 2.3478656, 20.31643, 11.482248, 4.2503576, 13.338948, -11.358835, 4.2503576, 13.338948, 2.9867253, 1.859373, 20, 3.229856, 5.519431, 20.31643, 2.7652657, 1.9923999, 12.67453)
@@ -81,6 +82,10 @@ too_close = 400.0
 keep_target_above = true
 ease_dist = 200.0
 stats = ExtResource("8_i0d2t")
+
+[node name="TargetReticles" parent="." unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("10_xi73q")]
+target_text = "Destroyer"
+hitbox = NodePath("../HitBoxComponent")
 
 [editable path="destroyer"]
 [editable path="NPCController"]

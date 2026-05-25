@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cexs1xykv11rj" path="res://Assets/ParticleImages/spark_04.png" id="5_cvrrl"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="7_cvrrl"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="8_dxfth"]
+[ext_resource type="PackedScene" uid="uid://cmg5hwgtanvoi" path="res://Attachments/Hitbox/damageable_area.tscn" id="9_6ga6k"]
+[ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="10_4vg58"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o0aob"]
 shading_mode = 2
@@ -170,15 +172,17 @@ draw_pass_1 = ExtResource("4_cvrrl")
 
 [node name="HealthComponent" parent="." unique_id=1378699833 instance=ExtResource("7_cvrrl")]
 
-[node name="HitBoxComponent" parent="." unique_id=91352412 node_paths=PackedStringArray("health_component") instance=ExtResource("8_dxfth")]
-health_component = NodePath("../HealthComponent")
-reticle_set = 2
+[node name="HitBoxComponent" parent="." unique_id=91352412 instance=ExtResource("8_dxfth")]
 
-[node name="TargetReticles" parent="HitBoxComponent" index="0" unique_id=1056906650]
-target_text = "Shield Generator"
+[node name="DamageableArea" parent="HitBoxComponent" unique_id=2096581842 instance=ExtResource("9_6ga6k")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent" unique_id=600990507]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent/DamageableArea" unique_id=600990507]
 shape = SubResource("ConvexPolygonShape3D_u1p73")
+
+[node name="TargetReticles" parent="." unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("10_4vg58")]
+target_text = "Shield Generator"
+reticle_set = 3
+hitbox = NodePath("../HitBoxComponent")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 
