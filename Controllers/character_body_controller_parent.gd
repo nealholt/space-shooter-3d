@@ -6,7 +6,7 @@ class_name CharacterBodyControlParent extends Node
 @export var stats:ControllerStats
 
 # Currently targeted hitbox
-var target:Node3D
+var target:HitBoxComponent
 
 # Fundamental control inputs
 var pitch_input: float = 0.0

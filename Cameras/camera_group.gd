@@ -190,26 +190,27 @@ func _physics_process(delta: float) -> void:
 	# is_instance_valid(Global.player.controller.target)
 	# and there is a current weapon
 	# Global.player.weapon_handler
-	# and the target has a velocity
-	# "velocity" in Global.player.controller.target
-	# and the target has not yet instantiated a death_animation_timer
-	# !Global.player.controller.target.death_animation_timer
+	# and the target is not yet dead
+	# !Global.player.controller.target.is_dead()
 	if state == CameraState.FIRSTPERSON and \
 	Global.player and Global.player.controller and \
 	is_instance_valid(Global.player.controller.target) and \
 	Global.player.weapon_handler and \
-	"velocity" in Global.player.controller.target and \
-	!Global.player.controller.target.death_animation_timer:
-		var lead_pos:Vector3 = Global.get_intercept(
-			Global.player.global_position,
-			Global.player.weapon_handler.get_bullet_speed(),
-			Global.player.controller.target)
-		Global.set_reticle(current_targ_indicator, lead_pos)
-		target_lead_visible = true
+	!Global.player.controller.target.is_dead():
+		var vel:Vector3 = Global.player.controller.target.get_velocity()
+		if vel == Vector3.ZERO:
+			current_targ_indicator.hide()
+			target_lead_visible = false
+		else:
+			var lead_pos:Vector3 = Global.get_intercept(
+				Global.player.global_position,
+				Global.player.weapon_handler.get_bullet_speed(),
+				Global.player.controller.target)
+			Global.set_reticle(current_targ_indicator, lead_pos)
+			target_lead_visible = true
 	else:
 		current_targ_indicator.hide()
 		target_lead_visible = false
-	
 	# Draw a line from the center of the screen to the mouse position.
 	# This is how House of the Dying Sun does mouse controls.
 	if Global.input_man.use_mouse_and_keyboard and Global.targeting_hud_on:

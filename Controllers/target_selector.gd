@@ -4,7 +4,7 @@ var ally_team:String
 # Group from which targets will be selected
 var enemy_team:String
 # current target
-var target:Node3D
+var target:HitBoxComponent
 var prefer_capital_ships:bool = false
 
 

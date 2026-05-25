@@ -129,7 +129,7 @@ func setup_turret_in_tree(dat:TurretData, p) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	# Get target from the target selector
-	var target = target_selector.get_target(self)
+	var target:HitBoxComponent = target_selector.get_target(self)
 	# Update profile.orientation_data
 	if target:
 		orientation_data.update_data(global_position,

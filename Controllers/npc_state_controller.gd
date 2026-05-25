@@ -91,7 +91,7 @@ func set_obstacle_detector(obstacle_detector:ObstacleDetector) -> void:
 func move_and_turn(mover, delta:float) -> void:
 	var gun:Gun = mover.get_current_gun()
 	# Update profile.orientation_data ...
-	if target and is_instance_valid(target):
+	if is_instance_valid(target):
 		# ... to shoot the main gun at the target ...
 		# Default to using ship speed
 		var temp_speed:float = mover.velocity.length()

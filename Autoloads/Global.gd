@@ -308,11 +308,10 @@ func interp_face_target(seeker:Node3D, target_pos:Vector3, percent:float) -> Tra
 # t = ((b+sqrt(b^2+4*a*c))/(2*a))
 func get_intercept(shooter_pos:Vector3,
 					bullet_speed:float,
-					target:Node3D) -> Vector3:
+					target:HitBoxComponent) -> Vector3:
 	# Determine target velocity
 	var target_velocity:Vector3 = Vector3.ZERO
-	if "velocity" in target:
-		target_velocity = target.velocity
+	target_velocity = target.get_velocity()
 	# Begin calculating intercept
 	var target_position:Vector3 = target.global_position
 	# It's really easy if the target is not moving, but

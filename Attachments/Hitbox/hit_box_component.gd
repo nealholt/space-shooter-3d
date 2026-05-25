@@ -118,3 +118,15 @@ func set_collisions(layer:int, b:bool) -> void:
 		a.set_collision_layer_value(layer, b)
 	else:
 		push_error('I don\'t know of any scenario in which this should happen. I think only the Shield messes with collision activation directly.')
+
+
+func get_velocity() -> Vector3:
+	var p = get_parent()
+	if 'velocity' in p:
+		return p.velocity
+	else:
+		return Vector3.ZERO
+
+
+func is_dead() -> bool:
+	return health_component.is_dead()
