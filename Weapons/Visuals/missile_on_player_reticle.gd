@@ -5,7 +5,7 @@ class_name MissileOnPlayerReticle extends Node
 # 1 have a controller
 # 2 have a hitbox
 # 3 are targeted on the player
-# Then this scene modifies the hitbox reticle based on
+# Then this scene modifies the target reticle based on
 # distance of the projectile to the player.
 
 # It may seem odd to do it like this, but otherwise this

@@ -133,10 +133,13 @@ func _ready() -> void:
 		var engAV_scene:PackedScene = preload("res://Audio/EngineAudio/engine_audio_visuals.tscn")
 		var engineAV:EngineAV = engAV_scene.instantiate()
 		add_child(engineAV)
-		if 'engineAV' in controller:
-			controller.engineAV = engineAV
-		else:
-			push_error('Every player controller should have an engineAV variable.')
+		# The only time I've ever needed to check if the controller
+		# exists at all is in the "near-miss" test scene
+		if controller:
+			if 'engineAV' in controller:
+				controller.engineAV = engineAV
+			else:
+				push_error('Every player controller should have an engineAV variable.')
 		# Remove player's target reticle
 		target_reticles.queue_free.call_deferred()
 	else: # This is not a player

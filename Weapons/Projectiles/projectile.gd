@@ -79,11 +79,11 @@ func _ready() -> void:
 	# Search through children for various components
 	# and save a reference to them.
 	for child in get_children():
-		# HitBoxComponents are ALSO Area3Ds, but not all
-		# Area3Ds are HitBoxComponents. That's why this
-		# check must go before the check for Area3D
 		if child is HitBoxComponent:
 			hit_box_component = child
+			if hit_box_component.collidable:
+				hit_box_component.collidable.area_entered.connect(_on_area_entered)
+				hit_box_component.collidable.body_entered.connect(_on_body_entered)
 		elif child is Area3D:
 			# Connect to area and body entered signals
 			child.area_entered.connect(_on_area_entered)
@@ -100,7 +100,7 @@ func _ready() -> void:
 	# Add an exception to prevent self collisions.
 	# Very few projectiles have both a hitbox and a raycast,
 	# but missiles do.
-	if hit_box_component:
+	if hit_box_component and hit_box_component.collidable:
 		ray.add_exception(hit_box_component.collidable)
 
 
@@ -143,11 +143,18 @@ func set_data(dat:ShootData) -> void:
 		time_out += randf_range(-time_out*dat.timeout_vary_percent, time_out*dat.timeout_vary_percent)
 	# Start the timer
 	timer.start(time_out)
-	# If there is a controller, a hitbox, and this projectile is
-	# targeting the player, then we want to create a special scene
-	# to change the reticle based on distance to target
-	if controller and hit_box_component and data.target == Global.player:
-		MissileOnPlayerReticle.new_missile_on_player(self, hit_box_component.get_reticle())
+	# If there is a controller, a hitbox, this projectile is
+	# targeting the player, AND there is a reticle,
+	# then we want to create a special scene to change the
+	# reticle based on distance to target
+	if controller and hit_box_component and data.target.owner == Global.player:
+		var reticle:TargetReticles = self.get_tree().get_first_node_in_group('reticle')
+		for c in get_children():
+			if c is TargetReticles:
+				reticle = c
+				break
+		if reticle:
+			MissileOnPlayerReticle.new_missile_on_player(self, reticle)
 
 
 # Randomize heading of this bullet based on ShootData

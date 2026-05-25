@@ -65,8 +65,7 @@ func add_damage_exception(s:Ship) -> void:
 	damage_exception = s
 
 
-# This is called when the player targets this hitbox
-# component.
+# This is called when any ship targets this hitbox.
 func set_targeted(targeter:Node3D, value:bool) -> void:
 	if Global.player == targeter:
 		is_targeted.emit(value)

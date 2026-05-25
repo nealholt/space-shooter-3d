@@ -21,13 +21,13 @@ func _ready() -> void:
 
 func _on_area_entered(area: Area3D) -> void:
 	# Don't enter your own shield
-	if shield_to_ignore and shield_to_ignore.is_same_area(area):
+	if shield_to_ignore and shield_to_ignore == area.owner:
 		return
 	enter_shield_audio.play()
 
 func _on_area_exited(area: Area3D) -> void:
 	# Don't exit your own shield
-	if shield_to_ignore and shield_to_ignore.is_same_area(area):
+	if shield_to_ignore and shield_to_ignore == area.owner:
 		return
 	# This call is deferred because otherwise exiting
 	# a level will queue free a shield, triggering 

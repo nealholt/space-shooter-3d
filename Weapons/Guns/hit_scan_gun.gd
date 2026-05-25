@@ -29,7 +29,8 @@ func shoot_actual() -> void:
 		var collider = ray.get_collider()
 		if collider.is_in_group("damageable"):
 			#print("dealt damage")
-			collider.damage(damage, data.shooter)
+			data.damage = damage
+			collider.damage(data)
 		# Spawn sparks on location of hit
 		VfxManager.play(VisualEffectSetting.VISUAL_EFFECT_TYPE.MUZZLE_FLASH, ray.get_collision_point())
 		# Play feedback for player if relevant

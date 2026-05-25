@@ -69,7 +69,7 @@ func move_and_turn(mover, delta:float) -> void:
 	
 	#Brake
 	#if im.brake:
-		#pass # TODO LEFT OFF HERE
+		#pass
 	#Accelerate
 	if im.accelerate:
 		stats = stats_accel

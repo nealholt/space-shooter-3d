@@ -19,7 +19,7 @@ material = SubResource("ShaderMaterial_51wj8")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0x6dj"]
 
-[node name="Shield" type="Node3D" unique_id=1992904425 groups=["shield"]]
+[node name="Shield" type="Node3D" unique_id=1992904425]
 script = ExtResource("1_xlxvf")
 explosion = 2
 
@@ -28,7 +28,7 @@ mesh = SubResource("SphereMesh_n464a")
 
 [node name="HitBoxComponent" parent="." unique_id=1491391398 groups=["shield"] instance=ExtResource("3_6jkow")]
 
-[node name="DamageableArea" parent="HitBoxComponent" unique_id=2096581842 instance=ExtResource("4_ytqv3")]
+[node name="DamageableArea" parent="HitBoxComponent" unique_id=2096581842 groups=["shield"] instance=ExtResource("4_ytqv3")]
 collision_layer = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent/DamageableArea" unique_id=1924844819]
