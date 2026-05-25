@@ -32,11 +32,6 @@ var hit_feedback:HitFeedback
 # npcs from shooting down their own missiles.
 var damage_exception:Ship
 
-# So hitboxes know what team they are on. These
-# are set in team_setup.gd
-var ally_team:String
-var enemy_team:String
-
 
 func _ready() -> void:
 	# Search through children for various components

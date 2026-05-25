@@ -104,7 +104,7 @@ func select_target(_targeter:Ship) -> void:
 
 func select_target_screen_center(targeter:Ship) -> void:
 	# Target most central enemy team member
-	target = Global.get_center_most_from_group(enemy_team,targeter)
+	target = Global.get_center_most_from_group(enemy_team, targeter)
 	# If target is valid and missile is off cooldown,
 	# tell target that missile lock is being sought on
 	# it and start the seeking audio and visual
