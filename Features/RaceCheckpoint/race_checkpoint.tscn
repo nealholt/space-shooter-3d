@@ -48,30 +48,30 @@ size = Vector2(10, 10)
 [sub_resource type="SphereShape3D" id="SphereShape3D_3b3r2"]
 radius = 6.0
 
-[node name="RaceCheckpoint" type="StaticBody3D"]
+[node name="RaceCheckpoint" type="StaticBody3D" unique_id=223205201]
 script = ExtResource("1_rikje")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=827185297]
 mesh = SubResource("TorusMesh_skbjm")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=916934722]
 shape = SubResource("ConcavePolygonShape3D_rikje")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=319387293]
 material_override = SubResource("StandardMaterial3D_rikje")
 emitting = false
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_flrl7")
 draw_pass_1 = SubResource("QuadMesh_rikje")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." unique_id=41677186]
 monitoring = false
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=262871293]
 shape = SubResource("SphereShape3D_3b3r2")
 
-[node name="TargetReticles" parent="." instance=ExtResource("4_flrl7")]
+[node name="TargetReticles" parent="." unique_id=481146593 instance=ExtResource("4_flrl7")]
 visible = false
 reticle_set = 3
 distance_cutoff = 500.0

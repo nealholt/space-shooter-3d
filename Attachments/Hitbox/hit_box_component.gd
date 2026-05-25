@@ -4,10 +4,13 @@ signal missile_locked # Emitted when an enemy acquires missile lock on this ship
 signal missile_fired_inbound # Emitted when a missile is fired at this ship
 signal is_targeted(tf:bool) # Emitted when this hitbox starts or stops being targeted
 
+# collidable will only be set if the hit box component
+# is associated with an Area3D. CharacterBody3Ds such as
+# ships, will call down to the hit box component directly
 var collidable:DamageableArea
-
+# The hit box communicates damage to an associated health component
 var health_component:HealthComponent
-
+# The hit box triggers various audio visual feeback when hit
 var got_hit_audio:AudioStreamPlayer
 var hit_feedback:HitFeedback
 
@@ -40,6 +43,9 @@ func _ready() -> void:
 		collidable.damaged.connect(damage)
 
 
+# This function is called by the CharacterBody3D (usually a ship)
+# or is called by a signal from the collidable Area3D when
+# damage is taken.
 func damage(dat:ShootData):
 	# A Ship shouldn't shoot down their own missiles
 	if dat.shooter and is_instance_valid(damage_exception) and dat.shooter == damage_exception:
@@ -66,6 +72,7 @@ func set_targeted(targeter:Node3D, value:bool) -> void:
 		is_targeted.emit(value)
 
 
+# Clean up function. Called when parent dies.
 func remove_audio() -> void:
 	if hit_feedback:
 		hit_feedback.queue_free.call_deferred()
@@ -73,6 +80,7 @@ func remove_audio() -> void:
 		got_hit_audio.queue_free.call_deferred()
 
 
+# This is used to deactivate hit sfx on NPC ships.
 func turn_off_audio() -> void:
 	if got_hit_audio:
 		got_hit_audio.queue_free()
@@ -97,6 +105,9 @@ func missile_inbound(_targeter:Node3D) -> void:
 	pass
 
 
+# This function is only called by shields to toggle
+# collidability when the shield is knocked out and
+# when the shield regenerates.
 func set_collisions(layer:int, b:bool) -> void:
 	if collidable and collidable is DamageableArea:
 		var a:Area3D = collidable

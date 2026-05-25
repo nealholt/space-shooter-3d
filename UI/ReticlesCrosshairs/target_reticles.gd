@@ -108,8 +108,6 @@ func _ready():
 	# Connect to hitbox signal:
 	if hitbox:
 		hitbox.is_targeted.connect(set_targeted)
-	else:
-		push_error('It looks like you forgot to connect this target reticle to a hitbox')
 
 
 func _process(_delta):
