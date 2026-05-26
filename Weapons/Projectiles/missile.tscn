@@ -25,8 +25,12 @@ material = SubResource("StandardMaterial3D_uudvm")
 [sub_resource type="SphereShape3D" id="SphereShape3D_vbe7u"]
 radius = 5.0
 
-[node name="Missile" unique_id=294693303 instance=ExtResource("1_g37v4")]
+[node name="Missile" unique_id=294693303 node_paths=PackedStringArray("controller", "health_component", "hit_box_component", "reticle") instance=ExtResource("1_g37v4")]
 speed = 0.0
+controller = NodePath("PhysicsSeekController")
+health_component = NodePath("HealthComponent")
+hit_box_component = NodePath("HitBoxComponent")
+reticle = NodePath("TargetReticles")
 time_out = 0.0
 deathExplosion = 8
 sparks = 0

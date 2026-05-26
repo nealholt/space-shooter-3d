@@ -11,12 +11,16 @@ class_name Projectile extends Node3D
 var velocity : Vector3
 
 # This is for guided projectiles
-var controller:Controller
+@export var controller:Controller
 # These next two are for projectiles that can be shot
 # down, such as missiles.
 # These are NOT for the projectile hitting its target.
-var health_component:HealthComponent
-var hit_box_component:HitBoxComponent
+@export var health_component:HealthComponent
+@export var hit_box_component:HitBoxComponent
+
+@export var proxy_fuse_area:Area3D
+
+@export var reticle:TargetReticles
 
 # Duration before the projectile expires
 @export var time_out:float = 2.0 #seconds
@@ -76,32 +80,26 @@ func _ready() -> void:
 	# is updated each frame
 	velocity = -global_transform.basis.z * speed
 	timer.start(time_out)
-	# Search through children for various components
-	# and save a reference to them.
-	for child in get_children():
-		if child is HitBoxComponent:
-			hit_box_component = child
-			if hit_box_component.collidable:
-				hit_box_component.collidable.area_entered.connect(_on_area_entered)
-				hit_box_component.collidable.body_entered.connect(_on_body_entered)
-		elif child is Area3D:
-			# Connect to area and body entered signals
-			child.area_entered.connect(_on_area_entered)
-			child.body_entered.connect(_on_body_entered)
-		elif child is Controller:
-			controller = child
-		elif child is HealthComponent:
-			health_component = child
-			# Connect signals with code
-			health_component.died.connect(_on_health_component_died)
+	# Connect to hitbox signals
+	if hit_box_component and hit_box_component.has_collidable():
+		var da:DamageableArea = hit_box_component.get_collidable()
+		da.area_entered.connect(_on_area_entered)
+		da.body_entered.connect(_on_body_entered)
+	# Connect to proximity fuse area
+	if proxy_fuse_area:
+		proxy_fuse_area.area_entered.connect(_on_area_entered)
+		proxy_fuse_area.body_entered.connect(_on_body_entered)
+	# Connect to health_component signals
+	if health_component:
+		health_component.died.connect(_on_health_component_died)
 	# Error check
 	if explode_on_timeout and !damaging_explosion:
-		push_error('If explode_on_timeout is true then a damaging_explosion should be set.')
+		push_error('If explode_on_timeout is true then a damaging_explosion should be set for '+self.name)
 	# Add an exception to prevent self collisions.
 	# Very few projectiles have both a hitbox and a raycast,
 	# but missiles do.
-	if hit_box_component and hit_box_component.collidable:
-		ray.add_exception(hit_box_component.collidable)
+	if hit_box_component and hit_box_component.has_collidable():
+		ray.add_exception(hit_box_component.get_collidable())
 
 
 # This is called by the gun that shoots the bullet.
@@ -147,14 +145,8 @@ func set_data(dat:ShootData) -> void:
 	# targeting the player, AND there is a reticle,
 	# then we want to create a special scene to change the
 	# reticle based on distance to target
-	if controller and hit_box_component and data.target.owner == Global.player:
-		var reticle:TargetReticles = self.get_tree().get_first_node_in_group('reticle')
-		for c in get_children():
-			if c is TargetReticles:
-				reticle = c
-				break
-		if reticle:
-			MissileOnPlayerReticle.new_missile_on_player(self, reticle)
+	if controller and hit_box_component and data.target.owner == Global.player and reticle:
+		MissileOnPlayerReticle.new_missile_on_player(self, reticle)
 
 
 # Randomize heading of this bullet based on ShootData
@@ -393,10 +385,13 @@ func wrap_up() -> void:
 	# Cut down the lifespan of Contrail
 	# Anything else visible should hide (Stuff like
 	# the model of a torpedo)
+	if hit_box_component:
+		hit_box_component.queue_free.call_deferred()
+	if reticle:
+		reticle.hide_all()
+		reticle.die.call_deferred()
 	for child in get_children():
-		if child is HitBoxComponent:
-			child.queue_free.call_deferred()
-		elif child is Contrail:
+		if child is Contrail:
 			child._lifeSpan = child._lifeSpan/10.0
 		elif child is SparkleTrailVisual:
 			child.wrap_up()

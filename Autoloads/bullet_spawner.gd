@@ -113,6 +113,7 @@ func _get_seeking_contrail(bt:BULLET_TYPE) -> Projectile:
 			push_error('Unrecognized bullet type ',bt)
 	# Attach physics seek controller
 	projectile.add_child(control)
+	projectile.controller = control
 	control.steer_force = 200.0
 	projectile.does_ricochet = false
 	# Attach contrail
@@ -153,6 +154,7 @@ func _get_proxy_fuse() -> Projectile:
 	a.collision_mask = Global.EVERYTHING_COLL_LAYER # I hit
 	a.scale = Vector3(3.0, 3.0, 3.0)
 	projectile.add_child(a)
+	projectile.proxy_fuse_area = a
 	projectile.does_ricochet = false
 	# Create mesh
 	var mesh := pellet_red.instantiate()
@@ -171,6 +173,7 @@ func _get_sparkle_trail() -> Projectile:
 	var control := fixed_rotation_seek.instantiate()
 	# Attach seek controller
 	projectile.add_child(control)
+	projectile.controller = control
 	control.rotation_speed_deg = 180 # Degrees of rotation per second
 	# I used to use physics_seek with steer force of 5000,
 	# but I didn't like the look of the behavior. Read the note

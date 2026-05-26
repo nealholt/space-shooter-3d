@@ -21,9 +21,9 @@ var damage_exception:Ship
 
 
 func _ready() -> void:
-	# Throw an error if not found
+	# Throw an error if health not found
 	if !health_component:
-		push_error('No HealthComponent found for HitBoxComponent. Parent is '+get_parent().name)
+		push_error('No HealthComponent found for HitBoxComponent. Did you forget to attach health to hitbox for the '+get_parent().name)
 	# Connect to collidable's damaged signal
 	if collidable:
 		collidable.damaged.connect(damage)
@@ -101,7 +101,7 @@ func set_collisions(layer:int, b:bool) -> void:
 		collidable.monitorable = b
 		collidable.set_collision_layer_value(layer, b)
 	else:
-		push_error('I don\'t know of any scenario in which this should happen. I think only the Shield messes with collision activation directly.')
+		push_error('I don\'t know of any scenario in which this should happen. I think only the Shield messes with collision activation directly. Did you forget to attach the DamageableArea to the export variable?')
 
 
 func get_velocity() -> Vector3:
@@ -113,8 +113,11 @@ func get_velocity() -> Vector3:
 
 
 func is_dead() -> bool:
-	if health_component:
-		return health_component.is_dead()
-	else:
-		push_error('Did you forget to attach a health component to this hitbox? Parent is '+get_parent().name)
-		return false
+	return health_component.is_dead()
+
+
+func has_collidable() -> bool:
+	return is_instance_valid(collidable)
+
+func get_collidable() -> DamageableArea:
+	return collidable
