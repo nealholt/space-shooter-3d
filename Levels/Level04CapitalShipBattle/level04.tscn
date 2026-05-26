@@ -66,8 +66,9 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -820
 [node name="Shield" parent="RedTeam/Destroyer4" unique_id=462814636 instance=ExtResource("7_3dyh5")]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
 
-[node name="ShieldGenerator" parent="RedTeam/Destroyer4" unique_id=1564933571 instance=ExtResource("8_hv5oy")]
+[node name="ShieldGenerator" parent="RedTeam/Destroyer4" unique_id=1564933571 node_paths=PackedStringArray("shield") instance=ExtResource("8_hv5oy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+shield = NodePath("../Shield")
 
 [node name="Destroyer5" parent="RedTeam" unique_id=406786840 instance=ExtResource("6_8xsvq")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -581.211, -191.003, 0)

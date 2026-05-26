@@ -55,9 +55,10 @@ death_animation_duration_max = 0.0
 [node name="Hangar" parent="." unique_id=1909997687 instance=ExtResource("7_db1yb")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 40, 150)
 
-[node name="HealthComponent" parent="." unique_id=2093890187 instance=ExtResource("2_r2d5f")]
+[node name="HealthComponent" parent="." unique_id=2093890187 node_paths=PackedStringArray("weakpoint_group") instance=ExtResource("2_r2d5f")]
 max_health = 1000.0
 weakpoint_damage = 50.0
+weakpoint_group = NodePath("../WeakpointGroup")
 
 [node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("health_component") instance=ExtResource("4_gxsaf")]
 health_component = NodePath("../HealthComponent")

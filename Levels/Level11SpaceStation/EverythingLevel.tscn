@@ -107,8 +107,9 @@ shield = NodePath("Shield")
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
 recharge_delay = 3
 
-[node name="ShieldGenerator" parent="RedTeam/Destroyer" unique_id=1564933571 instance=ExtResource("11_waoi0")]
+[node name="ShieldGenerator" parent="RedTeam/Destroyer" unique_id=1564933571 node_paths=PackedStringArray("shield") instance=ExtResource("11_waoi0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+shield = NodePath("../Shield")
 
 [node name="Frigate" parent="RedTeam" unique_id=560906150 instance=ExtResource("10_d6xr2")]
 transform = Transform3D(0.71774966, 0, -0.6963012, 0, 1, 0, 0.6963012, 0, 0.71774966, -280.751, 64.658, 165.201)

@@ -8,6 +8,7 @@ signal died
 
 @export var max_health := 10.0
 @export var weakpoint_damage:float = 1.0 ## health lost per weakpoint destroyed
+@export var weakpoint_group:Node3D
 
 # Only signal died once. If for some reason,
 # later on a component gets resurrected, then
@@ -36,9 +37,7 @@ var health: float:
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	health = max_health
-	# Check for weakpoints under the parent node
-	# https://docs.godotengine.org/en/3.2/classes/class_node.html#class-node-method-get-node-or-null
-	var weakpoint_group:Node3D = get_node_or_null('../WeakpointGroup')
+	# Check for weakpoints
 	if weakpoint_group:
 		# Connect to weakpoint destroyed signal
 		for wp in weakpoint_group.get_children():
