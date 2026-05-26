@@ -172,7 +172,9 @@ draw_pass_1 = ExtResource("4_cvrrl")
 
 [node name="HealthComponent" parent="." unique_id=1378699833 instance=ExtResource("7_cvrrl")]
 
-[node name="HitBoxComponent" parent="." unique_id=91352412 instance=ExtResource("8_dxfth")]
+[node name="HitBoxComponent" parent="." unique_id=91352412 node_paths=PackedStringArray("collidable", "health_component") instance=ExtResource("8_dxfth")]
+collidable = NodePath("DamageableArea")
+health_component = NodePath("../HealthComponent")
 
 [node name="DamageableArea" parent="HitBoxComponent" unique_id=2096581842 instance=ExtResource("9_6ga6k")]
 

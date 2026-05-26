@@ -43,7 +43,8 @@ death_animation_duration_max = 0.0
 [node name="HealthComponent" parent="." unique_id=1090263283 instance=ExtResource("2_2gkw6")]
 max_health = 400.0
 
-[node name="HitBoxComponent" parent="." unique_id=1463959918 instance=ExtResource("4_or537")]
+[node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("health_component") instance=ExtResource("4_or537")]
+health_component = NodePath("../HealthComponent")
 
 [node name="FrigateChassis" parent="." unique_id=275995599 instance=ExtResource("1_18ao0")]
 

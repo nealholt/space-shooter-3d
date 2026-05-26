@@ -54,7 +54,8 @@ shape = SubResource("ConvexPolygonShape3D_3jh5d")
 [node name="HealthComponent" parent="." unique_id=946910222 instance=ExtResource("3_2fe14")]
 max_health = 100.0
 
-[node name="HitBoxComponent" parent="." unique_id=1463959918 instance=ExtResource("5_sorjn")]
+[node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("health_component") instance=ExtResource("5_sorjn")]
+health_component = NodePath("../HealthComponent")
 
 [node name="TurretGroup" parent="." unique_id=122433543 instance=ExtResource("4_mjmit")]
 

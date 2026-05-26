@@ -45,7 +45,8 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, -1.35, 0.5, 3.3)
 
 [node name="HealthComponent" parent="." unique_id=167873350 instance=ExtResource("4_40no2")]
 
-[node name="HitBoxComponent" parent="." unique_id=1463959918 instance=ExtResource("8_te66f")]
+[node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("health_component") instance=ExtResource("8_te66f")]
+health_component = NodePath("../HealthComponent")
 
 [node name="MissileLockGroup" parent="." unique_id=786493030 instance=ExtResource("9_7wsae")]
 lock_style = 1

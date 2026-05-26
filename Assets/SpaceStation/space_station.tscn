@@ -590,7 +590,8 @@ finalExplosion = 10
 [node name="HealthComponent" parent="." unique_id=77346943 instance=ExtResource("2_eniao")]
 max_health = 100000.0
 
-[node name="HitBoxComponent" parent="." unique_id=1463959918 instance=ExtResource("4_0040n")]
+[node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("health_component") instance=ExtResource("4_0040n")]
+health_component = NodePath("../HealthComponent")
 
 [node name="TargetReticles" parent="." unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("5_lxr52")]
 target_text = "Space Station"

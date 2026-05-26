@@ -52,7 +52,8 @@ death_animation_duration_max = 0.0
 max_health = 1000.0
 weakpoint_damage = 50.0
 
-[node name="HitBoxComponent" parent="." unique_id=1463959918 instance=ExtResource("4_gxsaf")]
+[node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("health_component") instance=ExtResource("4_gxsaf")]
+health_component = NodePath("../HealthComponent")
 
 [node name="CarrierChassis" parent="." unique_id=1239768847 instance=ExtResource("1_67lmr")]
 

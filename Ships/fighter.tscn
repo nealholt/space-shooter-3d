@@ -71,7 +71,9 @@ outline_size = 4
 [node name="HealthComponent" parent="." unique_id=535388883 instance=ExtResource("5_1xytm")]
 max_health = 20
 
-[node name="HitBoxComponent" parent="." unique_id=1463959918 instance=ExtResource("9_s55gh")]
+[node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("health_component", "got_hit_audio") instance=ExtResource("9_s55gh")]
+health_component = NodePath("../HealthComponent")
+got_hit_audio = NodePath("GotHitAudio")
 
 [node name="GotHitAudio" type="AudioStreamPlayer" parent="HitBoxComponent" unique_id=245140248]
 stream = ExtResource("16_uh0vy")

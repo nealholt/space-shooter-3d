@@ -156,8 +156,10 @@ motion_mode = 1
 script = ExtResource("1_dp23i")
 stats = ExtResource("2_7erqg")
 
-[node name="HitBoxComponent" parent="." unique_id=868661198 instance=ExtResource("2_ffelx")]
+[node name="HitBoxComponent" parent="." unique_id=868661198 node_paths=PackedStringArray("collidable", "health_component") instance=ExtResource("2_ffelx")]
 transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, -30, 0)
+collidable = NodePath("DamageableArea")
+health_component = NodePath("../HealthComponent")
 
 [node name="DamageableArea" parent="HitBoxComponent" unique_id=2096581842 instance=ExtResource("4_a64g1")]
 

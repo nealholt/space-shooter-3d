@@ -19,7 +19,7 @@ class_name PlayerController5 extends CharacterBodyControlParent
 # Amount to lean into turns. This makes the camera rotate in the
 # direction of the turn.
 @export var lean_up_down:float = 0.2 ## Percent
-@export var lean_left_right:float = 0.5 ## Percent
+@export var lean_left_right:float = 0.2 ## Percent
 
 # Stats while no inputs are given
 var stats_standard:ControllerStats

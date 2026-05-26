@@ -26,7 +26,9 @@ explosion = 2
 [node name="FresnelAura" type="MeshInstance3D" parent="." unique_id=556348261]
 mesh = SubResource("SphereMesh_n464a")
 
-[node name="HitBoxComponent" parent="." unique_id=1491391398 groups=["shield"] instance=ExtResource("3_6jkow")]
+[node name="HitBoxComponent" parent="." unique_id=1491391398 node_paths=PackedStringArray("collidable", "health_component") groups=["shield"] instance=ExtResource("3_6jkow")]
+collidable = NodePath("DamageableArea")
+health_component = NodePath("../HealthComponent")
 
 [node name="DamageableArea" parent="HitBoxComponent" unique_id=2096581842 groups=["shield"] instance=ExtResource("4_ytqv3")]
 collision_layer = 8

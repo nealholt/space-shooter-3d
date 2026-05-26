@@ -20,7 +20,10 @@ script = ExtResource("1_v3ei0")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=255535639]
 mesh = SubResource("SphereMesh_dknmi")
 
-[node name="HitBoxComponent" parent="." unique_id=1512570400 instance=ExtResource("3_mpr5y")]
+[node name="HitBoxComponent" parent="." unique_id=1512570400 node_paths=PackedStringArray("collidable", "health_component", "hit_feedback") instance=ExtResource("3_mpr5y")]
+collidable = NodePath("DamageableArea")
+health_component = NodePath("../HealthComponent")
+hit_feedback = NodePath("HitFeedback")
 
 [node name="HitFeedback" parent="HitBoxComponent" unique_id=975945709 instance=ExtResource("4_goev0")]
 

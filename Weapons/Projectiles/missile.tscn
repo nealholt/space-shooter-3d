@@ -44,7 +44,9 @@ draw_pass_1 = SubResource("QuadMesh_5eo7h")
 [node name="PhysicsSeekController" parent="." index="3" unique_id=253226492 instance=ExtResource("5_m3n6r")]
 steer_force = 200.0
 
-[node name="HitBoxComponent" parent="." index="4" unique_id=1275164638 instance=ExtResource("6_g4iot")]
+[node name="HitBoxComponent" parent="." index="4" unique_id=1275164638 node_paths=PackedStringArray("collidable", "health_component") instance=ExtResource("6_g4iot")]
+collidable = NodePath("DamageableArea")
+health_component = NodePath("../HealthComponent")
 
 [node name="DamageableArea" parent="HitBoxComponent" index="0" unique_id=2096581842 instance=ExtResource("8_aqwbt")]
 

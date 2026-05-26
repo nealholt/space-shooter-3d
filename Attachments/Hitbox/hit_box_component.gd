@@ -7,12 +7,12 @@ signal is_targeted(tf:bool) # Emitted when this hitbox starts or stops being tar
 # collidable will only be set if the hit box component
 # is associated with an Area3D. CharacterBody3Ds such as
 # ships, will call down to the hit box component directly
-var collidable:DamageableArea
+@export var collidable:DamageableArea
 # The hit box communicates damage to an associated health component
-var health_component:HealthComponent
+@export var health_component:HealthComponent
 # The hit box triggers various audio visual feeback when hit
-var got_hit_audio:AudioStreamPlayer
-var hit_feedback:HitFeedback
+@export var got_hit_audio:AudioStreamPlayer
+@export var hit_feedback:HitFeedback
 
 # Anyone can damage this hitbox except for
 # this ship. Currently this is used to prevent
@@ -21,23 +21,9 @@ var damage_exception:Ship
 
 
 func _ready() -> void:
-	# Search through children for various components
-	# and save a reference to them.
-	for child in get_children():
-		if child is DamageableArea:
-			collidable = child
-		elif child is HitFeedback:
-			hit_feedback = child
-		elif child is AudioStreamPlayer:
-			got_hit_audio = child
-	# Search peers for a HealthComponent.
 	# Throw an error if not found
-	var p = get_parent()
-	for child in p.get_children():
-		if child is HealthComponent:
-			health_component = child
 	if !health_component:
-		push_error('No peer HealthComponent found for HitBoxComponent.')
+		push_error('No HealthComponent found for HitBoxComponent. Parent is '+get_parent().name)
 	# Connect to collidable's damaged signal
 	if collidable:
 		collidable.damaged.connect(damage)
@@ -50,11 +36,10 @@ func damage(dat:ShootData):
 	# A Ship shouldn't shoot down their own missiles
 	if dat.shooter and is_instance_valid(damage_exception) and dat.shooter == damage_exception:
 		return
-	if health_component:
-		#Global.friendly_fire_checker(dat.shooter, get_parent()) #TESTING
-		health_component.health -= dat.damage
-		if health_component.is_dead():
-			is_targeted.emit(false) # Can't be targeted if you're dead
+	#Global.friendly_fire_checker(dat.shooter, get_parent()) #TESTING
+	health_component.health -= dat.damage
+	if health_component.is_dead():
+		is_targeted.emit(false) # Can't be targeted if you're dead
 	if hit_feedback:
 		hit_feedback.hit()
 	if got_hit_audio:
@@ -108,14 +93,13 @@ func missile_inbound(_targeter:Node3D) -> void:
 # collidability when the shield is knocked out and
 # when the shield regenerates.
 func set_collisions(layer:int, b:bool) -> void:
-	if collidable and collidable is DamageableArea:
-		var a:Area3D = collidable
+	if collidable:
 		# monitorable = false doesn't seem to do
 		# anything. There are still collisions unless the
 		# collision layer is set to false. I'm not sure why,
 		# but for now I'll just turn off both.
-		a.monitorable = b
-		a.set_collision_layer_value(layer, b)
+		collidable.monitorable = b
+		collidable.set_collision_layer_value(layer, b)
 	else:
 		push_error('I don\'t know of any scenario in which this should happen. I think only the Shield messes with collision activation directly.')
 
@@ -129,4 +113,8 @@ func get_velocity() -> Vector3:
 
 
 func is_dead() -> bool:
-	return health_component.is_dead()
+	if health_component:
+		return health_component.is_dead()
+	else:
+		push_error('Did you forget to attach a health component to this hitbox? Parent is '+get_parent().name)
+		return false

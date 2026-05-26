@@ -35,8 +35,10 @@ collide_with_areas = true
 
 [node name="HealthComponent" parent="." unique_id=871332090 instance=ExtResource("8_qikae")]
 
-[node name="HitBoxComponent" parent="." unique_id=790939857 instance=ExtResource("9_b5qkf")]
+[node name="HitBoxComponent" parent="." unique_id=790939857 node_paths=PackedStringArray("collidable", "health_component") instance=ExtResource("9_b5qkf")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+collidable = NodePath("DamageableArea")
+health_component = NodePath("../HealthComponent")
 
 [node name="DamageableArea" parent="HitBoxComponent" unique_id=2096581842 instance=ExtResource("5_h2pi2")]
 

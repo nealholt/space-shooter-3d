@@ -52,16 +52,16 @@ radial_segments = 16
 [sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
 size = Vector3(6, 2.3, 10.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hjd52"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mamsf"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("34_80okc")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_cd2sc"]
+[sub_resource type="SphereMesh" id="SphereMesh_hjd52"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_hjd52")
+material = SubResource("ShaderMaterial_mamsf")
 
 [node name="Corvette" type="CharacterBody3D" unique_id=1134075911 groups=["damageable"]]
 motion_mode = 1
@@ -134,7 +134,8 @@ stream = ExtResource("8_klb2b")
 [node name="HealthComponent" parent="." unique_id=778683298 instance=ExtResource("7_vhcpa")]
 max_health = 20
 
-[node name="HitBoxComponent" parent="." unique_id=1463959918 instance=ExtResource("11_pe4ok")]
+[node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("health_component") instance=ExtResource("11_pe4ok")]
+health_component = NodePath("../HealthComponent")
 
 [node name="Sounds" type="Node3D" parent="." unique_id=1146936130]
 
@@ -155,7 +156,7 @@ fire_rate = 0.3
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_cd2sc")
+mesh = SubResource("SphereMesh_hjd52")
 
 [node name="WeaponHandler" parent="." unique_id=370825666 instance=ExtResource("9_1xly7")]
 
