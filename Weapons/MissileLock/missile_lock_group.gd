@@ -32,7 +32,7 @@ var faster_lock_angle:float = 5.0 # degrees
 var slower_lock_angle:float = 25.0 # degrees
 
 # Gun to fire when launch is triggered
-var missile_launcher:Gun
+@export var missile_launcher:Gun
 
 @export var missile_range:float = 600.0 ## Range within which missile lock can be acquired.
 # Calculated from missile_range
@@ -96,11 +96,6 @@ func _ready() -> void:
 	# Get a reference to parent ship. This is used for
 	# passing along collision exception information
 	parent_ship = get_parent()
-	# Search through children for gun to use
-	# as missile launcher.
-	for child in get_children():
-		if child is Gun:
-			missile_launcher = child
 	# Set up the style of missile lock
 	match lock_style:
 		LockStyle.STANDARD:

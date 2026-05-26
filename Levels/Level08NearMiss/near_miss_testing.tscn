@@ -33,6 +33,9 @@ environment = SubResource("Environment_jia05")
 shield = NodePath("Shield")
 is_player = true
 
+[node name="ShieldTransitAudio" parent="Fighter" index="11" unique_id=992133318 node_paths=PackedStringArray("shield_to_ignore")]
+shield_to_ignore = NodePath("../Shield")
+
 [node name="GunNode3D" type="Node3D" parent="Fighter" unique_id=2133777041]
 transform = Transform3D(-1, 4.37114e-08, -8.74228e-08, 4.3711395e-08, 1, 4.3711402e-08, 8.74228e-08, 4.37114e-08, -1, 8.85873, 7.351963e-06, -177.052)
 script = ExtResource("2_00mhe")
@@ -47,3 +50,5 @@ automatic = false
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 max_health = 5
 recharge_delay = 9999
+
+[editable path="Fighter"]

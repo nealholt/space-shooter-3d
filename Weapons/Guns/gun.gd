@@ -62,11 +62,11 @@ var reload_timer:Timer
 # Only guns that actually use a raycast3d should
 # have a ray, such as guns that fire laser guided
 # munitions.
-var ray : RayCast3D
+@export var ray : RayCast3D
 # Reticle, if any, to use for this gun. This should ONLY
 # be attached as a child of the gun on player-controlled
 # ships.
-var reticle:TextureRect
+@export var reticle:TextureRect
 
 # So guns can know what team they're on
 var ally_team:String
@@ -80,13 +80,6 @@ func _ready():
 		firing_rate_timer = $FiringRateTimer
 	if has_node("ReloadTimer"):
 		reload_timer = $ReloadTimer
-	# Search through children for various components
-	# and save a reference to them.
-	for child in get_children():
-		if child is RayCast3D:
-			ray = child
-		elif child is TextureRect:
-			reticle = child
 	# Calculate bullet range
 	range_sqd = (bullet_speed*bullet_timeout)*(bullet_speed*bullet_timeout)
 	# Detect when entering or exiting shields

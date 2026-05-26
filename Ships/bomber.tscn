@@ -53,9 +53,10 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, -1.35, 0.5, 3.3)
 [node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("health_component") instance=ExtResource("8_te66f")]
 health_component = NodePath("../HealthComponent")
 
-[node name="MissileLockGroup" parent="." unique_id=786493030 instance=ExtResource("9_7wsae")]
+[node name="MissileLockGroup" parent="." unique_id=786493030 node_paths=PackedStringArray("missile_launcher") instance=ExtResource("9_7wsae")]
 lock_style = 1
 lock_timeout = 0.2
+missile_launcher = NodePath("MissileLauncher")
 missile_range = 2000.0
 
 [node name="MissileLauncher" parent="MissileLockGroup" unique_id=908886794 instance=ExtResource("7_f8b5m")]

@@ -7,17 +7,11 @@ extends Area3D
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 
 @export var radius:float = 1.0 ## radius of the collision sphere
-var shield_to_ignore:Shield
+@export var shield_to_ignore:Shield
 
 
 func _ready() -> void:
 	collision_shape_3d.shape.radius = radius
-	# Search for and connect to a peer shield
-	var p = get_parent()
-	for child in p.get_children():
-		if child is Shield:
-			shield_to_ignore = child
-			break
 
 func _on_area_entered(area: Area3D) -> void:
 	# Don't enter your own shield

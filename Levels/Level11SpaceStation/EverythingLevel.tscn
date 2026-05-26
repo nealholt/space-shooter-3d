@@ -82,6 +82,9 @@ bullet_speed = 800.0
 fire_rate = 16.0
 reload_sound = 1
 
+[node name="ShieldTransitAudio" parent="BlueTeam/Fighter" index="11" unique_id=992133318 node_paths=PackedStringArray("shield_to_ignore")]
+shield_to_ignore = NodePath("../Shield")
+
 [node name="Shield" parent="BlueTeam/Fighter" unique_id=1992904425 instance=ExtResource("7_ka707")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
