@@ -42,13 +42,14 @@ script = ExtResource("2_widnh")
 script = ExtResource("2_widnh")
 team = "blue team"
 
-[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("4_0jw65")]
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller") instance=ExtResource("4_0jw65")]
+controller = NodePath("PlayerMovementV4")
 is_player = true
 
 [node name="AimAssist" parent="BlueTeam/Fighter" index="0" unique_id=936755743]
 angle_assist_limit = 5.0
 
-[node name="MissileLockGroup" parent="BlueTeam/Fighter" index="7" unique_id=756556192]
+[node name="MissileLockGroup" parent="BlueTeam/Fighter" index="8" unique_id=756556192]
 lock_timeout = 0.0
 missile_lock_max_angle = 20.0
 quick_launch_interval = 0.2

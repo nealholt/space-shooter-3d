@@ -33,16 +33,15 @@ reflected_light_source = 1
 tonemap_mode = 2
 glow_enabled = true
 glow_bloom = 0.35
-glow_blend_mode = 1
 adjustment_enabled = true
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=33376911]
 script = ExtResource("1_3kycw")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1034040450]
 environment = SubResource("Environment_x4e1d")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1477737435]
 transform = Transform3D(0.777146, 0.267952, -0.569426, 0, 0.904827, 0.42578, 0.62932, -0.330893, 0.703183, 0, 0, 0)
 light_color = Color(1, 0.643137, 1, 1)
 light_angular_distance = 2.0
@@ -52,55 +51,56 @@ shadow_blur = 0.4
 directional_shadow_mode = 0
 directional_shadow_max_distance = 1000.0
 
-[node name="BlueTeam" type="Node3D" parent="."]
+[node name="BlueTeam" type="Node3D" parent="." unique_id=1418463553]
 script = ExtResource("4_ero3n")
 team = "blue team"
 
-[node name="SpaceStation" parent="BlueTeam" instance=ExtResource("5_puqp7")]
+[node name="SpaceStation" parent="BlueTeam" unique_id=1941886597 instance=ExtResource("5_puqp7")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -133.42, 46.6032, 7)
 
-[node name="CameraSpectator" parent="BlueTeam" instance=ExtResource("5_3l0om")]
+[node name="CameraSpectator" parent="BlueTeam" unique_id=981488113 instance=ExtResource("5_3l0om")]
 transform = Transform3D(-0.14786121, 0, -0.9890081, 0, 1, 0, 0.9890081, 0, -0.14786121, -216.52014, 17.570091, 1194.982)
 
-[node name="RedTeam" type="Node3D" parent="."]
+[node name="RedTeam" type="Node3D" parent="." unique_id=1428287822]
 script = ExtResource("4_ero3n")
 
-[node name="Carrier" parent="RedTeam" instance=ExtResource("13_1u6j8")]
+[node name="Carrier" parent="RedTeam" unique_id=1242002367 instance=ExtResource("13_1u6j8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 729.95)
 
-[node name="Fighter" parent="RedTeam" instance=ExtResource("7_p5kkl")]
+[node name="Fighter" parent="RedTeam" unique_id=1906494811 node_paths=PackedStringArray("controller") instance=ExtResource("7_p5kkl")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -102.170906, 11.04957, 1680.9513)
+controller = NodePath("NPCController")
 
-[node name="NPCController" parent="RedTeam/Fighter" instance=ExtResource("8_cm862")]
+[node name="NPCController" parent="RedTeam/Fighter" unique_id=147750059 instance=ExtResource("8_cm862")]
 
-[node name="AsteroidGroup" type="Node3D" parent="."]
+[node name="AsteroidGroup" type="Node3D" parent="." unique_id=1906155760]
 
-[node name="AsteroidBrown" parent="AsteroidGroup" instance=ExtResource("14_sa88o")]
+[node name="AsteroidBrown" parent="AsteroidGroup" unique_id=317707520 instance=ExtResource("14_sa88o")]
 transform = Transform3D(132.963, 2.23517e-06, 69.4318, -36.5535, 127.529, 70.0007, -59.0306, -78.9699, 113.045, 789.945, 213.932, 195.713)
 
-[node name="AsteroidFoamAndBlue" parent="AsteroidGroup" instance=ExtResource("15_8nwrc")]
+[node name="AsteroidFoamAndBlue" parent="AsteroidGroup" unique_id=716920680 instance=ExtResource("15_8nwrc")]
 transform = Transform3D(85.2629, 118.52, 34.3983, -109.912, 91.9402, -44.3428, -56.1206, 0, 139.106, -316.427, 199.639, 598.091)
 
-[node name="AsteroidGray" parent="AsteroidGroup" instance=ExtResource("16_hba6q")]
+[node name="AsteroidGray" parent="AsteroidGroup" unique_id=50608190 instance=ExtResource("16_hba6q")]
 transform = Transform3D(136.881, 14.0901, 59.7075, 0, 145.99, -34.4514, -61.3475, 31.4383, 133.222, -460.431, -113.469, -783.136)
 
-[node name="AsteroidGrayGreen" parent="AsteroidGroup" instance=ExtResource("17_pckun")]
+[node name="AsteroidGrayGreen" parent="AsteroidGroup" unique_id=1425903165 instance=ExtResource("17_pckun")]
 transform = Transform3D(47.2773, 0, 16.2743, 0, 50, 0, -16.2743, 0, 47.2773, -107.879, -59.6615, 86.8361)
 
-[node name="AsteroidGrayGreen2" parent="AsteroidGroup" instance=ExtResource("17_pckun")]
+[node name="AsteroidGrayGreen2" parent="AsteroidGroup" unique_id=1974515196 instance=ExtResource("17_pckun")]
 transform = Transform3D(50, 0, 0, 0, 46.4155, 18.5903, 0, -18.5903, 46.4155, 80.4728, 0, -194.298)
 
-[node name="AsteroidGreenPurple" parent="AsteroidGroup" instance=ExtResource("18_y1i4y")]
+[node name="AsteroidGreenPurple" parent="AsteroidGroup" unique_id=1394115770 instance=ExtResource("18_y1i4y")]
 transform = Transform3D(-36.5677, -34.0999, -1.59842e-06, -2.18557e-06, 9.55343e-14, 50, -34.0999, 36.5677, -1.49055e-06, -161.23, 19.8419, -119.049)
 
-[node name="AsteroidGreenPurple2" parent="AsteroidGroup" instance=ExtResource("18_y1i4y")]
+[node name="AsteroidGreenPurple2" parent="AsteroidGroup" unique_id=2003770558 instance=ExtResource("18_y1i4y")]
 transform = Transform3D(-16.9369, -6.22187, -46.6308, 0, 49.5608, -6.61282, 47.044, -2.24001, -16.7881, 60.8297, -87.7114, 0)
 
-[node name="AsteroidPurple" parent="AsteroidGroup" instance=ExtResource("19_s6qqo")]
+[node name="AsteroidPurple" parent="AsteroidGroup" unique_id=229518016 instance=ExtResource("19_s6qqo")]
 transform = Transform3D(4.41094, 0, 54.8228, 0, 55, 0, -54.8228, 0, 4.41094, -37.5272, 155.403, 41.8384)
 
-[node name="AsteroidPurple2" parent="AsteroidGroup" instance=ExtResource("19_s6qqo")]
+[node name="AsteroidPurple2" parent="AsteroidGroup" unique_id=1606745587 instance=ExtResource("19_s6qqo")]
 transform = Transform3D(32.1127, 23.6395, -3.15418, 0, -5.29026, -39.6486, -23.849, 31.8306, -4.24711, -46.194, 181.993, 192.322)
 
-[node name="VictoryLayer" parent="." instance=ExtResource("20_sa5vr")]
+[node name="VictoryLayer" parent="." unique_id=493579745 instance=ExtResource("20_sa5vr")]
 visible = false

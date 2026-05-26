@@ -63,10 +63,17 @@ shader_parameter/EmissionStrength = 1.0
 resource_local_to_scene = true
 material = SubResource("ShaderMaterial_mamsf")
 
-[node name="Corvette" type="CharacterBody3D" unique_id=1134075911 groups=["damageable"]]
+[node name="Corvette" type="CharacterBody3D" unique_id=1134075911 node_paths=PackedStringArray("aim_assist", "burning_trail", "health_component", "missile_lock", "obstacle_detector", "shield", "weapon_handler") groups=["damageable"]]
 motion_mode = 1
 script = ExtResource("1_bfcrw")
 stats = ExtResource("2_pe4ok")
+aim_assist = NodePath("AimAssist")
+burning_trail = NodePath("BurningTrail")
+health_component = NodePath("HealthComponent")
+missile_lock = NodePath("MissileLockGroup")
+obstacle_detector = NodePath("ObstacleDetector")
+shield = NodePath("Shield")
+weapon_handler = NodePath("WeaponHandler")
 fps_cam_position = Vector3(0, 0.6, -2.9)
 side_cam_position = Vector3(2.3, -0.5, -3.5)
 deathExplosion = 9
@@ -134,8 +141,9 @@ stream = ExtResource("8_klb2b")
 [node name="HealthComponent" parent="." unique_id=778683298 instance=ExtResource("7_vhcpa")]
 max_health = 20
 
-[node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("health_component") instance=ExtResource("11_pe4ok")]
+[node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("health_component", "got_hit_audio") instance=ExtResource("11_pe4ok")]
 health_component = NodePath("../HealthComponent")
+got_hit_audio = NodePath("../GotHitAudio")
 
 [node name="Sounds" type="Node3D" parent="." unique_id=1146936130]
 

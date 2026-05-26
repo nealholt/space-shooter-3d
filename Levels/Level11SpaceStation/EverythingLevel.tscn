@@ -68,8 +68,10 @@ team = "blue team"
 [node name="SpaceStation" parent="BlueTeam" unique_id=2096872349 instance=ExtResource("3_eggcn")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -133.42, 46.6032, 7)
 
-[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("6_67ulr")]
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller", "shield") instance=ExtResource("6_67ulr")]
 transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 220, 0, 0)
+controller = NodePath("PlayerControllerV5")
+shield = NodePath("Shield")
 is_player = true
 
 [node name="AimAssist" parent="BlueTeam/Fighter" index="0" unique_id=936755743]
@@ -88,16 +90,18 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 [node name="RedTeam" type="Node3D" parent="." unique_id=381603895]
 script = ExtResource("5_0jpk3")
 
-[node name="Bomber" parent="RedTeam" unique_id=23169970 instance=ExtResource("7_m10fo")]
+[node name="Bomber" parent="RedTeam" unique_id=23169970 node_paths=PackedStringArray("controller") instance=ExtResource("7_m10fo")]
 transform = Transform3D(0.102862, 0, -0.994696, 0, 1, 0, 0.994696, 0, 0.102862, 0, 0, 77.4889)
+controller = NodePath("NPCFighterController")
 
 [node name="NPCFighterController" parent="RedTeam/Bomber" unique_id=1210361383 instance=ExtResource("8_isq32")]
 target_capital_ships = true
 too_far = 800.0
 too_close = 300.0
 
-[node name="Destroyer" parent="RedTeam" unique_id=649527583 instance=ExtResource("8_5shl4")]
+[node name="Destroyer" parent="RedTeam" unique_id=649527583 node_paths=PackedStringArray("shield") instance=ExtResource("8_5shl4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -110.593, 102.674, 620.615)
+shield = NodePath("Shield")
 
 [node name="Shield" parent="RedTeam/Destroyer" unique_id=595621168 instance=ExtResource("7_ka707")]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)

@@ -45,8 +45,9 @@ script = ExtResource("1_5h06f")
 script = ExtResource("1_5h06f")
 team = "blue team"
 
-[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("5_tk3ba")]
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller") instance=ExtResource("5_tk3ba")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -500)
+controller = NodePath("PlayerMovementV4")
 is_player = true
 
 [node name="AimAssist" parent="BlueTeam/Fighter" index="0" unique_id=936755743]

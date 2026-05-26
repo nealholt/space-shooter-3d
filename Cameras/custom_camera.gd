@@ -72,11 +72,18 @@ func set_as_targetcloseup() -> void:
 	deactivate_camera = Callable(self, 'standard_deactivation')
 
 func targetcloseup_activation() -> void:
-	if !Global.player or !is_instance_valid(Global.player.controller.target):
+	# Don't use this camera if there's no player
+	if !Global.player:
 		abandon_camera.emit()
 		return
+	# Don't use this camera if the player has no target
+	var controller:CharacterBodyControlParent = Global.player.get_controller()
+	if !is_instance_valid(controller.target):
+		abandon_camera.emit()
+		return
+	# Activate this camera and set the target
 	standard_activation()
-	target = Global.player.controller.target
+	target = controller.target
 	targetcloseup_update()
 
 # Moves camera to look at target close up

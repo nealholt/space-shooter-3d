@@ -5,9 +5,7 @@
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Features/TeamSetup/team_setup.gd" id="3_gw6v5"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="4_dbd15"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://UI/victory_layer.tscn" id="5_1focs"]
-[ext_resource type="PackedScene" uid="uid://dvl5nj413nxh2" path="res://Audio/EngineAudio/engine_audio_visuals.tscn" id="5_aq803"]
 [ext_resource type="PackedScene" uid="uid://dec2h3fkjfo0m" path="res://Features/RaceCheckpoint/race_checkpoint.tscn" id="6_kc8d4"]
-[ext_resource type="PackedScene" uid="uid://cungbhnq1r7av" path="res://Cameras/camera_group.tscn" id="7_aq803"]
 [ext_resource type="PackedScene" uid="uid://dqtdw47fdrqg" path="res://Controllers/player_controller_v_5.tscn" id="7_g048y"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_gnpxn"]
@@ -44,14 +42,11 @@ environment = SubResource("Environment_sc2p3")
 script = ExtResource("3_gw6v5")
 team = "blue team"
 
-[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("4_dbd15")]
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller") instance=ExtResource("4_dbd15")]
+controller = NodePath("PlayerControllerV5")
 is_player = true
 deathExplosion = 0
 finalExplosion = 0
-
-[node name="EngineAudioVisuals" parent="BlueTeam/Fighter" unique_id=1557527705 instance=ExtResource("5_aq803")]
-
-[node name="CameraGroup" parent="BlueTeam/Fighter" unique_id=1678925824 instance=ExtResource("7_aq803")]
 
 [node name="PlayerControllerV5" parent="BlueTeam/Fighter" unique_id=103839730 instance=ExtResource("7_g048y")]
 

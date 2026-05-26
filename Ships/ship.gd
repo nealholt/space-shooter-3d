@@ -7,15 +7,17 @@ signal destroyed # Emitted when this ship is destroyed
 
 @export var stats:ShipStats
 
-var aim_assist:AimAssist
-var burning_trail:BurningTrail # This is a visual effect
+@export var aim_assist:AimAssist
+@export var burning_trail:BurningTrail # This is a visual effect
 var camera_group:CameraGroup
-var controller:CharacterBodyControlParent
-var health_component:HealthComponent
-var missile_lock:MissileLockGroup
-var obstacle_detector:ObstacleDetector
-var shield:Shield
-var weapon_handler:WeaponHandler
+@export var controller:CharacterBodyControlParent
+@export var hangar:Hangar
+@export var health_component:HealthComponent
+@export var missile_lock:MissileLockGroup
+@export var obstacle_detector:ObstacleDetector
+@export var shield:Shield
+@export var turret_group:TurretGroup
+@export var weapon_handler:WeaponHandler
 
 # Previously I used a separate scene that inherited from
 # Ship for the player. I'd like to not do that. Setting
@@ -85,36 +87,19 @@ var collision_exceptions := Array()
 # little read, but acknowledges at the bottom
 # that it's best for simulation-type games.
 func _ready() -> void:
-	# Search through children for various components
-	# and save a reference to them.
-	for child in get_children():
-		if child is AimAssist:
-			aim_assist = child
-			aim_assist.set_assist_limit_deg(stats.aim_assist_angle)
-		elif child is BurningTrail:
-			burning_trail = child
-		elif child is CharacterBodyControlParent and !disable_for_testing:
-			controller = child
-		elif child is HealthComponent:
-			health_component = child
-			health_component.set_max_health(stats.max_health)
-			# Connect signals with code
-			health_component.health_lost.connect(_on_health_component_health_lost)
-			health_component.died.connect(_on_health_component_died)
-		elif child is MissileLockGroup:
-			missile_lock = child
-		elif child is ObstacleDetector:
-			obstacle_detector = child
-		elif child is Shield:
-			shield = child
-		elif child is WeaponHandler:
-			weapon_handler = child
-		# Remove turrets if we're just testing
-		elif child is TurretGroup and disable_for_testing:
-			child.disable_for_testing()
-		# Remove hangar if we're just testing
-		elif child is Hangar and disable_for_testing:
-			child.queue_free()
+	if aim_assist:
+		aim_assist.set_assist_limit_deg(stats.aim_assist_angle)
+	if disable_for_testing:
+		controller = null
+		if hangar:
+			hangar.queue_free.call_deferred()
+		if turret_group:
+			turret_group.disable_for_testing()
+	if health_component:
+		health_component.set_max_health(stats.max_health)
+		# Connect signals
+		health_component.health_lost.connect(_on_health_component_health_lost)
+		health_component.died.connect(_on_health_component_died)
 	# Attach the obstacle detector to the controller
 	# but only if this is an NPC ship
 	if controller and obstacle_detector and controller is NPCStateMachine:
@@ -282,6 +267,11 @@ func get_mouse_center_radius() -> float:
 func damage(dat:ShootData):
 	hit_box_component.damage(dat)
 
+
+func get_controller() -> CharacterBodyControlParent:
+	if !controller:
+		push_error('No controller found. Did you forget to attach a controller to '+self.name)
+	return controller
 
 func get_hitbox() -> HitBoxComponent:
 	return hit_box_component

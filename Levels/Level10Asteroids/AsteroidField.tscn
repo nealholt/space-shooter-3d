@@ -48,7 +48,8 @@ script = ExtResource("4_wdfow")
 script = ExtResource("4_wdfow")
 team = "blue team"
 
-[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("5_pnlws")]
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller") instance=ExtResource("5_pnlws")]
+controller = NodePath("PlayerMovementV4")
 is_player = true
 
 [node name="AimAssist" parent="BlueTeam/Fighter" index="0" unique_id=936755743]

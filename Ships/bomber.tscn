@@ -16,10 +16,15 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_rfws3"]
 size = Vector3(5.03894, 1.51178, 7.49753)
 
-[node name="Bomber" type="CharacterBody3D" unique_id=1295567426 groups=["damageable"]]
+[node name="Bomber" type="CharacterBody3D" unique_id=1295567426 node_paths=PackedStringArray("aim_assist", "burning_trail", "health_component", "missile_lock", "obstacle_detector") groups=["damageable"]]
 motion_mode = 1
 script = ExtResource("1_uw5oo")
 stats = ExtResource("2_te66f")
+aim_assist = NodePath("AimAssist")
+burning_trail = NodePath("BurningTrail")
+health_component = NodePath("HealthComponent")
+missile_lock = NodePath("MissileLockGroup")
+obstacle_detector = NodePath("ObstacleDetector")
 deathExplosion = 9
 finalExplosion = 8
 death_animation_duration_min = 1.0

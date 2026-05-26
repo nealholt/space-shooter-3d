@@ -54,8 +54,9 @@ bullet_type = 6
 script = ExtResource("2_hpnlp")
 team = "blue team"
 
-[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("6_of7ud")]
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller") instance=ExtResource("6_of7ud")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 315.07828)
+controller = NodePath("PlayerMovementV4")
 is_player = true
 
 [node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=2089624442 instance=ExtResource("7_2dgup")]

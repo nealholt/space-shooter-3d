@@ -242,11 +242,12 @@ disable_for_testing = true
 script = ExtResource("1_nau7t")
 team = "blue team"
 
-[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("4_s6g67")]
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller") instance=ExtResource("4_s6g67")]
 transform = Transform3D(0.19537577, 0.7544654, 0.6265862, -0.9803523, 0.1325488, 0.14608303, 0.027161345, -0.64281625, 0.7655387, 38.351, 65.318, 0)
+controller = NodePath("PlayerMovementV4")
 is_player = true
 
-[node name="MissileLockGroup" parent="BlueTeam/Fighter" index="7" unique_id=756556192]
+[node name="MissileLockGroup" parent="BlueTeam/Fighter" index="8" unique_id=756556192]
 quick_launch_interval = 0.01
 
 [node name="Gun" parent="BlueTeam/Fighter/WeaponHandler" parent_id_path=PackedInt32Array(1900985089, 1131696451) index="0" unique_id=2138703467]

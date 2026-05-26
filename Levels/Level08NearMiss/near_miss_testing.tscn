@@ -29,7 +29,8 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1254345369]
 environment = SubResource("Environment_jia05")
 
-[node name="Fighter" parent="." unique_id=1900985089 instance=ExtResource("2_yema8")]
+[node name="Fighter" parent="." unique_id=1900985089 node_paths=PackedStringArray("shield") instance=ExtResource("2_yema8")]
+shield = NodePath("Shield")
 is_player = true
 
 [node name="GunNode3D" type="Node3D" parent="Fighter" unique_id=2133777041]

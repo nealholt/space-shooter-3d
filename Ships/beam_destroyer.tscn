@@ -25,10 +25,14 @@ points = PackedVector3Array(-15, -3, -5, -15, 3, -5, 15, -3, -5, -15, -3, 5, -15
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dca3j"]
 points = PackedVector3Array(-15, -3, -5, -15, 3, -5, 15, -3, -5, -15, -3, 5, -15, 3, 5, 15, 3, -5, 15, -3, 5, 15, 3, 5)
 
-[node name="BeamDestroyer" type="CharacterBody3D" unique_id=45072852 groups=["capital_ship", "damageable"]]
+[node name="BeamDestroyer" type="CharacterBody3D" unique_id=45072852 node_paths=PackedStringArray("controller", "health_component", "turret_group", "weapon_handler") groups=["capital_ship", "damageable"]]
 motion_mode = 1
 script = ExtResource("1_h4lox")
 stats = ExtResource("2_rax4g")
+controller = NodePath("NPCController")
+health_component = NodePath("HealthComponent")
+turret_group = NodePath("TurretGroup")
+weapon_handler = NodePath("WeaponHandler")
 deathExplosion = 8
 finalExplosion = 9
 death_animation_duration_min = 0.0

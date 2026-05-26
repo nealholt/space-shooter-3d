@@ -16,6 +16,7 @@ func new_npc_fighter(team:String, pos:Vector3, direction:Vector3) -> Ship:
 	# Attach an NPC controller
 	var controller := NPC_CONTROLLER_SCENE.instantiate()
 	f.add_child(controller)
+	f.controller = controller
 	# Attach new fighter to a particular team node
 	Global.add_to_team_group(f, team)
 	# Position and orient the fighter

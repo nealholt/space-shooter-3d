@@ -40,13 +40,20 @@ points = PackedVector3Array(-50, -40, -50, -50, -40, 50, 0, 40, -50, 50, -40, -5
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0bygj"]
 points = PackedVector3Array(-50, -40, -50, -50, -40, 50, 0, 40, -50, 50, -40, -50, 50, -40, 50, 0, 40, 50)
 
-[node name="Carrier" type="CharacterBody3D" unique_id=1412780802 groups=["capital_ship", "damageable"]]
+[node name="Carrier" type="CharacterBody3D" unique_id=1412780802 node_paths=PackedStringArray("controller", "hangar", "health_component", "turret_group") groups=["capital_ship", "damageable"]]
 motion_mode = 1
 script = ExtResource("1_isj6t")
 stats = ExtResource("2_wnudi")
+controller = NodePath("NPCController")
+hangar = NodePath("Hangar")
+health_component = NodePath("HealthComponent")
+turret_group = NodePath("TurretGroup")
 finalExplosion = 10
 death_animation_duration_min = 0.0
 death_animation_duration_max = 0.0
+
+[node name="Hangar" parent="." unique_id=1909997687 instance=ExtResource("7_db1yb")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 40, 150)
 
 [node name="HealthComponent" parent="." unique_id=2093890187 instance=ExtResource("2_r2d5f")]
 max_health = 1000.0
@@ -130,9 +137,6 @@ transform = Transform3D(-0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 0, 0, 1
 script = ExtResource("5_cyiqs")
 min_elevation_deg = 5.0
 max_elevation_deg = 90.0
-
-[node name="Hangar" parent="." unique_id=1909997687 instance=ExtResource("7_db1yb")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 40, 150)
 
 [node name="WeakpointGroup" type="Node3D" parent="." unique_id=739711451]
 

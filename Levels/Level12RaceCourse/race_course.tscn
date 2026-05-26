@@ -42,8 +42,9 @@ environment = SubResource("Environment_sc2p3")
 script = ExtResource("2_56dt1")
 team = "blue team"
 
-[node name="Fighter" parent="BlueTeam" unique_id=1900985089 instance=ExtResource("4_va5od")]
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller") instance=ExtResource("4_va5od")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 17)
+controller = NodePath("PlayerMovementV4")
 is_player = true
 
 [node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=485550130 instance=ExtResource("5_gnpxn")]
