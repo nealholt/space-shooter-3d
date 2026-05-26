@@ -12,8 +12,8 @@ const TURRET_SCENE:PackedScene = preload("res://Attachments/Turret/turret.tscn")
 
 var aim_assist:AimAssist
 var guns: Array
-var health_component:HealthComponent
-var target_selector:TargetSelector
+@onready var health_component:HealthComponent = $HealthComponent
+@onready var target_selector:TargetSelector = $TargetSelector
 var turret_motion:TurretMotionComponent
 
 # Turret components necessary for rotation toward target
@@ -72,20 +72,9 @@ func _ready() -> void:
 	# Setup orientation data
 	orientation_data = TargetOrientationData.new()
 	
-	# Search through children for various components
-	# and save a reference to them.
-	for child in get_children():
-		if child is AimAssist:
-			aim_assist = child
-		elif child is Gun:
-			guns.append(child)
-		elif child is HealthComponent:
-			health_component = child
-			# Connect signals with code
-			health_component.health_lost.connect(_on_health_component_health_lost)
-			health_component.died.connect(_on_health_component_died)
-		elif child is TargetSelector:
-			target_selector = child
+	# Connect signals
+	health_component.health_lost.connect(_on_health_component_health_lost)
+	health_component.died.connect(_on_health_component_died)
 	
 	# Position all the guns at all the hardpoints
 	var gun_hardpoints = Global.get_group_nodes_on_branch("gun hardpoint", self)
@@ -106,8 +95,10 @@ func setup_turret_pre_tree(dat:TurretData) -> void:
 	# tree because of gun-related stuff taken care of in _ready
 	if dat.gun_type != GunSpawner.GUN_TYPE.NO_GUN:
 		# Attach two guns as children of this turret
-		GunSpawner.new_gun(dat.gun_type, dat.bullet_type, self)
-		GunSpawner.new_gun(dat.gun_type, dat.bullet_type, self)
+		var g:Gun = GunSpawner.new_gun(dat.gun_type, dat.bullet_type, self)
+		guns.append(g)
+		g = GunSpawner.new_gun(dat.gun_type, dat.bullet_type, self)
+		guns.append(g)
 
 
 func setup_turret_in_tree(dat:TurretData, p) -> void:
