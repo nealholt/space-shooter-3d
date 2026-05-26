@@ -80,10 +80,6 @@ var is_targeted:bool:
 	set(value):
 		#print(value)
 		is_targeted = value
-		# If targeted, play the animation
-		if value:
-			#print('is_targeted set')
-			just_targeted()
 		# Show or hide dynamic panel
 		dynamic_panel.visible = value
 
@@ -217,15 +213,6 @@ func die() -> void:
 	queue_free()
 
 
-func just_targeted() -> void:
-	if animation_player.is_playing():
-		#print('animation stopped')
-		animation_player.stop()
-	#print('ZoomOnDistantTarget')
-	#print(animation_player.is_playing())
-	animation_player.play('ZoomOnTarget')
-
-
 func setup_from_stats(stats:ShipStats) -> void:
 	set_target_text(stats.target_reticle_text)
 	set_reticle_textures(stats.reticle_set)
@@ -244,5 +231,14 @@ func set_reticle_scale(percent:float) -> void:
 	targeted_reticle.scale = scl
 
 
-func set_targeted(b:bool) -> void:
+func set_targeted(b:bool, targeter:Ship) -> void:
 	is_targeted = b
+	# If targeted is true and being targeted by the player,
+	# then play the animation
+	if b and Global.player == targeter:
+		if animation_player.is_playing():
+			#print('animation stopped')
+			animation_player.stop()
+		#print('ZoomOnDistantTarget')
+		#print(animation_player.is_playing())
+		animation_player.play('ZoomOnTarget')

@@ -2,7 +2,7 @@ class_name HitBoxComponent extends Node3D
 
 signal missile_locked # Emitted when an enemy acquires missile lock on this ship
 signal missile_fired_inbound # Emitted when a missile is fired at this ship
-signal is_targeted(tf:bool) # Emitted when this hitbox starts or stops being targeted
+signal is_targeted(tf:bool, targeter:Ship) # Emitted when this hitbox starts or stops being targeted
 
 # collidable will only be set if the hit box component
 # is associated with an Area3D. CharacterBody3Ds such as
@@ -39,7 +39,7 @@ func damage(dat:ShootData):
 	#Global.friendly_fire_checker(dat.shooter, get_parent()) #TESTING
 	health_component.health -= dat.damage
 	if health_component.is_dead():
-		is_targeted.emit(false) # Can't be targeted if you're dead
+		is_targeted.emit(false, dat.shooter) # Can't be targeted if you're dead
 	if hit_feedback:
 		hit_feedback.hit()
 	if got_hit_audio:
@@ -51,9 +51,8 @@ func add_damage_exception(s:Ship) -> void:
 
 
 # This is called when any ship targets this hitbox.
-func set_targeted(targeter:Node3D, value:bool) -> void:
-	if Global.player == targeter:
-		is_targeted.emit(value)
+func set_targeted(targeter:Ship, value:bool) -> void:
+	is_targeted.emit(value, targeter)
 
 
 # Clean up function. Called when parent dies.
