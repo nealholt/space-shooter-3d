@@ -25,11 +25,14 @@ material = SubResource("StandardMaterial3D_uudvm")
 [sub_resource type="SphereShape3D" id="SphereShape3D_vbe7u"]
 radius = 5.0
 
-[node name="Missile" unique_id=294693303 node_paths=PackedStringArray("controller", "health_component", "hit_box_component", "reticle") instance=ExtResource("1_g37v4")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_uqtem"]
+
+[node name="Missile" unique_id=294693303 node_paths=PackedStringArray("controller", "health_component", "hit_box_component", "proxy_fuse_area", "reticle") instance=ExtResource("1_g37v4")]
 speed = 0.0
 controller = NodePath("PhysicsSeekController")
 health_component = NodePath("HealthComponent")
 hit_box_component = NodePath("HitBoxComponent")
+proxy_fuse_area = NodePath("Area3D")
 reticle = NodePath("TargetReticles")
 time_out = 0.0
 deathExplosion = 8
@@ -46,7 +49,7 @@ amount = 128
 draw_pass_1 = SubResource("QuadMesh_5eo7h")
 
 [node name="PhysicsSeekController" parent="." index="3" unique_id=253226492 instance=ExtResource("5_m3n6r")]
-steer_force = 200.0
+steer_force = 300.0
 
 [node name="HitBoxComponent" parent="." index="4" unique_id=1275164638 node_paths=PackedStringArray("collidable", "health_component") instance=ExtResource("6_g4iot")]
 collidable = NodePath("DamageableArea")
@@ -64,3 +67,12 @@ max_health = 1
 target_text = "Missile"
 reticle_set = 4
 hitbox = NodePath("../HitBoxComponent")
+
+[node name="Area3D" type="Area3D" parent="." index="8" unique_id=2134267646]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+collision_layer = 0
+collision_mask = 31
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=772706228]
+shape = SubResource("SphereShape3D_uqtem")

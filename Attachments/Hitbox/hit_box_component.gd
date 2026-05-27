@@ -14,11 +14,6 @@ signal is_targeted(tf:bool, targeter:Ship) # Emitted when this hitbox starts or 
 @export var got_hit_audio:AudioStreamPlayer
 @export var hit_feedback:HitFeedback
 
-# Anyone can damage this hitbox except for
-# this ship. Currently this is used to prevent
-# npcs from shooting down their own missiles.
-var damage_exception:Ship
-
 
 func _ready() -> void:
 	# Throw an error if health not found
@@ -33,9 +28,6 @@ func _ready() -> void:
 # or is called by a signal from the collidable Area3D when
 # damage is taken.
 func damage(dat:ShootData):
-	# A Ship shouldn't shoot down their own missiles
-	if dat.shooter and is_instance_valid(damage_exception) and dat.shooter == damage_exception:
-		return
 	#Global.friendly_fire_checker(dat.shooter, get_parent()) #TESTING
 	health_component.health -= dat.damage
 	if health_component.is_dead():
@@ -47,7 +39,10 @@ func damage(dat:ShootData):
 
 
 func add_damage_exception(s:Ship) -> void:
-	damage_exception = s
+	if collidable:
+		collidable.damage_exception = s
+	else:
+		push_error('Trying to add a damage exception but there is no DamageableArea. HitBox parent is ', get_parent())
 
 
 # This is called when any ship targets this hitbox.

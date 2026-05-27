@@ -7,6 +7,11 @@ signal damaged(data:ShootData)
 var ally_team:String
 var enemy_team:String
 
+# Anyone can damage this except for the damage_exception
+# ship. Currently this is used to prevent ships from
+# shooting down their own missiles.
+var damage_exception:Ship
+
 
 func damage(data:ShootData):
 	damaged.emit(data)

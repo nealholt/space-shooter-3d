@@ -330,11 +330,16 @@ func should_skip_body(body) -> bool:
 	# and shields.
 	if data.collision_exceptions.has(body):
 		return true
-	# If the body has a damage_exception (as hit box component does)
-	# and that exception is the shooter, then skip it.
+	# If the body is our own proximity fuse area
+	if proxy_fuse_area and body == proxy_fuse_area:
+		return true
+	# If the body is our own damageable area
+	if hit_box_component and hit_box_component.has_collidable() and body == hit_box_component.get_collidable():
+		return true
+	# If the damage_exception is the shooter, then skip it.
 	# This is used to avoid shooting down one's own missiles
 	# and to avoid missiles blocking one's own shots.
-	if body is HitBoxComponent and is_instance_valid(body.damage_exception) and body.damage_exception == data.shooter:
+	if body is DamageableArea and is_instance_valid(body.damage_exception) and body.damage_exception == data.shooter:
 		return true
 	
 	return false

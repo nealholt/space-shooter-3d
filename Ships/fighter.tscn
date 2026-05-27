@@ -80,15 +80,15 @@ stream = ExtResource("16_uh0vy")
 [node name="MissileLockGroup" parent="." unique_id=756556192 node_paths=PackedStringArray("missile_launcher") instance=ExtResource("17_563f5")]
 lock_style = 2
 missile_launcher = NodePath("MissileLauncher")
-missile_range = 1000.0
+missile_range = 4000.0
 
 [node name="MissileLauncher" parent="MissileLockGroup" unique_id=684312626 instance=ExtResource("4_57m73")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 bullet_type = 0
-damage = 10.0
-bullet_speed = 150.0
-bullet_timeout = 5.0
-fire_rate = 0.033
+damage = 20.0
+bullet_speed = 250.0
+bullet_timeout = 9.0
+fire_rate = 0.2
 
 [node name="WeaponHandler" parent="." unique_id=1131696451 instance=ExtResource("4_dhpb0")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -96,11 +96,13 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 [node name="Gun" parent="WeaponHandler" unique_id=2138703467 node_paths=PackedStringArray("muzzle_flash", "reticle") instance=ExtResource("4_57m73")]
 transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -3.5)
 bullet_speed = 600.0
-fire_rate = 8.0
-spread_deg = 2.0
+bullet_timeout = 3.0
+fire_rate = 16.0
+spread_deg = 1.0
 fire_sound = 0
-reload_sound = 2
-magazine_size = 20
+reload_sound = 1
+magazine_size = 10
+reload_time = 3.0
 muzzle_flash = NodePath("MuzzleFlashGreenMonster")
 reticle = NodePath("TextureRect")
 
