@@ -102,17 +102,12 @@ func get_collision_severity(collision_angle_rads:float, speed:float) -> float:
 func select_target(_targeter:Ship) -> void:
 	printerr('For the near future, select_target in character_body_control_parent should be overriden by child class.')
 
+# Only the player should call this function
 func select_target_screen_center(targeter:Ship) -> void:
 	# Target most central enemy team member
-	target = Global.get_center_most_from_group(enemy_team, targeter)
-	# If target is valid and missile is off cooldown,
-	# tell target that missile lock is being sought on
-	# it and start the seeking audio and visual
-	if is_instance_valid(target):
-		# set_targeted is called on a hitbox component
-		# and merely modulates the reticle color (for now)
-		target.set_targeted(targeter, true)
+	set_target(targeter, Global.get_center_most_from_group(enemy_team, targeter))
 
+# Only the player should call this function
 func select_target_from_mouse(targeter:Ship) -> void:
 	# Target most central enemy team member
 	# based on where the mouse is looking.
@@ -120,14 +115,21 @@ func select_target_from_mouse(targeter:Ship) -> void:
 	var camera := Global.input_man.current_viewport.get_camera_3d()
 	var origin := camera.project_ray_origin(Global.input_man.mouse_pos)
 	var direction := camera.project_ray_normal(Global.input_man.mouse_pos)
-	target = Global.get_lowest_angleto_from_group(enemy_team, origin, direction)
-	# If target is valid and missile is off cooldown,
-	# tell target that missile lock is being sought on
-	# it and start the seeking audio and visual
+	set_target(targeter, Global.get_lowest_angleto_from_group(enemy_team, origin, direction))
+
+func get_target_or_null() -> HitBoxComponent:
 	if is_instance_valid(target):
-		# set_targeted is called on a hitbox component
-		# and merely modulates the reticle color (for now)
-		target.set_targeted(targeter, true)
+		return target
+	else:
+		return null
+
+func set_target(targeter:Ship, targ:HitBoxComponent) -> void:
+	# If current target is non-null, unset old target
+	if is_instance_valid(target):
+		target.set_targeted(false, targeter)
+	# Set new target
+	target = targ
+	target.set_targeted(true, targeter)
 
 
 func shoot(_shootDat:ShootData, _delta:float) -> void:

@@ -121,9 +121,9 @@ func move_and_turn(mover, delta:float) -> void:
 	super.move_and_turn(mover, delta)
 
 
-func select_target(targeter:Node3D) -> void:
+func select_target(targeter:Ship) -> void:
 	# Get target from the target selector
-	target = target_selector.get_target(targeter)
+	set_target(targeter, target_selector.get_target(targeter))
 
 
 # This function is identical in npc_capital_ship_controller

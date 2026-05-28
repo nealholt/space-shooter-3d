@@ -46,7 +46,7 @@ func add_damage_exception(s:Ship) -> void:
 
 
 # This is called when any ship targets this hitbox.
-func set_targeted(targeter:Ship, value:bool) -> void:
+func set_targeted(value:bool, targeter:Ship) -> void:
 	is_targeted.emit(value, targeter)
 
 

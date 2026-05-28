@@ -75,20 +75,14 @@ var always_show:bool = false
 
 @export var hitbox:HitBoxComponent
 
-
-var is_targeted:bool:
-	set(value):
-		#print(value)
-		is_targeted = value
-		# Show or hide dynamic panel
-		dynamic_panel.visible = value
+var is_targeted_by_player:bool = false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_reticle_textures(reticle_set)
 	distance_cutoff_sqd = distance_cutoff * distance_cutoff
-	is_targeted = false
+	is_targeted_by_player = false
 	hide_all()
 	#camera = get_viewport().get_camera_3d()
 	offscreen_reticle_offset = $OffscreenNode2D/OffscreenReticle.size/2.0
@@ -123,7 +117,7 @@ func _process(_delta):
 		# If targeted and targeting HUD on
 		# then show target reticle and label.
 		# Otherwise choose between near and far reticles.
-		if (is_targeted or always_show) and Global.targeting_hud_on:
+		if (is_targeted_by_player or always_show) and Global.targeting_hud_on:
 			# Get distance to target
 			var dist:float = global_position.distance_to(Global.player.global_position)
 			# Set reticle
@@ -138,7 +132,7 @@ func _process(_delta):
 		reticle_to_use.visible = true # Show the reticle
 		reticle_to_use.set_global_position(reticle_position)
 	# Reticle is off screen
-	elif is_targeted or always_show:
+	elif is_targeted_by_player or always_show:
 		display_offscreen_reticle()
 		dynamic_panel.visible = false
 	#else:
@@ -209,7 +203,7 @@ func set_color(c:Color) -> void:
 
 
 func die() -> void:
-	is_targeted = false
+	is_targeted_by_player = false
 	queue_free()
 
 
@@ -232,13 +226,19 @@ func set_reticle_scale(percent:float) -> void:
 
 
 func set_targeted(b:bool, targeter:Ship) -> void:
-	is_targeted = b
-	# If targeted is true and being targeted by the player,
-	# then play the animation
-	if b and Global.player == targeter:
-		if animation_player.is_playing():
-			#print('animation stopped')
-			animation_player.stop()
-		#print('ZoomOnDistantTarget')
-		#print(animation_player.is_playing())
-		animation_player.play('ZoomOnTarget')
+	is_targeted_by_player = b and Global.player == targeter
+	if is_targeted_by_player:
+		print('    set_targeted')
+	# If is targeted by the player,
+	# play the animation and show the tag
+	if !is_targeted_by_player:
+		dynamic_panel.visible = false
+		return
+	if animation_player.is_playing():
+		#print('animation stopped')
+		animation_player.stop()
+	#print('ZoomOnDistantTarget')
+	#print(animation_player.is_playing())
+	animation_player.play('ZoomOnTarget')
+	# Show or hide dynamic panel
+	dynamic_panel.visible = true

@@ -47,7 +47,7 @@ var time_since_lock:float = 0.0
 @export var quick_launch_interval = 0.1 # seconds
 
 # Reference to the target so we can track it
-var target:Node3D
+var target:HitBoxComponent
 # TextureRect used for the reticle when still
 # acquiring target
 @onready var acquiring:TextureRect = $AcquiringTargetReticle
@@ -196,38 +196,41 @@ func npc_seeking_update(targeter:Node3D, delta:float) -> void:
 # missile launcher is cooled down and ready.
 # If no target currently exists, the centermost
 # from targeter's perspective will be sought.
-func attempt_to_start_seeking(targeter:Node3D) -> void:
-	# Unset previous target if any.
-	# It would be better if we checked if the new target
-	# and old target are the same and didn't redo set_targeted
-	var old_target = null
-	if is_instance_valid(target):
-		target.set_targeted(targeter, false)
-		old_target = target
-		target = null
-	# If targeter already has a target, use it
-	if targeter.controller and targeter.controller.target and is_instance_valid(targeter.controller.target):
-		target = targeter.controller.target
-	else:
+func attempt_to_start_seeking(targeter:Ship) -> void:
+	# Get the ship's controller
+	var control:CharacterBodyControlParent = targeter.get_controller()
+	# Get the ship's target or null if there is none
+	var maybe_target:HitBoxComponent = control.get_target_or_null()
+	
+	# Summary:
+	# "target" is the instance variable for this missile lock group
+	# If target and maybe_target match and are not null
+		# do nothing
+	# else if target is not null
+		# unset target
+	# If maybe_target is not null
+		# set target to be maybe_target
+	# else (maybe_target is null)
+		# get a new target from center of the ship's view.
+	
+	# If target and maybe_target match and are not null
+	if target == maybe_target and maybe_target != null:
+		return
+	elif is_instance_valid(target):
+		target.lost_lock(targeter)
+	# If maybe_target is not null
+	if maybe_target:
+		target = maybe_target
+	else: #(maybe_target is null)
 		# Target most central enemy team member
 		target = Global.get_center_most_from_group(enemy_team,targeter)
+	
 	# If target is valid and missile is off cooldown,
 	# tell target that missile lock is being sought on
 	# it and start the seeking audio and visual
 	if is_instance_valid(target):
-		# If there was an old target and it's not
-		# the same as the new target, then tell
-		# old target that it's no longer locked on to
-		if old_target and old_target != target:
-			old_target.lost_lock(targeter)
-		
-		# set_targeted is called on a hitbox component
-		# and merely modulates the reticle color (for now)
-		# In the future, you might want to do
-		# this differently. Currently, this is also
-		# called in the player's controller, but is
-		# not otherwise called by NPCs.
-		target.set_targeted(targeter, true)
+		# Tell the hitbox that it is being targeted.
+		target.set_targeted(true, targeter)
 		
 		# Create missile reticle and put it on the screen
 		# only if another missile is ready to fire
