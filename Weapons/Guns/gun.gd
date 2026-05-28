@@ -133,6 +133,8 @@ func shoot(shootDat:ShootData) -> void:
 	shoot_actual()
 
 
+# Firing rate is shots per seconds, so the seconds per shot
+# is the inverse of that.
 func restart_timer() -> void:
 	if firing_rate_timer:
 		firing_rate_timer.start(1.0/fire_rate)

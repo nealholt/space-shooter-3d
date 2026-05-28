@@ -123,7 +123,12 @@ func set_as_NPC() -> void:
 # Ship that this scene is a child of ought to be the
 # targeter. This function will be called from
 # physics_process with delta as elapsed time.
-func update(targeter:Node3D, delta:float) -> void:
+func update(targeter:Ship, delta:float) -> void:
+	if npc_missile_lock:
+		npc_update(targeter, delta)
+	else:
+		player_update(targeter, delta)
+	# TODO LEFT OFF HERE
 	# NPCs attempt to start seeking at all times
 	if npc_missile_lock and !seeking:
 		attempt_to_start_seeking(targeter)
@@ -138,7 +143,6 @@ func update(targeter:Node3D, delta:float) -> void:
 	(targeter.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
 	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > deg_to_rad(missile_lock_max_angle)):
 		stop_seeking()
-		#print(target.name)
 		target.lost_lock(targeter)
 	# Otherwise target is valid and we're either seeking
 	# or locked.
@@ -162,6 +166,14 @@ func update(targeter:Node3D, delta:float) -> void:
 			if locked:
 				time_since_lock += delta
 				lock.set_global_position(target_onscreen - lock_offset)
+
+
+func npc_update(targeter:Ship, delta:float) -> void:
+	pass
+
+
+func player_update(targeter:Ship, delta:float) -> void:
+	pass
 
 
 func npc_seeking_update(targeter:Node3D, delta:float) -> void:
@@ -241,9 +253,9 @@ func attempt_to_start_seeking(targeter:Ship) -> void:
 		target.seeking_lock(targeter)
 
 
-# Fire missile if lock is acquired
-func attempt_to_fire_missile(targeter:Node3D) -> void:
-	if locked:
+# Fire missile if lock is acquired and target is valid
+func attempt_to_fire_missile(targeter:Ship) -> void:
+	if locked and is_instance_valid(target):
 		launch(targeter)
 		# Tell the target that it's got a missile inbound
 		target.missile_inbound(targeter)
@@ -252,9 +264,8 @@ func attempt_to_fire_missile(targeter:Node3D) -> void:
 
 func start_seeking() -> void:
 	seeking = true
+	lock_timer = lock_timeout # Reset
 	if npc_missile_lock:
-		# Reset lock_timer.
-		lock_timer = lock_timeout
 		return
 	# Otherwise run the code for a player,
 	# which includes audio and visuals.
@@ -283,7 +294,9 @@ func stop_seeking() -> void:
 
 
 # Fire the missiles!
-func launch(targeter:Node3D) -> void:
+func launch(targeter:Ship) -> void:
+	if !is_instance_valid(target):
+		return
 	# Determine if this is a quick launch
 	var is_quick_launch:bool = time_since_lock <= quick_launch_interval
 	# If the is not an npc missile lock then play audio
@@ -292,16 +305,13 @@ func launch(targeter:Node3D) -> void:
 			quick_launch_audio.play()
 		else:
 			launch_audio.play()
-	# Fire zee missile! (For now, don't let npcs use quick launch)
-	# I added the if statement here after getting an error when I
-	# launched a missile just as a target was getting queue_freed.
-	if !is_instance_valid(target):
-		return
+	# Fire zee missile!
 	var sd:=ShootData.new()
 	sd.shooter = targeter
 	sd.gun = missile_launcher
 	sd.target = target
 	sd.collision_exceptions = parent_ship.collision_exceptions
+	# Don't let NPCs use quick launch since it's supposed to be skill-based
 	sd.super_powered = is_quick_launch and !npc_missile_lock
 	sd.shoot()
 
