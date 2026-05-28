@@ -124,12 +124,15 @@ func get_target_or_null() -> HitBoxComponent:
 		return null
 
 func set_target(targeter:Ship, targ:HitBoxComponent) -> void:
-	# If current target is non-null, unset old target
+	# If current target is non-null, unset current target
 	if is_instance_valid(target):
 		target.set_targeted(false, targeter)
-	# Set new target
-	target = targ
-	target.set_targeted(true, targeter)
+		target = null
+	# If new target is valid
+	if is_instance_valid(targ):
+		# Set new target
+		target = targ
+		target.set_targeted(true, targeter)
 
 
 func shoot(_shootDat:ShootData, _delta:float) -> void:

@@ -132,6 +132,7 @@ func update(targeter:Node3D, delta:float) -> void:
 	if !is_instance_valid(target):
 		if seeking:
 			stop_seeking()
+		return
 	# Also stop seeking if target is out of range or offscreen
 	elif seeking and \
 	(targeter.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
@@ -215,6 +216,8 @@ func attempt_to_start_seeking(targeter:Ship) -> void:
 	
 	# If target and maybe_target match and are not null
 	if target == maybe_target and maybe_target != null:
+		# Keep seeking and return
+		seeking = true
 		return
 	elif is_instance_valid(target):
 		target.lost_lock(targeter)

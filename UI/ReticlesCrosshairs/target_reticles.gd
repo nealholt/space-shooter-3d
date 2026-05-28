@@ -104,6 +104,8 @@ func _process(_delta):
 	hide_all() # Reset all to hidden
 	# A significant chunk of the following is redundant with
 	# code in the Global.set_reticle function.
+	
+	# If the hud is off, hide the panel and return
 	if !Global.targeting_hud_on:
 		dynamic_panel.visible = false
 		return
@@ -112,10 +114,10 @@ func _process(_delta):
 		# Get position to put the reticle
 		var reticle_position:Vector2 = Global.current_camera.unproject_position(global_position)
 		var reticle_to_use:Node2D
-		# If targeted and targeting HUD on
+		# If targeted and the player is valid
 		# then show target reticle and label.
 		# Otherwise choose between near and far reticles.
-		if is_targeted_by_player or always_show:
+		if (is_targeted_by_player or always_show) and is_instance_valid(Global.player):
 			# Get distance to target
 			var dist:float = global_position.distance_to(Global.player.global_position)
 			# Set reticle

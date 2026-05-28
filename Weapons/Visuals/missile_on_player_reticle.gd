@@ -35,6 +35,8 @@ static func new_missile_on_player(proj:Projectile, ret:TargetReticles) -> void:
 
 
 func _process(_delta: float) -> void:
+	if !is_instance_valid(Global.player):
+		return
 	# Change reticle color and size based on distance of projectile to target
 	var dist:float = projectile.global_position.distance_squared_to(Global.player.global_position)
 	#print(round(dist))

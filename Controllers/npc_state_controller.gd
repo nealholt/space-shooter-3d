@@ -126,17 +126,16 @@ func select_target(targeter:Ship) -> void:
 	set_target(targeter, target_selector.get_target(targeter))
 
 
-# This function is identical in npc_capital_ship_controller
-# That's bad.
 func shoot(shootDat:ShootData, delta:float) -> void:
 	var shooter = shootDat.shooter
 	shootDat.gun = shooter.get_current_gun()
-	shootDat.target = target
-	# Decide whether or not to fire
-	if shootDat.can_shoot() and \
-	movement_profile.orientation_data.dist_sqd < shootDat.gun.range_sqd \
-	and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < shooting_angle:
-		shootDat.shoot()
+	if is_instance_valid(target):
+		shootDat.target = target
+		# Decide whether or not to fire
+		if shootDat.can_shoot() and \
+		movement_profile.orientation_data.dist_sqd < shootDat.gun.range_sqd \
+		and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < shooting_angle:
+			shootDat.shoot()
 	if shooter.missile_lock:
 		shooter.missile_lock.update(shooter, delta)
 
