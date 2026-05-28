@@ -109,15 +109,13 @@ func _process(_delta):
 		return
 	# Try to put reticle on screen
 	if Global.current_camera.is_position_in_frustum(global_position):
-		# Get distance to camera
-		cam_distance = global_position.distance_squared_to(Global.current_camera.global_position)
 		# Get position to put the reticle
 		var reticle_position:Vector2 = Global.current_camera.unproject_position(global_position)
 		var reticle_to_use:Node2D
 		# If targeted and targeting HUD on
 		# then show target reticle and label.
 		# Otherwise choose between near and far reticles.
-		if (is_targeted_by_player or always_show) and Global.targeting_hud_on:
+		if is_targeted_by_player or always_show:
 			# Get distance to target
 			var dist:float = global_position.distance_to(Global.player.global_position)
 			# Set reticle
@@ -125,7 +123,9 @@ func _process(_delta):
 			# Position dynamic panel
 			dynamic_panel.visible = true
 			dynamic_panel.set_start_position(reticle_position, str(int(dist))+' m')
-		elif cam_distance > distance_cutoff_sqd:
+		# If distance to camera is greater than the cutoff,
+		# swap to the distant reticle variant
+		elif distance_cutoff_sqd < global_position.distance_squared_to(Global.current_camera.global_position):
 			reticle_to_use = distant_reticle
 		else:
 			reticle_to_use = target_reticle
@@ -226,16 +226,18 @@ func set_reticle_scale(percent:float) -> void:
 
 
 func set_targeted(b:bool, targeter:Ship) -> void:
+	# Currently this function only handles the visuals of targeting
+	# that's why we return early if the player isn't the targeter
+	if Global.player != targeter:
+		return
 	is_targeted_by_player = b and Global.player == targeter
-	if is_targeted_by_player:
-		print('    set_targeted') # TODO TESTING
 	# If is targeted by the player,
 	# play the animation and show the tag
 	if !is_targeted_by_player:
 		dynamic_panel.visible = false
 		return
 	if animation_player.is_playing():
-		print('animation stopped') # TODO TESTING
+		#print('animation stopped')
 		animation_player.stop()
 	#print('ZoomOnDistantTarget')
 	#print(animation_player.is_playing())
