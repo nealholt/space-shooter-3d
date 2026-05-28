@@ -224,24 +224,18 @@ func attempt_to_start_seeking(targeter:Ship) -> void:
 	else: #(maybe_target is null)
 		# Target most central enemy team member
 		target = Global.get_center_most_from_group(enemy_team,targeter)
-	
-	# If target is valid and missile is off cooldown,
-	# tell target that missile lock is being sought on
-	# it and start the seeking audio and visual
-	if is_instance_valid(target):
-		# Tell the hitbox that it is being targeted.
-		target.set_targeted(true, targeter)
-		
-		# Create missile reticle and put it on the screen
-		# only if another missile is ready to fire
-		if missile_launcher.ready_to_fire():
-			start_seeking()
-			# NPC's do this differently
-			if !npc_missile_lock:
-				#print()
-				#for g in target.get_groups():
-					#print(g)
-				target.seeking_lock(targeter)
+		# If this fails for any reason (like when no enemies
+		# are available) then return early
+		if !is_instance_valid(target):
+			return
+	# Create missile reticle and put it on the screen
+	# only if another missile is ready to fire
+	if !missile_launcher.ready_to_fire():
+		return
+	start_seeking()
+	# NPC's do this differently
+	if !npc_missile_lock:
+		target.seeking_lock(targeter)
 
 
 # Fire missile if lock is acquired

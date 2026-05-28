@@ -228,14 +228,14 @@ func set_reticle_scale(percent:float) -> void:
 func set_targeted(b:bool, targeter:Ship) -> void:
 	is_targeted_by_player = b and Global.player == targeter
 	if is_targeted_by_player:
-		print('    set_targeted')
+		print('    set_targeted') # TODO TESTING
 	# If is targeted by the player,
 	# play the animation and show the tag
 	if !is_targeted_by_player:
 		dynamic_panel.visible = false
 		return
 	if animation_player.is_playing():
-		#print('animation stopped')
+		print('animation stopped') # TODO TESTING
 		animation_player.stop()
 	#print('ZoomOnDistantTarget')
 	#print(animation_player.is_playing())
