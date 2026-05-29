@@ -145,6 +145,6 @@ func took_damage() -> void:
 
 @abstract func select_target(_targeter:Ship) -> void
 
-@abstract func shoot(_shootDat:ShootData, _delta:float) -> void
+@abstract func shoot(shooter:Ship, _delta:float) -> void
 
 @abstract func enter_death_animation() -> void

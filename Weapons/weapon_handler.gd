@@ -58,22 +58,3 @@ func equip(active_weapon:Node3D) -> void:
 func change_weapon() -> void:
 	index = wrapi(index+1, 0, get_child_count())
 	equip(get_child(index))
-
-
-func shoot(shootDat:ShootData) -> void:
-	# Whether or not an instance is valid is
-	# different from null. queue_free makes an 
-	# instance invalid, but not null, hence
-	# the necessity of this check.
-	if !is_instance_valid(shootDat.target):
-		shootDat.target = null
-	shootDat.gun = current_weapon
-	shootDat.shoot()
-
-
-func is_automatic() -> bool:
-	return current_weapon.automatic
-
-
-func get_bullet_speed() -> float:
-	return current_weapon.bullet_speed

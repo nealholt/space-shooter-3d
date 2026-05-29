@@ -129,39 +129,40 @@ func move_and_turn(mover, delta:float) -> void:
 
 
 # Override parent class function
-func shoot(shootDat:ShootData, delta:float) -> void:
+func shoot(shooter:Ship, delta:float) -> void:
 	if is_dead:
 		return
-	
-	var shooter = shootDat.shooter
-	if is_instance_valid(target):
-		shootDat.target = target
-	shootDat.bullet_speed = shooter.weapon_handler.get_bullet_speed()
-	# Aim assist
-	shootDat.determine_aim_assist(1)
-	
-	# Trigger pulled. Try to shoot.
+	# GUNS:
+	# If shooter has a weapon handler...
 	if shooter.weapon_handler:
-		if shooter.weapon_handler.is_automatic():
-			if im.shoot_pressed:
-				shooter.weapon_handler.shoot(shootDat)
-		else: # Semiautomatic
-			if im.shoot_just_pressed:
-				shooter.weapon_handler.shoot(shootDat)
+		var gun:Gun = shooter.weapon_handler.current_weapon
+		# Construct the shoot data. Even though we might not
+		# shoot, the aim assist below needs this in order to
+		# know whether or not to play the audio cue.
+		var shootDat:ShootData = shooter.get_new_shootdata()
+		if is_instance_valid(target):
+			shootDat.target = target
+		shootDat.gun = gun
+		shootDat.bullet_speed = gun.bullet_speed
+		shootDat.determine_aim_assist(1)
+		# ...and an automatic weapon is selected and shoot is pressed
+		# or a semiauto weapon is selected and shoot was just pressed,
+		# then shoot.
+		if (gun.automatic and im.shoot_pressed) or (!gun.automatic and im.shoot_just_pressed):
+			gun.shoot(shootDat)
 	
-	# Missile lock
+	# MISSILES:
+	# If shooter has a missile lock component...
 	if shooter.missile_lock:
+		var mlg:MissileLockGroup = shooter.missile_lock
 		# Target most centered enemy and begin missile lock
 		if im.retarget_just_pressed:
-			shooter.missile_lock.attempt_to_start_seeking(shooter)
+			mlg.attempt_to_start_seeking(shooter)
 		# Fire missile if lock is acquired
-		if im.retarget_just_released:
-			shooter.missile_lock.attempt_to_fire_missile(shooter)
-		shooter.missile_lock.update(shooter, delta)
-		# Without this next code, autoseeking missile
-		# won't work.
-		if is_instance_valid(shooter.missile_lock.target):
-			target = shooter.missile_lock.target
+		elif im.retarget_just_released:
+			mlg.attempt_to_fire_missile(shooter)
+		# Update the missile lock group component
+		mlg.update(shooter, delta)
 
 
 # Override parent class function

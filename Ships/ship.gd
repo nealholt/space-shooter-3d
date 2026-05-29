@@ -167,14 +167,14 @@ func _physics_process(delta):
 	# Select target
 	controller.select_target(self)
 	# Handle shooting of guns and missiles
-	var sd:=ShootData.new()
-	sd.shooter = self
-	sd.collision_exceptions = collision_exceptions
-	controller.shoot(sd, delta)
+	controller.shoot(self, delta)
 	# Miscellaneous action (for now just switch weapon)
 	controller.misc_actions(self)
 
 
+# This is used by NPC controller to put this ship in position
+# to shoot at a target based on current gun's range and
+# projectile speed.
 func get_current_gun() -> Gun:
 	if weapon_handler:
 		return weapon_handler.current_weapon
@@ -275,3 +275,9 @@ func get_controller() -> CharacterBodyControlParent:
 
 func get_hitbox() -> HitBoxComponent:
 	return hit_box_component
+
+func get_new_shootdata() -> ShootData:
+	var sd:=ShootData.new()
+	sd.shooter = self
+	sd.collision_exceptions = collision_exceptions
+	return sd

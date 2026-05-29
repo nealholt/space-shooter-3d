@@ -204,7 +204,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			var lead_pos:Vector3 = Global.get_intercept(
 				Global.player.global_position,
-				Global.player.weapon_handler.get_bullet_speed(),
+				Global.player.weapon_handler.current_weapon.bullet_speed,
 				Global.player.controller.target)
 			Global.set_reticle(current_targ_indicator, lead_pos)
 			target_lead_visible = true

@@ -23,9 +23,6 @@ var collision_exceptions := Array()
 func can_shoot() -> bool:
 	return is_instance_valid(gun) and is_instance_valid(target)
 
-func shoot() -> void:
-	gun.shoot(self)
-
 func determine_aim_assist(simultaneous_shots:int) -> void:
 	# Only use aim assist if it's set up on the shooter
 	# and the target reference is valid

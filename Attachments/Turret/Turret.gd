@@ -154,7 +154,7 @@ func _physics_process(delta: float) -> void:
 			sd.gun = gun
 			sd.target = orientation_data.target
 			sd.collision_exceptions = exempt_colliders
-			sd.shoot()
+			gun.shoot(sd)
 
 
 func _on_health_component_health_lost() -> void:

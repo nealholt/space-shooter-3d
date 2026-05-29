@@ -124,6 +124,7 @@ func set_as_NPC() -> void:
 # targeter. This function will be called from
 # physics_process with delta as elapsed time.
 func update(targeter:Ship, delta:float) -> void:
+	# Choose between npc and player update
 	if npc_missile_lock:
 		npc_update(targeter, delta)
 	else:
@@ -318,7 +319,7 @@ func launch(targeter:Ship) -> void:
 	sd.collision_exceptions = parent_ship.collision_exceptions
 	# Don't let NPCs use quick launch since it's supposed to be skill-based
 	sd.super_powered = is_quick_launch and !npc_missile_lock
-	sd.shoot()
+	missile_launcher.shoot(sd)
 
 
 func acquire_lock(targeter:Node3D) -> void:

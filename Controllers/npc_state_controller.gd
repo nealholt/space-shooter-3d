@@ -126,18 +126,26 @@ func select_target(targeter:Ship) -> void:
 	set_target(targeter, target_selector.get_target(targeter))
 
 
-func shoot(shootDat:ShootData, delta:float) -> void:
-	var shooter = shootDat.shooter
-	shootDat.gun = shooter.get_current_gun()
-	if is_instance_valid(target):
-		shootDat.target = target
-		# Decide whether or not to fire
-		if shootDat.can_shoot() and \
-		movement_profile.orientation_data.dist_sqd < shootDat.gun.range_sqd \
-		and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < shooting_angle:
-			shootDat.shoot()
+func shoot(shooter:Ship, delta:float) -> void:
+	# MISSILES:
+	# If shooter has a missile lock component, update it
 	if shooter.missile_lock:
 		shooter.missile_lock.update(shooter, delta)
+	
+	# GUNS:
+	# If shooter has a target and a weapon handler, then proceed
+	# to a decision whether or not to shoot
+	if !is_instance_valid(target):
+		return
+	if shooter.weapon_handler:
+		var gun:Gun = shooter.weapon_handler.current_weapon
+		var shootDat:ShootData = shooter.get_new_shootdata()
+		shootDat.gun = gun
+		shootDat.target = target
+		# Decide whether or not to fire
+		if movement_profile.orientation_data.dist_sqd < shootDat.gun.range_sqd \
+		and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < shooting_angle:
+			gun.shoot(shootDat)
 
 
 func on_child_transition(state, new_state_name):

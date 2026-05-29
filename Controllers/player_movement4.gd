@@ -126,31 +126,29 @@ func move_and_turn(mover, delta:float) -> void:
 
 
 # Override parent class function
-func shoot(shootDat:ShootData, delta:float) -> void:
+func shoot(shooter:Ship, delta:float) -> void:
 	if is_dead:
 		return
-	
-	var shooter = shootDat.shooter
-	if is_instance_valid(target):
-		shootDat.target = target
-	shootDat.bullet_speed = shooter.weapon_handler.get_bullet_speed()
-	# Aim assist
-	shootDat.determine_aim_assist(1)
-	
+	# GUNS:
 	# If shooter has a weapon handler...
 	if shooter.weapon_handler:
-		var wh:WeaponHandler = shooter.weapon_handler
-		# ...and an automatic weapon is selected...
-		if wh.is_automatic():
-			# ...and the shoot button is pressed, then shoot.
-			if im.shoot_pressed:
-				wh.shoot(shootDat)
-		# ...a semiauto weapon is selected...
-		else: # Semiautomatic
-			# ...and shoot was just pressed, then shoot.
-			if im.shoot_just_pressed:
-				wh.shoot(shootDat)
+		var gun:Gun = shooter.weapon_handler.current_weapon
+		# Construct the shoot data. Even though we might not
+		# shoot, the aim assist below needs this in order to
+		# know whether or not to play the audio cue.
+		var shootDat:ShootData = shooter.get_new_shootdata()
+		if is_instance_valid(target):
+			shootDat.target = target
+		shootDat.gun = gun
+		shootDat.bullet_speed = gun.bullet_speed
+		shootDat.determine_aim_assist(1)
+		# ...and an automatic weapon is selected and shoot is pressed
+		# or a semiauto weapon is selected and shoot was just pressed,
+		# then shoot.
+		if (gun.automatic and im.shoot_pressed) or (!gun.automatic and im.shoot_just_pressed):
+			gun.shoot(shootDat)
 	
+	# MISSILES:
 	# If shooter has a missile lock component...
 	if shooter.missile_lock:
 		var mlg:MissileLockGroup = shooter.missile_lock
