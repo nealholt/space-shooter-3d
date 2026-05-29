@@ -1,3 +1,4 @@
+@abstract
 class_name CharacterBodyControlParent extends Node
 
 # Parent class for movement controllers for fighters,
@@ -98,10 +99,6 @@ func get_collision_severity(collision_angle_rads:float, speed:float) -> float:
 	# a speed of 100 is a lot.
 	return clamp(angle * (speed/100.0), 0.0, 1.0)
 
-
-func select_target(_targeter:Ship) -> void:
-	printerr('For the near future, select_target in character_body_control_parent should be overriden by child class.')
-
 # Only the player should call this function
 func select_target_screen_center(targeter:Ship) -> void:
 	# Target most central enemy team member
@@ -134,11 +131,6 @@ func set_target(targeter:Ship, targ:HitBoxComponent) -> void:
 		target = targ
 		target.set_targeted(true, targeter)
 
-
-func shoot(_shootDat:ShootData, _delta:float) -> void:
-	printerr('For the near future, shoot in character_body_control_parent should be overriden by child class.')
-
-
 func misc_actions(_actor:Ship) -> void:
 	pass
 
@@ -151,5 +143,8 @@ func took_damage() -> void:
 	#printerr('For the near future, took_damage in character_body_control_parent should be overriden by child class.')
 	pass # Player controller doesn't currently use this function
 
-func enter_death_animation() -> void:
-	printerr('For the near future, enter_death_animation in character_body_control_parent should be overriden by child class.')
+@abstract func select_target(_targeter:Ship) -> void
+
+@abstract func shoot(_shootDat:ShootData, _delta:float) -> void
+
+@abstract func enter_death_animation() -> void
