@@ -254,7 +254,8 @@ func attempt_to_start_seeking(targeter:Ship) -> void:
 	if !missile_launcher.ready_to_fire():
 		return
 	start_seeking()
-	# NPC's do this differently
+	# NPC's call target.seeking_lock(targeter) in 
+	# npc_seeking_update, so don't need to do it here.
 	if !npc_missile_lock:
 		target.seeking_lock(targeter)
 
@@ -291,10 +292,10 @@ func stop_seeking() -> void:
 	locked = false
 	npc_seeking_began = false # Reset
 	time_since_lock = 0.0
+	missile_lock.stop_seeking()
 	if !npc_missile_lock:
 		acquiring.hide()
 		lock.hide()
-		missile_lock.stop_seeking()
 		seeking_audio.stop()
 		locked_audio.stop()
 
