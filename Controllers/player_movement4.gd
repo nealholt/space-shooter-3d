@@ -139,26 +139,29 @@ func shoot(shootDat:ShootData, delta:float) -> void:
 	
 	# If shooter has a weapon handler...
 	if shooter.weapon_handler:
-		if shooter.weapon_handler.is_automatic():
+		var wh:WeaponHandler = shooter.weapon_handler
+		# ...and an automatic weapon is selected...
+		if wh.is_automatic():
+			# ...and the shoot button is pressed, then shoot.
 			if im.shoot_pressed:
-				shooter.weapon_handler.shoot(shootDat)
+				wh.shoot(shootDat)
+		# ...a semiauto weapon is selected...
 		else: # Semiautomatic
+			# ...and shoot was just pressed, then shoot.
 			if im.shoot_just_pressed:
-				shooter.weapon_handler.shoot(shootDat)
+				wh.shoot(shootDat)
 	
 	# If shooter has a missile lock component...
 	if shooter.missile_lock:
+		var mlg:MissileLockGroup = shooter.missile_lock
 		# Target most centered enemy and begin missile lock
 		if im.retarget_just_pressed:
-			shooter.missile_lock.attempt_to_start_seeking(shooter)
+			mlg.attempt_to_start_seeking(shooter)
 		# Fire missile if lock is acquired
-		if im.retarget_just_released:
-			shooter.missile_lock.attempt_to_fire_missile(shooter)
-		shooter.missile_lock.update(shooter, delta)
-		# Without this next code, autoseeking missile
-		# won't work.
-		if is_instance_valid(shooter.missile_lock.target):
-			target = shooter.missile_lock.target
+		elif im.retarget_just_released:
+			mlg.attempt_to_fire_missile(shooter)
+		# Update the missile lock group component
+		mlg.update(shooter, delta)
 
 
 # Override parent class function

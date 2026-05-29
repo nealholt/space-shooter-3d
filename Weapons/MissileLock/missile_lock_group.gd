@@ -206,10 +206,7 @@ func npc_seeking_update(targeter:Node3D, delta:float) -> void:
 			lock_timer -= 2.0*delta
 	# Check for lock on
 	if lock_timer < 0.0:
-		locked = true
-		seeking = false
-		npc_seeking_began = false # Reset
-		target.lock_acquired(targeter)
+		acquire_lock(targeter)
 
 
 # Try to begin seeking target as long as
@@ -236,8 +233,8 @@ func attempt_to_start_seeking(targeter:Ship) -> void:
 	
 	# If target and maybe_target match and are not null
 	if target == maybe_target and maybe_target != null:
-		# Keep seeking and return
-		seeking = true
+		# Start seeking and return
+		start_seeking()
 		return
 	elif is_instance_valid(target):
 		target.lost_lock(targeter)
@@ -325,12 +322,14 @@ func launch(targeter:Ship) -> void:
 
 
 func acquire_lock(targeter:Node3D) -> void:
-	acquiring.hide()
-	lock.show()
 	locked = true
-	locked_audio.play()
 	seeking = false
 	target.lock_acquired(targeter)
+	npc_seeking_began = false # Reset
+	if !npc_missile_lock:
+		acquiring.hide()
+		lock.show()
+		locked_audio.play()
 
 
 # Replay the seeking audio
