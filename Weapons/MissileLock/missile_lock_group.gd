@@ -120,7 +120,7 @@ func set_as_NPC() -> void:
 			c.queue_free()
 
 
-# Ship that this scene is a child of ought to be the
+# The Ship that this scene is a child of ought to be the
 # targeter. This function will be called from
 # physics_process with delta as elapsed time.
 func update(targeter:Ship, delta:float) -> void:
@@ -128,12 +128,34 @@ func update(targeter:Ship, delta:float) -> void:
 		npc_update(targeter, delta)
 	else:
 		player_update(targeter, delta)
-	# TODO LEFT OFF HERE
+
+
+func npc_update(targeter:Ship, delta:float) -> void:
 	# NPCs attempt to start seeking at all times
-	if npc_missile_lock and !seeking:
+	if !seeking:
 		attempt_to_start_seeking(targeter)
-	# If the target is invalid, stop seeking (if we were)
+	# If the target is invalid, stop seeking
 	# and do nothing further in this function
+	if !is_instance_valid(target):
+		stop_seeking()
+		return
+	# Also stop seeking if target is out of range or offscreen
+	elif (targeter.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
+	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > deg_to_rad(missile_lock_max_angle)):
+		stop_seeking()
+		target.lost_lock(targeter)
+	# Otherwise target is valid and we're either seeking
+	# or locked.
+	else:
+		if seeking:
+			npc_seeking_update(targeter, delta)
+		if locked:
+			attempt_to_fire_missile(targeter)
+
+
+func player_update(targeter:Ship, delta:float) -> void:
+	# If the target is invalid, stop seeking (if we were
+	# seeking) and do nothing further
 	if !is_instance_valid(target):
 		if seeking:
 			stop_seeking()
@@ -147,33 +169,19 @@ func update(targeter:Ship, delta:float) -> void:
 	# Otherwise target is valid and we're either seeking
 	# or locked.
 	else:
-		if npc_missile_lock:
-			if seeking:
-				npc_seeking_update(targeter, delta)
-			if locked:
-				attempt_to_fire_missile(targeter)
-		else: # Player missile lock behavior follows
-			# Get onscreen position of target
-			var target_onscreen:Vector2 = Global.current_camera.unproject_position(target.global_position)
-			if seeking:
-				# Move reticle into position and, if it's
-				# close enough, acquire lock
-				missile_lock.continue_seeking(delta, target_onscreen, targeter, acquiring)
-			# It seems like this should be an elif,
-			# but there's a messy little one frame
-			# flicker between the reticles if you
-			# make it an elif, so don't!
-			if locked:
-				time_since_lock += delta
-				lock.set_global_position(target_onscreen - lock_offset)
-
-
-func npc_update(targeter:Ship, delta:float) -> void:
-	pass
-
-
-func player_update(targeter:Ship, delta:float) -> void:
-	pass
+		# Get onscreen position of target
+		var target_onscreen:Vector2 = Global.current_camera.unproject_position(target.global_position)
+		if seeking:
+			# Move reticle into position and, if it's
+			# close enough, acquire lock
+			missile_lock.continue_seeking(delta, target_onscreen, targeter, acquiring)
+		# It seems like this should be an elif,
+		# but there's a messy little one frame
+		# flicker between the reticles if you
+		# make it an elif, so don't!
+		if locked:
+			time_since_lock += delta
+			lock.set_global_position(target_onscreen - lock_offset)
 
 
 func npc_seeking_update(targeter:Node3D, delta:float) -> void:

@@ -137,7 +137,7 @@ func shoot(shootDat:ShootData, delta:float) -> void:
 	# Aim assist
 	shootDat.determine_aim_assist(1)
 	
-	# Trigger pulled. Try to shoot.
+	# If shooter has a weapon handler...
 	if shooter.weapon_handler:
 		if shooter.weapon_handler.is_automatic():
 			if im.shoot_pressed:
@@ -146,7 +146,7 @@ func shoot(shootDat:ShootData, delta:float) -> void:
 			if im.shoot_just_pressed:
 				shooter.weapon_handler.shoot(shootDat)
 	
-	# Missile lock
+	# If shooter has a missile lock component...
 	if shooter.missile_lock:
 		# Target most centered enemy and begin missile lock
 		if im.retarget_just_pressed:
