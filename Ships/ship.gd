@@ -104,6 +104,12 @@ func _ready() -> void:
 	# but only if this is an NPC ship
 	if controller and obstacle_detector and controller is NPCStateMachine:
 		controller.set_obstacle_detector(obstacle_detector)
+	# Loop through gun resources and add new guns to the
+	# weapon handler then reset the weapon handler
+	if weapon_handler:
+		for gun_res in stats.guns:
+			GunSpawner.new_gun_from_resource(gun_res, weapon_handler)
+		weapon_handler.reset_weapon_handler()
 	# Set this ship up differently if it's the player
 	if is_player:
 		Global.register_player(self)

@@ -9,6 +9,11 @@ var index = -1
 var current_weapon: Gun
 
 func _ready() -> void:
+	reset_weapon_handler()
+
+
+func reset_weapon_handler() -> void:
+	index = -1
 	# Initially deactivate all weapons
 	deactivate_all()
 	# Set index and equip first weapon

@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="6_67ulr"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Attachments/Shield/shield.tscn" id="7_ka707"]
 [ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Ships/bomber.tscn" id="7_m10fo"]
+[ext_resource type="Resource" uid="uid://ukpbvp5m6q0l" path="res://Ships/Resources/ship_stats_player.tres" id="7_tcc1m"]
 [ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Ships/destroyer.tscn" id="8_5shl4"]
 [ext_resource type="PackedScene" uid="uid://dqtdw47fdrqg" path="res://Controllers/player_controller_v_5.tscn" id="8_67ulr"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="8_isq32"]
@@ -70,6 +71,7 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -133.42, 46.6032, 7)
 
 [node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller", "shield") instance=ExtResource("6_67ulr")]
 transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 220, 0, 0)
+stats = ExtResource("7_tcc1m")
 controller = NodePath("PlayerControllerV5")
 shield = NodePath("Shield")
 is_player = true
@@ -79,8 +81,6 @@ angle_assist_limit = 5.0
 
 [node name="Gun" parent="BlueTeam/Fighter/WeaponHandler" parent_id_path=PackedInt32Array(1900985089, 1131696451) index="0" unique_id=2138703467]
 bullet_speed = 800.0
-fire_rate = 16.0
-reload_sound = 1
 
 [node name="ShieldTransitAudio" parent="BlueTeam/Fighter" index="11" unique_id=992133318 node_paths=PackedStringArray("shield_to_ignore")]
 shield_to_ignore = NodePath("../Shield")

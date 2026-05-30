@@ -1,5 +1,10 @@
 class_name GunStats extends Resource
 
+# This is literally just to help me remember what this
+# gun is about in the inspector
+@export var name:String = ''
+
+@export var gun_type:GunSpawner.GUN_TYPE
 @export var bullet_type:BulletSpawner.BULLET_TYPE
 @export var damage:float = 1.0
 @export var bullet_speed:float = 1000.0

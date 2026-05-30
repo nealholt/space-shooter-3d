@@ -74,23 +74,53 @@ var ally_team:String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	current_mag = magazine_size
 	# The new laser doesn't use a firing rate timer or reload timer.
 	if has_node("FiringRateTimer"):
 		firing_rate_timer = $FiringRateTimer
 	if has_node("ReloadTimer"):
 		reload_timer = $ReloadTimer
-	# Calculate bullet range
-	range_sqd = (bullet_speed*bullet_timeout)*(bullet_speed*bullet_timeout)
 	# Detect when entering or exiting shields
 	shield_detector.area_entered.connect(_on_shield_entered)
 	shield_detector.area_exited.connect(_on_shield_exited)
+	# Set some non-export variables
+	set_initial_values()
+
+
+func set_initial_values() -> void:
+	current_mag = magazine_size
+	# Calculate bullet range
+	range_sqd = (bullet_speed*bullet_timeout)*(bullet_speed*bullet_timeout)
+
+
+# For now, just copy the stats over
+func setup_from_resource(gun_stats:GunStats) -> void:
+	# Copy over everything from the gun stats resource
+	# to instance variables.
+	bullet_type = gun_stats.bullet_type
+	damage = gun_stats.damage
+	bullet_speed = gun_stats.bullet_speed
+	bullet_timeout = gun_stats.bullet_timeout
+	timeout_vary_percent = gun_stats.timeout_vary_percent
+	fire_rate = gun_stats.fire_rate
+	magazine_size = gun_stats.magazine_size
+	reload_time = gun_stats.reload_time
+	automatic = gun_stats.automatic
+	spread_deg = gun_stats.spread_deg
+	simultaneous_shots = gun_stats.simultaneous_shots
+	fire_sound = gun_stats.fire_sound
+	reload_sound = gun_stats.reload_sound
+	# what needs done afterward? like what's done in _ready, but should also be done here
+	set_initial_values()
 
 
 func _process(_delta: float) -> void:
 	if reticle:
 		var position_ahead:Vector3 = global_position - global_transform.basis.z*500.0
 		Global.set_reticle(reticle, position_ahead)
+	else:
+		# This function doesn't do anything else,
+		# so shut itself down.
+		set_process(false)
 
 
 func ready_to_fire() -> bool:
