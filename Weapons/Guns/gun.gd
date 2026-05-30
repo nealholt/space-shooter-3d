@@ -57,7 +57,7 @@ var reload_timer:Timer
 # Gun animation, for example, rotation of the gatling gun.
 # Also the muzzle flash
 @export var gun_animation : AnimationPlayer
-@export var muzzle_flash:Node3D # This requires only a play button
+@export var muzzle_flash : MuzzleFlash
 
 # Only guns that actually use a raycast3d should
 # have a ray, such as guns that fire laser guided
@@ -66,7 +66,7 @@ var reload_timer:Timer
 # Reticle, if any, to use for this gun. This should ONLY
 # be attached as a child of the gun on player-controlled
 # ships.
-@export var reticle:TextureRect
+@export var reticle : TextureRect
 
 # So guns can know what team they're on
 var ally_team:String
@@ -109,6 +109,9 @@ func setup_from_resource(gun_stats:GunStats) -> void:
 	simultaneous_shots = gun_stats.simultaneous_shots
 	fire_sound = gun_stats.fire_sound
 	reload_sound = gun_stats.reload_sound
+	if gun_stats.muzzle_flash:
+		muzzle_flash = gun_stats.muzzle_flash.instantiate()
+		add_child(muzzle_flash)
 	# what needs done afterward? like what's done in _ready, but should also be done here
 	set_initial_values()
 

@@ -4,7 +4,7 @@
 # by Gabriel Aguiar Prod.
 # at https://www.youtube.com/watch?v=YuCvAwZ3OlQ
 # Modifications and scripts by Neal Holtschulte
-extends Node3D
+class_name MuzzleFlash extends Node3D
 
 @onready var planes_group: Node3D = $PlanesGroup
 @onready var cones_group: Node3D = $ConesGroup

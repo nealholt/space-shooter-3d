@@ -91,10 +91,10 @@ bullet_timeout = 9.0
 fire_rate = 0.2
 
 [node name="WeaponHandler" parent="." unique_id=1131696451 instance=ExtResource("4_dhpb0")]
-transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -3.5)
 
 [node name="Gun" parent="WeaponHandler" unique_id=2138703467 node_paths=PackedStringArray("muzzle_flash", "reticle") instance=ExtResource("4_57m73")]
-transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -3.5)
+transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 bullet_speed = 600.0
 bullet_timeout = 3.0
 fire_rate = 16.0

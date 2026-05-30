@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="1_stmd2"]
 [ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="1_ttnv4"]
+[ext_resource type="PackedScene" uid="uid://do50y2jdho5iq" path="res://vfx/MuzzleFlash/muzzle_flash_green_monster.tscn" id="2_3ecky"]
 
 [sub_resource type="Resource" id="Resource_3ecky"]
 script = ExtResource("1_ttnv4")
@@ -16,6 +17,7 @@ spread_deg = 10.0
 simultaneous_shots = 5
 fire_sound = 0
 reload_sound = 1
+muzzle_flash = ExtResource("2_3ecky")
 metadata/_custom_type_script = "uid://bflupvkh65uf"
 
 [sub_resource type="Resource" id="Resource_6xahi"]

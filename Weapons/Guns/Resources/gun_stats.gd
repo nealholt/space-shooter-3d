@@ -31,3 +31,6 @@ const INFINITE_AMMO:int = 2**30-1
 
 @export var fire_sound: SoundEffectSetting.SOUND_EFFECT_TYPE = SoundEffectSetting.SOUND_EFFECT_TYPE.NONE
 @export var reload_sound: SoundEffectSetting.SOUND_EFFECT_TYPE = SoundEffectSetting.SOUND_EFFECT_TYPE.NONE
+
+@export var muzzle_flash : PackedScene
+@export var reticle : String
