@@ -74,10 +74,17 @@ missile_lock = NodePath("MissileLockGroup")
 obstacle_detector = NodePath("ObstacleDetector")
 shield = NodePath("Shield")
 weapon_handler = NodePath("WeaponHandler")
+is_player = null
+disable_for_testing = null
 fps_cam_position = Vector3(0, 0.6, -2.9)
+fps_cam_rotation_deg = null
 side_cam_position = Vector3(2.3, -0.5, -3.5)
+side_cam_rotation_deg = null
+max_collision_damage = null
 deathExplosion = 9
 finalExplosion = 8
+death_animation_duration_min = null
+death_animation_duration_max = null
 
 [node name="AimAssist" parent="." unique_id=828639523 instance=ExtResource("29_3q0pi")]
 angle_assist_limit = 10.0

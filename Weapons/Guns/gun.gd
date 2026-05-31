@@ -93,7 +93,7 @@ func set_initial_values() -> void:
 
 
 # For now, just copy the stats over
-func setup_from_resource(gun_stats:GunStats) -> void:
+func setup_from_resource(gun_stats:GunStats, is_player:bool) -> void:
 	# Copy over everything from the gun stats resource
 	# to instance variables.
 	bullet_type = gun_stats.bullet_type
@@ -112,6 +112,16 @@ func setup_from_resource(gun_stats:GunStats) -> void:
 	if gun_stats.muzzle_flash:
 		muzzle_flash = gun_stats.muzzle_flash.instantiate()
 		add_child(muzzle_flash)
+		muzzle_flash.rotation_degrees = Vector3(0.0, -180.0, 0.0)
+	# Only player guns have reticles
+	if is_player and gun_stats.reticle:
+		reticle = TextureRect.new()
+		reticle.texture = gun_stats.reticle
+		reticle.size = Vector2(64,64)
+		reticle.self_modulate = Color(1.0,1.0,1.0,0.6)
+		add_child(reticle)
+	# The only thing _process does is update the reticle
+	set_process(is_player and gun_stats.reticle)
 	# what needs done afterward? like what's done in _ready, but should also be done here
 	set_initial_values()
 

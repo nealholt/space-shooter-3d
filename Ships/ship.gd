@@ -108,7 +108,7 @@ func _ready() -> void:
 	# weapon handler then reset the weapon handler
 	if weapon_handler:
 		for gun_res in stats.guns:
-			GunSpawner.new_gun_from_resource(gun_res, weapon_handler)
+			GunSpawner.new_gun_from_resource(gun_res, weapon_handler, is_player)
 		weapon_handler.reset_weapon_handler()
 	# Set this ship up differently if it's the player
 	if is_player:

@@ -29,11 +29,11 @@ func new_gun(gt:GUN_TYPE, bt:BulletSpawner.BULLET_TYPE, my_parent:Node3D) -> Gun
 	my_parent.add_child(g)
 	return g
 
-func new_gun_from_resource(gun_stats:GunStats, my_parent:Node3D) -> Gun:
+func new_gun_from_resource(gun_stats:GunStats, my_parent:Node3D, is_player:bool) -> Gun:
 	# Create a new gun
 	var g := gun_array[int(gun_stats.gun_type)].instantiate()
 	# initiate a gun from the resource
-	g.setup_from_resource(gun_stats)
+	g.setup_from_resource(gun_stats, is_player)
 	# Attach it to parent
 	my_parent.add_child(g)
 	return g
