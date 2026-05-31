@@ -46,20 +46,12 @@ func equip(active_weapon:Node3D) -> void:
 	if current_weapon:
 		current_weapon.deactivate()
 	current_weapon = active_weapon
-	current_weapon.activate()
-	# Old version:
-	## Pre: All children must be weapons
-	#current_weapon = active_weapon
-	#for child in get_children():
-		#if child == active_weapon:
-			## Precondition: child is a Gun
-			#child.activate()
-		#else:
-			## Precondition: child is a Gun
-			#child.deactivate()
+	if current_weapon:
+		current_weapon.activate()
 
 
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/41204700#questions
 func change_weapon() -> void:
 	index = wrapi(index+1, 0, get_child_count())
-	equip(get_child(index))
+	if get_child_count() > 0:
+		equip(get_child(index))

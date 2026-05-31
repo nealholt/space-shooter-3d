@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="1_57f3b"]
 [ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="1_utn3n"]
+[ext_resource type="Resource" uid="uid://coa1jlc52fxuo" path="res://Weapons/Guns/Resources/BlasterMKI.tres" id="2_qc520"]
 
 [resource]
 script = ExtResource("1_utn3n")
+guns = Array[ExtResource("1_57f3b")]([ExtResource("2_qc520")])
 metadata/_custom_type_script = "uid://llcl4ev3hi63"
