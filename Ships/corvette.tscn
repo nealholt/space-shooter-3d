@@ -51,16 +51,16 @@ radial_segments = 16
 [sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
 size = Vector3(6, 2.3, 10.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mamsf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pe4ok"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("34_80okc")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_hjd52"]
+[sub_resource type="SphereMesh" id="SphereMesh_mamsf"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_mamsf")
+material = SubResource("ShaderMaterial_pe4ok")
 
 [node name="Corvette" type="CharacterBody3D" unique_id=1134075911 node_paths=PackedStringArray("aim_assist", "burning_trail", "health_component", "missile_lock", "obstacle_detector", "shield", "weapon_handler") groups=["damageable"]]
 motion_mode = 1
@@ -163,30 +163,25 @@ missile_launcher = NodePath("MissileLauncher")
 
 [node name="MissileLauncher" parent="MissileLockGroup" unique_id=303582067 instance=ExtResource("2_2p718")]
 bullet_type = 0
-damage = 50.0
-bullet_speed = 200.0
-fire_rate = 0.3
 
 [node name="Shield" parent="." unique_id=2025902563 instance=ExtResource("21_5ow11")]
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_hjd52")
+mesh = SubResource("SphereMesh_mamsf")
 
 [node name="WeaponHandler" parent="." unique_id=370825666 instance=ExtResource("9_1xly7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.455)
 
-[node name="GatlingGun" parent="WeaponHandler" unique_id=1123320670 node_paths=PackedStringArray("gun_animation", "reticle") instance=ExtResource("2_2p718")]
+[node name="GatlingGun" parent="WeaponHandler" unique_id=1123320670 node_paths=PackedStringArray("gun_model", "reticle") instance=ExtResource("2_2p718")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63, 0.14, -1.545)
 burst_total = 6
 burst_rate = 12.0
 bullet_type = 5
 bullet_speed = 600.0
-fire_rate = 1.2
-spread_deg = 3.0
 fire_sound = 2
 reload_sound = 1
-gun_animation = NodePath("GunModel/AnimationPlayer")
+gun_model = NodePath("GunModel")
 reticle = NodePath("TextureRect")
 
 [node name="GunModel" parent="WeaponHandler/GatlingGun" unique_id=1901639962 instance=ExtResource("11_kbwk7")]
@@ -198,12 +193,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("19_gmlsk")
 
-[node name="HitScanGun" parent="WeaponHandler" unique_id=1687734169 node_paths=PackedStringArray("laser_mesh", "laser_mesh_pivot", "gun_animation", "ray", "reticle") instance=ExtResource("13_428na")]
+[node name="HitScanGun" parent="WeaponHandler" unique_id=1687734169 node_paths=PackedStringArray("laser_mesh", "laser_mesh_pivot", "gun_model", "ray", "reticle") instance=ExtResource("13_428na")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.147, 0, 1.063)
-laser_mesh = NodePath("Node/Head/LaserMesh")
-laser_mesh_pivot = NodePath("Node/Head")
-fire_rate = 5.0
-gun_animation = NodePath("Node/Head/LaserMesh/AnimationPlayer")
+laser_mesh = NodePath("LaserBeam/Head/LaserMesh")
+laser_mesh_pivot = NodePath("LaserBeam/Head")
+bullet_type = 0
+gun_model = NodePath("LaserBeam")
 ray = NodePath("RayCast3D")
 reticle = NodePath("TextureRect")
 
@@ -212,10 +207,7 @@ target_position = Vector3(0, 0, -1000)
 collision_mask = 10
 collide_with_areas = true
 
-[node name="Node" parent="WeaponHandler/HitScanGun" unique_id=2123640719 instance=ExtResource("16_y2utm")]
-
-[node name="LaserMesh" parent="WeaponHandler/HitScanGun/Node/Head" index="0"]
-visible = false
+[node name="LaserBeam" parent="WeaponHandler/HitScanGun" unique_id=2123640719 instance=ExtResource("16_y2utm")]
 
 [node name="TextureRect" type="TextureRect" parent="WeaponHandler/HitScanGun" unique_id=1093952534]
 self_modulate = Color(1, 1, 1, 0.588235)
@@ -260,4 +252,4 @@ hitbox = NodePath("../HitBoxComponent")
 
 [editable path="Shield"]
 [editable path="WeaponHandler/GatlingGun/GunModel"]
-[editable path="WeaponHandler/HitScanGun/Node"]
+[editable path="WeaponHandler/HitScanGun/LaserBeam"]

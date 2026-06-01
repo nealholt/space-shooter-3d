@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bp0suqn2071pk"]
+[gd_scene format=3 uid="uid://bp0suqn2071pk"]
+
+[ext_resource type="Script" uid="uid://cvqla86vrboo2" path="res://Weapons/Visuals/gun_model.gd" id="1_mbt56"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xnkam"]
 transparency = 1
@@ -73,17 +75,18 @@ _data = {
 &"gun_animation": SubResource("Animation_nnov1")
 }
 
-[node name="Node" type="Node"]
+[node name="LaserBeam" type="Node3D" unique_id=1405283469 node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_mbt56")
+animation_player = NodePath("Head/LaserMesh/AnimationPlayer")
 
-[node name="Head" type="Node3D" parent="."]
+[node name="Head" type="Node3D" parent="." unique_id=707617988]
 
-[node name="LaserMesh" type="MeshInstance3D" parent="Head"]
+[node name="LaserMesh" type="MeshInstance3D" parent="Head" unique_id=1714131822]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -500)
+visible = false
 cast_shadow = 0
 mesh = SubResource("CylinderMesh_hiy2a")
 skeleton = NodePath("../../..")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/LaserMesh"]
-libraries = {
-"": SubResource("AnimationLibrary_swh51")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head/LaserMesh" unique_id=249331880]
+libraries/ = SubResource("AnimationLibrary_swh51")

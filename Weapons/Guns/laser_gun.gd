@@ -72,8 +72,8 @@ func _ready():
 	range_sqd = ray_length*ray_length
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	super._process(delta)
 	# Default cast point
 	var cast_point:Vector3 = Vector3(0, -ray_length, 0)
 	# Check for actual collision

@@ -12,16 +12,25 @@ var burst_count:int = 0
 
 # Called every frame. 'delta' is the elapsed time
 # since the previous frame.
-func _physics_process(_delta):
+func _process(delta):
+	super._process(delta)
 	if firing and burst_timer.is_stopped():
 		shoot_actual()
 
 
-# Override parent class
+# Override parent function
+func setup_from_resource(gun_stats:GunStats, is_player:bool) -> void:
+	super.setup_from_resource(gun_stats, is_player)
+	burst_total = gun_stats.burst_total
+	burst_rate = gun_stats.burst_rate
+
+
+# Override parent function
 func ready_to_fire() -> bool:
 	return super.ready_to_fire() and burst_timer.is_stopped()
 
 
+# Override parent function
 func shoot_actual() -> void:
 	super.shoot_actual()
 	firing = true
@@ -44,7 +53,7 @@ func shoot_actual() -> void:
 		burst_timer.stop()
 
 
-# Override parent class's function
+# Override parent function
 func deactivate() -> void:
 	super.deactivate()
 	burst_count = 0 # Reset burst count

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="GunStats" format=3 uid="uid://b4hei1boxoqir"]
+
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="1_0gkrr"]
+[ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://UI/ReticlesCrosshairs/Images/crosshair012.png" id="1_htycb"]
+
+[resource]
+script = ExtResource("1_0gkrr")
+name = "Gatling Gun"
+gun_type = 1
+bullet_type = 5
+bullet_speed = 600.0
+fire_rate = 1.2
+spread_deg = 3.0
+fire_sound = 2
+reload_sound = 1
+reticle = ExtResource("1_htycb")
+position = Vector3(0.63, 0.14, -1.545)
+burst_total = 6
+metadata/_custom_type_script = "uid://bflupvkh65uf"

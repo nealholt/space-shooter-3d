@@ -141,11 +141,11 @@ func set_data(dat:ShootData) -> void:
 		time_out += randf_range(-time_out*dat.timeout_vary_percent, time_out*dat.timeout_vary_percent)
 	# Start the timer
 	timer.start(time_out)
-	# If there is a controller, a hitbox, this projectile is
-	# targeting the player, AND there is a reticle,
+	# If there is a controller, a hitbox, a target, this
+	# projectile is targeting the player, AND there is a reticle,
 	# then we want to create a special scene to change the
 	# reticle based on distance to target
-	if controller and hit_box_component and data.target.owner == Global.player and reticle:
+	if controller and hit_box_component and is_instance_valid(data.target) and data.target.owner == Global.player and reticle:
 		MissileOnPlayerReticle.new_missile_on_player(self, reticle)
 
 

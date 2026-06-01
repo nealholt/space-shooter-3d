@@ -54,9 +54,8 @@ var current_mag:int
 @export var reload_time:= 1.0 ## seconds
 var reload_timer:Timer
 
-# Gun animation, for example, rotation of the gatling gun.
-# Also the muzzle flash
-@export var gun_animation : AnimationPlayer
+# Gun visual components
+@export var gun_model : GunModel
 @export var muzzle_flash : MuzzleFlash
 
 # Only guns that actually use a raycast3d should
@@ -109,6 +108,7 @@ func setup_from_resource(gun_stats:GunStats, is_player:bool) -> void:
 	simultaneous_shots = gun_stats.simultaneous_shots
 	fire_sound = gun_stats.fire_sound
 	reload_sound = gun_stats.reload_sound
+	position = gun_stats.position
 	if gun_stats.muzzle_flash:
 		muzzle_flash = gun_stats.muzzle_flash.instantiate()
 		add_child(muzzle_flash)
@@ -122,7 +122,7 @@ func setup_from_resource(gun_stats:GunStats, is_player:bool) -> void:
 		add_child(reticle)
 	# The only thing _process does is update the reticle
 	set_process(is_player and gun_stats.reticle)
-	# what needs done afterward? like what's done in _ready, but should also be done here
+	# What needs done afterward? like what's done in _ready, but should also be done here
 	set_initial_values()
 
 
@@ -130,10 +130,13 @@ func _process(_delta: float) -> void:
 	if reticle:
 		var position_ahead:Vector3 = global_position - global_transform.basis.z*500.0
 		Global.set_reticle(reticle, position_ahead)
-	else:
-		# This function doesn't do anything else,
-		# so shut itself down.
-		set_process(false)
+	# One of the problems with the next bit is that it breaks gun
+	# variants (such as burst gun or laser gun) that also use the
+	# _process function when you don't attach a reticle to them.
+	#else:
+		## This function doesn't do anything else,
+		## so shut itself down.
+		#set_process(false)
 
 
 func ready_to_fire() -> bool:
@@ -146,8 +149,8 @@ func shoot(shootDat:ShootData) -> void:
 	if !ready_to_fire():
 		return
 	# Animate 'em if you got 'em
-	if gun_animation:
-		gun_animation.play("gun_animation")
+	if gun_model:
+		gun_model.shoot()
 	# Play muzzle flash effect
 	if muzzle_flash:
 		muzzle_flash.play()
@@ -211,8 +214,8 @@ func deactivate() -> void:
 	set_physics_process(false)
 	if reticle:
 		reticle.hide()
-	if gun_animation:
-		gun_animation.stop()
+	if gun_model:
+		gun_model.stop_animating()
 	# Interrupt firing sound
 	if fire_sound_active != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
 		AudioManager.stop(fire_sound, fire_sound_active, true)

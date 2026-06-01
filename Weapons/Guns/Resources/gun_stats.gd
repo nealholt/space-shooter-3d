@@ -1,6 +1,8 @@
 class_name GunStats extends Resource
 
-# This is literally just to help me remember what this
+@export_group("Gun Properties")
+
+# name is literally just to help me remember what this
 # gun is about in the inspector
 @export var name:String = ''
 
@@ -34,3 +36,21 @@ const INFINITE_AMMO:int = 2**30-1
 
 @export var muzzle_flash : PackedScene
 @export var reticle:CompressedTexture2D
+
+@export var position:=Vector3(0.0, 0.0, 0.0) ## For adjusting the position of where the bullets come out
+
+
+# The following properties only apply to the
+# "Burst Gun" gun variant
+@export_group("Burst Gun Properties")
+@export var burst_total:int = 3 ## Shots per burst
+@export var burst_rate:float = 12.0 ## Shots per second (distinct from bursts per second, which is determined by the base gun property fire_rate)
+
+
+# The following properties only apply to the
+# "Laser Gun" gun variant
+@export_group("Laser Gun Properties")
+@export var damage_max:float = 10.0
+@export var ray_length:float = 1000.0 ## Meters
+@export var power_on_time:float = 5.0 ## Seconds
+@export var power_off_time:float = 5.0 ## Seconds
