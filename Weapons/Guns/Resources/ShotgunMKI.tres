@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="GunStats" format=3 uid="uid://c3nsko2en7767"]
+
+[ext_resource type="PackedScene" uid="uid://do50y2jdho5iq" path="res://vfx/MuzzleFlash/muzzle_flash_green_monster.tscn" id="1_40umw"]
+[ext_resource type="Texture2D" uid="uid://bpdpseb3x2cbp" path="res://UI/ReticlesCrosshairs/Images/crosshair026.png" id="2_717mu"]
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="3_btnv7"]
+
+[resource]
+script = ExtResource("3_btnv7")
+name = "Shotgun"
+bullet_type = 2
+bullet_speed = 500.0
+fire_rate = 3.0
+magazine_size = 48
+reload_time = 0.8
+spread_deg = 5.0
+simultaneous_shots = 8
+fire_sound = 0
+reload_sound = 1
+muzzle_flash = ExtResource("1_40umw")
+reticle = ExtResource("2_717mu")
+metadata/_custom_type_script = "uid://bflupvkh65uf"

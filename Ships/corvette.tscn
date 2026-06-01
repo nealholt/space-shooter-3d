@@ -20,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Weapons/Guns/gun.tscn" id="19_yfprc"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Attachments/Shield/shield.tscn" id="21_5ow11"]
 [ext_resource type="Texture2D" uid="uid://yqry61o8jiwb" path="res://UI/ReticlesCrosshairs/Images/crosshair177.png" id="23_lbswy"]
-[ext_resource type="Texture2D" uid="uid://bpdpseb3x2cbp" path="res://UI/ReticlesCrosshairs/Images/crosshair026.png" id="25_1j34j"]
 [ext_resource type="Texture2D" uid="uid://b7foqk2u8ykv3" path="res://UI/ReticlesCrosshairs/Images/crosshair054.png" id="26_1j34j"]
 [ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Weapons/Guns/laser_gun.tscn" id="26_lbswy"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Attachments/ObstacleDetector/obstacle_detector.tscn" id="27_lbswy"]
@@ -175,9 +174,10 @@ transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 mesh = SubResource("SphereMesh_hjd52")
 
 [node name="WeaponHandler" parent="." unique_id=370825666 instance=ExtResource("9_1xly7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.455)
 
 [node name="GatlingGun" parent="WeaponHandler" unique_id=1123320670 node_paths=PackedStringArray("gun_animation", "reticle") instance=ExtResource("2_2p718")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63, 0.14, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63, 0.14, -1.545)
 burst_total = 6
 burst_rate = 12.0
 bullet_type = 5
@@ -198,15 +198,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("19_gmlsk")
 
-[node name="AutoSeekingMissileLauncher" parent="WeaponHandler" unique_id=472321920 instance=ExtResource("19_yfprc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.33626)
-bullet_type = 3
-bullet_speed = 150.0
-bullet_timeout = 3.0
-fire_rate = 3.0
-
 [node name="HitScanGun" parent="WeaponHandler" unique_id=1687734169 node_paths=PackedStringArray("laser_mesh", "laser_mesh_pivot", "gun_animation", "ray", "reticle") instance=ExtResource("13_428na")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14718, 0, -2.39168)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.147, 0, 1.063)
 laser_mesh = NodePath("Node/Head/LaserMesh")
 laser_mesh_pivot = NodePath("Node/Head")
 fire_rate = 5.0
@@ -230,22 +223,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("23_lbswy")
 
-[node name="Shotgun" parent="WeaponHandler" unique_id=1609728349 node_paths=PackedStringArray("reticle") instance=ExtResource("19_yfprc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.455)
-bullet_speed = 500.0
-fire_rate = 3.0
-spread_deg = 5.0
-simultaneous_shots = 8
-reticle = NodePath("TextureRect")
-
-[node name="TextureRect" type="TextureRect" parent="WeaponHandler/Shotgun" unique_id=1759730832]
-self_modulate = Color(1, 1, 1, 0.529412)
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("25_1j34j")
-
 [node name="LaserGuidedLauncher" parent="WeaponHandler" unique_id=265477221 node_paths=PackedStringArray("ray", "reticle") instance=ExtResource("19_yfprc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.40851)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.954)
 bullet_type = 4
 bullet_speed = 200.0
 bullet_timeout = 5.0

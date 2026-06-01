@@ -1,8 +1,12 @@
 [gd_resource type="Resource" script_class="ShipStats" format=3 uid="uid://g610si3hen87"]
 
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="1_b4dh5"]
 [ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="1_ktj8y"]
+[ext_resource type="Resource" uid="uid://c3nsko2en7767" path="res://Weapons/Guns/Resources/ShotgunMKI.tres" id="2_ija12"]
+[ext_resource type="Resource" uid="uid://cxq6gnsb6xqel" path="res://Weapons/Guns/Resources/AutoSeekerMKI.tres" id="3_ija12"]
 
 [resource]
 script = ExtResource("1_ktj8y")
 target_reticle_text = "Corvette"
+guns = Array[ExtResource("1_b4dh5")]([ExtResource("2_ija12"), ExtResource("3_ija12")])
 metadata/_custom_type_script = "uid://llcl4ev3hi63"

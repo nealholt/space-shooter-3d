@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="GunStats" format=3 uid="uid://cxq6gnsb6xqel"]
+
+[ext_resource type="Texture2D" uid="uid://cfhu778msmjfa" path="res://UI/ReticlesCrosshairs/Images/crosshair120.png" id="1_k8xxq"]
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="2_8rjo3"]
+
+[resource]
+script = ExtResource("2_8rjo3")
+name = "AutoSeeking Missile"
+bullet_type = 3
+bullet_speed = 150.0
+bullet_timeout = 3.0
+fire_rate = 3.0
+reload_time = 0.0
+reticle = ExtResource("1_k8xxq")
+metadata/_custom_type_script = "uid://bflupvkh65uf"
