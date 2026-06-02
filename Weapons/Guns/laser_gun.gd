@@ -113,6 +113,15 @@ func _process(delta: float) -> void:
 	stay_on = false
 
 
+# Override parent function
+func setup_from_resource(gun_stats:GunStats, is_player:bool) -> void:
+	super.setup_from_resource(gun_stats, is_player)
+	damage_max = gun_stats.damage_max
+	ray_length = gun_stats.ray_length
+	power_on_time = gun_stats.power_on_time
+	power_off_time = gun_stats.power_off_time
+
+
 # Override parent class's shoot_actual
 func shoot_actual() -> void:
 	# Activate the beam if it's not already on

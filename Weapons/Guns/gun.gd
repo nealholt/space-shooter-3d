@@ -120,6 +120,10 @@ func setup_from_resource(gun_stats:GunStats, is_player:bool) -> void:
 		reticle.size = Vector2(64,64)
 		reticle.self_modulate = Color(1.0,1.0,1.0,0.6)
 		add_child(reticle)
+	if gun_stats.gun_model:
+		gun_model = gun_stats.gun_model.instantiate()
+		add_child(gun_model)
+		gun_model.position = gun_stats.model_adjust
 	# The only thing _process does is update the reticle
 	set_process(is_player and gun_stats.reticle)
 	# What needs done afterward? like what's done in _ready, but should also be done here

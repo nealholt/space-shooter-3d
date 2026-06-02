@@ -5,9 +5,10 @@
 [ext_resource type="Resource" uid="uid://c3nsko2en7767" path="res://Weapons/Guns/Resources/ShotgunMKI.tres" id="2_ija12"]
 [ext_resource type="Resource" uid="uid://cxq6gnsb6xqel" path="res://Weapons/Guns/Resources/AutoSeekerMKI.tres" id="3_ija12"]
 [ext_resource type="Resource" uid="uid://b4hei1boxoqir" path="res://Weapons/Guns/Resources/GatlingGunMKI.tres" id="4_0pb2m"]
+[ext_resource type="Resource" uid="uid://cr3el53op1x8m" path="res://Weapons/Guns/Resources/LaserBeamMKI.tres" id="5_8odk2"]
 
 [resource]
 script = ExtResource("1_ktj8y")
 target_reticle_text = "Corvette"
-guns = Array[ExtResource("1_b4dh5")]([ExtResource("2_ija12"), ExtResource("3_ija12"), ExtResource("4_0pb2m")])
+guns = Array[ExtResource("1_b4dh5")]([ExtResource("2_ija12"), ExtResource("3_ija12"), ExtResource("4_0pb2m"), ExtResource("5_8odk2")])
 metadata/_custom_type_script = "uid://llcl4ev3hi63"

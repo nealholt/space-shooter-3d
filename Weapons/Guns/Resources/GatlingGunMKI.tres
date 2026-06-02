@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="1_0gkrr"]
 [ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://UI/ReticlesCrosshairs/Images/crosshair012.png" id="1_htycb"]
+[ext_resource type="PackedScene" uid="uid://drm4t5i6exnhc" path="res://Weapons/Visuals/gatling_gun.tscn" id="1_r8oeo"]
 
 [resource]
 script = ExtResource("1_0gkrr")
@@ -15,5 +16,7 @@ fire_sound = 2
 reload_sound = 1
 reticle = ExtResource("1_htycb")
 position = Vector3(0.63, 0.14, -1.545)
+gun_model = ExtResource("1_r8oeo")
+model_adjust = Vector3(0, -0.132, 1.3)
 burst_total = 6
 metadata/_custom_type_script = "uid://bflupvkh65uf"

@@ -37,7 +37,10 @@ const INFINITE_AMMO:int = 2**30-1
 @export var muzzle_flash : PackedScene
 @export var reticle:CompressedTexture2D
 
-@export var position:=Vector3(0.0, 0.0, 0.0) ## For adjusting the position of where the bullets come out
+@export var position:=Vector3(0.0, 0.0, 0.0) ## For adjusting the position where the bullets come out
+
+@export var gun_model:PackedScene
+@export var model_adjust:=Vector3(0.0, 0.0, 0.0) ## For adjusting the position of the gun model
 
 
 # The following properties only apply to the
