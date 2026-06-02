@@ -124,6 +124,18 @@ func setup_from_resource(gun_stats:GunStats, is_player:bool) -> void:
 		gun_model = gun_stats.gun_model.instantiate()
 		add_child(gun_model)
 		gun_model.position = gun_stats.model_adjust
+	# If the bullets are laser guided and there is not
+	# already a ray cast attached, then attach one
+	if bullet_type == BulletSpawner.BULLET_TYPE.LASER_GUIDED_MISSILE and !ray:
+		ray = RayCast3D.new()
+		ray.enabled = false
+		ray.target_position = Vector3(0.0, 0.0, -1000.0)
+		ray.collision_mask = Global.BODY_COLL_LAYER + \
+					Global.BULLET_COLL_LAYER + \
+					Global.SHIELD_COLL_LAYER + \
+					Global.HITBOX_COLL_LAYER
+		ray.collide_with_areas = true
+		add_child(ray)
 	# The only thing _process does is update the reticle
 	set_process(is_player and gun_stats.reticle)
 	# What needs done afterward? like what's done in _ready, but should also be done here

@@ -15,10 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Ships/Models/engine_mesh_component.tscn" id="12_e20ac"]
 [ext_resource type="PackedScene" uid="uid://ddoyejlbh51s5" path="res://Weapons/Guns/hit_scan_gun.tscn" id="13_428na"]
 [ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Weapons/Visuals/laser_beam.tscn" id="16_y2utm"]
-[ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Weapons/Guns/gun.tscn" id="19_yfprc"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Attachments/Shield/shield.tscn" id="21_5ow11"]
 [ext_resource type="Texture2D" uid="uid://yqry61o8jiwb" path="res://UI/ReticlesCrosshairs/Images/crosshair177.png" id="23_lbswy"]
-[ext_resource type="Texture2D" uid="uid://b7foqk2u8ykv3" path="res://UI/ReticlesCrosshairs/Images/crosshair054.png" id="26_1j34j"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Attachments/ObstacleDetector/obstacle_detector.tscn" id="27_lbswy"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Weapons/aim_assist.tscn" id="29_3q0pi"]
 [ext_resource type="PackedScene" uid="uid://yp51kcujfd4s" path="res://Audio/ShieldTransitAudio/shield_transit_audio.tscn" id="29_f4jgf"]
@@ -191,29 +189,6 @@ self_modulate = Color(1, 1, 1, 0.588235)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("23_lbswy")
-
-[node name="LaserGuidedLauncher" parent="WeaponHandler" unique_id=265477221 node_paths=PackedStringArray("ray", "reticle") instance=ExtResource("19_yfprc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.954)
-bullet_type = 4
-bullet_speed = 200.0
-bullet_timeout = 5.0
-fire_rate = 2.0
-spread_deg = 90.0
-simultaneous_shots = 8
-ray = NodePath("RayCast3D")
-reticle = NodePath("TextureRect")
-
-[node name="RayCast3D" type="RayCast3D" parent="WeaponHandler/LaserGuidedLauncher" unique_id=511623843]
-enabled = false
-target_position = Vector3(0, 0, -1000)
-collision_mask = 10
-collide_with_areas = true
-
-[node name="TextureRect" type="TextureRect" parent="WeaponHandler/LaserGuidedLauncher" unique_id=27785365]
-self_modulate = Color(1, 1, 1, 0.5)
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("26_1j34j")
 
 [node name="ObstacleDetector" parent="." unique_id=735341060 instance=ExtResource("27_lbswy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.384907)

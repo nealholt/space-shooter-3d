@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GunStats" format=3 uid="uid://c6ie208dfiyb6"]
+
+[ext_resource type="Texture2D" uid="uid://b7foqk2u8ykv3" path="res://UI/ReticlesCrosshairs/Images/crosshair054.png" id="1_o4che"]
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="1_u471d"]
+
+[resource]
+script = ExtResource("1_u471d")
+name = "Laser Guided Missile"
+bullet_type = 4
+bullet_speed = 200.0
+bullet_timeout = 5.0
+fire_rate = 2.0
+spread_deg = 90.0
+simultaneous_shots = 8
+reticle = ExtResource("1_o4che")
+position = Vector3(0, 0, -0.954)
+metadata/_custom_type_script = "uid://bflupvkh65uf"
