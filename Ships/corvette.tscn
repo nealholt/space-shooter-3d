@@ -13,10 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="11_pe4ok"]
 [ext_resource type="PackedScene" uid="uid://b8ln3rpl1ayn6" path="res://Ships/Models/fighter_chassis_diamond.tscn" id="12_a77x5"]
 [ext_resource type="PackedScene" uid="uid://cnelcvgwycqmo" path="res://Ships/Models/engine_mesh_component.tscn" id="12_e20ac"]
-[ext_resource type="PackedScene" uid="uid://ddoyejlbh51s5" path="res://Weapons/Guns/hit_scan_gun.tscn" id="13_428na"]
-[ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Weapons/Visuals/laser_beam.tscn" id="16_y2utm"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Attachments/Shield/shield.tscn" id="21_5ow11"]
-[ext_resource type="Texture2D" uid="uid://yqry61o8jiwb" path="res://UI/ReticlesCrosshairs/Images/crosshair177.png" id="23_lbswy"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Attachments/ObstacleDetector/obstacle_detector.tscn" id="27_lbswy"]
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Weapons/aim_assist.tscn" id="29_3q0pi"]
 [ext_resource type="PackedScene" uid="uid://yp51kcujfd4s" path="res://Audio/ShieldTransitAudio/shield_transit_audio.tscn" id="29_f4jgf"]
@@ -46,16 +43,16 @@ radial_segments = 16
 [sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
 size = Vector3(6, 2.3, 10.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v0vms"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_egehn"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("34_80okc")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_whyjy"]
+[sub_resource type="SphereMesh" id="SphereMesh_y6t16"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_v0vms")
+material = SubResource("ShaderMaterial_egehn")
 
 [node name="Corvette" type="CharacterBody3D" unique_id=1134075911 node_paths=PackedStringArray("aim_assist", "burning_trail", "health_component", "missile_lock", "obstacle_detector", "shield", "weapon_handler") groups=["damageable"]]
 motion_mode = 1
@@ -163,32 +160,10 @@ bullet_type = 0
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="FresnelAura" parent="Shield" index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_whyjy")
+mesh = SubResource("SphereMesh_y6t16")
 
 [node name="WeaponHandler" parent="." unique_id=370825666 instance=ExtResource("9_1xly7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.455)
-
-[node name="HitScanGun" parent="WeaponHandler" unique_id=1687734169 node_paths=PackedStringArray("laser_mesh", "laser_mesh_pivot", "gun_model", "ray", "reticle") instance=ExtResource("13_428na")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.147, 0, 1.063)
-laser_mesh = NodePath("LaserBeam/Head/LaserMesh")
-laser_mesh_pivot = NodePath("LaserBeam/Head")
-bullet_type = 0
-gun_model = NodePath("LaserBeam")
-ray = NodePath("RayCast3D")
-reticle = NodePath("TextureRect")
-
-[node name="RayCast3D" type="RayCast3D" parent="WeaponHandler/HitScanGun" unique_id=1195964649]
-target_position = Vector3(0, 0, -1000)
-collision_mask = 10
-collide_with_areas = true
-
-[node name="LaserBeam" parent="WeaponHandler/HitScanGun" unique_id=2123640719 instance=ExtResource("16_y2utm")]
-
-[node name="TextureRect" type="TextureRect" parent="WeaponHandler/HitScanGun" unique_id=1093952534]
-self_modulate = Color(1, 1, 1, 0.588235)
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("23_lbswy")
 
 [node name="ObstacleDetector" parent="." unique_id=735341060 instance=ExtResource("27_lbswy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.384907)
@@ -201,4 +176,3 @@ target_text = "Corvette"
 hitbox = NodePath("../HitBoxComponent")
 
 [editable path="Shield"]
-[editable path="WeaponHandler/HitScanGun/LaserBeam"]

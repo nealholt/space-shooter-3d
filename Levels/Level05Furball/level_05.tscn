@@ -179,9 +179,6 @@ is_player = true
 [node name="FresnelAura" parent="BlueTeam/PlayerCorvette/Shield" parent_id_path=PackedInt32Array(1134075911, 2025902563) index="0" unique_id=556348261]
 mesh = SubResource("SphereMesh_vskk7")
 
-[node name="HitScanGun" parent="BlueTeam/PlayerCorvette/WeaponHandler" parent_id_path=PackedInt32Array(1134075911, 370825666) index="2" unique_id=1687734169]
-fire_rate = 1.0
-
 [node name="PlayerMovementV4" parent="BlueTeam/PlayerCorvette" unique_id=1908608534 instance=ExtResource("9_x3qal")]
 
 [node name="VictoryLayer" parent="." unique_id=1967853426 instance=ExtResource("9_24hf6")]
@@ -189,5 +186,3 @@ visible = false
 
 [editable path="BlueTeam/PlayerCorvette"]
 [editable path="BlueTeam/PlayerCorvette/Shield"]
-[editable path="BlueTeam/PlayerCorvette/WeaponHandler/GatlingGun/GunModel"]
-[editable path="BlueTeam/PlayerCorvette/WeaponHandler/HitScanGun/Node"]

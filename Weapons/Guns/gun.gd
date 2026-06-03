@@ -129,7 +129,10 @@ func setup_from_resource(gun_stats:GunStats, is_player:bool) -> void:
 	if bullet_type == BulletSpawner.BULLET_TYPE.LASER_GUIDED_MISSILE and !ray:
 		ray = RayCast3D.new()
 		ray.enabled = false
-		ray.target_position = Vector3(0.0, 0.0, -1000.0)
+		# The -10000 on the next line is a magic number,
+		# but it's probably fine. All we need is a point
+		# waaay in front of the gun.
+		ray.target_position = Vector3(0.0, 0.0, -10000.0)
 		ray.collision_mask = Global.BODY_COLL_LAYER + \
 					Global.BULLET_COLL_LAYER + \
 					Global.SHIELD_COLL_LAYER + \

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GunStats" format=3 uid="uid://digrqoqdmv40m"]
+
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="1_cbb67"]
+[ext_resource type="Texture2D" uid="uid://yqry61o8jiwb" path="res://UI/ReticlesCrosshairs/Images/crosshair177.png" id="1_j5fj1"]
+
+[resource]
+script = ExtResource("1_cbb67")
+name = "Hit Scan Laser"
+gun_type = 2
+reticle = ExtResource("1_j5fj1")
+metadata/_custom_type_script = "uid://bflupvkh65uf"

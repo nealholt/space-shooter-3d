@@ -2,7 +2,22 @@
 
 [ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Weapons/Guns/gun.tscn" id="1_av3ot"]
 [ext_resource type="Script" uid="uid://blu2oolgjq5f0" path="res://Weapons/Guns/hit_scan_gun.gd" id="1_ksxwb"]
+[ext_resource type="PackedScene" uid="uid://bp0suqn2071pk" path="res://Weapons/Visuals/laser_beam.tscn" id="3_8dqre"]
 
-[node name="HitScanGun" instance=ExtResource("1_av3ot")]
+[node name="HitScanGun" unique_id=523449910 node_paths=PackedStringArray("laser_mesh", "laser_mesh_pivot", "gun_model", "ray") instance=ExtResource("1_av3ot")]
 script = ExtResource("1_ksxwb")
-sparks = 0
+sparks = 1
+laser_mesh = NodePath("LaserBeam/Head/LaserMesh")
+laser_mesh_pivot = NodePath("LaserBeam/Head")
+gun_model = NodePath("LaserBeam")
+ray = NodePath("RayCast3D")
+
+[node name="LaserBeam" parent="." index="3" unique_id=1405283469 instance=ExtResource("3_8dqre")]
+
+[node name="RayCast3D" type="RayCast3D" parent="." index="4" unique_id=2025029363]
+enabled = false
+target_position = Vector3(0, 0, -400)
+collision_mask = 27
+collide_with_areas = true
+
+[editable path="LaserBeam"]
