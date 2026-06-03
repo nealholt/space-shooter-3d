@@ -8,9 +8,6 @@ var index = -1
 
 var current_weapon: Gun
 
-func _ready() -> void:
-	reset_weapon_handler()
-
 
 func reset_weapon_handler() -> void:
 	index = -1
@@ -37,21 +34,13 @@ func deactivate_all() -> void:
 
 
 func equip(active_weapon:Node3D) -> void:
-	# New version doesn't re-deactivate all guns,
-	# just the current gun. Old version was
-	# causing issues with LaserGun.
-	# A lot of the old version code was
-	# copied into the deactivate_all() function.
-	# New version:
 	if current_weapon:
 		current_weapon.deactivate()
 	current_weapon = active_weapon
-	if current_weapon:
-		current_weapon.activate()
+	current_weapon.activate()
 
 
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/41204700#questions
 func change_weapon() -> void:
 	index = wrapi(index+1, 0, get_child_count())
-	if get_child_count() > 0:
-		equip(get_child(index))
+	equip(get_child(index))
