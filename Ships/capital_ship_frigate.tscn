@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Attachments/Turret/turret_group.tscn" id="7_bof2b"]
 [ext_resource type="PackedScene" uid="uid://dk6y2tyoo25sn" path="res://Attachments/Weakpoint/weakpoint.tscn" id="8_3qdq6"]
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Attachments/Turret/turret_data.gd" id="8_ejvar"]
+[ext_resource type="Resource" uid="uid://bhxcfdviqbqqo" path="res://Weapons/Guns/Resources/BigBlaster4TurretsMKI.tres" id="10_sths2"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="11_xgv7f"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mdcux"]
@@ -239,22 +240,27 @@ shape = SubResource("BoxShape3D_45crj")
 [node name="Turret1" type="Node3D" parent="TurretGroup" unique_id=1631471865]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 31, -76)
 script = ExtResource("8_ejvar")
+gun = ExtResource("10_sths2")
 
 [node name="Turret2" type="Node3D" parent="TurretGroup" unique_id=1999629967]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 38, -35)
 script = ExtResource("8_ejvar")
+gun = ExtResource("10_sths2")
 
 [node name="Turret3" type="Node3D" parent="TurretGroup" unique_id=1295925781]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 38, 35)
 script = ExtResource("8_ejvar")
+gun = ExtResource("10_sths2")
 
 [node name="Turret4" type="Node3D" parent="TurretGroup" unique_id=1796163841]
 transform = Transform3D(4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, 0, 3.82137e-15, 8.74228e-08, -1, 37, 0, 0)
 script = ExtResource("8_ejvar")
+gun = ExtResource("10_sths2")
 
 [node name="Turret5" type="Node3D" parent="TurretGroup" unique_id=367305831]
 transform = Transform3D(4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 3.82137e-15, -8.74228e-08, -1, -37, 0, 0)
 script = ExtResource("8_ejvar")
+gun = ExtResource("10_sths2")
 
 [node name="ScriptHolder" type="Node" parent="." unique_id=1019828200]
 script = ExtResource("7_3qdq6")

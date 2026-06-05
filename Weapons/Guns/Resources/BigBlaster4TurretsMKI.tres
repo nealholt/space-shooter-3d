@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="GunStats" format=3 uid="uid://bhxcfdviqbqqo"]
+
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="1_86bs6"]
+
+[resource]
+script = ExtResource("1_86bs6")
+name = "Turret Big Laser"
+bullet_type = 7
+bullet_speed = 500.0
+bullet_timeout = 4.0
+fire_rate = 0.5
+metadata/_custom_type_script = "uid://bflupvkh65uf"

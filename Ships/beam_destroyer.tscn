@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="5_rax4g"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Weapons/weapon_handler.tscn" id="7_ravav"]
 [ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Weapons/Guns/laser_gun.tscn" id="8_lmwtr"]
+[ext_resource type="Resource" uid="uid://bhxcfdviqbqqo" path="res://Weapons/Guns/Resources/BigBlaster4TurretsMKI.tres" id="8_rx22l"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="9_u0pe6"]
 [ext_resource type="Resource" uid="uid://j7qi0q8tmupn" path="res://Controllers/Resources/controller_stats_capship_forward.tres" id="10_u0pe6"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="12_e6gkc"]
@@ -69,11 +70,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 15)
 script = ExtResource("5_1v2wc")
 min_elevation = 0.2617993877991494
 max_elevation = 1.5707963267948966
+gun = ExtResource("8_rx22l")
 
 [node name="BottomHardpoint" type="Node3D" parent="TurretGroup" unique_id=36422470]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -8, 15)
 script = ExtResource("5_1v2wc")
 max_elevation = 1.5707963267948966
+gun = ExtResource("8_rx22l")
 
 [node name="WeaponHandler" parent="." unique_id=414523431 instance=ExtResource("7_ravav")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
@@ -83,7 +86,6 @@ ray_length = 500.0
 
 [node name="NPCController" parent="." unique_id=1852644041 node_paths=PackedStringArray("initial_state") instance=ExtResource("9_u0pe6")]
 initial_state = NodePath("States/Orbit")
-shooting_angle_degrees = 3.0
 x_speed = 5.0
 y_speed = 5.0
 target_capital_ships = true

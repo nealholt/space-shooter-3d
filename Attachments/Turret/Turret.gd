@@ -86,11 +86,11 @@ func _ready() -> void:
 func setup_turret_pre_tree(dat:TurretData) -> void:
 	# Guns have to be put on the turret before adding to the
 	# tree because of gun-related stuff taken care of in _ready
-	if dat.gun_type != GunSpawner.GUN_TYPE.NO_GUN:
+	if dat.gun.gun_type != GunSpawner.GUN_TYPE.NO_GUN:
 		# Attach two guns as children of this turret
-		var g:Gun = GunSpawner.new_gun(dat.gun_type, dat.bullet_type, self)
+		var g:Gun = GunSpawner.new_gun_from_resource(dat.gun, self, false)
 		guns.append(g)
-		g = GunSpawner.new_gun(dat.gun_type, dat.bullet_type, self)
+		g = GunSpawner.new_gun_from_resource(dat.gun, self, false)
 		guns.append(g)
 
 

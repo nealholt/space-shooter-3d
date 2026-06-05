@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ca1xpxadpwp5u" path="res://Levels/Level06TurretTest/TestCam.gd" id="1_qvatm"]
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Levels/level.gd" id="1_t2ssg"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Features/TeamSetup/team_setup.gd" id="2_hpnlp"]
+[ext_resource type="Resource" uid="uid://bhxcfdviqbqqo" path="res://Weapons/Guns/Resources/BigBlaster4TurretsMKI.tres" id="6_2dgup"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="6_of7ud"]
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Controllers/player_movement_v_4.tscn" id="7_2dgup"]
 [ext_resource type="PackedScene" uid="uid://o2spk0lv7tup" path="res://Attachments/Turret/turret_group.tscn" id="7_iacnd"]
@@ -47,8 +48,7 @@ script = ExtResource("2_hpnlp")
 script = ExtResource("8_hu0ry")
 elevation_speed = 0.3490658503988659
 rotation_speed = 0.3490658503988659
-gun_type = 1
-bullet_type = 6
+gun = ExtResource("6_2dgup")
 
 [node name="BlueTeam" type="Node3D" parent="." unique_id=331800158]
 script = ExtResource("2_hpnlp")

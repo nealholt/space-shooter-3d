@@ -6,5 +6,6 @@
 
 [resource]
 script = ExtResource("1_utn3n")
+max_health = 2000.0
 guns = Array[ExtResource("1_57f3b")]([ExtResource("2_qc520")])
 metadata/_custom_type_script = "uid://llcl4ev3hi63"

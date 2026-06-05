@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cbhoikklwgc0c" path="res://Attachments/Hangar/hangar.tscn" id="7_db1yb"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="8_2hhpl"]
 [ext_resource type="PackedScene" uid="uid://dk6y2tyoo25sn" path="res://Attachments/Weakpoint/weakpoint.tscn" id="8_sqmai"]
+[ext_resource type="Resource" uid="uid://bhxcfdviqbqqo" path="res://Weapons/Guns/Resources/BigBlaster4TurretsMKI.tres" id="9_1ybwa"]
 [ext_resource type="Resource" uid="uid://j7qi0q8tmupn" path="res://Controllers/Resources/controller_stats_capship_forward.tres" id="9_2hhpl"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="12_2kqhm"]
 
@@ -108,36 +109,42 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 50, -155)
 script = ExtResource("5_cyiqs")
 min_elevation = 0.08726646259971647
 max_elevation = 1.5707963267948966
+gun = ExtResource("9_1ybwa")
 
 [node name="TopRightFrontHardpoint2" type="Node3D" parent="TurretGroup" unique_id=2143419728]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 50, -155)
 script = ExtResource("5_cyiqs")
 min_elevation = 0.08726646259971647
 max_elevation = 1.5707963267948966
+gun = ExtResource("9_1ybwa")
 
 [node name="LeftFangOutside" type="Node3D" parent="TurretGroup" unique_id=526285739]
 transform = Transform3D(-0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1, -120, -100, -200)
 script = ExtResource("5_cyiqs")
 min_elevation = 0.08726646259971647
 max_elevation = 1.5707963267948966
+gun = ExtResource("9_1ybwa")
 
 [node name="LeftFangInside" type="Node3D" parent="TurretGroup" unique_id=397629107]
 transform = Transform3D(-0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 0, 0, 1, -80, -100, -200)
 script = ExtResource("5_cyiqs")
 min_elevation = 0.08726646259971647
 max_elevation = 1.5707963267948966
+gun = ExtResource("9_1ybwa")
 
 [node name="RightFangInside" type="Node3D" parent="TurretGroup" unique_id=1984745591]
 transform = Transform3D(-0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1, 80, -100, -200)
 script = ExtResource("5_cyiqs")
 min_elevation = 0.08726646259971647
 max_elevation = 1.5707963267948966
+gun = ExtResource("9_1ybwa")
 
 [node name="RightFangOutside" type="Node3D" parent="TurretGroup" unique_id=531714066]
 transform = Transform3D(-0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 0, 0, 1, 120, -100, -200)
 script = ExtResource("5_cyiqs")
 min_elevation = 0.08726646259971647
 max_elevation = 1.5707963267948966
+gun = ExtResource("9_1ybwa")
 
 [node name="WeakpointGroup" type="Node3D" parent="." unique_id=739711451]
 

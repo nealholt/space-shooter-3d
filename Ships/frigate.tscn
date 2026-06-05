@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Attachments/Turret/turret_data.gd" id="5_mh4mh"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Weapons/weapon_handler.tscn" id="7_qbhaa"]
 [ext_resource type="PackedScene" uid="uid://cwvjmhlcv8ry7" path="res://Weapons/Guns/laser_gun.tscn" id="8_14glc"]
+[ext_resource type="Resource" uid="uid://bhxcfdviqbqqo" path="res://Weapons/Guns/Resources/BigBlaster4TurretsMKI.tres" id="8_owjca"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="9_6rpyf"]
 [ext_resource type="Resource" uid="uid://j7qi0q8tmupn" path="res://Controllers/Resources/controller_stats_capship_forward.tres" id="10_6rpyf"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="12_gf4me"]
@@ -81,7 +82,7 @@ shape = SubResource("ConvexPolygonShape3D_si2lx")
 [node name="Hardpoint" type="Node3D" parent="TurretGroup" unique_id=443907705]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 6.5, -11)
 script = ExtResource("5_mh4mh")
-bullet_type = 7
+gun = ExtResource("8_owjca")
 
 [node name="WeaponHandler" parent="." unique_id=233234706 instance=ExtResource("7_qbhaa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -46.5)

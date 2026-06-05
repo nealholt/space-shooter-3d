@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bgwjjl3ctieae" path="res://Attachments/Turret/turret_data.gd" id="5_i0xpl"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="5_sorjn"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="7_i0d2t"]
+[ext_resource type="Resource" uid="uid://bhxcfdviqbqqo" path="res://Weapons/Guns/Resources/BigBlaster4TurretsMKI.tres" id="8_7h2tf"]
 [ext_resource type="Resource" uid="uid://dick38j62uhh4" path="res://Controllers/Resources/controller_stats_capship_above.tres" id="8_i0d2t"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="10_xi73q"]
 
@@ -67,14 +68,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 4.5, -17)
 script = ExtResource("5_i0xpl")
 max_elevation = 1.5707963267948966
 prefer_capital_ships = true
-bullet_type = 7
+gun = ExtResource("8_7h2tf")
 
 [node name="RightHardpoint" type="Node3D" parent="TurretGroup" unique_id=388332348]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 4.5, -17)
 script = ExtResource("5_i0xpl")
 max_elevation = 1.5707963267948966
 prefer_capital_ships = true
-bullet_type = 7
+gun = ExtResource("8_7h2tf")
 
 [node name="NPCController" parent="." unique_id=1852644041 node_paths=PackedStringArray("initial_state") instance=ExtResource("7_i0d2t")]
 initial_state = NodePath("States/Orbit")

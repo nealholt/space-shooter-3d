@@ -20,5 +20,4 @@ class_name TurretData extends Node3D
 # Whether or not to target capital ships first
 @export var prefer_capital_ships:bool = false
 
-@export var gun_type:GunSpawner.GUN_TYPE = GunSpawner.GUN_TYPE.GUN
-@export var bullet_type:BulletSpawner.BULLET_TYPE = BulletSpawner.BULLET_TYPE.BASIC_RAY
+@export var gun:GunStats

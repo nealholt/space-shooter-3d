@@ -21,14 +21,6 @@ var gun_array:Array[PackedScene] = [
 
 enum GUN_TYPE {GUN, BURST, HITSCAN, LASER, NO_GUN}
 
-func new_gun(gt:GUN_TYPE, bt:BulletSpawner.BULLET_TYPE, my_parent:Node3D) -> Gun:
-	# Create a new gun
-	var g := gun_array[int(gt)].instantiate()
-	g.bullet_type = bt
-	# Attach it to parent
-	my_parent.add_child(g)
-	return g
-
 func new_gun_from_resource(gun_stats:GunStats, my_parent:Node3D, is_player:bool) -> Gun:
 	# Create a new gun
 	var g := gun_array[int(gun_stats.gun_type)].instantiate()
