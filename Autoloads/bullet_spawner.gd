@@ -174,7 +174,7 @@ func _get_sparkle_trail() -> Projectile:
 	# Attach seek controller
 	projectile.add_child(control)
 	projectile.controller = control
-	control.rotation_speed_deg = 180 # Degrees of rotation per second
+	control.rotation_speed = deg_to_rad(180) # Degrees of rotation per second
 	# I used to use physics_seek with steer force of 5000,
 	# but I didn't like the look of the behavior. Read the note
 	# at the top of the physics seek script for more info on this.

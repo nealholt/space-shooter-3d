@@ -250,13 +250,6 @@ is_player = true
 [node name="MissileLockGroup" parent="BlueTeam/Fighter" index="8" unique_id=756556192]
 quick_launch_interval = 0.01
 
-[node name="Gun" parent="BlueTeam/Fighter/WeaponHandler" parent_id_path=PackedInt32Array(1900985089, 1131696451) index="0" unique_id=2138703467]
-bullet_speed = 800.0
-fire_rate = 14.0
-spread_deg = 0.0
-reload_sound = 9
-reload_time = 0.1
-
 [node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=396859238 instance=ExtResource("13_qb1ff")]
 stats = SubResource("Resource_3xvk7")
 

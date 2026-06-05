@@ -67,14 +67,13 @@ health_component = NodePath("../HealthComponent")
 [node name="TopHardpoint" type="Node3D" parent="TurretGroup" unique_id=62402200]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 15)
 script = ExtResource("5_1v2wc")
-min_elevation_deg = 15.0
-max_elevation_deg = 90.0
+min_elevation = 0.2617993877991494
+max_elevation = 1.5707963267948966
 
 [node name="BottomHardpoint" type="Node3D" parent="TurretGroup" unique_id=36422470]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -8, 15)
 script = ExtResource("5_1v2wc")
-min_elevation_deg = 15.0
-max_elevation_deg = 90.0
+max_elevation = 1.5707963267948966
 
 [node name="WeaponHandler" parent="." unique_id=414523431 instance=ExtResource("7_ravav")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)

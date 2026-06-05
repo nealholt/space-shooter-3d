@@ -9,7 +9,7 @@ var damage:float = 1.0
 var bullet_speed:float
 var bullet_timeout:float
 var timeout_vary_percent:float
-var spread_deg:float # Bullet spread in degrees
+var spread:float # Bullet spread in radians
 # If aim_assist is not zero, then bullets should
 # adjust to face this location, it will be the
 # intercept returned by aim_assist.gd

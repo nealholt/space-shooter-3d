@@ -27,11 +27,10 @@ var firing_rate_timer: Timer
 # released and pressed again before firing.
 @export var automatic:bool = true
 
-# Later in the code I convert spread_deg to radians
-# and cut it in half so that the spread total is
-# spread_deg rather than plus or minus spread_deg,
-# which makes it twice as large.
-@export var spread_deg:float = 0.0 # degrees
+# Later in the code I cut spread in half so
+# that the spread total is spread rather
+# than plus or minus spread.
+@export_range(0, 90, 0.1, "radians_as_degrees") var spread: float = 0.0
 
 ## How many bullets to spawn simultaneously
 @export var simultaneous_shots:int = 1
@@ -104,7 +103,7 @@ func setup_from_resource(gun_stats:GunStats, is_player:bool) -> void:
 	magazine_size = gun_stats.magazine_size
 	reload_time = gun_stats.reload_time
 	automatic = gun_stats.automatic
-	spread_deg = gun_stats.spread_deg
+	spread = gun_stats.spread
 	simultaneous_shots = gun_stats.simultaneous_shots
 	fire_sound = gun_stats.fire_sound
 	reload_sound = gun_stats.reload_sound
@@ -185,7 +184,7 @@ func shoot(shootDat:ShootData) -> void:
 	data.bullet_speed = bullet_speed
 	data.bullet_timeout = bullet_timeout
 	data.timeout_vary_percent = timeout_vary_percent
-	data.spread_deg = spread_deg
+	data.spread = spread
 	# Add the raycast to the shoot_data for
 	# reference by laser-guided projectiles
 	data.ray = ray

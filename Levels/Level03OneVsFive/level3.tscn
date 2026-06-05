@@ -84,15 +84,8 @@ stats = ExtResource("6_oiq64")
 controller = NodePath("PlayerMovementV4")
 is_player = true
 
-[node name="AimAssist" parent="BlueTeam/Fighter" index="0" unique_id=936755743]
-angle_assist_limit = 5.0
-
 [node name="HealthComponent" parent="BlueTeam/Fighter" index="6" unique_id=535388883]
 max_health = 100.0
-
-[node name="Gun" parent="BlueTeam/Fighter/WeaponHandler" parent_id_path=PackedInt32Array(1900985089, 1131696451) index="0" unique_id=2138703467]
-magazine_size = 20
-reload_time = 1.5
 
 [node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=392117838 instance=ExtResource("6_trw21")]
 

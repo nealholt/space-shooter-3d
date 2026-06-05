@@ -12,7 +12,6 @@ bullet_speed = 600.0
 bullet_timeout = 3.0
 fire_rate = 16.0
 magazine_size = 16
-spread_deg = 1.0
 fire_sound = 0
 reload_sound = 1
 muzzle_flash = ExtResource("1_4lciu")

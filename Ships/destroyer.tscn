@@ -65,14 +65,14 @@ health_component = NodePath("../HealthComponent")
 [node name="LeftHardpoint" type="Node3D" parent="TurretGroup" unique_id=1362490832]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 4.5, -17)
 script = ExtResource("5_i0xpl")
-max_elevation_deg = 90.0
+max_elevation = 1.5707963267948966
 prefer_capital_ships = true
 bullet_type = 7
 
 [node name="RightHardpoint" type="Node3D" parent="TurretGroup" unique_id=388332348]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 4.5, -17)
 script = ExtResource("5_i0xpl")
-max_elevation_deg = 90.0
+max_elevation = 1.5707963267948966
 prefer_capital_ships = true
 bullet_type = 7
 

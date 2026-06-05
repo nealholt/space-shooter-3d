@@ -88,7 +88,7 @@ var collision_exceptions := Array()
 # that it's best for simulation-type games.
 func _ready() -> void:
 	if aim_assist:
-		aim_assist.set_assist_limit_deg(stats.aim_assist_angle)
+		aim_assist.set_assist_limit(stats.aim_assist_angle)
 	if disable_for_testing:
 		controller = null
 		if hangar:

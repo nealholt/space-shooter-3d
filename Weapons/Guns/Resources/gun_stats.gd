@@ -23,10 +23,10 @@ const INFINITE_AMMO:int = 2**30-1
 # shoot is first pressed. Shoot must then be
 # released and pressed again before firing.
 @export var automatic:bool = true
-# Later in the code I convert spread_deg to radians
-# and cut it in half so that the spread total is
-# spread_deg rather than plus or minus spread_deg.
-@export var spread_deg:float = 0.0 # degrees
+# Later in the code I cut spread in half so
+# that the spread total is spread rather
+# than plus or minus spread.
+@export_range(0, 90, 0.1, "radians_as_degrees") var spread: float = 0.0
 # How many bullets to spawn simultaneously.
 # Used for shotgun-type weapons
 @export var simultaneous_shots:int = 1

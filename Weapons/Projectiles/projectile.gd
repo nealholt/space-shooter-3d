@@ -154,7 +154,7 @@ func apply_spread(dat:ShootData) -> void:
 	# Randomize angle that bullet comes out. I'm cutting
 	# spread in half so that a 10 degree spread is
 	# 10 degrees total, not plus or minus 10 degrees.
-	var spread:float = deg_to_rad(dat.spread_deg/2.0)
+	var spread:float = dat.spread
 	# I'm not sure why .normalized() is needed here
 	# and it concerns me that I either need it
 	# everywhere that this sort of rotation is performed

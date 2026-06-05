@@ -4,12 +4,6 @@ const TURRET_SCENE:PackedScene = preload("res://Attachments/Turret/turret.tscn")
 
 @onready var line_of_sight := $TurretModel/Body/Head/RayCast3D
 
-# movement speeds and constraints in degrees
-@export var elevation_speed_deg: float = 5
-@export var rotation_speed_deg: float = 5
-@export var min_elevation_deg: float = 0
-@export var max_elevation_deg: float = 60
-
 var aim_assist:AimAssist
 var guns: Array
 @onready var health_component:HealthComponent = $HealthComponent
@@ -22,8 +16,7 @@ var body: Node3D
 var orientation_data:TargetOrientationData
 
 # If angle to target is less than this number of degrees, then shoot
-@export var angle_to_shoot_deg : float = 5
-var angle_to_shoot : float = deg_to_rad(angle_to_shoot_deg)
+@export_range(0, 90, 0.1, "radians_as_degrees") var angle_to_shoot: float = deg_to_rad(5.0)
 
 # So turrets know what team they are on. These
 # are set in team_setup.gd
@@ -105,8 +98,7 @@ func setup_turret_in_tree(dat:TurretData, p) -> void:
 	turret_motion = TurretMotionComponent.new()
 	turret_motion.setup_values(dat)
 	
-	angle_to_shoot_deg = dat.angle_to_shoot_deg
-	angle_to_shoot = deg_to_rad(angle_to_shoot_deg)
+	angle_to_shoot = dat.angle_to_shoot
 	
 	if dat.use_aim_assist:
 		aim_assist = AimAssist.new_aim_assist(self, dat.angle_assist_limit)

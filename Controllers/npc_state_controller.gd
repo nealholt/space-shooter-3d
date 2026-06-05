@@ -19,8 +19,7 @@ var states : Dictionary = {}
 
 # Within this angle of the target, the enemy
 # will start shooting
-@export var shooting_angle_degrees := 10.0 # degrees
-var shooting_angle:float
+@export_range(0, 90, 0.1, "radians_as_degrees") var angle_to_shoot: float = deg_to_rad(10.0)
 
 # Modifiers for movement amount
 @export var x_speed: float = 0.0 ## Left / right speed.
@@ -49,7 +48,6 @@ var debug_label:Label3D
 
 
 func _ready() -> void:
-	shooting_angle = deg_to_rad(shooting_angle_degrees)
 	# Tell target selector to prefer capital ships
 	target_selector.prefer_capital_ships = target_capital_ships
 	#print('In StateMachine _ready adding children:')
@@ -144,7 +142,7 @@ func shoot(shooter:Ship, delta:float) -> void:
 		shootDat.target = target
 		# Decide whether or not to fire
 		if movement_profile.orientation_data.dist_sqd < shootDat.gun.range_sqd \
-		and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < shooting_angle:
+		and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < angle_to_shoot:
 			gun.shoot(shootDat)
 
 

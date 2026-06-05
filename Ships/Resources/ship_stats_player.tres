@@ -2,26 +2,8 @@
 
 [ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="1_stmd2"]
 [ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="1_ttnv4"]
-[ext_resource type="PackedScene" uid="uid://do50y2jdho5iq" path="res://vfx/MuzzleFlash/muzzle_flash_green_monster.tscn" id="2_3ecky"]
-[ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://UI/ReticlesCrosshairs/Images/crosshair012.png" id="3_6xahi"]
+[ext_resource type="Resource" uid="uid://c3nsko2en7767" path="res://Weapons/Guns/Resources/ShotgunMKI.tres" id="2_6xahi"]
 [ext_resource type="Resource" uid="uid://coa1jlc52fxuo" path="res://Weapons/Guns/Resources/BlasterMKI.tres" id="4_dggup"]
-
-[sub_resource type="Resource" id="Resource_3ecky"]
-script = ExtResource("1_ttnv4")
-name = "shotgun"
-bullet_type = 2
-bullet_speed = 500.0
-bullet_timeout = 4.0
-timeout_vary_percent = 0.0
-fire_rate = 3.0
-reload_time = 1.5
-spread_deg = 10.0
-simultaneous_shots = 5
-fire_sound = 0
-reload_sound = 1
-muzzle_flash = ExtResource("2_3ecky")
-reticle = ExtResource("3_6xahi")
-metadata/_custom_type_script = "uid://bflupvkh65uf"
 
 [sub_resource type="Resource" id="Resource_6xahi"]
 script = ExtResource("1_ttnv4")
@@ -40,6 +22,5 @@ metadata/_custom_type_script = "uid://bflupvkh65uf"
 [resource]
 script = ExtResource("1_stmd2")
 max_health = 100.0
-aim_assist_angle = 5.0
-guns = Array[ExtResource("1_ttnv4")]([SubResource("Resource_3ecky"), SubResource("Resource_6xahi"), ExtResource("4_dggup")])
+guns = Array[ExtResource("1_ttnv4")]([ExtResource("2_6xahi"), SubResource("Resource_6xahi"), ExtResource("4_dggup")])
 metadata/_custom_type_script = "uid://llcl4ev3hi63"

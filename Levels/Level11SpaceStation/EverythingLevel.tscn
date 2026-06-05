@@ -79,9 +79,6 @@ is_player = true
 [node name="AimAssist" parent="BlueTeam/Fighter" index="0" unique_id=936755743]
 angle_assist_limit = 5.0
 
-[node name="Gun" parent="BlueTeam/Fighter/WeaponHandler" parent_id_path=PackedInt32Array(1900985089, 1131696451) index="0" unique_id=2138703467]
-bullet_speed = 800.0
-
 [node name="ShieldTransitAudio" parent="BlueTeam/Fighter" index="11" unique_id=992133318 node_paths=PackedStringArray("shield_to_ignore")]
 shield_to_ignore = NodePath("../Shield")
 

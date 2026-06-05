@@ -46,9 +46,6 @@ team = "blue team"
 controller = NodePath("PlayerMovementV4")
 is_player = true
 
-[node name="AimAssist" parent="BlueTeam/Fighter" index="0" unique_id=936755743]
-angle_assist_limit = 5.0
-
 [node name="MissileLockGroup" parent="BlueTeam/Fighter" index="8" unique_id=756556192]
 lock_timeout = 1.0
 missile_lock_max_angle = 20.0
@@ -59,12 +56,8 @@ bullet_type = 8
 damage = 1.0
 bullet_speed = 600.0
 fire_rate = 2.0
-spread_deg = 60.0
+spread = 1.0471975511965976
 simultaneous_shots = 5
-
-[node name="Gun" parent="BlueTeam/Fighter/WeaponHandler" parent_id_path=PackedInt32Array(1900985089, 1131696451) index="0" unique_id=2138703467]
-bullet_speed = 1000.0
-fire_rate = 18.0
 
 [node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=882451378 instance=ExtResource("5_qdonm")]
 

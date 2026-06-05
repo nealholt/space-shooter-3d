@@ -15,10 +15,10 @@ const ROTATION_LIMIT_DEG:float = 60 # 60 degrees
 
 
 func setup_values(dat:TurretData) -> void:
-	elevation_speed = deg_to_rad(dat.elevation_speed_deg)
-	rotation_speed = deg_to_rad(dat.rotation_speed_deg)
-	min_elevation = deg_to_rad(dat.min_elevation_deg)
-	max_elevation = deg_to_rad(dat.max_elevation_deg)
+	elevation_speed = dat.elevation_speed
+	rotation_speed = dat.rotation_speed
+	min_elevation = dat.min_elevation
+	max_elevation = dat.max_elevation
 
 # The following is loosely based on code from here:
 # https://github.com/IndieQuest/ModularTurret/tree/master/src

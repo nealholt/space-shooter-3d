@@ -14,25 +14,22 @@ const AIMASSIST_SCENE:PackedScene = preload("res://Weapons/aim_assist.tscn")
 # The ship or turret should call use_aim_assist
 # and pass the result to the firing gun.
 
-# Aim assist is live is shooter is within
-# angle_assist_limit degrees of pointing
-# at target intercept.
-@export var angle_assist_limit:float = 3.0 # degrees
-var angle_assist_limit_radians:float
+# Aim assist is active if shooter is within
+# angle_assist_limit of pointing at target intercept.
+@export_range(0, 90, 0.1, "radians_as_degrees") var angle_assist_limit: float = deg_to_rad(3.0)
 
-# Audio to play when aim assist is live
+# Audio to play when aim assist is active
 var audio:AudioStreamPlayer
 
 
-static func new_aim_assist(my_parent:Node3D, angle_assist_limit_deg:float) -> AimAssist:
+static func new_aim_assist(my_parent:Node3D, angle_assist_lim:float) -> AimAssist:
 	var t := AIMASSIST_SCENE.instantiate()
 	my_parent.add_child(t)
-	t.set_assist_limit_deg(angle_assist_limit_deg)
+	t.set_assist_limit(angle_assist_lim)
 	return t
 
 
 func _ready() -> void:
-	angle_assist_limit_radians = deg_to_rad(angle_assist_limit)
 	for c in get_children():
 		if c is AudioStreamPlayer:
 			audio = c
@@ -40,9 +37,8 @@ func _ready() -> void:
 			push_error('Unexpected child of aim assist: ', c)
 
 
-func set_assist_limit_deg(angle_assist_limit_deg:float) -> void:
-	angle_assist_limit = angle_assist_limit_deg
-	angle_assist_limit_radians = deg_to_rad(angle_assist_limit)
+func set_assist_limit(angle_assist_lim:float) -> void:
+	angle_assist_limit = angle_assist_lim
 
 
 func use_aim_assist(sd:ShootData) -> bool:
@@ -62,14 +58,14 @@ func use_aim_assist(sd:ShootData) -> bool:
 	var angle_to:float = Global.get_angle_to_target(
 		shooter.global_position, intercept,
 		-shooter.global_basis.z)
-	var do_use_aim_assist:bool = angle_to < angle_assist_limit_radians
+	var do_use_aim_assist:bool = angle_to < angle_assist_limit
 	play_audio(do_use_aim_assist)
 	return do_use_aim_assist
 
 # Detmerine aim assist usage from relative positions
 # of camera and mouse.
 # If angle between two vectors (camera to intercept versus
-# camera to mouse) is less than angle_assist_limit_radians
+# camera to mouse) is less than angle_assist_limit
 # then return true for do_use_aim_assist
 func use_aim_assist_mouse(intercept:Vector3) -> bool:
 	# Use the first person camera! If you use any other
@@ -86,7 +82,7 @@ func use_aim_assist_mouse(intercept:Vector3) -> bool:
 	var vect_to_cursor := camera.project_ray_normal(Global.input_man.mouse_pos)
 	var vect_to_intercept := intercept - camera.global_position
 	var angle_to:float = vect_to_cursor.angle_to(vect_to_intercept)
-	var do_use_aim_assist:bool = angle_to < angle_assist_limit_radians
+	var do_use_aim_assist:bool = angle_to < angle_assist_limit
 	play_audio(do_use_aim_assist)
 	return do_use_aim_assist
 

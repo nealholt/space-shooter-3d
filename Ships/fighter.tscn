@@ -37,7 +37,6 @@ deathExplosion = 9
 finalExplosion = 8
 
 [node name="AimAssist" parent="." unique_id=936755743 instance=ExtResource("19_xjc2u")]
-angle_assist_limit = 10.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AimAssist" unique_id=1480253422]
 stream = ExtResource("3_g3b86")

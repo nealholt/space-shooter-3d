@@ -3,10 +3,11 @@ class_name CameraGroup extends Node3D
 # https://www.reddit.com/r/godot/comments/18w6prn/camera_considerations/
 
 # Controls for looking at target
-@export var elevation_speed_deg:float = 100.0
-@export var rotation_speed_deg:float = 100.0
-@export var min_elevation_deg:float = 0.0
-@export var max_elevation_deg:float = 80.0
+@export_range(0, 720, 0.1, "radians_as_degrees") var elevation_speed: float = deg_to_rad(100.0)
+@export_range(0, 720, 0.1, "radians_as_degrees") var rotation_speed: float = deg_to_rad(100.0)
+@export_range(-90, 90, 0.1, "radians_as_degrees") var min_elevation: float = 0.0
+@export_range(0, 90, 0.1, "radians_as_degrees") var max_elevation: float = deg_to_rad(80.0)
+
 # This is used for the lerp involved with leaning into turns
 # as well as snapping back after looking at a target
 @export var lerp_str:float = 3.0
@@ -63,10 +64,10 @@ var velocity:=Vector3.ZERO
 
 func _ready() -> void:
 	turret_motion = TurretMotionComponent.new()
-	turret_motion.elevation_speed = deg_to_rad(elevation_speed_deg)
-	turret_motion.rotation_speed = deg_to_rad(rotation_speed_deg)
-	turret_motion.min_elevation = deg_to_rad(min_elevation_deg)
-	turret_motion.max_elevation = deg_to_rad(max_elevation_deg)
+	turret_motion.elevation_speed = elevation_speed
+	turret_motion.rotation_speed = rotation_speed
+	turret_motion.min_elevation = min_elevation
+	turret_motion.max_elevation = max_elevation
 	# Set the first two points in the mouse_guide line to
 	# be center screen. Two points are added because 
 	# _physics_process always resets the second point,

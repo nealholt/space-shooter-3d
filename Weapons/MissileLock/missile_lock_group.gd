@@ -37,7 +37,8 @@ var slower_lock_angle:float = 25.0 # degrees
 @export var missile_range:float = 600.0 ## Range within which missile lock can be acquired.
 # Calculated from missile_range
 var missile_range_sqd:float ## Squared range within which missile lock can be acquired
-@export var missile_lock_max_angle:float = 35.0 ## In degrees. Can achieve and maintain missile lock if target is within plus of minus of this angle from center.
+# Can achieve and maintain missile lock if target is within plus of minus of this angle from center.
+@export_range(0, 90, 0.1, "radians_as_degrees") var missile_lock_max_angle: float = deg_to_rad(35.0)
 
 # Track time since missile lock acquired
 var time_since_lock:float = 0.0
@@ -142,7 +143,7 @@ func npc_update(targeter:Ship, delta:float) -> void:
 		return
 	# Also stop seeking if target is out of range or offscreen
 	elif (targeter.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
-	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > deg_to_rad(missile_lock_max_angle)):
+	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > missile_lock_max_angle):
 		stop_seeking()
 		target.lost_lock(targeter)
 	# Otherwise target is valid and we're either seeking
@@ -164,7 +165,7 @@ func player_update(targeter:Ship, delta:float) -> void:
 	# Also stop seeking if target is out of range or offscreen
 	elif seeking and \
 	(targeter.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
-	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > deg_to_rad(missile_lock_max_angle)):
+	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > missile_lock_max_angle):
 		stop_seeking()
 		target.lost_lock(targeter)
 	# Otherwise target is valid and we're either seeking
