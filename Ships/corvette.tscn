@@ -73,7 +73,7 @@ side_cam_position = Vector3(2.3, -0.5, -3.5)
 side_cam_rotation_deg = null
 max_collision_damage = null
 deathExplosion = 9
-finalExplosion = 8
+finalExplosion = 11
 death_animation_duration_min = null
 death_animation_duration_max = null
 

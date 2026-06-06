@@ -13,75 +13,81 @@
 [ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://Assets/Particles/vfx_explosion_lelu_8x.tscn" id="11_j7uvs"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://Assets/Particles/explosion.tscn" id="12_ey1l5"]
 [ext_resource type="PackedScene" uid="uid://dd7gue1cwbx6u" path="res://Assets/Particles/massive_explosion.tscn" id="13_71nip"]
+[ext_resource type="PackedScene" uid="uid://7dofuekbf3cs" path="res://Assets/Particles/explosion_MkII.tscn" id="14_fdgtq"]
 
-[node name="VFX_Manager" type="Node"]
+[node name="VFX_Manager" type="Node" unique_id=1546280994]
 script = ExtResource("1_4hukn")
 
-[node name="all_vfx_settings" type="Node" parent="."]
+[node name="all_vfx_settings" type="Node" parent="." unique_id=25385317]
 
-[node name="ShieldStrikeSetting" parent="all_vfx_settings" instance=ExtResource("2_kqin3")]
+[node name="ShieldStrikeSetting" parent="all_vfx_settings" unique_id=1547821570 instance=ExtResource("2_kqin3")]
 limit = 40
 type = 1
 visual_effect = ExtResource("3_8do65")
 
-[node name="ShieldExplosionEffectSetting" type="Node" parent="all_vfx_settings"]
+[node name="ShieldExplosionEffectSetting" type="Node" parent="all_vfx_settings" unique_id=334466268]
 script = ExtResource("4_vbg6y")
 limit = 20
 type = 2
 visual_effect = ExtResource("4_levs1")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
-[node name="ShipStrikeSetting" type="Node" parent="all_vfx_settings"]
+[node name="ShipStrikeSetting" type="Node" parent="all_vfx_settings" unique_id=86356444]
 script = ExtResource("4_vbg6y")
 limit = 40
 type = 3
 visual_effect = ExtResource("6_8do65")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
-[node name="BulletHoleSetting" type="Node" parent="all_vfx_settings"]
+[node name="BulletHoleSetting" type="Node" parent="all_vfx_settings" unique_id=733613282]
 script = ExtResource("4_vbg6y")
 limit = 100
 type = 4
 visual_effect = ExtResource("7_levs1")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
-[node name="FlakExplosionSetting" type="Node" parent="all_vfx_settings"]
+[node name="FlakExplosionSetting" type="Node" parent="all_vfx_settings" unique_id=1977722552]
 script = ExtResource("4_vbg6y")
 limit = 80
 type = 5
 visual_effect = ExtResource("8_le2sy")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
-[node name="MuzzleFlashSetting" type="Node" parent="all_vfx_settings"]
+[node name="MuzzleFlashSetting" type="Node" parent="all_vfx_settings" unique_id=470384721]
 script = ExtResource("4_vbg6y")
 limit = 100
 type = 6
 visual_effect = ExtResource("9_14doy")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
-[node name="SingleExplosionSetting" type="Node" parent="all_vfx_settings"]
+[node name="SingleExplosionSetting" type="Node" parent="all_vfx_settings" unique_id=1483340351]
 script = ExtResource("4_vbg6y")
 type = 7
 visual_effect = ExtResource("10_ptu8o")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
-[node name="SingleExplosion8xSetting" type="Node" parent="all_vfx_settings"]
+[node name="SingleExplosion8xSetting" type="Node" parent="all_vfx_settings" unique_id=1698029398]
 script = ExtResource("4_vbg6y")
 limit = 30
 type = 8
 visual_effect = ExtResource("11_j7uvs")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
-[node name="ExplosionSetting" type="Node" parent="all_vfx_settings"]
+[node name="ExplosionSetting" type="Node" parent="all_vfx_settings" unique_id=1831221807]
 script = ExtResource("4_vbg6y")
 limit = 30
 type = 9
 visual_effect = ExtResource("12_ey1l5")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
-[node name="CarrierExplosionSetting" type="Node" parent="all_vfx_settings"]
+[node name="CarrierExplosionSetting" type="Node" parent="all_vfx_settings" unique_id=535941681]
 script = ExtResource("4_vbg6y")
 limit = 2
 type = 10
 visual_effect = ExtResource("13_71nip")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
+
+[node name="BusyExplosion" parent="all_vfx_settings" unique_id=1278060277 instance=ExtResource("2_kqin3")]
+limit = 5
+type = 11
+visual_effect = ExtResource("14_fdgtq")
