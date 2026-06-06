@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3asmlify74hw"
-path.s3tc="res://.godot/imported/flame_02.png-2f0bdce656adf7644b1a1264b922157c.s3tc.ctex"
+uid="uid://bwfyyi3q8raw4"
+path.s3tc="res://.godot/imported/spark_02.png-2dab55164f3997acb6fd37b61f0b24de.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Textures/kenney_particle-pack/flame_02.png"
-dest_files=["res://.godot/imported/flame_02.png-2f0bdce656adf7644b1a1264b922157c.s3tc.ctex"]
+source_file="res://Assets/Textures/kenney_particle-pack/spark_02.png"
+dest_files=["res://.godot/imported/spark_02.png-2dab55164f3997acb6fd37b61f0b24de.s3tc.ctex"]
 
 [params]
 

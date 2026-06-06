@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://hghgh008vwv" path="res://Assets/Textures/kenney_particle-pack/flare_01.png" id="1_f3jch"]
 [ext_resource type="Script" uid="uid://dcdgmk2hdc70k" path="res://vfx/specific_effects/massive_explosion.gd" id="1_t7dhc"]
-[ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/ParticleImages/star_05.png" id="2_t7dhc"]
+[ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/Textures/kenney_particle-pack/star_05.png" id="2_t7dhc"]
 [ext_resource type="Texture2D" uid="uid://p6vwpntup0ja" path="res://Assets/Textures/kenney_particle-pack/circle_01.png" id="3_6j2k2"]
 [ext_resource type="Texture2D" uid="uid://cevjv4lsemkac" path="res://Assets/Textures/kenney_particle-pack/circle_05.png" id="4_q5vej"]
 

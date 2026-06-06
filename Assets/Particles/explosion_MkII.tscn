@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://7dofuekbf3cs"]
 
 [ext_resource type="Script" uid="uid://jce54cs8xhg1" path="res://vfx/specific_effects/explosion_single.gd" id="1_54mup"]
-[ext_resource type="Texture2D" uid="uid://dmdma38hj76ed" path="res://Assets/ParticleImages/flame_04.png" id="1_tf0us"]
-[ext_resource type="Texture2D" uid="uid://dj56rpx4qmqh7" path="res://Assets/ParticleImages/flame_03.png" id="2_54mup"]
-[ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/ParticleImages/star_05.png" id="3_f4waa"]
-[ext_resource type="Texture2D" uid="uid://dhgy70nb1wj4x" path="res://Assets/ParticleImages/fire_02.png" id="4_117nw"]
-[ext_resource type="Texture2D" uid="uid://cqxy5k2dm2wt8" path="res://Assets/ParticleImages/fire_01.png" id="5_qreak"]
+[ext_resource type="Texture2D" uid="uid://dmdma38hj76ed" path="res://Assets/Textures/kenney_particle-pack/flame_04.png" id="1_tf0us"]
+[ext_resource type="Texture2D" uid="uid://dj56rpx4qmqh7" path="res://Assets/Textures/kenney_particle-pack/flame_03.png" id="2_54mup"]
+[ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/Textures/kenney_particle-pack/star_05.png" id="3_f4waa"]
+[ext_resource type="Texture2D" uid="uid://dhgy70nb1wj4x" path="res://Assets/Textures/kenney_particle-pack/fire_02.png" id="4_117nw"]
+[ext_resource type="Texture2D" uid="uid://cqxy5k2dm2wt8" path="res://Assets/Textures/kenney_particle-pack/fire_01.png" id="5_qreak"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7crj"]
 transparency = 1

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://loiql7x3ow62"]
 
 [ext_resource type="Script" uid="uid://bohtbu5g83x78" path="res://vfx/specific_effects/shield_strike.gd" id="1_rcwin"]
-[ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/ParticleImages/star_04.png" id="1_xdx7c"]
+[ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/Textures/kenney_particle-pack/star_04.png" id="1_xdx7c"]
 [ext_resource type="Material" uid="uid://covsu58qwnqru" path="res://Assets/Materials/flare00.tres" id="2_l105u"]
 [ext_resource type="AudioStream" uid="uid://drwbhql0pjblr" path="res://Audio/SoundEffects/shield_strike.wav" id="3_30u2s"]
 

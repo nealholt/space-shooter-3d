@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dec2h3fkjfo0m"]
 
-[ext_resource type="Texture2D" uid="uid://ce6i4w30wrek0" path="res://Assets/ParticleImages/star_09.png" id="1_3b3r2"]
+[ext_resource type="Texture2D" uid="uid://ce6i4w30wrek0" path="res://Assets/Textures/kenney_particle-pack/star_09.png" id="1_3b3r2"]
 [ext_resource type="Script" uid="uid://savoxhna208c" path="res://Features/RaceCheckpoint/race_checkpoint.gd" id="1_rikje"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="4_flrl7"]
 

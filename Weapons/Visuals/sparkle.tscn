@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cdpvm8pijxv0f" path="res://Weapons/Projectiles/sparkle_trail.gd" id="1_ba1k8"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://vfx/contrail.tscn" id="1_gwo8b"]
-[ext_resource type="Texture2D" uid="uid://ce6i4w30wrek0" path="res://Assets/ParticleImages/star_09.png" id="2_ba1k8"]
-[ext_resource type="Texture2D" uid="uid://cuth4s67j0brc" path="res://Assets/ParticleImages/star_08.png" id="3_2foe0"]
+[ext_resource type="Texture2D" uid="uid://ce6i4w30wrek0" path="res://Assets/Textures/kenney_particle-pack/star_09.png" id="2_ba1k8"]
+[ext_resource type="Texture2D" uid="uid://cuth4s67j0brc" path="res://Assets/Textures/kenney_particle-pack/star_08.png" id="3_2foe0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6j8b"]
 transparency = 1

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ctylowk0dxhp3"]
 
-[ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/ParticleImages/star_05.png" id="1_qgf74"]
+[ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/Textures/kenney_particle-pack/star_05.png" id="1_qgf74"]
 [ext_resource type="Script" uid="uid://btt6vbjkdafk7" path="res://vfx/specific_effects/sparks.gd" id="1_wywr5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_abhd1"]
