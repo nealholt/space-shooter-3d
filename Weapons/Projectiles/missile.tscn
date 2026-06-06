@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="7_4ccg1"]
 [ext_resource type="PackedScene" uid="uid://cmg5hwgtanvoi" path="res://Attachments/Hitbox/damageable_area.tscn" id="8_aqwbt"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="10_uqtem"]
+[ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/ParticleImages/star_05.png" id="11_pjwh6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uudvm"]
 transparency = 1
@@ -26,6 +27,17 @@ material = SubResource("StandardMaterial3D_uudvm")
 radius = 5.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uqtem"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_six0c"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(2.454227, 2.454227, 2.454227, 1)
+albedo_texture = ExtResource("11_pjwh6")
+disable_receive_shadows = true
+billboard_mode = 1
+billboard_keep_scale = true
 
 [node name="Missile" unique_id=294693303 node_paths=PackedStringArray("controller", "health_component", "hit_box_component", "proxy_fuse_area", "reticle") instance=ExtResource("1_g37v4")]
 speed = 0.0
@@ -76,3 +88,15 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=772706228]
 shape = SubResource("SphereShape3D_uqtem")
+
+[node name="BrightSpot" type="Sprite3D" parent="." index="9" unique_id=78029119]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 2.3241978)
+material_override = SubResource("StandardMaterial3D_six0c")
+cast_shadow = 0
+double_sided = false
+texture = ExtResource("11_pjwh6")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="10" unique_id=963726733]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.324)
+light_energy = 10.0
+omni_range = 100.0

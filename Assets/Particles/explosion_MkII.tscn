@@ -189,6 +189,7 @@ scale_curve = SubResource("CurveTexture_ak1tb")
 [node name="Smoke2" type="GPUParticles3D" parent="." unique_id=2106229254]
 material_override = SubResource("StandardMaterial3D_j7crj")
 material_overlay = SubResource("StandardMaterial3D_rvdp6")
+cast_shadow = 0
 amount = 10
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_pya87")
@@ -197,6 +198,7 @@ draw_pass_1 = SubResource("QuadMesh_qdc4w")
 [node name="Smoke1" type="GPUParticles3D" parent="." unique_id=988697557]
 material_override = SubResource("StandardMaterial3D_j7crj")
 material_overlay = SubResource("StandardMaterial3D_sttnj")
+cast_shadow = 0
 amount = 4
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_m0bon")
@@ -204,12 +206,14 @@ draw_pass_1 = SubResource("QuadMesh_qdc4w")
 
 [node name="Brightness" type="GPUParticles3D" parent="." unique_id=1359769496]
 material_override = SubResource("StandardMaterial3D_fm8a8")
+cast_shadow = 0
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_d40my")
 draw_pass_1 = SubResource("QuadMesh_jnasw")
 
 [node name="Fire2" type="GPUParticles3D" parent="." unique_id=2017332983]
 material_override = SubResource("StandardMaterial3D_h1wpx")
+cast_shadow = 0
 amount = 20
 lifetime = 0.5
 explosiveness = 1.0
@@ -219,6 +223,7 @@ draw_pass_1 = SubResource("QuadMesh_g2x1n")
 
 [node name="Fire1" type="GPUParticles3D" parent="." unique_id=2050170460]
 material_override = SubResource("StandardMaterial3D_akc05")
+cast_shadow = 0
 amount = 10
 lifetime = 0.7
 explosiveness = 0.67
@@ -228,6 +233,7 @@ draw_pass_1 = SubResource("QuadMesh_g2x1n")
 
 [node name="Sparks" type="GPUParticles3D" parent="." unique_id=476426789]
 material_override = SubResource("StandardMaterial3D_c3c78")
+cast_shadow = 0
 amount = 64
 lifetime = 0.2
 explosiveness = 1.0

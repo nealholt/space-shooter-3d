@@ -131,7 +131,12 @@ func shoot_actual() -> void:
 
 
 func deal_damage(collider, delta:float) -> void:
-	if is_instance_valid(collider) and collider.is_in_group("damageable"):
+	# I was getting an error on the line below
+	#     data.damage = damage*delta
+	# because data was null, so I added a condition
+	# to the if that data not be null, but I don't
+	# understand why this issue cropped up only recently
+	if is_instance_valid(collider) and collider.is_in_group("damageable") and data:
 		#print("dealing damage %f" % (damage*delta))
 		data.damage = damage*delta
 		collider.damage(data)
