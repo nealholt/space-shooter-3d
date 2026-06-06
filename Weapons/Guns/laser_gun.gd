@@ -73,7 +73,8 @@ func _ready():
 
 
 func _process(delta: float) -> void:
-	super._process(delta)
+	if reticle:
+		super._process(delta)
 	# Default cast point
 	var cast_point:Vector3 = Vector3(0, -ray_length, 0)
 	# Check for actual collision
@@ -230,9 +231,7 @@ func beam_off(time:float) -> void:
 
 # Override parent class
 func activate() -> void:
-	#visible = true
-	#set_process(true)
-	#set_physics_process(true)
+	set_process(true)
 	if reticle:
 		reticle.show()
 	if ray:
@@ -249,6 +248,9 @@ func deactivate() -> void:
 		state = LaserState.POWERING_ON
 		beam_off(0.01)
 	super.deactivate()
+	set_process(true) # Super turns this off, but we need it on
+	# beam_off will properly deactivate process
+
 
 # Override parent class
 func reload() -> void:

@@ -148,11 +148,6 @@ func _ready() -> void:
 		# Set as a missile lock for NPCs
 		if missile_lock:
 			missile_lock.set_as_NPC()
-		# Remove texture rects beneath the guns beneath the
-		# weapon handler. These are crosshairs for use by
-		# the player only.
-		if weapon_handler:
-			weapon_handler.remove_texture_rects()
 		# Turn off the "got hit" audio
 		hit_box_component.turn_off_audio()
 		# Attach target reticle

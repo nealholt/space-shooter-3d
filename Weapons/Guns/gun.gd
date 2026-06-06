@@ -82,6 +82,8 @@ func _ready():
 	shield_detector.area_exited.connect(_on_shield_exited)
 	# Set some non-export variables
 	set_initial_values()
+	# By default, don't run the process function
+	set_process(false)
 
 
 func set_initial_values() -> void:
@@ -119,6 +121,8 @@ func setup_from_resource(gun_stats:GunStats, is_player:bool) -> void:
 		reticle.size = Vector2(64,64)
 		reticle.self_modulate = Color(1.0,1.0,1.0,0.6)
 		add_child(reticle)
+		# Update the reticle in process
+		set_process(true)
 	if gun_stats.gun_model:
 		gun_model = gun_stats.gun_model.instantiate()
 		add_child(gun_model)
@@ -138,23 +142,15 @@ func setup_from_resource(gun_stats:GunStats, is_player:bool) -> void:
 					Global.HITBOX_COLL_LAYER
 		ray.collide_with_areas = true
 		add_child(ray)
-	# The only thing _process does is update the reticle
-	set_process(is_player and gun_stats.reticle)
 	# What needs done afterward? like what's done in _ready, but should also be done here
 	set_initial_values()
 
 
+# This function should only run if there is a player-owned
+# gun with a reticle
 func _process(_delta: float) -> void:
-	if reticle:
-		var position_ahead:Vector3 = global_position - global_transform.basis.z*500.0
-		Global.set_reticle(reticle, position_ahead)
-	# One of the problems with the next bit is that it breaks gun
-	# variants (such as burst gun or laser gun) that also use the
-	# _process function when you don't attach a reticle to them.
-	#else:
-		## This function doesn't do anything else,
-		## so shut itself down.
-		#set_process(false)
+	var position_ahead:Vector3 = global_position - global_transform.basis.z*500.0
+	Global.set_reticle(reticle, position_ahead)
 
 
 func ready_to_fire() -> bool:
@@ -229,7 +225,6 @@ func deactivate() -> void:
 		reload()
 	#visible = false
 	set_process(false)
-	set_physics_process(false)
 	if reticle:
 		reticle.hide()
 	if gun_model:
@@ -245,8 +240,7 @@ func deactivate() -> void:
 # this weapon
 func activate() -> void:
 	visible = true
-	set_process(true)
-	set_physics_process(true)
+	set_process(is_instance_valid(reticle))
 	if reticle:
 		reticle.show()
 	if ray:

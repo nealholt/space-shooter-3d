@@ -10,3 +10,5 @@ burst_rate = 1.0
 
 [node name="BurstTimer" type="Timer" parent="." index="1" unique_id=512524106]
 one_shot = true
+
+[connection signal="timeout" from="BurstTimer" to="." method="_on_burst_timer_timeout"]

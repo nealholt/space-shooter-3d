@@ -17,15 +17,6 @@ func reset_weapon_handler() -> void:
 	change_weapon()
 
 
-# This is called on NPC ships' weapon handlers so
-# that targeting reticles can be removed.
-func remove_texture_rects() -> void:
-	for weapon in get_children():
-		for gun_child in weapon.get_children():
-			if gun_child is TextureRect:
-				gun_child.queue_free()
-
-
 func deactivate_all() -> void:
 	# Pre: All children must be weapons
 	for child in get_children():

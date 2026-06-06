@@ -10,14 +10,6 @@ var firing: bool = false
 var burst_count:int = 0
 
 
-# Called every frame. 'delta' is the elapsed time
-# since the previous frame.
-func _process(delta):
-	super._process(delta)
-	if firing and burst_timer.is_stopped():
-		shoot_actual()
-
-
 # Override parent function
 func setup_from_resource(gun_stats:GunStats, is_player:bool) -> void:
 	super.setup_from_resource(gun_stats, is_player)
@@ -61,3 +53,8 @@ func deactivate() -> void:
 	# interfere with the firing rate
 	burst_timer.stop()
 	firing = false
+
+
+func _on_burst_timer_timeout() -> void:
+	if firing:
+		shoot_actual()
