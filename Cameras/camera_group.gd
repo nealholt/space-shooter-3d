@@ -12,7 +12,7 @@ class_name CameraGroup extends Node3D
 # as well as snapping back after looking at a target
 @export var lerp_str:float = 3.0
 
-enum CameraState {FIRSTPERSON, REAR, FLYBY, TARGETCLOSEUP, TARGETVIEW, PROFILE}
+enum CameraState {FIRSTPERSON, REAR, FLYBY, TARGETCLOSEUP, TARGETVIEW, PROFILE, THIRDPERSON}
 var state : CameraState
 
 # free_camera has top_level (Under Node3D -> Transform) set to true.
@@ -20,6 +20,7 @@ var state : CameraState
 @onready var rear_under_camera: Camera3D = $RearUnderCamera
 @onready var profile_camera: Camera3D = $ProfileCamera
 @onready var free_camera: Camera3D = $FreeCamera
+@onready var third_person_camera:Camera3D = $ThirdPersonCam
 
 @onready var body:Node3D = $Body
 @onready var head:Node3D = $Body/Head
@@ -119,8 +120,11 @@ func _ready() -> void:
 	rear_under_camera.abandon_camera.connect(switch_cameras)
 	profile_camera.abandon_camera.connect(switch_cameras)
 	free_camera.abandon_camera.connect(switch_cameras)
-	# Start off in firstperson
-	current_camera = first_person_camera
+	third_person_camera.abandon_camera.connect(switch_cameras)
+	# Start off in firstperson, but since switching to first is
+	# a toggle, start off in third and then call switch, which
+	# switches to first.
+	current_camera = third_person_camera
 	switch_cameras.call_deferred()
 
 
@@ -181,8 +185,8 @@ func _physics_process(delta: float) -> void:
 		turret_motion.rotate_and_elevate_lerp(body, head, delta, temp_targ_pos)
 	
 	# Show target lead indicator and center crosshair
-	# if in first person view
-	# state == CameraState.FIRSTPERSON
+	# if in first or third person view
+	# (state == CameraState.FIRSTPERSON or state == CameraState.THIRDPERSON)
 	# and the player exists
 	# Global.player
 	# and the player has a controller
@@ -193,7 +197,7 @@ func _physics_process(delta: float) -> void:
 	# Global.player.weapon_handler
 	# and the target is not yet dead
 	# !Global.player.controller.target.is_dead()
-	if state == CameraState.FIRSTPERSON and \
+	if (state == CameraState.FIRSTPERSON or state == CameraState.THIRDPERSON) and \
 	Global.player and Global.player.controller and \
 	is_instance_valid(Global.player.controller.target) and \
 	Global.player.weapon_handler and \
@@ -247,7 +251,14 @@ func switch_cameras(cs:CameraState = CameraState.FIRSTPERSON) -> void:
 	near_center.visible = false
 	beyond_center.visible = false
 	current_camera.deactivate_camera.call()
+	# If switching to first person from first person, instead
+	# switch to third person. This makes the first person
+	# button a toggle instead
+	if state == cs and cs == CameraState.FIRSTPERSON:
+		cs = CameraState.THIRDPERSON
+	# Update state
 	state = cs
+	# Update camera
 	match state:
 		CameraState.FIRSTPERSON:
 			current_camera = first_person_camera
@@ -265,6 +276,9 @@ func switch_cameras(cs:CameraState = CameraState.FIRSTPERSON) -> void:
 		CameraState.TARGETVIEW:
 			current_camera = free_camera
 			current_camera.set_as_targetview()
+		CameraState.THIRDPERSON:
+			current_camera = third_person_camera
+			Global.targeting_hud_on = true
 	current_camera.activate_camera.call()
 	Global.current_camera = current_camera
 

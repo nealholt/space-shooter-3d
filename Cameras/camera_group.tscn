@@ -8,7 +8,6 @@
 
 [node name="CameraGroup" type="Node3D" unique_id=582326403]
 script = ExtResource("1_sad13")
-min_elevation_deg = -30.0
 
 [node name="RearUnderCamera" parent="." unique_id=1844376467 instance=ExtResource("3_0u455")]
 fov = 100.0
@@ -17,6 +16,9 @@ fov = 100.0
 
 [node name="FreeCamera" parent="." unique_id=1681996162 instance=ExtResource("3_0u455")]
 top_level = true
+
+[node name="ThirdPersonCam" parent="." unique_id=2113444870 instance=ExtResource("3_0u455")]
+transform = Transform3D(1, 0, 0, 0, 0.9961947, 0.08715574, 0, -0.08715574, 0.9961947, 0, 4, 7)
 
 [node name="Body" type="Node3D" parent="." unique_id=713808017]
 

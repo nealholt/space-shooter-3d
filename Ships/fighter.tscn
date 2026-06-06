@@ -73,9 +73,8 @@ got_hit_audio = NodePath("GotHitAudio")
 [node name="GotHitAudio" type="AudioStreamPlayer" parent="HitBoxComponent" unique_id=245140248]
 stream = ExtResource("16_uh0vy")
 
-[node name="MissileLockGroup" parent="." unique_id=756556192 node_paths=PackedStringArray("missile_launcher") instance=ExtResource("17_563f5")]
+[node name="MissileLockGroup" parent="." unique_id=756556192 instance=ExtResource("17_563f5")]
 lock_style = 2
-missile_launcher = NodePath("")
 missile_range = 4000.0
 
 [node name="WeaponHandler" parent="." unique_id=1131696451 instance=ExtResource("4_dhpb0")]
