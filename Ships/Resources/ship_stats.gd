@@ -6,3 +6,5 @@ class_name ShipStats extends Resource
 @export var reticle_set:TargetReticles.ReticleSet = TargetReticles.ReticleSet.FIGHTER
 
 @export var guns:Array[GunStats]
+
+@export var missile_launcher:GunStats

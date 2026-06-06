@@ -109,16 +109,12 @@ func _ready() -> void:
 	missile_lock.acquiring_offset = acquiring.size/2.0
 
 
+func setup_from_resource(gun_res:GunStats, is_player) -> void:
+	missile_launcher = GunSpawner.new_gun_from_resource(gun_res, self, is_player)
+
+
 func set_as_NPC() -> void:
 	npc_missile_lock = true
-	# If this is an NPC missile lock group, as
-	# opposed to a player's missile lock group, then
-	# queue free all children of this node EXCEPT
-	# for the gun / missile_launcher.
-	# They aren't needed.
-	for c in get_children():
-		if missile_launcher != c:
-			c.queue_free()
 
 
 # The Ship that this scene is a child of ought to be the

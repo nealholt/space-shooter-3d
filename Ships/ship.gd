@@ -110,6 +110,9 @@ func _ready() -> void:
 		for gun_res in stats.guns:
 			GunSpawner.new_gun_from_resource(gun_res, weapon_handler, is_player)
 		weapon_handler.reset_weapon_handler()
+	# Set up missile launcher, if any
+	if missile_lock and stats.missile_launcher:
+		missile_lock.setup_from_resource(stats.missile_launcher, is_player)
 	# Set this ship up differently if it's the player
 	if is_player:
 		Global.register_player(self)

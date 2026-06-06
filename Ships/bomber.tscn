@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://ctw16pilpn8rk" path="res://Ships/Models/bomber_chassis.tscn" id="3_hrk35"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="4_40no2"]
 [ext_resource type="PackedScene" uid="uid://ch30rmws7v08k" path="res://vfx/contrail.tscn" id="5_rgdmc"]
-[ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Weapons/Guns/gun.tscn" id="7_f8b5m"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="8_te66f"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Weapons/MissileLock/missile_lock_group.tscn" id="9_7wsae"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Attachments/ObstacleDetector/obstacle_detector.tscn" id="12_e1i0b"]
@@ -56,16 +55,8 @@ health_component = NodePath("../HealthComponent")
 [node name="MissileLockGroup" parent="." unique_id=786493030 node_paths=PackedStringArray("missile_launcher") instance=ExtResource("9_7wsae")]
 lock_style = 1
 lock_timeout = 0.2
-missile_launcher = NodePath("MissileLauncher")
+missile_launcher = NodePath("")
 missile_range = 2000.0
-
-[node name="MissileLauncher" parent="MissileLockGroup" unique_id=908886794 instance=ExtResource("7_f8b5m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, -1.1)
-bullet_type = 0
-damage = 100.0
-bullet_speed = 80.0
-bullet_timeout = 20.0
-fire_rate = 0.1
 
 [node name="ObstacleDetector" parent="." unique_id=1346467973 instance=ExtResource("12_e1i0b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.6661463)

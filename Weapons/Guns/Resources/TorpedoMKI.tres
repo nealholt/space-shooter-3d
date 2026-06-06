@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GunStats" format=3 uid="uid://bx72xq7efrasw"]
+
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="1_sht37"]
+
+[resource]
+script = ExtResource("1_sht37")
+name = "Torpedo"
+damage = 100.0
+bullet_speed = 90.0
+bullet_timeout = 20.0
+timeout_vary_percent = 0.0
+fire_rate = 0.1
+metadata/_custom_type_script = "uid://bflupvkh65uf"

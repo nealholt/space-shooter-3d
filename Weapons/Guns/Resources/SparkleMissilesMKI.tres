@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GunStats" format=3 uid="uid://cogutc3uk7e24"]
+
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="1_cqgsu"]
+
+[resource]
+script = ExtResource("1_cqgsu")
+name = "Sparkle Missiles"
+bullet_type = 8
+bullet_speed = 600.0
+bullet_timeout = 9.0
+fire_rate = 0.5
+spread = 1.0471975511965976
+simultaneous_shots = 5
+metadata/_custom_type_script = "uid://bflupvkh65uf"

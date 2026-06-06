@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="GunStats" format=3 uid="uid://cwbihjofcpss8"]
+
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="1_uy25d"]
+
+[resource]
+script = ExtResource("1_uy25d")
+name = "Missile Standard"
+damage = 20.0
+bullet_speed = 300.0
+bullet_timeout = 9.0
+timeout_vary_percent = 0.0
+fire_rate = 0.2
+metadata/_custom_type_script = "uid://bflupvkh65uf"

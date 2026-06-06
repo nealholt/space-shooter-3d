@@ -4,7 +4,6 @@
 [ext_resource type="Resource" uid="uid://dtpn51rkaubwl" path="res://Ships/Resources/ship_stats_fighter.tres" id="2_s55gh"]
 [ext_resource type="AudioStream" uid="uid://bafyqtqnisog7" path="res://Audio/SoundEffects/aim_assist.wav" id="3_g3b86"]
 [ext_resource type="PackedScene" uid="uid://hpvkerb8hmkp" path="res://Ships/ModelsBlender/fighter_tri.tscn" id="4_05dih"]
-[ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Weapons/Guns/gun.tscn" id="4_57m73"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Weapons/weapon_handler.tscn" id="4_dhpb0"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="5_1xytm"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="9_s55gh"]
@@ -76,16 +75,8 @@ stream = ExtResource("16_uh0vy")
 
 [node name="MissileLockGroup" parent="." unique_id=756556192 node_paths=PackedStringArray("missile_launcher") instance=ExtResource("17_563f5")]
 lock_style = 2
-missile_launcher = NodePath("MissileLauncher")
+missile_launcher = NodePath("")
 missile_range = 4000.0
-
-[node name="MissileLauncher" parent="MissileLockGroup" unique_id=684312626 instance=ExtResource("4_57m73")]
-transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-bullet_type = 0
-damage = 20.0
-bullet_speed = 250.0
-bullet_timeout = 9.0
-fire_rate = 0.2
 
 [node name="WeaponHandler" parent="." unique_id=1131696451 instance=ExtResource("4_dhpb0")]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -3.5)
