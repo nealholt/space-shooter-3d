@@ -194,13 +194,13 @@ func aim_self() -> void:
 		look_at(intercept, Vector3.UP)
 	# Else if the shooter is the player and the player is
 	# using mouse controls, and the player is in first
-	# person...
+	# (or third) person...
 	# (I added in "if Global.player" because there is a
 	# rare error when there is no player, yet the first
 	# three conditions here are true. I think it can occur
 	# because null==null is true in Godot, so hopefully
 	# this fixes it.)
-	elif Global.player and data.shooter == Global.player and Global.input_man.use_mouse_and_keyboard and Global.player.camera_group.is_first_person():
+	elif Global.player and data.shooter == Global.player and Global.input_man.use_mouse_and_keyboard and Global.player.camera_group.is_first_or_third():
 		#shoot at mouse / cursor
 		aim_self_at_cursor()
 	else:

@@ -123,6 +123,7 @@ func _ready() -> void:
 		# Add first person camera's near miss detector to collision exceptions
 		# so one's own bullets don't trigger it
 		collision_exceptions.push_back(camera_group.get_first_person_near_miss())
+		collision_exceptions.push_back(camera_group.get_third_person_near_miss())
 		# Attach engine audio visuals
 		var engAV_scene:PackedScene = preload("res://Audio/EngineAudio/engine_audio_visuals.tscn")
 		var engineAV:EngineAV = engAV_scene.instantiate()

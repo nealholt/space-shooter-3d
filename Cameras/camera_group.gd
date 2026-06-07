@@ -125,6 +125,7 @@ func _ready() -> void:
 	# a toggle, start off in third and then call switch, which
 	# switches to first.
 	current_camera = third_person_camera
+	state = CameraState.THIRDPERSON
 	switch_cameras.call_deferred()
 
 
@@ -286,8 +287,8 @@ func switch_cameras(cs:CameraState = CameraState.FIRSTPERSON) -> void:
 func is_mouse_near_center() -> bool:
 	return Global.input_man.use_mouse_and_keyboard and Global.targeting_hud_on and near_center.visible
 
-func is_first_person() -> bool:
-	return state == CameraState.FIRSTPERSON
+func is_first_or_third() -> bool:
+	return state == CameraState.FIRSTPERSON or state == CameraState.THIRDPERSON
 
 func visualize_hit(hit:HIT_TYPE) -> void:
 	# Hide current target lead indicator
@@ -320,9 +321,15 @@ func _on_timer_hit_flicker_timeout() -> void:
 func get_first_person_near_miss() -> Area3D:
 	return first_person_camera.get_near_miss_area()
 
+func get_third_person_near_miss() -> Area3D:
+	return third_person_camera.get_near_miss_area()
 
-func get_first_person_camera() -> Camera3D:
-	return first_person_camera
+
+func get_look_camera() -> Camera3D:
+	if state == CameraState.THIRDPERSON:
+		return third_person_camera
+	else:
+		return first_person_camera
 
 
 func set_fp_manual_override(b:bool) -> void:
@@ -333,7 +340,7 @@ func set_fp_manual_override(b:bool) -> void:
 # rotx is the pitch
 func rotate_fp_cam(rotx:float, roty:float, delta:float) -> void:
 	# if current camera is not first person OR using target look then return
-	if !is_first_person() or look_at_target:
+	if state != CameraState.FIRSTPERSON or look_at_target:
 		return
 	if rotx!=0.0:
 		turret_motion.swivel_toward(body, rotx, delta*lerp_str)
