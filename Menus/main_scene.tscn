@@ -296,8 +296,8 @@ text = "D-pad Left"
 [node name="StandardCamera" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=622544492]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "Switch to 1st person, or if already in 1st, 
-switch to 3rd (hold to look at target)"
+text = "Hold to look at target. Tap to switch
+between 1st and 3rd person"
 
 [node name="Label12" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=1236991195]
 layout_mode = 2
@@ -482,8 +482,8 @@ text = "1"
 [node name="StandardCamera" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=629641026]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "Switch to 1st person, or if already in 1st,
-switch to 3rd (hold to look at target)"
+text = "Hold to look at target. Tap to switch
+between 1st and 3rd person"
 
 [node name="Label12" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=153102064]
 layout_mode = 2

@@ -1,5 +1,7 @@
 class_name CameraGroup extends Node3D
 
+signal switching_cameras(switching_to:CameraState)
+
 # https://www.reddit.com/r/godot/comments/18w6prn/camera_considerations/
 
 # Controls for looking at target
@@ -55,6 +57,9 @@ const MOUSE_CENTER_RADIUS := 200.0*200.0
 # Radius (squared)  from the center of the screen within which
 # the mouse guide is hidden
 const MOUSE_HIDE_RADIUS := 100.0*100.0
+
+var quick_release_timer := 0.0
+const QUICK_RELEASE_LIMIT := 0.2 # seconds
 
 
 # These are used to control a camera indpendent of any ship.
@@ -121,21 +126,28 @@ func _ready() -> void:
 	profile_camera.abandon_camera.connect(switch_cameras)
 	free_camera.abandon_camera.connect(switch_cameras)
 	third_person_camera.abandon_camera.connect(switch_cameras)
-	# Start off in firstperson, but since switching to first is
-	# a toggle, start off in third and then call switch, which
-	# switches to first.
-	current_camera = third_person_camera
-	state = CameraState.THIRDPERSON
+	# Start off in firstperson
+	current_camera = first_person_camera
+	state = CameraState.FIRSTPERSON
 	switch_cameras.call_deferred()
 
 
 # For gameplay mode
 func _physics_process(delta: float) -> void:
+	# Track elapsed time for pov standard held down
+	quick_release_timer += delta
 	# Right thumb stick pressed in. Switch to first person
 	# and as long as right stick is held in, look at
 	# current target.
 	# Control key for mouse and keyboard.
 	if Input.is_action_just_pressed("POV_standard"):
+		# Only reset the timer if NOT transitioning from third
+		# to first, otherwise you can't rapid swap becuase
+		# on release it swaps back to third.
+		if state != CameraState.THIRDPERSON:
+			# Track how long this button gets held
+			quick_release_timer = 0.0 # reset
+		# Switch to first person
 		switch_cameras(CameraState.FIRSTPERSON)
 		turn_on_look()
 	# Target view. Look towards the target, but from the far
@@ -160,6 +172,10 @@ func _physics_process(delta: float) -> void:
 	# Turn off target look when right thumbstick is released
 	elif Input.is_action_just_released("POV_standard"):
 		look_at_target = false
+		# If this was a quick release from first person,
+		# then switch to third person
+		if state == CameraState.FIRSTPERSON and quick_release_timer < QUICK_RELEASE_LIMIT:
+			switch_cameras(CameraState.THIRDPERSON)
 	# Profile camera initially used for testing
 	elif Input.is_action_just_released("POV_profile"):
 		switch_cameras(CameraState.PROFILE)
@@ -252,11 +268,6 @@ func switch_cameras(cs:CameraState = CameraState.FIRSTPERSON) -> void:
 	near_center.visible = false
 	beyond_center.visible = false
 	current_camera.deactivate_camera.call()
-	# If switching to first person from first person, instead
-	# switch to third person. This makes the first person
-	# button a toggle instead
-	if state == cs and cs == CameraState.FIRSTPERSON:
-		cs = CameraState.THIRDPERSON
 	# Update state
 	state = cs
 	# Update camera
@@ -282,6 +293,7 @@ func switch_cameras(cs:CameraState = CameraState.FIRSTPERSON) -> void:
 			Global.targeting_hud_on = true
 	current_camera.activate_camera.call()
 	Global.current_camera = current_camera
+	switching_cameras.emit(state)
 
 
 func is_mouse_near_center() -> bool:

@@ -4,6 +4,7 @@ signal destroyed # Emitted when this ship is destroyed
 
 @onready var hit_box_component: HitBoxComponent = $HitBoxComponent
 @onready var target_reticles: TargetReticles = $TargetReticles
+@onready var contrail: Contrail = $Contrail
 
 @export var stats:ShipStats
 
@@ -120,6 +121,7 @@ func _ready() -> void:
 		var cam_group_scene:PackedScene = preload("res://Cameras/camera_group.tscn")
 		camera_group = cam_group_scene.instantiate()
 		add_child(camera_group)
+		camera_group.switching_cameras.connect(_on_camera_switch)
 		# Add first person camera's near miss detector to collision exceptions
 		# so one's own bullets don't trigger it
 		collision_exceptions.push_back(camera_group.get_first_person_near_miss())
@@ -286,3 +288,8 @@ func get_new_shootdata() -> ShootData:
 	sd.shooter = self
 	sd.collision_exceptions = collision_exceptions
 	return sd
+
+func _on_camera_switch(new_cam:CameraGroup.CameraState) -> void:
+	# Toggle contrail visibility off when in third person.
+	# It just gets in the way.
+	contrail.visible = new_cam != CameraGroup.CameraState.THIRDPERSON
