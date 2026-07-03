@@ -23,6 +23,8 @@ var fired_warning_time:int = 0
 
 func _ready() -> void:
 	# Make this scene statically accessible
+	if mc:
+		push_error('ERROR: Unique, static MissileCues reference has already been set. This should only ever get set once.')
 	mc = self
 
 func connect_to_player(p:Ship) -> void:

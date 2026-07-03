@@ -36,6 +36,8 @@ var mouse_pos:Vector2 ## Current mouse position on the viewport
 
 func _ready() -> void:
 	# Make this scene statically accessible
+	if im:
+		push_error('ERROR: Unique, static InputManager reference has already been set. This should only ever get set once.')
 	im = self
 
 func refresh() -> void:

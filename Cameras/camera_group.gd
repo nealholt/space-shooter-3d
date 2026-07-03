@@ -77,6 +77,8 @@ var velocity:=Vector3.ZERO
 
 func _ready() -> void:
 	# Make this scene statically accessible
+	if cg:
+		push_error('ERROR: Unique, static CameraGroup reference has already been set. This should only ever get set once.')
 	cg = self
 	
 	turret_motion = TurretMotionComponent.new()

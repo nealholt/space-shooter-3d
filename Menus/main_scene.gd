@@ -21,6 +21,8 @@ var level_string:String ## String used to load current level
 
 func _ready() -> void:
 	# Make this scene statically accessible
+	if main_scene:
+		push_error('ERROR: Unique, static MainScene reference has already been set. This should only ever get set once.')
 	main_scene = self
 	# Start with load level 1 button focused. This lets you
 	# use arrow keys and enter to nabigate the menus.
