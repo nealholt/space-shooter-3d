@@ -473,7 +473,7 @@ func explode_with_damage() -> void:
 	# Add to main_3d, not root, otherwise the added
 	# node might not be properly cleared when
 	# transitioning to a new scene.
-	Global.main_scene.main_3d.add_child(explosion)
+	MainScene.main_scene.add_to_scene(explosion)
 	# Set explosion's position and damage
 	explosion.global_position = global_position
 	explosion.damage_amt = data.damage

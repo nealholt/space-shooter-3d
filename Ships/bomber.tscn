@@ -15,9 +15,10 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_rfws3"]
 size = Vector3(5.03894, 1.51178, 7.49753)
 
-[node name="Bomber" type="CharacterBody3D" unique_id=1295567426 node_paths=PackedStringArray("aim_assist", "burning_trail", "health_component", "missile_lock", "obstacle_detector") groups=["damageable"]]
+[node name="Bomber" type="CharacterBody3D" unique_id=1295567426 node_paths=PackedStringArray("contrails", "aim_assist", "burning_trail", "health_component", "missile_lock", "obstacle_detector") groups=["damageable"]]
 motion_mode = 1
 script = ExtResource("1_uw5oo")
+contrails = [NodePath("Contrail"), NodePath("Contrail2")]
 stats = ExtResource("2_te66f")
 aim_assist = NodePath("AimAssist")
 burning_trail = NodePath("BurningTrail")
@@ -52,10 +53,9 @@ transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, -1.35, 0.5, 3.3)
 [node name="HitBoxComponent" parent="." unique_id=1463959918 node_paths=PackedStringArray("health_component") instance=ExtResource("8_te66f")]
 health_component = NodePath("../HealthComponent")
 
-[node name="MissileLockGroup" parent="." unique_id=786493030 node_paths=PackedStringArray("missile_launcher") instance=ExtResource("9_7wsae")]
+[node name="MissileLockGroup" parent="." unique_id=786493030 instance=ExtResource("9_7wsae")]
 lock_style = 1
 lock_timeout = 0.2
-missile_launcher = NodePath("")
 missile_range = 2000.0
 
 [node name="ObstacleDetector" parent="." unique_id=1346467973 instance=ExtResource("12_e1i0b")]

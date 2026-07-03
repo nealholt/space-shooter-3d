@@ -50,8 +50,8 @@ func victory(_stars_earned:Array) -> void:
 
 
 func _on_retry_button_pressed() -> void:
-	Global.main_scene.retry_current_level()
+	MainScene.main_scene.retry_current_level()
 
 
 func _on_quit_button_pressed() -> void:
-	Global.main_scene.to_main_menu()
+	MainScene.main_scene.to_main_menu()

@@ -25,7 +25,7 @@ func _on_health_component_died() -> void:
 	# Add to main_3d, not root, otherwise the added
 	# node might not be properly cleared when
 	# transitioning to a new scene.
-	Global.main_scene.main_3d.add_child(on_death_sound)
+	MainScene.main_scene.add_to_scene(on_death_sound)
 	on_death_sound.play_then_delete(global_position)
 	# Wait until the end of the frame to execute queue_free
 	Callable(queue_free).call_deferred()

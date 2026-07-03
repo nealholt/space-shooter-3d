@@ -4,7 +4,8 @@ signal destroyed # Emitted when this ship is destroyed
 
 @onready var hit_box_component: HitBoxComponent = $HitBoxComponent
 @onready var target_reticles: TargetReticles = $TargetReticles
-@onready var contrail: Contrail = $Contrail
+
+@export var contrails: Array[Contrail] ## Add any contrails to this so they can be hidden in third person
 
 @export var stats:ShipStats
 
@@ -292,4 +293,5 @@ func get_new_shootdata() -> ShootData:
 func _on_camera_switch(new_cam:CameraGroup.CameraState) -> void:
 	# Toggle contrail visibility off when in third person.
 	# It just gets in the way.
-	contrail.visible = new_cam != CameraGroup.CameraState.THIRDPERSON
+	for c in contrails:
+		c.visible = new_cam != CameraGroup.CameraState.THIRDPERSON

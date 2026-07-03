@@ -19,10 +19,11 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_ydoww"]
 radius = 2.3
 
-[node name="Fighter" type="CharacterBody3D" unique_id=1900985089 node_paths=PackedStringArray("aim_assist", "burning_trail", "health_component", "missile_lock", "obstacle_detector", "weapon_handler") groups=["damageable"]]
+[node name="Fighter" type="CharacterBody3D" unique_id=1900985089 node_paths=PackedStringArray("contrails", "aim_assist", "burning_trail", "health_component", "missile_lock", "obstacle_detector", "weapon_handler") groups=["damageable"]]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
 motion_mode = 1
 script = ExtResource("1_dn8ab")
+contrails = [NodePath("Contrail")]
 stats = ExtResource("2_s55gh")
 aim_assist = NodePath("AimAssist")
 burning_trail = NodePath("BurningTrail")

@@ -1,7 +1,13 @@
-extends Node
-class_name MainScene
+class_name MainScene extends Node
 
-# This was all based on this tutorial:
+# Global self reference.
+# Now any script can reference the main_scene like so:
+# MainScene.main_scene
+# BE WARNED: This will not work correctly if there is more
+# than one landing pad in a scene.
+static var main_scene:MainScene = null
+
+# The following is based on this tutorial:
 # https://www.youtube.com/watch?v=a0UQ-t-vuzY
 
 @onready var hud: Control = $HUD
@@ -14,6 +20,8 @@ var level_string:String ## String used to load current level
 
 
 func _ready() -> void:
+	# Make this scene statically accessible
+	main_scene = self
 	# Start with load level 1 button focused. This lets you
 	# use arrow keys and enter to nabigate the menus.
 	# After completing a level, you might want to default
@@ -23,8 +31,7 @@ func _ready() -> void:
 	# fullscreen as the default in project settings,
 	# the toggle button was broken, but this way it works.
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	# Make this scene globally accessible
-	Global.main_scene = self
+	# globally accessible
 	Global.input_man = $InputManager
 	# Make sure the interface is synced with the default
 	# input manager settings.
@@ -178,3 +185,7 @@ func _on_toggle_controls_toggled(toggled_on: bool) -> void:
 	else:
 		$Menu/HBoxContainer/MouseKeyboardControls.visible = false
 		$Menu/HBoxContainer/ControllerControls.visible = true
+
+
+func add_to_scene(n:Node) -> void:
+	main_3d.add_child(n)
