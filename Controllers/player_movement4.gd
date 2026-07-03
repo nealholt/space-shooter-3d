@@ -49,8 +49,6 @@ var pitch_std_right_stick: float = 0.4
 
 var is_dead := false
 
-var im : InputManager
-
 # Reference to engine audiovisuals. ship.gd is responsible for
 # setting up this reference.
 var engineAV:EngineAV
@@ -60,7 +58,6 @@ func _ready() -> void:
 	# Get a backup reference to the default settings
 	stats_standard = stats
 	impulse = stats.impulse
-	im = Global.input_man
 
 
 # Override parent class function
@@ -68,18 +65,18 @@ func move_and_turn(mover, delta:float) -> void:
 	if is_dead:
 		return
 	
-	im.update()
+	InputManager.im.update()
 	
 	#Brake
-	if im.brake:
+	if InputManager.im.brake:
 		stats = stats_brake
 		engineAV.shift2brake(0.0)
 	#Accelerate
-	elif im.accelerate:
+	elif InputManager.im.accelerate:
 		stats = stats_accel
 		engineAV.shift2afterburners(4.0)
 	#Drift
-	elif im.drift:
+	elif InputManager.im.drift:
 		stats = stats_drift
 		engineAV.shift2drift(1.0)
 	else:
@@ -98,7 +95,7 @@ func move_and_turn(mover, delta:float) -> void:
 	var roll_modifier: float = 1.0
 	var yaw_modifier: float = 1.0
 	# Don't apply if drifting.
-	if !im.drift:
+	if !InputManager.im.drift:
 		var speed:float = mover.velocity.length()
 		var turn_reduction:float = max(abs(speed-stats.impulse/stats.friction_std) / turn_reduction_factor, 1.0)
 		pitch_modifier /= turn_reduction
@@ -109,15 +106,15 @@ func move_and_turn(mover, delta:float) -> void:
 	# Use min to avoid this.
 	# Get pitch
 	pitch_input = lerp(pitch_input,
-		(im.up_down1*stats.pitch + im.up_down2*pitch_std_right_stick) * pitch_modifier,
+		(InputManager.im.up_down1*stats.pitch + InputManager.im.up_down2*pitch_std_right_stick) * pitch_modifier,
 		min(1.0, stats.turning_lerp*delta))
 	# Get Roll
 	roll_input = lerp(roll_input,
-		(im.left_right1*stats.roll + im.left_right2*roll_std_right_stick) * roll_modifier,
+		(InputManager.im.left_right1*stats.roll + InputManager.im.left_right2*roll_std_right_stick) * roll_modifier,
 		min(1.0, stats.turning_lerp*delta))
 	# Get yaw using same left stick input as roll
 	yaw_input = lerp(yaw_input,
-		im.left_right1*stats.yaw * yaw_modifier,
+		InputManager.im.left_right1*stats.yaw * yaw_modifier,
 		min(1.0, stats.turning_lerp*delta))
 	
 	friction = stats.friction_std
@@ -145,7 +142,7 @@ func shoot(shooter:Ship, delta:float) -> void:
 		# ...and an automatic weapon is selected and shoot is pressed
 		# or a semiauto weapon is selected and shoot was just pressed,
 		# then shoot.
-		if (gun.automatic and im.shoot_pressed) or (!gun.automatic and im.shoot_just_pressed):
+		if (gun.automatic and InputManager.im.shoot_pressed) or (!gun.automatic and InputManager.im.shoot_just_pressed):
 			gun.shoot(shootDat)
 	
 	# MISSILES:
@@ -153,10 +150,10 @@ func shoot(shooter:Ship, delta:float) -> void:
 	if shooter.missile_lock:
 		var mlg:MissileLockGroup = shooter.missile_lock
 		# Target most centered enemy and begin missile lock
-		if im.retarget_just_pressed:
+		if InputManager.im.retarget_just_pressed:
 			mlg.attempt_to_start_seeking(shooter)
 		# Fire missile if lock is acquired
-		elif im.retarget_just_released:
+		elif InputManager.im.retarget_just_released:
 			mlg.attempt_to_fire_missile(shooter)
 		# Update the missile lock group component
 		mlg.update(shooter, delta)
@@ -165,9 +162,9 @@ func shoot(shooter:Ship, delta:float) -> void:
 # Override parent class function
 func select_target(targeter:Node3D) -> void:
 	if is_dead: return
-	if !im.retarget_just_pressed: return
+	if !InputManager.im.retarget_just_pressed: return
 	
-	if im.use_mouse_and_keyboard:
+	if InputManager.im.use_mouse_and_keyboard:
 		# Target most central enemy team member
 		# based on where the mouse is looking.
 		select_target_from_mouse(targeter)
@@ -177,7 +174,7 @@ func select_target(targeter:Node3D) -> void:
 
 
 func misc_actions(actor) -> void:
-	if im.switch_weapons:
+	if InputManager.im.switch_weapons:
 		actor.weapon_handler.change_weapon()
 
 

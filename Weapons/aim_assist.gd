@@ -51,7 +51,7 @@ func use_aim_assist(sd:ShootData) -> bool:
 	# then this needs to be handled differently;
 	# do_use_aim_assist is true if angle from where mouse / camera
 	# is looking is within limit, not from where shooter is looking.
-	if shooter == Global.player and Global.input_man.use_mouse_and_keyboard:
+	if shooter == Global.player and InputManager.im.use_mouse_and_keyboard:
 		return use_aim_assist_mouse(intercept)
 	# Otherwise calculate whether or not to use aim assist
 	# from the shooter's perspective.
@@ -79,7 +79,7 @@ func use_aim_assist_mouse(intercept:Vector3) -> bool:
 	# shooter (ship or gun) perspective, not the camera
 	# perspective.
 	var camera := Global.camera_group.get_look_camera()
-	var vect_to_cursor := camera.project_ray_normal(Global.input_man.mouse_pos)
+	var vect_to_cursor := camera.project_ray_normal(InputManager.im.mouse_pos)
 	var vect_to_intercept := intercept - camera.global_position
 	var angle_to:float = vect_to_cursor.angle_to(vect_to_intercept)
 	var do_use_aim_assist:bool = angle_to < angle_assist_limit

@@ -8,6 +8,6 @@ point_count = 3
 metadata/_snap_enabled = true
 metadata/_snap_count = 50
 
-[node name="InputManager" type="Node"]
+[node name="InputManager" type="Node" unique_id=1842716672]
 script = ExtResource("1_umdoe")
 mouse_control_curve = SubResource("Curve_umdoe")

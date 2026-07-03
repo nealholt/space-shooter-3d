@@ -30,8 +30,6 @@ var stats_standard:ControllerStats
 
 var is_dead := false
 
-var im : InputManager
-
 # Reference to engine audiovisuals. ship.gd is responsible for
 # setting up this reference.
 var engineAV:EngineAV
@@ -41,7 +39,6 @@ func _ready() -> void:
 	# Get a backup reference to the default settings
 	stats_standard = stats
 	impulse = stats.impulse
-	im = Global.input_man
 
 
 # Override parent class function
@@ -49,7 +46,7 @@ func move_and_turn(mover, delta:float) -> void:
 	if is_dead:
 		return
 	
-	im.update()
+	InputManager.im.update()
 	
 	# If drift is just released, lerp heading toward
 	# velocity for the next heading_reset_duration
@@ -71,11 +68,11 @@ func move_and_turn(mover, delta:float) -> void:
 	#if im.brake:
 		#pass
 	#Accelerate
-	if im.accelerate:
+	if InputManager.im.accelerate:
 		stats = stats_accel
 		engineAV.shift2afterburners(4.0)
 	#Drift
-	elif im.drift:
+	elif InputManager.im.drift:
 		stats = stats_drift
 		engineAV.shift2drift(1.0)
 		# Drifting cancels heading reset
@@ -94,35 +91,35 @@ func move_and_turn(mover, delta:float) -> void:
 	# Use min to avoid this.
 	# Get pitch
 	pitch_input = lerp(pitch_input,
-		im.up_down1 * stats.pitch,
+		InputManager.im.up_down1 * stats.pitch,
 		min(1.0, stats.turning_lerp*delta))
 	# Get Roll
 	roll_input = lerp(roll_input,
-		im.left_right1 * stats.roll,
+		InputManager.im.left_right1 * stats.roll,
 		min(1.0, stats.turning_lerp*delta))
 	# Get yaw using same left stick input as roll
 	yaw_input = lerp(yaw_input,
-		im.left_right1*stats.yaw,
+		InputManager.im.left_right1*stats.yaw,
 		min(1.0, stats.turning_lerp*delta))
 	
 	friction = stats.friction_std
 	
 	# Turn "head" and "neck"
-	var manual_look:bool = im.left_right2 != 0.0 or im.up_down2 != 0.0
+	var manual_look:bool = InputManager.im.left_right2 != 0.0 or InputManager.im.up_down2 != 0.0
 	Global.camera_group.set_fp_manual_override(manual_look)
 	if manual_look:
 		# -im.up_down2 The negative makes it be NOT inverted, which
 		# makes more sense to my thumb.
-		Global.camera_group.rotate_fp_cam(im.left_right2, -im.up_down2, delta)
+		Global.camera_group.rotate_fp_cam(InputManager.im.left_right2, -InputManager.im.up_down2, delta)
 		#print(im.left_right2)
 		#print(im.up_down2)
 	else:
-		var lean_in:bool = im.left_right1 != 0.0 or im.up_down1 != 0.0
+		var lean_in:bool = InputManager.im.left_right1 != 0.0 or InputManager.im.up_down1 != 0.0
 		Global.camera_group.set_fp_manual_override(lean_in)
 		# Lean into turns
 		if lean_in:
-			var horz_lean:=im.left_right1*lean_left_right
-			var vert_lean:=im.up_down1*lean_up_down
+			var horz_lean:=InputManager.im.left_right1*lean_left_right
+			var vert_lean:=InputManager.im.up_down1*lean_up_down
 			Global.camera_group.rotate_fp_cam(horz_lean, vert_lean, delta)
 	
 	super.move_and_turn(mover, delta)
@@ -148,7 +145,7 @@ func shoot(shooter:Ship, delta:float) -> void:
 		# ...and an automatic weapon is selected and shoot is pressed
 		# or a semiauto weapon is selected and shoot was just pressed,
 		# then shoot.
-		if (gun.automatic and im.shoot_pressed) or (!gun.automatic and im.shoot_just_pressed):
+		if (gun.automatic and InputManager.im.shoot_pressed) or (!gun.automatic and InputManager.im.shoot_just_pressed):
 			gun.shoot(shootDat)
 	
 	# MISSILES:
@@ -156,10 +153,10 @@ func shoot(shooter:Ship, delta:float) -> void:
 	if shooter.missile_lock:
 		var mlg:MissileLockGroup = shooter.missile_lock
 		# Target most centered enemy and begin missile lock
-		if im.retarget_just_pressed:
+		if InputManager.im.retarget_just_pressed:
 			mlg.attempt_to_start_seeking(shooter)
 		# Fire missile if lock is acquired
-		elif im.retarget_just_released:
+		elif InputManager.im.retarget_just_released:
 			mlg.attempt_to_fire_missile(shooter)
 		# Update the missile lock group component
 		mlg.update(shooter, delta)
@@ -168,9 +165,9 @@ func shoot(shooter:Ship, delta:float) -> void:
 # Override parent class function
 func select_target(targeter:Node3D) -> void:
 	if is_dead: return
-	if !im.retarget_just_pressed: return
+	if !InputManager.im.retarget_just_pressed: return
 	
-	if im.use_mouse_and_keyboard:
+	if InputManager.im.use_mouse_and_keyboard:
 		# Target most central enemy team member
 		# based on where the mouse is looking.
 		select_target_from_mouse(targeter)
@@ -180,7 +177,7 @@ func select_target(targeter:Node3D) -> void:
 
 
 func misc_actions(actor) -> void:
-	if im.switch_weapons:
+	if InputManager.im.switch_weapons:
 		actor.weapon_handler.change_weapon()
 
 

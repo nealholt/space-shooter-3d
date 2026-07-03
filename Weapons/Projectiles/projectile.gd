@@ -200,7 +200,7 @@ func aim_self() -> void:
 	# three conditions here are true. I think it can occur
 	# because null==null is true in Godot, so hopefully
 	# this fixes it.)
-	elif Global.player and data.shooter == Global.player and Global.input_man.use_mouse_and_keyboard and Global.player.camera_group.is_first_or_third():
+	elif Global.player and data.shooter == Global.player and InputManager.im.use_mouse_and_keyboard and Global.player.camera_group.is_first_or_third():
 		#shoot at mouse / cursor
 		aim_self_at_cursor()
 	else:
@@ -214,7 +214,7 @@ func aim_self() -> void:
 
 
 func aim_self_at_cursor() -> void:
-	var mouse_pos:Vector2 = Global.input_man.mouse_pos
+	var mouse_pos:Vector2 = InputManager.im.mouse_pos
 	# The following if makes the projectile head off
 	# toward the mouse/cursor if the mouse is near screen
 	# center, and makes the projectile head toward the
@@ -224,7 +224,7 @@ func aim_self_at_cursor() -> void:
 		# Find the vector toward the mouse from
 		# screen center, shrink it to the proper length,
 		# and add it to the screen center.
-		var half_size : Vector2 = Global.input_man.current_viewport.size / 2
+		var half_size : Vector2 = InputManager.im.current_viewport.size / 2
 		# Get mouse x and y relative to screen center
 		var x_rel_center = half_size.x - mouse_pos.x
 		var y_rel_center = half_size.y - mouse_pos.y
@@ -234,7 +234,7 @@ func aim_self_at_cursor() -> void:
 		# Shrink vector to length and subtract it off of screen center
 		mouse_pos = half_size - mouse_pos*(aim_radius / vect_length)
 		#print(mouse_position)
-	var camera := Global.input_man.current_viewport.get_camera_3d()
+	var camera := InputManager.im.current_viewport.get_camera_3d()
 	# Go to camera position + camera direction times 100000
 	var go_to_point := camera.project_ray_origin(mouse_pos) + camera.project_ray_normal(mouse_pos) * 100000
 	look_at(go_to_point, Vector3.UP)

@@ -235,8 +235,8 @@ func _physics_process(delta: float) -> void:
 		target_lead_visible = false
 	# Draw a line from the center of the screen to the mouse position.
 	# This is how House of the Dying Sun does mouse controls.
-	if Global.input_man.use_mouse_and_keyboard and Global.targeting_hud_on:
-		var mouse_pos:Vector2 = Global.input_man.mouse_pos #get_viewport().get_mouse_position()
+	if InputManager.im.use_mouse_and_keyboard and Global.targeting_hud_on:
+		var mouse_pos:Vector2 = InputManager.im.mouse_pos #get_viewport().get_mouse_position()
 		mouse_guide.set_point_position(1, mouse_pos)
 		# Hide the mouse_guide if it's close to center
 		var guide_length:float = mouse_pos.distance_squared_to(mouse_guide.get_point_position(0))
@@ -297,7 +297,7 @@ func switch_cameras(cs:CameraState = CameraState.FIRSTPERSON) -> void:
 
 
 func is_mouse_near_center() -> bool:
-	return Global.input_man.use_mouse_and_keyboard and Global.targeting_hud_on and near_center.visible
+	return InputManager.im.use_mouse_and_keyboard and Global.targeting_hud_on and near_center.visible
 
 func is_first_or_third() -> bool:
 	return state == CameraState.FIRSTPERSON or state == CameraState.THIRDPERSON

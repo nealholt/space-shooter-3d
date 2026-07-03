@@ -109,9 +109,9 @@ func select_target_from_mouse(targeter:Ship) -> void:
 	# Target most central enemy team member
 	# based on where the mouse is looking.
 	# Point in direction of mouse viewed from camera
-	var camera := Global.input_man.current_viewport.get_camera_3d()
-	var origin := camera.project_ray_origin(Global.input_man.mouse_pos)
-	var direction := camera.project_ray_normal(Global.input_man.mouse_pos)
+	var camera := InputManager.im.current_viewport.get_camera_3d()
+	var origin := camera.project_ray_origin(InputManager.im.mouse_pos)
+	var direction := camera.project_ray_normal(InputManager.im.mouse_pos)
 	set_target(targeter, Global.get_lowest_angleto_from_group(enemy_team, origin, direction))
 
 func get_target_or_null() -> HitBoxComponent:

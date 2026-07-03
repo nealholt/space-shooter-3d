@@ -18,7 +18,6 @@ var blue_team_group : TeamSetup # Node3D holding everything on team blue
 var current_camera : Camera3D
 var camera_group : CameraGroup
 var player : Ship
-var input_man : InputManager
 var missile_cues : MissileCues
 # For now I'm globally turning off the hud when in
 # camera views other than first person.

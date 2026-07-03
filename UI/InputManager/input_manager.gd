@@ -1,5 +1,12 @@
 class_name InputManager extends Node
 
+# Static self reference.
+# Now any script can reference the input manager like so:
+# InputManager.im
+# BE WARNED: This will not work correctly if there is more
+# than one landing pad in a scene.
+static var im:InputManager = null
+
 @export var use_mouse_and_keyboard := true
 @export var use_inverted := false
 # Use this curve to scale mouse input to make the ship easier
@@ -26,6 +33,10 @@ var up_down2 := 0.0 # Right stick
 var current_viewport:Viewport
 var mouse_pos:Vector2 ## Current mouse position on the viewport
 
+
+func _ready() -> void:
+	# Make this scene statically accessible
+	im = self
 
 func refresh() -> void:
 	if use_inverted:

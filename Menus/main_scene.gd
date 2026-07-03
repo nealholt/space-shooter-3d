@@ -1,6 +1,6 @@
 class_name MainScene extends Node
 
-# Global self reference.
+# Static self reference.
 # Now any script can reference the main_scene like so:
 # MainScene.main_scene
 # BE WARNED: This will not work correctly if there is more
@@ -31,12 +31,10 @@ func _ready() -> void:
 	# fullscreen as the default in project settings,
 	# the toggle button was broken, but this way it works.
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	# globally accessible
-	Global.input_man = $InputManager
 	# Make sure the interface is synced with the default
 	# input manager settings.
-	_on_toggle_inverted_toggled(Global.input_man.use_inverted)
-	_on_toggle_controls_toggled(Global.input_man.use_mouse_and_keyboard)
+	_on_toggle_inverted_toggled(InputManager.im.use_inverted)
+	_on_toggle_controls_toggled(InputManager.im.use_mouse_and_keyboard)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -108,7 +106,7 @@ func load_level(level_name:String) -> void:
 		main_3d.add_child(level_instance)
 		menu.visible = false
 		hud.visible = true
-		Global.input_man.refresh()
+		InputManager.im.refresh()
 	# Set team node references in the global script
 	Global.red_team_group = null
 	Global.blue_team_group = null
@@ -174,11 +172,11 @@ func _on_toggle_fullscreen_pressed() -> void:
 
 
 func _on_toggle_inverted_toggled(toggled_on: bool) -> void:
-	Global.input_man.toggle_inverted(toggled_on)
+	InputManager.im.toggle_inverted(toggled_on)
 
 
 func _on_toggle_controls_toggled(toggled_on: bool) -> void:
-	Global.input_man.toggle_mouse_and_keyboard(toggled_on)
+	InputManager.im.toggle_mouse_and_keyboard(toggled_on)
 	if toggled_on:
 		$Menu/HBoxContainer/MouseKeyboardControls.visible = true
 		$Menu/HBoxContainer/ControllerControls.visible = false

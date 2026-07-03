@@ -58,33 +58,31 @@ var rotate_up_down:float = 0.0
 @export var mouse_deadzone:float = 0.15 ## Range 0 to 1
 
 var current_mode := CameraMode.FREE
-var im : InputManager
 var target:Node3D
 
 
 func _ready() -> void:
 	Global.current_camera = camera
-	im = Global.input_man
 
 
 func _process(delta: float) -> void:
-	im.update() # Update the input manager
+	InputManager.im.update() # Update the input manager
 	
 	# Toggle mouse visibility
-	if im.switch_weapons:
+	if InputManager.im.switch_weapons:
 		if Input.mouse_mode == Input.MouseMode.MOUSE_MODE_VISIBLE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	# Create mouse deadzone for ease of control
-	if im.use_mouse_and_keyboard:
-		if abs(im.left_right2) < mouse_deadzone:
-			im.left_right2 = 0.0
-		if abs(im.up_down1) < mouse_deadzone:
-			im.up_down1 = 0.0
-		if abs(im.left_right1) < mouse_deadzone:
-			im.left_right1 = 0.0
+	if InputManager.im.use_mouse_and_keyboard:
+		if abs(InputManager.im.left_right2) < mouse_deadzone:
+			InputManager.im.left_right2 = 0.0
+		if abs(InputManager.im.up_down1) < mouse_deadzone:
+			InputManager.im.up_down1 = 0.0
+		if abs(InputManager.im.left_right1) < mouse_deadzone:
+			InputManager.im.left_right1 = 0.0
 	
 	# Act on current camera mode
 	match current_mode:
@@ -98,7 +96,7 @@ func _process(delta: float) -> void:
 			attached_behavior(delta)
 	
 	# Grab a target from either team (left mouse click)
-	if im.shoot_just_pressed:
+	if InputManager.im.shoot_just_pressed:
 		var all_targets:= Array()
 		for c in Global.red_team_group.get_children():
 			all_targets.append(c)
@@ -107,7 +105,7 @@ func _process(delta: float) -> void:
 		target = Global.get_center_most(self, all_targets)
 	
 	# Switch camera mode (right mouse click)
-	if im.retarget_just_pressed:
+	if InputManager.im.retarget_just_pressed:
 		current_mode = ((current_mode+1) % CameraMode.size()) as CameraMode
 		#print(CameraMode.find_key(current_mode))
 		
@@ -143,11 +141,11 @@ func move_forward_backward(delta:float) -> void:
 
 func accelerate(delta:float) -> void:
 	# Speed up or slow down
-	if im.accelerate:
+	if InputManager.im.accelerate:
 		speed = lerp(speed, max_speed, speed_lerp * delta)
-	elif im.drift: # Reverse
+	elif InputManager.im.drift: # Reverse
 		speed = lerp(speed, min_speed, speed_lerp * delta)
-	elif im.brake: # Decelerate
+	elif InputManager.im.brake: # Decelerate
 		speed = lerp(speed, 0.0, brake_lerp * delta)
 
 
@@ -163,8 +161,8 @@ func look_behavior(delta:float) -> void:
 	if global_position.distance_squared_to(target.global_position) < 1:
 		speed = -1.0
 	# Get strafe amount
-	strafe_left_right = lerp(strafe_left_right, strafe_strength*im.left_right1, strafe_lerp*delta)
-	strafe_up_down = lerp(strafe_up_down, strafe_strength*im.up_down1, strafe_lerp*delta)
+	strafe_left_right = lerp(strafe_left_right, strafe_strength*InputManager.im.left_right1, strafe_lerp*delta)
+	strafe_up_down = lerp(strafe_up_down, strafe_strength*InputManager.im.up_down1, strafe_lerp*delta)
 	# Strafe left right
 	global_position += -transform.basis.x * strafe_left_right * delta
 	# Before strafing up down, check the following:
@@ -200,9 +198,9 @@ func look_attached_behavior(delta:float) -> void:
 	if camera.global_position.distance_squared_to(target.global_position) < 1.0:
 		speed = -1.0
 	# control movement around target by rotating root
-	rotate_left_right = lerp(rotate_left_right, rotate_strength*im.left_right1, rotate_lerp*delta)
+	rotate_left_right = lerp(rotate_left_right, rotate_strength*InputManager.im.left_right1, rotate_lerp*delta)
 	rotate_y(-rotate_left_right)
-	rotate_up_down = lerp(rotate_up_down, rotate_strength*im.up_down1, rotate_lerp*delta)
+	rotate_up_down = lerp(rotate_up_down, rotate_strength*InputManager.im.up_down1, rotate_lerp*delta)
 	rotate_x(-rotate_up_down)
 
 
@@ -217,9 +215,9 @@ func attached_behavior(delta:float) -> void:
 
 func pitch_roll_yaw_me(me:Node3D, delta:float) -> void:
 	# Pitch roll and yaw the camera
-	roll = lerp(roll, roll_strength*im.left_right2, roll_lerp*delta)
-	pitch = lerp(pitch, pitch_strength*im.up_down1, pitch_lerp*delta)
-	yaw = lerp(yaw, yaw_strength*im.left_right1, yaw_lerp*delta)
+	roll = lerp(roll, roll_strength*InputManager.im.left_right2, roll_lerp*delta)
+	pitch = lerp(pitch, pitch_strength*InputManager.im.up_down1, pitch_lerp*delta)
+	yaw = lerp(yaw, yaw_strength*InputManager.im.left_right1, yaw_lerp*delta)
 	
 	# Pitch roll and yaw
 	me.transform.basis = me.transform.basis.rotated(me.transform.basis.z, roll)
