@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://bp1koykjkfgfm"]
+
+[ext_resource type="Texture2D" uid="uid://cevjv4lsemkac" path="res://Assets/Textures/kenney_particle-pack/circle_05.png" id="1_udbha"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2jj5a"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 1.0
+emission_ring_radius = 100.0
+emission_ring_inner_radius = 90.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1too"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_udbha")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_81xpv"]
+material = SubResource("StandardMaterial3D_j1too")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_udbha"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 1.0
+emission_ring_radius = 100.0
+emission_ring_inner_radius = 90.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_81xpv"]
+emission_enabled = true
+emission = Color(0.47058824, 0.5921569, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_y171m"]
+material = SubResource("StandardMaterial3D_81xpv")
+height = 500.0
+cap_top = false
+cap_bottom = false
+
+[node name="HyperspaceTest" type="Node3D" unique_id=1228350217]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=460775396]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 1000, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1147531218]
+cast_shadow = 0
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_2jj5a")
+draw_pass_1 = SubResource("QuadMesh_81xpv")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="." unique_id=661679546]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 500, 0)
+cast_shadow = 0
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_udbha")
+draw_pass_1 = SubResource("CylinderMesh_y171m")
