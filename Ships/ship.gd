@@ -2,6 +2,13 @@ class_name Ship extends CharacterBody3D
 
 signal destroyed # Emitted when this ship is destroyed
 
+# Static self reference.
+# Now any script can reference the player like so:
+# Ship.player
+# BE WARNED: This will not work correctly if there is more
+# than one player in a scene.
+static var player:Ship = null
+
 @onready var hit_box_component: HitBoxComponent = $HitBoxComponent
 @onready var target_reticles: TargetReticles = $TargetReticles
 
@@ -117,7 +124,12 @@ func _ready() -> void:
 		missile_lock.setup_from_resource(stats.missile_launcher, is_player)
 	# Set this ship up differently if it's the player
 	if is_player:
-		Global.register_player(self)
+		# Make this scene statically accessible
+		if player:
+			push_error('ERROR: Unique, static Ship.player reference has already been set. This should only ever get set once.')
+		player = self
+		# Connect missile cues tot he player
+		MissileCues.mc.connect_to_player(player)
 		# Attach a camera group
 		var cam_group_scene:PackedScene = preload("res://Cameras/camera_group.tscn")
 		camera_group = cam_group_scene.instantiate()

@@ -145,7 +145,7 @@ func set_data(dat:ShootData) -> void:
 	# projectile is targeting the player, AND there is a reticle,
 	# then we want to create a special scene to change the
 	# reticle based on distance to target
-	if controller and hit_box_component and is_instance_valid(data.target) and data.target.owner == Global.player and reticle:
+	if controller and hit_box_component and is_instance_valid(data.target) and data.target.owner == Ship.player and reticle:
 		MissileOnPlayerReticle.new_missile_on_player(self, reticle)
 
 
@@ -195,12 +195,12 @@ func aim_self() -> void:
 	# Else if the shooter is the player and the player is
 	# using mouse controls, and the player is in first
 	# (or third) person...
-	# (I added in "if Global.player" because there is a
+	# (I added in "if Ship.player" because there is a
 	# rare error when there is no player, yet the first
 	# three conditions here are true. I think it can occur
 	# because null==null is true in Godot, so hopefully
 	# this fixes it.)
-	elif Global.player and data.shooter == Global.player and InputManager.im.use_mouse_and_keyboard and Global.player.camera_group.is_first_or_third():
+	elif Ship.player and data.shooter == Ship.player and InputManager.im.use_mouse_and_keyboard and Ship.player.camera_group.is_first_or_third():
 		#shoot at mouse / cursor
 		aim_self_at_cursor()
 	else:
@@ -220,7 +220,7 @@ func aim_self_at_cursor() -> void:
 	# center, and makes the projectile head toward the
 	# nearest point on the circle that limits the mouse/cursor
 	# when the mouse is not near screen center.
-	if !Global.player.is_mouse_near_center():
+	if !Ship.player.is_mouse_near_center():
 		# Find the vector toward the mouse from
 		# screen center, shrink it to the proper length,
 		# and add it to the screen center.

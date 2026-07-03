@@ -42,10 +42,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	# Display player velocity
-	if Global.player and is_instance_valid(Global.player):
-		$HUD/Demo.text = "Velocity: %.0f" % Global.player.velocity.length()
-		if Global.player.health_component:
-			$HUD/Demo.text += "\nHealth: %.d" % Global.player.health_component.health
+	if Ship.player and is_instance_valid(Ship.player):
+		$HUD/Demo.text = "Velocity: %.0f" % Ship.player.velocity.length()
+		if Ship.player.health_component:
+			$HUD/Demo.text += "\nHealth: %.d" % Ship.player.health_component.health
 		$HUD/Demo.text += "\nFPS: %d" % Engine.get_frames_per_second()
 
 

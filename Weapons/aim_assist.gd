@@ -51,7 +51,7 @@ func use_aim_assist(sd:ShootData) -> bool:
 	# then this needs to be handled differently;
 	# do_use_aim_assist is true if angle from where mouse / camera
 	# is looking is within limit, not from where shooter is looking.
-	if shooter == Global.player and InputManager.im.use_mouse_and_keyboard:
+	if shooter == Ship.player and InputManager.im.use_mouse_and_keyboard:
 		return use_aim_assist_mouse(intercept)
 	# Otherwise calculate whether or not to use aim assist
 	# from the shooter's perspective.

@@ -16,7 +16,6 @@ var environment : Environment
 var red_team_group : TeamSetup # Node3D holding everything on team red
 var blue_team_group : TeamSetup # Node3D holding everything on team blue
 var current_camera : Camera3D
-var player : Ship
 # For now I'm globally turning off the hud when in
 # camera views other than first person.
 var targeting_hud_on : bool = true
@@ -24,11 +23,6 @@ var targeting_hud_on : bool = true
 # Until I find a better home for these functions, I'm
 # putting them here
 # Control-Shift-f to search for anywhere text is found.
-
-
-func register_player(p:Ship) -> void:
-	player = p
-	MissileCues.mc.connect_to_player(p)
 
 
 # Get the member of the given groups who is nearest to
@@ -398,7 +392,7 @@ func set_reticle(reticle:TextureRect, position:Vector3) -> bool:
 
 
 func player_feedback(collider, shoot_data) -> void:
-	if !shoot_data or !shoot_data.shooter or shoot_data.shooter != player:
+	if !shoot_data or !shoot_data.shooter or shoot_data.shooter != Ship.player:
 		return
 	if collider.is_in_group("damageable"):
 		var parent = collider.get_parent()

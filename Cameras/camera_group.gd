@@ -203,9 +203,9 @@ func _physics_process(delta: float) -> void:
 	# Alternatively, maybe I should have a Node3D
 	# attached to the player straight ahead that the
 	# camera looks at instead.
-	elif !fp_manual_override and Global.player:
+	elif !fp_manual_override and Ship.player:
 		# The 10000.0 is simply to indicate "far ahead." Is it needed?
-		var temp_targ_pos : Vector3 = first_person_camera.global_position - Global.player.global_transform.basis.z*10000.0
+		var temp_targ_pos : Vector3 = first_person_camera.global_position - Ship.player.global_transform.basis.z*10000.0
 		# Old version
 		#turret_motion.rotate_and_elevate(body, head, delta, temp_targ_pos)
 		# New version with lerp
@@ -215,29 +215,29 @@ func _physics_process(delta: float) -> void:
 	# if in first or third person view
 	# (state == CameraState.FIRSTPERSON or state == CameraState.THIRDPERSON)
 	# and the player exists
-	# Global.player
+	# Ship.player
 	# and the player has a controller
-	# Global.player.controller
+	# Ship.player.controller
 	# and the target is valid
-	# is_instance_valid(Global.player.controller.target)
+	# is_instance_valid(Ship.player.controller.target)
 	# and there is a current weapon
-	# Global.player.weapon_handler
+	# Ship.player.weapon_handler
 	# and the target is not yet dead
-	# !Global.player.controller.target.is_dead()
+	# !Ship.player.controller.target.is_dead()
 	if (state == CameraState.FIRSTPERSON or state == CameraState.THIRDPERSON) and \
-	Global.player and Global.player.controller and \
-	is_instance_valid(Global.player.controller.target) and \
-	Global.player.weapon_handler and \
-	!Global.player.controller.target.is_dead():
-		var vel:Vector3 = Global.player.controller.target.get_velocity()
+	Ship.player and Ship.player.controller and \
+	is_instance_valid(Ship.player.controller.target) and \
+	Ship.player.weapon_handler and \
+	!Ship.player.controller.target.is_dead():
+		var vel:Vector3 = Ship.player.controller.target.get_velocity()
 		if vel == Vector3.ZERO:
 			current_targ_indicator.hide()
 			target_lead_visible = false
 		else:
 			var lead_pos:Vector3 = Global.get_intercept(
-				Global.player.global_position,
-				Global.player.weapon_handler.current_weapon.bullet_speed,
-				Global.player.controller.target)
+				Ship.player.global_position,
+				Ship.player.weapon_handler.current_weapon.bullet_speed,
+				Ship.player.controller.target)
 			Global.set_reticle(current_targ_indicator, lead_pos)
 			target_lead_visible = true
 	else:
@@ -267,8 +267,8 @@ func _physics_process(delta: float) -> void:
 # Turn on looking at player's target
 func turn_on_look() -> void:
 	look_at_target = true
-	if is_instance_valid(Global.player.controller.target):
-		target = Global.player.controller.target
+	if is_instance_valid(Ship.player.controller.target):
+		target = Ship.player.controller.target
 
 
 # Switch cameras. Defaults to first person camera

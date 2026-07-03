@@ -40,7 +40,7 @@ func check_win_loss(dead_thing) -> void:
 		return
 	# If the player died. Show defeat.
 	# If the entire red team died. Show victory.
-	if Global.player == dead_thing:
+	if Ship.player == dead_thing:
 		end_screen.defeat()
 		# Prevent reactivation of end_screen.
 		EventsBus.ship_died.disconnect(check_win_loss)

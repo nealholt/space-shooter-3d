@@ -16,7 +16,7 @@ func _ready():
 # Level is over when this timer reaches zero
 func _on_ui_times_up() -> void:
 	# Turn off the player
-	Global.player.set_physics_process(false)
+	Ship.player.set_physics_process(false)
 	# Show end of level victory screen
 	ui.victory()
 	# Show mouse cursor

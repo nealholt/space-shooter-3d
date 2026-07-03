@@ -117,9 +117,9 @@ func _process(_delta):
 		# If targeted and the player is valid
 		# then show target reticle and label.
 		# Otherwise choose between near and far reticles.
-		if (is_targeted_by_player or always_show) and is_instance_valid(Global.player):
+		if (is_targeted_by_player or always_show) and is_instance_valid(Ship.player):
 			# Get distance to target
-			var dist:float = global_position.distance_to(Global.player.global_position)
+			var dist:float = global_position.distance_to(Ship.player.global_position)
 			# Set reticle
 			reticle_to_use = targeted_reticle
 			# Position dynamic panel
@@ -230,9 +230,9 @@ func set_reticle_scale(percent:float) -> void:
 func set_targeted(b:bool, targeter:Ship) -> void:
 	# Currently this function only handles the visuals of targeting
 	# that's why we return early if the player isn't the targeter
-	if Global.player != targeter:
+	if Ship.player != targeter:
 		return
-	is_targeted_by_player = b and Global.player == targeter
+	is_targeted_by_player = b and Ship.player == targeter
 	# If is targeted by the player,
 	# play the animation and show the tag
 	if !is_targeted_by_player:

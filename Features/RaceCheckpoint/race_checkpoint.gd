@@ -10,7 +10,7 @@ func activate_checkpoint() -> void:
 	particles.emitting = true
 	area_3d.monitoring = true
 	reticle.show()
-	reticle.set_targeted(true, Global.player)
+	reticle.set_targeted(true, Ship.player)
 
 func deactivate_checkpoint() -> void:
 	particles.emitting = false

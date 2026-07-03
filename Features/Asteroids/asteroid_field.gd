@@ -32,15 +32,15 @@ func generate_field() -> void:
 	# (RADIUS+0.5) * GRID_SIZE
 	# RADIUS is 1 and index 1 is in the center of 0,1,2
 	# Add 0.5 and mult by GRID_SIZE to be in the global position center.
-	Global.player.global_position = Vector3(RADIUS+0.5, RADIUS+0.5, RADIUS+0.5) * GRID_SIZE
+	Ship.player.global_position = Vector3(RADIUS+0.5, RADIUS+0.5, RADIUS+0.5) * GRID_SIZE
 	# You MUST use floor here, otherwise the player can become
 	# off center, because when integer division rounds "down"
 	# everything from -0.999 to 0.999 becomes zero, but that
 	# is a nearly 2-wide space, whereas the distance between
 	# every other pair of integers is 1.
-	player_center= Vector3i(floor(Global.player.global_position/GRID_SIZE))
+	player_center= Vector3i(floor(Ship.player.global_position/GRID_SIZE))
 	center = Vector3i(player_center)
-	#print('Player global pos: '+str(Global.player.global_position))
+	#print('Player global pos: '+str(Ship.player.global_position))
 	#print('Player center: '+str(player_center))
 	#print('center: '+str(center))
 	
@@ -111,12 +111,12 @@ func _process(_delta: float) -> void:
 	# everything from -0.999 to 0.999 becomes zero, but that
 	# is a nearly 2-wide space, whereas the distance between
 	# every other pair of integers is 1.
-	player_center = Vector3i(floor(Global.player.global_position/GRID_SIZE))
+	player_center = Vector3i(floor(Ship.player.global_position/GRID_SIZE))
 	# If center and player_center are still the same, don't do anyering
 	if center == player_center: return
 	# Otherwise, get the difference vector
 	var diff:Vector3i = player_center - center
-	#print('\nPlayer was in cell '+str(center)+' but is now in '+str(player_center)+' at global position '+str(Global.player.global_position))
+	#print('\nPlayer was in cell '+str(center)+' but is now in '+str(player_center)+' at global position '+str(Ship.player.global_position))
 	#print('was in grid cell '+str(wrap_index(center.x))+', '+str(wrap_index(center.y))+', '+str(wrap_index(center.z)))
 	#print('now in grid cell '+str(wrap_index(player_center.x))+', '+str(wrap_index(player_center.y))+', '+str(wrap_index(player_center.z)))
 	# Update one x, y, or z slice per frame. You could do them

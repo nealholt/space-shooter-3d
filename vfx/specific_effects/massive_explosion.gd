@@ -287,6 +287,6 @@ func get_is_obscured() -> bool:
 	if ray.is_colliding():
 		# Don't collide with the player, but all else
 		# obscures the explosion.
-		return ray.get_collider() != Global.player
+		return ray.get_collider() != Ship.player
 	# Clear view of explosion
 	return false

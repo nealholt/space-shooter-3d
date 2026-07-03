@@ -46,23 +46,23 @@ func set_as_flyby() -> void:
 # Positiong the flyby camera randomly ahead of the player
 # then look at the player
 func flyby_activation() -> void:
-	if !Global.player:
+	if !Ship.player:
 		abandon_camera.emit()
 		return
 	standard_activation()
 	# Reposition to ahead and off to the side of the player
-	global_position = Global.player.global_position - \
-		Global.player.transform.basis.z*50.0 + \
-		Global.player.transform.basis.y*rng.randf_range(-20.0,20.0)+ \
-		Global.player.transform.basis.x*rng.randf_range(-20.0,20.0)
-	look_at(Global.player.global_position, Vector3.UP)
+	global_position = Ship.player.global_position - \
+		Ship.player.transform.basis.z*50.0 + \
+		Ship.player.transform.basis.y*rng.randf_range(-20.0,20.0)+ \
+		Ship.player.transform.basis.x*rng.randf_range(-20.0,20.0)
+	look_at(Ship.player.global_position, Vector3.UP)
 
 # Flyby camera should keep looking at the player
 func flyby_update() -> void:
-	if !Global.player:
+	if !Ship.player:
 		abandon_camera.emit()
 		return
-	look_at(Global.player.global_position, Vector3.UP)
+	look_at(Ship.player.global_position, Vector3.UP)
 
 
 # Setup this camera as a target close-up camera
@@ -73,11 +73,11 @@ func set_as_targetcloseup() -> void:
 
 func targetcloseup_activation() -> void:
 	# Don't use this camera if there's no player
-	if !Global.player:
+	if !Ship.player:
 		abandon_camera.emit()
 		return
 	# Don't use this camera if the player has no target
-	var controller:CharacterBodyControlParent = Global.player.get_controller()
+	var controller:CharacterBodyControlParent = Ship.player.get_controller()
 	if !is_instance_valid(controller.target):
 		abandon_camera.emit()
 		return
@@ -99,9 +99,9 @@ func targetcloseup_update() -> void:
 	# Reposition to at target position, but back up
 	# the camera to get a better view
 	global_position = target.global_position + \
-		Global.player.transform.basis.z*target_close_up_dist
+		Ship.player.transform.basis.z*target_close_up_dist
 	# Look at target
-	look_at(target.global_position, Global.player.transform.basis.y)
+	look_at(target.global_position, Ship.player.transform.basis.y)
 
 
 # Setup this camera as looking at the target from the
@@ -112,11 +112,11 @@ func set_as_targetview() -> void:
 	deactivate_camera = Callable(self, 'standard_deactivation')
 
 func targetview_activation() -> void:
-	if !Global.player or !is_instance_valid(Global.player.controller.target):
+	if !Ship.player or !is_instance_valid(Ship.player.controller.target):
 		abandon_camera.emit()
 		return
 	standard_activation()
-	target = Global.player.controller.target
+	target = Ship.player.controller.target
 	targetview_update()
 
 # Pre: target is valid
@@ -126,10 +126,10 @@ func targetview_update() -> void:
 		abandon_camera.emit()
 		return
 	# Look at target from player's position
-	look_at_from_position(Global.player.global_position, target.global_position, Vector3.UP)
+	look_at_from_position(Ship.player.global_position, target.global_position, Vector3.UP)
 	# Back the camera up and move it vertically to have
 	# the player in view, but not blocking center screen
-	global_position = Global.player.global_position + \
+	global_position = Ship.player.global_position + \
 		transform.basis.z*10 + Vector3.UP*5
 
 
