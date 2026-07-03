@@ -8,7 +8,7 @@ signal switching_cameras(switching_to:CameraState)
 # Now any script can reference the camera group like so:
 # CameraGroup.cg
 # BE WARNED: This will not work correctly if there is more
-# than one landing pad in a scene.
+# than one CameraGroup in a scene.
 static var cg:CameraGroup = null
 
 # Controls for looking at target

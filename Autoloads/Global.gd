@@ -17,7 +17,6 @@ var red_team_group : TeamSetup # Node3D holding everything on team red
 var blue_team_group : TeamSetup # Node3D holding everything on team blue
 var current_camera : Camera3D
 var player : Ship
-var missile_cues : MissileCues
 # For now I'm globally turning off the hud when in
 # camera views other than first person.
 var targeting_hud_on : bool = true
@@ -29,7 +28,7 @@ var targeting_hud_on : bool = true
 
 func register_player(p:Ship) -> void:
 	player = p
-	missile_cues.connect_to_player(p)
+	MissileCues.mc.connect_to_player(p)
 
 
 # Get the member of the given groups who is nearest to

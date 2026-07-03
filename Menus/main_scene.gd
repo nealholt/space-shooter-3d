@@ -4,7 +4,7 @@ class_name MainScene extends Node
 # Now any script can reference the main_scene like so:
 # MainScene.main_scene
 # BE WARNED: This will not work correctly if there is more
-# than one landing pad in a scene.
+# than one MainScene in a scene.
 static var main_scene:MainScene = null
 
 # The following is based on this tutorial:

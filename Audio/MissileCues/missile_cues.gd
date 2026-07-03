@@ -1,5 +1,12 @@
 class_name MissileCues extends Node
 
+# Static self reference.
+# Now any script can reference the MissileCues like so:
+# MissileCues.mc
+# BE WARNED: This will not work correctly if there is more
+# than one MissileCues in a scene.
+static var mc:MissileCues = null
+
 # Interval between subsequent audio cues
 @export var warning_interval:int = 2000 ## millis
 
@@ -15,11 +22,8 @@ var lock_warning_time:int = 0
 var fired_warning_time:int = 0
 
 func _ready() -> void:
-	setup_missile_cues.call_deferred()
-
-# Register self with the global script
-func setup_missile_cues() -> void:
-	Global.missile_cues = self
+	# Make this scene statically accessible
+	mc = self
 
 func connect_to_player(p:Ship) -> void:
 	var hitbox:HitBoxComponent = p.get_hitbox()

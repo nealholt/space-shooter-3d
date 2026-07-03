@@ -4,7 +4,7 @@ class_name InputManager extends Node
 # Now any script can reference the input manager like so:
 # InputManager.im
 # BE WARNED: This will not work correctly if there is more
-# than one landing pad in a scene.
+# than one InputManager in a scene.
 static var im:InputManager = null
 
 @export var use_mouse_and_keyboard := true
