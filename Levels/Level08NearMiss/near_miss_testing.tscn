@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://jw5871doy4ch"]
 
 [ext_resource type="Script" uid="uid://d3dhiktwvyhus" path="res://Levels/Level08NearMiss/near_miss_testing.gd" id="1_4q2ny"]
-[ext_resource type="Script" uid="uid://dct8roiqo6fdl" path="res://Levels/Level08NearMiss/bullet_spawner_testing.gd" id="2_00mhe"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="2_yema8"]
-[ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Weapons/Guns/gun.tscn" id="3_fyqj6"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Controllers/player_movement_v_4.tscn" id="3_yema8"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Attachments/Shield/shield.tscn" id="5_h5iwy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vaoif"]
@@ -29,26 +28,16 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1254345369]
 environment = SubResource("Environment_jia05")
 
-[node name="Fighter" parent="." unique_id=1900985089 node_paths=PackedStringArray("shield") instance=ExtResource("2_yema8")]
+[node name="Fighter" parent="." unique_id=1900985089 node_paths=PackedStringArray("controller", "shield") instance=ExtResource("2_yema8")]
+controller = NodePath("PlayerMovementV4")
 shield = NodePath("Shield")
 is_player = true
 
-[node name="ShieldTransitAudio" parent="Fighter" index="11" unique_id=992133318 node_paths=PackedStringArray("shield_to_ignore")]
-shield_to_ignore = NodePath("../Shield")
+[node name="WeaponHandler" parent="Fighter" index="9" unique_id=1131696451]
+transform = Transform3D(-0.99999994, 8.3518774e-23, -8.742277e-08, -2.6865768e-16, 1, 0, 8.742277e-08, 0, -0.99999994, 2.6147575, 0.299998, 39.952194)
 
-[node name="GunNode3D" type="Node3D" parent="Fighter" unique_id=2133777041]
-transform = Transform3D(-1, 4.37114e-08, -8.74228e-08, 4.3711395e-08, 1, 4.3711402e-08, 8.74228e-08, 4.37114e-08, -1, 8.85873, 7.351963e-06, -177.052)
-script = ExtResource("2_00mhe")
-
-[node name="Gun" parent="Fighter/GunNode3D" unique_id=1302134213 instance=ExtResource("3_fyqj6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.273674, 0, 0)
-bullet_speed = 400.0
-fire_rate = 20.0
-automatic = false
+[node name="PlayerMovementV4" parent="Fighter" unique_id=1908608534 instance=ExtResource("3_yema8")]
 
 [node name="Shield" parent="Fighter" unique_id=1992904425 instance=ExtResource("5_h5iwy")]
-transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
-max_health = 5
-recharge_delay = 9999
 
 [editable path="Fighter"]

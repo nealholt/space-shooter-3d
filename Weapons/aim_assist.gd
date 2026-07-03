@@ -78,7 +78,7 @@ func use_aim_assist_mouse(intercept:Vector3) -> bool:
 	# be to make sure "looking" takes place from the
 	# shooter (ship or gun) perspective, not the camera
 	# perspective.
-	var camera := Global.camera_group.get_look_camera()
+	var camera := CameraGroup.cg.get_look_camera()
 	var vect_to_cursor := camera.project_ray_normal(InputManager.im.mouse_pos)
 	var vect_to_intercept := intercept - camera.global_position
 	var angle_to:float = vect_to_cursor.angle_to(vect_to_intercept)
@@ -90,7 +90,7 @@ func play_audio(do_use_aim_assist:bool) -> void:
 	if !audio:
 		return
 	# Only play the noise in first or third person camera
-	if !is_instance_valid(Global.camera_group) or !Global.camera_group.is_first_or_third():
+	if !is_instance_valid(CameraGroup.cg) or !CameraGroup.cg.is_first_or_third():
 		return
 	if do_use_aim_assist and !audio.playing:
 		audio.play()

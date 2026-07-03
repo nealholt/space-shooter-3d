@@ -106,21 +106,21 @@ func move_and_turn(mover, delta:float) -> void:
 	
 	# Turn "head" and "neck"
 	var manual_look:bool = InputManager.im.left_right2 != 0.0 or InputManager.im.up_down2 != 0.0
-	Global.camera_group.set_fp_manual_override(manual_look)
+	CameraGroup.cg.set_fp_manual_override(manual_look)
 	if manual_look:
 		# -im.up_down2 The negative makes it be NOT inverted, which
 		# makes more sense to my thumb.
-		Global.camera_group.rotate_fp_cam(InputManager.im.left_right2, -InputManager.im.up_down2, delta)
+		CameraGroup.cg.rotate_fp_cam(InputManager.im.left_right2, -InputManager.im.up_down2, delta)
 		#print(im.left_right2)
 		#print(im.up_down2)
 	else:
 		var lean_in:bool = InputManager.im.left_right1 != 0.0 or InputManager.im.up_down1 != 0.0
-		Global.camera_group.set_fp_manual_override(lean_in)
+		CameraGroup.cg.set_fp_manual_override(lean_in)
 		# Lean into turns
 		if lean_in:
 			var horz_lean:=InputManager.im.left_right1*lean_left_right
 			var vert_lean:=InputManager.im.up_down1*lean_up_down
-			Global.camera_group.rotate_fp_cam(horz_lean, vert_lean, delta)
+			CameraGroup.cg.rotate_fp_cam(horz_lean, vert_lean, delta)
 	
 	super.move_and_turn(mover, delta)
 

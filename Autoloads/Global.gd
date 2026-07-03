@@ -16,7 +16,6 @@ var environment : Environment
 var red_team_group : TeamSetup # Node3D holding everything on team red
 var blue_team_group : TeamSetup # Node3D holding everything on team blue
 var current_camera : Camera3D
-var camera_group : CameraGroup
 var player : Ship
 var missile_cues : MissileCues
 # For now I'm globally turning off the hud when in
@@ -407,15 +406,15 @@ func player_feedback(collider, shoot_data) -> void:
 		if parent is Weakpoint:
 			#print('damage to weakpoint') # strong_hit.wav
 			AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.HIT_ON_WEAKPOINT)
-			camera_group.visualize_hit(CameraGroup.HIT_TYPE.STRONG)
+			CameraGroup.cg.visualize_hit(CameraGroup.HIT_TYPE.STRONG)
 		elif collider.is_in_group("shield"):
 			#print('damage to shield') # shield_hit.wav
 			AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.HIT_ON_SHIELD)
-			camera_group.visualize_hit(CameraGroup.HIT_TYPE.SHIELD)
+			CameraGroup.cg.visualize_hit(CameraGroup.HIT_TYPE.SHIELD)
 		else:
 			#print('damage') # standard_hit.wav
 			AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.HIT_STANDARD)
-			camera_group.visualize_hit(CameraGroup.HIT_TYPE.STANDARD)
+			CameraGroup.cg.visualize_hit(CameraGroup.HIT_TYPE.STANDARD)
 	else:
 		#print('hit but no damage') # bad_hit.wav
 		AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.HIT_NO_DAMAGE)

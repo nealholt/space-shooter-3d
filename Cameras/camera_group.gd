@@ -4,6 +4,13 @@ signal switching_cameras(switching_to:CameraState)
 
 # https://www.reddit.com/r/godot/comments/18w6prn/camera_considerations/
 
+# Static self reference.
+# Now any script can reference the camera group like so:
+# CameraGroup.cg
+# BE WARNED: This will not work correctly if there is more
+# than one landing pad in a scene.
+static var cg:CameraGroup = null
+
 # Controls for looking at target
 @export_range(0, 720, 0.1, "radians_as_degrees") var elevation_speed: float = deg_to_rad(100.0)
 @export_range(0, 720, 0.1, "radians_as_degrees") var rotation_speed: float = deg_to_rad(100.0)
@@ -69,6 +76,9 @@ var velocity:=Vector3.ZERO
 
 
 func _ready() -> void:
+	# Make this scene statically accessible
+	cg = self
+	
 	turret_motion = TurretMotionComponent.new()
 	turret_motion.elevation_speed = elevation_speed
 	turret_motion.rotation_speed = rotation_speed
@@ -116,8 +126,6 @@ func _ready() -> void:
 	else:
 		# Turn off _physics_process, which handles gameplay mode
 		set_physics_process(false)
-	# Register self with global
-	Global.camera_group = self
 	# Connect to camera signal. Always switch to first
 	# person camera whenever there's an issue with the
 	# current camera.
