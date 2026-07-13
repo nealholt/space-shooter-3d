@@ -41,6 +41,15 @@ points = PackedVector3Array(-50, -40, -50, -50, -40, 50, 0, 40, -50, 50, -40, -5
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0bygj"]
 points = PackedVector3Array(-50, -40, -50, -50, -40, 50, 0, 40, -50, 50, -40, -50, 50, -40, 50, 0, 40, 50)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ybwa"]
+shading_mode = 0
+disable_receive_shadows = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_r3qf7"]
+material = SubResource("StandardMaterial3D_1ybwa")
+radial_segments = 32
+rings = 16
+
 [node name="Carrier" type="CharacterBody3D" unique_id=1412780802 node_paths=PackedStringArray("controller", "hangar", "health_component", "turret_group") groups=["capital_ship", "damageable"]]
 motion_mode = 1
 script = ExtResource("1_isj6t")
@@ -178,5 +187,17 @@ stats = ExtResource("9_2hhpl")
 [node name="TargetReticles" parent="." unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("12_2kqhm")]
 target_text = "Carrier"
 hitbox = NodePath("../HitBoxComponent")
+
+[node name="LightGroup" type="Node3D" parent="." unique_id=1198223493]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LightGroup" unique_id=1343158552]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 105, -50.000084, 230)
+mesh = SubResource("SphereMesh_r3qf7")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="LightGroup/MeshInstance3D" unique_id=1388578248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+light_energy = 5.0
+omni_range = 2000.0
+omni_attenuation = 2.0
 
 [editable path="NPCController"]

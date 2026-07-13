@@ -1,6 +1,14 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://der0adt6ep0sg"]
 
+[ext_resource type="Texture2D" uid="uid://b1pf13hlpjjnd" path="res://Assets/StarshipPanels/worn-modern-panels2_albedo.png" id="1_5sub4"]
+[ext_resource type="Texture2D" uid="uid://2uwgl3gdcymj" path="res://Assets/StarshipPanels/worn-modern-panels2_normal-ogl.png" id="1_sc5ku"]
+
 [resource]
-albedo_color = Color(0, 0.284255, 0.285637, 1)
-metallic = 1.0
-roughness = 0.65
+albedo_color = Color(0.601223, 0.601223, 0.60122293, 1)
+albedo_texture = ExtResource("1_5sub4")
+metallic = 0.55
+metallic_specular = 1.0
+roughness = 0.2
+normal_enabled = true
+normal_scale = 2.0
+normal_texture = ExtResource("1_sc5ku")

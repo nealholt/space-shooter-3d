@@ -31,16 +31,16 @@ adjustment_brightness = 0.9
 adjustment_contrast = 1.1
 adjustment_saturation = 1.3
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_x3qal"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wosky"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("8_x3qal")
 shader_parameter/FresnelPower = 2.0
 shader_parameter/EmissionStrength = 1.0
 
-[sub_resource type="SphereMesh" id="SphereMesh_vskk7"]
+[sub_resource type="SphereMesh" id="SphereMesh_jhttu"]
 resource_local_to_scene = true
-material = SubResource("ShaderMaterial_x3qal")
+material = SubResource("ShaderMaterial_wosky")
 
 [node name="Level05" type="Node3D" unique_id=781614166]
 script = ExtResource("1_02qsi")
@@ -177,7 +177,7 @@ controller = NodePath("PlayerMovementV4")
 is_player = true
 
 [node name="FresnelAura" parent="BlueTeam/PlayerCorvette/Shield" parent_id_path=PackedInt32Array(1134075911, 2025902563) index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_vskk7")
+mesh = SubResource("SphereMesh_jhttu")
 
 [node name="PlayerMovementV4" parent="BlueTeam/PlayerCorvette" unique_id=1908608534 instance=ExtResource("9_x3qal")]
 
