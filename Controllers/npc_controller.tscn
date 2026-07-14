@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://beiyskfygh07q" path="res://Controllers/States/state_flee.gd" id="6_dfhat"]
 [ext_resource type="Script" uid="uid://cc2ar16a8fbkb" path="res://Controllers/States/state_corkscrew.gd" id="7_41md1"]
 [ext_resource type="Script" uid="uid://crjovchlt2grr" path="res://Controllers/States/state_wave.gd" id="8_4aecr"]
+[ext_resource type="Script" uid="uid://xric4kglnjbe" path="res://Controllers/States/state_jink.gd" id="8_g7xl4"]
 [ext_resource type="Script" uid="uid://bwic7uvlkd66r" path="res://Controllers/States/state_fighter_death_animation.gd" id="10_cp4qn"]
 [ext_resource type="Script" uid="uid://c3gw1nt0lnjsu" path="res://Controllers/target_selector.gd" id="10_kh3qm"]
 [ext_resource type="Script" uid="uid://bdsf0fc3mi1vk" path="res://Controllers/States/state_orbit.gd" id="11_ahqse"]
@@ -24,32 +25,35 @@ script = ExtResource("2_hkqme")
 
 [node name="States" type="Node" parent="." unique_id=1339827534]
 
-[node name="Stop" type="Node" parent="States" unique_id=442592184]
-script = ExtResource("3_4u817")
-
-[node name="Loop" type="Node" parent="States" unique_id=1769707865]
-script = ExtResource("4_8so7c")
-
-[node name="Seek" type="Node" parent="States" unique_id=189753527]
-script = ExtResource("5_g0pm5")
-
-[node name="Flee" type="Node" parent="States" unique_id=541868400]
-script = ExtResource("6_dfhat")
+[node name="Avoid" type="Node" parent="States" unique_id=104670257]
+script = ExtResource("12_kws6a")
 
 [node name="Corkscrew" type="Node" parent="States" unique_id=360861947]
 script = ExtResource("7_41md1")
 
-[node name="Wave" type="Node" parent="States" unique_id=2026480514]
-script = ExtResource("8_4aecr")
-
 [node name="DeathAnimation" type="Node" parent="States" unique_id=1951376284]
 script = ExtResource("10_cp4qn")
+
+[node name="Flee" type="Node" parent="States" unique_id=541868400]
+script = ExtResource("6_dfhat")
+
+[node name="Jink" type="Node" parent="States" unique_id=516167409]
+script = ExtResource("8_g7xl4")
+
+[node name="Loop" type="Node" parent="States" unique_id=1769707865]
+script = ExtResource("4_8so7c")
 
 [node name="Orbit" type="Node" parent="States" unique_id=1826316037]
 script = ExtResource("11_ahqse")
 
-[node name="Avoid" type="Node" parent="States" unique_id=104670257]
-script = ExtResource("12_kws6a")
+[node name="Seek" type="Node" parent="States" unique_id=189753527]
+script = ExtResource("5_g0pm5")
+
+[node name="Stop" type="Node" parent="States" unique_id=442592184]
+script = ExtResource("3_4u817")
+
+[node name="Wave" type="Node" parent="States" unique_id=2026480514]
+script = ExtResource("8_4aecr")
 
 [node name="TargetSelector" type="Node" parent="." unique_id=2019266898]
 script = ExtResource("10_kh3qm")

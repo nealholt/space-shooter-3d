@@ -74,14 +74,16 @@ func enter_death_animation() -> void:
 func transition_to_evasion() -> void:
 	# If the current state can be interrupted...
 	if motion.can_interrupt_state and !in_death_animation:
+		# TODO TESTING
+		Transitioned.emit(self, 'jink')
 		# ...then switch into evasion state.
-		var x := random.randi() % 3
-		if x == 0:
-			Transitioned.emit(self, 'jink')
-		elif x == 1:
-			Transitioned.emit(self, 'wave')
-		else:
-			Transitioned.emit(self, 'corkscrew')
+		#var x := random.randi() % 3
+		#if x == 0:
+			#Transitioned.emit(self, 'jink')
+		#elif x == 1:
+			#Transitioned.emit(self, 'wave')
+		#else:
+			#Transitioned.emit(self, 'corkscrew')
 
 
 func avoid_now() -> void:

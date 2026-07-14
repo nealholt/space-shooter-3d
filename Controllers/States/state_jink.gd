@@ -19,7 +19,7 @@ var max_speed := 1.0
 # executed at the start of the state,
 # including any set up that needs performed.
 func Enter() -> void:
-	super.Enter()
+	super.Enter() # This resets elapsed_time to zero
 	# Set  speed
 	motion.goal_speed = random.randf_range(min_speed,max_speed)
 	# Disable interrupt
@@ -38,6 +38,8 @@ func Enter() -> void:
 # This function should be called on each
 # physics update frame.
 func Physics_Update(delta:float) -> void:
+	# Keep the current motion settings for a limited
+	# duration before switching to different settings
 	elapsed_time += delta
 	if elapsed_time < time_limit:
 		return

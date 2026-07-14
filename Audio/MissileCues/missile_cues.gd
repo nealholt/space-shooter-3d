@@ -8,7 +8,7 @@ class_name MissileCues extends Node
 static var mc:MissileCues = null
 
 # Interval between subsequent audio cues
-@export var warning_interval:int = 2000 ## millis
+@export var warning_interval:int = 4000 ## millis
 
 # Grouping nodes for two sets of audio cues
 @onready var lock_audio: Node = $LockAudio

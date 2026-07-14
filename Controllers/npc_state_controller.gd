@@ -32,7 +32,7 @@ var states : Dictionary = {}
 # here that just set variables in child state
 # nodes, but for now, this is the best I've come
 # up with.
-@export var too_far:float = 300.0 ## Distance at which to come in for another attack pass
+@export var too_far:float = 600.0 ## Distance at which to come in for another attack pass
 @export var too_close:float = 100.0 ## Distance at which to stop attack pass and peel off
 @export var keep_target_above:bool = false ## Default is to orient so target is ahead, but some capital ships want their target above
 
@@ -153,7 +153,7 @@ func on_child_transition(state, new_state_name):
 	
 	var new_state = states.get(new_state_name.to_lower())
 	if !new_state:
-		#print('in state machine !new_state')
+		print('In npc_state_controller. No state named ', new_state_name)
 		return
 	
 	if current_state:
