@@ -2,17 +2,21 @@ class_name StateJink extends State
 # Transition to this state with a random chance when taking fire.
 # Switch back and forth between rolling and pitching.
 
+# The jink behavior resets up to jink_limit_max times.
 var jink_count := 0
 var jink_limit := 0
-var jink_limit_min := 1
-var jink_limit_max := 6
+var jink_limit_min := 0
+var jink_limit_max := 4
 
-var min_jink_duration := 1.5 # seconds
-var max_jink_duration := 3.5 # seconds
+# A single jink behavior lasts between these intervals
+var min_jink_duration := 0.5 # seconds
+var max_jink_duration := 2.0 # seconds
 
-var currently_rolling:bool = true
+# Switch between intervals of pitching and intervals
+# of rolling. Start with pitch.
+var currently_rolling:bool = false
 
-var min_speed := 0.6
+var min_speed := 0.7
 var max_speed := 1.0
 
 # This function should contain code to be
@@ -24,14 +28,14 @@ func Enter() -> void:
 	motion.goal_speed = random.randf_range(min_speed,max_speed)
 	# Disable interrupt
 	motion.can_interrupt_state = false
-	# Time for this state to run
+	# Duration of this state
 	time_limit = random.randf_range(min_jink_duration,max_jink_duration)
-	# Motion for this state
+	# Motion for this state. Start with pitch up or down
 	if random.randi()%2 == 0:
-		motion.goal_roll = 1.0
+		motion.goal_pitch = 1.0
 	else:
-		motion.goal_roll = -1.0
-	# Select maximum number of waves
+		motion.goal_pitch = -1.0
+	# Select maximum number of distinct jinks
 	jink_limit = random.randi()%(jink_limit_max-jink_limit_min) + jink_limit_min
 
 
@@ -47,9 +51,8 @@ func Physics_Update(delta:float) -> void:
 	if jink_count >= jink_limit:
 		Transitioned.emit(self,"seek")
 	else:
-		# Reset speed
-		motion.goal_speed = random.randf_range(min_speed,max_speed)
-		# Switch between roll and pitch
+		# Each subsequent jink switches between roll
+		# and pitch
 		if currently_rolling:
 			# Switch to pitch
 			motion.goal_roll = 0.0
@@ -57,14 +60,19 @@ func Physics_Update(delta:float) -> void:
 				motion.goal_pitch = 1.0
 			else:
 				motion.goal_pitch = -1.0
+			# Random speed
+			motion.goal_speed = random.randf_range(min_speed,max_speed)
 		else:
-			jink_count += 1
 			# Switch to roll
 			motion.goal_pitch = 0.0
 			if random.randi()%2 == 0:
 				motion.goal_roll = 1.0
 			else:
 				motion.goal_roll = -1.0
+			# Roll at max speed
+			motion.goal_speed = max_speed
+		
+		jink_count += 1
 		currently_rolling = !currently_rolling
 		# Reset jink time limit
 		time_limit = random.randf_range(min_jink_duration,max_jink_duration)
