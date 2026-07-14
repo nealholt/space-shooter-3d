@@ -135,11 +135,11 @@ func misc_actions(_actor:Ship) -> void:
 	pass
 
 # This lets the controller decide how to respond
-# to damage in the future this probably should
-# be more sophisticated and will require an
-# input, but for now it's mainly here so that
-# npcs can take evasive maneuvers when they get shot.
-func took_damage() -> void:
+# to damage. For now it exists so npcs can take
+# evasive maneuvers when they get shot.
+# amount is the amount of health lost.
+# ship.gd connects health_lost signal to this function
+func took_damage(_health:HealthComponent, _amount:float) -> void:
 	#printerr('For the near future, took_damage in character_body_control_parent should be overriden by child class.')
 	pass # Player controller doesn't currently use this function
 

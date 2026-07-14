@@ -107,7 +107,10 @@ func _ready() -> void:
 	if health_component:
 		health_component.set_max_health(stats.max_health)
 		# Connect signals
-		health_component.health_lost.connect(_on_health_component_health_lost)
+		if controller:
+			health_component.health_lost.connect(controller.took_damage)
+		if burning_trail:
+			health_component.health_lost.connect(burning_trail.display_damage)
 		health_component.died.connect(_on_health_component_died)
 	# Attach the obstacle detector to the controller
 	# but only if this is an NPC ship
@@ -202,16 +205,6 @@ func get_current_gun() -> Gun:
 		return missile_lock.missile_launcher
 	else:
 		return null
-
-
-func _on_health_component_health_lost() -> void:
-	# Communicate damage to the controller.
-	# This will let npcs take evasive action.
-	if controller:
-		controller.took_damage()
-	# Trail smoke and sparks when damaged
-	if health_component and burning_trail:
-		burning_trail.display_damage(health_component.get_percent_health())
 
 
 func _on_health_component_died() -> void:

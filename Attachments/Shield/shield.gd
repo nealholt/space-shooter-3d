@@ -56,7 +56,8 @@ func _physics_process(delta: float) -> void:
 	# changes it on ALL shields.
 
 
-func _on_health_component_health_lost() -> void:
+# amount is the amount of health lost.
+func _on_health_component_health_lost(_health:HealthComponent, _amount:float) -> void:
 	# Dramatically alter shield opacity and emission when struck
 	fresnel_power_current = fresnel_power_when_struck
 	fresnel_emission_current = fresnel_emission_when_struck

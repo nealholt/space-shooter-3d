@@ -71,7 +71,7 @@ func enter_death_animation() -> void:
 		in_death_animation = true
 
 
-func choose_random_evasion() -> void:
+func transition_to_evasion() -> void:
 	# If the current state can be interrupted...
 	if motion.can_interrupt_state and !in_death_animation:
 		# ...then switch into evasion state.

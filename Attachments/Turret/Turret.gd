@@ -149,7 +149,8 @@ func _physics_process(delta: float) -> void:
 			gun.shoot(sd)
 
 
-func _on_health_component_health_lost() -> void:
+# amount is the amount of health lost.
+func _on_health_component_health_lost(_health:HealthComponent, _amount:float) -> void:
 	pass # nothing for now
 
 

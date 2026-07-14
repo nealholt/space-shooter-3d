@@ -168,11 +168,10 @@ func on_child_transition(state, new_state_name):
 		debug_label.text = new_state_name.to_lower()
 
 # Override parent class function
-func took_damage() -> void:
-	go_evasive()
-
-func go_evasive() -> void:
-	current_state.choose_random_evasion()
+# amount is the amount of health lost.
+# ship.gd connects health_lost signal to this function
+func took_damage(_health:HealthComponent, _amount:float) -> void:
+	current_state.transition_to_evasion()
 
 # Override parent class function
 func enter_death_animation() -> void:

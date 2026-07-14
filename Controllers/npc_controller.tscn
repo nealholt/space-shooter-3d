@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://beiyskfygh07q" path="res://Controllers/States/state_flee.gd" id="6_dfhat"]
 [ext_resource type="Script" uid="uid://cc2ar16a8fbkb" path="res://Controllers/States/state_corkscrew.gd" id="7_41md1"]
 [ext_resource type="Script" uid="uid://crjovchlt2grr" path="res://Controllers/States/state_wave.gd" id="8_4aecr"]
-[ext_resource type="Script" uid="uid://xric4kglnjbe" path="res://Controllers/States/state_jink.gd" id="9_m06hc"]
 [ext_resource type="Script" uid="uid://bwic7uvlkd66r" path="res://Controllers/States/state_fighter_death_animation.gd" id="10_cp4qn"]
 [ext_resource type="Script" uid="uid://c3gw1nt0lnjsu" path="res://Controllers/target_selector.gd" id="10_kh3qm"]
 [ext_resource type="Script" uid="uid://bdsf0fc3mi1vk" path="res://Controllers/States/state_orbit.gd" id="11_ahqse"]
@@ -42,9 +41,6 @@ script = ExtResource("7_41md1")
 
 [node name="Wave" type="Node" parent="States" unique_id=2026480514]
 script = ExtResource("8_4aecr")
-
-[node name="Jink" type="Node" parent="States" unique_id=379785705]
-script = ExtResource("9_m06hc")
 
 [node name="DeathAnimation" type="Node" parent="States" unique_id=1951376284]
 script = ExtResource("10_cp4qn")

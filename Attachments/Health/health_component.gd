@@ -3,7 +3,7 @@ class_name HealthComponent
 # Inspired by this:
 # https://www.youtube.com/watch?v=74y6zWZfQKk&t=184s
 
-signal health_lost
+signal health_lost(me:HealthComponent, amount:float)
 signal died
 
 @export var max_health := 10.0
@@ -21,13 +21,13 @@ var signalled_died:bool = false
 var health: float:
 	# This setter runs whenever current_health is changed,
 	# including basic assignment like in _ready()
-	set(health_in):
+	set(new_health):
 		# https://www.udemy.com/course/complete-godot-3d/learn/lecture/40736150#questions
 		# If health is decreasing
-		if health_in < health:
-			health_lost.emit()
+		if new_health < health:
+			health_lost.emit(self, health-new_health)
 		# Change health
-		health = health_in
+		health = new_health
 		# If dead. Check against 0.5 in order to round down.
 		if health <= 0.5 and !signalled_died:
 			died.emit()
