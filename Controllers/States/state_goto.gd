@@ -1,4 +1,7 @@
 class_name StateGoto extends State
+# Go to a point in space. The point is
+# motion.orientation_data.intermediate_pos which is a bit hacky
+# but it works well enough.
 
 # Distance at which to peel off, flee, before
 # coming back around for another pass.

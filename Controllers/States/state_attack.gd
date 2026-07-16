@@ -46,8 +46,12 @@ func Physics_Update(_delta:float) -> void:
 
 
 func steer_around() -> void:
+	# Get a more convenient variable for my position
+	var my_pos := motion.orientation_data.my_pos
+	# Get my target's body. Ignore raycast collisions with this
+	var target_body:Node3D = motion.orientation_data.target.get_parent()
 	# Get the point in space midway between self and target
-	var midpoint:Vector3 = (motion.orientation_data.target_pos - motion.orientation_data.my_pos)/2
+	var midpoint:Vector3 = my_pos + (motion.orientation_data.target_pos - my_pos)/2
 	# Move the point up or down until a clear space is reached
 	# or all the adjustments have been exhausted.
 	var adjustments := [20,-20,50,-50,100,-100,200,-200,500,-500]
@@ -55,16 +59,21 @@ func steer_around() -> void:
 	var new_point:Vector3
 	for adjustment in adjustments:
 		new_point = midpoint + up*adjustment
-		# TODO LEFT OFF HERE TODO TESTING
 		# Verify that there is a clear path to new_point.
 		# If so, transition to goto on the new position
-		if RayOnDemand.me.line_is_clear(motion.orientation_data.my_pos, new_point, motion.orientation_data.target.get_parent()):
+		if RayOnDemand.me.line_is_clear(my_pos, new_point, target_body):
+			# TODO LEFT OFF HERE TODO TESTING
 			print(adjustment,' is clear, going to intermediate point')
 			motion.orientation_data.intermediate_pos = new_point
 			Transitioned.emit(self,'goto')
 			return
 		# otherwise keep looping.
-		else:
-			print(adjustment,' is still blocked')
 	# No ability to steer around was detected, just pitch up
-	# or down hard with no other movement
+	# or down hard with no other movement.
+	# But if you already were pitching, just keep at it.
+	motion.goal_roll = 0.0
+	motion.goal_yaw = 0.0
+	if abs(motion.goal_pitch) != 1.0:
+		# TODO LEFT OFF HERE TODO TESTING
+		print('Totally blocked. Pitching to the max')
+		motion.goal_pitch = [-1.0, 1.0].pick_random()
