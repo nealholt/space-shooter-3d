@@ -1,4 +1,4 @@
-class_name NPCStateMachine extends CharacterBodyControlParent
+class_name NPCController extends CharacterBodyControlParent
 
 # This script handles basic transitioning between states
 # and an extreme check that sends the ship toward the
@@ -61,7 +61,7 @@ func _ready() -> void:
 		initial_state.Enter()
 		current_state = initial_state
 	# Set state parameters. Squared for efficiency.
-	$States/Seek.too_close_sqd = too_close * too_close
+	$States/Attack.too_close_sqd = too_close * too_close
 	$States/Flee.distance_limit_sqd = too_far * too_far
 	var ideal_distance:float = (too_far + too_close) / 2.0
 	var orbit_state:State = $States/Orbit
@@ -153,7 +153,7 @@ func on_child_transition(state, new_state_name):
 	
 	var new_state = states.get(new_state_name.to_lower())
 	if !new_state:
-		print('In npc_state_controller. No state named ', new_state_name)
+		print('In npc_controller. No state named ', new_state_name)
 		return
 	
 	if current_state:

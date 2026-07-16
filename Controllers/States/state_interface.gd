@@ -27,12 +27,6 @@ var obstacle_detector:ObstacleDetector
 # Store npc and target info
 var my_pos:Vector3
 var target_pos:Vector3
-var dist_sqd:float
-var basis
-# Angles to target in radians
-var x_angle:float
-var y_angle:float
-var z_angle:float
 # Booleans for target position relative to npc
 var target_is_ahead:bool
 var target_is_above:bool

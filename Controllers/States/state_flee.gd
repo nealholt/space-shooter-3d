@@ -6,8 +6,8 @@ class_name StateFlee extends State
 # If max_distance reached, transition to seek.
 # If timeout reached, transition to a random evasion.
 
-# This value is over-written by the npc_state_controller
-var distance_limit_sqd:float = 150.0**2 # meters
+# This value is over-written by the npc_controller
+var distance_limit_sqd:float = 0.0 # meters
 
 # This function should contain code to be
 # executed at the start of the state,
@@ -32,7 +32,7 @@ func Physics_Update(delta:float) -> void:
 	if motion.orientation_data.dist_sqd > distance_limit_sqd \
 	or elapsed_time > time_limit:
 		#print('transitioning from flee to seek')
-		Transitioned.emit(self,"seek")
+		Transitioned.emit(self,'attack')
 	
 	# Otherwise pitch away from target
 	#pitch_target_behind()

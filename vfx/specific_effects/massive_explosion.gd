@@ -268,6 +268,7 @@ func blink_environment(attribute:String, baseline:float, factor:=3.0, duration:=
 	# https://raw.githubusercontent.com/urodelagames/urodelagames.github.io/master/photos/tween_cheatsheet.png
 
 
+# The following is VERY similar to code in state_attack
 func get_is_obscured() -> bool:
 	# Ray cast from explosion source to camera to see
 	# whether the sprites should be visible or not.

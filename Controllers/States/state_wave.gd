@@ -37,7 +37,7 @@ func Physics_Update(delta:float) -> void:
 		return
 	# Transition out of this state after a limited number of waves.
 	if wave_count >= wave_limit:
-		Transitioned.emit(self,"seek")
+		Transitioned.emit(self,'attack')
 	else:
 		wave_count += 1
 		# Pitch the other direction and reset timer

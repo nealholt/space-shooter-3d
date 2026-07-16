@@ -114,7 +114,7 @@ func _ready() -> void:
 		health_component.died.connect(_on_health_component_died)
 	# Attach the obstacle detector to the controller
 	# but only if this is an NPC ship
-	if controller and obstacle_detector and controller is NPCStateMachine:
+	if controller and obstacle_detector and controller is NPCController:
 		controller.set_obstacle_detector(obstacle_detector)
 	# Loop through gun resources and add new guns to the
 	# weapon handler then reset the weapon handler
@@ -185,10 +185,10 @@ func _ready() -> void:
 func _physics_process(delta):
 	if !controller:
 		return
-	# Move and turn
-	controller.move_and_turn(self, delta)
 	# Select target
 	controller.select_target(self)
+	# Move and turn
+	controller.move_and_turn(self, delta)
 	# Handle shooting of guns and missiles
 	controller.shoot(self, delta)
 	# Miscellaneous action (for now just switch weapon)

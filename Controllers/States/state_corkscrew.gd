@@ -29,4 +29,4 @@ func Enter() -> void:
 func Physics_Update(delta:float) -> void:
 	elapsed_time += delta
 	if elapsed_time > time_limit:
-		Transitioned.emit(self,"seek")
+		Transitioned.emit(self,'attack')

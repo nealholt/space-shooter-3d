@@ -60,4 +60,4 @@ func Physics_Update(delta:float) -> void:
 	elapsed_time += delta
 	if time_limit < elapsed_time and !obstacle_detector.get_blocked_above() and !obstacle_detector.get_blocked_below():
 		# No longer blocked at all.
-		Transitioned.emit(self, 'seek')
+		Transitioned.emit(self, 'attack')

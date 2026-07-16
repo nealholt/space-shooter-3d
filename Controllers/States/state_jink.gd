@@ -49,7 +49,7 @@ func Physics_Update(delta:float) -> void:
 		return
 	# Transition out of this state after a limited number of waves.
 	if jink_count >= jink_limit:
-		Transitioned.emit(self,"seek")
+		Transitioned.emit(self,'attack')
 	else:
 		# Each subsequent jink switches between roll
 		# and pitch

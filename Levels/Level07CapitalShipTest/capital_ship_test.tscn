@@ -53,10 +53,6 @@ is_player = true
 [node name="AimAssist" parent="BlueTeam/Fighter" index="0" unique_id=936755743]
 angle_assist_limit = 5.0
 
-[node name="Gun" parent="BlueTeam/Fighter/WeaponHandler" parent_id_path=PackedInt32Array(1900985089, 1131696451) index="0" unique_id=2138703467]
-fire_rate = 18.0
-reload_sound = 1
-
 [node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=2093590034 instance=ExtResource("6_jbkr8")]
 
 [editable path="BlueTeam/Fighter"]
