@@ -32,6 +32,10 @@ var percent_behind:float
 var percent_above:float
 var percent_right:float
 
+# This is used by the goto state to head toward an
+# intermediate position
+var intermediate_pos:Vector3
+
 
 # speed is bullet speed even if calculating a ship's intercept
 # (unless the ship is intercepting for some reason other than
@@ -88,3 +92,28 @@ func get_data_string() -> String:
 
 func print_data() -> void:
 	print(get_data_string())
+
+
+# Reset the data to orient on the intermediate_pos
+func reset_on_intermediate() -> void:
+	target_pos = intermediate_pos
+	target_velocity = Vector3.ZERO
+	intercept = target_pos
+	# Calculate distance and angles relative to intercept
+	dist_sqd = my_pos.distance_squared_to(intercept)
+	# Calculate angles to target in radians
+	y_angle = Global.get_angle_to_target(my_pos, intercept, basis.y)
+	z_angle = Global.get_angle_to_target(my_pos, intercept, -basis.z)
+	x_angle = Global.get_angle_to_target(my_pos, intercept, basis.x)
+	# Simpler angles to target
+	target_is_ahead = abs(z_angle) < PI/2
+	target_is_above = abs(y_angle) < PI/2
+	target_is_right = abs(x_angle) < PI/2
+	# Get magnitude in the direction in radians
+	amt_ahead_behind = z_angle # 0 is dead ahead. pi is directly behind
+	amt_above_below = abs(PI/2 - abs(y_angle)) # pi/2 is directly above or below. 0 is inbetween
+	amt_right_left = abs(PI/2 - abs(x_angle)) # pi/2 is directly right or left. 0 is inbetween
+	# Get percents in the indicated directions
+	percent_behind = amt_ahead_behind / PI
+	percent_above = amt_above_below / (PI/2)
+	percent_right = amt_right_left / (PI/2)

@@ -57,23 +57,23 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_20t1u"]
 material = SubResource("StandardMaterial3D_11ixh")
 
-[node name="MassiveExplosion" type="Node3D"]
+[node name="MassiveExplosion" type="Node3D" unique_id=580659816]
 script = ExtResource("1_t7dhc")
 
-[node name="ExplosionSprite3D" type="Sprite3D" parent="."]
+[node name="ExplosionSprite3D" type="Sprite3D" parent="." unique_id=575393900]
 visible = false
 material_override = SubResource("StandardMaterial3D_ybq6y")
 cast_shadow = 0
 double_sided = false
 texture = ExtResource("2_t7dhc")
 
-[node name="RingSprite3D" type="Sprite3D" parent="."]
+[node name="RingSprite3D" type="Sprite3D" parent="." unique_id=820392079]
 visible = false
 material_override = SubResource("StandardMaterial3D_jn4p2")
 cast_shadow = 0
 texture = ExtResource("3_6j2k2")
 
-[node name="FireflyParticles3D" type="GPUParticles3D" parent="."]
+[node name="FireflyParticles3D" type="GPUParticles3D" parent="." unique_id=438305091]
 emitting = false
 amount = 32
 lifetime = 2.0
@@ -84,14 +84,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_w078t")
 draw_pass_1 = SubResource("QuadMesh_20t1u")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1272876503]
 one_shot = true
-
-[node name="Node" type="Node" parent="."]
-
-[node name="RayCast3D" type="RayCast3D" parent="Node"]
-enabled = false
-debug_shape_custom_color = Color(0, 1, 0, 1)
-debug_shape_thickness = 5
 
 [connection signal="timeout" from="Timer" to="." method="_on_animation_finished"]

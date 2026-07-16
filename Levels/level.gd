@@ -30,6 +30,8 @@ func _ready() -> void:
 	# at the start of each level when mouse and keyboard
 	# are in use.
 	center_the_mouse()
+	# Create a ray on demand and attach it as a child
+	RayOnDemand.new_ray(self)
 
 
 # This function is called after something dies.

@@ -62,6 +62,7 @@ func _ready() -> void:
 		current_state = initial_state
 	# Set state parameters. Squared for efficiency.
 	$States/Attack.too_close_sqd = too_close * too_close
+	$States/GoTo.too_close_sqd = too_close * too_close
 	$States/Flee.distance_limit_sqd = too_far * too_far
 	var ideal_distance:float = (too_far + too_close) / 2.0
 	var orbit_state:State = $States/Orbit

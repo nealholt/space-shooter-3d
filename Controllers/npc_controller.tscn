@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cc2ar16a8fbkb" path="res://Controllers/States/state_corkscrew.gd" id="7_41md1"]
 [ext_resource type="Script" uid="uid://crjovchlt2grr" path="res://Controllers/States/state_wave.gd" id="8_4aecr"]
 [ext_resource type="Script" uid="uid://xric4kglnjbe" path="res://Controllers/States/state_jink.gd" id="8_g7xl4"]
+[ext_resource type="Script" uid="uid://bwy52tmujugwr" path="res://Controllers/States/state_goto.gd" id="9_iuy43"]
 [ext_resource type="Script" uid="uid://bwic7uvlkd66r" path="res://Controllers/States/state_fighter_death_animation.gd" id="10_cp4qn"]
 [ext_resource type="Script" uid="uid://c3gw1nt0lnjsu" path="res://Controllers/target_selector.gd" id="10_kh3qm"]
 [ext_resource type="Script" uid="uid://bdsf0fc3mi1vk" path="res://Controllers/States/state_orbit.gd" id="11_ahqse"]
@@ -28,13 +29,6 @@ script = ExtResource("2_hkqme")
 [node name="Attack" type="Node" parent="States" unique_id=189753527]
 script = ExtResource("5_g0pm5")
 
-[node name="RayCast3D" type="RayCast3D" parent="States/Attack" unique_id=831176391]
-enabled = false
-exclude_parent = false
-hit_back_faces = false
-debug_shape_custom_color = Color(1, 0, 0, 1)
-debug_shape_thickness = 5
-
 [node name="Avoid" type="Node" parent="States" unique_id=104670257]
 script = ExtResource("12_kws6a")
 
@@ -46,6 +40,9 @@ script = ExtResource("10_cp4qn")
 
 [node name="Flee" type="Node" parent="States" unique_id=541868400]
 script = ExtResource("6_dfhat")
+
+[node name="GoTo" type="Node" parent="States" unique_id=1620488931]
+script = ExtResource("9_iuy43")
 
 [node name="Jink" type="Node" parent="States" unique_id=516167409]
 script = ExtResource("8_g7xl4")

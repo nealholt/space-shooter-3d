@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bosxindk1alsp" path="res://Weapons/Projectiles/projectile.tscn" id="1_g37v4"]
 [ext_resource type="PackedScene" uid="uid://dbpuijlnfgmru" path="res://Features/Explosion/explosion_damage_dealing.tscn" id="2_nu5nk"]
-[ext_resource type="PackedScene" uid="uid://ux6ivcx1ovdp" path="res://Assets/Particles/booster_particles.tscn" id="3_7d76i"]
+[ext_resource type="PackedScene" uid="uid://ux6ivcx1ovdp" path="res://Weapons/Projectiles/booster_particles.tscn" id="3_7d76i"]
 [ext_resource type="PackedScene" uid="uid://b8xwbrmhu8ybu" path="res://Weapons/Visuals/gray_torpedo_body.tscn" id="4_4eh70"]
 [ext_resource type="Texture2D" uid="uid://dwhxx0f2kh1cu" path="res://Assets/Textures/kenney_particle-pack/smoke_07.png" id="4_g37v4"]
 [ext_resource type="PackedScene" uid="uid://dto664xfw5qbf" path="res://Controllers/Seekers/physics_seek_controller.tscn" id="5_m3n6r"]

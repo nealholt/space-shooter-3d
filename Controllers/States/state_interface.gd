@@ -24,18 +24,6 @@ var in_death_animation:bool = false
 
 var obstacle_detector:ObstacleDetector
 
-# Store npc and target info
-var my_pos:Vector3
-var target_pos:Vector3
-# Booleans for target position relative to npc
-var target_is_ahead:bool
-var target_is_above:bool
-var target_is_right:bool
-# Magnitude in indicated direction, in radians
-var amt_ahead_behind:float # zero is max ahead. pi (180) is max behind
-var amt_above_below:float # zero is inbetween. pi/2 (90) is max above or below
-var amt_right_left:float # zero is inbetween. pi/2 (90) is max right or left
-
 
 func _on_ready() -> void:
 	# Feed a time-based seed to the RNG.

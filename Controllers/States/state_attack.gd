@@ -7,8 +7,6 @@ class_name StateAttack extends State
 # otherwise steer to face target and attack
 
 
-@onready var ray: RayCast3D = $RayCast3D
-
 # Distance at which to peel off, flee, before
 # coming back around for another pass.
 # This value is over-written by the npc_controller
@@ -24,17 +22,19 @@ func Enter() -> void:
 # This function should be called on each
 # physics update frame.
 func Physics_Update(_delta:float) -> void:
+	# Transition to avoid if blocked ahead
+	if obstacle_detector and obstacle_detector.get_blocked_ahead():
+		Transitioned.emit(self,'avoid')
 	# If distance to target is too close,
 	#     transition into flee state
-	if motion.orientation_data.dist_sqd < too_close_sqd:
+	elif motion.orientation_data.dist_sqd < too_close_sqd:
 		#print('transitioning from seek to flee')
-		Transitioned.emit(self,"flee")
-		return
+		Transitioned.emit(self,'flee')
 	# else if facing target and line of sight to target is blocked,
-	#     then call "steer around" which will give a waypoint,
-	#     which will transition into the Go to state.
-	elif motion.orientation_data.target_is_ahead and obstacle_to_target():
-		pass # TODO LEFT OFF HERE
+	#     then call "steer around" which will set an intermediate
+	#     waypoint and transition into the GoTo state.
+	elif motion.orientation_data.target_is_ahead and !RayOnDemand.me.line_is_clear(motion.orientation_data.my_pos, motion.orientation_data.target_pos, motion.orientation_data.target.get_parent()):
+		steer_around()
 	# otherwise steer to face target and attack
 	else:
 		# Roll to get target above us.
@@ -45,21 +45,26 @@ func Physics_Update(_delta:float) -> void:
 		yaw_target_ahead()
 
 
-# The following is VERY similar to code in massive_explosion
-# Returns true if there is an obstacle between ship and its target.
-func obstacle_to_target() -> bool:
-	return false
-	#print() # TODO TESTING
-	#print(my_pos)
-	#print(target_pos)
-	# Position ray from me to my target
-	ray.position = my_pos
-	ray.target_position = target_pos - my_pos
-	# Force an update
-	ray.force_raycast_update()
-	# Is there a collision?
-	if ray.is_colliding():
-		#print(ray.get_collider()) # TODO TESTING
-		return true
-	# Clear view of explosion
-	return false
+func steer_around() -> void:
+	# Get the point in space midway between self and target
+	var midpoint:Vector3 = (motion.orientation_data.target_pos - motion.orientation_data.my_pos)/2
+	# Move the point up or down until a clear space is reached
+	# or all the adjustments have been exhausted.
+	var adjustments := [20,-20,50,-50,100,-100,200,-200,500,-500]
+	var up:Vector3 = motion.orientation_data.basis.y
+	var new_point:Vector3
+	for adjustment in adjustments:
+		new_point = midpoint + up*adjustment
+		# TODO LEFT OFF HERE TODO TESTING
+		# Verify that there is a clear path to new_point.
+		# If so, transition to goto on the new position
+		if RayOnDemand.me.line_is_clear(motion.orientation_data.my_pos, new_point, motion.orientation_data.target.get_parent()):
+			print(adjustment,' is clear, going to intermediate point')
+			motion.orientation_data.intermediate_pos = new_point
+			Transitioned.emit(self,'goto')
+			return
+		# otherwise keep looping.
+		else:
+			print(adjustment,' is still blocked')
+	# No ability to steer around was detected, just pitch up
+	# or down hard with no other movement

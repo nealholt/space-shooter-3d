@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b0wlikb05rabe"]
+
+[ext_resource type="Script" uid="uid://by48ka7c2qfd7" path="res://Features/RayCastOnDemand/ray_on_demand.gd" id="1_7yu4e"]
+
+[node name="RayOnDemand" type="Node" unique_id=2087952084]
+script = ExtResource("1_7yu4e")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1871193678]
+enabled = false
+exclude_parent = false
+hit_back_faces = false
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 5

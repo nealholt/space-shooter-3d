@@ -37,7 +37,6 @@ extends VisualEffect
 @onready var explosion_sprite:=$ExplosionSprite3D
 @onready var ring_sprite:=$RingSprite3D
 @onready var fireflies:=$FireflyParticles3D
-@onready var ray: RayCast3D = $Node/RayCast3D
 
 const MAX_ANGLE := 70.0 ## Degrees. Max angle at which the world environment is modified.
 const MIN_ANGLE := 0.0 ## Degrees. Max angle at which the world environment is modified.
@@ -136,8 +135,9 @@ func backup_environment_baselines() -> void:
 # for the duration of the explosion effect.
 func _process(_delta: float) -> void:
 	# Ray cast from explosion source to camera to see
-	# whether the sprites should be visible or not
-	var obscured:bool = get_is_obscured()
+	# whether the sprites should be visible or not.
+	# Ignore collisions with the player.
+	var obscured:bool = !RayOnDemand.me.line_is_clear(global_position, camera.global_position, Ship.player)
 	# Show or hide sprites
 	explosion_sprite.visible = !obscured
 	ring_sprite.visible = !obscured
@@ -266,28 +266,3 @@ func blink_environment(attribute:String, baseline:float, factor:=3.0, duration:=
 	# https://www.reddit.com/r/godot/comments/14gt180/all_possible_tweening_transition_types_and_easing/
 	# Graph visualization:
 	# https://raw.githubusercontent.com/urodelagames/urodelagames.github.io/master/photos/tween_cheatsheet.png
-
-
-# The following is VERY similar to code in state_attack
-func get_is_obscured() -> bool:
-	# Ray cast from explosion source to camera to see
-	# whether the sprites should be visible or not.
-	# Ray's are very persnicketty about how they are
-	# positioned. I resorted to making the ray a child
-	# of a generic Node to prevent it from inheriting
-	# position then here I explicitly set the ray's
-	# position and relative target position.
-	# I think the reason for this is that rays are typically
-	# fixed to the front of a ship or a face and look
-	# straight ahead rather than from one specific point
-	# to a different specific point.
-	# Force raycast update because ray is not enabled by default.
-	ray.position = global_position
-	ray.target_position = camera.global_position - global_position
-	ray.force_raycast_update()
-	if ray.is_colliding():
-		# Don't collide with the player, but all else
-		# obscures the explosion.
-		return ray.get_collider() != Ship.player
-	# Clear view of explosion
-	return false
