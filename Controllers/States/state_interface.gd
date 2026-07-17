@@ -4,6 +4,7 @@ class_name State extends Node
 # https://www.youtube.com/watch?v=ow_Lum-Agbs&t=145s
 
 signal Transitioned
+signal NewTargetRequested
 
 # Reference to an intermediate script through which
 # states and the npc moved by the state can communicate.

@@ -19,7 +19,7 @@ var states : Dictionary = {}
 
 # Within this angle of the target, the enemy
 # will start shooting
-@export_range(0, 90, 0.1, "radians_as_degrees") var angle_to_shoot: float = deg_to_rad(10.0)
+@export_range(0, 90, 0.1, "radians_as_degrees") var angle_to_shoot: float = deg_to_rad(2.0)
 
 # Modifiers for movement amount
 @export var x_speed: float = 0.0 ## Left / right speed.
@@ -46,6 +46,13 @@ var debug_label:Label3D
 # by capital ships.
 @export var ease_dist := 300.0 # Squared for efficiency
 
+# When this flag is set, update to a new target at the
+# first opportunity. The new target might be the same
+# target, but only if it meets the targeting criteria,
+# which has been the most central hitbox in view, but
+# maybe I got around to updating it.
+var target_update_requested:bool = false
+
 
 func _ready() -> void:
 	# Tell target selector to prefer capital ships
@@ -57,6 +64,8 @@ func _ready() -> void:
 			states[child.name.to_lower()] = child
 			child.Transitioned.connect(on_child_transition)
 			child.motion = movement_profile
+			# Connect to signal
+			child.NewTargetRequested.connect(_on_target_update_request)
 	if initial_state:
 		initial_state.Enter()
 		current_state = initial_state
@@ -121,8 +130,12 @@ func move_and_turn(mover, delta:float) -> void:
 
 
 func select_target(targeter:Ship) -> void:
-	# Get target from the target selector
-	set_target(targeter, target_selector.get_target(targeter))
+	# If the target died or a target update was requested,
+	# set a new target
+	if !is_instance_valid(target) or target_update_requested:
+		# Get target from the target selector
+		set_target(targeter, target_selector.update_target(targeter))
+		target_update_requested = false
 
 
 func shoot(shooter:Ship, delta:float) -> void:
@@ -134,17 +147,16 @@ func shoot(shooter:Ship, delta:float) -> void:
 	# GUNS:
 	# If shooter has a target and a weapon handler, then proceed
 	# to a decision whether or not to shoot
-	if !is_instance_valid(target):
+	if !is_instance_valid(target) or !shooter.weapon_handler:
 		return
-	if shooter.weapon_handler:
-		var gun:Gun = shooter.weapon_handler.current_weapon
-		var shootDat:ShootData = shooter.get_new_shootdata()
-		shootDat.gun = gun
-		shootDat.target = target
-		# Decide whether or not to fire
-		if movement_profile.orientation_data.dist_sqd < shootDat.gun.range_sqd \
-		and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < angle_to_shoot:
-			gun.shoot(shootDat)
+	var gun:Gun = shooter.weapon_handler.current_weapon
+	var shootDat:ShootData = shooter.get_new_shootdata()
+	shootDat.gun = gun
+	shootDat.target = target
+	# Decide whether or not to fire
+	if movement_profile.orientation_data.dist_sqd < shootDat.gun.range_sqd \
+	and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < angle_to_shoot:
+		gun.shoot(shootDat)
 
 
 func on_child_transition(state, new_state_name):
@@ -179,3 +191,6 @@ func enter_death_animation() -> void:
 	current_state.enter_death_animation()
 	# Go ballistic. No "air" friction.
 	friction = 0.0
+
+func _on_target_update_request() -> void:
+	target_update_requested = true

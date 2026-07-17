@@ -8,13 +8,14 @@ var target:HitBoxComponent
 var prefer_capital_ships:bool = false
 
 
-func update_target(targeter:Node3D) -> void:
+func update_target(targeter:Node3D) -> Node3D:
 	# Keep it simple for now
 	# Set target to be centermost in view from group
 	if prefer_capital_ships:
 		target = Global.get_center_most_from_groups([enemy_team,'capital_ship'], targeter)
 	else:
 		target = Global.get_center_most_from_group(enemy_team, targeter)
+	return target
 
 
 func get_target(targeter:Node3D) -> Node3D:

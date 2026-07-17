@@ -18,6 +18,9 @@ var too_close_sqd := 0.0
 func Enter() -> void:
 	super.Enter()
 	motion.goal_speed = 1.0 # Top speed
+	# Force a target update to see if there's a better
+	# target to be attacking.
+	NewTargetRequested.emit()
 
 # This function should be called on each
 # physics update frame.
@@ -62,8 +65,7 @@ func steer_around() -> void:
 		# Verify that there is a clear path to new_point.
 		# If so, transition to goto on the new position
 		if RayOnDemand.me.line_is_clear(my_pos, new_point, target_body):
-			# TODO LEFT OFF HERE TODO TESTING
-			print(adjustment,' is clear, going to intermediate point')
+			#print(adjustment,' is clear, going to intermediate point')
 			motion.orientation_data.intermediate_pos = new_point
 			Transitioned.emit(self,'goto')
 			return
@@ -74,6 +76,5 @@ func steer_around() -> void:
 	motion.goal_roll = 0.0
 	motion.goal_yaw = 0.0
 	if abs(motion.goal_pitch) != 1.0:
-		# TODO LEFT OFF HERE TODO TESTING
-		print('Totally blocked. Pitching to the max')
+		#print('Totally blocked. Pitching to the max')
 		motion.goal_pitch = [-1.0, 1.0].pick_random()
