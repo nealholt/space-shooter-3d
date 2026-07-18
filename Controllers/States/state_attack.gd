@@ -33,10 +33,21 @@ func Physics_Update(_delta:float) -> void:
 	elif motion.orientation_data.dist_sqd < too_close_sqd:
 		#print('transitioning from seek to flee')
 		Transitioned.emit(self,'flee')
-	# else if facing target and line of sight to target is blocked,
+	# else if within 45 degrees (PI/4 radians) of facing target
+	# and line of sight to target is blocked,
 	#     then call "steer around" which will set an intermediate
 	#     waypoint and transition into the GoTo state.
-	elif motion.orientation_data.target_is_ahead and !RayOnDemand.me.line_is_clear(motion.orientation_data.my_pos, motion.orientation_data.target_pos, motion.orientation_data.target.get_parent()):
+	# OLD WAY:
+	# This way is bad because anything less than 90 degrees counts
+	# as "target_is_ahead" but ships coming out of the carrier's
+	# hangar will be totally blocked by the carrier's walls and
+	# then will attempt weird goto motions to find a clear path to
+	# their target, so I've rested on 45 degrees instead of target_is_ahead
+	# which is essentially the same thing, but with 90 degrees (PI/2)
+	# elif motion.orientation_data.target_is_ahead and !RayOnDemand.me.line_is_clear(motion.orientation_data.my_pos, motion.orientation_data.target_pos, motion.orientation_data.target.get_parent()):
+	# NEW WAY:
+	elif motion.orientation_data.amt_ahead_behind < PI/4.0 and \
+	!RayOnDemand.me.line_is_clear(motion.orientation_data.my_pos, motion.orientation_data.target_pos, motion.orientation_data.target.get_parent()):
 		steer_around()
 	# otherwise steer to face target and attack
 	else:

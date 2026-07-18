@@ -183,16 +183,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta):
-	if !controller:
-		return
-	# Select target
-	controller.select_target(self)
-	# Move and turn
-	controller.move_and_turn(self, delta)
-	# Handle shooting of guns and missiles
-	controller.shoot(self, delta)
-	# Miscellaneous action (for now just switch weapon)
-	controller.misc_actions(self)
+	if controller:
+		controller.Update(self, delta)
 
 
 # This is used by NPC controller to put this ship in position

@@ -4,6 +4,9 @@ class_name State extends Node
 # https://www.youtube.com/watch?v=ow_Lum-Agbs&t=145s
 
 signal Transitioned
+# Added so the debugger stops nagging me.
+# This signal is emitted by the attack state.
+@warning_ignore("unused_signal")
 signal NewTargetRequested
 
 # Reference to an intermediate script through which

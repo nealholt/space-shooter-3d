@@ -24,6 +24,15 @@ var ally_team:String
 var enemy_team:String
 
 
+# Update every physics frame. This is called from ship
+func Update(ship:Ship, delta:float) -> void:
+	select_target(ship)
+	move_and_turn(ship, delta)
+	# Handle shooting of guns and missiles
+	shoot(ship, delta)
+	# Miscellaneous action (for now just switch weapon)
+	misc_actions(ship)
+
 func turn(mover, delta:float) -> void:
 	# Pitch roll and yaw
 	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.z, roll_input*delta)

@@ -41,12 +41,16 @@ func _ready() -> void:
 	impulse = stats.impulse
 
 
-# Override parent class function
-func move_and_turn(mover, delta:float) -> void:
-	if is_dead:
-		return
-	
+# Update every physics frame. This is called from ship
+func Update(ship:Ship, delta:float) -> void:
+	# Make sure to update the inputs before any further action
 	InputManager.im.update()
+	super.Update(ship, delta)
+
+
+# Override parent class function
+func move_and_turn(mover:Ship, delta:float) -> void:
+	if is_dead: return
 	
 	# If drift is just released, lerp heading toward
 	# velocity for the next heading_reset_duration

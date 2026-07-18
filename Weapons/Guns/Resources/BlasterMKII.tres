@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="GunStats" format=3 uid="uid://edgunytxriqs"]
+
+[ext_resource type="PackedScene" uid="uid://do50y2jdho5iq" path="res://vfx/MuzzleFlash/muzzle_flash_green_monster.tscn" id="1_2n57q"]
+[ext_resource type="Texture2D" uid="uid://b1me86g84hu0w" path="res://UI/ReticlesCrosshairs/Images/crosshair012.png" id="2_ry1rd"]
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="3_hfwa0"]
+
+[resource]
+script = ExtResource("3_hfwa0")
+name = "Blaster MkII"
+bullet_type = 2
+bullet_speed = 600.0
+bullet_timeout = 3.0
+fire_rate = 16.0
+magazine_size = 12
+fire_sound = 0
+reload_sound = 1
+muzzle_flash = ExtResource("1_2n57q")
+reticle = ExtResource("2_ry1rd")
+metadata/_custom_type_script = "uid://bflupvkh65uf"

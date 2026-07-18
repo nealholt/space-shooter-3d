@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="1_stmd2"]
 [ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="1_ttnv4"]
 [ext_resource type="Resource" uid="uid://c3nsko2en7767" path="res://Weapons/Guns/Resources/ShotgunMKI.tres" id="2_6xahi"]
-[ext_resource type="Resource" uid="uid://coa1jlc52fxuo" path="res://Weapons/Guns/Resources/BlasterMKI.tres" id="4_dggup"]
+[ext_resource type="Resource" uid="uid://edgunytxriqs" path="res://Weapons/Guns/Resources/BlasterMKII.tres" id="3_dggup"]
 [ext_resource type="Resource" uid="uid://cogutc3uk7e24" path="res://Weapons/Guns/Resources/SparkleMissilesMKI.tres" id="4_epurg"]
 
 [sub_resource type="Resource" id="Resource_6xahi"]
@@ -23,6 +23,6 @@ metadata/_custom_type_script = "uid://bflupvkh65uf"
 [resource]
 script = ExtResource("1_stmd2")
 max_health = 100.0
-guns = Array[ExtResource("1_ttnv4")]([ExtResource("2_6xahi"), SubResource("Resource_6xahi"), ExtResource("4_dggup")])
+guns = Array[ExtResource("1_ttnv4")]([ExtResource("2_6xahi"), SubResource("Resource_6xahi"), ExtResource("3_dggup")])
 missile_launcher = ExtResource("4_epurg")
 metadata/_custom_type_script = "uid://llcl4ev3hi63"
