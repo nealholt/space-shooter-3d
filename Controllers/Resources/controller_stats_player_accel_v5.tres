@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ControllerStats" format=3 uid="uid://nqu40q5k67tf"]
+
+[ext_resource type="Script" uid="uid://c4rebesbspn8" path="res://Controllers/Resources/controller_stats.gd" id="1_acnda"]
+
+[resource]
+script = ExtResource("1_acnda")
+impulse = 150.0
+pitch = 1.0
+roll = 1.2
+friction_std = 0.8
+impulse_lerp = 0.5
+turning_lerp = 2.0
+metadata/_custom_type_script = "uid://c4rebesbspn8"

@@ -19,6 +19,40 @@ class_name PlayerMovement4 extends CharacterBodyControlParent
 # "asteroids" controls.
 #     No brakes (EXCEPT WE KEPT THEM IN FOR TESTING PURPOSES)
 
+
+
+# It turns out I don't like the following, so I'm commenting it
+# out for now. Maybe there is a different way to limit abuse
+# of drift, like make it a powerup akin to gap 
+# drive and put something else on the drift button?
+# Alternatively, let the player abuse drift.
+# If enemies shoot more accurately it might not
+# even be an abusable feature.
+# When I say "abuse drift" what I mean is, the player can use
+# drift, reversing direction, and then thrusting to counter
+# velocity and come to a nearly complete stop and I don't really
+# want that. I want the game to be always moving.
+#    -Maybe do put a brake on the current drift button, but it only slows you down a little while increasing turn rate.
+#    -Maybe allow the player to drift, but the turn rate is sluggish
+#    -Maybe allow the player to drift, but emerging out of it is sluggish
+# When drift is just released, lerp heading
+# toward velocity for this duration.
+#@export var heading_reset_duration:float = 0.7 ## Seconds
+#var heading_reset_countdown:float = 0.0
+#@export var heading_reset_strength:float = 5.0
+
+# Amount to lean into turns. This makes the camera rotate in the
+# direction of the turn. This is ONLY used on movement_v5
+@export var lean_up_down:float = 0.2 ## Percent
+@export var lean_left_right:float = 0.2 ## Percent
+
+
+
+# There's another draft of the controls in this script.
+# Use that version if this is true.
+@export var use_movement_v5 := false
+
+
 # Stats while no inputs are given
 var stats_standard:ControllerStats
 # Stats while braking
@@ -71,6 +105,11 @@ func Update(ship:Ship, delta:float) -> void:
 func move_and_turn(mover:Ship, delta:float) -> void:
 	if is_dead: return
 	
+	# Alternative movement scheme
+	if use_movement_v5:
+		move_and_turn_v5(mover, delta)
+		return
+	
 	#Brake
 	if InputManager.im.brake:
 		stats = stats_brake
@@ -122,6 +161,84 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 		min(1.0, stats.turning_lerp*delta))
 	
 	friction = stats.friction_std
+	
+	super.move_and_turn(mover, delta)
+
+
+func move_and_turn_v5(mover:Ship, delta:float) -> void:
+	# If drift is just released, lerp heading toward
+	# velocity for the next heading_reset_duration
+	# seconds.
+	# The idea is to use drift to do strafing attacks,
+	# but NOT to change direction.
+	#if im.drift_just_released:
+		#heading_reset_countdown = heading_reset_duration
+	#if heading_reset_countdown > 0.0:
+		#heading_reset_countdown -= delta
+		## lerp heading toward velocity
+		#var pos:Vector3 = mover.global_position + mover.velocity
+		#mover.transform = Global.interp_face_target(mover, pos, delta*heading_reset_strength)
+		# Consider rewriting the above to steer
+		# like an NPC's seek function, otherwise it will
+		# yaw unnaturally.
+	
+	#Brake
+	#if im.brake:
+		#pass
+	#Accelerate
+	if InputManager.im.accelerate:
+		stats = stats_accel
+		engineAV.shift2afterburners(4.0)
+	#Drift
+	elif InputManager.im.drift:
+		stats = stats_drift
+		engineAV.shift2drift(1.0)
+		# Drifting cancels heading reset
+		#heading_reset_countdown = 0.0
+	else:
+		stats = stats_standard
+		engineAV.shift2default(2.0)
+	
+	# Lerp current impulse toward goal impulse.
+	# If you lerp more than 100% weird bad behavior occurs.
+	# Use min to avoid this.
+	impulse = lerp(impulse, stats.impulse,
+			min(1.0, stats.impulse_lerp*delta))
+	
+	# If you lerp more than 100% weird bad behavior occurs.
+	# Use min to avoid this.
+	# Get pitch
+	pitch_input = lerp(pitch_input,
+		InputManager.im.up_down1 * stats.pitch,
+		min(1.0, stats.turning_lerp*delta))
+	# Get Roll
+	roll_input = lerp(roll_input,
+		InputManager.im.left_right1 * stats.roll,
+		min(1.0, stats.turning_lerp*delta))
+	# Get yaw using same left stick input as roll
+	yaw_input = lerp(yaw_input,
+		InputManager.im.left_right1*stats.yaw,
+		min(1.0, stats.turning_lerp*delta))
+	
+	friction = stats.friction_std
+	
+	# Turn "head" and "neck"
+	var manual_look:bool = InputManager.im.left_right2 != 0.0 or InputManager.im.up_down2 != 0.0
+	CameraGroup.cg.set_fp_manual_override(manual_look)
+	if manual_look:
+		# -im.up_down2 The negative makes it be NOT inverted, which
+		# makes more sense to my thumb.
+		CameraGroup.cg.rotate_fp_cam(InputManager.im.left_right2, -InputManager.im.up_down2, delta)
+		#print(im.left_right2)
+		#print(im.up_down2)
+	else:
+		var lean_in:bool = InputManager.im.left_right1 != 0.0 or InputManager.im.up_down1 != 0.0
+		CameraGroup.cg.set_fp_manual_override(lean_in)
+		# Lean into turns
+		if lean_in:
+			var horz_lean:=InputManager.im.left_right1*lean_left_right
+			var vert_lean:=InputManager.im.up_down1*lean_up_down
+			CameraGroup.cg.rotate_fp_cam(horz_lean, vert_lean, delta)
 	
 	super.move_and_turn(mover, delta)
 

@@ -10,12 +10,15 @@
 [ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Ships/bomber.tscn" id="7_m10fo"]
 [ext_resource type="Resource" uid="uid://ukpbvp5m6q0l" path="res://Ships/Resources/ship_stats_player.tres" id="7_tcc1m"]
 [ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Ships/destroyer.tscn" id="8_5shl4"]
-[ext_resource type="PackedScene" uid="uid://dqtdw47fdrqg" path="res://Controllers/player_controller_v_5.tscn" id="8_67ulr"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="8_isq32"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Controllers/player_movement_v_4.tscn" id="9_02r3a"]
 [ext_resource type="PackedScene" uid="uid://bqvcfo7v6o6ip" path="res://Ships/beam_destroyer.tscn" id="9_kc2e1"]
+[ext_resource type="Resource" uid="uid://nqu40q5k67tf" path="res://Controllers/Resources/controller_stats_player_accel_v5.tres" id="10_5aibn"]
 [ext_resource type="PackedScene" uid="uid://byb8ya6fryjw0" path="res://Ships/frigate.tscn" id="10_d6xr2"]
 [ext_resource type="PackedScene" uid="uid://diilp2vvcvj53" path="res://Ships/carrier.tscn" id="11_gd4i7"]
+[ext_resource type="Resource" uid="uid://cq7sk6bkw8vw3" path="res://Controllers/Resources/controller_stats_player_drift_v5.tres" id="11_nt6oy"]
 [ext_resource type="PackedScene" uid="uid://i7qxmq7hwdhc" path="res://Attachments/Shield/shield_generator.tscn" id="11_waoi0"]
+[ext_resource type="Resource" uid="uid://c57gwpf13vtkm" path="res://Controllers/Resources/controller_stats_player_v5.tres" id="12_6xirf"]
 [ext_resource type="PackedScene" uid="uid://ct14xs5b052ay" path="res://Features/Asteroids/asteroid_brown.tscn" id="13_2pdmp"]
 [ext_resource type="PackedScene" uid="uid://f5ns6ks1l1em" path="res://Features/Asteroids/asteroid_foam_and_blue.tscn" id="14_83use"]
 [ext_resource type="PackedScene" uid="uid://bnme5l5dyvdaj" path="res://Features/Asteroids/asteroid_gray.tscn" id="15_t5c7k"]
@@ -72,7 +75,7 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -133.42, 46.6032, 7)
 [node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller", "shield") instance=ExtResource("6_67ulr")]
 transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 220, 0, 0)
 stats = ExtResource("7_tcc1m")
-controller = NodePath("PlayerControllerV5")
+controller = NodePath("PlayerMovementV4")
 shield = NodePath("Shield")
 is_player = true
 
@@ -85,7 +88,11 @@ shield_to_ignore = NodePath("../Shield")
 [node name="Shield" parent="BlueTeam/Fighter" unique_id=1992904425 instance=ExtResource("7_ka707")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
-[node name="PlayerControllerV5" parent="BlueTeam/Fighter" unique_id=103839730 instance=ExtResource("8_67ulr")]
+[node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=1908608534 instance=ExtResource("9_02r3a")]
+use_movement_v5 = true
+stats_accel = ExtResource("10_5aibn")
+stats_drift = ExtResource("11_nt6oy")
+stats = ExtResource("12_6xirf")
 
 [node name="RedTeam" type="Node3D" parent="." unique_id=381603895]
 script = ExtResource("5_0jpk3")

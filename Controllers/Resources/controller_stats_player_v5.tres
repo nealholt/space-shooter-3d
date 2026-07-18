@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ControllerStats" format=3 uid="uid://c57gwpf13vtkm"]
+
+[ext_resource type="Script" uid="uid://c4rebesbspn8" path="res://Controllers/Resources/controller_stats.gd" id="1_66ky0"]
+
+[resource]
+script = ExtResource("1_66ky0")
+pitch = 1.5
+roll = 1.5
+friction_std = 0.8
+metadata/_custom_type_script = "uid://c4rebesbspn8"

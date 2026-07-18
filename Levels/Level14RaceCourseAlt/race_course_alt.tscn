@@ -5,8 +5,11 @@
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Features/TeamSetup/team_setup.gd" id="3_gw6v5"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="4_dbd15"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://UI/victory_layer.tscn" id="5_1focs"]
+[ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Controllers/player_movement_v_4.tscn" id="5_dbd15"]
+[ext_resource type="Resource" uid="uid://nqu40q5k67tf" path="res://Controllers/Resources/controller_stats_player_accel_v5.tres" id="6_aq803"]
 [ext_resource type="PackedScene" uid="uid://dec2h3fkjfo0m" path="res://Features/RaceCheckpoint/race_checkpoint.tscn" id="6_kc8d4"]
-[ext_resource type="PackedScene" uid="uid://dqtdw47fdrqg" path="res://Controllers/player_controller_v_5.tscn" id="7_g048y"]
+[ext_resource type="Resource" uid="uid://cq7sk6bkw8vw3" path="res://Controllers/Resources/controller_stats_player_drift_v5.tres" id="7_g048y"]
+[ext_resource type="Resource" uid="uid://c57gwpf13vtkm" path="res://Controllers/Resources/controller_stats_player_v5.tres" id="8_x5xe8"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_gnpxn"]
 panorama = ExtResource("2_ufjhp")
@@ -43,12 +46,16 @@ script = ExtResource("3_gw6v5")
 team = "blue team"
 
 [node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller") instance=ExtResource("4_dbd15")]
-controller = NodePath("PlayerControllerV5")
+controller = NodePath("PlayerMovementV4")
 is_player = true
 deathExplosion = 0
 finalExplosion = 0
 
-[node name="PlayerControllerV5" parent="BlueTeam/Fighter" unique_id=103839730 instance=ExtResource("7_g048y")]
+[node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=1908608534 instance=ExtResource("5_dbd15")]
+use_movement_v5 = true
+stats_accel = ExtResource("6_aq803")
+stats_drift = ExtResource("7_g048y")
+stats = ExtResource("8_x5xe8")
 
 [node name="VictoryLayer" parent="." unique_id=982250268 instance=ExtResource("5_1focs")]
 visible = false
