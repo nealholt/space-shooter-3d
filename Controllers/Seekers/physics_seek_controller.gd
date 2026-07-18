@@ -33,11 +33,11 @@ func move_me(body:Node3D, delta:float) -> void:
 	# Acceleration should be zero unless this is a seeking missile
 	acceleration = get_velocity_adjustment(body)
 	# Adjust velocity based on acceleration
-	body.velocity += acceleration * delta
+	body.velocity += acceleration * delta * steer_force
 	# Face the point in local space that is our current
 	# position adjusted in the direction of the new
 	# velocity
-	body.look_at(body.transform.origin + body.velocity, body.global_transform.basis.y)
+	body.look_at(body.global_position + body.velocity, body.global_transform.basis.y)
 
 
 # Source:
@@ -49,7 +49,9 @@ func get_velocity_adjustment(body) -> Vector3:
 	var target_pos := get_target_pos(body)
 	# Calculate the desired direction
 	var desired : Vector3 = body.global_position.direction_to(target_pos)
-	# This does the exact same thing
+	# This does the exact same thing as the above.
 	#var desired : Vector3 = (target_pos - body.global_position).normalized()
 	# Return an adjustment to velocity based on the steer force.
-	return (desired - body.velocity.normalized()) * steer_force
+	# Normalize velocity and the difference to get consistent
+	# acceleration.
+	return (desired - body.velocity.normalized()).normalized()
