@@ -33,7 +33,7 @@ func Update(ship:Ship, delta:float) -> void:
 	# Miscellaneous action (for now just switch weapon)
 	misc_actions(ship)
 
-func turn(mover, delta:float) -> void:
+func turn(mover:Ship, delta:float) -> void:
 	# Pitch roll and yaw
 	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.z, roll_input*delta)
 	mover.transform.basis = mover.transform.basis.rotated(mover.transform.basis.x, pitch_input*delta)

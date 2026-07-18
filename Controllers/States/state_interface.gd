@@ -3,7 +3,7 @@ class_name State extends Node
 # Finite state machine source:
 # https://www.youtube.com/watch?v=ow_Lum-Agbs&t=145s
 
-signal Transitioned
+signal Transitioned(s:State, str:String)
 # Added so the debugger stops nagging me.
 # This signal is emitted by the attack state.
 @warning_ignore("unused_signal")

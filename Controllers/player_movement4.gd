@@ -164,7 +164,7 @@ func shoot(shooter:Ship, delta:float) -> void:
 
 
 # Override parent class function
-func select_target(targeter:Node3D) -> void:
+func select_target(targeter:Ship) -> void:
 	if is_dead: return
 	if !InputManager.im.retarget_just_pressed: return
 	if InputManager.im.use_mouse_and_keyboard:
@@ -176,7 +176,7 @@ func select_target(targeter:Node3D) -> void:
 		select_target_screen_center(targeter)
 
 
-func misc_actions(actor) -> void:
+func misc_actions(actor:Ship) -> void:
 	if InputManager.im.switch_weapons:
 		actor.weapon_handler.change_weapon()
 

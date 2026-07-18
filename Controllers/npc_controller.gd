@@ -96,7 +96,7 @@ func set_obstacle_detector(obstacle_detector:ObstacleDetector) -> void:
 	pass
 
 
-func move_and_turn(mover, delta:float) -> void:
+func move_and_turn(mover:Ship, delta:float) -> void:
 	var gun:Gun = mover.get_current_gun()
 	# Update profile.orientation_data ...
 	if is_instance_valid(target):
@@ -159,7 +159,7 @@ func shoot(shooter:Ship, delta:float) -> void:
 		gun.shoot(shootDat)
 
 
-func on_child_transition(state, new_state_name):
+func on_child_transition(state:State, new_state_name:String):
 	if state != current_state:
 		#print('in state machine state != current_state')
 		return
