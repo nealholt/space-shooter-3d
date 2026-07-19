@@ -47,6 +47,7 @@ func Physics_Update(_delta:float) -> void:
 	# elif motion.orientation_data.target_is_ahead and !RayOnDemand.me.line_is_clear(motion.orientation_data.my_pos, motion.orientation_data.target_pos, motion.orientation_data.target.get_parent()):
 	# NEW WAY:
 	elif motion.orientation_data.amt_ahead_behind < PI/4.0 and \
+	is_instance_valid(motion.orientation_data.target) and \
 	!RayOnDemand.me.line_is_clear(motion.orientation_data.my_pos, motion.orientation_data.target_pos, motion.orientation_data.target.get_parent()):
 		steer_around()
 	# otherwise steer to face target and attack

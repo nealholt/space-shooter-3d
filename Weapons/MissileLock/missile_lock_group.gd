@@ -229,20 +229,21 @@ func attempt_to_start_seeking(targeter:Ship) -> void:
 	#     get a new target from center of the ship's view.
 	
 	# If target and maybe_target match and are not null
-	if target == maybe_target and maybe_target != null:
+	# and another missile is ready to go, start seeking
+	if target == maybe_target and maybe_target != null and missile_launcher.ready_to_fire():
 		# Start seeking and return
 		start_seeking()
 		return
 	
-	# Tell the target that we lost lock because we're
+	# Tell the current target that we lost lock because we're
 	# about to reset our target anyway. It's possible
 	# we reset to the same target, but cross that bridge
 	# when you come to it.
 	if is_instance_valid(target):
 		target.lost_lock(targeter)
 	
-	# If maybe_target is not null then set maybe_target
-	# to be our target.
+	# If maybe_target is not null then set our new target
+	# to be maybe_target.
 	if maybe_target:
 		target = maybe_target
 	else: #(maybe_target is null)
