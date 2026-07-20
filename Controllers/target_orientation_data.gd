@@ -31,6 +31,8 @@ var amt_right_left:float # zero is inbetween. pi/2 (90) is max right or left
 var percent_behind:float
 var percent_above:float
 var percent_right:float
+# Amount (zero to one) that the target is facing us
+var amt_target_facing_us:float
 
 # This is used by the goto state to head toward an
 # intermediate position
@@ -69,6 +71,12 @@ func update_data(pos:Vector3, speed:float, t:HitBoxComponent,
 	percent_behind = amt_ahead_behind / PI
 	percent_above = amt_above_below / (PI/2)
 	percent_right = amt_right_left / (PI/2)
+	# Get the amount that target is facing my position
+	# TODO TESTING TODO LEFT OFF HERE
+	var target_basis:Basis = target.get_parent_basis()
+	# 1 indicates target is facing us.
+	# 0 indicates target is facing away from us.
+	amt_target_facing_us = 1.0 - (Global.get_angle_to_target(target_pos, my_pos, -target_basis.z) / PI)
 
 
 func get_data_string() -> String:

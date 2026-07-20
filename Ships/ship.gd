@@ -180,11 +180,13 @@ func _ready() -> void:
 	# Add self (CharacterBody3D) to collision exceptions so
 	# bullets don't hit self.
 	collision_exceptions.push_back(self)
+	# If there's no controller, then don't use physics process
+	if !controller:
+		set_physics_process(false)
 
 
 func _physics_process(delta):
-	if controller:
-		controller.Update(self, delta)
+	controller.Update(self, delta)
 
 
 # This is used by NPC controller to put this ship in position

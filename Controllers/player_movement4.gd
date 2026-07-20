@@ -89,6 +89,7 @@ var engineAV:EngineAV
 
 
 func _ready() -> void:
+	super._ready()
 	# Get a backup reference to the default settings
 	stats_standard = stats
 	impulse = stats.impulse

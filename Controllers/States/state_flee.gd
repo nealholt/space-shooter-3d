@@ -15,7 +15,6 @@ var distance_limit_sqd:float = 0.0 # meters
 func Enter() -> void:
 	super.Enter()
 	time_limit = 15.0 # seconds
-	motion.goal_speed = 1.0 # Top speed
 
 # This function should be called on each
 # physics update frame.
@@ -26,6 +25,7 @@ func Physics_Update(delta:float) -> void:
 	motion.orientation_data.target != obstacle_detector.get_obstacle_ahead():
 		Transitioned.emit(self,"avoid")
 		return
+	
 	# Transition to seek if distance limit is reached
 	# or timeout occurs
 	elapsed_time += delta
@@ -34,11 +34,23 @@ func Physics_Update(delta:float) -> void:
 		#print('transitioning from flee to seek')
 		Transitioned.emit(self,'attack')
 	
+	# Else if target is facing us, then pitch so target is
+	# above. (So we are moving across enemy's line of sight.)
+	# Specifically if target is more than 75% facing us.
+	elif motion.orientation_data.amt_target_facing_us > 0.75:
+		# TODO TESTING TODO LEFT OFF HERE
+		#print('pitching to get target above')
+		# Slow slightly for better pitching
+		motion.goal_speed = 0.9
+		pitch_target_above()
+	
 	# Otherwise pitch away from target
-	#pitch_target_behind()
-	pitch_target_behind_serious() # ignore obstacle detector
-	# The reason we need to ignore the obstacle detector is
-	# because if we are too close to a target, the obstacle
-	# detector can suppress pitching in BOTH directions
-	# resulting in a head-on collision with the very
-	# object we're trying to avoid.
+	else:
+		motion.goal_speed = 1.0 # Top speed
+		#pitch_target_behind()
+		pitch_target_behind_serious() # ignore obstacle detector
+		# The reason we need to ignore the obstacle detector is
+		# because if we are too close to a target, the obstacle
+		# detector can suppress pitching in BOTH directions
+		# resulting in a head-on collision with the very
+		# object we're trying to avoid.

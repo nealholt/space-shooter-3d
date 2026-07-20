@@ -106,6 +106,10 @@ func get_velocity() -> Vector3:
 		return Vector3.ZERO
 
 
+func get_parent_basis() -> Basis:
+	return get_parent().global_transform.basis
+
+
 func is_dead() -> bool:
 	return health_component.is_dead()
 

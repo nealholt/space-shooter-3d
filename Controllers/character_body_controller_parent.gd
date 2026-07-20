@@ -14,14 +14,19 @@ var pitch_input: float = 0.0
 var roll_input: float = 0.0
 var yaw_input: float = 0.0
 
-var friction: float = 0.99
-var impulse: float = 70.0 # z-axis impulse / speed
+var friction: float = 1.0 # Friction is multiplied by delta
+var impulse: float = 0.0 # z-axis impulse / speed
 var x_impulse: float = 0.0 # strafe left / right
 var y_impulse: float = 0.0 # strafe up / down
 
 # The following two variables get set by team_setup.gd
 var ally_team:String
 var enemy_team:String
+
+
+func _ready() -> void:
+	# Set friction from stats
+	friction = stats.friction_std
 
 
 # Update every physics frame. This is called from ship

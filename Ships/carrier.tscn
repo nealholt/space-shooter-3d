@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="8_2hhpl"]
 [ext_resource type="PackedScene" uid="uid://dk6y2tyoo25sn" path="res://Attachments/Weakpoint/weakpoint.tscn" id="8_sqmai"]
 [ext_resource type="Resource" uid="uid://bhxcfdviqbqqo" path="res://Weapons/Guns/Resources/BigBlaster4TurretsMKI.tres" id="9_1ybwa"]
-[ext_resource type="Resource" uid="uid://j7qi0q8tmupn" path="res://Controllers/Resources/controller_stats_capship_forward.tres" id="9_2hhpl"]
+[ext_resource type="Resource" uid="uid://d3btf383rkktn" path="res://Controllers/Resources/controller_stats_capship_carrier.tres" id="12_1ybwa"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="12_2kqhm"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sqmai"]
@@ -182,7 +182,7 @@ y_speed = 1.0
 target_capital_ships = true
 too_far = 800.0
 too_close = 800.0
-stats = ExtResource("9_2hhpl")
+stats = ExtResource("12_1ybwa")
 
 [node name="TargetReticles" parent="." unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("12_2kqhm")]
 target_text = "Carrier"

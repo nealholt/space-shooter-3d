@@ -72,23 +72,23 @@ team = "blue team"
 [node name="SpaceStation" parent="BlueTeam" unique_id=2096872349 instance=ExtResource("3_eggcn")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -133.42, 46.6032, 7)
 
-[node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller", "shield") instance=ExtResource("6_67ulr")]
+[node name="Player" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller", "shield") instance=ExtResource("6_67ulr")]
 transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 220, 0, 0)
 stats = ExtResource("7_tcc1m")
 controller = NodePath("PlayerMovementV4")
 shield = NodePath("Shield")
 is_player = true
 
-[node name="AimAssist" parent="BlueTeam/Fighter" index="0" unique_id=936755743]
+[node name="AimAssist" parent="BlueTeam/Player" index="0" unique_id=936755743]
 angle_assist_limit = 5.0
 
-[node name="ShieldTransitAudio" parent="BlueTeam/Fighter" index="11" unique_id=992133318 node_paths=PackedStringArray("shield_to_ignore")]
+[node name="ShieldTransitAudio" parent="BlueTeam/Player" index="11" unique_id=992133318 node_paths=PackedStringArray("shield_to_ignore")]
 shield_to_ignore = NodePath("../Shield")
 
-[node name="Shield" parent="BlueTeam/Fighter" unique_id=1992904425 instance=ExtResource("7_ka707")]
+[node name="Shield" parent="BlueTeam/Player" unique_id=1992904425 instance=ExtResource("7_ka707")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
-[node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=1908608534 instance=ExtResource("9_02r3a")]
+[node name="PlayerMovementV4" parent="BlueTeam/Player" unique_id=1908608534 instance=ExtResource("9_02r3a")]
 use_movement_v5 = true
 stats_accel = ExtResource("10_5aibn")
 stats_drift = ExtResource("11_nt6oy")
@@ -159,4 +159,4 @@ transform = Transform3D(32.1127, 23.6395, -3.15418, 0, -5.29026, -39.6486, -23.8
 [node name="VictoryLayer" parent="." unique_id=260037237 instance=ExtResource("20_hxa7u")]
 visible = false
 
-[editable path="BlueTeam/Fighter"]
+[editable path="BlueTeam/Player"]

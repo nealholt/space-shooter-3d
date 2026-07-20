@@ -55,6 +55,7 @@ var target_update_requested:bool = false
 
 
 func _ready() -> void:
+	super._ready()
 	# Tell target selector to prefer capital ships
 	target_selector.prefer_capital_ships = target_capital_ships
 	#print('In StateMachine _ready adding children:')
