@@ -2,6 +2,7 @@
 
 [ext_resource type="Material" uid="uid://34abp865u0qu" path="res://Testing/blue_gray_pale.tres" id="2_0qikk"]
 [ext_resource type="Texture2D" uid="uid://ba1gb0dgunagh" path="res://Features/Skyboxes/ringed_gas_giant_planet.png" id="2_bym4a"]
+[ext_resource type="Material" uid="uid://der0adt6ep0sg" path="res://Ships/Models/carrier_material.tres" id="3_nqbdn"]
 [ext_resource type="Material" uid="uid://djlvouny6bdt7" path="res://Testing/blue_gray_dark.tres" id="3_rm5y4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_trw21"]
@@ -35,6 +36,11 @@ material = ExtResource("3_rm5y4")
 left_to_right = 0.0
 size = Vector3(1, 1, 5)
 
+[sub_resource type="PrismMesh" id="PrismMesh_5htk0"]
+material = ExtResource("3_nqbdn")
+left_to_right = 0.0
+size = Vector3(1, 1, 5)
+
 [node name="Node3D" type="Node3D" unique_id=1367515792]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1099043579]
@@ -58,3 +64,10 @@ mesh = SubResource("PrismMesh_j5837")
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="." unique_id=1790751488]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.602024, 2.586941, 0)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1431082774]
+transform = Transform3D(0.99920905, 0.039765567, 0, -0.039765567, 0.99920905, 0, 0, 0, 1, -4.194493, 1.9243827, 0)
+mesh = SubResource("PrismMesh_5htk0")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D3" unique_id=644270321]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.039765835, -0.99920905, 0)
