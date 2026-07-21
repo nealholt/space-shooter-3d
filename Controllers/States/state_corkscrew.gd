@@ -5,8 +5,8 @@ class_name StateCorkscrew extends State
 # This function should contain code to be
 # executed at the start of the state,
 # including any set up that needs performed.
-func Enter() -> void:
-	super.Enter()
+func Enter(motion:MovementProfile) -> void:
+	super.Enter(motion)
 	# Set highest speed
 	motion.goal_speed = 1.0
 	# Disable interrupt
@@ -26,7 +26,7 @@ func Enter() -> void:
 
 # This function should be called on each
 # physics update frame.
-func Physics_Update(delta:float) -> void:
+func Physics_Update(delta:float, _motion:MovementProfile, _orientation_data:TargetOrientationData) -> void:
 	elapsed_time += delta
 	if elapsed_time > time_limit:
 		Transitioned.emit(self,'attack')

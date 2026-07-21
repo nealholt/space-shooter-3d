@@ -4,8 +4,8 @@ class_name StateLoop extends State
 
 # This function should contain code to be
 # executed at the start of the state.
-func Enter() -> void:
-	super.Enter()
+func Enter(motion:MovementProfile) -> void:
+	super.Enter(motion)
 	motion.goal_pitch = 0.5
 	motion.goal_speed = 0.5
 
@@ -14,5 +14,5 @@ func Enter() -> void:
 # abstract function, but since the motion parameters
 # are set in the Enter function, there's nothing else to
 # do for the loop state.
-func Physics_Update(_delta:float) -> void:
+func Physics_Update(_delta:float, _motion:MovementProfile, _orientation_data:TargetOrientationData) -> void:
 	pass

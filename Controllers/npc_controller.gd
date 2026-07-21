@@ -53,9 +53,14 @@ var debug_label:Label3D
 # maybe I got around to updating it.
 var target_update_requested:bool = false
 
+# Object containing data to orient on target.
+# Is accessed by the states.
+var orientation_data:TargetOrientationData
+
 
 func _ready() -> void:
 	super._ready()
+	orientation_data = TargetOrientationData.new()
 	# Tell target selector to prefer capital ships
 	target_selector.prefer_capital_ships = target_capital_ships
 	#print('In StateMachine _ready adding children:')
@@ -64,11 +69,11 @@ func _ready() -> void:
 			#print(child.name.to_lower())
 			states[child.name.to_lower()] = child
 			child.Transitioned.connect(on_child_transition)
-			child.motion = movement_profile
 			# Connect to signal
 			child.NewTargetRequested.connect(_on_target_update_request)
 	if initial_state:
-		initial_state.Enter()
+		movement_profile.reset()
+		initial_state.Enter(movement_profile)
 		current_state = initial_state
 	# Set state parameters. Squared for efficiency.
 	$States/Attack.too_close_sqd = too_close * too_close
@@ -94,12 +99,11 @@ func set_obstacle_detector(obstacle_detector:ObstacleDetector) -> void:
 	for state_key in states:
 		var state:State = states[state_key]
 		state.obstacle_detector = obstacle_detector
-	pass
 
 
 func move_and_turn(mover:Ship, delta:float) -> void:
 	var gun:Gun = mover.get_current_gun()
-	# Update profile.orientation_data ...
+	# Update orientation_data ...
 	if is_instance_valid(target):
 		# ... to shoot the main gun at the target ...
 		# Default to using ship speed
@@ -108,15 +112,15 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 		# target using bullet speed.
 		if gun:
 			temp_speed = gun.bullet_speed
-		# Update profile.orientation_data
-		movement_profile.orientation_data.update_data(
+		# Update orientation_data
+		orientation_data.update_data(
 			mover.global_position, temp_speed,
 			target, mover.global_transform.basis)
 	# Update the current state, which updates
 	# the movement profile, which is used below
 	# to steer the craft
 	if current_state:
-		current_state.Physics_Update(delta)
+		current_state.Physics_Update(delta, movement_profile, orientation_data)
 	# Move
 	# Lerp toward desired settings
 	pitch_input = lerp(pitch_input, movement_profile.goal_pitch * stats.pitch, stats.turning_lerp*delta)
@@ -155,7 +159,7 @@ func shoot(shooter:Ship, delta:float) -> void:
 	shootDat.gun = gun
 	shootDat.target = target
 	# Decide whether or not to fire
-	if movement_profile.orientation_data.dist_sqd < shootDat.gun.range_sqd \
+	if orientation_data.dist_sqd < shootDat.gun.range_sqd \
 	and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < angle_to_shoot:
 		gun.shoot(shootDat)
 
@@ -171,9 +175,10 @@ func on_child_transition(state:State, new_state_name:String):
 		return
 	
 	if current_state:
-		current_state.Exit()
+		current_state.Exit(movement_profile)
 	
-	new_state.Enter()
+	movement_profile.reset()
+	new_state.Enter(movement_profile)
 	
 	current_state = new_state
 	
@@ -185,7 +190,10 @@ func on_child_transition(state:State, new_state_name:String):
 # amount is the amount of health lost.
 # ship.gd connects health_lost signal to this function
 func took_damage(_health:HealthComponent, _amount:float) -> void:
-	current_state.transition_to_evasion()
+	# If we are in an interruptable state, interrupt it
+	# and transition to evasion.
+	if movement_profile.can_interrupt_state:
+		current_state.transition_to_evasion()
 
 # Override parent class function
 func enter_death_animation() -> void:

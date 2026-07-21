@@ -3,8 +3,8 @@ class_name StateFighterDeathAnimation extends State
 # This function should contain code to be
 # executed at the start of the state,
 # including any set up that needs performed.
-func Enter() -> void:
-	super.Enter()
+func Enter(motion:MovementProfile) -> void:
+	super.Enter(motion)
 	# Zero speed because ballistic turns off
 	# friction and the extra speed makes it
 	# go too fast.
@@ -24,5 +24,5 @@ func Enter() -> void:
 # abstract function, but since the motion parameters
 # are set in the Enter function, there's nothing else to
 # do for the loop state.
-func Physics_Update(_delta:float) -> void:
+func Physics_Update(_delta:float, _motion:MovementProfile, _orientation_data:TargetOrientationData) -> void:
 	pass

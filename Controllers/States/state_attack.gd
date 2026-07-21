@@ -15,8 +15,8 @@ var too_close_sqd := 0.0
 # This function should contain code to be
 # executed at the start of the state,
 # including any set up that needs performed.
-func Enter() -> void:
-	super.Enter()
+func Enter(motion:MovementProfile) -> void:
+	super.Enter(motion)
 	motion.goal_speed = 1.0 # Top speed
 	# Force a target update to see if there's a better
 	# target to be attacking.
@@ -24,13 +24,13 @@ func Enter() -> void:
 
 # This function should be called on each
 # physics update frame.
-func Physics_Update(_delta:float) -> void:
+func Physics_Update(_delta:float, motion:MovementProfile, orientation_data:TargetOrientationData) -> void:
 	# Transition to avoid if blocked ahead
 	if obstacle_detector and obstacle_detector.get_blocked_ahead():
 		Transitioned.emit(self,'avoid')
 	# If distance to target is too close,
 	#     transition into flee state
-	elif motion.orientation_data.dist_sqd < too_close_sqd:
+	elif orientation_data.dist_sqd < too_close_sqd:
 		#print('transitioning from seek to flee')
 		Transitioned.emit(self,'flee')
 	# else if within 45 degrees (PI/4 radians) of facing target
@@ -44,33 +44,33 @@ func Physics_Update(_delta:float) -> void:
 	# then will attempt weird goto motions to find a clear path to
 	# their target, so I've rested on 45 degrees instead of target_is_ahead
 	# which is essentially the same thing, but with 90 degrees (PI/2)
-	# elif motion.orientation_data.target_is_ahead and !RayOnDemand.me.line_is_clear(motion.orientation_data.my_pos, motion.orientation_data.target_pos, motion.orientation_data.target.get_parent()):
+	# elif orientation_data.target_is_ahead and !RayOnDemand.me.line_is_clear(orientation_data.my_pos, orientation_data.target_pos, orientation_data.target.get_parent()):
 	# NEW WAY:
-	elif motion.orientation_data.amt_ahead_behind < PI/4.0 and \
-	is_instance_valid(motion.orientation_data.target) and \
-	!RayOnDemand.me.line_is_clear(motion.orientation_data.my_pos, motion.orientation_data.target_pos, motion.orientation_data.target.get_parent()):
-		steer_around()
+	elif orientation_data.amt_ahead_behind < PI/4.0 and \
+	is_instance_valid(orientation_data.target) and \
+	!RayOnDemand.me.line_is_clear(orientation_data.my_pos, orientation_data.target_pos, orientation_data.target.get_parent()):
+		steer_around(motion, orientation_data)
 	# otherwise steer to face target and attack
 	else:
 		# Roll to get target above us.
-		roll_target_above()
+		motion.roll_target_above(orientation_data)
 		# Pitch toward target.
-		pitch_target_ahead()
+		motion.pitch_target_ahead(orientation_data, obstacle_detector)
 		# Yaw to get target ahead
-		yaw_target_ahead()
+		motion.yaw_target_ahead(orientation_data)
 
 
-func steer_around() -> void:
+func steer_around(motion:MovementProfile, orientation_data:TargetOrientationData) -> void:
 	# Get a more convenient variable for my position
-	var my_pos := motion.orientation_data.my_pos
+	var my_pos := orientation_data.my_pos
 	# Get my target's body. Ignore raycast collisions with this
-	var target_body:Node3D = motion.orientation_data.target.get_parent()
+	var target_body:Node3D = orientation_data.target.get_parent()
 	# Get the point in space midway between self and target
-	var midpoint:Vector3 = my_pos + (motion.orientation_data.target_pos - my_pos)/2
+	var midpoint:Vector3 = my_pos + (orientation_data.target_pos - my_pos)/2
 	# Move the point up or down until a clear space is reached
 	# or all the adjustments have been exhausted.
 	var adjustments := [20,-20,50,-50,100,-100,200,-200,500,-500]
-	var up:Vector3 = motion.orientation_data.basis.y
+	var up:Vector3 = orientation_data.basis.y
 	var new_point:Vector3
 	for adjustment in adjustments:
 		new_point = midpoint + up*adjustment
@@ -78,7 +78,7 @@ func steer_around() -> void:
 		# If so, transition to goto on the new position
 		if RayOnDemand.me.line_is_clear(my_pos, new_point, target_body):
 			#print(adjustment,' is clear, going to intermediate point')
-			motion.orientation_data.intermediate_pos = new_point
+			orientation_data.intermediate_pos = new_point
 			Transitioned.emit(self,'goto')
 			return
 		# otherwise keep looping.
