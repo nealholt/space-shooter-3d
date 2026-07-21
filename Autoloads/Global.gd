@@ -361,7 +361,10 @@ func add_to_team_group(to_add, team:String) -> void:
 		blue_team_group.set_team_properties(to_add)
 	elif team == "":
 		# This will occur for some testing scenes
-		MainScene.main_scene.add_to_scene(to_add)
+		if MainScene.main_scene:
+			MainScene.main_scene.add_to_scene(to_add)
+		else:
+			print('No team given when trying to add ', to_add, ' no main scene either. This might be okay in some testing scenarios')
 	else:
 		printerr('Unrecognized team %s in Global.gd load_level' % team)
 

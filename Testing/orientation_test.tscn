@@ -1,0 +1,208 @@
+[gd_scene format=3 uid="uid://dohgbslnssr4t"]
+
+[ext_resource type="Script" uid="uid://e17sg72igyf" path="res://Testing/orientation_test.gd" id="1_t262v"]
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="4_npnmt"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="5_c2gfg"]
+[ext_resource type="Resource" uid="uid://coa1jlc52fxuo" path="res://Weapons/Guns/Resources/BlasterMKI.tres" id="5_yftcm"]
+[ext_resource type="PackedScene" uid="uid://dct3loj10mg5k" path="res://Ships/bomber.tscn" id="6_blufe"]
+[ext_resource type="Resource" uid="uid://cwbihjofcpss8" path="res://Weapons/Guns/Resources/MissileStandardMKI.tres" id="6_uvsyk"]
+[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="7_5515e"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="7_yftcm"]
+[ext_resource type="Resource" uid="uid://bx72xq7efrasw" path="res://Weapons/Guns/Resources/TorpedoMKI.tres" id="9_86n1i"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_npnmt"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_yftcm"]
+sky_material = SubResource("ProceduralSkyMaterial_npnmt")
+
+[sub_resource type="Environment" id="Environment_uvsyk"]
+background_mode = 2
+sky = SubResource("Sky_yftcm")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Resource" id="Resource_7q02d"]
+script = ExtResource("7_5515e")
+max_health = 10.0
+target_reticle_text = "Bomber"
+reticle_set = 5
+missile_launcher = ExtResource("9_86n1i")
+metadata/_custom_type_script = "uid://llcl4ev3hi63"
+
+[sub_resource type="Resource" id="Resource_t262v"]
+script = ExtResource("7_5515e")
+reticle_set = 5
+guns = Array[ExtResource("4_npnmt")]([ExtResource("5_yftcm")])
+missile_launcher = ExtResource("6_uvsyk")
+metadata/_custom_type_script = "uid://llcl4ev3hi63"
+
+[node name="Node" type="Node3D" unique_id=875617678 node_paths=PackedStringArray("pov", "other", "cam")]
+script = ExtResource("1_t262v")
+pov = [NodePath("Test1/Bomber"), NodePath("Test2/Bomber"), NodePath("Test3/Bomber"), NodePath("Test4/Bomber"), NodePath("Test5/Bomber"), NodePath("Test6/Bomber"), NodePath("Test7/Bomber"), NodePath("Test8/Bomber")]
+other = [NodePath("Test1/Fighter"), NodePath("Test2/Fighter"), NodePath("Test3/Fighter"), NodePath("Test4/Fighter"), NodePath("Test5/Fighter"), NodePath("Test6/Fighter"), NodePath("Test7/Fighter"), NodePath("Test8/Fighter")]
+cam = [NodePath("Test1/Camera3D"), NodePath("Test2/Camera3D"), NodePath("Test3/Camera3D"), NodePath("Test4/Camera3D"), NodePath("Test5/Camera3D"), NodePath("Test6/Camera3D"), NodePath("Test7/Camera3D"), NodePath("Test8/Camera3D")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1288596783]
+environment = SubResource("Environment_uvsyk")
+
+[node name="Test1" type="Node3D" parent="." unique_id=823023075]
+
+[node name="Bomber" parent="Test1" unique_id=211794352 node_paths=PackedStringArray("controller") instance=ExtResource("6_blufe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50.073395)
+stats = SubResource("Resource_7q02d")
+controller = NodePath("NPCController")
+
+[node name="NPCController" parent="Test1/Bomber" unique_id=1852644041 node_paths=PackedStringArray("initial_state") instance=ExtResource("7_yftcm")]
+initial_state = NodePath("States/Stop")
+
+[node name="Fighter" parent="Test1" unique_id=190729509 instance=ExtResource("5_c2gfg")]
+transform = Transform3D(1, -4.37114e-08, -1.9106863e-15, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
+stats = SubResource("Resource_t262v")
+disable_for_testing = true
+
+[node name="Camera3D" type="Camera3D" parent="Test1" unique_id=386037993]
+transform = Transform3D(0.7980679, 0, 0.6025675, -0.070197545, 0.993191, 0.09297284, -0.5984646, -0.1164974, 0.7926339, 12.459503, 3.4614677, 56.40062)
+current = true
+
+[node name="Test2" type="Node3D" parent="." unique_id=2297832]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+
+[node name="Bomber" parent="Test2" unique_id=1295567426 node_paths=PackedStringArray("controller") instance=ExtResource("6_blufe")]
+stats = SubResource("Resource_7q02d")
+controller = NodePath("NPCController")
+
+[node name="NPCController" parent="Test2/Bomber" unique_id=2144701741 node_paths=PackedStringArray("initial_state") instance=ExtResource("7_yftcm")]
+initial_state = NodePath("States/Stop")
+
+[node name="Fighter" parent="Test2" unique_id=1900985089 instance=ExtResource("5_c2gfg")]
+transform = Transform3D(1, -4.37114e-08, -1.9106863e-15, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 50)
+stats = SubResource("Resource_t262v")
+disable_for_testing = true
+
+[node name="Camera3D" type="Camera3D" parent="Test2" unique_id=136990053]
+transform = Transform3D(0.7980679, 0, 0.6025675, -0.070197545, 0.993191, 0.09297284, -0.5984646, -0.1164974, 0.7926339, 12.459503, 3.4614677, 56.40062)
+
+[node name="Test3" type="Node3D" parent="." unique_id=170355095]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 0)
+
+[node name="Bomber" parent="Test3" unique_id=168687151 node_paths=PackedStringArray("controller") instance=ExtResource("6_blufe")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+stats = SubResource("Resource_7q02d")
+controller = NodePath("NPCController")
+
+[node name="NPCController" parent="Test3/Bomber" unique_id=964479654 node_paths=PackedStringArray("initial_state") instance=ExtResource("7_yftcm")]
+initial_state = NodePath("States/Stop")
+
+[node name="Fighter" parent="Test3" unique_id=1562831719 instance=ExtResource("5_c2gfg")]
+transform = Transform3D(1, -4.37114e-08, -1.9106863e-15, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 50)
+stats = SubResource("Resource_t262v")
+disable_for_testing = true
+
+[node name="Camera3D" type="Camera3D" parent="Test3" unique_id=482339615]
+transform = Transform3D(0.7980679, 0, 0.6025675, -0.070197545, 0.993191, 0.09297284, -0.5984646, -0.1164974, 0.7926339, 12.459503, 3.4614677, 56.40062)
+
+[node name="Test4" type="Node3D" parent="." unique_id=618961691]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 0)
+
+[node name="Bomber" parent="Test4" unique_id=2111194585 node_paths=PackedStringArray("controller") instance=ExtResource("6_blufe")]
+transform = Transform3D(-1, 6.181724e-08, 6.181724e-08, 0, 0.70710677, -0.70710677, -8.742278e-08, -0.70710677, -0.70710677, 0, 0, 0)
+stats = SubResource("Resource_7q02d")
+controller = NodePath("NPCController")
+
+[node name="NPCController" parent="Test4/Bomber" unique_id=1835186306 node_paths=PackedStringArray("initial_state") instance=ExtResource("7_yftcm")]
+initial_state = NodePath("States/Stop")
+
+[node name="Fighter" parent="Test4" unique_id=346617922 instance=ExtResource("5_c2gfg")]
+transform = Transform3D(1, -4.37114e-08, -1.9106863e-15, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 50)
+stats = SubResource("Resource_t262v")
+disable_for_testing = true
+
+[node name="Camera3D" type="Camera3D" parent="Test4" unique_id=1312666981]
+transform = Transform3D(0.7980679, 0, 0.6025675, -0.070197545, 0.993191, 0.09297284, -0.5984646, -0.1164974, 0.7926339, 12.459503, 3.4614677, 56.40062)
+
+[node name="Test5" type="Node3D" parent="." unique_id=2065130500]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 0)
+
+[node name="Bomber" parent="Test5" unique_id=578780653 node_paths=PackedStringArray("controller") instance=ExtResource("6_blufe")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -5.4142666, 37.393776)
+stats = SubResource("Resource_7q02d")
+controller = NodePath("NPCController")
+
+[node name="NPCController" parent="Test5/Bomber" unique_id=898757480 node_paths=PackedStringArray("initial_state") instance=ExtResource("7_yftcm")]
+initial_state = NodePath("States/Stop")
+
+[node name="Fighter" parent="Test5" unique_id=399431663 instance=ExtResource("5_c2gfg")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 12.492767, 36.309063)
+stats = SubResource("Resource_t262v")
+disable_for_testing = true
+
+[node name="Camera3D" type="Camera3D" parent="Test5" unique_id=1772903331]
+transform = Transform3D(0.7980679, 0, 0.6025675, -0.070197545, 0.993191, 0.09297284, -0.5984646, -0.1164974, 0.7926339, 12.459503, 3.4614677, 56.40062)
+
+[node name="Test6" type="Node3D" parent="." unique_id=1552136811]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 500, 0, 0)
+
+[node name="Bomber" parent="Test6" unique_id=1668702667 node_paths=PackedStringArray("controller") instance=ExtResource("6_blufe")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -5.4142666, 37.393776)
+stats = SubResource("Resource_7q02d")
+controller = NodePath("NPCController")
+
+[node name="NPCController" parent="Test6/Bomber" unique_id=187397711 node_paths=PackedStringArray("initial_state") instance=ExtResource("7_yftcm")]
+initial_state = NodePath("States/Stop")
+
+[node name="Fighter" parent="Test6" unique_id=1198966651 instance=ExtResource("5_c2gfg")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 12.492767, 36.309063)
+stats = SubResource("Resource_t262v")
+disable_for_testing = true
+
+[node name="Camera3D" type="Camera3D" parent="Test6" unique_id=1106726074]
+transform = Transform3D(0.7980679, 0, 0.6025675, -0.070197545, 0.993191, 0.09297284, -0.5984646, -0.1164974, 0.7926339, 12.459503, 3.4614677, 56.40062)
+
+[node name="Test7" type="Node3D" parent="." unique_id=1814676228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 600, 0, 0)
+
+[node name="Bomber" parent="Test7" unique_id=558848073 node_paths=PackedStringArray("controller") instance=ExtResource("6_blufe")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -9.779, 0, 38)
+stats = SubResource("Resource_7q02d")
+controller = NodePath("NPCController")
+
+[node name="NPCController" parent="Test7/Bomber" unique_id=2144313641 node_paths=PackedStringArray("initial_state") instance=ExtResource("7_yftcm")]
+initial_state = NodePath("States/Stop")
+
+[node name="Fighter" parent="Test7" unique_id=451609204 instance=ExtResource("5_c2gfg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.4017944, 0, 38)
+stats = SubResource("Resource_t262v")
+disable_for_testing = true
+
+[node name="Camera3D" type="Camera3D" parent="Test7" unique_id=255015600]
+transform = Transform3D(0.7980679, 0, 0.6025675, -0.070197545, 0.993191, 0.09297284, -0.5984646, -0.1164974, 0.7926339, 8.079956, 3.4614677, 53.72271)
+
+[node name="Test8" type="Node3D" parent="." unique_id=1738788827]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 700, 0, 0)
+
+[node name="Bomber" parent="Test8" unique_id=1788669319 node_paths=PackedStringArray("controller") instance=ExtResource("6_blufe")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -9.779, 0, 38)
+stats = SubResource("Resource_7q02d")
+controller = NodePath("NPCController")
+
+[node name="NPCController" parent="Test8/Bomber" unique_id=735732180 node_paths=PackedStringArray("initial_state") instance=ExtResource("7_yftcm")]
+initial_state = NodePath("States/Stop")
+
+[node name="Fighter" parent="Test8" unique_id=1926445007 instance=ExtResource("5_c2gfg")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.4017944, 0, 38)
+stats = SubResource("Resource_t262v")
+disable_for_testing = true
+
+[node name="Camera3D" type="Camera3D" parent="Test8" unique_id=1022418343]
+transform = Transform3D(0.7980679, 0, 0.6025675, -0.070197545, 0.993191, 0.09297284, -0.5984646, -0.1164974, 0.7926339, 8.079956, 3.4614677, 53.72271)
+
+[editable path="Test1/Bomber/NPCController"]
+[editable path="Test2/Bomber/NPCController"]
+[editable path="Test3/Bomber/NPCController"]
+[editable path="Test4/Bomber/NPCController"]
+[editable path="Test5/Bomber/NPCController"]
+[editable path="Test6/Bomber/NPCController"]
+[editable path="Test7/Bomber/NPCController"]
+[editable path="Test8/Bomber/NPCController"]

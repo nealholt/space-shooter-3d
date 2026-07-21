@@ -41,6 +41,8 @@ var states : Dictionary = {}
 var DEBUG : bool = false #TESTING
 var debug_label:Label3D
 
+@export var dont_shoot:bool = false #TESTING
+
 # Distance at which to reduce speed as we ease toward
 # ideal attack distance. This is currently only used
 # by capital ships.
@@ -144,6 +146,8 @@ func select_target(targeter:Ship) -> void:
 
 
 func shoot(shooter:Ship, delta:float) -> void:
+	if dont_shoot: return
+	
 	# MISSILES:
 	# If shooter has a missile lock component, update it
 	if shooter.missile_lock:

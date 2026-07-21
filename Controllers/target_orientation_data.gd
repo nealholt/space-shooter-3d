@@ -95,6 +95,10 @@ func get_data_string() -> String:
 		temp_str += "behind"
 	temp_str += " %0.2f\n" % rad_to_deg(z_angle)
 	temp_str += "At distance %d" % round(sqrt(dist_sqd))
+	temp_str += "\nPercent behind %d%%" % round(100*percent_behind)
+	temp_str += "\nPercent above %d%%" % round(100*percent_above)
+	temp_str += "\nPercent to the right %d%%" % round(100*percent_right)
+	temp_str += '\nTarget is '+str(round(100*amt_target_facing_us))+'% facing me'
 	return temp_str
 
 
