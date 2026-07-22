@@ -10,8 +10,7 @@ class_name PhysicsController extends Controller
 # I don't know why I'd use this over fixed rotation seek.
 # However, the default missile currently does use this.
 
-var acceleration := Vector3.ZERO
-@export var steer_force: float = 50.0
+var steer_force: float = 50.0
 
 
 # Override parent class
@@ -32,9 +31,13 @@ func move_me(body:Node3D, delta:float) -> void:
 	# addition to make it feel "physics-y"
 	
 	# Acceleration should be zero unless this is a seeking missile
-	acceleration = get_velocity_adjustment(body)
+	var acceleration:Vector3 = get_velocity_adjustment(body)
 	# Adjust velocity based on acceleration
 	body.velocity += acceleration * delta * steer_force
+	
+	#print('Acceleration ',acceleration.length())
+	#print('Velocity ',body.velocity.length())
+	
 	# Face the point in local space that is our current
 	# position adjusted in the direction of the new
 	# velocity

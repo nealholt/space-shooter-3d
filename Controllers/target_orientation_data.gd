@@ -72,7 +72,6 @@ func update_data(pos:Vector3, speed:float, t:HitBoxComponent,
 	percent_above = amt_above_below / (PI/2)
 	percent_right = amt_right_left / (PI/2)
 	# Get the amount that target is facing my position
-	# TODO TESTING TODO LEFT OFF HERE
 	var target_basis:Basis = target.get_parent_basis()
 	# 1 indicates target is facing us.
 	# 0 indicates target is facing away from us.

@@ -126,7 +126,7 @@ transform = Transform3D(0.7980679, 0, 0.6025675, -0.070197545, 0.993191, 0.09297
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 400, 0, 0)
 
 [node name="Bomber" parent="Test5" unique_id=578780653 node_paths=PackedStringArray("controller") instance=ExtResource("6_blufe")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -5.4142666, 37.393776)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -5.414, 37)
 stats = SubResource("Resource_7q02d")
 controller = NodePath("NPCController")
 
@@ -134,7 +134,7 @@ controller = NodePath("NPCController")
 initial_state = NodePath("States/Stop")
 
 [node name="Fighter" parent="Test5" unique_id=399431663 instance=ExtResource("5_c2gfg")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 12.492767, 36.309063)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 12.493, 37)
 stats = SubResource("Resource_t262v")
 disable_for_testing = true
 
@@ -145,7 +145,7 @@ transform = Transform3D(0.7980679, 0, 0.6025675, -0.070197545, 0.993191, 0.09297
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 500, 0, 0)
 
 [node name="Bomber" parent="Test6" unique_id=1668702667 node_paths=PackedStringArray("controller") instance=ExtResource("6_blufe")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -5.4142666, 37.393776)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, -5.414, 37)
 stats = SubResource("Resource_7q02d")
 controller = NodePath("NPCController")
 
@@ -153,7 +153,7 @@ controller = NodePath("NPCController")
 initial_state = NodePath("States/Stop")
 
 [node name="Fighter" parent="Test6" unique_id=1198966651 instance=ExtResource("5_c2gfg")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 12.492767, 36.309063)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 12.493, 37)
 stats = SubResource("Resource_t262v")
 disable_for_testing = true
 
@@ -164,7 +164,7 @@ transform = Transform3D(0.7980679, 0, 0.6025675, -0.070197545, 0.993191, 0.09297
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 600, 0, 0)
 
 [node name="Bomber" parent="Test7" unique_id=558848073 node_paths=PackedStringArray("controller") instance=ExtResource("6_blufe")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -9.779, 0, 38)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -10, 0, 38)
 stats = SubResource("Resource_7q02d")
 controller = NodePath("NPCController")
 
@@ -183,7 +183,7 @@ transform = Transform3D(0.7980679, 0, 0.6025675, -0.070197545, 0.993191, 0.09297
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 700, 0, 0)
 
 [node name="Bomber" parent="Test8" unique_id=1788669319 node_paths=PackedStringArray("controller") instance=ExtResource("6_blufe")]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -9.779, 0, 38)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -10, 0, 38)
 stats = SubResource("Resource_7q02d")
 controller = NodePath("NPCController")
 

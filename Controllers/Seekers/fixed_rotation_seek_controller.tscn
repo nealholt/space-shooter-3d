@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bgb8ijl4hhgr4"]
-
-[ext_resource type="Script" uid="uid://6gw7gni8m7sf" path="res://Controllers/Seekers/fixed_rotation_seek_controller.gd" id="1_wflp0"]
-
-[node name="FixedRotationSeekController" type="Node" unique_id=949127235]
-script = ExtResource("1_wflp0")

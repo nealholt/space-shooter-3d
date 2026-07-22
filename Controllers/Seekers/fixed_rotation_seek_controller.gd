@@ -3,8 +3,7 @@ class_name FixedRotationController extends Controller
 # to the target.
 # This class modifies rotation by a constant rate per unit time
 
-@export_range(0, 720, 1.0, "radians_as_degrees") var rotation_speed: float = deg_to_rad(90.0)
-
+var rotation_speed: float = deg_to_rad(90.0)
 
 # Override parent class
 func set_data(shoot_data:ShootData) -> void:
@@ -12,7 +11,6 @@ func set_data(shoot_data:ShootData) -> void:
 	# 'Super powered' doubles turn rate and 10xs damage
 	if shoot_data.super_powered:
 		rotation_speed *= 2.0
-
 
 # Override parent class
 func move_me(body:Node3D, delta:float) -> void:

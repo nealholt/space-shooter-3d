@@ -11,7 +11,18 @@ class_name Projectile extends Node3D
 var velocity : Vector3
 
 # This is for guided projectiles
-@export var controller:Controller
+var controller:Controller
+enum CONTROLLER {NONE, SIMPLE_SEEK, PHYSICS_SEEK, FIXED_ROTATION_SEEK}
+var control_type:CONTROLLER = CONTROLLER.NONE
+# Parameters for controllers START
+var is_laser_guided:bool = false
+# Physics seek controller uses steer strength as acceleration
+# Fixed rotation controller uses steer strength as a literal
+# turning rate in radians per second with a recommended range
+# of pi to 6pi.
+var steer_strength:float = 300.0
+# Parameters for controllers END
+
 # These next two are for projectiles that can be shot
 # down, such as missiles.
 # These are NOT for the projectile hitting its target.
@@ -119,8 +130,21 @@ func set_data(dat:ShootData) -> void:
 	# in the controller) and 10xs damage
 	if dat.super_powered:
 		data.damage *= 10.0
-	# Set target for seeking munitions
+	# Set up controller, if any. This is not NONE for
+	# seeking munitions
+	match control_type:
+		CONTROLLER.NONE:
+			controller = null
+		CONTROLLER.SIMPLE_SEEK:
+			controller = Controller.new()
+		CONTROLLER.PHYSICS_SEEK:
+			controller = PhysicsController.new()
+			controller.steer_force = steer_strength
+		CONTROLLER.FIXED_ROTATION_SEEK:
+			controller = FixedRotationController.new()
+			controller.rotation_speed = steer_strength
 	if controller:
+		controller.is_laser_guided = is_laser_guided
 		controller.set_data(dat)
 	# Make it so a Ship can't shoot their own bullets.
 	# More often this is making a shooter not shoot down

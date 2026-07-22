@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://ux6ivcx1ovdp" path="res://Weapons/Projectiles/booster_particles.tscn" id="3_7d76i"]
 [ext_resource type="PackedScene" uid="uid://b8xwbrmhu8ybu" path="res://Weapons/Visuals/gray_torpedo_body.tscn" id="4_4eh70"]
 [ext_resource type="Texture2D" uid="uid://dwhxx0f2kh1cu" path="res://Assets/Textures/kenney_particle-pack/smoke_07.png" id="4_g37v4"]
-[ext_resource type="PackedScene" uid="uid://dto664xfw5qbf" path="res://Controllers/Seekers/physics_seek_controller.tscn" id="5_m3n6r"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="6_g4iot"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="7_4ccg1"]
 [ext_resource type="PackedScene" uid="uid://cmg5hwgtanvoi" path="res://Attachments/Hitbox/damageable_area.tscn" id="8_aqwbt"]
@@ -41,7 +40,7 @@ billboard_keep_scale = true
 
 [node name="Missile" unique_id=294693303 node_paths=PackedStringArray("controller", "health_component", "hit_box_component", "proxy_fuse_area", "reticle") instance=ExtResource("1_g37v4")]
 speed = 0.0
-controller = NodePath("PhysicsSeekController")
+controller = NodePath("")
 health_component = NodePath("HealthComponent")
 hit_box_component = NodePath("HitBoxComponent")
 proxy_fuse_area = NodePath("Area3D")
@@ -60,10 +59,7 @@ explode_on_timeout = true
 amount = 128
 draw_pass_1 = SubResource("QuadMesh_5eo7h")
 
-[node name="PhysicsSeekController" parent="." index="3" unique_id=253226492 instance=ExtResource("5_m3n6r")]
-steer_force = 300.0
-
-[node name="HitBoxComponent" parent="." index="4" unique_id=1275164638 node_paths=PackedStringArray("collidable", "health_component") instance=ExtResource("6_g4iot")]
+[node name="HitBoxComponent" parent="." index="3" unique_id=1275164638 node_paths=PackedStringArray("collidable", "health_component") instance=ExtResource("6_g4iot")]
 collidable = NodePath("DamageableArea")
 health_component = NodePath("../HealthComponent")
 
@@ -72,15 +68,15 @@ health_component = NodePath("../HealthComponent")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBoxComponent/DamageableArea" index="0" unique_id=538652052]
 shape = SubResource("SphereShape3D_vbe7u")
 
-[node name="HealthComponent" parent="." index="5" unique_id=404622303 instance=ExtResource("7_4ccg1")]
+[node name="HealthComponent" parent="." index="4" unique_id=404622303 instance=ExtResource("7_4ccg1")]
 max_health = 1
 
-[node name="TargetReticles" parent="." index="7" unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("10_uqtem")]
+[node name="TargetReticles" parent="." index="6" unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("10_uqtem")]
 target_text = "Missile"
 reticle_set = 4
 hitbox = NodePath("../HitBoxComponent")
 
-[node name="Area3D" type="Area3D" parent="." index="8" unique_id=2134267646]
+[node name="Area3D" type="Area3D" parent="." index="7" unique_id=2134267646]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 collision_layer = 0
 collision_mask = 31
@@ -89,14 +85,14 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0" unique_id=772706228]
 shape = SubResource("SphereShape3D_uqtem")
 
-[node name="BrightSpot" type="Sprite3D" parent="." index="9" unique_id=78029119]
+[node name="BrightSpot" type="Sprite3D" parent="." index="8" unique_id=78029119]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 2.3241978)
 material_override = SubResource("StandardMaterial3D_six0c")
 cast_shadow = 0
 double_sided = false
 texture = ExtResource("11_pjwh6")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." index="10" unique_id=963726733]
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="9" unique_id=963726733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.324)
 light_energy = 10.0
 omni_range = 100.0

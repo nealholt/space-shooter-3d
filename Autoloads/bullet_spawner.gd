@@ -36,11 +36,6 @@ var contrail:PackedScene = load('res://vfx/contrail.tscn')
 # Larger contrail and some flashing GPU particles
 var sparkle_trail:PackedScene = load('res://Weapons/Visuals/sparkle.tscn')
 
-# Controllers for seeking behaviors
-var physics_seek:PackedScene = load('res://Controllers/Seekers/physics_seek_controller.tscn')
-var simple_seek:PackedScene = load('res://Controllers/Seekers/simple_seek_controller.tscn')
-var fixed_rotation_seek:PackedScene = load('res://Controllers/Seekers/fixed_rotation_seek_controller.tscn')
-
 
 # Guns call this to get a made-to-order bullet
 func new_bullet(bt:BULLET_TYPE) -> Projectile:
@@ -48,6 +43,7 @@ func new_bullet(bt:BULLET_TYPE) -> Projectile:
 	match bt:
 		BULLET_TYPE.MISSILE:
 			projectile = missile_scene.instantiate()
+			projectile.control_type = Projectile.CONTROLLER.PHYSICS_SEEK
 		BULLET_TYPE.DUMMY_PLACEHOLDER: # Replace me when you have a chance
 			projectile = null
 		BULLET_TYPE.BASIC_RAY:
@@ -102,20 +98,10 @@ func _get_ray_bolt(bt:BULLET_TYPE) -> Projectile:
 func _get_seeking_contrail(bt:BULLET_TYPE) -> Projectile:
 	var projectile := generic_projectile.instantiate()
 	var contra := contrail.instantiate()
-	var control := physics_seek.instantiate()
-	# Parameterize the physics_seek
-	match bt:
-		BULLET_TYPE.SEEKING_MISSILE:
-			control.is_laser_guided = false
-		BULLET_TYPE.LASER_GUIDED_MISSILE:
-			control.is_laser_guided = true
-		_: # Default / Otherwise
-			push_error('Unrecognized bullet type ',bt)
-	# Attach physics seek controller
-	projectile.add_child(control)
-	projectile.controller = control
-	control.steer_force = 200.0
-	projectile.does_ricochet = false
+	# Set up projectile controller
+	projectile.control_type = Projectile.CONTROLLER.PHYSICS_SEEK
+	projectile.is_laser_guided = bt == BULLET_TYPE.LASER_GUIDED_MISSILE
+	projectile.steer_strength = 300.0 # Acceleration
 	# Attach contrail
 	projectile.add_child(contra)
 	# Parameterize projectile
@@ -125,6 +111,7 @@ func _get_seeking_contrail(bt:BULLET_TYPE) -> Projectile:
 	projectile.shieldSparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT
 	projectile.autotarget = true
 	projectile.roll_amount = 10.0
+	projectile.does_ricochet = false
 	return projectile
 
 
@@ -170,19 +157,14 @@ func _get_proxy_fuse() -> Projectile:
 func _get_sparkle_trail() -> Projectile:
 	var projectile := generic_projectile.instantiate()
 	var visuals := sparkle_trail.instantiate()
-	var control := fixed_rotation_seek.instantiate()
-	# Attach seek controller
-	projectile.add_child(control)
-	projectile.controller = control
-	control.rotation_speed = deg_to_rad(180) # Degrees of rotation per second
-	# I used to use physics_seek with steer force of 5000,
-	# but I didn't like the look of the behavior. Read the note
-	# at the top of the physics seek script for more info on this.
-	projectile.does_ricochet = false
+	# Set up seeking projectile controls
+	projectile.control_type = Projectile.CONTROLLER.FIXED_ROTATION_SEEK
+	projectile.steer_strength = deg_to_rad(180) # Degrees of rotation per second
 	# Attach contrail and sparkle
 	projectile.add_child(visuals)
 	# Parameterize projectile
 	projectile.time_out = 5.0
 	projectile.deathExplosion = VisualEffectSetting.VISUAL_EFFECT_TYPE.SINGLE_EXPLOSION_8X
 	projectile.wrap_up_time = 5.0
+	projectile.does_ricochet = false
 	return projectile
