@@ -21,10 +21,7 @@ func Enter(motion:MovementProfile) -> void:
 	# Time for this state to run
 	time_limit = random.randf_range(minimum_wave_duration,maximum_wave_duration)
 	# Motion for this state
-	if random.randi()%2 == 0:
-		motion.goal_pitch = 1.0
-	else:
-		motion.goal_pitch = -1.0
+	motion.goal_pitch = _one_or_neg_one()
 	# Select maximum number of waves
 	wave_limit = random.randi()%(wave_limit_max-wave_limit_min) + wave_limit_min
 
@@ -35,11 +32,15 @@ func Physics_Update(delta:float, motion:MovementProfile, _orientation_data:Targe
 	elapsed_time += delta
 	if elapsed_time < time_limit:
 		return
+	
 	# Transition out of this state after a limited number of waves.
 	if wave_count >= wave_limit:
 		Transitioned.emit(self,'attack')
-	else:
-		wave_count += 1
-		# Pitch the other direction and reset timer
-		motion.goal_pitch = motion.goal_pitch*-1.0
-		time_limit = random.randf_range(minimum_wave_duration,maximum_wave_duration)
+		return
+	
+	# Proceed to next wave
+	wave_count += 1
+	# Pitch the other direction and reset timer
+	motion.goal_pitch *= -1.0
+	time_limit = random.randf_range(minimum_wave_duration,maximum_wave_duration)
+	elapsed_time = 0.0

@@ -1,12 +1,16 @@
 [gd_scene format=3 uid="uid://c0xrugrnh82s5"]
 
-[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Levels/level.gd" id="1_3kycw"]
+[ext_resource type="Script" uid="uid://bn4yrdi6e8hl2" path="res://Levels/Level13CollisionAvoid/collision_avoid_test.gd" id="1_2um8d"]
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Features/Skyboxes/purple_nebula_complex.png" id="2_4w2qt"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Features/TeamSetup/team_setup.gd" id="4_ero3n"]
 [ext_resource type="PackedScene" uid="uid://dtxyvqvpd4khl" path="res://Cameras/camera_spectator.tscn" id="5_3l0om"]
 [ext_resource type="PackedScene" uid="uid://br3bb2mewavvc" path="res://Assets/SpaceStation/space_station.tscn" id="5_puqp7"]
 [ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="7_p5kkl"]
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="8_2um8d"]
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="8_cm862"]
+[ext_resource type="Resource" uid="uid://coa1jlc52fxuo" path="res://Weapons/Guns/Resources/BlasterMKI.tres" id="9_f5ga1"]
+[ext_resource type="Resource" uid="uid://cwbihjofcpss8" path="res://Weapons/Guns/Resources/MissileStandardMKI.tres" id="10_dsauf"]
+[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="11_74err"]
 [ext_resource type="PackedScene" uid="uid://diilp2vvcvj53" path="res://Ships/carrier.tscn" id="13_1u6j8"]
 [ext_resource type="PackedScene" uid="uid://ct14xs5b052ay" path="res://Features/Asteroids/asteroid_brown.tscn" id="14_sa88o"]
 [ext_resource type="PackedScene" uid="uid://f5ns6ks1l1em" path="res://Features/Asteroids/asteroid_foam_and_blue.tscn" id="15_8nwrc"]
@@ -35,8 +39,15 @@ glow_enabled = true
 glow_bloom = 0.35
 adjustment_enabled = true
 
+[sub_resource type="Resource" id="Resource_vs5il"]
+script = ExtResource("11_74err")
+max_health = 999.0
+guns = Array[ExtResource("8_2um8d")]([ExtResource("9_f5ga1")])
+missile_launcher = ExtResource("10_dsauf")
+metadata/_custom_type_script = "uid://llcl4ev3hi63"
+
 [node name="Node3D" type="Node3D" unique_id=33376911]
-script = ExtResource("1_3kycw")
+script = ExtResource("1_2um8d")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1034040450]
 environment = SubResource("Environment_x4e1d")
@@ -70,6 +81,7 @@ disable_for_testing = true
 
 [node name="Fighter" parent="RedTeam" unique_id=1906494811 node_paths=PackedStringArray("controller") instance=ExtResource("7_p5kkl")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -102.170906, 11.04957, 1680.9513)
+stats = SubResource("Resource_vs5il")
 controller = NodePath("NPCController")
 
 [node name="NPCController" parent="RedTeam/Fighter" unique_id=147750059 instance=ExtResource("8_cm862")]

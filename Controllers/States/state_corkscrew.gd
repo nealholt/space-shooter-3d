@@ -1,6 +1,9 @@
 class_name StateCorkscrew extends State
 # Transition to this state with a random chance when taking fire.
 
+var min_duration := 3.5 # seconds
+var max_duration := 8.0 # seconds
+
 
 # This function should contain code to be
 # executed at the start of the state,
@@ -12,16 +15,10 @@ func Enter(motion:MovementProfile) -> void:
 	# Disable interrupt
 	motion.can_interrupt_state = false
 	# Time for this state to run
-	time_limit = 8.0
+	time_limit = random.randf_range(min_duration,max_duration)
 	# Motion for this state
-	if random.randi()%2 == 0:
-		motion.goal_pitch = 1.0
-	else:
-		motion.goal_pitch = -1.0
-	if random.randi()%2 == 0:
-		motion.goal_roll = 1.0
-	else:
-		motion.goal_roll = -1.0
+	motion.goal_pitch = _one_or_neg_one()
+	motion.goal_roll = _one_or_neg_one()
 
 
 # This function should be called on each
