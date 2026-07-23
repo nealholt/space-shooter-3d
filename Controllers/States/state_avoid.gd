@@ -46,13 +46,17 @@ func Enter(motion:MovementProfile) -> void:
 # This function should be called on each
 # physics update frame.
 func Physics_Update(delta:float, motion:MovementProfile, orientation_data:TargetOrientationData) -> void:
+	# The following pitch reduction is bad and causes ships
+	# to run into things, so I commented it out.
 	# Reduce pitch to 1/3 when no longer blocked ahead
-	if !obstacle_detector.get_blocked_ahead():
+	#if !obstacle_detector.get_blocked_ahead():
 		#print('reduce pitch')
-		motion.goal_pitch = motion.goal_pitch/3.0
+		#motion.goal_pitch = motion.goal_pitch/3.0
+		#return
+	
 	# Otherwise if obstacle ahead is target, then
 	# transition to flee state immediately.
-	elif orientation_data.target == obstacle_detector.get_obstacle_ahead():
+	if orientation_data.target == obstacle_detector.get_obstacle_ahead():
 		Transitioned.emit(self, 'flee')
 		return
 	# When no longer blocked elsewhere, transition out

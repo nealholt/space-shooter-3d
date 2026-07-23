@@ -38,7 +38,7 @@ var states : Dictionary = {}
 
 # Setting the following to true will cause the fighter label to
 # show the current state.
-var DEBUG : bool = false #TESTING
+@export var DEBUG : bool = false #TESTING
 var debug_label:Label3D
 
 @export var dont_shoot:bool = false #TESTING

@@ -63,7 +63,12 @@ var target:Node3D
 
 func _ready() -> void:
 	Global.current_camera = camera
-
+	print('=== SPECTATOR CAMERA CONTROLS ===')
+	print('Left click / shoot to select target')
+	print('Right click / target to change camera mode')
+	print('Move with mouse and arrow keys or')
+	print('joysticks and accel / decel / brake')
+	print('Switch weapons to toggle cursor on or off')
 
 func _process(delta: float) -> void:
 	InputManager.im.update() # Update the input manager
@@ -107,7 +112,7 @@ func _process(delta: float) -> void:
 	# Switch camera mode (right mouse click)
 	if InputManager.im.retarget_just_pressed:
 		current_mode = ((current_mode+1) % CameraMode.size()) as CameraMode
-		#print(CameraMode.find_key(current_mode))
+		print('Switching to camera mode: '+CameraMode.find_key(current_mode))
 		
 		# If there is no target, be in FREE mode
 		if !is_instance_valid(target):
