@@ -14,7 +14,7 @@ static var cg:CameraGroup = null
 # Controls for looking at target
 @export_range(0, 720, 0.1, "radians_as_degrees") var elevation_speed: float = deg_to_rad(100.0)
 @export_range(0, 720, 0.1, "radians_as_degrees") var rotation_speed: float = deg_to_rad(100.0)
-@export_range(-90, 90, 0.1, "radians_as_degrees") var min_elevation: float = 0.0
+@export_range(-90, 90, 0.1, "radians_as_degrees") var min_elevation: float = deg_to_rad(-80.0)
 @export_range(0, 90, 0.1, "radians_as_degrees") var max_elevation: float = deg_to_rad(80.0)
 
 # This is used for the lerp involved with leaning into turns

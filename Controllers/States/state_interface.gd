@@ -72,6 +72,6 @@ func avoid_now() -> void:
 # Returns one or negative one randomly
 func _one_or_neg_one() -> int:
 	if random.randi()%2 == 0:
-		return 1.0
+		return 1
 	else:
-		return -1.0
+		return -1

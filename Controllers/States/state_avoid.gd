@@ -45,7 +45,7 @@ func Enter(motion:MovementProfile) -> void:
 
 # This function should be called on each
 # physics update frame.
-func Physics_Update(delta:float, motion:MovementProfile, orientation_data:TargetOrientationData) -> void:
+func Physics_Update(delta:float, _motion:MovementProfile, orientation_data:TargetOrientationData) -> void:
 	# The following pitch reduction is bad and causes ships
 	# to run into things, so I commented it out.
 	# Reduce pitch to 1/3 when no longer blocked ahead

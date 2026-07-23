@@ -42,15 +42,15 @@ class_name PlayerMovement4 extends CharacterBodyControlParent
 #@export var heading_reset_strength:float = 5.0
 
 # Amount to lean into turns. This makes the camera rotate in the
-# direction of the turn. This is ONLY used on movement_v5
+# direction of the turn.
 @export var lean_up_down:float = 0.2 ## Percent
-@export var lean_left_right:float = 0.2 ## Percent
+@export var lean_left_right:float = 0.3 ## Percent
 
 
 
 # There's another draft of the controls in this script.
 # Use that version if this is true.
-@export var use_movement_v5 := false
+#@export var use_movement_v5 := false
 
 
 # Stats while no inputs are given
@@ -106,10 +106,10 @@ func Update(ship:Ship, delta:float) -> void:
 func move_and_turn(mover:Ship, delta:float) -> void:
 	if is_dead: return
 	
-	# Alternative movement scheme
-	if use_movement_v5:
-		move_and_turn_v5(mover, delta)
-		return
+	## Alternative movement scheme
+	#if use_movement_v5:
+		#move_and_turn_v5(mover, delta)
+		#return
 	
 	#Brake
 	if InputManager.im.brake:
@@ -148,11 +148,11 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 	
 	# If you lerp more than 100% weird bad behavior occurs.
 	# Use min to avoid this.
-	# Get pitch
+	# Get pitch. Both left and right stick contribute. Left is primary.
 	pitch_input = lerp(pitch_input,
 		(InputManager.im.up_down1*stats.pitch + InputManager.im.up_down2*pitch_std_right_stick) * pitch_modifier,
 		min(1.0, stats.turning_lerp*delta))
-	# Get Roll
+	# Get roll. Both left and right stick contribute. Left is primary.
 	roll_input = lerp(roll_input,
 		(InputManager.im.left_right1*stats.roll + InputManager.im.left_right2*roll_std_right_stick) * roll_modifier,
 		min(1.0, stats.turning_lerp*delta))
@@ -163,9 +163,26 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 	
 	friction = stats.friction_std
 	
+	# Lean into turns (and pitches)
+	var lean_in:bool = InputManager.im.left_right1 != 0.0 or InputManager.im.up_down1 != 0.0
+	CameraGroup.cg.set_fp_manual_override(lean_in)
+	# Lean into turns
+	if lean_in:
+		var horz_lean:=InputManager.im.left_right1*lean_left_right
+		var vert_lean:=InputManager.im.up_down1*lean_up_down
+		CameraGroup.cg.rotate_fp_cam(horz_lean, vert_lean, delta)
+	
 	super.move_and_turn(mover, delta)
 
 
+# I'm keeping this here for now, but I'm not using it.
+# I didn't like it. The following controlls take
+# roll off the right stick on controller and off the
+# a-d keys on keyboard, and put look left or right on there
+# instead. It felt ok for controller, but I found myself wanting
+# to roll.
+# I did like the leaning into turns and have incorporated that
+# into the move_and_turn above.
 func move_and_turn_v5(mover:Ship, delta:float) -> void:
 	# If drift is just released, lerp heading toward
 	# velocity for the next heading_reset_duration
