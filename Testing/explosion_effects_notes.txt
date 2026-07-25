@@ -1,0 +1,43 @@
+
+How to make VFX in Godot - Brackeys
+https://www.youtube.com/watch?v=htRjt505sPg
+Documentation for all the settings can be found here:
+https://docs.godotengine.org/en/stable/tutorials/3d/particles/creating_a_3d_particle_system.html
+GPU Particles first steps:
+ - Add a ProcessMaterial
+ - Under Draw Passes add a Pass 1, usually a quad mesh for a flat image, or maybe a sphere or other shape if you want.
+ - Under Draw Passes -> Pass 1, add a material (use a texture for quad mesh, but for a sphere you might just use a color)
+ - It's recommended to add material under Geometry/Material override, not under Draw Passes -> Pass 1 so that meshes (when possible) can be shared between Draw Passes for efficiency, but the material can still be unique.. (See 14:30 in the video)
+ - Set Vertex Color to Use as Albedo
+ - For many explosion textures set Transparency to Alpha
+ - When duplicating GPU Particles make sure to make the process material unique recursive. Do the same thing for the material, but try to avoid this under Draw Passes when possible for efficiency.
+ - Don't make the textures unique
+ - If you use Shading -> Shading Mode -> Unshaded, you won't be able to use emissions.
+ - This is really valuable for fire and spark textures: Material -> Transparency -> Blend Mode -> Add. For smoke and debris, use Mix. If you try to use "Add" for smoke, black may appear as transparent.
+ - If you want stuff to appear at random angles, use Process Material -> Spawn -> Angle and set the max to 360. However, this won't work with meshes like boxes or prisms. It works great for textures though.
+ - To rotate textures over time: Process Material -> Animated Velocity -> Angular Velocity. Rotating meshes like boxes and prisms doesn't work, but you can fake it with billboarded textures and Process Material -> Spawn -> Angle.
+ - To get spark textures to align properly you have to not Billboard, not Process Materials -> Particle Flags -> Y-Align, but instead at the outer level set Drawing -> Transform Align -> Z-Billboard + Y to Velocity
+ - Z-fighting: Effects can sometimes flicker if the renderer doesn't know what to draw on top of what. To fix this (and generally you should do this anyway) go under VisualInstance3D -> Sorting and change the offset of each gpu particle to get the stacking order you want. Higher numbers render on top of (closer to the camera) than lower numbers.
+ - 31 minutes in covers premultiplied alpha, but I have decided that this is beyond the scope of what I want to deal with at this time.
+
+You can set particles to one-shot then use control-r to toggle emitting.
+
+Process Material -> Accelerations is covered at 10 min
+https://www.youtube.com/watch?v=htRjt505sPg
+There are some really interesting patterns you can create with these. A lot of the magic-looking protoss explosions use radial or tangential accelerations, I think.
+
+Billboarding with quadmeshes starts at 23:30
+https://www.youtube.com/watch?v=htRjt505sPg
+
+Material -> Shading options are discussed at 26:30
+https://www.youtube.com/watch?v=htRjt505sPg
+Unshaded is super efficient, but the particles will look the same regardless of lighting in the environment.
+Unless you want shiny particles, you can disable Specular Mode.
+
+The source for Explosion00_5x5.png
+is Explosion00 https://unity.com/blog/engine-platform/free-vfx-image-sequences-flipbooks
+
+debris.png was made by me, Neal Holtschulte.
+
+REFERENCE:
+HotDS explosions are CLEAN. https://www.youtube.com/watch?v=nUNbTb6MCrc

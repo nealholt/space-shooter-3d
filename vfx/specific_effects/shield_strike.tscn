@@ -106,10 +106,10 @@ color_ramp = SubResource("GradientTexture1D_sxp0e")
 
 [sub_resource type="QuadMesh" id="QuadMesh_pnf0b"]
 
-[node name="ShieldStrike" type="Node3D"]
+[node name="ShieldStrike" type="Node3D" unique_id=1395448116]
 script = ExtResource("1_rcwin")
 
-[node name="Sparks" type="GPUParticles3D" parent="."]
+[node name="Sparks" type="GPUParticles3D" parent="." unique_id=142426149]
 material_override = SubResource("StandardMaterial3D_46d27")
 emitting = false
 amount = 30
@@ -120,7 +120,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_3ewge")
 draw_pass_1 = SubResource("QuadMesh_u36mk")
 
-[node name="Flash" type="GPUParticles3D" parent="."]
+[node name="Flash" type="GPUParticles3D" parent="." unique_id=1241436408]
 material_override = ExtResource("2_l105u")
 emitting = false
 amount = 1
@@ -131,7 +131,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_pqjbm")
 draw_pass_1 = SubResource("QuadMesh_ysvqd")
 
-[node name="Fire" type="GPUParticles3D" parent="."]
+[node name="Fire" type="GPUParticles3D" parent="." unique_id=1200527086]
 material_override = SubResource("StandardMaterial3D_568gq")
 emitting = false
 amount = 5
@@ -142,7 +142,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_ywo5y")
 draw_pass_1 = SubResource("QuadMesh_pnf0b")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1409088748]
 stream = ExtResource("3_30u2s")
 volume_db = 2.0
 

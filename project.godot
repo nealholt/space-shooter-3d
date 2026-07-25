@@ -34,6 +34,10 @@ BulletSpawner="*uid://d0r6c7kklyj38"
 window/size/mode=4
 window/size/borderless=true
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/brackeys_particle_controls/plugin.cfg")
+
 [global_group]
 
 "team color"=""

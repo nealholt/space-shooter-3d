@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw7pook0uxwq3"
-path.s3tc="res://.godot/imported/trace_05.png-afb895b5828874d1bc99a64029cdb5a1.s3tc.ctex"
+uid="uid://yaarjog6mrbh"
+path.s3tc="res://.godot/imported/Explosion00_5x5.png-309b10713e462bba6f2d221fff839e57.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Textures/kenney_particle-pack/trace_05.png"
-dest_files=["res://.godot/imported/trace_05.png-afb895b5828874d1bc99a64029cdb5a1.s3tc.ctex"]
+source_file="res://Testing/Explosion00_5x5.png"
+dest_files=["res://.godot/imported/Explosion00_5x5.png-309b10713e462bba6f2d221fff839e57.s3tc.ctex"]
 
 [params]
 
