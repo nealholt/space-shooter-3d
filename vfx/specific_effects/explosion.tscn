@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bnfrjatb6prnb"]
 
-[ext_resource type="Script" uid="uid://jce54cs8xhg1" path="res://vfx/specific_effects/explosion_single.gd" id="1_0y3pu"]
+[ext_resource type="Script" uid="uid://bvmwhl62ighly" path="res://vfx/visual_effect.gd" id="1_ukt7p"]
 [ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/Textures/kenney_particle-pack/star_04.png" id="1_xbms3"]
 [ext_resource type="Material" uid="uid://covsu58qwnqru" path="res://Assets/Materials/flare00.tres" id="2_ggp7v"]
 [ext_resource type="AudioStream" uid="uid://cdvuqhwbklq3c" path="res://Audio/SoundEffects/explosion_pow.wav" id="3_ehf7x"]
@@ -113,7 +113,7 @@ color = Color(0, 0, 0, 1)
 [sub_resource type="QuadMesh" id="QuadMesh_m3584"]
 
 [sub_resource type="Animation" id="Animation_bv6qo"]
-resource_name = "Init"
+resource_name = "Explosion"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -162,27 +162,13 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/4/type = "method"
+tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".")
+tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_on_animation_finished"
-}]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("AudioStreamPlayer3D:playing")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -254,14 +240,14 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h4ga4"]
 _data = {
-&"Init": SubResource("Animation_bv6qo"),
+&"Explosion": SubResource("Animation_bv6qo"),
 &"RESET": SubResource("Animation_44uyp")
 }
 
-[node name="Explosion" type="Node3D"]
-script = ExtResource("1_0y3pu")
+[node name="Explosion" type="Node3D" unique_id=462847740]
+script = ExtResource("1_ukt7p")
 
-[node name="Sparks" type="GPUParticles3D" parent="."]
+[node name="Sparks" type="GPUParticles3D" parent="." unique_id=1281964304]
 material_override = SubResource("StandardMaterial3D_46d27")
 emitting = false
 amount = 30
@@ -272,7 +258,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_6agb2")
 draw_pass_1 = SubResource("QuadMesh_u36mk")
 
-[node name="Flash" type="GPUParticles3D" parent="."]
+[node name="Flash" type="GPUParticles3D" parent="." unique_id=855922850]
 material_override = ExtResource("2_ggp7v")
 emitting = false
 amount = 1
@@ -283,7 +269,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_os3nl")
 draw_pass_1 = SubResource("QuadMesh_ysvqd")
 
-[node name="Fire" type="GPUParticles3D" parent="."]
+[node name="Fire" type="GPUParticles3D" parent="." unique_id=1615196095]
 material_override = ExtResource("2_ggp7v")
 emitting = false
 amount = 13
@@ -294,7 +280,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_ywo5y")
 draw_pass_1 = SubResource("QuadMesh_pnf0b")
 
-[node name="Smoke" type="GPUParticles3D" parent="."]
+[node name="Smoke" type="GPUParticles3D" parent="." unique_id=548089670]
 material_override = ExtResource("2_ggp7v")
 emitting = false
 amount = 10
@@ -304,11 +290,9 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_eu1qv")
 draw_pass_1 = SubResource("QuadMesh_m3584")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_h4ga4")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=129211659]
+libraries/ = SubResource("AnimationLibrary_h4ga4")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=604360556]
 stream = ExtResource("3_ehf7x")
 volume_db = 2.0

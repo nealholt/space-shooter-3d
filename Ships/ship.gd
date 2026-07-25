@@ -129,7 +129,7 @@ func _ready() -> void:
 	if is_player:
 		# Make this scene statically accessible
 		if player:
-			push_error('ERROR: Unique, static Ship.player reference has already been set. This should only ever get set once.')
+			push_error('ERROR: Unique static Ship.player reference has already been set. This should only ever get set once.')
 		player = self
 		# Connect missile cues tot he player
 		MissileCues.mc.connect_to_player(player)

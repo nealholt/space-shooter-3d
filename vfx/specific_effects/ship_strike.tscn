@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://domnb1m51i30x"]
 
 [ext_resource type="Texture2D" uid="uid://cgs2blq7xbju4" path="res://Assets/Textures/kenney_particle-pack/trace_01.png" id="1_0cdd1"]
+[ext_resource type="Script" uid="uid://bvmwhl62ighly" path="res://vfx/visual_effect.gd" id="1_fiiru"]
 [ext_resource type="Texture2D" uid="uid://ce6i4w30wrek0" path="res://Assets/Textures/kenney_particle-pack/star_09.png" id="2_weuwo"]
 [ext_resource type="AudioStream" uid="uid://bnvv2m1sdy00w" path="res://Audio/SoundEffects/ship_strike.wav" id="3_mb3w1"]
 
@@ -8,6 +9,7 @@
 transparency = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("1_0cdd1")
 disable_receive_shadows = true
@@ -17,32 +19,43 @@ particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
+[sub_resource type="Curve" id="Curve_k6hp0"]
+_limits = [0.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1, 0), -15.735646, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fiiru"]
+curve = SubResource("Curve_k6hp0")
+
 [sub_resource type="Curve" id="Curve_04b6a"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.693548, 0.472294), -2.42021, -2.42021, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.3335297, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_pxohv"]
 curve = SubResource("Curve_04b6a")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cvldn"]
 direction = Vector3(0, 0, 1)
-spread = 10.0
-initial_velocity_min = 10.0
-initial_velocity_max = 30.0
+spread = 30.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
 gravity = Vector3(0, 0, 0)
-scale_min = 5.0
+scale_min = 8.0
 scale_max = 10.0
 scale_curve = SubResource("CurveTexture_pxohv")
 color = Color(2, 1, 1, 1)
+emission_curve = SubResource("CurveTexture_fiiru")
 
-[sub_resource type="QuadMesh" id="QuadMesh_u3p24"]
+[sub_resource type="QuadMesh" id="QuadMesh_qyhie"]
 orientation = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k2dfx"]
 transparency = 1
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("2_weuwo")
+disable_receive_shadows = true
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -50,27 +63,27 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="Curve" id="Curve_kjye7"]
-_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.106452, 0.865979), 1.1803, 1.1803, 0, 0, Vector2(0.6, 0.5), -1.52236, -1.52236, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 0.4973787), 0.0, 0.0, 0, 0, Vector2(0.05519481, 0.99999994), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_w8r38"]
 curve = SubResource("Curve_kjye7")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ao36t"]
 emission_shape = 1
-emission_sphere_radius = 2.0
-angle_min = -180.0
-angle_max = 180.0
+emission_sphere_radius = 1.0
+angle_min = 1.0728835e-05
+angle_max = 360.00003
 gravity = Vector3(0, 0, 0)
-scale_max = 2.0
+scale_min = 2.0
+scale_max = 4.0
 scale_curve = SubResource("CurveTexture_w8r38")
 color = Color(3, 2, 1, 1)
-turbulence_noise_strength = 0.0
-turbulence_noise_scale = 0.0
-turbulence_noise_speed = Vector3(5, 0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_u3p24"]
 
 [sub_resource type="Animation" id="Animation_8rnhr"]
-resource_name = "Init"
+resource_name = "Explosion"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -95,27 +108,13 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/2/type = "method"
+tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".")
+tracks/2/path = NodePath("AudioStreamPlayer3D:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -163,27 +162,29 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dnwm4"]
 _data = {
-&"Init": SubResource("Animation_8rnhr"),
+&"Explosion": SubResource("Animation_8rnhr"),
 &"RESET": SubResource("Animation_jwvfn")
 }
 
-[node name="ShipStrike" type="Node3D"]
+[node name="ShipStrike" type="Node3D" unique_id=1929856746]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+script = ExtResource("1_fiiru")
 
-[node name="Straight" type="GPUParticles3D" parent="."]
+[node name="Straight" type="GPUParticles3D" parent="." unique_id=1978053633]
 material_override = SubResource("StandardMaterial3D_kvud0")
 cast_shadow = 0
 emitting = false
 amount = 30
-lifetime = 0.7
+lifetime = 0.2
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_cvldn")
-draw_pass_1 = SubResource("QuadMesh_u3p24")
+draw_pass_1 = SubResource("QuadMesh_qyhie")
 
-[node name="Star" type="GPUParticles3D" parent="."]
+[node name="Star" type="GPUParticles3D" parent="." unique_id=1291139468]
 material_override = SubResource("StandardMaterial3D_k2dfx")
+cast_shadow = 0
 emitting = false
 lifetime = 0.3
 one_shot = true
@@ -192,12 +193,9 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_ao36t")
 draw_pass_1 = SubResource("QuadMesh_u3p24")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_dnwm4")
-}
-autoplay = "Init"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=32430195]
+libraries/ = SubResource("AnimationLibrary_dnwm4")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=977227181]
 stream = ExtResource("3_mb3w1")
 volume_db = 2.0

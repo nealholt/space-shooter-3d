@@ -35,7 +35,7 @@ static func new_ray(my_parent:Node3D) -> RayOnDemand:
 func _ready() -> void:
 	# Make this scene statically accessible
 	if me:
-		push_error('ERROR: Unique, static RayOnDemand reference has already been set. This should only ever get set once.')
+		push_error('ERROR: Unique static RayOnDemand reference has already been set. This should only ever get set once.')
 	me = self
 
 

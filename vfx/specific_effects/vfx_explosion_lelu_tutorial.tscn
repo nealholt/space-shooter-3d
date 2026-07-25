@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://wvqr1nvfc2u1"]
 
-[ext_resource type="Script" uid="uid://jce54cs8xhg1" path="res://vfx/specific_effects/explosion_single.gd" id="1_b0pur"]
+[ext_resource type="Script" uid="uid://bvmwhl62ighly" path="res://vfx/visual_effect.gd" id="1_4frpy"]
 [ext_resource type="Material" uid="uid://ck6a2ts7de74c" path="res://Assets/Shaders/material_explosion_cloud.tres" id="1_ite73"]
 [ext_resource type="Shader" uid="uid://bee3mywubqp6k" path="res://Assets/Shaders/streak_shader.tres" id="2_3q7cl"]
 [ext_resource type="Texture2D" uid="uid://dr5x7m3c1x4pw" path="res://Assets/Textures/explosion_textures/T_vfx_hit122.jpg" id="3_jxvm6"]
@@ -86,7 +86,7 @@ hue_variation_max = 1.0
 size = Vector2(0.25, 1.5)
 
 [sub_resource type="Animation" id="Animation_u6se1"]
-resource_name = "Init"
+resource_name = "Explosion"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -135,27 +135,13 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/4/type = "method"
+tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".")
+tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_on_animation_finished"
-}]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("AudioStreamPlayer3D:playing")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -227,7 +213,7 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i0xkb"]
 _data = {
-&"Init": SubResource("Animation_u6se1"),
+&"Explosion": SubResource("Animation_u6se1"),
 &"RESET": SubResource("Animation_tkou0")
 }
 
@@ -258,10 +244,10 @@ scale_curve = SubResource("CurveTexture_12lof")
 
 [sub_resource type="QuadMesh" id="QuadMesh_bl1ix"]
 
-[node name="VFX_Explosion" type="Node3D"]
-script = ExtResource("1_b0pur")
+[node name="VFX_Explosion" type="Node3D" unique_id=345173086]
+script = ExtResource("1_4frpy")
 
-[node name="VFX_SmokeClouds" type="GPUParticles3D" parent="."]
+[node name="VFX_SmokeClouds" type="GPUParticles3D" parent="." unique_id=1519752887]
 material_override = ExtResource("1_ite73")
 emitting = false
 lifetime = 0.6
@@ -271,7 +257,7 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_ev6r4")
 draw_pass_1 = SubResource("SphereMesh_a01sr")
 
-[node name="VFX_StreakSparks" type="GPUParticles3D" parent="."]
+[node name="VFX_StreakSparks" type="GPUParticles3D" parent="." unique_id=1600601136]
 material_override = SubResource("ShaderMaterial_u66al")
 emitting = false
 lifetime = 0.4
@@ -282,17 +268,15 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_xut87")
 draw_pass_1 = SubResource("QuadMesh_qadt1")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_i0xkb")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1533933421]
+libraries/ = SubResource("AnimationLibrary_i0xkb")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=156924263]
 light_color = Color(0.886275, 0.345098, 0.12549, 1)
 light_energy = 20.0
 omni_range = 10.0
 
-[node name="Flare" type="GPUParticles3D" parent="."]
+[node name="Flare" type="GPUParticles3D" parent="." unique_id=1949133405]
 material_override = SubResource("StandardMaterial3D_sl06y")
 emitting = false
 amount = 1
@@ -303,6 +287,6 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_16r1b")
 draw_pass_1 = SubResource("QuadMesh_bl1ix")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1975339717]
 stream = ExtResource("4_n4s7i")
 volume_db = 2.0

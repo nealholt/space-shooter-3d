@@ -13,12 +13,12 @@ enum VISUAL_EFFECT_TYPE {
 	SHIP_STRIKE,
 	BULLET_HOLE,
 	FLAK_EXPLOSION,
-	MUZZLE_FLASH, # Can this be deleted?
 	SINGLE_EXPLOSION,
 	SINGLE_EXPLOSION_8X,
 	EXPLOSION,
 	CARRIER_EXPLOSION,
-	BUSY_EXPLOSION
+	BUSY_EXPLOSION,
+	EXPLOSION_HOTDS
 }
 
 @export var limit: int = 50 ## Maximum number of this VisualEffect to play simultaneously before culled.

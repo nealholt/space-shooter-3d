@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://loiql7x3ow62"]
 
-[ext_resource type="Script" uid="uid://bohtbu5g83x78" path="res://vfx/specific_effects/shield_strike.gd" id="1_rcwin"]
+[ext_resource type="Script" uid="uid://bvmwhl62ighly" path="res://vfx/visual_effect.gd" id="1_6d5r7"]
 [ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/Textures/kenney_particle-pack/star_04.png" id="1_xdx7c"]
 [ext_resource type="Material" uid="uid://covsu58qwnqru" path="res://Assets/Materials/flare00.tres" id="2_l105u"]
 [ext_resource type="AudioStream" uid="uid://drwbhql0pjblr" path="res://Audio/SoundEffects/shield_strike.wav" id="3_30u2s"]
@@ -106,8 +106,116 @@ color_ramp = SubResource("GradientTexture1D_sxp0e")
 
 [sub_resource type="QuadMesh" id="QuadMesh_pnf0b"]
 
+[sub_resource type="Animation" id="Animation_6d5r7"]
+resource_name = "Explosion"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sparks:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flash:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fire:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_twp0c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sparks:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flash:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fire:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hxaxm"]
+_data = {
+&"Explosion": SubResource("Animation_6d5r7"),
+&"RESET": SubResource("Animation_twp0c")
+}
+
 [node name="ShieldStrike" type="Node3D" unique_id=1395448116]
-script = ExtResource("1_rcwin")
+script = ExtResource("1_6d5r7")
 
 [node name="Sparks" type="GPUParticles3D" parent="." unique_id=142426149]
 material_override = SubResource("StandardMaterial3D_46d27")
@@ -145,6 +253,9 @@ draw_pass_1 = SubResource("QuadMesh_pnf0b")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1409088748]
 stream = ExtResource("3_30u2s")
 volume_db = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1796490530]
+libraries/ = SubResource("AnimationLibrary_hxaxm")
 
 [connection signal="finished" from="Sparks" to="." method="_on_part_finished"]
 [connection signal="finished" from="Flash" to="." method="_on_part_finished"]

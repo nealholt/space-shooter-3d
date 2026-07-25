@@ -195,12 +195,12 @@ func is_playing() -> bool:
 
 
 func stop() -> void:
-	super()
+	_on_animation_finished('')
 	timer.stop()
 
 
-func _on_animation_finished() -> void:
-	super()
+func _on_animation_finished(anim_name:String) -> void:
+	super(anim_name)
 	effect_is_live = false
 	fireflies.emitting = false
 	explosion_sprite.visible = false

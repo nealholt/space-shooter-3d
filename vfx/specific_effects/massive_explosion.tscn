@@ -57,6 +57,14 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_20t1u"]
 material = SubResource("StandardMaterial3D_11ixh")
 
+[sub_resource type="Animation" id="Animation_nlhnk"]
+resource_name = "Explosion"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pbeax"]
+_data = {
+&"Explosion": SubResource("Animation_nlhnk")
+}
+
 [node name="MassiveExplosion" type="Node3D" unique_id=580659816]
 script = ExtResource("1_t7dhc")
 
@@ -87,4 +95,7 @@ draw_pass_1 = SubResource("QuadMesh_20t1u")
 [node name="Timer" type="Timer" parent="." unique_id=1272876503]
 one_shot = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_animation_finished"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1241042648]
+libraries/ = SubResource("AnimationLibrary_pbeax")
+
+[connection signal="timeout" from="Timer" to="." method="_on_animation_finished" binds= ["''"]]

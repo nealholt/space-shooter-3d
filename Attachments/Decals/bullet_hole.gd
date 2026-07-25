@@ -1,6 +1,5 @@
 class_name BulletHole extends VisualEffect
 
-@onready var anim := $AnimationPlayer
 @onready var timer := $Timer
 
 func play() -> void:
@@ -18,6 +17,6 @@ func stop() -> void:
 	anim.stop()
 	timer.stop()
 
-func _on_animation_finished() -> void:
-	super()
+func _on_animation_finished(anim_name:String) -> void:
+	super(anim_name)
 	visible = false

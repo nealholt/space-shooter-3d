@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://7dofuekbf3cs"]
 
-[ext_resource type="Script" uid="uid://jce54cs8xhg1" path="res://vfx/specific_effects/explosion_single.gd" id="1_54mup"]
 [ext_resource type="Texture2D" uid="uid://dmdma38hj76ed" path="res://Assets/Textures/kenney_particle-pack/flame_04.png" id="1_tf0us"]
+[ext_resource type="Script" uid="uid://bvmwhl62ighly" path="res://vfx/visual_effect.gd" id="1_wt5u7"]
 [ext_resource type="Texture2D" uid="uid://dj56rpx4qmqh7" path="res://Assets/Textures/kenney_particle-pack/flame_03.png" id="2_54mup"]
 [ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/Textures/kenney_particle-pack/star_05.png" id="3_f4waa"]
 [ext_resource type="Texture2D" uid="uid://dhgy70nb1wj4x" path="res://Assets/Textures/kenney_particle-pack/fire_02.png" id="4_117nw"]
@@ -191,7 +191,7 @@ scale_curve = SubResource("CurveTexture_ak1tb")
 [sub_resource type="SphereMesh" id="SphereMesh_miv4a"]
 
 [sub_resource type="Animation" id="Animation_f4waa"]
-resource_name = "Init"
+resource_name = "Explosion"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -356,12 +356,12 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qreak"]
 _data = {
-&"Init": SubResource("Animation_f4waa"),
+&"Explosion": SubResource("Animation_f4waa"),
 &"RESET": SubResource("Animation_117nw")
 }
 
 [node name="AnotherExplosion" type="Node3D" unique_id=88507780]
-script = ExtResource("1_54mup")
+script = ExtResource("1_wt5u7")
 
 [node name="Smoke2" type="GPUParticles3D" parent="." unique_id=2106229254]
 material_override = SubResource("StandardMaterial3D_j7crj")

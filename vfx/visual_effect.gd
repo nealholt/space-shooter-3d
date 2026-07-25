@@ -1,12 +1,19 @@
-@abstract
 class_name VisualEffect extends Node3D
-## Parent class for all visual effects
 
+@onready var anim: AnimationPlayer = $AnimationPlayer
 var remote_transform:RemoteTransform3D
 
-@abstract func play() -> void
 
-@abstract func is_playing() -> bool
+func _ready() -> void:
+	if !anim:
+		push_error('Oops, there should be an animation player on every visual effect.')
+	anim.animation_finished.connect(_on_animation_finished)
+
+func play() -> void:
+	anim.play("Explosion")
+
+func is_playing() -> bool:
+	return anim.is_playing()
 
 func play_at(loc:Vector3) -> void:
 	global_position = loc
@@ -29,7 +36,6 @@ func play_at_angle(loc:Vector3, angle:Vector3) -> void:
 	elif !angle.is_equal_approx(Vector3.ZERO):
 		look_at(global_position - angle, Vector3(0,1,0))
 	play()
-
 
 func face_and_play(loc:Vector3, to_face:Vector3) -> void:
 	global_position = loc
@@ -57,9 +63,15 @@ func play_remote_transform(remote_mover:Node3D, adjust:Vector3=Vector3.INF) -> v
 	play()
 
 func stop() -> void:
-	_on_animation_finished()
+	_on_animation_finished('')
+	anim.stop()
+	# I think this reset is needed in case the animation
+	# gets interrupted. I'm not sure, but there was a
+	# weird bug where an explosion kept reinitiating
+	# every time I loaded or unloaded a level, so I added this.
+	anim.play("RESET")
 
-func _on_animation_finished() -> void:
+func _on_animation_finished(_anim_name:String) -> void:
 	# Free any remote transform
 	if is_instance_valid(remote_transform):
 		remote_transform.queue_free()

@@ -8,12 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://ctylowk0dxhp3" path="res://vfx/specific_effects/sparks.tscn" id="6_8do65"]
 [ext_resource type="PackedScene" uid="uid://dgfgr1a12mn0l" path="res://Attachments/Decals/bullet_hole.tscn" id="7_levs1"]
 [ext_resource type="PackedScene" uid="uid://dry7yodrwl18u" path="res://vfx/specific_effects/vfx_explosion_lelu_single.tscn" id="8_le2sy"]
-[ext_resource type="PackedScene" uid="uid://58nrpfbay3lf" path="res://vfx/MuzzleFlash/muzzle_flash.tscn" id="9_14doy"]
 [ext_resource type="PackedScene" uid="uid://wvqr1nvfc2u1" path="res://vfx/specific_effects/vfx_explosion_lelu_tutorial.tscn" id="10_ptu8o"]
 [ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://vfx/specific_effects/vfx_explosion_lelu_8x.tscn" id="11_j7uvs"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://vfx/specific_effects/explosion.tscn" id="12_ey1l5"]
 [ext_resource type="PackedScene" uid="uid://dd7gue1cwbx6u" path="res://vfx/specific_effects/massive_explosion.tscn" id="13_71nip"]
 [ext_resource type="PackedScene" uid="uid://7dofuekbf3cs" path="res://vfx/specific_effects/explosion_MkII.tscn" id="14_fdgtq"]
+[ext_resource type="PackedScene" uid="uid://bbql1i0kvg5e7" path="res://vfx/specific_effects/explosion_hotds.tscn" id="14_gwvbw"]
 
 [node name="VFX_Manager" type="Node" unique_id=1546280994]
 script = ExtResource("1_4hukn")
@@ -53,13 +53,6 @@ type = 5
 visual_effect = ExtResource("8_le2sy")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
-[node name="MuzzleFlashSetting" type="Node" parent="all_vfx_settings" unique_id=470384721]
-script = ExtResource("4_vbg6y")
-limit = 100
-type = 6
-visual_effect = ExtResource("9_14doy")
-metadata/_custom_type_script = "uid://dxavjpjg06j5w"
-
 [node name="SingleExplosionSetting" type="Node" parent="all_vfx_settings" unique_id=1483340351]
 script = ExtResource("4_vbg6y")
 type = 7
@@ -91,3 +84,8 @@ metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 limit = 5
 type = 11
 visual_effect = ExtResource("14_fdgtq")
+
+[node name="ExplosionHotDS" parent="all_vfx_settings" unique_id=877466162 instance=ExtResource("2_kqin3")]
+limit = 20
+type = 11
+visual_effect = ExtResource("14_gwvbw")

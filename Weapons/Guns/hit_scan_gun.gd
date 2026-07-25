@@ -31,8 +31,12 @@ func shoot_actual() -> void:
 			#print("dealt damage")
 			data.damage = damage
 			collider.damage(data)
+		
 		# Spawn sparks on location of hit
-		VfxManager.play(VisualEffectSetting.VISUAL_EFFECT_TYPE.MUZZLE_FLASH, ray.get_collision_point())
+		# The muzzle flash effect was removed. You can use a
+		# different one.
+		#VfxManager.play(VisualEffectSetting.VISUAL_EFFECT_TYPE.MUZZLE_FLASH, ray.get_collision_point())
+		
 		# Play feedback for player if relevant
 		Global.player_feedback(collider, data)
 	position_laser()
