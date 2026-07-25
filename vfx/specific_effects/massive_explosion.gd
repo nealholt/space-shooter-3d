@@ -4,10 +4,6 @@ extends VisualEffect
 # for the carrier size and shape. Different shape
 # would be good for other ships.
 
-# NOTE: It might be nice to scale the environment
-# effects based on distance as well as angle to the
-# explosion. Currently only angle is used.
-
 # I made the explosion sprite and ring sprite
 # "Double Sided" under Flags and also under Geometry,
 # Material Override, Transparency, set Cull Mode to Disabled
@@ -34,12 +30,14 @@ extends VisualEffect
 # the explosion sprites positioned relative to the camera.
 
 @onready var timer:=$Timer
-@onready var explosion_sprite:=$ExplosionSprite3D
 @onready var ring_sprite:=$RingSprite3D
 @onready var fireflies:=$FireflyParticles3D
+@onready var flare_explosion: GPUParticles3D = $FlareExplosion
 
 const MAX_ANGLE := 70.0 ## Degrees. Max angle at which the world environment is modified.
 const MIN_ANGLE := 0.0 ## Degrees. Max angle at which the world environment is modified.
+
+const UNIT_DISTANCE := 700.0 ## Distance at which the factor for world environment modification is one.
 
 # Currently brightness goes up to 4x
 const MAX_BRIGHTNESS_FACTOR := 4.0 ## Max factor by which brightness will be scaled when the camera is staring into the explosion.
@@ -68,15 +66,6 @@ var ring_scale_duration := 1.5 ## Tween duration for changing ring image's scale
 var ring_scale_target := 1.6 ## Scale value we are tweening to
 var ring_scale_start := 0.1 ## Scale value we are starting at
 
-# How far flare image will be placed from the camera
-var flare_distance_min_actual := 1.0
-var flare_distance_max_actual := 5.0
-# Camera range from explosion which will be linearly mapped
-# to the above two values, the "actual" values.
-# These were experimentally determined.
-var flare_distance_camera_min := 350.0
-var flare_distance_camera_max := 1600.0
-
 # How far ring image will be placed from the camera
 var ring_distance_min_actual := 1.0
 var ring_distance_max_actual := 5.0
@@ -103,6 +92,9 @@ var max_time:float ## Max time this effect might last.
 
 
 func _ready() -> void:
+	# Set the particle's lifetime to be consistent with
+	# other alpha effects.
+	flare_explosion.lifetime = explosion_alpha_duration
 	# Set max_time to be the largest of all the durations
 	# then add on 50% as a buffer. After this time, the
 	# effect is officially finished.
@@ -139,7 +131,6 @@ func _process(_delta: float) -> void:
 	# Ignore collisions with the player.
 	var obscured:bool = !RayOnDemand.me.line_is_clear(global_position, camera.global_position, Ship.player)
 	# Show or hide sprites
-	explosion_sprite.visible = !obscured
 	ring_sprite.visible = !obscured
 	# No need for the following if the sprites are invisible
 	if obscured:
@@ -153,33 +144,42 @@ func _process(_delta: float) -> void:
 	# based on distance of explosion from the camera.
 	# These were experimentally determined
 	# https://docs.godotengine.org/en/latest/classes/class_@globalscope.html#class-globalscope-method-remap
-	var ideal_distance:float=clamp(remap(cam_distance, flare_distance_camera_min, flare_distance_camera_max, flare_distance_min_actual, flare_distance_max_actual), flare_distance_min_actual, flare_distance_max_actual)
-	# Update explosion sprite position
-	explosion_sprite.global_position = camera.global_position + direction * ideal_distance
-	# Update ring sprite position
-	ideal_distance=clamp(remap(cam_distance, ring_distance_camera_min, ring_distance_camera_max, ring_distance_min_actual, ring_distance_max_actual), ring_distance_min_actual, ring_distance_max_actual)
+	var ideal_distance:float=clamp(remap(cam_distance, ring_distance_camera_min, ring_distance_camera_max, ring_distance_min_actual, ring_distance_max_actual), ring_distance_min_actual, ring_distance_max_actual)
 	ring_sprite.global_position = camera.global_position + direction * ideal_distance
 
 
 func play() -> void:
+	super.play()
 	# Update the camera
 	camera = get_viewport().get_camera_3d()
 	
 	# Initiate explosion effects
-	flare_explosion()
+	#flare_explosion() #TODO TESTING
 	ring_explosion()
 	
 	# Angle from camera to this explosion
 	var cam_angle:float = rad_to_deg(Global.get_angle_to_target(camera.global_position, global_position, -camera.global_transform.basis.z))
+	# Distance from camera to this explosion
+	# normalized by UNIT_DISTANCE an arbitrary
+	# distance at which the environment effects are
+	# neither increased nor decreased by distance.
+	var dist_normalized:float = global_position.distance_to(camera.global_position) / UNIT_DISTANCE
 	# Change environment variables.
 	# remap from max to min angle because lowest values should
 	# occur at max and highest at min because zero means camera
 	# is staring right into the explosion.
-	var factor:float = clamp(remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MIN_BRIGHTNESS_FACTOR,MAX_BRIGHTNESS_FACTOR), MIN_BRIGHTNESS_FACTOR, MAX_BRIGHTNESS_FACTOR)
+	# Account for distance by dividing factor by
+	# dist/UNIT_DISTANCE for brightness and contrast but
+	# multiplying for saturation since it's inverted.
+	# More distance means less effect.
+	var factor:float = remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MIN_BRIGHTNESS_FACTOR,MAX_BRIGHTNESS_FACTOR)
+	factor = clamp(factor / dist_normalized, MIN_BRIGHTNESS_FACTOR, MAX_BRIGHTNESS_FACTOR)
 	blink_environment('adjustment_brightness', baseline_brightness, factor, brightness_change_duration)
-	factor = clamp(remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MIN_CONTRAST_FACTOR,MAX_CONTRAST_FACTOR), MIN_CONTRAST_FACTOR, MAX_CONTRAST_FACTOR)
+	factor = remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MIN_CONTRAST_FACTOR,MAX_CONTRAST_FACTOR)
+	factor = clamp(factor / dist_normalized, MIN_CONTRAST_FACTOR, MAX_CONTRAST_FACTOR)
 	blink_environment('adjustment_contrast', baseline_contrast, factor, contrast_change_duration)
-	factor = clamp(remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MAX_SATURATION_FACTOR, MIN_SATURATION_FACTOR), MIN_SATURATION_FACTOR, MAX_SATURATION_FACTOR)
+	factor = remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MAX_SATURATION_FACTOR, MIN_SATURATION_FACTOR)
+	factor = clamp(factor * dist_normalized, MIN_SATURATION_FACTOR, MAX_SATURATION_FACTOR)
 	blink_environment('adjustment_saturation', baseline_saturation, factor, saturation_change_duration)
 	
 	fireflies.emitting = true
@@ -203,30 +203,8 @@ func _on_animation_finished(anim_name:String) -> void:
 	super(anim_name)
 	effect_is_live = false
 	fireflies.emitting = false
-	explosion_sprite.visible = false
 	ring_sprite.visible = false
 	set_process(false) # Turn off process function
-
-
-func flare_explosion() -> void:
-	# Reset sprite modulate value back to full
-	explosion_sprite.modulate.a8 = 255
-	# Modulate sprite's opacity until it disappears
-	var tween:Tween = create_tween()
-	tween.tween_property(explosion_sprite,
-		'modulate:a8',
-		explosion_alpha_target, explosion_alpha_duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
-	# An animation player could be used to modify the
-	# sprite in other ways, per this suggestion:
-	# https://www.reddit.com/r/godot/comments/r4snzr/how_do_you_make_a_spotlight_have_a/
-	
-	# The following does nothing when billboarding is on
-	# however, I don't want the image to sometimes be
-	# invisible because by random chance it's rotated side-on.
-	# Add some random rotation for variety
-	#explosion_sprite.rotate_x(randf_range(-PI/2, PI/2))
-	#explosion_sprite.rotate_y(randf_range(-PI/2, PI/2))
-	#explosion_sprite.rotate_z(randf_range(-PI/2, PI/2))
 
 
 func ring_explosion() -> void:

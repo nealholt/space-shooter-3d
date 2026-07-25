@@ -2,18 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://hghgh008vwv" path="res://Assets/Textures/kenney_particle-pack/flare_01.png" id="1_f3jch"]
 [ext_resource type="Script" uid="uid://dcdgmk2hdc70k" path="res://vfx/specific_effects/massive_explosion.gd" id="1_t7dhc"]
-[ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/Textures/kenney_particle-pack/star_05.png" id="2_t7dhc"]
 [ext_resource type="Texture2D" uid="uid://p6vwpntup0ja" path="res://Assets/Textures/kenney_particle-pack/circle_01.png" id="3_6j2k2"]
 [ext_resource type="Texture2D" uid="uid://cevjv4lsemkac" path="res://Assets/Textures/kenney_particle-pack/circle_05.png" id="4_q5vej"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybq6y"]
-transparency = 1
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_color = Color(5, 5, 5, 1)
-albedo_texture = ExtResource("1_f3jch")
-disable_receive_shadows = true
-billboard_mode = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jn4p2"]
 transparency = 1
@@ -59,21 +49,81 @@ material = SubResource("StandardMaterial3D_11ixh")
 
 [sub_resource type="Animation" id="Animation_nlhnk"]
 resource_name = "Explosion"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlareExplosion:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pbeax"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlareExplosion:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pbeax"]
 _data = {
-&"Explosion": SubResource("Animation_nlhnk")
+&"Explosion": SubResource("Animation_nlhnk"),
+&"RESET": SubResource("Animation_pbeax")
 }
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlhnk"]
+transparency = 1
+specular_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_f3jch")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_pbeax"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.3568535, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8l15y"]
+curve = SubResource("Curve_pbeax")
+
+[sub_resource type="Curve" id="Curve_nlhnk"]
+_limits = [0.0, 6.0, 0.0, 1.0]
+_data = [Vector2(0, 6), 0.0, 0.0, 0, 0, Vector2(1, 3.6000001), -2.7836204, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pbeax"]
+curve = SubResource("Curve_nlhnk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h5xmv"]
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+gravity = Vector3(0, 0, 0)
+scale_min = 1600.0
+scale_max = 1600.0
+alpha_curve = SubResource("CurveTexture_8l15y")
+emission_curve = SubResource("CurveTexture_pbeax")
+
+[sub_resource type="QuadMesh" id="QuadMesh_3367o"]
 
 [node name="MassiveExplosion" type="Node3D" unique_id=580659816]
 script = ExtResource("1_t7dhc")
-
-[node name="ExplosionSprite3D" type="Sprite3D" parent="." unique_id=575393900]
-visible = false
-material_override = SubResource("StandardMaterial3D_ybq6y")
-cast_shadow = 0
-double_sided = false
-texture = ExtResource("2_t7dhc")
 
 [node name="RingSprite3D" type="Sprite3D" parent="." unique_id=820392079]
 visible = false
@@ -97,5 +147,15 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1241042648]
 libraries/ = SubResource("AnimationLibrary_pbeax")
+
+[node name="FlareExplosion" type="GPUParticles3D" parent="." unique_id=1652400726]
+material_override = SubResource("StandardMaterial3D_nlhnk")
+emitting = false
+amount = 1
+lifetime = 2.0
+one_shot = true
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_h5xmv")
+draw_pass_1 = SubResource("QuadMesh_3367o")
 
 [connection signal="timeout" from="Timer" to="." method="_on_animation_finished" binds= ["''"]]
