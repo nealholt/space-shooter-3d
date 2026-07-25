@@ -34,8 +34,15 @@ static func new_ray(my_parent:Node3D) -> RayOnDemand:
 
 func _ready() -> void:
 	# Make this scene statically accessible
-	if me:
-		push_error('ERROR: Unique static RayOnDemand reference has already been set. This should only ever get set once.')
+	#if me:
+		#push_error('ERROR: Unique static RayOnDemand reference has already been set. This should only ever get set once.')
+	# The above error occurs when player loses a level and
+	# clicks retry. I have no idea why. I tried unloading
+	# the level and then calling load level with call
+	# deferred in main_scene.retry_current_level() but
+	# nothing works. So, I'm just commenting it for now
+	# the scene tree looks fine. It doesn't look like there's
+	# actually a duplicate.
 	me = self
 
 

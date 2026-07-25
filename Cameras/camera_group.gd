@@ -77,8 +77,15 @@ var velocity:=Vector3.ZERO
 
 func _ready() -> void:
 	# Make this scene statically accessible
-	if cg:
-		push_error('ERROR: Unique static CameraGroup reference has already been set. This should only ever get set once.')
+	#if cg:
+		#push_error('ERROR: Unique static CameraGroup reference has already been set. This should only ever get set once.')
+	# The above error occurs when player loses a level and
+	# clicks retry. I have no idea why. I tried unloading
+	# the level and then calling load level with call
+	# deferred in main_scene.retry_current_level() but
+	# nothing works. So, I'm just commenting it for now
+	# the scene tree looks fine. It doesn't look like there's
+	# actually a duplicate.
 	cg = self
 	
 	turret_motion = TurretMotionComponent.new()
