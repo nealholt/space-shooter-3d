@@ -10,43 +10,14 @@ class_name EnvironmentTweener extends Node
 
 const ENVIRONMENTTWEENER_SCENE:PackedScene = preload("res://Features/EnvironmentTweener/environment_tweener.tscn")
 
-
 # Reference to the world environment
 var environment:Environment
-
-# Min and max angle, relative to the camera, at which the world
-# environment is modified.
-const MAX_ANGLE := 70.0 ## Degrees
-const MIN_ANGLE := 0.0 ## Degrees
-
-## Distance at which the factor for world environment modification is one.
-const UNIT_DISTANCE := 700.0
-
-# Currently brightness goes up to 4x
-const MAX_BRIGHTNESS_FACTOR := 4.0 ## Max factor by which brightness will be scaled when the camera is staring into the explosion.
-const MIN_BRIGHTNESS_FACTOR := 1.0
-# Currently contrast goes up to 3x.
-# Darks become darker and brights become brighter.
-# Alternatively, you can drop the contrast down, which
-# washes out everything to gray. I think that's less striking.
-const MAX_CONTRAST_FACTOR := 3.0 ## Max factor by which contrast will be scaled when the camera is staring into the explosion.
-const MIN_CONTRAST_FACTOR := 1.0
-# Currently saturation drops to zero, which leaches color
-# out of the world.
-const MAX_SATURATION_FACTOR := 1.0 ## Max factor by which saturation will be scaled when the camera is staring into the explosion.
-const MIN_SATURATION_FACTOR := 0.0
-
-var brightness_change_duration := 0.3 ## Seconds
-var contrast_change_duration := 0.4 ## Seconds
-var saturation_change_duration := 1.5 ## Seconds
-
 # Backing up the world environment variables so they
 # can get reset back to baseline after temporarily
 # modifying them.
 var baseline_brightness:float
 var baseline_contrast:float
 var baseline_saturation:float
-
 
 # Static self reference.
 # Now any script can reference the EnvironmentTweener like so:
@@ -83,7 +54,7 @@ func backup_environment_baselines(env:Environment) -> void:
 # Tweens environment variables based on camera position
 # and direction relative to flash, as well as the other
 # parameters above.
-func play(flash_pos:Vector3) -> void:
+func play(flash_pos:Vector3, stats:EnvTweenStats) -> void:
 	# Update the camera
 	var camera:Camera3D = get_viewport().get_camera_3d()
 	
@@ -93,24 +64,12 @@ func play(flash_pos:Vector3) -> void:
 	# normalized by UNIT_DISTANCE an arbitrary
 	# distance at which the environment effects are
 	# neither increased nor decreased by distance.
-	var dist_normalized:float = flash_pos.distance_to(camera.global_position) / UNIT_DISTANCE
+	var dist_normalized:float = flash_pos.distance_to(camera.global_position) / stats.unit_distance
 	# Change environment variables.
-	# remap from max to min angle because lowest values should
-	# occur at max and highest at min because zero means camera
-	# is staring right into the explosion.
-	# Account for distance by dividing factor by
-	# dist/UNIT_DISTANCE for brightness and contrast but
-	# multiplying for saturation since it's inverted.
-	# More distance means less effect.
-	var factor:float = remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MIN_BRIGHTNESS_FACTOR,MAX_BRIGHTNESS_FACTOR)
-	factor = clamp(factor / dist_normalized, MIN_BRIGHTNESS_FACTOR, MAX_BRIGHTNESS_FACTOR)
-	blink_environment('adjustment_brightness', baseline_brightness, factor, brightness_change_duration)
-	factor = remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MIN_CONTRAST_FACTOR,MAX_CONTRAST_FACTOR)
-	factor = clamp(factor / dist_normalized, MIN_CONTRAST_FACTOR, MAX_CONTRAST_FACTOR)
-	blink_environment('adjustment_contrast', baseline_contrast, factor, contrast_change_duration)
-	factor = remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MAX_SATURATION_FACTOR, MIN_SATURATION_FACTOR)
-	factor = clamp(factor * dist_normalized, MIN_SATURATION_FACTOR, MAX_SATURATION_FACTOR)
-	blink_environment('adjustment_saturation', baseline_saturation, factor, saturation_change_duration)
+	var factors:Array[float] = stats.get_factors(cam_angle, dist_normalized)
+	blink_environment('adjustment_brightness', baseline_brightness, factors[0], stats.brightness_change_duration)
+	blink_environment('adjustment_contrast', baseline_contrast, factors[1], stats.contrast_change_duration)
+	blink_environment('adjustment_saturation', baseline_saturation, factors[2], stats.saturation_change_duration)
 
 
 # Tween into and out of an environment attribute

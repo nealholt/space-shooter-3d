@@ -1,6 +1,11 @@
 class_name VisualEffect extends Node3D
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
+
+# Only set this if you want to modify the world environment
+# with this effect
+@export var world_env_mods:EnvTweenStats
+
 var remote_transform:RemoteTransform3D
 
 
@@ -11,6 +16,9 @@ func _ready() -> void:
 
 func play() -> void:
 	anim.play("Explosion")
+	if world_env_mods:
+		EnvironmentTweener.me.play(global_position, world_env_mods)
+
 
 func is_playing() -> bool:
 	return anim.is_playing()

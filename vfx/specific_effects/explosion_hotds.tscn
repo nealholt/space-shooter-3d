@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bvmwhl62ighly" path="res://vfx/visual_effect.gd" id="1_cxu0x"]
 [ext_resource type="Texture2D" uid="uid://cevjv4lsemkac" path="res://Assets/Textures/kenney_particle-pack/circle_05.png" id="2_1d50n"]
+[ext_resource type="Resource" uid="uid://dcf1318u8p7el" path="res://Features/EnvironmentTweener/Resources/fighter_explosion.tres" id="2_bv2bj"]
 [ext_resource type="Texture2D" uid="uid://dwhxx0f2kh1cu" path="res://Assets/Textures/kenney_particle-pack/smoke_07.png" id="3_bv2bj"]
 [ext_resource type="Texture2D" uid="uid://cw7pook0uxwq3" path="res://Assets/Textures/kenney_particle-pack/trace_05.png" id="4_h5mw2"]
 [ext_resource type="Texture2D" uid="uid://p6vwpntup0ja" path="res://Assets/Textures/kenney_particle-pack/circle_01.png" id="5_yaepo"]
@@ -482,6 +483,7 @@ _data = {
 
 [node name="explosion_HotDS" type="Node3D" unique_id=508884527]
 script = ExtResource("1_cxu0x")
+world_env_mods = ExtResource("2_bv2bj")
 
 [node name="Glow" type="GPUParticles3D" parent="." unique_id=165546314]
 sorting_offset = 0.1

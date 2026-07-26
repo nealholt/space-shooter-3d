@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnvTweenStats" format=3 uid="uid://dcf1318u8p7el"]
+
+[ext_resource type="Script" uid="uid://bmi3jx6mmoaw5" path="res://Features/EnvironmentTweener/Resources/env_tween_stats.gd" id="1_84fn1"]
+
+[resource]
+script = ExtResource("1_84fn1")
+max_angle = 60.0
+unit_distance = 300.0
+max_brightness_factor = 2.0
+max_contrast_factor = 2.0
+min_saturation_factor = 0.8
+brightness_change_duration = 0.1
+contrast_change_duration = 0.2
+saturation_change_duration = 0.5
+metadata/_custom_type_script = "uid://bmi3jx6mmoaw5"

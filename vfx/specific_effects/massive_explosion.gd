@@ -100,15 +100,14 @@ func _process(_delta: float) -> void:
 
 
 func play() -> void:
-	super.play() # This activates the animation player
+	# play activates the animation player and modifies the
+	# world environment variables.
+	super.play()
 	# Update the camera
 	camera = get_viewport().get_camera_3d()
 	
 	# Initiate explosion effect
 	ring_explosion()
-	
-	# Tween the environment variables to create blinding effects
-	EnvironmentTweener.me.play(global_position)
 	
 	# Note that the effect is live and start timer
 	effect_is_live = true

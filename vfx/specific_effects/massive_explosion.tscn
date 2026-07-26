@@ -2,8 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://hghgh008vwv" path="res://Assets/Textures/kenney_particle-pack/flare_01.png" id="1_f3jch"]
 [ext_resource type="Script" uid="uid://dcdgmk2hdc70k" path="res://vfx/specific_effects/massive_explosion.gd" id="1_t7dhc"]
+[ext_resource type="Script" uid="uid://bmi3jx6mmoaw5" path="res://Features/EnvironmentTweener/Resources/env_tween_stats.gd" id="2_nlhnk"]
 [ext_resource type="Texture2D" uid="uid://p6vwpntup0ja" path="res://Assets/Textures/kenney_particle-pack/circle_01.png" id="3_6j2k2"]
 [ext_resource type="Texture2D" uid="uid://cevjv4lsemkac" path="res://Assets/Textures/kenney_particle-pack/circle_05.png" id="4_q5vej"]
+
+[sub_resource type="Resource" id="Resource_pbeax"]
+script = ExtResource("2_nlhnk")
+metadata/_custom_type_script = "uid://bmi3jx6mmoaw5"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jn4p2"]
 transparency = 1
@@ -148,6 +153,7 @@ emission_curve = SubResource("CurveTexture_pbeax")
 
 [node name="MassiveExplosion" type="Node3D" unique_id=580659816]
 script = ExtResource("1_t7dhc")
+world_env_mods = SubResource("Resource_pbeax")
 
 [node name="RingSprite3D" type="Sprite3D" parent="." unique_id=820392079]
 visible = false
