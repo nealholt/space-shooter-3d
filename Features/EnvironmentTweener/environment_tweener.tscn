@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b36u7gi8007w8"]
+
+[ext_resource type="Script" uid="uid://coedghwsi1k7y" path="res://Features/EnvironmentTweener/environment_tweener.gd" id="1_8gko2"]
+
+[node name="EnvironmentTweener" type="Node" unique_id=2004763972]
+script = ExtResource("1_8gko2")

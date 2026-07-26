@@ -15,6 +15,67 @@ albedo_texture = ExtResource("3_6j2k2")
 disable_receive_shadows = true
 billboard_keep_scale = true
 
+[sub_resource type="Animation" id="Animation_nlhnk"]
+resource_name = "Explosion"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlareExplosion:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FireflyParticles3D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pbeax"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlareExplosion:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FireflyParticles3D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pbeax"]
+_data = {
+&"Explosion": SubResource("Animation_nlhnk"),
+&"RESET": SubResource("Animation_pbeax")
+}
+
 [sub_resource type="Curve" id="Curve_jn4p2"]
 _data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.130435, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
 point_count = 3
@@ -46,43 +107,6 @@ particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_20t1u"]
 material = SubResource("StandardMaterial3D_11ixh")
-
-[sub_resource type="Animation" id="Animation_nlhnk"]
-resource_name = "Explosion"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FlareExplosion:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_pbeax"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FlareExplosion:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pbeax"]
-_data = {
-&"Explosion": SubResource("Animation_nlhnk"),
-&"RESET": SubResource("Animation_pbeax")
-}
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlhnk"]
 transparency = 1
@@ -131,6 +155,12 @@ material_override = SubResource("StandardMaterial3D_jn4p2")
 cast_shadow = 0
 texture = ExtResource("3_6j2k2")
 
+[node name="Timer" type="Timer" parent="." unique_id=1272876503]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1241042648]
+libraries/ = SubResource("AnimationLibrary_pbeax")
+
 [node name="FireflyParticles3D" type="GPUParticles3D" parent="." unique_id=438305091]
 emitting = false
 amount = 32
@@ -141,12 +171,6 @@ randomness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_w078t")
 draw_pass_1 = SubResource("QuadMesh_20t1u")
-
-[node name="Timer" type="Timer" parent="." unique_id=1272876503]
-one_shot = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1241042648]
-libraries/ = SubResource("AnimationLibrary_pbeax")
 
 [node name="FlareExplosion" type="GPUParticles3D" parent="." unique_id=1652400726]
 material_override = SubResource("StandardMaterial3D_nlhnk")

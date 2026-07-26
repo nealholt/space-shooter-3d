@@ -5,10 +5,6 @@ var red_team : TeamSetup
 var blue_team : TeamSetup
 
 func _ready() -> void:
-	# Set up global reference to world environment
-	Global.environment = $WorldEnvironment.environment
-	# Emit that world environment is now set
-	EventsBus.environment_set.emit()
 	# Connect to signals that a ship died
 	EventsBus.ship_died.connect(check_win_loss)
 	# Search for an asteroid field child. If found,
@@ -32,6 +28,10 @@ func _ready() -> void:
 	center_the_mouse()
 	# Create a ray on demand and attach it as a child
 	RayOnDemand.new_ray(self)
+	# Create an environment tweener, attach it as a child,
+	# and tell it to copy baseline environment values
+	var envt := EnvironmentTweener.new_environment_tweener(self)
+	envt.backup_environment_baselines.call_deferred($WorldEnvironment.environment)
 
 
 # This function is called after something dies.

@@ -1,0 +1,132 @@
+class_name EnvironmentTweener extends Node
+# This is used for tweening environment vaiables:
+#    Brightness
+#    Contrast
+#    Saturation
+# Originally, MassiveExplosion was the only thing to use this
+# but I realized I wanted it for other explosions too
+# and I might extend it later if the camera is staring into a
+# star, stuff like that.
+
+const ENVIRONMENTTWEENER_SCENE:PackedScene = preload("res://Features/EnvironmentTweener/environment_tweener.tscn")
+
+
+# Reference to the world environment
+var environment:Environment
+
+# Min and max angle, relative to the camera, at which the world
+# environment is modified.
+const MAX_ANGLE := 70.0 ## Degrees
+const MIN_ANGLE := 0.0 ## Degrees
+
+## Distance at which the factor for world environment modification is one.
+const UNIT_DISTANCE := 700.0
+
+# Currently brightness goes up to 4x
+const MAX_BRIGHTNESS_FACTOR := 4.0 ## Max factor by which brightness will be scaled when the camera is staring into the explosion.
+const MIN_BRIGHTNESS_FACTOR := 1.0
+# Currently contrast goes up to 3x.
+# Darks become darker and brights become brighter.
+# Alternatively, you can drop the contrast down, which
+# washes out everything to gray. I think that's less striking.
+const MAX_CONTRAST_FACTOR := 3.0 ## Max factor by which contrast will be scaled when the camera is staring into the explosion.
+const MIN_CONTRAST_FACTOR := 1.0
+# Currently saturation drops to zero, which leaches color
+# out of the world.
+const MAX_SATURATION_FACTOR := 1.0 ## Max factor by which saturation will be scaled when the camera is staring into the explosion.
+const MIN_SATURATION_FACTOR := 0.0
+
+var brightness_change_duration := 0.3 ## Seconds
+var contrast_change_duration := 0.4 ## Seconds
+var saturation_change_duration := 1.5 ## Seconds
+
+# Backing up the world environment variables so they
+# can get reset back to baseline after temporarily
+# modifying them.
+var baseline_brightness:float
+var baseline_contrast:float
+var baseline_saturation:float
+
+
+# Static self reference.
+# Now any script can reference the EnvironmentTweener like so:
+# EnvironmentTweener.me
+# BE WARNED: This will not work correctly if there is more
+# than one EnvironmentTweener in a scene.
+static var me:EnvironmentTweener = null
+
+
+static func new_environment_tweener(my_parent:Node3D) -> EnvironmentTweener:
+	var et := ENVIRONMENTTWEENER_SCENE.instantiate()
+	my_parent.add_child(et)
+	return et
+
+
+func _ready() -> void:
+	# Make this scene statically accessible
+	if me:
+		push_error('ERROR: Unique static EnvironmentTweener reference has already been set. This should only ever get set once.')
+	me = self
+
+
+func backup_environment_baselines(env:Environment) -> void:
+	environment = env
+	# Allow us to adjust environment.
+	environment.adjustment_enabled = true
+	# Save baseline values.
+	baseline_brightness = environment.adjustment_brightness
+	baseline_contrast = environment.adjustment_contrast
+	baseline_saturation = environment.adjustment_saturation
+
+
+# Takes position of the flash or explosion as input.
+# Tweens environment variables based on camera position
+# and direction relative to flash, as well as the other
+# parameters above.
+func play(flash_pos:Vector3) -> void:
+	# Update the camera
+	var camera:Camera3D = get_viewport().get_camera_3d()
+	
+	# Angle from camera to this explosion
+	var cam_angle:float = rad_to_deg(Global.get_angle_to_target(camera.global_position, flash_pos, -camera.global_transform.basis.z))
+	# Distance from camera to this explosion
+	# normalized by UNIT_DISTANCE an arbitrary
+	# distance at which the environment effects are
+	# neither increased nor decreased by distance.
+	var dist_normalized:float = flash_pos.distance_to(camera.global_position) / UNIT_DISTANCE
+	# Change environment variables.
+	# remap from max to min angle because lowest values should
+	# occur at max and highest at min because zero means camera
+	# is staring right into the explosion.
+	# Account for distance by dividing factor by
+	# dist/UNIT_DISTANCE for brightness and contrast but
+	# multiplying for saturation since it's inverted.
+	# More distance means less effect.
+	var factor:float = remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MIN_BRIGHTNESS_FACTOR,MAX_BRIGHTNESS_FACTOR)
+	factor = clamp(factor / dist_normalized, MIN_BRIGHTNESS_FACTOR, MAX_BRIGHTNESS_FACTOR)
+	blink_environment('adjustment_brightness', baseline_brightness, factor, brightness_change_duration)
+	factor = remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MIN_CONTRAST_FACTOR,MAX_CONTRAST_FACTOR)
+	factor = clamp(factor / dist_normalized, MIN_CONTRAST_FACTOR, MAX_CONTRAST_FACTOR)
+	blink_environment('adjustment_contrast', baseline_contrast, factor, contrast_change_duration)
+	factor = remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MAX_SATURATION_FACTOR, MIN_SATURATION_FACTOR)
+	factor = clamp(factor * dist_normalized, MIN_SATURATION_FACTOR, MAX_SATURATION_FACTOR)
+	blink_environment('adjustment_saturation', baseline_saturation, factor, saturation_change_duration)
+
+
+# Tween into and out of an environment attribute
+# modification.
+# https://docs.godotengine.org/en/stable/classes/class_environment.html
+func blink_environment(attribute:String, baseline:float, factor:=3.0, duration:=0.3) -> void:
+	var tween:Tween = create_tween()
+	var current = environment.get(attribute)
+	tween.tween_property(environment,
+		attribute, current*factor, duration
+		).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+	# Reset to baseline
+	tween.tween_property(environment,
+		attribute, baseline, duration
+		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	# Tween easing animated:
+	# https://www.reddit.com/r/godot/comments/14gt180/all_possible_tweening_transition_types_and_easing/
+	# Graph visualization:
+	# https://raw.githubusercontent.com/urodelagames/urodelagames.github.io/master/photos/tween_cheatsheet.png

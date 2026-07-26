@@ -4,9 +4,9 @@ extends VisualEffect
 # for the carrier size and shape. Different shape
 # would be good for other ships.
 
-# I made the explosion sprite and ring sprite
-# "Double Sided" under Flags and also under Geometry,
-# Material Override, Transparency, set Cull Mode to Disabled
+# I made the ring sprite "Double Sided" under Flags and
+# also under Geometry, Material Override, Transparency,
+# set Cull Mode to Disabled
 # This lets me add in random rotations, but it's possible
 # that the sprites will be viewed edge-on and be invisible.
 # To prevent this from happening to the Explosion Sprite
@@ -25,40 +25,15 @@ extends VisualEffect
 # being further out in space. They need to update based
 # on the camera for their entire duration. Same principle
 # as reticles.
-# Now the process function
-# is turned on when the effect is active and keeps
-# the explosion sprites positioned relative to the camera.
+# Now the process function is turned on when the effect is
+# active and keeps the explosion sprites positioned
+# relative to the camera.
 
 @onready var timer:=$Timer
 @onready var ring_sprite:=$RingSprite3D
-@onready var fireflies:=$FireflyParticles3D
 @onready var flare_explosion: GPUParticles3D = $FlareExplosion
 
-const MAX_ANGLE := 70.0 ## Degrees. Max angle at which the world environment is modified.
-const MIN_ANGLE := 0.0 ## Degrees. Max angle at which the world environment is modified.
-
-const UNIT_DISTANCE := 700.0 ## Distance at which the factor for world environment modification is one.
-
-# Currently brightness goes up to 4x
-const MAX_BRIGHTNESS_FACTOR := 4.0 ## Max factor by which brightness will be scaled when the camera is staring into the explosion.
-const MIN_BRIGHTNESS_FACTOR := 1.0
-# Currently contrast goes up to 3x.
-# Darks become darker and brights become brighter.
-# Alternatively, you can drop the contrast down, which
-# washes out everything to gray. I think that's less striking.
-const MAX_CONTRAST_FACTOR := 3.0 ## Max factor by which contrast will be scaled when the camera is staring into the explosion.
-const MIN_CONTRAST_FACTOR := 1.0
-# Currently saturation drops to zero, which leaches color
-# out of the world.
-const MAX_SATURATION_FACTOR := 1.0 ## Max factor by which saturation will be scaled when the camera is staring into the explosion.
-const MIN_SATURATION_FACTOR := 0.0
-
-var brightness_change_duration := 0.3 ## Seconds
-var contrast_change_duration := 0.4 ## Seconds
-var saturation_change_duration := 1.5 ## Seconds
-
 var explosion_alpha_duration := 2.0 ## Tween duration for changing explosion image's alpha
-var explosion_alpha_target := 0.1 ## Alpha value we are tweening to
 
 var ring_alpha_duration := 1.5 ## Tween duration for changing ring image's alpha
 var ring_alpha_target := 0.3 ## Alpha value we are tweening to
@@ -81,13 +56,6 @@ var effect_is_live := false
 # Reference to current camera
 var camera:Camera3D
 
-# Backing up the world environment variables so they
-# can get reset back to baseline after temporarily
-# modifying them.
-var baseline_brightness:float
-var baseline_contrast:float
-var baseline_saturation:float
-
 var max_time:float ## Max time this effect might last.
 
 
@@ -98,29 +66,12 @@ func _ready() -> void:
 	# Set max_time to be the largest of all the durations
 	# then add on 50% as a buffer. After this time, the
 	# effect is officially finished.
-	max_time = [brightness_change_duration, contrast_change_duration, saturation_change_duration, explosion_alpha_duration, ring_alpha_duration, ring_scale_duration].max()
+	# However, moving responsibilities out into EnvironmentTweener
+	# means that this number might not be accurate!
+	max_time = [explosion_alpha_duration, ring_alpha_duration, ring_scale_duration].max()
 	max_time = max_time * 1.5 # 50% buffer
-	# Back up environment baseline values every time
-	# the world environment gets set (usually when the
-	# level is first created).
-	EventsBus.environment_set.connect(backup_environment_baselines)
 	# Default process function to off
 	set_process(false)
-
-
-func backup_environment_baselines() -> void:
-	# Allow us to adjust environment. I tried to do
-	# this in ready, but Godot said Global.environment
-	# was null.
-	Global.environment.adjustment_enabled = true
-	# Save baseline values. If you do this at
-	# runtime rather than in _ready and another
-	# instance has already started modifying
-	# environment values then they could get
-	# reset incorrectly. This is safer.
-	baseline_brightness = Global.environment.adjustment_brightness
-	baseline_contrast = Global.environment.adjustment_contrast
-	baseline_saturation = Global.environment.adjustment_saturation
 
 
 # Continually update sprite positions as the camera moves
@@ -149,42 +100,20 @@ func _process(_delta: float) -> void:
 
 
 func play() -> void:
-	super.play()
+	super.play() # This activates the animation player
 	# Update the camera
 	camera = get_viewport().get_camera_3d()
 	
-	# Initiate explosion effects
-	#flare_explosion() #TODO TESTING
+	# Initiate explosion effect
 	ring_explosion()
 	
-	# Angle from camera to this explosion
-	var cam_angle:float = rad_to_deg(Global.get_angle_to_target(camera.global_position, global_position, -camera.global_transform.basis.z))
-	# Distance from camera to this explosion
-	# normalized by UNIT_DISTANCE an arbitrary
-	# distance at which the environment effects are
-	# neither increased nor decreased by distance.
-	var dist_normalized:float = global_position.distance_to(camera.global_position) / UNIT_DISTANCE
-	# Change environment variables.
-	# remap from max to min angle because lowest values should
-	# occur at max and highest at min because zero means camera
-	# is staring right into the explosion.
-	# Account for distance by dividing factor by
-	# dist/UNIT_DISTANCE for brightness and contrast but
-	# multiplying for saturation since it's inverted.
-	# More distance means less effect.
-	var factor:float = remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MIN_BRIGHTNESS_FACTOR,MAX_BRIGHTNESS_FACTOR)
-	factor = clamp(factor / dist_normalized, MIN_BRIGHTNESS_FACTOR, MAX_BRIGHTNESS_FACTOR)
-	blink_environment('adjustment_brightness', baseline_brightness, factor, brightness_change_duration)
-	factor = remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MIN_CONTRAST_FACTOR,MAX_CONTRAST_FACTOR)
-	factor = clamp(factor / dist_normalized, MIN_CONTRAST_FACTOR, MAX_CONTRAST_FACTOR)
-	blink_environment('adjustment_contrast', baseline_contrast, factor, contrast_change_duration)
-	factor = remap(cam_angle, MAX_ANGLE,MIN_ANGLE, MAX_SATURATION_FACTOR, MIN_SATURATION_FACTOR)
-	factor = clamp(factor * dist_normalized, MIN_SATURATION_FACTOR, MAX_SATURATION_FACTOR)
-	blink_environment('adjustment_saturation', baseline_saturation, factor, saturation_change_duration)
+	# Tween the environment variables to create blinding effects
+	EnvironmentTweener.me.play(global_position)
 	
-	fireflies.emitting = true
+	# Note that the effect is live and start timer
 	effect_is_live = true
 	timer.start(max_time)
+	
 	# Turn on process function to keep the images in the
 	# correct location on the screen
 	set_process(true)
@@ -202,7 +131,6 @@ func stop() -> void:
 func _on_animation_finished(anim_name:String) -> void:
 	super(anim_name)
 	effect_is_live = false
-	fireflies.emitting = false
 	ring_sprite.visible = false
 	set_process(false) # Turn off process function
 
@@ -225,22 +153,3 @@ func ring_explosion() -> void:
 		ring_alpha_target, ring_alpha_duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	tween.tween_property(ring_sprite, 'scale',
 		Vector3(ring_scale_target,ring_scale_target,ring_scale_target), ring_scale_duration)
-
-
-# Tween into and out of an environment attribute
-# modification.
-# https://docs.godotengine.org/en/stable/classes/class_environment.html
-func blink_environment(attribute:String, baseline:float, factor:=3.0, duration:=0.3) -> void:
-	var tween:Tween = create_tween()
-	var current = Global.environment.get(attribute)
-	tween.tween_property(Global.environment,
-		attribute, current*factor, duration
-		).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
-	# Reset to baseline
-	tween.tween_property(Global.environment,
-		attribute, baseline, duration
-		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	# Tween easing animated:
-	# https://www.reddit.com/r/godot/comments/14gt180/all_possible_tweening_transition_types_and_easing/
-	# Graph visualization:
-	# https://raw.githubusercontent.com/urodelagames/urodelagames.github.io/master/photos/tween_cheatsheet.png
