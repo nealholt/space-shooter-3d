@@ -22,5 +22,6 @@ emitting = false
 amount = 20
 randomness = 0.1
 fixed_fps = 60
+visibility_aabb = AABB(-400, -400, -400, 800, 800, 800)
 process_material = ExtResource("3_qcsm0")
 draw_pass_1 = SubResource("QuadMesh_y86dh")

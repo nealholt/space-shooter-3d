@@ -170,6 +170,7 @@ color_ramp = SubResource("GradientTexture1D_cd3s5")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pr8o5"]
 transparency = 1
+blend_mode = 1
 specular_mode = 2
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_ncvxi")
@@ -221,6 +222,7 @@ cast_shadow = 0
 emitting = false
 amount = 20
 fixed_fps = 60
+visibility_aabb = AABB(-400, -400, -400, 800, 800, 800)
 process_material = SubResource("ParticleProcessMaterial_1euvu")
 draw_pass_1 = SubResource("QuadMesh_wd1xt")
 
@@ -231,6 +233,7 @@ emitting = false
 amount = 100
 lifetime = 2.0
 fixed_fps = 60
+visibility_aabb = AABB(-400, -400, -400, 800, 800, 800)
 transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_l1hwt")
 draw_pass_1 = SubResource("QuadMesh_821tw")
