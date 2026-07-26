@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://123jkwus4316"]
 
+[ext_resource type="Script" uid="uid://bvmwhl62ighly" path="res://vfx/visual_effect.gd" id="1_8ogrp"]
 [ext_resource type="Texture2D" uid="uid://die8v8wcj1pfv" path="res://Assets/Textures/kenney_particle-pack/muzzle_01_right.png" id="1_buv2n"]
-[ext_resource type="Script" uid="uid://d1rqjc3tf8k2u" path="res://vfx/MuzzleFlash/muzzle_flash.gd" id="1_duwo1"]
 [ext_resource type="ArrayMesh" uid="uid://phyrt75f30w8" path="res://Ships/ModelsBlender/MuzzlePlane01.obj" id="2_duwo1"]
 [ext_resource type="Texture2D" uid="uid://bwfyyi3q8raw4" path="res://Assets/Textures/kenney_particle-pack/spark_02.png" id="3_f5x7n"]
 [ext_resource type="ArrayMesh" uid="uid://dmovo5tcqpbhn" path="res://Ships/ModelsBlender/muzzle_cone01.obj" id="4_s0idf"]
@@ -114,8 +114,116 @@ alpha_curve = SubResource("CurveTexture_gwtcp")
 [sub_resource type="QuadMesh" id="QuadMesh_0xguk"]
 size = Vector2(0.2, 1)
 
+[sub_resource type="Animation" id="Animation_8ogrp"]
+resource_name = "Explosion"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MuzzlePlanes:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MuzzleCone:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BeamFlash:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sparks:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_me8sl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MuzzlePlanes:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MuzzleCone:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BeamFlash:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sparks:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o7asw"]
+_data = {
+&"Explosion": SubResource("Animation_8ogrp"),
+&"RESET": SubResource("Animation_me8sl")
+}
+
 [node name="MuzzleFlash" type="Node3D" unique_id=1849458057]
-script = ExtResource("1_duwo1")
+script = ExtResource("1_8ogrp")
 
 [node name="MuzzlePlanes" type="GPUParticles3D" parent="." unique_id=127791307]
 material_override = SubResource("StandardMaterial3D_s22ts")
@@ -165,3 +273,6 @@ fixed_fps = 60
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_k6rkm")
 draw_pass_1 = SubResource("QuadMesh_0xguk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1169975298]
+libraries/ = SubResource("AnimationLibrary_o7asw")

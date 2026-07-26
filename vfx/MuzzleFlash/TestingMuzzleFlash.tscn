@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bnerjnl8w7alf"]
 
-[ext_resource type="PackedScene" uid="uid://123jkwus4316" path="res://vfx/MuzzleFlash/muzzle_flash_demo.tscn" id="1_4wtqt"]
+[ext_resource type="PackedScene" uid="uid://123jkwus4316" path="res://vfx/MuzzleFlash/muzzle_flash.tscn" id="1_4wtqt"]
 [ext_resource type="Script" uid="uid://b1fyoiju51ugv" path="res://vfx/MuzzleFlash/testing_muzzle_flash.gd" id="1_ryj20"]
 [ext_resource type="PackedScene" uid="uid://chhlq0fbj03la" path="res://vfx/MuzzleFlash/muzzle_flash_rand_demo.tscn" id="3_qu0gk"]
 
@@ -19,26 +19,26 @@ sky = SubResource("Sky_6bbpv")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="World" type="Node3D"]
+[node name="World" type="Node3D" unique_id=1098109083]
 script = ExtResource("1_ryj20")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=588488483]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 directional_shadow_max_distance = 1.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1101710876]
 environment = SubResource("Environment_2i8le")
 
-[node name="MuzzleFlash" parent="." instance=ExtResource("1_4wtqt")]
-transform = Transform3D(0.34202015, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, 0.34202015, -1.1331549, -0.5766332, 0)
+[node name="MuzzleFlash" parent="." unique_id=356833599 instance=ExtResource("1_4wtqt")]
+transform = Transform3D(0.34202015, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, 0.34202015, -1.1331549, -0.0010524988, -1.4278042)
 
-[node name="MuzzleFlashRand" parent="." instance=ExtResource("3_qu0gk")]
+[node name="MuzzleFlashRand" parent="." unique_id=429173778 instance=ExtResource("3_qu0gk")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.7780756, -0.14938357, -0.927081)
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1957363458]
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1264458752]
 wait_time = 0.3
 autostart = true
 
