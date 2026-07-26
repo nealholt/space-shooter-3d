@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cp4m6n403qink" path="res://Weapons/aim_assist.tscn" id="29_3q0pi"]
 [ext_resource type="PackedScene" uid="uid://yp51kcujfd4s" path="res://Audio/ShieldTransitAudio/shield_transit_audio.tscn" id="29_f4jgf"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="29_mamsf"]
-[ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://vfx/burning_trail.tscn" id="29_w78kn"]
+[ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://vfx/DamageEffects/burning_trail.tscn" id="29_w78kn"]
 [ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Attachments/Shield/FresnelAura.tres" id="34_80okc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyjhj"]

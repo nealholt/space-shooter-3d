@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Weapons/weapon_handler.tscn" id="4_dhpb0"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="5_1xytm"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="9_s55gh"]
-[ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://vfx/burning_trail.tscn" id="14_4fwow"]
+[ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://vfx/DamageEffects/burning_trail.tscn" id="14_4fwow"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Attachments/ObstacleDetector/obstacle_detector.tscn" id="14_05dih"]
 [ext_resource type="AudioStream" uid="uid://brf6ht6wpkh3a" path="res://Audio/SoundEffects/lowFrequency_explosion_001.ogg" id="16_uh0vy"]
 [ext_resource type="PackedScene" uid="uid://dfni57jntnnk8" path="res://Weapons/MissileLock/missile_lock_group.tscn" id="17_563f5"]

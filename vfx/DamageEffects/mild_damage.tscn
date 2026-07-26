@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dk37kibucmpd0"]
 
-[ext_resource type="Script" uid="uid://e227y4iwmttr" path="res://Features/DamageEffects/emission_controller.gd" id="1_m4oen"]
+[ext_resource type="Script" uid="uid://e227y4iwmttr" path="res://vfx/DamageEffects/emission_controller.gd" id="1_m4oen"]
 [ext_resource type="Shader" uid="uid://f1k01v3aocxo" path="res://Assets/Shaders/FireShader.tres" id="1_q8wva"]
 [ext_resource type="Texture2D" uid="uid://dj56rpx4qmqh7" path="res://Assets/Textures/kenney_particle-pack/flame_03.png" id="2_t4108"]
-[ext_resource type="Material" uid="uid://c5bww2oms7d84" path="res://Features/DamageEffects/fire_particle_process_material.tres" id="3_qcsm0"]
+[ext_resource type="Material" uid="uid://c5bww2oms7d84" path="res://vfx/DamageEffects/fire_particle_process_material.tres" id="3_qcsm0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fhde2"]
 render_priority = 0
@@ -12,13 +12,14 @@ shader_parameter/MainTexture = ExtResource("2_t4108")
 
 [sub_resource type="QuadMesh" id="QuadMesh_y86dh"]
 
-[node name="MildDamage" type="Node3D"]
+[node name="MildDamage" type="Node3D" unique_id=859404820]
 script = ExtResource("1_m4oen")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="Fire" type="GPUParticles3D" parent="." unique_id=197443472]
 material_override = SubResource("ShaderMaterial_fhde2")
+cast_shadow = 0
 emitting = false
-amount = 32
+amount = 20
 randomness = 0.1
 fixed_fps = 60
 process_material = ExtResource("3_qcsm0")

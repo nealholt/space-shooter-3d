@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://6uc35sikpbpq"]
+
+[ext_resource type="Script" uid="uid://dv4jmn570rgqk" path="res://vfx/DamageEffects/burning_trail.gd" id="1_ebwgu"]
+[ext_resource type="PackedScene" uid="uid://d3erdmulqy1l2" path="res://vfx/DamageEffects/major_damage.tscn" id="1_k1lmb"]
+[ext_resource type="PackedScene" uid="uid://b70y8labc000a" path="res://vfx/DamageEffects/major_damage_line_sparks.tscn" id="2_1eytn"]
+[ext_resource type="PackedScene" uid="uid://dk37kibucmpd0" path="res://vfx/DamageEffects/mild_damage.tscn" id="3_1gxec"]
+
+[node name="BurningTrail" type="Node3D" unique_id=1309589398]
+script = ExtResource("1_ebwgu")
+
+[node name="MajorDamage" parent="." unique_id=684046083 instance=ExtResource("1_k1lmb")]
+
+[node name="MajorDamageLineSparks" parent="." unique_id=1529324925 instance=ExtResource("2_1eytn")]
+
+[node name="MildDamage" parent="." unique_id=20018699 instance=ExtResource("3_1gxec")]
