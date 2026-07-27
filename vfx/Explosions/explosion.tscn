@@ -4,13 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/Textures/kenney_particle-pack/star_04.png" id="1_xbms3"]
 [ext_resource type="Material" uid="uid://covsu58qwnqru" path="res://Assets/Materials/flare00.tres" id="2_ggp7v"]
 [ext_resource type="AudioStream" uid="uid://cdvuqhwbklq3c" path="res://Audio/SoundEffects/explosion_pow.wav" id="3_ehf7x"]
+[ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/Textures/kenney_particle-pack/star_05.png" id="4_rlc4s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46d27"]
 transparency = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("1_xbms3")
+disable_receive_shadows = true
 
 [sub_resource type="Curve" id="Curve_q0lff"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -32,8 +35,6 @@ curve_z = SubResource("Curve_c26l3")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6agb2"]
 particle_flag_align_y = true
-emission_shape = 1
-emission_sphere_radius = 0.2
 spread = 180.0
 initial_velocity_min = 40.0
 initial_velocity_max = 60.0
@@ -60,6 +61,21 @@ scale_curve = SubResource("CurveTexture_11p2x")
 color = Color(2.5, 1, 0.5, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_ysvqd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3kclj"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+specular_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_rlc4s")
+disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="Gradient" id="Gradient_5dow5"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -121,7 +137,7 @@ tracks/0/path = NodePath("Smoke:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -133,7 +149,7 @@ tracks/1/path = NodePath("Fire:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.1),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -249,6 +265,7 @@ script = ExtResource("1_ukt7p")
 
 [node name="Sparks" type="GPUParticles3D" parent="." unique_id=1281964304]
 material_override = SubResource("StandardMaterial3D_46d27")
+cast_shadow = 0
 emitting = false
 amount = 30
 lifetime = 0.4
@@ -260,6 +277,7 @@ draw_pass_1 = SubResource("QuadMesh_u36mk")
 
 [node name="Flash" type="GPUParticles3D" parent="." unique_id=855922850]
 material_override = ExtResource("2_ggp7v")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -270,7 +288,9 @@ process_material = SubResource("ParticleProcessMaterial_os3nl")
 draw_pass_1 = SubResource("QuadMesh_ysvqd")
 
 [node name="Fire" type="GPUParticles3D" parent="." unique_id=1615196095]
-material_override = ExtResource("2_ggp7v")
+sorting_offset = 1.0
+material_override = SubResource("StandardMaterial3D_3kclj")
+cast_shadow = 0
 emitting = false
 amount = 13
 lifetime = 0.55
@@ -281,7 +301,9 @@ process_material = SubResource("ParticleProcessMaterial_ywo5y")
 draw_pass_1 = SubResource("QuadMesh_pnf0b")
 
 [node name="Smoke" type="GPUParticles3D" parent="." unique_id=548089670]
+sorting_offset = 2.0
 material_override = ExtResource("2_ggp7v")
+cast_shadow = 0
 emitting = false
 amount = 10
 one_shot = true
