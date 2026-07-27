@@ -40,8 +40,7 @@ controller = NodePath("NPCController")
 health_component = NodePath("HealthComponent")
 turret_group = NodePath("TurretGroup")
 weapon_handler = NodePath("WeaponHandler")
-deathExplosion = 8
-finalExplosion = 9
+finalExplosion = 10
 death_animation_duration_min = 0.0
 death_animation_duration_max = 0.0
 
@@ -95,7 +94,6 @@ initial_state = NodePath("States/Orbit")
 x_speed = 3.0
 y_speed = 3.0
 target_capital_ships = true
-too_far = 600.0
 too_close = 600.0
 stats = ExtResource("10_6rpyf")
 

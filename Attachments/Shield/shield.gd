@@ -108,4 +108,4 @@ func permanently_destroy() -> void:
 	# Start the fireworks
 	VfxManager.play(explosion, global_position)
 	# Self delete
-	Callable(queue_free).call_deferred()
+	queue_free.call_deferred()

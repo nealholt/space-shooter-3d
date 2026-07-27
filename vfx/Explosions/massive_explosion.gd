@@ -123,11 +123,11 @@ func is_playing() -> bool:
 
 
 func stop() -> void:
-	_on_animation_finished('')
+	_on_animation_finished()
 	timer.stop()
 
 
-func _on_animation_finished(anim_name:String) -> void:
+func _on_animation_finished(anim_name:='') -> void:
 	super(anim_name)
 	effect_is_live = false
 	ring_sprite.visible = false

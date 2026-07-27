@@ -2,90 +2,36 @@
 
 [ext_resource type="Texture2D" uid="uid://dmdma38hj76ed" path="res://Assets/Textures/kenney_particle-pack/flame_04.png" id="1_tf0us"]
 [ext_resource type="Script" uid="uid://bvmwhl62ighly" path="res://vfx/visual_effect.gd" id="1_wt5u7"]
-[ext_resource type="Texture2D" uid="uid://dj56rpx4qmqh7" path="res://Assets/Textures/kenney_particle-pack/flame_03.png" id="2_54mup"]
+[ext_resource type="Resource" uid="uid://bbeawlwuh4d2s" path="res://Features/EnvironmentTweener/Resources/frigate_explosion.tres" id="2_vpxhu"]
 [ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/Textures/kenney_particle-pack/star_05.png" id="3_f4waa"]
 [ext_resource type="Texture2D" uid="uid://dhgy70nb1wj4x" path="res://Assets/Textures/kenney_particle-pack/fire_02.png" id="4_117nw"]
 [ext_resource type="Texture2D" uid="uid://cqxy5k2dm2wt8" path="res://Assets/Textures/kenney_particle-pack/fire_01.png" id="5_qreak"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7crj"]
-transparency = 1
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_tf0us")
-billboard_mode = 1
-billboard_keep_scale = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvdp6"]
-transparency = 1
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_tf0us")
-disable_receive_shadows = true
-billboard_mode = 2
-billboard_keep_scale = true
-
-[sub_resource type="Curve" id="Curve_p3ujm"]
-_data = [Vector2(0, 0.087602496), 0.0, 1.1473079, 0, 0, Vector2(0.8337731, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.14088118), -16.091015, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_bucqx"]
-curve = SubResource("Curve_p3ujm")
-
-[sub_resource type="Curve" id="Curve_w2ajl"]
-_data = [Vector2(0, 0), 0.0, 0.36613038, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_p2x85"]
-curve = SubResource("Curve_w2ajl")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pya87"]
-emission_shape = 1
-emission_sphere_radius = 30.0
-angle_min = -179.99998
-angle_max = 180.00002
-gravity = Vector3(0, 0, 0)
-scale_min = 120.0
-scale_max = 120.0
-scale_curve = SubResource("CurveTexture_p2x85")
-color = Color(0, 0, 0, 1)
-alpha_curve = SubResource("CurveTexture_bucqx")
-
-[sub_resource type="QuadMesh" id="QuadMesh_qdc4w"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sttnj"]
-transparency = 1
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_54mup")
-disable_receive_shadows = true
-billboard_mode = 1
-billboard_keep_scale = true
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m0bon"]
-emission_shape = 1
-emission_sphere_radius = 30.0
-angle_min = -179.99998
-angle_max = 180.00002
-gravity = Vector3(0, 0, 0)
-scale_min = 40.0
-scale_max = 80.0
-color = Color(0.15487596, 0.154876, 0.15487596, 1)
-alpha_curve = SubResource("CurveTexture_bucqx")
+[ext_resource type="PackedScene" uid="uid://cxd7ahrv8vrys" path="res://Ships/Models/frigate_chassis.tscn" id="7_vpxhu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fm8a8"]
 transparency = 1
+blend_mode = 1
 cull_mode = 2
+specular_mode = 2
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("3_f4waa")
-emission_enabled = true
-emission = Color(1, 0.8792635, 0.88857853, 1)
-emission_energy_multiplier = 50.0
 disable_receive_shadows = true
-billboard_mode = 1
+billboard_mode = 3
 billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_em6m2"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 3.2), 0.0, 0.0, 0, 0, Vector2(0.1, 4), 0.0, 0.0, 0, 0, Vector2(1, 0), -7.3757825, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_10nnj"]
+curve = SubResource("Curve_em6m2")
 
 [sub_resource type="Curve" id="Curve_ulo6m"]
-_data = [Vector2(0, 0.920082), 0.0, 0.0, 0, 0, Vector2(0.06596305, 1), -0.5699526, -0.5699526, 0, 0, Vector2(1, 0.16752052), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.6516854), 0.0, 0.0, 0, 0, Vector2(0.06596305, 1), -0.5699526, -0.5699526, 0, 0, Vector2(1, 0), -1.6595511, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_prji5"]
@@ -93,9 +39,10 @@ curve = SubResource("Curve_ulo6m")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d40my"]
 gravity = Vector3(0, 0, 0)
-scale_min = 100.0
-scale_max = 100.0
+scale_min = 300.0
+scale_max = 300.0
 scale_curve = SubResource("CurveTexture_prji5")
+emission_curve = SubResource("CurveTexture_10nnj")
 
 [sub_resource type="QuadMesh" id="QuadMesh_jnasw"]
 
@@ -166,6 +113,51 @@ color_ramp = SubResource("GradientTexture1D_mbml6")
 hue_variation_min = -0.07000002
 hue_variation_max = -2.2351742e-08
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7crj"]
+transparency = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_tf0us")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvdp6"]
+transparency = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_tf0us")
+disable_receive_shadows = true
+billboard_mode = 2
+billboard_keep_scale = true
+
+[sub_resource type="Curve" id="Curve_p3ujm"]
+_data = [Vector2(0, 0.087602496), 0.0, 1.1473079, 0, 0, Vector2(0.8337731, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.14088118), -16.091015, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_bucqx"]
+curve = SubResource("Curve_p3ujm")
+
+[sub_resource type="Curve" id="Curve_w2ajl"]
+_data = [Vector2(0, 0), 0.0, 0.36613038, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_p2x85"]
+curve = SubResource("Curve_w2ajl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pya87"]
+emission_shape = 1
+emission_sphere_radius = 30.0
+angle_min = -179.99998
+angle_max = 180.00002
+gravity = Vector3(0, 0, 0)
+scale_min = 120.0
+scale_max = 120.0
+scale_curve = SubResource("CurveTexture_p2x85")
+color = Color(0, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_bucqx")
+
+[sub_resource type="QuadMesh" id="QuadMesh_qdc4w"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3c78"]
 shading_mode = 2
 vertex_color_use_as_albedo = true
@@ -195,7 +187,7 @@ resource_name = "Explosion"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Smoke2:emitting")
+tracks/0/path = NodePath("Smoke:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -207,7 +199,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Smoke1:emitting")
+tracks/1/path = NodePath("Brightness:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -219,7 +211,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Brightness:emitting")
+tracks/2/path = NodePath("FireOrange:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -231,7 +223,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Fire2:emitting")
+tracks/3/path = NodePath("FireGreen:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -243,7 +235,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Fire1:emitting")
+tracks/4/path = NodePath("Sparks:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -252,25 +244,13 @@ tracks/4/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/5/type = "value"
+tracks/5/type = "method"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sparks:emitting")
+tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/6/type = "method"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath(".")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -284,7 +264,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Smoke2:emitting")
+tracks/0/path = NodePath("Smoke:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -296,7 +276,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Smoke1:emitting")
+tracks/1/path = NodePath("Brightness:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -308,7 +288,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Brightness:emitting")
+tracks/2/path = NodePath("FireOrange:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -320,7 +300,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Fire2:emitting")
+tracks/3/path = NodePath("FireGreen:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -332,22 +312,10 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Fire1:emitting")
+tracks/4/path = NodePath("Sparks:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sparks:emitting")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -360,44 +328,23 @@ _data = {
 &"RESET": SubResource("Animation_117nw")
 }
 
-[node name="AnotherExplosion" type="Node3D" unique_id=88507780]
+[node name="FrigateExplosion" type="Node3D" unique_id=88507780]
 script = ExtResource("1_wt5u7")
-
-[node name="Smoke2" type="GPUParticles3D" parent="." unique_id=2106229254]
-material_override = SubResource("StandardMaterial3D_j7crj")
-material_overlay = SubResource("StandardMaterial3D_rvdp6")
-cast_shadow = 0
-emitting = false
-amount = 10
-one_shot = true
-explosiveness = 1.0
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_pya87")
-draw_pass_1 = SubResource("QuadMesh_qdc4w")
-
-[node name="Smoke1" type="GPUParticles3D" parent="." unique_id=988697557]
-material_override = SubResource("StandardMaterial3D_j7crj")
-material_overlay = SubResource("StandardMaterial3D_sttnj")
-cast_shadow = 0
-emitting = false
-amount = 4
-one_shot = true
-explosiveness = 1.0
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_m0bon")
-draw_pass_1 = SubResource("QuadMesh_qdc4w")
+world_env_mods = ExtResource("2_vpxhu")
 
 [node name="Brightness" type="GPUParticles3D" parent="." unique_id=1359769496]
 material_override = SubResource("StandardMaterial3D_fm8a8")
 cast_shadow = 0
 emitting = false
 amount = 1
+lifetime = 2.0
 one_shot = true
 fixed_fps = 60
+visibility_aabb = AABB(-250, -250, -250, 500, 500, 500)
 process_material = SubResource("ParticleProcessMaterial_d40my")
 draw_pass_1 = SubResource("QuadMesh_jnasw")
 
-[node name="Fire2" type="GPUParticles3D" parent="." unique_id=2017332983]
+[node name="FireOrange" type="GPUParticles3D" parent="." unique_id=2017332983]
 material_override = SubResource("StandardMaterial3D_h1wpx")
 cast_shadow = 0
 emitting = false
@@ -407,10 +354,11 @@ one_shot = true
 explosiveness = 1.0
 randomness = 0.41
 fixed_fps = 60
+visibility_aabb = AABB(-250, -250, -250, 500, 500, 500)
 process_material = SubResource("ParticleProcessMaterial_fxirx")
 draw_pass_1 = SubResource("QuadMesh_g2x1n")
 
-[node name="Fire1" type="GPUParticles3D" parent="." unique_id=2050170460]
+[node name="FireGreen" type="GPUParticles3D" parent="." unique_id=2050170460]
 material_override = SubResource("StandardMaterial3D_akc05")
 cast_shadow = 0
 emitting = false
@@ -420,8 +368,22 @@ one_shot = true
 explosiveness = 0.67
 randomness = 1.0
 fixed_fps = 60
+visibility_aabb = AABB(-250, -250, -250, 500, 500, 500)
 process_material = SubResource("ParticleProcessMaterial_u8cja")
 draw_pass_1 = SubResource("QuadMesh_g2x1n")
+
+[node name="Smoke" type="GPUParticles3D" parent="." unique_id=2106229254]
+material_override = SubResource("StandardMaterial3D_j7crj")
+material_overlay = SubResource("StandardMaterial3D_rvdp6")
+cast_shadow = 0
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+visibility_aabb = AABB(-250, -250, -250, 500, 500, 500)
+process_material = SubResource("ParticleProcessMaterial_pya87")
+draw_pass_1 = SubResource("QuadMesh_qdc4w")
 
 [node name="Sparks" type="GPUParticles3D" parent="." unique_id=476426789]
 material_override = SubResource("StandardMaterial3D_c3c78")
@@ -433,8 +395,12 @@ one_shot = true
 explosiveness = 1.0
 randomness = 0.2
 fixed_fps = 60
+visibility_aabb = AABB(-250, -250, -250, 500, 500, 500)
 process_material = SubResource("ParticleProcessMaterial_7miyp")
 draw_pass_1 = SubResource("SphereMesh_miv4a")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=201220506]
 libraries/ = SubResource("AnimationLibrary_qreak")
+
+[node name="FrigateChassis" parent="." unique_id=893792452 instance=ExtResource("7_vpxhu")]
+visible = false

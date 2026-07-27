@@ -31,8 +31,7 @@ stats = ExtResource("2_sorjn")
 controller = NodePath("NPCController")
 health_component = NodePath("HealthComponent")
 turret_group = NodePath("TurretGroup")
-deathExplosion = 8
-finalExplosion = 9
+finalExplosion = 10
 death_animation_duration_min = 0.0
 death_animation_duration_max = 0.0
 

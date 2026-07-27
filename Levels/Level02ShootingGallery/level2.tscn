@@ -206,9 +206,6 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 49.2309, 202.131, 5.05472)
 [node name="Orb16" parent="RedTeam" unique_id=1264794447 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 143.357, 98.8829, 136.363)
 
-[node name="Orb17" parent="RedTeam" unique_id=2121023897 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 29.856186, 64.05452, -14.939216)
-
 [node name="Fighter" parent="RedTeam" unique_id=190729509 instance=ExtResource("4_s6g67")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -55.1471, 50.2299, -241.805)
 

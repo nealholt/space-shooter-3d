@@ -71,7 +71,7 @@ func play_remote_transform(remote_mover:Node3D, adjust:Vector3=Vector3.INF) -> v
 	play()
 
 func stop() -> void:
-	_on_animation_finished('')
+	_on_animation_finished()
 	anim.stop()
 	# I think this reset is needed in case the animation
 	# gets interrupted. I'm not sure, but there was a
@@ -79,7 +79,7 @@ func stop() -> void:
 	# every time I loaded or unloaded a level, so I added this.
 	anim.play("RESET")
 
-func _on_animation_finished(_anim_name:String) -> void:
+func _on_animation_finished(_anim_name:='') -> void:
 	# Free any remote transform
 	if is_instance_valid(remote_transform):
 		remote_transform.queue_free()

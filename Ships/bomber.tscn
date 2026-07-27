@@ -25,8 +25,8 @@ burning_trail = NodePath("BurningTrail")
 health_component = NodePath("HealthComponent")
 missile_lock = NodePath("MissileLockGroup")
 obstacle_detector = NodePath("ObstacleDetector")
-deathExplosion = 9
-finalExplosion = 8
+deathExplosion = 7
+finalExplosion = 11
 death_animation_duration_min = 1.0
 death_animation_duration_max = 3.2
 

@@ -248,6 +248,7 @@ scale_curve = SubResource("CurveTexture_12lof")
 script = ExtResource("1_3bxac")
 
 [node name="VFX_SmokeClouds" type="GPUParticles3D" parent="." unique_id=53802206]
+sorting_offset = 2.0
 material_override = ExtResource("1_hr0sc")
 cast_shadow = 0
 emitting = false
@@ -258,6 +259,7 @@ process_material = SubResource("ParticleProcessMaterial_ev6r4")
 draw_pass_1 = SubResource("SphereMesh_a01sr")
 
 [node name="VFX_StreakSparks" type="GPUParticles3D" parent="." unique_id=462617646]
+sorting_offset = 1.0
 material_override = SubResource("ShaderMaterial_u66al")
 cast_shadow = 0
 emitting = false
@@ -275,7 +277,7 @@ libraries/ = SubResource("AnimationLibrary_i0xkb")
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1486102968]
 light_color = Color(0.886275, 0.345098, 0.12549, 1)
 light_energy = 20.0
-omni_range = 60.0
+omni_range = 100.0
 
 [node name="Flare" type="GPUParticles3D" parent="." unique_id=905495830]
 material_override = SubResource("StandardMaterial3D_sl06y")

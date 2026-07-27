@@ -67,7 +67,7 @@ shield = NodePath("Shield")
 weapon_handler = NodePath("WeaponHandler")
 fps_cam_position = Vector3(0, 0.6, -2.9)
 side_cam_position = Vector3(2.3, -0.5, -3.5)
-deathExplosion = 9
+deathExplosion = 7
 finalExplosion = 11
 
 [node name="AimAssist" parent="." unique_id=828639523 instance=ExtResource("29_3q0pi")]

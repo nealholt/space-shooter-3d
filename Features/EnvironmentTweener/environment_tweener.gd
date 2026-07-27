@@ -82,7 +82,11 @@ func play(flash_pos:Vector3, stats:EnvTweenStats) -> void:
 # Tween into and out of an environment attribute
 # modification.
 # https://docs.godotengine.org/en/stable/classes/class_environment.html
-func blink_environment(attribute:String, baseline:float, factor:=3.0, duration:=0.3) -> void:
+func blink_environment(attribute:String, baseline:float, factor:float, duration:float) -> void:
+	# Do nothing if the factor is one or the duration is zero
+	if factor == 1.0 or duration == 0.0:
+		return
+	# Tween the environment variable
 	var tween:Tween = create_tween()
 	var current = environment.get(attribute)
 	tween.tween_property(environment,

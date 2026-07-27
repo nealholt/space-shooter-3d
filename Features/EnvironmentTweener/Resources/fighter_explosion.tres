@@ -6,7 +6,7 @@
 script = ExtResource("1_84fn1")
 max_angle = 60.0
 unit_distance = 200.0
-max_brightness_factor = 3.0
+max_brightness_factor = 2.0
 max_contrast_factor = 1.0
 min_saturation_factor = 1.0
 brightness_change_duration = 0.1

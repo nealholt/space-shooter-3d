@@ -17,6 +17,6 @@ func stop() -> void:
 	anim.stop()
 	timer.stop()
 
-func _on_animation_finished(anim_name:String) -> void:
+func _on_animation_finished(anim_name:='') -> void:
 	super(anim_name)
 	visible = false

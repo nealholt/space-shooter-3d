@@ -5,14 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://loiql7x3ow62" path="res://vfx/Explosions/shield_strike.tscn" id="3_8do65"]
 [ext_resource type="PackedScene" uid="uid://w2dnuhc55w32" path="res://vfx/Explosions/shield_explosion.tscn" id="4_levs1"]
 [ext_resource type="Script" uid="uid://dxavjpjg06j5w" path="res://vfx/visual_effect_setting.gd" id="4_vbg6y"]
-[ext_resource type="PackedScene" uid="uid://ctylowk0dxhp3" path="res://vfx/Explosions/sparks.tscn" id="6_8do65"]
+[ext_resource type="PackedScene" uid="uid://ctylowk0dxhp3" path="res://vfx/Explosions/ship_strike.tscn" id="6_fdgtq"]
 [ext_resource type="PackedScene" uid="uid://dgfgr1a12mn0l" path="res://Attachments/Decals/bullet_hole.tscn" id="7_levs1"]
 [ext_resource type="PackedScene" uid="uid://dry7yodrwl18u" path="res://vfx/Explosions/vfx_explosion_lelu_single.tscn" id="8_le2sy"]
 [ext_resource type="PackedScene" uid="uid://wvqr1nvfc2u1" path="res://vfx/Explosions/vfx_explosion_lelu_tutorial.tscn" id="10_ptu8o"]
 [ext_resource type="PackedScene" uid="uid://dappypoft2ab4" path="res://vfx/Explosions/vfx_explosion_lelu_8x.tscn" id="11_j7uvs"]
 [ext_resource type="PackedScene" uid="uid://bnfrjatb6prnb" path="res://vfx/Explosions/explosion.tscn" id="12_ey1l5"]
 [ext_resource type="PackedScene" uid="uid://dd7gue1cwbx6u" path="res://vfx/Explosions/massive_explosion.tscn" id="13_71nip"]
-[ext_resource type="PackedScene" uid="uid://7dofuekbf3cs" path="res://vfx/Explosions/explosion_MkII.tscn" id="14_fdgtq"]
+[ext_resource type="PackedScene" uid="uid://7dofuekbf3cs" path="res://vfx/Explosions/frigate_explosion.tscn" id="13_fdgtq"]
 [ext_resource type="PackedScene" uid="uid://bbql1i0kvg5e7" path="res://vfx/Explosions/explosion_hotds.tscn" id="14_gwvbw"]
 
 [node name="VFX_Manager" type="Node" unique_id=1546280994]
@@ -21,22 +21,20 @@ script = ExtResource("1_4hukn")
 [node name="all_vfx_settings" type="Node" parent="." unique_id=25385317]
 
 [node name="ShieldStrikeSetting" parent="all_vfx_settings" unique_id=1547821570 instance=ExtResource("2_kqin3")]
-limit = 40
 type = 1
 visual_effect = ExtResource("3_8do65")
 
 [node name="ShieldExplosionEffectSetting" type="Node" parent="all_vfx_settings" unique_id=334466268]
 script = ExtResource("4_vbg6y")
-limit = 20
+limit = 15
 type = 2
 visual_effect = ExtResource("4_levs1")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
 [node name="ShipStrikeSetting" type="Node" parent="all_vfx_settings" unique_id=86356444]
 script = ExtResource("4_vbg6y")
-limit = 40
 type = 3
-visual_effect = ExtResource("6_8do65")
+visual_effect = ExtResource("6_fdgtq")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
 [node name="BulletHoleSetting" type="Node" parent="all_vfx_settings" unique_id=733613282]
@@ -48,44 +46,44 @@ metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
 [node name="FlakExplosionSetting" type="Node" parent="all_vfx_settings" unique_id=1977722552]
 script = ExtResource("4_vbg6y")
-limit = 80
 type = 5
 visual_effect = ExtResource("8_le2sy")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
 [node name="SingleExplosionSetting" type="Node" parent="all_vfx_settings" unique_id=1483340351]
 script = ExtResource("4_vbg6y")
-type = 7
+limit = 40
+type = 6
 visual_effect = ExtResource("10_ptu8o")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
 [node name="SingleExplosion8xSetting" type="Node" parent="all_vfx_settings" unique_id=1698029398]
 script = ExtResource("4_vbg6y")
-limit = 30
-type = 8
+limit = 20
+type = 7
 visual_effect = ExtResource("11_j7uvs")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
 [node name="ExplosionSetting" type="Node" parent="all_vfx_settings" unique_id=1831221807]
 script = ExtResource("4_vbg6y")
-limit = 30
-type = 9
+limit = 20
+type = 8
 visual_effect = ExtResource("12_ey1l5")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
 [node name="CarrierExplosionSetting" type="Node" parent="all_vfx_settings" unique_id=535941681]
 script = ExtResource("4_vbg6y")
 limit = 2
-type = 10
+type = 9
 visual_effect = ExtResource("13_71nip")
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
-[node name="BusyExplosion" parent="all_vfx_settings" unique_id=1278060277 instance=ExtResource("2_kqin3")]
+[node name="FrigateExplosion" parent="all_vfx_settings" unique_id=1377271947 instance=ExtResource("2_kqin3")]
 limit = 5
-type = 11
-visual_effect = ExtResource("14_fdgtq")
+type = 10
+visual_effect = ExtResource("13_fdgtq")
 
 [node name="ExplosionHotDS" parent="all_vfx_settings" unique_id=877466162 instance=ExtResource("2_kqin3")]
-limit = 20
+limit = 10
 type = 11
 visual_effect = ExtResource("14_gwvbw")

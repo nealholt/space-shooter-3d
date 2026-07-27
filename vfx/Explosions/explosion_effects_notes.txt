@@ -41,3 +41,5 @@ debris.png was made by me, Neal Holtschulte.
 
 REFERENCE:
 HotDS explosions are CLEAN. https://www.youtube.com/watch?v=nUNbTb6MCrc
+
+The vfx_explosion_lelu explosions are all based on this: https://www.youtube.com/watch?v=miQ7DO1QUVE
