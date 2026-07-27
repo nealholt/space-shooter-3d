@@ -109,3 +109,4 @@ draw_pass_1 = SubResource("QuadMesh_q070q")
 libraries/ = SubResource("AnimationLibrary_vmar1")
 
 [connection signal="finished" from="Sparks" to="Sparks" method="_on_finished"]
+[connection signal="finished" from="@GPUParticles3D@40933" to="@GPUParticles3D@40933" method="_on_finished"]

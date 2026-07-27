@@ -12,9 +12,11 @@ transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("1_buv2n")
+disable_receive_shadows = true
 
 [sub_resource type="Curve" id="Curve_s22ts"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -41,18 +43,22 @@ transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("3_f5x7n")
+disable_receive_shadows = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xguk"]
 transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("5_7153f")
+disable_receive_shadows = true
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -87,9 +93,11 @@ transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("5_7153f")
+disable_receive_shadows = true
 
 [sub_resource type="Curve" id="Curve_lklsr"]
 _data = [Vector2(0, 1), 0.0, -2.9706204, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -227,6 +235,7 @@ script = ExtResource("1_8ogrp")
 
 [node name="MuzzlePlanes" type="GPUParticles3D" parent="." unique_id=127791307]
 material_override = SubResource("StandardMaterial3D_s22ts")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -239,6 +248,7 @@ draw_pass_1 = ExtResource("2_duwo1")
 
 [node name="MuzzleCone" type="GPUParticles3D" parent="." unique_id=338769095]
 material_override = SubResource("StandardMaterial3D_k6rkm")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -251,6 +261,7 @@ draw_pass_1 = ExtResource("4_s0idf")
 
 [node name="BeamFlash" type="GPUParticles3D" parent="." unique_id=1694864778]
 material_override = SubResource("StandardMaterial3D_0xguk")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -263,6 +274,7 @@ draw_pass_1 = SubResource("QuadMesh_rhr0g")
 
 [node name="Sparks" type="GPUParticles3D" parent="." unique_id=82672879]
 material_override = SubResource("StandardMaterial3D_tyaal")
+cast_shadow = 0
 emitting = false
 amount = 20
 lifetime = 0.3

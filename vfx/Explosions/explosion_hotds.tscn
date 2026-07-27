@@ -494,6 +494,7 @@ amount = 1
 lifetime = 3.5
 one_shot = true
 fixed_fps = 0
+visibility_aabb = AABB(-250, -250, -250, 500, 500, 500)
 process_material = SubResource("ParticleProcessMaterial_u24pa")
 draw_pass_1 = SubResource("QuadMesh_hujiu")
 
@@ -506,6 +507,7 @@ lifetime = 3.5
 one_shot = true
 explosiveness = 0.95
 fixed_fps = 0
+visibility_aabb = AABB(-250, -250, -250, 500, 500, 500)
 process_material = SubResource("ParticleProcessMaterial_piioj")
 draw_pass_1 = SubResource("QuadMesh_u24pa")
 
@@ -518,6 +520,7 @@ lifetime = 0.8
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 0
+visibility_aabb = AABB(-250, -250, -250, 500, 500, 500)
 transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_77skn")
 draw_pass_1 = SubResource("QuadMesh_nhdj6")
@@ -532,6 +535,7 @@ lifetime = 5.0
 one_shot = true
 explosiveness = 0.95
 fixed_fps = 0
+visibility_aabb = AABB(-250, -250, -250, 500, 500, 500)
 process_material = SubResource("ParticleProcessMaterial_oowtd")
 draw_pass_1 = SubResource("QuadMesh_u24pa")
 
@@ -542,6 +546,7 @@ amount = 1
 lifetime = 0.8
 one_shot = true
 explosiveness = 1.0
+visibility_aabb = AABB(-250, -250, -250, 500, 500, 500)
 process_material = SubResource("ParticleProcessMaterial_hujiu")
 draw_pass_1 = SubResource("QuadMesh_xv03i")
 
@@ -554,6 +559,7 @@ amount = 16
 lifetime = 3.5
 one_shot = true
 explosiveness = 1.0
+visibility_aabb = AABB(-250, -250, -250, 500, 500, 500)
 process_material = SubResource("ParticleProcessMaterial_hlyjk")
 draw_pass_1 = SubResource("QuadMesh_x2s23")
 

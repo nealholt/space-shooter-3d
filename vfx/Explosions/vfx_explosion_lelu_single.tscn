@@ -100,6 +100,7 @@ script = ExtResource("1_nu2wl")
 
 [node name="VFX_SmokeClouds" type="GPUParticles3D" parent="." unique_id=1718084682]
 material_override = ExtResource("1_iyipg")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.6

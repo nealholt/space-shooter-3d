@@ -100,6 +100,7 @@ scale_curve = SubResource("CurveTexture_ybq6y")
 transparency = 1
 blend_mode = 1
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 albedo_color = Color(100, 100, 100, 1)
 albedo_texture = ExtResource("4_q5vej")
@@ -168,6 +169,7 @@ one_shot = true
 libraries/ = SubResource("AnimationLibrary_pbeax")
 
 [node name="FireflyParticles3D" type="GPUParticles3D" parent="." unique_id=438305091]
+cast_shadow = 0
 emitting = false
 amount = 32
 lifetime = 2.0
@@ -180,6 +182,7 @@ draw_pass_1 = SubResource("QuadMesh_20t1u")
 
 [node name="FlareExplosion" type="GPUParticles3D" parent="." unique_id=1652400726]
 material_override = SubResource("StandardMaterial3D_nlhnk")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 2.0

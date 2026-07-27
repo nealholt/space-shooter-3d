@@ -131,6 +131,7 @@ script = ExtResource("1_4m2dr")
 
 [node name="Sparks" type="GPUParticles3D" parent="." unique_id=825077025]
 material_override = SubResource("StandardMaterial3D_46d27")
+cast_shadow = 0
 emitting = false
 amount = 50
 lifetime = 1.5
@@ -148,4 +149,5 @@ volume_db = -8.0
 libraries/ = SubResource("AnimationLibrary_a5esd")
 
 [connection signal="finished" from="Sparks" to="." method="_on_part_finished"]
+[connection signal="finished" from="@GPUParticles3D@36890" to="." method="_on_part_finished"]
 [connection signal="finished" from="AudioStreamPlayer3D" to="." method="_on_part_finished"]

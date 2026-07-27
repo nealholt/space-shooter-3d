@@ -20,9 +20,11 @@ transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("2_tbda7")
+disable_receive_shadows = true
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -57,9 +59,11 @@ transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("2_tbda7")
+disable_receive_shadows = true
 
 [sub_resource type="Curve" id="Curve_tbda7"]
 _data = [Vector2(0, 1), 0.0, -2.9706204, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -89,9 +93,11 @@ transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("3_dhcul")
+disable_receive_shadows = true
 
 [sub_resource type="Curve" id="Curve_s22ts"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -118,87 +124,106 @@ transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("5_22sac")
+disable_receive_shadows = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_prung"]
 transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("6_hhsuu")
+disable_receive_shadows = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bmxqy"]
 transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("7_p4e21")
+disable_receive_shadows = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ivdx1"]
 transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("8_j44fh")
+disable_receive_shadows = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k6rkm"]
 transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("9_rbtcd")
+disable_receive_shadows = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_koa05"]
 transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("11_7px1a")
+disable_receive_shadows = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h8v7r"]
 transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("12_2e55s")
+disable_receive_shadows = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3dea"]
 transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("13_ulld0")
+disable_receive_shadows = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f3ovb"]
 transparency = 1
 blend_mode = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("14_52qps")
+disable_receive_shadows = true
 
 [node name="MuzzleFlashGreenMonster" type="Node3D" unique_id=334970442]
 script = ExtResource("1_50lh3")
 
 [node name="BeamFlash" type="GPUParticles3D" parent="." unique_id=202883686]
 material_override = SubResource("StandardMaterial3D_0xguk")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -211,6 +236,7 @@ draw_pass_1 = SubResource("QuadMesh_rhr0g")
 
 [node name="Sparks" type="GPUParticles3D" parent="." unique_id=1261862351]
 material_override = SubResource("StandardMaterial3D_50lh3")
+cast_shadow = 0
 emitting = false
 amount = 20
 lifetime = 0.4
@@ -226,6 +252,7 @@ draw_pass_1 = SubResource("QuadMesh_iba8p")
 
 [node name="MuzzlePlane00" type="GPUParticles3D" parent="PlanesGroup" unique_id=1282608257]
 material_override = SubResource("StandardMaterial3D_s22ts")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -238,6 +265,7 @@ draw_pass_1 = ExtResource("4_iba8p")
 
 [node name="MuzzlePlane01" type="GPUParticles3D" parent="PlanesGroup" unique_id=1551614023]
 material_override = SubResource("StandardMaterial3D_frx31")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -250,6 +278,7 @@ draw_pass_1 = ExtResource("4_iba8p")
 
 [node name="MuzzlePlane02" type="GPUParticles3D" parent="PlanesGroup" unique_id=1639973269]
 material_override = SubResource("StandardMaterial3D_prung")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -262,6 +291,7 @@ draw_pass_1 = ExtResource("4_iba8p")
 
 [node name="MuzzlePlane03" type="GPUParticles3D" parent="PlanesGroup" unique_id=1537493469]
 material_override = SubResource("StandardMaterial3D_bmxqy")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -274,6 +304,7 @@ draw_pass_1 = ExtResource("4_iba8p")
 
 [node name="MuzzlePlane04" type="GPUParticles3D" parent="PlanesGroup" unique_id=2140448410]
 material_override = SubResource("StandardMaterial3D_ivdx1")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -288,6 +319,7 @@ draw_pass_1 = ExtResource("4_iba8p")
 
 [node name="MuzzleCone00" type="GPUParticles3D" parent="ConesGroup" unique_id=1056967788]
 material_override = SubResource("StandardMaterial3D_k6rkm")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -300,6 +332,7 @@ draw_pass_1 = ExtResource("10_f5i4y")
 
 [node name="MuzzleCone01" type="GPUParticles3D" parent="ConesGroup" unique_id=814446240]
 material_override = SubResource("StandardMaterial3D_koa05")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -312,6 +345,7 @@ draw_pass_1 = ExtResource("10_f5i4y")
 
 [node name="MuzzleCone02" type="GPUParticles3D" parent="ConesGroup" unique_id=1252447935]
 material_override = SubResource("StandardMaterial3D_h8v7r")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -324,6 +358,7 @@ draw_pass_1 = ExtResource("10_f5i4y")
 
 [node name="MuzzleCone03" type="GPUParticles3D" parent="ConesGroup" unique_id=1842006144]
 material_override = SubResource("StandardMaterial3D_b3dea")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1
@@ -336,6 +371,7 @@ draw_pass_1 = ExtResource("10_f5i4y")
 
 [node name="MuzzleCone04" type="GPUParticles3D" parent="ConesGroup" unique_id=1967142960]
 material_override = SubResource("StandardMaterial3D_f3ovb")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.1

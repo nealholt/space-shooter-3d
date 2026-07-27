@@ -249,6 +249,7 @@ script = ExtResource("1_3bxac")
 
 [node name="VFX_SmokeClouds" type="GPUParticles3D" parent="." unique_id=53802206]
 material_override = ExtResource("1_hr0sc")
+cast_shadow = 0
 emitting = false
 one_shot = true
 explosiveness = 0.8
@@ -258,6 +259,7 @@ draw_pass_1 = SubResource("SphereMesh_a01sr")
 
 [node name="VFX_StreakSparks" type="GPUParticles3D" parent="." unique_id=462617646]
 material_override = SubResource("ShaderMaterial_u66al")
+cast_shadow = 0
 emitting = false
 lifetime = 0.4
 one_shot = true
@@ -277,6 +279,7 @@ omni_range = 60.0
 
 [node name="Flare" type="GPUParticles3D" parent="." unique_id=905495830]
 material_override = SubResource("StandardMaterial3D_sl06y")
+cast_shadow = 0
 emitting = false
 amount = 1
 lifetime = 0.5

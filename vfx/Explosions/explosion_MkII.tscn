@@ -371,6 +371,7 @@ emitting = false
 amount = 10
 one_shot = true
 explosiveness = 1.0
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_pya87")
 draw_pass_1 = SubResource("QuadMesh_qdc4w")
 
@@ -382,6 +383,7 @@ emitting = false
 amount = 4
 one_shot = true
 explosiveness = 1.0
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_m0bon")
 draw_pass_1 = SubResource("QuadMesh_qdc4w")
 
@@ -391,6 +393,7 @@ cast_shadow = 0
 emitting = false
 amount = 1
 one_shot = true
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_d40my")
 draw_pass_1 = SubResource("QuadMesh_jnasw")
 
@@ -403,6 +406,7 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 randomness = 0.41
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_fxirx")
 draw_pass_1 = SubResource("QuadMesh_g2x1n")
 
@@ -415,6 +419,7 @@ lifetime = 0.7
 one_shot = true
 explosiveness = 0.67
 randomness = 1.0
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_u8cja")
 draw_pass_1 = SubResource("QuadMesh_g2x1n")
 
@@ -427,6 +432,7 @@ lifetime = 0.2
 one_shot = true
 explosiveness = 1.0
 randomness = 0.2
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_7miyp")
 draw_pass_1 = SubResource("SphereMesh_miv4a")
 

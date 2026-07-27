@@ -9,8 +9,10 @@
 transparency = 1
 cull_mode = 2
 shading_mode = 0
+specular_mode = 2
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("1_xdx7c")
+disable_receive_shadows = true
 
 [sub_resource type="Curve" id="Curve_m1esp"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -219,6 +221,7 @@ script = ExtResource("1_6d5r7")
 
 [node name="Sparks" type="GPUParticles3D" parent="." unique_id=142426149]
 material_override = SubResource("StandardMaterial3D_46d27")
+cast_shadow = 0
 emitting = false
 amount = 30
 lifetime = 0.4
