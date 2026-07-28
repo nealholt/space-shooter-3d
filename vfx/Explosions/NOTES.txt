@@ -1,0 +1,28 @@
+
+explosion_hotds.tscn was created based on this Brackeys tutorial https://www.youtube.com/watch?v=htRjt505sPg and was inspired by House of the Dying Sun. It's used on small fighters as their final death explosion and does change environment brightness if you're looking right at it.
+
+frigate_explosion.tscn is also based on the above Brackeys tutorial. This explosion is used for all mid-sized capital ships.
+
+vfx_explosion_lelu_single.tscn was created based on this tutorial https://www.youtube.com/watch?v=miQ7DO1QUVE It uses a shader. It's used on the flak bullet area explosions.
+
+vfx_explosion_lelu_8x.tscn was created based on this tutorial https://www.youtube.com/watch?v=miQ7DO1QUVE It uses a shader. It's used on small fighters as their initial kill explosion.
+
+vfx_explosion_lelu_tutorial was created based on this tutorial https://www.youtube.com/watch?v=miQ7DO1QUVE It uses a shader. Turrets use it on death.
+
+
+ENUM				SCENE
+	ExplosionDamageDealing uses
+Flak Explosion		vfx_explosion_lelu_single
+	Turret uses
+Single Explosion	vfx_explosion_lelu_tutorial
+	Fighter, Bomber, and Corvette use
+Single Explosion 8x	vfx_explosion_lelu_8x
+Explosion Hotds 	explosion_hotds
+	Destroyer, Beam Destroyer, and Frigate all use
+Frigate Explosion	frigate_explosion
+	Carrier and Capital Ship Frigate use
+Carrier Explosion	massive_explosion
+
+	Missile uses Explosion
+
+	Projectile uses Ship Strike and Shield Strike
