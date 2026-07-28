@@ -22,13 +22,14 @@ var health: float:
 	# This setter runs whenever current_health is changed,
 	# including basic assignment like in _ready()
 	set(new_health):
-		# https://www.udemy.com/course/complete-godot-3d/learn/lecture/40736150#questions
-		# If health is decreasing
-		if new_health < health:
-			health_lost.emit(self, health-new_health)
+		var amount_lost := health-new_health
 		# Change health
 		health = new_health
+		# If health is decreasing, signal
+		if 0 < amount_lost:
+			health_lost.emit(self, amount_lost)
 		# If dead. Check against 0.5 in order to round down.
+		# But don't emit this signal more than once.
 		if health <= 0.5 and !signalled_died:
 			died.emit()
 			signalled_died = true

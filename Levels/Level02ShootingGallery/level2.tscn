@@ -12,8 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Ships/corvette.tscn" id="9_1bvmw"]
 [ext_resource type="PackedScene" uid="uid://diilp2vvcvj53" path="res://Ships/carrier.tscn" id="10_3xvk7"]
 [ext_resource type="PackedScene" uid="uid://dp3w08p8gkd3p" path="res://Ships/capital_ship_frigate.tscn" id="11_c40xb"]
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="13_34l5u"]
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Controllers/player_movement_v_4.tscn" id="13_qb1ff"]
 [ext_resource type="Script" uid="uid://c4rebesbspn8" path="res://Controllers/Resources/controller_stats.gd" id="14_1bvmw"]
+[ext_resource type="Resource" uid="uid://coa1jlc52fxuo" path="res://Weapons/Guns/Resources/BlasterMKI.tres" id="14_gxevk"]
+[ext_resource type="Resource" uid="uid://cwbihjofcpss8" path="res://Weapons/Guns/Resources/MissileStandardMKI.tres" id="15_pok8p"]
+[ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="16_prps4"]
 
 [sub_resource type="GDScript" id="GDScript_ulixo"]
 script/source = "extends Level
@@ -57,6 +61,23 @@ tonemap_mode = 2
 glow_enabled = true
 glow_bloom = 0.35
 adjustment_enabled = true
+
+[sub_resource type="Resource" id="Resource_38se8"]
+script = ExtResource("13_34l5u")
+name = "Turret Big Laser"
+bullet_type = 7
+damage = 9999.0
+bullet_speed = 500.0
+bullet_timeout = 4.0
+fire_rate = 0.5
+fire_sound = 8
+metadata/_custom_type_script = "uid://bflupvkh65uf"
+
+[sub_resource type="Resource" id="Resource_txjoc"]
+script = ExtResource("16_prps4")
+guns = Array[ExtResource("13_34l5u")]([ExtResource("14_gxevk"), SubResource("Resource_38se8")])
+missile_launcher = ExtResource("15_pok8p")
+metadata/_custom_type_script = "uid://llcl4ev3hi63"
 
 [sub_resource type="Resource" id="Resource_3xvk7"]
 script = ExtResource("14_1bvmw")
@@ -241,8 +262,12 @@ team = "blue team"
 
 [node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller") instance=ExtResource("4_s6g67")]
 transform = Transform3D(0.19537577, 0.7544654, 0.6265862, -0.9803523, 0.1325488, 0.14608303, 0.027161345, -0.64281625, 0.7655387, 38.351, 65.318, 0)
+stats = SubResource("Resource_txjoc")
 controller = NodePath("PlayerMovementV4")
 is_player = true
+
+[node name="HealthComponent" parent="BlueTeam/Fighter" index="6" unique_id=535388883]
+max_health = 10.0
 
 [node name="MissileLockGroup" parent="BlueTeam/Fighter" index="8" unique_id=756556192]
 quick_launch_interval = 0.01
