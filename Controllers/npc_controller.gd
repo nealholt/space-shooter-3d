@@ -147,6 +147,20 @@ func select_target(targeter:Ship) -> void:
 
 func shoot(shooter:Ship, delta:float) -> void:
 	if dont_shoot: return
+	if !is_instance_valid(target): return
+	
+	# Check for line of sight on target
+	var los:bool = RayOnDemand.me.line_is_clear(shooter.global_position, target.global_position, target)
+	# If line of sight is blocked...
+	if !los:
+		# Get obstacle
+		var blocker:CollisionObject3D = RayOnDemand.me.get_obstacle()
+		# If the obstacle is not our target, lose missile lock progress
+		if shooter.missile_lock and blocker != target.get_parent():
+			shooter.missile_lock.stop_seeking(shooter)
+		# If line of sight is blocked by an ally, abort
+		if 'ally_team' in blocker and ally_team == blocker.ally_team:
+			return
 	
 	# MISSILES:
 	# If shooter has a missile lock component, update it

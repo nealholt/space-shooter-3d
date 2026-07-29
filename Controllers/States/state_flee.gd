@@ -19,6 +19,9 @@ var distance_limit_sqd:float = 0.0 # meters
 func Enter(motion:MovementProfile) -> void:
 	super.Enter(motion)
 	time_limit = 15.0 # seconds
+	# Add a small random amount of roll to add a little
+	# personality and variability
+	motion.goal_roll = randf_range(-0.3, 0.3)
 
 # This function should be called on each
 # physics update frame.

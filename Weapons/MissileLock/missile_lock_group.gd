@@ -135,13 +135,12 @@ func npc_update(targeter:Ship, delta:float) -> void:
 	# If the target is invalid, stop seeking
 	# and do nothing further in this function
 	if !is_instance_valid(target):
-		stop_seeking()
+		stop_seeking(targeter)
 		return
 	# Also stop seeking if target is out of range or offscreen
 	elif (targeter.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
 	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > missile_lock_max_angle):
-		stop_seeking()
-		target.lost_lock(targeter)
+		stop_seeking(targeter)
 	# Otherwise target is valid and we're either seeking
 	# or locked.
 	else:
@@ -156,14 +155,13 @@ func player_update(targeter:Ship, delta:float) -> void:
 	# seeking) and do nothing further
 	if !is_instance_valid(target):
 		if seeking:
-			stop_seeking()
+			stop_seeking(targeter)
 		return
 	# Also stop seeking if target is out of range or offscreen
 	elif seeking and \
 	(targeter.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
 	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > missile_lock_max_angle):
-		stop_seeking()
-		target.lost_lock(targeter)
+		stop_seeking(targeter)
 	# Otherwise target is valid and we're either seeking
 	# or locked.
 	else:
@@ -270,7 +268,7 @@ func attempt_to_fire_missile(targeter:Ship) -> void:
 		launch(targeter)
 		# Tell the target that it's got a missile inbound
 		target.missile_inbound(targeter)
-	stop_seeking()
+	stop_seeking(targeter)
 
 
 func start_seeking() -> void:
@@ -291,7 +289,9 @@ func start_seeking() -> void:
 	audio_timer.start(repeat_tone_max_time)
 
 
-func stop_seeking() -> void:
+func stop_seeking(targeter:Ship) -> void:
+	if is_instance_valid(target):
+		target.lost_lock(targeter)
 	seeking = false
 	locked = false
 	npc_seeking_began = false # Reset

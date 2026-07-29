@@ -24,7 +24,7 @@ const RAYONDEMAND_SCENE:PackedScene = preload("res://Features/RayCastOnDemand/ra
 static var me:RayOnDemand = null
 
 @onready var ray: RayCast3D = $RayCast3D
-
+var blockage:CollisionObject3D
 
 static func new_ray(my_parent:Node3D) -> RayOnDemand:
 	var rod := RAYONDEMAND_SCENE.instantiate()
@@ -56,6 +56,12 @@ func line_is_clear(startpoint:Vector3, endpoint:Vector3, ignorebody:Node3D) -> b
 	if ray.is_colliding():
 		# Don't collide with ignorebody, but anything else
 		# results in FALSE, line is not clear.
-		return ray.get_collider() == ignorebody
+		blockage = ray.get_collider()
+		return blockage == ignorebody
 	# All clear
 	return true
+
+
+# Returns most recent collision body
+func get_obstacle() -> CollisionObject3D:
+	return blockage

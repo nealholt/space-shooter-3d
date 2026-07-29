@@ -19,6 +19,7 @@
 [node name="NPCController" type="Node" unique_id=1852644041 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("1_bsujv")
 initial_state = NodePath("States/Attack")
+too_close = 200.0
 stats = ExtResource("2_2qc78")
 
 [node name="MovementProfile" type="Node" parent="." unique_id=1273875585]
