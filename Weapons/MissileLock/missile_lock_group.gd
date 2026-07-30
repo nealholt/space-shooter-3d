@@ -84,8 +84,10 @@ var repeat_tone_min_time:float = 0.05 # seconds
 var ally_team:String
 var enemy_team:String
 
-# Reference to parent ship
-var parent_ship:Ship
+# I wish there was a way to decouple the missile lock group
+# from its parent ship, but for now this reference is the
+# simplest solution
+var my_parent:Ship
 
 
 # Called when the node enters the scene tree for the first time.
@@ -94,9 +96,6 @@ func _ready() -> void:
 	acquiring.hide()
 	lock_offset = lock.size/2.0
 	lock.hide()
-	# Get a reference to parent ship. This is used for
-	# passing along collision exception information
-	parent_ship = get_parent()
 	# Set up the style of missile lock
 	match lock_style:
 		LockStyle.STANDARD:
@@ -109,8 +108,17 @@ func _ready() -> void:
 	missile_lock.acquiring_offset = acquiring.size/2.0
 
 
-func setup_from_resource(gun_res:GunStats, is_player) -> void:
-	missile_launcher = GunSpawner.new_gun_from_resource(gun_res, self, is_player)
+func setup_missile_lock_group(parent_ship:Ship, gun_res:GunStats, is_player:bool) -> void:
+	# Get the parent reference
+	my_parent = parent_ship
+	# Connect to controller signals
+	var control:CharacterBodyControlParent = my_parent.get_controller()
+	control.line_of_sight_lost.connect(stop_seeking)
+	control.target_updated.connect(attempt_to_start_seeking)
+	control.attempt_to_fire_missile.connect(attempt_to_fire_missile)
+	# Set up the missile launched from resource
+	if gun_res:
+		missile_launcher = GunSpawner.new_gun_from_resource(gun_res, self, is_player)
 
 
 func set_as_NPC() -> void:
@@ -120,48 +128,48 @@ func set_as_NPC() -> void:
 # The Ship that this scene is a child of ought to be the
 # targeter. This function will be called from
 # physics_process with delta as elapsed time.
-func update(targeter:Ship, delta:float) -> void:
+func update(delta:float) -> void:
 	# Choose between npc and player update
 	if npc_missile_lock:
-		npc_update(targeter, delta)
+		npc_update(delta)
 	else:
-		player_update(targeter, delta)
+		player_update(delta)
 
 
-func npc_update(targeter:Ship, delta:float) -> void:
+func npc_update(delta:float) -> void:
 	# NPCs attempt to start seeking at all times
 	if !seeking:
-		attempt_to_start_seeking(targeter)
+		attempt_to_start_seeking()
 	# If the target is invalid, stop seeking
 	# and do nothing further in this function
 	if !is_instance_valid(target):
-		stop_seeking(targeter)
+		stop_seeking()
 		return
 	# Also stop seeking if target is out of range or offscreen
-	elif (targeter.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
-	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > missile_lock_max_angle):
-		stop_seeking(targeter)
+	elif (my_parent.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
+	or Global.get_angle_to_target(my_parent.global_position, target.global_position, -my_parent.global_basis.z) > missile_lock_max_angle):
+		stop_seeking()
 	# Otherwise target is valid and we're either seeking
 	# or locked.
 	else:
 		if seeking:
-			npc_seeking_update(targeter, delta)
+			npc_seeking_update(delta)
 		if locked:
-			attempt_to_fire_missile(targeter)
+			attempt_to_fire_missile()
 
 
-func player_update(targeter:Ship, delta:float) -> void:
+func player_update(delta:float) -> void:
 	# If the target is invalid, stop seeking (if we were
 	# seeking) and do nothing further
 	if !is_instance_valid(target):
 		if seeking:
-			stop_seeking(targeter)
+			stop_seeking()
 		return
 	# Also stop seeking if target is out of range or offscreen
 	elif seeking and \
-	(targeter.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
-	or Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z) > missile_lock_max_angle):
-		stop_seeking(targeter)
+	(my_parent.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
+	or Global.get_angle_to_target(my_parent.global_position, target.global_position, -my_parent.global_basis.z) > missile_lock_max_angle):
+		stop_seeking()
 	# Otherwise target is valid and we're either seeking
 	# or locked.
 	else:
@@ -170,7 +178,7 @@ func player_update(targeter:Ship, delta:float) -> void:
 		if seeking:
 			# Move reticle into position and, if it's
 			# close enough, acquire lock
-			missile_lock.continue_seeking(delta, target_onscreen, targeter, acquiring)
+			missile_lock.continue_seeking(delta, target_onscreen, acquiring)
 		# It seems like this should be an elif,
 		# but there's a messy little one frame
 		# flicker between the reticles if you
@@ -180,8 +188,8 @@ func player_update(targeter:Ship, delta:float) -> void:
 			lock.set_global_position(target_onscreen - lock_offset)
 
 
-func npc_seeking_update(targeter:Node3D, delta:float) -> void:
-	var angle_to:float = rad_to_deg(Global.get_angle_to_target(targeter.global_position, target.global_position, -targeter.global_basis.z))
+func npc_seeking_update(delta:float) -> void:
+	var angle_to:float = rad_to_deg(Global.get_angle_to_target(my_parent.global_position, target.global_position, -my_parent.global_basis.z))
 	# Target is at a bad angle
 	if slower_lock_angle < angle_to:
 		# lock timer increases rather than decreases
@@ -190,7 +198,7 @@ func npc_seeking_update(targeter:Node3D, delta:float) -> void:
 	else:
 		# If seeking had not already begun, alert target
 		if !npc_seeking_began:
-			target.seeking_lock(targeter)
+			target.seeking_lock(my_parent)
 			npc_seeking_began = true
 		# Target is at an okay angle
 		if faster_lock_angle < angle_to:
@@ -202,7 +210,7 @@ func npc_seeking_update(targeter:Node3D, delta:float) -> void:
 			lock_timer -= 2.0*delta
 	# Check for lock on
 	if lock_timer < 0.0:
-		acquire_lock(targeter)
+		acquire_lock()
 
 
 # Try to begin seeking target as long as
@@ -210,9 +218,9 @@ func npc_seeking_update(targeter:Node3D, delta:float) -> void:
 # missile launcher is cooled down and ready.
 # If no target currently exists, the centermost
 # from targeter's perspective will be sought.
-func attempt_to_start_seeking(targeter:Ship) -> void:
+func attempt_to_start_seeking() -> void:
 	# Get the ship's controller
-	var control:CharacterBodyControlParent = targeter.get_controller()
+	var control:CharacterBodyControlParent = my_parent.get_controller()
 	# Get the ship's target or null if there is none
 	var maybe_target:HitBoxComponent = control.get_target_or_null()
 	# Summary:
@@ -238,7 +246,7 @@ func attempt_to_start_seeking(targeter:Ship) -> void:
 	# we reset to the same target, but cross that bridge
 	# when you come to it.
 	if is_instance_valid(target):
-		target.lost_lock(targeter)
+		target.lost_lock(my_parent)
 	
 	# If maybe_target is not null then set our new target
 	# to be maybe_target.
@@ -246,7 +254,7 @@ func attempt_to_start_seeking(targeter:Ship) -> void:
 		target = maybe_target
 	else: #(maybe_target is null)
 		# Target most central enemy team member
-		target = Global.get_center_most_from_group(enemy_team,targeter)
+		target = Global.get_center_most_from_group(enemy_team,my_parent)
 		# If this fails for any reason (like when no enemies
 		# are available) then return early
 		if !is_instance_valid(target):
@@ -259,16 +267,16 @@ func attempt_to_start_seeking(targeter:Ship) -> void:
 	# NPC's call target.seeking_lock(targeter) in 
 	# npc_seeking_update, so don't do it here.
 	if !npc_missile_lock:
-		target.seeking_lock(targeter)
+		target.seeking_lock(my_parent)
 
 
 # Fire missile if lock is acquired and target is valid
-func attempt_to_fire_missile(targeter:Ship) -> void:
+func attempt_to_fire_missile() -> void:
 	if locked and is_instance_valid(target):
-		launch(targeter)
+		launch()
 		# Tell the target that it's got a missile inbound
-		target.missile_inbound(targeter)
-	stop_seeking(targeter)
+		target.missile_inbound(my_parent)
+	stop_seeking()
 
 
 func start_seeking() -> void:
@@ -289,9 +297,9 @@ func start_seeking() -> void:
 	audio_timer.start(repeat_tone_max_time)
 
 
-func stop_seeking(targeter:Ship) -> void:
+func stop_seeking() -> void:
 	if is_instance_valid(target):
-		target.lost_lock(targeter)
+		target.lost_lock(my_parent)
 	seeking = false
 	locked = false
 	npc_seeking_began = false # Reset
@@ -305,7 +313,7 @@ func stop_seeking(targeter:Ship) -> void:
 
 
 # Fire the missiles!
-func launch(targeter:Ship) -> void:
+func launch() -> void:
 	if !is_instance_valid(target):
 		return
 	# Determine if this is a quick launch
@@ -318,19 +326,19 @@ func launch(targeter:Ship) -> void:
 			launch_audio.play()
 	# Fire zee missile!
 	var sd:=ShootData.new()
-	sd.shooter = targeter
+	sd.shooter = my_parent
 	sd.gun = missile_launcher
 	sd.target = target
-	sd.collision_exceptions = parent_ship.collision_exceptions
+	sd.collision_exceptions = my_parent.collision_exceptions
 	# Don't let NPCs use quick launch since it's supposed to be skill-based
 	sd.super_powered = is_quick_launch and !npc_missile_lock
 	missile_launcher.shoot(sd)
 
 
-func acquire_lock(targeter:Node3D) -> void:
+func acquire_lock() -> void:
 	locked = true
 	seeking = false
-	target.lock_acquired(targeter)
+	target.lock_acquired(my_parent)
 	npc_seeking_began = false # Reset
 	if !npc_missile_lock:
 		acquiring.hide()

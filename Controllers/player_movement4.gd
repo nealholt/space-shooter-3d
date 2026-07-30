@@ -262,7 +262,7 @@ func move_and_turn_v5(mover:Ship, delta:float) -> void:
 
 
 # Override parent class function
-func shoot(shooter:Ship, delta:float) -> void:
+func shoot(shooter:Ship) -> void:
 	if is_dead:
 		return
 	# GUNS:
@@ -285,17 +285,12 @@ func shoot(shooter:Ship, delta:float) -> void:
 			gun.shoot(shootDat)
 	
 	# MISSILES:
-	# If shooter has a missile lock component...
-	if shooter.missile_lock:
-		var mlg:MissileLockGroup = shooter.missile_lock
-		# Target most centered enemy and begin missile lock
-		if InputManager.im.retarget_just_pressed:
-			mlg.attempt_to_start_seeking(shooter)
-		# Fire missile if lock is acquired
-		elif InputManager.im.retarget_just_released:
-			mlg.attempt_to_fire_missile(shooter)
-		# Update the missile lock group component
-		mlg.update(shooter, delta)
+	# Target most centered enemy and begin missile lock
+	if InputManager.im.retarget_just_pressed:
+		target_updated.emit()
+	# Fire missile if lock is acquired
+	elif InputManager.im.retarget_just_released:
+		attempt_to_fire_missile.emit()
 
 
 # Override parent class function

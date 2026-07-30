@@ -1,8 +1,19 @@
 @abstract
 class_name CharacterBodyControlParent extends Node
-
 # Parent class for movement controllers for fighters,
 # whether NPC or player
+
+# The following signals were added to decouple controllers
+# from missile lock components. The idea is that ship.gd
+# will now connect these signals to the missile_lock_group,
+# if any.
+# These signals are used in inheriting classes.
+@warning_ignore("unused_signal") # Added so the debugger stops nagging me.
+signal line_of_sight_lost
+@warning_ignore("unused_signal") # Added so the debugger stops nagging me.
+signal target_updated
+@warning_ignore("unused_signal") # Added so the debugger stops nagging me.
+signal attempt_to_fire_missile
 
 @export var stats:ControllerStats
 
@@ -34,7 +45,7 @@ func Update(ship:Ship, delta:float) -> void:
 	select_target(ship)
 	move_and_turn(ship, delta)
 	# Handle shooting of guns and missiles
-	shoot(ship, delta)
+	shoot(ship)
 	# Miscellaneous action (for now just switch weapon)
 	misc_actions(ship)
 
@@ -159,6 +170,6 @@ func took_damage(_health:HealthComponent, _amount:float) -> void:
 
 @abstract func select_target(_targeter:Ship) -> void
 
-@abstract func shoot(shooter:Ship, _delta:float) -> void
+@abstract func shoot(shooter:Ship) -> void
 
 @abstract func enter_death_animation() -> void

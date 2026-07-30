@@ -5,7 +5,7 @@ class_name MissileLock extends Node
 # to be acquired.
 # Screen-centered locks are basically instantaneous.
 
-signal lock_acquired(targeter:Node3D)
+signal lock_acquired()
 
 # Speed at which reticle approaches target.
 # Is false measured in onscreen pixels per second (I think)
@@ -41,7 +41,7 @@ func start_seeking(target_onscreen:Vector2) -> void:
 # Move reticle into position and, if it's close enough,
 # acquire lock. Move toward target linearly.
 func continue_seeking(delta:float, target_onscreen:Vector2,
-		targeter:Node3D, acquiring:TextureRect) -> void:
+		acquiring:TextureRect) -> void:
 	# Move reticle toward target
 	reticle_position = reticle_position.move_toward(target_onscreen, delta*speed)
 	# "acquiring" is the reticle. Position it on screen
@@ -50,7 +50,7 @@ func continue_seeking(delta:float, target_onscreen:Vector2,
 	dist_tween_reticles = target_onscreen.distance_squared_to(reticle_position)
 	#print(int(sqrt(dist_tween_reticles)))
 	if dist_tween_reticles < lock_dist_sqd:
-		lock_acquired.emit(targeter)
+		lock_acquired.emit()
 
 
 func stop_seeking() -> void:

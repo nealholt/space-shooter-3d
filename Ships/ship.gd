@@ -123,8 +123,8 @@ func _ready() -> void:
 			GunSpawner.new_gun_from_resource(gun_res, weapon_handler, is_player)
 		weapon_handler.reset_weapon_handler()
 	# Set up missile launcher, if any
-	if missile_lock and stats.missile_launcher:
-		missile_lock.setup_from_resource(stats.missile_launcher, is_player)
+	if missile_lock and controller:
+		missile_lock.setup_missile_lock_group(self, stats.missile_launcher, is_player)
 	# Set this ship up differently if it's the player
 	if is_player:
 		# Make this scene statically accessible
@@ -186,7 +186,11 @@ func _ready() -> void:
 
 
 func _physics_process(delta):
+	# Update the controller
 	controller.Update(self, delta)
+	# If there's a missile lock component, update it
+	if missile_lock:
+		missile_lock.update(delta)
 
 
 # This is used by NPC controller to put this ship in position

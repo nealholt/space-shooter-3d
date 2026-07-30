@@ -27,11 +27,11 @@ func start_seeking(target_onscreen:Vector2) -> void:
 # Move reticle randomly within shrinking reticle_radius.
 # When lock_time reaches zero, acquire lock
 func continue_seeking(delta:float, target_onscreen:Vector2,
-		targeter:Node3D, acquiring:TextureRect) -> void:
+		acquiring:TextureRect) -> void:
 	# Countdown to lock
 	lock_time -= delta
 	if lock_time <= 0.0:
-		lock_acquired.emit(targeter)
+		lock_acquired.emit()
 	# Reposition reticle
 	reticle_radius = RETICLE_DISTANCE * (lock_time / TIME_TO_LOCK)
 	var angle:float = randf_range(0,2*PI) # Random angle

@@ -14,7 +14,7 @@ var lerp_weight:float = 0.0
 # Move reticle into position and, if it's close enough,
 # acquire lock. Lerp toward target.
 func continue_seeking(delta:float, target_onscreen:Vector2,
-		targeter:Node3D, acquiring:TextureRect) -> void:
+		acquiring:TextureRect) -> void:
 	# Lerp reticle toward target
 	lerp_weight += delta/lerp_modifier
 	reticle_position = lerp(reticle_position, target_onscreen, lerp_weight)
@@ -24,7 +24,7 @@ func continue_seeking(delta:float, target_onscreen:Vector2,
 	dist_tween_reticles = target_onscreen.distance_squared_to(reticle_position)
 	#print(int(sqrt(dist_tween_reticles)))
 	if dist_tween_reticles < lock_dist_sqd:
-		lock_acquired.emit(targeter)
+		lock_acquired.emit()
 
 
 func stop_seeking() -> void:
