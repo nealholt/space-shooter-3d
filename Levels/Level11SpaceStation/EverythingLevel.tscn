@@ -73,7 +73,7 @@ team = "blue team"
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -133.42, 46.6032, 7)
 
 [node name="Player" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller", "shield") instance=ExtResource("6_67ulr")]
-transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 220, 0, 0)
+transform = Transform3D(-0.8321091, 0, 0.55461216, 0, 1, 0, -0.55461216, 0, -0.8321091, 514.33356, 0, -420.0616)
 stats = ExtResource("7_tcc1m")
 controller = NodePath("PlayerMovementV4")
 shield = NodePath("Shield")
@@ -89,7 +89,6 @@ shield_to_ignore = NodePath("../Shield")
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
 [node name="PlayerMovementV4" parent="BlueTeam/Player" unique_id=1908608534 instance=ExtResource("9_02r3a")]
-use_movement_v5 = true
 stats_accel = ExtResource("10_5aibn")
 stats_drift = ExtResource("11_nt6oy")
 stats = ExtResource("12_6xirf")

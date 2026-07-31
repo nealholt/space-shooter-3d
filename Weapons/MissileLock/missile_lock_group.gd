@@ -218,25 +218,21 @@ func npc_seeking_update(delta:float) -> void:
 # missile launcher is cooled down and ready.
 # If no target currently exists, the centermost
 # from targeter's perspective will be sought.
-func attempt_to_start_seeking() -> void:
-	# Get the ship's controller
-	var control:CharacterBodyControlParent = my_parent.get_controller()
-	# Get the ship's target or null if there is none
-	var maybe_target:HitBoxComponent = control.get_target_or_null()
+func attempt_to_start_seeking(new_target:HitBoxComponent = null) -> void:
 	# Summary:
 	# "target" is the instance variable for this missile lock group
-	# If target and maybe_target match and are not null
+	# If target and new_target match and are not null
 	#     do nothing
 	# else if target is not null
 	#     unset target because we are swapping to a different target
-	# If maybe_target is not null
-	#     set target to be maybe_target
-	# else (maybe_target is null)
+	# If new_target is not null
+	#     set target to be new_target
+	# else (new_target is null)
 	#     get a new target from center of the ship's view.
 	
 	# If target and maybe_target match and are not null
 	# and another missile is ready to go, start seeking
-	if target == maybe_target and maybe_target != null and missile_launcher.ready_to_fire():
+	if target == new_target and new_target != null and missile_launcher.ready_to_fire():
 		# Start seeking and return
 		start_seeking()
 		return
@@ -250,8 +246,8 @@ func attempt_to_start_seeking() -> void:
 	
 	# If maybe_target is not null then set our new target
 	# to be maybe_target.
-	if maybe_target:
-		target = maybe_target
+	if new_target:
+		target = new_target
 	else: #(maybe_target is null)
 		# Target most central enemy team member
 		target = Global.get_center_most_from_group(enemy_team,my_parent)

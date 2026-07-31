@@ -285,18 +285,17 @@ func shoot(shooter:Ship) -> void:
 			gun.shoot(shootDat)
 	
 	# MISSILES:
-	# Target most centered enemy and begin missile lock
-	if InputManager.im.retarget_just_pressed:
-		target_updated.emit()
 	# Fire missile if lock is acquired
-	elif InputManager.im.retarget_just_released:
+	if InputManager.im.retarget_just_released:
 		attempt_to_fire_missile.emit()
 
 
 # Override parent class function
 func select_target(targeter:Ship) -> void:
 	if is_dead: return
+	# Only select a target if retarget_just_pressed
 	if !InputManager.im.retarget_just_pressed: return
+	# Different selection for controller versus mouse and keyboard
 	if InputManager.im.use_mouse_and_keyboard:
 		# Target most central enemy team member
 		# based on where the mouse is looking.

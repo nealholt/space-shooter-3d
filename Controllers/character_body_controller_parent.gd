@@ -11,7 +11,7 @@ class_name CharacterBodyControlParent extends Node
 @warning_ignore("unused_signal") # Added so the debugger stops nagging me.
 signal line_of_sight_lost
 @warning_ignore("unused_signal") # Added so the debugger stops nagging me.
-signal target_updated
+signal target_updated(new_target:HitBoxComponent)
 @warning_ignore("unused_signal") # Added so the debugger stops nagging me.
 signal attempt_to_fire_missile
 
@@ -145,6 +145,7 @@ func get_target_or_null() -> HitBoxComponent:
 	else:
 		return null
 
+# Switch to a new target. 'targ' is the new target
 func set_target(targeter:Ship, targ:HitBoxComponent) -> void:
 	# If current target is non-null, unset current target
 	if is_instance_valid(target):
@@ -155,6 +156,8 @@ func set_target(targeter:Ship, targ:HitBoxComponent) -> void:
 		# Set new target
 		target = targ
 		target.set_targeted(true, targeter)
+		# Signal
+		target_updated.emit(targ)
 
 func misc_actions(_actor:Ship) -> void:
 	pass
