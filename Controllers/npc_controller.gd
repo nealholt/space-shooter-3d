@@ -145,9 +145,11 @@ func select_target(targeter:Ship) -> void:
 		target_update_requested = false
 
 
-func shoot(shooter:Ship) -> void:
+func shoot(shoot_dat:ShootData) -> void:
 	if dont_shoot: return
 	if !is_instance_valid(target): return
+	
+	var shooter:Ship = shoot_dat.shooter
 	
 	# Don't shoot if line of sight is blocked by an ally.
 	# Check for line of sight on target
@@ -168,14 +170,11 @@ func shoot(shooter:Ship) -> void:
 	# to a decision whether or not to shoot
 	if !is_instance_valid(target) or !shooter.weapon_handler:
 		return
-	var gun:Gun = shooter.weapon_handler.current_weapon
-	var shootDat:ShootData = shooter.get_new_shootdata()
-	shootDat.gun = gun
-	shootDat.target = target
+	shoot_dat.target = target
 	# Decide whether or not to fire
-	if orientation_data.dist_sqd < shootDat.gun.range_sqd \
+	if orientation_data.dist_sqd < shoot_dat.gun.range_sqd \
 	and Global.get_angle_to_target(shooter.global_position,target.global_position, -shooter.global_transform.basis.z) < angle_to_shoot:
-		gun.shoot(shootDat)
+		shoot_dat.shoot()
 
 
 func on_child_transition(state:State, new_state_name:String):

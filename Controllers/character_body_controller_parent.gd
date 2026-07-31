@@ -45,7 +45,7 @@ func Update(ship:Ship, delta:float) -> void:
 	select_target(ship)
 	move_and_turn(ship, delta)
 	# Handle shooting of guns and missiles
-	shoot(ship)
+	shoot(ship.get_new_shootdata())
 	# Miscellaneous action (for now just switch weapon)
 	misc_actions(ship)
 
@@ -173,6 +173,6 @@ func took_damage(_health:HealthComponent, _amount:float) -> void:
 
 @abstract func select_target(_targeter:Ship) -> void
 
-@abstract func shoot(shooter:Ship) -> void
+@abstract func shoot(data:ShootData) -> void
 
 @abstract func enter_death_animation() -> void

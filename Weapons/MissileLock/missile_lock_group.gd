@@ -312,23 +312,23 @@ func stop_seeking() -> void:
 func launch() -> void:
 	if !is_instance_valid(target):
 		return
+	# Fire zee missile!
+	var sd:ShootData = my_parent.get_new_shootdata()
 	# Determine if this is a quick launch
 	var is_quick_launch:bool = time_since_lock <= quick_launch_interval
 	# If the is not an npc missile lock then play audio
 	if !npc_missile_lock:
 		if is_quick_launch:
 			quick_launch_audio.play()
+			# Don't let NPCs use quick launch since it's supposed to be skill-based
+			sd.super_powered = true
 		else:
 			launch_audio.play()
-	# Fire zee missile!
-	var sd:=ShootData.new()
-	sd.shooter = my_parent
-	sd.gun = missile_launcher
+	# Replace the default weapon handler gun with the
+	# missile launcher.
+	sd.set_gun(missile_launcher)
 	sd.target = target
-	sd.collision_exceptions = my_parent.collision_exceptions
-	# Don't let NPCs use quick launch since it's supposed to be skill-based
-	sd.super_powered = is_quick_launch and !npc_missile_lock
-	missile_launcher.shoot(sd)
+	sd.shoot()
 
 
 func acquire_lock() -> void:

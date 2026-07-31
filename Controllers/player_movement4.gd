@@ -262,27 +262,23 @@ func move_and_turn_v5(mover:Ship, delta:float) -> void:
 
 
 # Override parent class function
-func shoot(shooter:Ship) -> void:
-	if is_dead:
-		return
+func shoot(shoot_dat:ShootData) -> void:
+	if is_dead: return
+	
 	# GUNS:
 	# If shooter has a weapon handler...
-	if shooter.weapon_handler:
-		var gun:Gun = shooter.weapon_handler.current_weapon
+	if shoot_dat.shooter.weapon_handler:
 		# Construct the shoot data. Even though we might not
 		# shoot, the aim assist below needs this in order to
 		# know whether or not to play the audio cue.
-		var shootDat:ShootData = shooter.get_new_shootdata()
 		if is_instance_valid(target):
-			shootDat.target = target
-		shootDat.gun = gun
-		shootDat.bullet_speed = gun.bullet_speed
-		shootDat.determine_aim_assist(1)
+			shoot_dat.target = target
+		shoot_dat.determine_aim_assist(1)
 		# ...and an automatic weapon is selected and shoot is pressed
 		# or a semiauto weapon is selected and shoot was just pressed,
 		# then shoot.
-		if (gun.automatic and InputManager.im.shoot_pressed) or (!gun.automatic and InputManager.im.shoot_just_pressed):
-			gun.shoot(shootDat)
+		if (shoot_dat.gun.automatic and InputManager.im.shoot_pressed) or (!shoot_dat.gun.automatic and InputManager.im.shoot_just_pressed):
+			shoot_dat.shoot()
 	
 	# MISSILES:
 	# Fire missile if lock is acquired

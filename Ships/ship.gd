@@ -290,6 +290,8 @@ func get_hitbox() -> HitBoxComponent:
 func get_new_shootdata() -> ShootData:
 	var sd:=ShootData.new()
 	sd.shooter = self
+	if weapon_handler:
+		sd.set_gun(weapon_handler.current_weapon)
 	sd.collision_exceptions = collision_exceptions
 	return sd
 
