@@ -7,8 +7,8 @@ class_name TurretData extends Node3D
 # movement speeds and constraints. You enter the number
 # in degrees and it comes out in radians.
 # https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_exports.html#adding-suffixes-and-handling-degrees-radians
-@export_range(0, 720, 0.1, "radians_as_degrees") var elevation_speed: float = deg_to_rad(5.0)
-@export_range(0, 720, 0.1, "radians_as_degrees") var rotation_speed: float = deg_to_rad(5.0)
+@export_range(0, 720, 0.1, "radians_as_degrees") var elevation_speed: float = deg_to_rad(25.0)
+@export_range(0, 720, 0.1, "radians_as_degrees") var rotation_speed: float = deg_to_rad(25.0)
 @export_range(-90, 90, 0.1, "radians_as_degrees") var min_elevation: float = 0.0
 @export_range(0, 90, 0.1, "radians_as_degrees") var max_elevation: float = deg_to_rad(60.0)
 

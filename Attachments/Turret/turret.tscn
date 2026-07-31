@@ -9,34 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="9_b5qkf"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g6fsi"]
-radius = 1.0
+radius = 2.0
 
 [node name="Turret" type="Node3D" unique_id=817027845]
 script = ExtResource("1_cbt5p")
 
-[node name="TurretModel" parent="." unique_id=121223985 instance=ExtResource("2_xuhpe")]
-
-[node name="Body" parent="TurretModel" index="0" groups=["turret body"]]
-
-[node name="Head" parent="TurretModel/Body" index="1" groups=["turret head"]]
-
-[node name="GunHardpoint1" type="Node3D" parent="TurretModel/Body/Head/Barrel1" index="0" unique_id=1399282889 groups=["gun hardpoint"]]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0)
-
-[node name="GunHardpoint2" type="Node3D" parent="TurretModel/Body/Head/Barrel2" index="0" unique_id=321548122 groups=["gun hardpoint"]]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.8, 0)
-
-[node name="RayCast3D" type="RayCast3D" parent="TurretModel/Body/Head" index="3" unique_id=870977290]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
-exclude_parent = false
-target_position = Vector3(0, 0, 1000)
-collision_mask = 9
-collide_with_areas = true
+[node name="TurretModel" parent="." unique_id=660704182 instance=ExtResource("2_xuhpe")]
 
 [node name="HealthComponent" parent="." unique_id=871332090 instance=ExtResource("8_qikae")]
 
 [node name="HitBoxComponent" parent="." unique_id=790939857 node_paths=PackedStringArray("collidable", "health_component") instance=ExtResource("9_b5qkf")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 collidable = NodePath("DamageableArea")
 health_component = NodePath("../HealthComponent")
 
@@ -53,5 +35,4 @@ target_text = "Turret"
 reticle_set = 1
 hitbox = NodePath("../HitBoxComponent")
 
-[editable path="TurretModel"]
 [editable path="HitBoxComponent"]

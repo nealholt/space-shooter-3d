@@ -2,10 +2,15 @@ class_name Turret extends Node3D
 
 const TURRET_SCENE:PackedScene = preload("res://Attachments/Turret/turret.tscn")
 
-@onready var line_of_sight := $TurretModel/Body/Head/RayCast3D
+# I removed this for now and I'm not sure I need it at all.
+# Most recently it was used for testing in an attempt to
+# make turrets stop shooting their allies or even the ship
+# they are attached to.
+#@onready var line_of_sight := $TurretModel/Body/Head/RayCast3D
 
 var aim_assist:AimAssist
 var guns: Array
+var gun_stats:GunStats # Resource that specifies this turret's guns
 @onready var health_component:HealthComponent = $HealthComponent
 @onready var target_selector:TargetSelector = $TargetSelector
 var turret_motion:TurretMotionComponent
@@ -42,7 +47,7 @@ var parent_ship
 static func new_turret(my_parent:TurretData, maybe_ship) -> Turret:
 	var t := TURRET_SCENE.instantiate()
 	# Order matters for these next three lines of code
-	t.setup_turret_pre_tree(my_parent)
+	t.gun_stats = my_parent.gun
 	my_parent.add_child(t)
 	t.setup_turret_in_tree(my_parent, maybe_ship)
 	return t
@@ -69,29 +74,19 @@ func _ready() -> void:
 	health_component.health_lost.connect(_on_health_component_health_lost)
 	health_component.died.connect(_on_health_component_died)
 	
-	# Position all the guns at all the hardpoints
+	# If no guns are specified, then stop here
+	if gun_stats.gun_type == GunSpawner.GUN_TYPE.NO_GUN:
+		return
+	
+	# Otherwise, attach guns as children of all the hardpoints
 	var gun_hardpoints = Global.get_group_nodes_on_branch("gun hardpoint", self)
-	# Sanity check
-	if gun_hardpoints.size() != guns.size():
-		printerr("Mismatch between number of guns %d and number of hardpoints %d" % [guns.size(), gun_hardpoints.size()])
-		get_tree().quit()
-	for i in range(guns.size()):
-		guns[i].reparent(gun_hardpoints[i], false)
+	for i in range(gun_hardpoints.size()):
+		var g:Gun = GunSpawner.new_gun_from_resource(gun_stats, gun_hardpoints[i], false)
+		guns.append(g)
 	
 	# Add hit box component to collision exceptions to avoid
 	# shooting self
 	collision_exceptions.push_back($HitBoxComponent)
-
-
-func setup_turret_pre_tree(dat:TurretData) -> void:
-	# Guns have to be put on the turret before adding to the
-	# tree because of gun-related stuff taken care of in _ready
-	if dat.gun.gun_type != GunSpawner.GUN_TYPE.NO_GUN:
-		# Attach two guns as children of this turret
-		var g:Gun = GunSpawner.new_gun_from_resource(dat.gun, self, false)
-		guns.append(g)
-		g = GunSpawner.new_gun_from_resource(dat.gun, self, false)
-		guns.append(g)
 
 
 func setup_turret_in_tree(dat:TurretData, p) -> void:
@@ -126,11 +121,11 @@ func _physics_process(delta: float) -> void:
 	if is_instance_valid(orientation_data.target) and Global.get_angle_to_target(head.global_position, orientation_data.target_pos, head.global_transform.basis.z) < angle_to_shoot:
 		# Prevent friendly fire.
 		# I'm not sure how much this is helping.
-		if line_of_sight.is_colliding():
-			var collider = line_of_sight.get_collider()
-			if is_instance_valid(collider) and 'ally_team' in collider and collider.ally_team == ally_team:
-				#print('\nturret seeing friendly ',collider)
-				return
+		#if line_of_sight.is_colliding():
+			#var collider = line_of_sight.get_collider()
+			#if is_instance_valid(collider) and 'ally_team' in collider and collider.ally_team == ally_team:
+				##print('\nturret seeing friendly ',collider)
+				#return
 			#elif 'ally_team' in collider and collider.ally_team != ally_team:
 				#print('\nturret seeing enemy ',collider)
 			#else:

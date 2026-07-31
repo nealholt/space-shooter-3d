@@ -7,6 +7,6 @@ script = ExtResource("1_86bs6")
 name = "Turret Big Laser"
 bullet_type = 7
 bullet_speed = 500.0
-bullet_timeout = 4.0
+bullet_timeout = 12.0
 fire_rate = 0.5
 metadata/_custom_type_script = "uid://bflupvkh65uf"
