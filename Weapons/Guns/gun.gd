@@ -174,13 +174,6 @@ func shoot(shootDat:ShootData) -> void:
 	restart_timer()
 	# Copy ShootData reference and further populate it
 	data = shootDat
-	# Fire from the position of the gun
-	data.gun = self
-	data.damage = damage
-	data.bullet_speed = bullet_speed
-	data.bullet_timeout = bullet_timeout
-	data.timeout_vary_percent = timeout_vary_percent
-	data.spread = spread
 	# Add the raycast to the shoot_data for
 	# reference by laser-guided projectiles
 	data.ray = ray

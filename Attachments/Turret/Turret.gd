@@ -143,10 +143,11 @@ func _physics_process(delta: float) -> void:
 		for gun in guns:
 			var sd := ShootData.new()
 			sd.shooter = self
-			sd.gun = gun
+			sd.set_gun(gun)
 			sd.target = orientation_data.target
+			sd.aim_assist_obj = aim_assist
 			sd.collision_exceptions = exempt_colliders
-			gun.shoot(sd)
+			sd.shoot()
 
 
 # amount is the amount of health lost.

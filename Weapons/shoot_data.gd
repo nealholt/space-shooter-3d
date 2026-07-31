@@ -10,10 +10,12 @@ var bullet_speed:float
 var bullet_timeout:float
 var timeout_vary_percent:float
 var spread:float # Bullet spread in radians
-# If aim_assist is not zero, then bullets should
-# adjust to face this location, it will be the
-# intercept returned by aim_assist.gd
+# True if the target's intercept is within an acceptable
+# angle of where the gun is pointing
 var aim_assist:bool = false
+# Reference to the object, if any, that determines whether
+# or not to use aim_assist
+var aim_assist_obj:AimAssist
 # This projectile should ignore collisions with anything
 # in this array
 var collision_exceptions := Array()
@@ -39,5 +41,5 @@ func determine_aim_assist(simultaneous_shots:int) -> void:
 	# and the target reference is valid
 	# AND the gun only fires one bullet at a time.
 	# Spread shot weapons should not use aim assist.
-	if "aim_assist" in shooter and shooter.aim_assist and simultaneous_shots == 1 and is_instance_valid(target):
-		aim_assist = shooter.aim_assist.use_aim_assist(self)
+	if aim_assist_obj and simultaneous_shots == 1 and is_instance_valid(target):
+		aim_assist = aim_assist_obj.use_aim_assist(self)

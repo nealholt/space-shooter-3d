@@ -292,6 +292,7 @@ func get_new_shootdata() -> ShootData:
 	sd.shooter = self
 	if weapon_handler:
 		sd.set_gun(weapon_handler.current_weapon)
+	sd.aim_assist_obj = aim_assist
 	sd.collision_exceptions = collision_exceptions
 	return sd
 

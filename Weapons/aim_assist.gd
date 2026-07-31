@@ -59,7 +59,6 @@ func use_aim_assist(sd:ShootData) -> bool:
 		shooter.global_position, intercept,
 		-shooter.global_basis.z)
 	var do_use_aim_assist:bool = angle_to < angle_assist_limit
-	play_audio(do_use_aim_assist)
 	return do_use_aim_assist
 
 # Detmerine aim assist usage from relative positions
@@ -83,15 +82,17 @@ func use_aim_assist_mouse(intercept:Vector3) -> bool:
 	var vect_to_intercept := intercept - camera.global_position
 	var angle_to:float = vect_to_cursor.angle_to(vect_to_intercept)
 	var do_use_aim_assist:bool = angle_to < angle_assist_limit
-	play_audio(do_use_aim_assist)
 	return do_use_aim_assist
 
-func play_audio(do_use_aim_assist:bool) -> void:
+# Play audio cue only if target it near enough in our sights.
+# The idea is that only the player controller would call this.
+func maybe_play_audio(sd:ShootData) -> void:
 	if !audio:
 		return
 	# Only play the noise in first or third person camera
 	if !is_instance_valid(CameraGroup.cg) or !CameraGroup.cg.is_first_or_third():
 		return
+	var do_use_aim_assist:bool = use_aim_assist(sd)
 	if do_use_aim_assist and !audio.playing:
 		audio.play()
 	if !do_use_aim_assist and audio.playing:

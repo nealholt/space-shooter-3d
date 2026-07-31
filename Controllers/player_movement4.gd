@@ -268,13 +268,14 @@ func shoot(shoot_dat:ShootData) -> void:
 	# GUNS:
 	# If shooter has a weapon handler...
 	if shoot_dat.shooter.weapon_handler:
-		# Construct the shoot data. Even though we might not
+		# Populate target even though we might not
 		# shoot, the aim assist below needs this in order to
 		# know whether or not to play the audio cue.
 		if is_instance_valid(target):
 			shoot_dat.target = target
-		shoot_dat.determine_aim_assist(1)
-		# ...and an automatic weapon is selected and shoot is pressed
+			if shoot_dat.aim_assist_obj:
+				shoot_dat.aim_assist_obj.maybe_play_audio(shoot_dat)
+		# If an automatic weapon is selected and shoot is pressed
 		# or a semiauto weapon is selected and shoot was just pressed,
 		# then shoot.
 		if (shoot_dat.gun.automatic and InputManager.im.shoot_pressed) or (!shoot_dat.gun.automatic and InputManager.im.shoot_just_pressed):
