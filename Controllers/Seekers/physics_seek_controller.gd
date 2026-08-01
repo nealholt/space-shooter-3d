@@ -35,8 +35,12 @@ func move_me(body:Node3D, delta:float) -> void:
 	# Adjust velocity based on acceleration
 	body.velocity += acceleration * delta * steer_force
 	
-	#print('Acceleration ',acceleration.length())
-	#print('Velocity ',body.velocity.length())
+	#print('\nAcceleration ',acceleration.length())
+	#print('Speed ',body.velocity.length())
+	#print('Velocity ',body.velocity) # Y component keeps changing
+	#print('Intercept ',get_target_pos(body))
+	#var desired:Vector3 = body.global_position.direction_to(get_target_pos(body))
+	#print('Desired angle ',desired)
 	
 	# Face the point in local space that is our current
 	# position adjusted in the direction of the new

@@ -28,6 +28,7 @@ ShipSpawner="*res://Autoloads/ship_spawner.gd"
 GunSpawner="*res://Autoloads/gun_spawner.gd"
 AudioManager="*res://Audio/AudioManager/audio_manager.tscn"
 BulletSpawner="*uid://d0r6c7kklyj38"
+SceneLoader="*uid://degpqg3b20nme"
 
 [display]
 
