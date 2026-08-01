@@ -7,6 +7,13 @@ extends CanvasLayer
 # And is to be used in conjunction with the scene_loader.gd
 # autoload script.
 
+# More info can be found here:
+# https://docs.godotengine.org/en/stable/tutorials/io/background_loading.html
+# And here are some alternative tutorials I have not yet looked into:
+# https://www.gotut.net/loading-screen-in-godot-4/
+# https://www.youtube.com/watch?v=-renxc-EmUg
+# https://www.youtube.com/watch?v=dl2rUzXJtIU
+
 signal loading_screen_ready
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer

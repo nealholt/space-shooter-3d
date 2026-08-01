@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://brec5vmygtijo"]
 
 [ext_resource type="Script" uid="uid://cmlc387hydgbl" path="res://Features/Orbs/Orb.gd" id="1_1lixd"]
-[ext_resource type="PackedScene" uid="uid://d3pdq381luwwg" path="res://Features/Orbs/pop_player.tscn" id="2_2ard2"]
 [ext_resource type="PackedScene" uid="uid://d33fc5p10x7j7" path="res://Features/HitFeedback/hit_feedback.tscn" id="2_if2x6"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="4_5ba2v"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="5_e1bac"]
@@ -19,7 +18,6 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 disable_mode = 1
 collision_mask = 0
 script = ExtResource("1_1lixd")
-pop_player = ExtResource("2_2ard2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=246013889]
 shape = SubResource("SphereShape3D_rhun0")

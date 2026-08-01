@@ -4,9 +4,6 @@ const ORB_SCENE : PackedScene = preload("res://Features/Orbs/orb.tscn")
 
 signal destroyed
 
-# Sound to be played on death. Self-freeing.
-@export var pop_player: PackedScene
-
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var hit_box_component: HitBoxComponent = $HitBoxComponent
 
@@ -20,13 +17,8 @@ static func new_orb() -> Orb:
 
 func _on_health_component_died() -> void:
 	destroyed.emit()
-	# Create self-freeing audio to play pop sound
-	var on_death_sound = pop_player.instantiate()
-	# Add to main_3d, not root, otherwise the added
-	# node might not be properly cleared when
-	# transitioning to a new scene.
-	MainScene.main_scene.add_to_scene(on_death_sound)
-	on_death_sound.play_then_delete(global_position)
+	# Play pop sound effect
+	AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.POP, global_position)
 	# Wait until the end of the frame to execute queue_free
 	Callable(queue_free).call_deferred()
 

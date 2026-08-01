@@ -6,6 +6,13 @@ extends Node
 # by Queble https://www.youtube.com/@queblegamedevelopment4143
 # And is to be used in conjunction with loading_screen.tscn
 
+# More info can be found here:
+# https://docs.godotengine.org/en/stable/tutorials/io/background_loading.html
+# And here are some alternative tutorials I have not yet looked into:
+# https://www.gotut.net/loading-screen-in-godot-4/
+# https://www.youtube.com/watch?v=-renxc-EmUg
+# https://www.youtube.com/watch?v=dl2rUzXJtIU
+
 signal progress_changed(progress)
 signal load_finished
 
@@ -14,6 +21,7 @@ var loaded_resource:PackedScene
 var scene_path:String
 var progress:Array = []
 var use_sub_threads:bool = true
+
 
 func _ready() -> void:
 	set_process(false)
@@ -46,7 +54,11 @@ func _process(_delta: float) -> void:
 			set_process(false)
 		ResourceLoader.THREAD_LOAD_LOADED:
 			loaded_resource = ResourceLoader.load_threaded_get(scene_path)
-			# TODO I think you'll want to change this next line
+			# The tutorial used this next get_tree line, but I load
+			# every level as a child of a very particular node in
+			# my main scene, so I'm not doing it this way. Instead
+			# the main scene will call get_loaded_scene() after
+			# it gets the load_finished signal.
 			#get_tree().change_scene_to_packed(loaded_resource)
 			load_finished.emit()
 			set_process(false)

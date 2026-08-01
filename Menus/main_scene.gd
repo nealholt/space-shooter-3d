@@ -103,15 +103,12 @@ func load_level(level_name:String) -> void:
 	level_string = level_name # Used for retrying current level
 	var level_path := "res://Levels/%s.tscn" % level_name
 	
-	# TODO TESTING
 	# OLD WAY
 	#var level_resource := load(level_path)
-	
 	# NEW WAY
 	SceneLoader.load_scene(level_path)
 	await SceneLoader.load_finished
 	var level_resource := SceneLoader.get_loaded_scene()
-	
 	
 	if(level_resource):
 		level_instance = level_resource.instantiate()
