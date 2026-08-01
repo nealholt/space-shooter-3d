@@ -12,6 +12,7 @@
 
 [resource]
 script = ExtResource("1_ktj8y")
+max_health = 40.0
 target_reticle_text = "Corvette"
 guns = Array[ExtResource("1_b4dh5")]([ExtResource("2_ija12"), ExtResource("3_ija12"), ExtResource("4_0pb2m"), ExtResource("5_8odk2"), ExtResource("6_gryi7"), ExtResource("7_v8kwr")])
 missile_launcher = ExtResource("8_v432y")

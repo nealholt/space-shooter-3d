@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_i2bg0")
-max_health = 10.0
+max_health = 30.0
 target_reticle_text = "Bomber"
 missile_launcher = ExtResource("2_sgak0")
 metadata/_custom_type_script = "uid://llcl4ev3hi63"

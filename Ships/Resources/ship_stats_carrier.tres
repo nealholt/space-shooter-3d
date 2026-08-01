@@ -5,6 +5,6 @@
 
 [resource]
 script = ExtResource("1_t86fs")
-max_health = 1000.0
+max_health = 500.0
 target_reticle_text = "Carrier"
 metadata/_custom_type_script = "uid://llcl4ev3hi63"

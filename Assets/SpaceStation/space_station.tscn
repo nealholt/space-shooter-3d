@@ -2,13 +2,14 @@
 
 [ext_resource type="Script" uid="uid://crio32jygp3bj" path="res://Ships/ship.gd" id="1_usm2i"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="2_eniao"]
+[ext_resource type="Script" uid="uid://bflupvkh65uf" path="res://Weapons/Guns/Resources/gun_stats.gd" id="2_i1e10"]
 [ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="2_pb2je"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="4_0040n"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="5_lxr52"]
 
 [sub_resource type="Resource" id="Resource_0040n"]
 script = ExtResource("2_pb2je")
-max_health = 100000.0
+max_health = 1000.0
 target_reticle_text = ""
 metadata/_custom_type_script = "uid://llcl4ev3hi63"
 
@@ -586,7 +587,9 @@ collision_layer = 3
 script = ExtResource("1_usm2i")
 stats = SubResource("Resource_0040n")
 health_component = NodePath("HealthComponent")
-finalExplosion = 10
+finalExplosion = 9
+death_animation_duration_min = 0.0
+death_animation_duration_max = 0.0
 
 [node name="HealthComponent" parent="." unique_id=77346943 instance=ExtResource("2_eniao")]
 max_health = 100000.0
