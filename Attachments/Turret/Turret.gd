@@ -21,7 +21,7 @@ var body: Node3D
 var orientation_data:TargetOrientationData
 
 # If angle to target is less than this number of degrees, then shoot
-@export_range(0, 90, 0.1, "radians_as_degrees") var angle_to_shoot: float = deg_to_rad(5.0)
+@export_range(0, 90, 0.1, "radians_as_degrees") var angle_to_shoot: float = deg_to_rad(2.0)
 
 # So turrets know what team they are on. These
 # are set in team_setup.gd

@@ -110,23 +110,11 @@ func load_level(level_name:String) -> void:
 	await SceneLoader.load_finished
 	var level_resource := SceneLoader.get_loaded_scene()
 	
-	if(level_resource):
-		level_instance = level_resource.instantiate()
-		main_3d.add_child(level_instance)
-		menu.visible = false
-		hud.visible = true
-		InputManager.im.refresh()
-	# Set team node references in the global script
-	Global.red_team_group = null
-	Global.blue_team_group = null
-	for c in Global.get_all_children(main_3d):
-		if c is TeamSetup:
-			if c.team == "red team":
-				Global.red_team_group = c
-			elif c.team == "blue team":
-				Global.blue_team_group = c
-			else:
-				printerr('Unrecognized team %s in main_scene.gd load_level' % c.team)
+	level_instance = level_resource.instantiate()
+	main_3d.add_child(level_instance)
+	menu.visible = false
+	hud.visible = true
+	InputManager.im.refresh()
 
 
 func _on_load_1_pressed() -> void:

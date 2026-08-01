@@ -5,6 +5,10 @@ class_name TeamSetup extends Node3D
 # this script is to consolidate all the code that sets
 # team colors and groups for opposing teams.
 
+# Static references to red and blue teams.
+static var red_team:TeamSetup = null
+static var blue_team:TeamSetup = null
+
 @export var team : String = "red team"
 var color:Color = Color.RED
 var reticle_color:Color = Color.GREEN
@@ -13,12 +17,15 @@ var team_material:String = "res://Assets/Materials/red_team_material.tres"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Set up team color
+	# Set up team colors and static references
 	if team == "blue team":
 		color = Color.BLUE
 		reticle_color = Color.WHITE
 		enemy = "red team"
 		team_material = "res://Assets/Materials/blue_team_material.tres"
+		blue_team = self
+	else:
+		red_team = self
 	# Set team properties for all children of self
 	# and all their children and children's children,
 	# and so on

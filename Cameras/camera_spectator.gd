@@ -103,9 +103,9 @@ func _process(delta: float) -> void:
 	# Grab a target from either team (left mouse click)
 	if InputManager.im.shoot_just_pressed:
 		var all_targets:= Array()
-		for c in Global.red_team_group.get_children():
+		for c in TeamSetup.red_team.get_children():
 			all_targets.append(c)
-		for c in Global.blue_team_group.get_children():
+		for c in TeamSetup.blue_team.get_children():
 			all_targets.append(c)
 		target = Global.get_center_most(self, all_targets)
 	

@@ -12,7 +12,7 @@ class_name TurretData extends Node3D
 @export_range(-90, 90, 0.1, "radians_as_degrees") var min_elevation: float = 0.0
 @export_range(0, 90, 0.1, "radians_as_degrees") var max_elevation: float = deg_to_rad(60.0)
 
-@export_range(0, 90, 0.1, "radians_as_degrees") var angle_to_shoot: float = deg_to_rad(5.0)
+@export_range(0, 90, 0.1, "radians_as_degrees") var angle_to_shoot: float = deg_to_rad(2.0)
 
 @export var use_aim_assist:bool = false
 @export var angle_assist_limit:float = 3.0 # degrees

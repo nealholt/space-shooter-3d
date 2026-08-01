@@ -12,8 +12,6 @@ const SHIELD_COLL_LAYER:int = 8
 const HITBOX_COLL_LAYER:int = 16
 const EVERYTHING_COLL_LAYER:int = 1+2+4+8+16
 
-var red_team_group : TeamSetup # Node3D holding everything on team red
-var blue_team_group : TeamSetup # Node3D holding everything on team blue
 var current_camera : Camera3D
 # For now I'm globally turning off the hud when in
 # camera views other than first person.
@@ -353,11 +351,11 @@ func get_group_nodes_on_branch(group: String, branch: Node) -> Array:
 # into the team group that they belong to
 func add_to_team_group(to_add, team:String) -> void:
 	if team == "red team":
-		red_team_group.add_child(to_add)
-		red_team_group.set_team_properties(to_add)
+		TeamSetup.red_team.add_child(to_add)
+		TeamSetup.red_team.set_team_properties(to_add)
 	elif team == "blue team":
-		blue_team_group.add_child(to_add)
-		blue_team_group.set_team_properties(to_add)
+		TeamSetup.blue_team.add_child(to_add)
+		TeamSetup.blue_team.set_team_properties(to_add)
 	elif team == "":
 		# This will occur for some testing scenes
 		if MainScene.main_scene:
