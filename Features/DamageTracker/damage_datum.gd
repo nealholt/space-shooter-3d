@@ -17,31 +17,21 @@ var count:int = 1
 func _init(data:ShootData) -> void:
 	shooter = data.shooter.get_name()
 	if 'ally_team' in data.shooter:
-		shooter_team = data.shooter
+		shooter_team = data.shooter.ally_team
 	damage_dealt = data.actual_damage
 	if data.thing_hit:
 		thing_hit = data.thing_hit.get_name()
-	if 'ally_team' in data.thing_hit:
-		thing_team = data.thing_hit.ally_team
+		# This next bit is indented because you can't
+		# check if a thing has an ally_team if it doesn't
+		# exist
+		if 'ally_team' in data.thing_hit:
+			thing_team = data.thing_hit.ally_team
 	friendly_fire = shooter_team==thing_team
 	undamageable_hit = data.thing_hit and data.actual_damage==0.0
 	timed_out = !data.thing_hit
 
 
 func print_data() -> void:
-	# I plan on deleting this part
-	if damage_dealt == 0.0:
-		if thing_hit:
-			print('Un-damageable thing hit')
-		else:
-			print('Projectile timed out')
-	else:
-		if thing_team == shooter_team:
-			print('Friendly fire')
-		else:
-			print(damage_dealt, ' dealt to enemy ', thing_hit, ' by ', shooter)
-	
-	# USE THIS INSTEAD
 	print(shooter, ',', shooter_team, ',', damage_dealt, ',', \
 		thing_hit, ',', thing_team, ',', friendly_fire, ',', \
 		undamageable_hit, ',', timed_out, ',', count)

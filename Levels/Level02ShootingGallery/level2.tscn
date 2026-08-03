@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cfiwadbmgx3up"]
 
+[ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Levels/level.gd" id="1_gxevk"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Features/TeamSetup/team_setup.gd" id="1_nau7t"]
 [ext_resource type="Texture2D" uid="uid://mfavff5dpqol" path="res://Features/Skyboxes/purple_nebula_complex.png" id="1_qb1ff"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Attachments/Shield/shield.tscn" id="3_6nm7s"]
@@ -18,30 +19,6 @@
 [ext_resource type="Resource" uid="uid://coa1jlc52fxuo" path="res://Weapons/Guns/Resources/BlasterMKI.tres" id="14_gxevk"]
 [ext_resource type="Resource" uid="uid://cwbihjofcpss8" path="res://Weapons/Guns/Resources/MissileStandardMKI.tres" id="15_pok8p"]
 [ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="16_prps4"]
-
-[sub_resource type="GDScript" id="GDScript_ulixo"]
-script/source = "extends Level
-
-const ORB_COUNT:int = 16
-var dead_orb_count := 0
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	super()
-	# Hide mouse cursor
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	# Connect the destroyed signal of the orb to the ui
-	var orbs = get_tree().get_nodes_in_group(\"orb\")
-	for orb in orbs:
-		orb.destroyed.connect(orb_died)
-
-func orb_died() -> void:
-	dead_orb_count += 1
-	#print(\"orb died: %s\" % dead_orb_count)
-	#Go back to main menu once all orbs are destroyed
-	if dead_orb_count >= ORB_COUNT:
-		Global.main_scene.to_main_menu()
-"
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1bvmw"]
 panorama = ExtResource("1_qb1ff")
@@ -86,7 +63,7 @@ friction_std = 0.8
 metadata/_custom_type_script = "uid://c4rebesbspn8"
 
 [node name="Node" type="Node3D" unique_id=875617678]
-script = SubResource("GDScript_ulixo")
+script = ExtResource("1_gxevk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1089952643]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.75, -0.43301, 0, 12, 0)

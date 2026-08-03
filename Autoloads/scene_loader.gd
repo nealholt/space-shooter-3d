@@ -16,7 +16,13 @@ extends Node
 signal progress_changed(progress)
 signal load_finished
 
-var loading_screen:PackedScene = preload('uid://dclw1gwerq6n') # Reference to loading_screen.tscn
+# According to this: https://forum.godotengine.org/t/parse-error-referenced-non-existent-resource/95356/5
+# "you shouldn’t use preload in autoload script because there will
+# be a 'race' of loading files and your program will try to load
+# non referenced file or things like that."
+# The error is this "Parse Error: referenced non-existent resource"
+# and it can be caused by circular references.
+var loading_screen:PackedScene = load('uid://dclw1gwerq6n') # Reference to loading_screen.tscn
 var loaded_resource:PackedScene
 var scene_path:String
 var progress:Array = []
