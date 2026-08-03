@@ -20,6 +20,11 @@ var aim_assist_obj:AimAssist
 # in this array
 var collision_exceptions := Array()
 
+# This is the actual damage dealt. This is for record keeping
+var actual_damage:float = 0.0
+# This is the thing that got hit (if anything)
+var thing_hit:Node3D = null
+
 # Player can shoot without a valid target, so this should
 # only be used for NPCs
 func can_shoot() -> bool:

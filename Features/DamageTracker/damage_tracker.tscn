@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://da6fm73fjl6fn"]
+
+[ext_resource type="Script" uid="uid://cpe0rrnmox36o" path="res://Features/DamageTracker/damage_tracker.gd" id="1_33i4u"]
+
+[node name="DamageTracker" type="Node" unique_id=2096378222]
+script = ExtResource("1_33i4u")

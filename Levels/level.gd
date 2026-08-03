@@ -3,10 +3,13 @@ class_name Level extends Node3D
 var end_screen : EndScreen # aka victory_layer
 var red_team : TeamSetup
 var blue_team : TeamSetup
+var damage_tracker : DamageTracker
 
 func _ready() -> void:
-	# Connect to signals that a ship died
+	# Connect to signal that a ship died
 	EventsBus.ship_died.connect(check_win_loss)
+	# Add a damage tracker
+	damage_tracker = DamageTracker.new_damage_tracker(self)
 	# Search for an asteroid field child. If found,
 	# generate the asteroid field.
 	# This is done instead of using the _ready function
@@ -34,7 +37,9 @@ func _ready() -> void:
 	envt.backup_environment_baselines.call_deferred($WorldEnvironment.environment)
 
 
-# This function is called after something dies.
+# This function is called when something dies.
+# "something" includes ships and orbs only (if I recall
+# correctly)
 func check_win_loss(dead_thing) -> void:
 	# If there is no end screen or enemy team, return.
 	# There's nothing to do here.
@@ -46,9 +51,13 @@ func check_win_loss(dead_thing) -> void:
 		end_screen.defeat()
 		# Prevent reactivation of end_screen.
 		EventsBus.ship_died.disconnect(check_win_loss)
+		# Display damage data
+		damage_tracker.display_data()
 	# This assumes the red team is always the enemy.
 	elif red_team.get_child_count() == 0:
 		end_screen.victory(Array())
+		# Display damage data
+		damage_tracker.display_data()
 	# Unfortunately since the signal is emitted from the
 	# ship that died, the red_team won't actually have
 	# no children yet, so we also check if there is one
@@ -57,6 +66,8 @@ func check_win_loss(dead_thing) -> void:
 		var child:HealthComponent = red_team.get_child(0).health_component
 		if child.is_dead():
 			end_screen.victory(Array())
+			# Display damage data
+			damage_tracker.display_data()
 
 
 func center_the_mouse() -> void:

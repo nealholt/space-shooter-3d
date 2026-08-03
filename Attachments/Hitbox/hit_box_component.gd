@@ -36,6 +36,10 @@ func damage(dat:ShootData):
 		hit_feedback.hit()
 	if got_hit_audio:
 		got_hit_audio.play()
+	# Register damage
+	dat.actual_damage = dat.damage
+	dat.thing_hit = get_parent()
+	EventsBus.register_damage.emit(dat)
 
 
 func add_damage_exception(s:Ship) -> void:

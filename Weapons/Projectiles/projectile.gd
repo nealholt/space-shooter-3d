@@ -309,6 +309,10 @@ func did_collide(delta:float) -> bool:
 func damage_and_die(body, collision_point=null) -> bool:
 	if should_skip_body(body):
 		return false
+	# Register what got hit. This must be done before
+	# body.damage(data) because that function ends up
+	# in a hit_box_component, which registers damage.
+	data.thing_hit = body
 	# Damage what was hit
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
 	if body.is_in_group("damageable"):
@@ -336,6 +340,8 @@ func die_without_damaging(body, collision_point=null) -> bool:
 	# Explode maybe
 	if damaging_explosion:
 		explode_with_damage()
+	# Register what got hit
+	data.thing_hit = body
 	#Delete bullets that strike a body
 	wrap_up()
 	return true
@@ -402,6 +408,14 @@ func _on_health_component_died() -> void:
 # an opportunity to wrap up their special effects, such as
 # smoke trails, before queue_freeing the projectile.
 func wrap_up() -> void:
+	# If data.actual_damage is 0.0, assume this means
+	# the projectile either timed out or collided with
+	# something undamageable, in which case this lack
+	# of damage was not registered by a hit_box_component.
+	# Register it here.
+	if data.actual_damage == 0.0:
+		EventsBus.register_damage.emit(data)
+	# Wrap up immediately if no time is set
 	if wrap_up_time <= 0.0:
 		queue_free.call_deferred()
 		return
