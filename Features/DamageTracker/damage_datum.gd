@@ -3,6 +3,7 @@ class_name DamageDatum extends Resource
 
 var shooter:String = ''
 var shooter_team:String = ''
+var bullet_type:String = ''
 var damage_dealt:float = 0.0
 var thing_hit:String = ''
 var thing_team:String = ''
@@ -15,9 +16,9 @@ var count:int = 1
 
 
 func _init(data:ShootData) -> void:
-	shooter = data.shooter.get_name()
-	if 'ally_team' in data.shooter:
-		shooter_team = data.shooter.ally_team
+	shooter = data.shooter_name
+	shooter_team = data.shooter_team
+	bullet_type = data.bullet_type
 	damage_dealt = data.actual_damage
 	if data.thing_hit:
 		thing_hit = data.thing_hit.get_name()
@@ -32,7 +33,7 @@ func _init(data:ShootData) -> void:
 
 
 func print_data() -> void:
-	print(shooter, ',', shooter_team, ',', damage_dealt, ',', \
+	print(shooter, ',', shooter_team, ',', str(bullet_type), ',', damage_dealt, ',', \
 		thing_hit, ',', thing_team, ',', friendly_fire, ',', \
 		undamageable_hit, ',', timed_out, ',', count)
 

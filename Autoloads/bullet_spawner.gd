@@ -62,6 +62,7 @@ func new_bullet(bt:BULLET_TYPE) -> Projectile:
 			projectile = _get_sparkle_trail()
 		_: # Default / Otherwise
 			push_error('Unrecognized bullet type ',bt)
+	projectile.bullet_type = BULLET_TYPE.keys()[bt]
 	return projectile
 
 

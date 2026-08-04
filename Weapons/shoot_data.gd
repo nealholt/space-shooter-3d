@@ -2,7 +2,7 @@ class_name ShootData
 
 var target:Node3D # Used for seeking missiles
 var gun:Gun # For use positioning and orienting the bullet
-var shooter # Identifies shooter for kill attribution
+var shooter:Node3D # Identifies shooter for kill attribution. Could be a ship or a turret
 var super_powered:bool # True, for example, if a missile is quick launched
 var ray:RayCast3D # Used for laser-guided bullets
 var damage:float = 1.0
@@ -20,7 +20,12 @@ var aim_assist_obj:AimAssist
 # in this array
 var collision_exceptions := Array()
 
-# This is the actual damage dealt. This is for record keeping
+# The following are for record keeping:
+var shooter_name:String = ''
+var shooter_team:String = ''
+var bullet_type:String = ''
+# This is the actual damage dealt, the difference in health
+# caused by this damage dealer.
 var actual_damage:float = 0.0
 # This is the thing that got hit (if anything)
 var thing_hit:Node3D = null
@@ -32,6 +37,12 @@ func can_shoot() -> bool:
 
 func shoot() -> void:
 	gun.shoot(self)
+
+func set_shooter(_shooter:Node3D) -> void:
+	shooter = _shooter
+	shooter_name = _shooter.get_name()
+	if 'ally_team' in _shooter:
+		shooter_team = _shooter.ally_team
 
 func set_gun(g:Gun) -> void:
 	gun = g

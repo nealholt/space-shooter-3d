@@ -137,7 +137,7 @@ func _physics_process(delta: float) -> void:
 		# Fire ze guns!
 		for gun in guns:
 			var sd := ShootData.new()
-			sd.shooter = self
+			sd.set_shooter(self)
 			sd.set_gun(gun)
 			sd.target = orientation_data.target
 			sd.aim_assist_obj = aim_assist

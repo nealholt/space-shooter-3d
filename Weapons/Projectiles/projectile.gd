@@ -84,6 +84,8 @@ var wrap_up_timer:Timer
 # has an effect if explode_on_timeout is true.
 @export var target_range_plus_minus:float = 0.1
 
+var bullet_type:String
+
 
 func _ready() -> void:
 	# Give the bullet a default velocity.
@@ -118,6 +120,7 @@ func _ready() -> void:
 # a variety of bullet attributes.
 func set_data(dat:ShootData) -> void:
 	data = dat
+	data.bullet_type = bullet_type
 	speed = dat.bullet_speed
 	time_out = dat.bullet_timeout
 	# Position projectile, but defer aiming.
@@ -507,16 +510,12 @@ func ricochet(delta:float):
 func explode_with_damage() -> void:
 	# Add an explosion to main_3d and properly
 	# queue free this ship
-	var explosion = damaging_explosion.instantiate()
+	var explosion:ExplosionDamaging = damaging_explosion.instantiate()
 	# Add to main_3d, not root, otherwise the added
 	# node might not be properly cleared when
 	# transitioning to a new scene.
 	MainScene.main_scene.add_to_scene(explosion)
-	# Set explosion's position and damage
+	# Set explosion's position
 	explosion.global_position = global_position
-	explosion.damage_amt = data.damage
-	# I got an invalid assignment on 
-	# explosion.shooter = data.shooter
-	# so I slapped on this if to try to avoid it.
-	if is_instance_valid(data.shooter):
-		explosion.shooter = data.shooter
+	# Pass forward shoot data
+	explosion.set_shoot_data(data)
