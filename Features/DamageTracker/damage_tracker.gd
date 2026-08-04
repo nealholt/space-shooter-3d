@@ -40,5 +40,6 @@ func track_damage_data(dat:ShootData) -> void:
 
 # Display every DamageDatum in the array.
 func display_data() -> void:
+	print('shooter,shooter_team,damage_dealt,thing_hit,thing_team,friendly_fire,undamageable_hit,timed_out,count')
 	for d in damage_data:
 		d.print_data()

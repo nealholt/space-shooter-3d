@@ -29,6 +29,7 @@ func _ready() -> void:
 # damage is taken.
 func damage(dat:ShootData):
 	#Global.friendly_fire_checker(dat.shooter, get_parent()) #TESTING
+	var previous_health := health_component.health
 	health_component.health -= dat.damage
 	if health_component.is_dead():
 		is_targeted.emit(false, dat.shooter) # Can't be targeted if you're dead
@@ -36,8 +37,8 @@ func damage(dat:ShootData):
 		hit_feedback.hit()
 	if got_hit_audio:
 		got_hit_audio.play()
-	# Register damage
-	dat.actual_damage = dat.damage
+	# Register damage as change in health
+	dat.actual_damage = previous_health - max(health_component.health, 0.0)
 	dat.thing_hit = get_parent()
 	EventsBus.register_damage.emit(dat)
 

@@ -73,3 +73,8 @@ func check_win_loss(dead_thing) -> void:
 func center_the_mouse() -> void:
 	var center_screen := Vector2(get_viewport().size) / 2.0
 	get_viewport().warp_mouse(center_screen)
+
+
+func print_damage_data() -> void:
+	damage_tracker.display_data()
+	
