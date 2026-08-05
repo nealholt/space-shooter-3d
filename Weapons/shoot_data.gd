@@ -25,7 +25,8 @@ var shooter_name:String = ''
 var shooter_team:String = ''
 var bullet_type:String = ''
 # This is the actual damage dealt, the difference in health
-# caused by this damage dealer.
+# caused by this damage dealer. This is set to zero in
+# hit_box_component if an already dead target is hit again.
 var actual_damage:float = 0.0
 # This is the thing that got hit (if anything)
 var thing_hit:Node3D = null

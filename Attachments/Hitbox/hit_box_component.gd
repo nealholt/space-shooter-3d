@@ -28,7 +28,6 @@ func _ready() -> void:
 # or is called by a signal from the collidable Area3D when
 # damage is taken.
 func damage(dat:ShootData):
-	#Global.friendly_fire_checker(dat.shooter, get_parent()) #TESTING
 	var previous_health := health_component.health
 	health_component.health -= dat.damage
 	if health_component.is_dead():
@@ -37,8 +36,13 @@ func damage(dat:ShootData):
 		hit_feedback.hit()
 	if got_hit_audio:
 		got_hit_audio.play()
-	# Register damage as change in health
-	dat.actual_damage = previous_health - max(health_component.health, 0.0)
+	# Register damage as change in health unless a ship
+	# is already dead (previous_health < 0) in which
+	# case just set the actual_damage to zero.
+	if previous_health < 0.0:
+		dat.actual_damage = 0.0
+	else:
+		dat.actual_damage = previous_health - max(health_component.health, 0.0)
 	dat.thing_hit = get_parent()
 	EventsBus.register_damage.emit(dat)
 

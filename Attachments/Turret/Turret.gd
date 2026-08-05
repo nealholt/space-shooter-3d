@@ -2,12 +2,6 @@ class_name Turret extends Node3D
 
 const TURRET_SCENE:PackedScene = preload("res://Attachments/Turret/turret.tscn")
 
-# I removed this for now and I'm not sure I need it at all.
-# Most recently it was used for testing in an attempt to
-# make turrets stop shooting their allies or even the ship
-# they are attached to.
-#@onready var line_of_sight := $TurretModel/Body/Head/RayCast3D
-
 var aim_assist:AimAssist
 var guns: Array
 var gun_stats:GunStats # Resource that specifies this turret's guns
@@ -104,7 +98,8 @@ func setup_turret_in_tree(dat:TurretData, p) -> void:
 	parent_ship = p
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# Called every frame. 'delta' is the elapsed time since the
+# previous frame.
 func _physics_process(delta: float) -> void:
 	# Get target from the target selector
 	var target:HitBoxComponent = target_selector.get_target(self)
@@ -117,32 +112,47 @@ func _physics_process(delta: float) -> void:
 	if orientation_data.target_pos != Vector3.ZERO:
 		turret_motion.rotate_and_elevate(body, head, delta, orientation_data.target_pos)
 	
-	# Shoot if within angle limit
-	if is_instance_valid(orientation_data.target) and Global.get_angle_to_target(head.global_position, orientation_data.target_pos, head.global_transform.basis.z) < angle_to_shoot:
-		# Prevent friendly fire.
-		# I'm not sure how much this is helping.
-		#if line_of_sight.is_colliding():
-			#var collider = line_of_sight.get_collider()
-			#if is_instance_valid(collider) and 'ally_team' in collider and collider.ally_team == ally_team:
-				##print('\nturret seeing friendly ',collider)
-				#return
-			#elif 'ally_team' in collider and collider.ally_team != ally_team:
-				#print('\nturret seeing enemy ',collider)
-			#else:
-				#print('\nturret seeing bogey ',collider)
-		# Get collision exceptions
-		var exempt_colliders:Array = collision_exceptions
-		if 'collision_exceptions' in parent_ship:
-			exempt_colliders = collision_exceptions+parent_ship.collision_exceptions
-		# Fire ze guns!
-		for gun in guns:
-			var sd := ShootData.new()
-			sd.set_shooter(self)
-			sd.set_gun(gun)
-			sd.target = orientation_data.target
-			sd.aim_assist_obj = aim_assist
-			sd.collision_exceptions = exempt_colliders
-			sd.shoot()
+	# Abort shooting if no target or beyond angle limit
+	if !is_instance_valid(target) or Global.get_angle_to_target(head.global_position, orientation_data.target_pos, head.global_transform.basis.z) > angle_to_shoot:
+		return
+	# For efficiency, check if the guns are even ready to fire before
+	# checking for line of sight
+	var one_is_ready:bool = false
+	for gun in guns:
+		if gun.ready_to_fire():
+			one_is_ready = true
+			continue
+	if !one_is_ready:
+		return
+	# Don't shoot if line of sight is blocked by an ally.
+	# I did some testing and was seeing 15 out of about 500 shots
+	# were friendly fire before I added this in. With this line
+	# of sight check I got it lower, but not to zero. Still worth
+	# it, I figure.
+	# Check for line of sight on target
+	var los:bool = RayOnDemand.me.line_is_clear(global_position, orientation_data.target_pos, target)
+	# If line of sight is blocked...
+	if !los:
+		# Get obstacle
+		var blocker:CollisionObject3D = RayOnDemand.me.get_obstacle()
+		# If line of sight is blocked by an ally, abort
+		if 'ally_team' in blocker and ally_team == blocker.ally_team:
+			#print('LINE OF SIGHT BLOCKED BY ALLY')
+			return
+	# Otherwise proceed with targeting
+	# Get collision exceptions
+	var exempt_colliders:Array = collision_exceptions
+	if 'collision_exceptions' in parent_ship:
+		exempt_colliders = collision_exceptions+parent_ship.collision_exceptions
+	# Fire ze guns!
+	for gun in guns:
+		var sd := ShootData.new()
+		sd.set_shooter(self)
+		sd.set_gun(gun)
+		sd.target = target
+		sd.aim_assist_obj = aim_assist
+		sd.collision_exceptions = exempt_colliders
+		sd.shoot()
 
 
 # amount is the amount of health lost.

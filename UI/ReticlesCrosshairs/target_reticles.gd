@@ -227,7 +227,10 @@ func set_reticle_scale(percent:float) -> void:
 	targeted_reticle.scale = scl
 
 
-func set_targeted(b:bool, targeter:Ship) -> void:
+# b is true if targeted, false otherwise.
+# We can't guarantee that targeter is a ship. It could be a
+# turret. So we declare it as Node3D
+func set_targeted(b:bool, targeter:Node3D) -> void:
 	# Currently this function only handles the visuals of targeting
 	# that's why we return early if the player isn't the targeter
 	if Ship.player != targeter:
