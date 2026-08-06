@@ -219,6 +219,11 @@ func _on_health_component_died() -> void:
 	if target_reticles:
 		target_reticles.die()
 		target_reticles = null
+	# Fade out the contrails
+	for contrail in contrails:
+		contrail.fade_out_fast()
+	# Stop the burning trail
+	burning_trail.last_time()
 	# Create and start a timer, if you haven't
 	# already done so.
 	# Go into death animation for this duration.

@@ -18,8 +18,6 @@ var _points = [] # Stores all 3D positions that will make up the trail
 var _widths = [] # Stores all calculated widths using the positions of the points
 var _lifePoints = [] # Stores all the trail points lifespans
 
-@export var _trailEnabled :bool = true ## Is trail allowed to be shown?
-
 @export var _fromWidth : float = 0.5 ## Starting width of the trail
 @export var _toWidth : float = 0.0 ## End width of the trail
 @export_range(0.5,1.5) var _scaleAcceleration : float = 1.0 ## Speed of the scaling
@@ -31,6 +29,11 @@ var _lifePoints = [] # Stores all the trail points lifespans
 @export var _endColor : Color = Color(1.0, 1.0, 1.0, 0.0) ## End color of the trail
 
 var _oldPos : Vector3 # Get the previous position
+
+# When set to true, _lifeSpan decreases by shrink_rate per
+# second to a minimum of 0.0
+var shrink_to_nothing:bool = false
+var shrink_rate:float = 4.0
 
 func _ready() -> void:
 	_oldPos = get_global_transform().origin
@@ -49,6 +52,8 @@ func RemovePoint(i:int) -> void:
 	_lifePoints.remove_at(i)
 
 func _process(delta:float) -> void:
+	if shrink_to_nothing:
+		_lifeSpan = max(_lifeSpan - shrink_rate * delta, 0.0)
 	# PREVIOUSLY:
 	# If the distance between the previous
 	# position and the current position is
@@ -56,16 +61,14 @@ func _process(delta:float) -> void:
 	# trails are allowed to be made:
 	#if (_oldPos - get_global_transform().origin).length() > _motionDelta and _trailEnabled:
 	# NOW:
-	# So long as trails are allowed to be made, new
-	# points are added. This has the effect of fading
-	# out trails, even when the object the trail is
-	# attached to stops moving. This is particularly
+	# New points are added regardless. This has the effect
+	# of fading out trails, even when the object the trail
+	# is attached to stops moving. This is particularly
 	# important when a Trail-using ship or missile dies,
 	# so the trail doesn't disappear instantaneously.
 	# It's still not perfect, but it's better.
-	if _trailEnabled:
-		AppendPoint() # Create a new point
-		_oldPos = get_global_transform().origin # Update the old position to the current position
+	AppendPoint() # Create a new point
+	_oldPos = get_global_transform().origin # Update the old position to the current position
 	
 	# Update the lifespan of every point,
 	# removing expired points
@@ -113,3 +116,8 @@ func _process(delta:float) -> void:
 		mesh.surface_set_uv(Vector2(t1,1))
 		mesh.surface_add_vertex(to_local(_points[i] - currWidth))
 	mesh.surface_end()
+
+
+func fade_out_fast() -> void:
+	print('fade_out_fast ', _lifeSpan)
+	shrink_to_nothing = true

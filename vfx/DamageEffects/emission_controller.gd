@@ -13,3 +13,8 @@ func start_emitting() -> void:
 func stop_emitting() -> void:
 	for n in get_children():
 		n.set_emitting(false)
+
+# Turn on one_shot
+func last_time() -> void:
+	for n in get_children():
+		n.one_shot = true

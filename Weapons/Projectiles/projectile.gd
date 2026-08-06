@@ -438,7 +438,7 @@ func wrap_up() -> void:
 		reticle.die.call_deferred()
 	for child in get_children():
 		if child is Contrail:
-			child._lifeSpan = child._lifeSpan/10.0
+			child.fade_out_fast()
 		elif child is SparkleTrailVisual:
 			child.wrap_up()
 		elif child is MissileOnPlayerReticle:

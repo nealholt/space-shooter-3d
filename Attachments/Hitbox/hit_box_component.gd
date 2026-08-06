@@ -2,7 +2,7 @@ class_name HitBoxComponent extends Node3D
 
 signal missile_locked # Emitted when an enemy acquires missile lock on this ship
 signal missile_fired_inbound # Emitted when a missile is fired at this ship
-signal is_targeted(tf:bool, targeter:Ship) # Emitted when this hitbox starts or stops being targeted
+signal is_targeted(tf:bool, targeter:Node3D) # Emitted when this hitbox starts or stops being targeted
 
 # collidable will only be set if the hit box component
 # is associated with an Area3D. CharacterBody3Ds such as

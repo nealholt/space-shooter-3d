@@ -11,10 +11,11 @@ class_name SparkleTrailVisual extends Node3D
 
 # This is called by the projectile's wrap_up() function
 func wrap_up() -> void:
+	
 	gpu_particles_3d.one_shot = true
 	gpu_particles_3d.emitting = false
 	
 	gpu_particles_3d_2.one_shot = true
 	gpu_particles_3d_2.emitting = false
 	
-	contrail._lifeSpan = contrail._lifeSpan/10.0
+	contrail.fade_out_fast()
