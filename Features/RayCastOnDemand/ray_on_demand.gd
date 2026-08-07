@@ -74,8 +74,9 @@ func line_is_clear(startpoint:Vector3, endpoint:Vector3, ignorebody:Node3D) -> b
 # This fixed some of the issues, but not others. Also using
 # hit_from_inside both did not fix the carrier weakpoint show through
 # and also required a call to get_parent in target_reticles to figure
-# out what else to ignore, so I'm giving up and moving on. This is
-# better than nothing.
+# out what else to ignore, so I'm giving up and moving on this approach.
+# The line_is_clear_plus function below works perfectly in every case
+# I've tested, though it relies on a magic number.
 func line_is_clear_back_faces(startpoint:Vector3, endpoint:Vector3, ignorebodies:Array[Node3D]) -> bool:
 	var result:bool = true # Default that line is clear
 	ray.position = startpoint
@@ -96,6 +97,17 @@ func line_is_clear_back_faces(startpoint:Vector3, endpoint:Vector3, ignorebodies
 	ray.hit_back_faces = false
 	ray.clear_exceptions()
 	return result
+
+
+# Same as line_is_clear, but moves the startpoint back 0.1 meter.
+# The goal is to detect obstacles that coincide with the startpoint,
+# for example, when the hull of a ship ought to obscure a turret
+# or weakpoint sitting on the hull.
+func line_is_clear_plus(startpoint:Vector3, endpoint:Vector3, ignorebody:Node3D) -> bool:
+	# Calculate direction of ray
+	var v:Vector3 = (endpoint - startpoint).normalized()
+	# Step back one meter
+	return line_is_clear(startpoint-v*0.1, endpoint, ignorebody)
 
 
 # Returns most recent collision body
