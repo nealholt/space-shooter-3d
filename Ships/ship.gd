@@ -223,7 +223,8 @@ func _on_health_component_died() -> void:
 	for contrail in contrails:
 		contrail.fade_out_fast()
 	# Stop the burning trail
-	burning_trail.last_time()
+	if burning_trail:
+		burning_trail.last_time()
 	# Create and start a timer, if you haven't
 	# already done so.
 	# Go into death animation for this duration.

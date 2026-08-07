@@ -1,11 +1,11 @@
 class_name Orb extends StaticBody3D
 
-const ORB_SCENE : PackedScene = preload("res://Features/Orbs/orb.tscn")
+const ORB_SCENE:PackedScene = preload("res://Features/Orbs/orb.tscn")
 
 signal destroyed
 
-@onready var health_component: HealthComponent = $HealthComponent
-@onready var hit_box_component: HitBoxComponent = $HitBoxComponent
+@onready var health_component:HealthComponent = $HealthComponent
+@onready var hit_box_component:HitBoxComponent = $HitBoxComponent
 
 const MAX_COORD: int = 200
 

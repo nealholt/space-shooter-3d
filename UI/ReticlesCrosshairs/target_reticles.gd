@@ -111,6 +111,15 @@ func _process(_delta):
 		return
 	# Try to put reticle on screen
 	if Global.current_camera.is_position_in_frustum(global_position):
+		# If camera does not have line of sight on the object
+		# with the reticle, then abort.
+		# I added this in to fix target reticles showing through certain
+		# collidables. This fixed some of the issues, but not others,
+		# namely the weakpoints of the carrier still show through.
+		# I'm giving up and moving on. This is better than nothing.
+		var obscured:bool = !RayOnDemand.me.line_is_clear_back_faces(global_position, Global.current_camera.global_position, [Ship.player])
+		if obscured:
+			return
 		# Get position to put the reticle
 		var reticle_position:Vector2 = Global.current_camera.unproject_position(global_position)
 		var reticle_to_use:Node2D

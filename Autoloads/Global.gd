@@ -369,6 +369,11 @@ func add_to_team_group(to_add, team:String) -> void:
 # Returns true if the reticle was drawn on screen.
 # Returns false if the reticle was not drawn.
 # This function is called by gun.gd and camera_player_group.gd.
+# This function is used for the player ship's lead or "look"
+# indicator. It's also used for gun reticles. That's why
+# target_reticles.gd uses a ray cast, but this does not.
+# Gun and heading reticles should always be shown. Targeting
+# reticles should not be shown if there is no line of sight.
 # A significant chunk of the following is redundant with
 # code in the target_reticles.gd's _process function.
 func set_reticle(reticle:TextureRect, position:Vector3) -> bool:

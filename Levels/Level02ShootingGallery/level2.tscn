@@ -183,9 +183,6 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -118.287, 35.5529, -4.6792
 [node name="Orb9" parent="RedTeam" unique_id=1676745946 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -139.03, 62.182, -49.1457)
 
-[node name="Orb10" parent="RedTeam" unique_id=1277448495 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -93.66, 35.5529, -44.7279)
-
 [node name="Orb11" parent="RedTeam" unique_id=2077668895 instance=ExtResource("7_yxjtr")]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -139.03, 62.182, -121.166)
 
