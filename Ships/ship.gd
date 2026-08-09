@@ -280,9 +280,45 @@ func get_mouse_center_radius() -> float:
 	return 0.0
 
 
-# Pass along damage to the hitbox component
+# Pass along damage to the hitbox component.
+# But also get the before and after percent health for
+# potentially displaying damage effects.
 func damage(dat:ShootData):
+	var health_percent_pre := health_component.get_percent_health()
 	hit_box_component.damage(dat)
+	var health_percent_post := health_component.get_percent_health()
+	display_damage(dat, health_percent_pre, health_percent_post)
+
+
+# The following function would be better as a component that gets
+# attached only to capital ships and preloads the damage efects
+# scene, but for now it works fine as a proof of concept.
+# For capital ships, we're going to add a damage effect every
+# time the damage crosses a 10% threshold.
+func display_damage(dat:ShootData, health_percent_pre:float, health_percent_post:float):
+	# Stop if not a capital ship
+	if !is_in_group('capital_ship'): return
+	# Stop if not crossing a ten percent health threshold
+	var tens_digit:int = int(health_percent_pre*10) - int(health_percent_post*10)
+	if tens_digit == 0: return
+	# Stop if there's no collision point set
+	if !dat.collision_pos: return
+	# Spawn damage effect
+	# Add the effect to scene
+	var particle_scene:PackedScene = load('res://vfx/DamageEffects/damage_fire.tscn')
+	var effect = particle_scene.instantiate()
+	add_child(effect)
+	# Put effect at correct location
+	effect.global_position = dat.collision_pos
+	# Rotate the effect so its Z axis points along the surface normal.
+	# Pick an "up" direction that isn't parallel to the normal,
+	# otherwise you get an error.
+	var up := Vector3.UP
+	var hit_normal := dat.collision_surf_norm
+	if abs(hit_normal.dot(up)) > 0.95: # Too close to parallel
+		up = Vector3.RIGHT # use alternate "up"
+	# -Z axis points toward the target.
+	effect.global_basis = Basis.looking_at(hit_normal, up)
 
 
 func get_controller() -> CharacterBodyControlParent:

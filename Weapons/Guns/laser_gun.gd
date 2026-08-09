@@ -79,7 +79,7 @@ func _process(delta: float) -> void:
 	var cast_point:Vector3 = Vector3(0, -ray_length, 0)
 	# Check for actual collision
 	if ray.is_colliding():
-		deal_damage(ray.get_collider(), delta)
+		deal_damage(delta)
 		cast_point = to_local(ray.get_collision_point())
 	# Position the beam mesh
 	beam_mesh.mesh.height = cast_point.y
@@ -130,13 +130,18 @@ func shoot_actual() -> void:
 	stay_on = true
 
 
-func deal_damage(collider, delta:float) -> void:
+func deal_damage(delta:float) -> void:
+	var collider:CollisionObject3D = ray.get_collider()
 	# I was getting an error on the line below
 	#     data.damage = damage*delta
 	# because data was null, so I added a condition
 	# to the if that data not be null, but I don't
 	# understand why this issue cropped up only recently
 	if is_instance_valid(collider) and collider.is_in_group("damageable") and data:
+		# Save more data on the hit. This is for adding damage
+		# effects.
+		data.collision_pos = ray.get_collision_point()
+		data.collision_surf_norm = ray.get_collision_normal()
 		#print("dealing damage %f" % (damage*delta))
 		data.damage = damage*delta
 		collider.damage(data)

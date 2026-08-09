@@ -28,6 +28,10 @@ func shoot_actual() -> void:
 	if ray.is_colliding():
 		var collider = ray.get_collider()
 		if collider.is_in_group("damageable"):
+			# Save more data on the hit. This is for adding damage
+			# effects.
+			data.collision_pos = ray.get_collision_point()
+			data.collision_surf_norm = ray.get_collision_normal()
 			#print("dealt damage")
 			data.damage = damage
 			collider.damage(data)

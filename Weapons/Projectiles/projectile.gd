@@ -319,7 +319,13 @@ func damage_and_die(body, collision_point=null) -> bool:
 	# Damage what was hit
 	#https://www.youtube.com/watch?v=LuUjqHU-wBw
 	if body.is_in_group("damageable"):
+		# Save more data on the hit. This is for adding damage
+		# effects.
+		data.collision_pos = collision_point
+		data.collision_surf_norm = ray.get_collision_normal()
+		# Deliver damage
 		body.damage(data)
+		
 	# Previous was the damage part. Now do the dieing part.
 	return die_without_damaging(body, collision_point)
 

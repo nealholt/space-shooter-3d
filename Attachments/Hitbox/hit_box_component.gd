@@ -27,7 +27,7 @@ func _ready() -> void:
 # This function is called by the CharacterBody3D (usually a ship)
 # or is called by a signal from the collidable Area3D when
 # damage is taken.
-func damage(dat:ShootData):
+func damage(dat:ShootData) -> void:
 	var previous_health := health_component.health
 	health_component.health -= dat.damage
 	if health_component.is_dead():

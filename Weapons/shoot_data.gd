@@ -30,6 +30,10 @@ var bullet_type:String = ''
 var actual_damage:float = 0.0
 # This is the thing that got hit (if anything)
 var thing_hit:Node3D = null
+# Where the damaging hit occurred, if known
+var collision_pos:Vector3
+# Surface normal vector of where the damaging hit occurred, if known
+var collision_surf_norm:Vector3
 
 # Player can shoot without a valid target, so this should
 # only be used for NPCs
