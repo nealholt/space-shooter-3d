@@ -253,8 +253,8 @@ func aim_self_at_cursor() -> void:
 		# and add it to the screen center.
 		var half_size : Vector2 = InputManager.im.current_viewport.size / 2
 		# Get mouse x and y relative to screen center
-		var x_rel_center = half_size.x - mouse_pos.x
-		var y_rel_center = half_size.y - mouse_pos.y
+		var x_rel_center:float = half_size.x - mouse_pos.x
+		var y_rel_center:float = half_size.y - mouse_pos.y
 		mouse_pos = Vector2(x_rel_center, y_rel_center)
 		var aim_radius:float = data.shooter.get_mouse_center_radius()
 		var vect_length := mouse_pos.length()
@@ -309,7 +309,9 @@ func did_collide(delta:float) -> bool:
 	return true # Did collide with something.
 
 
-func damage_and_die(body, collision_point=null) -> bool:
+# You can't assign null to typed variables so I use Vector3.INF
+# to indicate "no collision point"
+func damage_and_die(body:Node3D, collision_point:Vector3=Vector3.INF) -> bool:
 	if should_skip_body(body):
 		return false
 	# Register what got hit. This must be done before
@@ -321,8 +323,9 @@ func damage_and_die(body, collision_point=null) -> bool:
 	if body.is_in_group("damageable"):
 		# Save more data on the hit. This is for adding damage
 		# effects.
-		data.collision_pos = collision_point
-		data.collision_surf_norm = ray.get_collision_normal()
+		if is_instance_valid(ray):
+			data.collision_pos = collision_point
+			data.collision_surf_norm = ray.get_collision_normal()
 		# Deliver damage
 		body.damage(data)
 		
@@ -332,14 +335,18 @@ func damage_and_die(body, collision_point=null) -> bool:
 
 # Called by projectile.damage_and_die, but also called
 # by RayCastForProjectiles.did_collide when collided with
-# a non-damageable object
-func die_without_damaging(body, collision_point=null) -> bool:
+# a non-damageable object.
+# You can't assign null to typed variables so I use Vector3.INF
+# to indicate "no collision point".
+func die_without_damaging(body:Node3D, collision_point:Vector3=Vector3.INF) -> bool:
 	if should_skip_body(body):
 		return false
 	# Play feedback for player if relevant
 	Global.player_feedback(body, data)
 	# Make a spark at collision point
-	if collision_point:
+	# You can't assign null to typed variables so I use Vector3.INF
+	# to indicate "no collision point".
+	if collision_point != Vector3.INF:
 		if body.is_in_group("shield"):
 			VfxManager.play_with_transform(shieldSparks, collision_point, transform)
 		else:
@@ -358,7 +365,7 @@ func die_without_damaging(body, collision_point=null) -> bool:
 
 # If the given body should not be collided with for any
 # reason, then return true
-func should_skip_body(body) -> bool:
+func should_skip_body(body:Node3D) -> bool:
 	# Null instance can occur when body dies
 	# from another source of damage while this
 	# projectile is still trying to damage it.
@@ -389,7 +396,7 @@ func start_near_miss_audio() -> void:
 	# If it doesn't exist yet, create it
 	if !near_miss_audio:
 		near_miss_audio = AudioStreamPlayer3D.new()
-		var audiostream = preload("res://Audio/SoundEffects/whoosh_medium_001.ogg")
+		var audiostream:AudioStream = preload("res://Audio/SoundEffects/whoosh_medium_001.ogg")
 		near_miss_audio.set_stream(audiostream)
 		add_child(near_miss_audio)
 		near_miss_audio.play()
@@ -490,7 +497,7 @@ func _on_body_entered(body: Node3D) -> void:
 # It seems that the second ricochet is glitchy,
 # though the first bounce works as expected.
 # For now I'm moving on.
-func ricochet(delta:float):
+func ricochet(delta:float) -> void:
 	# Move the bullet back to the point of collision
 	global_position = ray.get_collision_point()
 	# Remove 20% of the speed

@@ -39,7 +39,7 @@ enum LaserState {
 }
 
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	ray.target_position.y = -ray_length
 	# The following chunk of code sets the beam

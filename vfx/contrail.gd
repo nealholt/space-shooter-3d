@@ -14,9 +14,9 @@ class_name Contrail extends MeshInstance3D
 # I (Neal) added some more types and declared the
 # variables outside the loop in _process.
 
-var _points = [] # Stores all 3D positions that will make up the trail
-var _widths = [] # Stores all calculated widths using the positions of the points
-var _lifePoints = [] # Stores all the trail points lifespans
+var _points:Array[Vector3] = [] # Stores all 3D positions that will make up the trail
+var _widths:Array = [] # Stores all calculated widths using the positions of the points
+var _lifePoints:Array[float] = [] # Stores all the trail points lifespans
 
 @export var _fromWidth : float = 0.5 ## Starting width of the trail
 @export var _toWidth : float = 0.0 ## End width of the trail
@@ -119,5 +119,5 @@ func _process(delta:float) -> void:
 
 
 func fade_out_fast() -> void:
-	print('fade_out_fast ', _lifeSpan)
+	#print('fade_out_fast ', _lifeSpan)
 	shrink_to_nothing = true

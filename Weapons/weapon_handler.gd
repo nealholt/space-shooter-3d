@@ -4,7 +4,7 @@ class_name WeaponHandler
 # Source
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/41204698#questions
 
-var index = -1
+var index := -1
 
 var current_weapon: Gun
 
@@ -19,7 +19,7 @@ func reset_weapon_handler() -> void:
 
 func deactivate_all() -> void:
 	# Pre: All children must be weapons
-	for child in get_children():
+	for child:Gun in get_children():
 		# Precondition: child is a Gun
 		child.deactivate()
 

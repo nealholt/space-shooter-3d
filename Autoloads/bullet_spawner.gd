@@ -133,7 +133,7 @@ func _get_timed_fuse() -> Projectile:
 func _get_proxy_fuse() -> Projectile:
 	var projectile := generic_projectile.instantiate()
 	# Create area with collision shape
-	var collision_shape = CollisionShape3D.new()
+	var collision_shape := CollisionShape3D.new()
 	collision_shape.shape = SphereShape3D.new()
 	var a := Area3D.new()
 	a.add_child(collision_shape)

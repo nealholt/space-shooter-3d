@@ -40,7 +40,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process(_delta:float) -> void:
 	# Display player velocity
 	if Ship.player and is_instance_valid(Ship.player):
 		$HUD/Demo.text = "Velocity: %.0f" % Ship.player.velocity.length()

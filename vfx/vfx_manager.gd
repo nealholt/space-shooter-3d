@@ -41,5 +41,5 @@ func play_remote_transform(type:int, remote_mover:Node3D, adjust:Vector3=Vector3
 	return vfx_dict[type].play_remote_transform(remote_mover, adjust)
 
 func stop_everything() -> void:
-	for vfx in vfx_dict.values():
+	for vfx:VfxQueue in vfx_dict.values():
 		vfx.stop_all()

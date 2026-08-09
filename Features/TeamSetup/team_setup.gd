@@ -32,7 +32,7 @@ func _ready() -> void:
 	set_team_properties(self)
 
 
-func set_team_properties(parent_node) -> void:
+func set_team_properties(parent_node:Node3D) -> void:
 	# Loop through parent_node, all its children, and all
 	# their children's children's children
 	var children:Array = Global.get_all_children(parent_node)
@@ -40,14 +40,14 @@ func set_team_properties(parent_node) -> void:
 	children.push_back(parent_node)
 	# Set teams and team colors of all
 	# relevant nodes that are encountered.
-	for child in children:
+	for child:Node in children:
 		if child.is_in_group("team member"):
 			child.add_to_group(team)
 		
 		# This may be outdated and not needed now
 		# that I have the BlenderModel class (see below)
 		if child.is_in_group("team color"):
-			var newMaterial = StandardMaterial3D.new()
+			var newMaterial := StandardMaterial3D.new()
 			# Set color of new material
 			newMaterial.albedo_color = color
 			# Assign new material to material overrride

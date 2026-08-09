@@ -32,13 +32,13 @@ var collision_exceptions := Array()
 # asteroids or simply out and about).
 # This is used for adding in collision exceptions
 # to bullets fired.
-var parent_ship
+var parent_ship:Node3D
 
 
 # 'maybe_ship' should be the ship this turret is attached to,
 # but sometimes we want to test a turret all by itself
 # or even attach a turret to things other than a ship.
-static func new_turret(my_parent:TurretData, maybe_ship) -> Turret:
+static func new_turret(my_parent:TurretData, maybe_ship:Node3D) -> Turret:
 	var t := TURRET_SCENE.instantiate()
 	# Order matters for these next three lines of code
 	t.gun_stats = my_parent.gun
@@ -49,8 +49,8 @@ static func new_turret(my_parent:TurretData, maybe_ship) -> Turret:
 
 func _ready() -> void:
 	# Setup head and body
-	var nodes_in_group_head = Global.get_group_nodes_on_branch("turret head", self)
-	var nodes_in_group_body = Global.get_group_nodes_on_branch("turret body", self)
+	var nodes_in_group_head:Array = Global.get_group_nodes_on_branch("turret head", self)
+	var nodes_in_group_body:Array = Global.get_group_nodes_on_branch("turret body", self)
 	# Sanity checks
 	if nodes_in_group_head.size() != 1:
 		printerr("More than one turret head node detected in turret.gd")
@@ -73,7 +73,7 @@ func _ready() -> void:
 		return
 	
 	# Otherwise, attach guns as children of all the hardpoints
-	var gun_hardpoints = Global.get_group_nodes_on_branch("gun hardpoint", self)
+	var gun_hardpoints:Array = Global.get_group_nodes_on_branch("gun hardpoint", self)
 	for i in range(gun_hardpoints.size()):
 		var g:Gun = GunSpawner.new_gun_from_resource(gun_stats, gun_hardpoints[i], false)
 		guns.append(g)
@@ -83,7 +83,7 @@ func _ready() -> void:
 	collision_exceptions.push_back($HitBoxComponent)
 
 
-func setup_turret_in_tree(dat:TurretData, p) -> void:
+func setup_turret_in_tree(dat:TurretData, p:Node3D) -> void:
 	turret_motion = TurretMotionComponent.new()
 	turret_motion.setup_values(dat)
 	
@@ -118,7 +118,7 @@ func _physics_process(delta: float) -> void:
 	# For efficiency, check if the guns are even ready to fire before
 	# checking for line of sight
 	var one_is_ready:bool = false
-	for gun in guns:
+	for gun:Gun in guns:
 		if gun.ready_to_fire():
 			one_is_ready = true
 			continue
@@ -145,7 +145,7 @@ func _physics_process(delta: float) -> void:
 	if 'collision_exceptions' in parent_ship:
 		exempt_colliders = collision_exceptions+parent_ship.collision_exceptions
 	# Fire ze guns!
-	for gun in guns:
+	for gun:Gun in guns:
 		var sd := ShootData.new()
 		sd.set_shooter(self)
 		sd.set_gun(gun)

@@ -36,7 +36,7 @@ var health: float:
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	health = max_health
 	# Check for weakpoints
 	if weakpoint_group:

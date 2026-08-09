@@ -101,8 +101,8 @@ func update_mouse_keyboard_input() -> void:
 	mouse_pos = current_viewport.get_mouse_position()
 	var half_size : Vector2 = current_viewport.size / 2
 	# Get mouse x and y relative to screen center
-	var x_rel_center = half_size.x - mouse_pos.x
-	var y_rel_center = inverted*(half_size.y - mouse_pos.y)
+	var x_rel_center:float = half_size.x - mouse_pos.x
+	var y_rel_center:float = inverted*(half_size.y - mouse_pos.y)
 	# Roll
 	left_right2 = Input.get_axis("right_stick_right", "right_stick_left")
 	# Normalize

@@ -71,7 +71,7 @@ var ally_team:String
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	# The new laser doesn't use a firing rate timer or reload timer.
 	if has_node("FiringRateTimer"):
 		firing_rate_timer = $FiringRateTimer

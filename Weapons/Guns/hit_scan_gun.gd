@@ -12,7 +12,7 @@ class_name HitScanGun extends Gun
 @export var laser_mesh: MeshInstance3D
 @export var laser_mesh_pivot: Node3D
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	if !ray:
 		printerr('This gun requires an attached RayCast3D child that is connect to the ray export variable.')
@@ -61,7 +61,7 @@ func position_laser() -> void:
 	# Change laser mesh length and position relative to Head
 	# so the laser doesn't appear to pass through what it hits
 	if ray.is_colliding():
-		var length = global_position.distance_to(ray.get_collision_point())
+		var length:float = global_position.distance_to(ray.get_collision_point())
 		laser_mesh.position.z = -length/2
 		laser_mesh.mesh.set_height(length)
 	else:

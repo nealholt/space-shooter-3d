@@ -15,7 +15,7 @@ static var mc:MissileCues = null
 @onready var fired_audio: Node = $FiredAudio
 
 # For picking audio to play
-var rng = RandomNumberGenerator.new() # For positioning flyby camera
+var rng := RandomNumberGenerator.new() # For positioning flyby camera
 
 # Time in millis of most recent audiocues so we can prevent overlap
 var lock_warning_time:int = 0

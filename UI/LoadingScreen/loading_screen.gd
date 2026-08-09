@@ -1,4 +1,4 @@
-extends CanvasLayer
+class_name LoadingScreen extends CanvasLayer
 
 # This was built off of this tutorial:
 # https://www.youtube.com/watch?v=m4PfHg3hmSo

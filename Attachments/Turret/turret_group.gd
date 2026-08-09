@@ -6,7 +6,7 @@ func _ready() -> void:
 	# Except that it won't be a ship in testing scenario
 	# and later on we might want to put turrets out on
 	# asteroids or where ever
-	var p = get_parent()
+	var p:Node3D = get_parent()
 	for child in get_children():
 		if child is TurretData:
 			# Pass along the ship reference to the new turret.

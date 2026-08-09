@@ -79,7 +79,7 @@ var is_targeted_by_player:bool = false
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	set_reticle_textures(reticle_set)
 	distance_cutoff_sqd = distance_cutoff * distance_cutoff
 	is_targeted_by_player = false
@@ -100,7 +100,7 @@ func _ready():
 		hitbox.is_targeted.connect(set_targeted)
 
 
-func _process(_delta):
+func _process(_delta:float) -> void:
 	hide_all() # Reset all to hidden
 	# A significant chunk of the following is redundant with
 	# code in the Global.set_reticle function.
@@ -183,14 +183,14 @@ func display_offscreen_reticle() -> void:
 	# Calculations to keep the off screen reticle on the
 	# edge of the screen.
 	# https://www.youtube.com/watch?v=EKVYfF8oG0s&t=300s
-	var local_to_camera = Global.current_camera.to_local(global_position)
-	var reticle_position = Vector2(local_to_camera.x, -local_to_camera.y)
+	var local_to_camera:Vector3 = Global.current_camera.to_local(global_position)
+	var reticle_position:Vector2 = Vector2(local_to_camera.x, -local_to_camera.y)
 	if reticle_position.abs().aspect() > max_reticle_position.aspect():
 		reticle_position *= max_reticle_position.x / abs(reticle_position.x)
 	else:
 		reticle_position *= max_reticle_position.y / abs(reticle_position.y)
 	offscreen_reticle.set_global_position(viewport_center + reticle_position - offscreen_reticle_offset)
-	var angle = Vector2.UP.angle_to(reticle_position)
+	var angle:float = Vector2.UP.angle_to(reticle_position)
 	offscreen_reticle.rotation = angle
 
 

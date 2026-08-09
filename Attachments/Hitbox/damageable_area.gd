@@ -13,5 +13,5 @@ var enemy_team:String
 var damage_exception:Ship
 
 
-func damage(data:ShootData):
+func damage(data:ShootData) -> void:
 	damaged.emit(data)

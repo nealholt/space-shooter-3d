@@ -53,7 +53,7 @@ func move_me(body:Node3D, delta:float) -> void:
 # with a great deal of help from
 # https://www.youtube.com/watch?v=cgVNu5-7f0w&ab_channel=IndieQuest
 # to make it work in 3d
-func get_velocity_adjustment(body) -> Vector3:
+func get_velocity_adjustment(body:Node3D) -> Vector3:
 	var target_pos := get_target_pos(body)
 	# Calculate the desired direction
 	var desired : Vector3 = body.global_position.direction_to(target_pos)

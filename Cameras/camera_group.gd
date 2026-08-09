@@ -118,7 +118,7 @@ func _ready() -> void:
 	# Camera group should typically be attached to ships
 	# but if not, use the camera group in spectator mode
 	# with mouse and keyboard controls.
-	var p = get_parent()
+	var p:Node3D = get_parent()
 	if p is Ship:
 		# We assume the parent is a ship with variables
 		# for positioning the FirstPerson and RearUnder

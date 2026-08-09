@@ -30,6 +30,10 @@ AudioManager="*res://Audio/AudioManager/audio_manager.tscn"
 BulletSpawner="*uid://d0r6c7kklyj38"
 SceneLoader="*uid://degpqg3b20nme"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+
 [display]
 
 window/size/mode=4

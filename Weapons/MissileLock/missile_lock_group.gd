@@ -45,7 +45,7 @@ var time_since_lock:float = 0.0
 # Then if missile is fired within this interval,
 # give the missile more damage or better
 # tracking or something
-@export var quick_launch_interval = 0.1 # seconds
+@export var quick_launch_interval := 0.1 # seconds
 
 # Reference to the target so we can track it
 var target:HitBoxComponent

@@ -29,9 +29,9 @@ var targeting_hud_on : bool = true
 # If there are no members of all the requested groups,
 # then fewer groups will be required until a member
 # is found or we run out of groups.
-func get_center_most_from_groups(group_array:Array, looker) -> Node3D:
+func get_center_most_from_groups(group_array:Array, looker:Node3D) -> Node3D:
 	# Get a list of members of the groups
-	var targets = Array()
+	var targets := Array()
 	# The following is the closest gdscript has to dowhile
 	while true:
 		targets = get_tree().get_nodes_in_group(group_array[0])
@@ -63,9 +63,9 @@ func get_center_most_from_groups(group_array:Array, looker) -> Node3D:
 # the center of the looker's view.
 # This is initially used by seeking missiles and
 # NPCs.
-func get_center_most_from_group(group:String, looker) -> Node3D:
+func get_center_most_from_group(group:String, looker:Node3D) -> Node3D:
 	# Identify target from group with smallest angle to
-	var targets = get_tree().get_nodes_in_group(group)
+	var targets:Array = get_tree().get_nodes_in_group(group)
 	return get_center_most(looker, targets)
 
 
@@ -74,17 +74,17 @@ func get_center_most_from_group(group:String, looker) -> Node3D:
 # This is used for selecting targets with the mouse.
 func get_lowest_angleto_from_group(group:String, source:Vector3, direction:Vector3) -> Node3D:
 	# Identify target from group with smallest angle to
-	var targets = get_tree().get_nodes_in_group(group)
+	var targets:Array = get_tree().get_nodes_in_group(group)
 	return get_center_most_from_angle(targets, source, direction)
 
 
 # Get item from array targets that is most centered
 # from looker's perspective.
-func get_center_most(looker, targets:Array) -> Node3D:
+func get_center_most(looker:Node3D, targets:Array) -> Node3D:
 	var most_centered:Node3D # This is a target-type variable
 	var smallest_angle_to := 7.0 # Start off with any upper limit over 2pi
 	var temp_angle_to : float
-	for target in targets:
+	for target:Node3D in targets:
 		temp_angle_to = Global.get_angle_to_target(looker.global_position, target.global_position, -looker.global_transform.basis.z)
 		if temp_angle_to < smallest_angle_to:
 			smallest_angle_to = temp_angle_to
@@ -98,7 +98,7 @@ func get_center_most_from_angle(targets:Array, source:Vector3, direction:Vector3
 	var most_centered:Node3D # This is a target-type variable
 	var smallest_angle_to := 7.0 # Start off with any upper limit over 2pi
 	var temp_angle_to : float
-	for target in targets:
+	for target:Node3D in targets:
 		temp_angle_to = Global.get_angle_to_target(source, target.global_position, direction)
 		if temp_angle_to < smallest_angle_to:
 			smallest_angle_to = temp_angle_to
@@ -125,7 +125,7 @@ func get_angle_to_target(seeker_pos:Vector3, target_pos:Vector3, facing_dir:Vect
 	# is above or below, or use seeker.global_transform.basis.x
 	# to see if target is to the left or right.
 	# Return value guaranteed to be between 0 and pi
-	var dir_to = seeker_pos.direction_to(target_pos)
+	var dir_to:Vector3 = seeker_pos.direction_to(target_pos)
 	# Normalizing IS necessary under certain circumstances,
 	# which do occur. Having the next two lines commented
 	# was what was making the turret fire even when it
@@ -151,7 +151,7 @@ func interp_face_target(seeker:Node3D, target_pos:Vector3, percent:float) -> Tra
 	# https://kidscancode.org/godot_recipes/4.x/3d/rotate_interpolate/index.html
 	# I use transform.basis.y as relative "up" rather than Vector3.UP
 	# So the object doesn't roll over when the target crosses past high noon
-	var new_transform = seeker.transform.looking_at(target_pos,seeker.global_transform.basis.y)
+	var new_transform:Transform3D = seeker.transform.looking_at(target_pos,seeker.global_transform.basis.y)
 	return seeker.transform.interpolate_with(new_transform, percent)
 
 
@@ -322,9 +322,9 @@ func get_intercept(shooter_pos:Vector3,
 # https://www.reddit.com/r/godot/comments/40cm3w/looping_through_all_children_and_subchildren_of_a/
 # https://www.reddit.com/r/godot/comments/40cm3w/comment/idf9vth/?utm_source=share&utm_medium=web2x&context=3
 # Modified by Neal Holtschulte in 2024
-func get_all_children(node) -> Array:
-	var nodes : Array = []
-	for N in node.get_children():
+func get_all_children(node:Node) -> Array[Node]:
+	var nodes:Array[Node] = []
+	for N:Node in node.get_children():
 		nodes.append(N)
 		if N.get_child_count() > 0:
 			nodes.append_array(get_all_children(N))
@@ -337,7 +337,7 @@ func get_all_children(node) -> Array:
 # https://www.reddit.com/r/godot/comments/o90vpv/comment/h38fvzg/
 # Fixed and modified by Neal Holtschulte
 func get_group_nodes_on_branch(group: String, branch: Node) -> Array:
-	var group_nodes_on_branch = Array()
+	var group_nodes_on_branch := Array()
 	for child in branch.get_children():
 		if child.is_in_group(group):
 			group_nodes_on_branch.append(child)
@@ -349,7 +349,7 @@ func get_group_nodes_on_branch(group: String, branch: Node) -> Array:
 # Add the given node to the given team this is
 # important for spawning in new units (and missiles)
 # into the team group that they belong to
-func add_to_team_group(to_add, team:String) -> void:
+func add_to_team_group(to_add:Node, team:String) -> void:
 	if team == "red team":
 		TeamSetup.red_team.add_child(to_add)
 		TeamSetup.red_team.set_team_properties(to_add)
@@ -383,7 +383,7 @@ func set_reticle(reticle:TextureRect, position:Vector3) -> bool:
 	# If the camera can see the target reticle Node3D...
 	if current_camera.is_position_in_frustum(position):
 		# Get position to put the reticle
-		var reticle_position = current_camera.unproject_position(position)
+		var reticle_position:Vector2 = current_camera.unproject_position(position)
 		# Show the reticle
 		reticle.visible = true
 		# Subtract half width and height to center the reticle.
@@ -396,11 +396,11 @@ func set_reticle(reticle:TextureRect, position:Vector3) -> bool:
 		return false
 
 
-func player_feedback(collider, shoot_data) -> void:
+func player_feedback(collider:Node3D, shoot_data:ShootData) -> void:
 	if !shoot_data or !shoot_data.shooter or shoot_data.shooter != Ship.player:
 		return
 	if collider.is_in_group("damageable"):
-		var parent = collider.get_parent()
+		var parent:Node3D = collider.get_parent()
 		if parent is Weakpoint:
 			#print('damage to weakpoint') # strong_hit.wav
 			AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.HIT_ON_WEAKPOINT)

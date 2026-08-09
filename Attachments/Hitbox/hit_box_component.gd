@@ -108,7 +108,7 @@ func set_collisions(layer:int, b:bool) -> void:
 
 
 func get_velocity() -> Vector3:
-	var p = get_parent()
+	var p:Node3D = get_parent()
 	if 'velocity' in p:
 		return p.velocity
 	else:

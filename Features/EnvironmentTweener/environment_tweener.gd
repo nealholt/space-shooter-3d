@@ -88,7 +88,7 @@ func blink_environment(attribute:String, baseline:float, factor:float, duration:
 		return
 	# Tween the environment variable
 	var tween:Tween = create_tween()
-	var current = environment.get(attribute)
+	var current:float = environment.get(attribute)
 	tween.tween_property(environment,
 		attribute, current*factor, duration
 		).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)

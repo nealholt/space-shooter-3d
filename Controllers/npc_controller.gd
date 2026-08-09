@@ -88,7 +88,7 @@ func _ready() -> void:
 	orbit_state.ease_dist_sqd = ease_dist * ease_dist
 	#TESTING
 	if DEBUG:
-		var p = get_parent()
+		var p:Node3D = get_parent()
 		for c in p.get_children():
 			if c is Label3D:
 				debug_label = c
@@ -98,7 +98,7 @@ func _ready() -> void:
 
 func set_obstacle_detector(obstacle_detector:ObstacleDetector) -> void:
 	# Give every state a reference to the obstacle detector
-	for state_key in states:
+	for state_key:String in states:
 		var state:State = states[state_key]
 		state.obstacle_detector = obstacle_detector
 
@@ -177,12 +177,12 @@ func shoot(shoot_dat:ShootData) -> void:
 		shoot_dat.shoot()
 
 
-func on_child_transition(state:State, new_state_name:String):
+func on_child_transition(state:State, new_state_name:String) -> void:
 	if state != current_state:
 		#print('in state machine state != current_state')
 		return
 	
-	var new_state = states.get(new_state_name.to_lower())
+	var new_state:State = states.get(new_state_name.to_lower())
 	if !new_state:
 		print('In npc_controller. No state named ', new_state_name)
 		return

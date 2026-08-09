@@ -6,7 +6,7 @@ class_name ObstacleDetector extends Node
 @onready var ahead := $RayAhead
 @onready var below := $RayBelow
 
-var obstacle_ahead
+var obstacle_ahead:CollisionObject3D
 
 func get_blocked_above() -> bool:
 	above.force_raycast_update()
@@ -25,5 +25,5 @@ func get_blocked_below() -> bool:
 	below.force_raycast_update()
 	return below.is_colliding()
 
-func get_obstacle_ahead():
+func get_obstacle_ahead() -> CollisionObject3D:
 	return obstacle_ahead

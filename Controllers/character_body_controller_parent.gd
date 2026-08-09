@@ -60,7 +60,7 @@ func turn(mover:Ship, delta:float) -> void:
 func move_and_turn(mover:Ship, delta:float) -> void:
 	turn(mover, delta)
 	# New velocity is old velocity * friction + impulse in current direction
-	var new_dir = (-mover.transform.basis.z * impulse + mover.transform.basis.x * x_impulse + mover.transform.basis.y * y_impulse) * delta
+	var new_dir:Vector3 = (-mover.transform.basis.z * impulse + mover.transform.basis.x * x_impulse + mover.transform.basis.y * y_impulse) * delta
 	# Apply friction on a per unit time basis
 	mover.velocity = mover.velocity * (1-clamp(friction*delta,0,1)) + new_dir
 	

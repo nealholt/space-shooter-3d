@@ -162,10 +162,7 @@ func _ready() -> void:
 			# Error check
 			if aim_assist.get_child_count() != 1:
 				push_error('Why does aim assist have multiple children? Should be at most one audio player')
-			var aim_child = aim_assist.get_child(0)
-			# Error check
-			if !(aim_child is AudioStreamPlayer):
-				push_error('Aim assist\'s only child should be audio player')
+			var aim_child:AudioStreamPlayer = aim_assist.get_child(0)
 			aim_child.queue_free()
 		# Set as a missile lock for NPCs
 		if missile_lock:
@@ -185,7 +182,7 @@ func _ready() -> void:
 		set_physics_process(false)
 
 
-func _physics_process(delta):
+func _physics_process(delta:float) -> void:
 	# Update the controller
 	controller.Update(self, delta)
 	# If there's a missile lock component, update it
@@ -283,7 +280,7 @@ func get_mouse_center_radius() -> float:
 # Pass along damage to the hitbox component.
 # But also get the before and after percent health for
 # potentially displaying damage effects.
-func damage(dat:ShootData):
+func damage(dat:ShootData) -> void:
 	var health_percent_pre := health_component.get_percent_health()
 	hit_box_component.damage(dat)
 	var health_percent_post := health_component.get_percent_health()
@@ -295,7 +292,7 @@ func damage(dat:ShootData):
 # scene, but for now it works fine as a proof of concept.
 # For capital ships, we're going to add a damage effect every
 # time the damage crosses a 10% threshold.
-func display_damage(dat:ShootData, health_percent_pre:float, health_percent_post:float):
+func display_damage(dat:ShootData, health_percent_pre:float, health_percent_post:float) -> void:
 	# Stop if not a capital ship
 	if !is_in_group('capital_ship'): return
 	# Stop if not crossing a ten percent health threshold
@@ -306,7 +303,7 @@ func display_damage(dat:ShootData, health_percent_pre:float, health_percent_post
 	# Spawn damage effect
 	# Add the effect to scene
 	var particle_scene:PackedScene = load('res://vfx/DamageEffects/damage_fire.tscn')
-	var effect = particle_scene.instantiate()
+	var effect:Node3D = particle_scene.instantiate()
 	add_child(effect)
 	# Put effect at correct location
 	effect.global_position = dat.collision_pos

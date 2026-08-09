@@ -4,7 +4,7 @@ signal abandon_camera
 
 @onready var near_miss_detector: Area3D = $NearMissDetector
 
-var rng = RandomNumberGenerator.new() # For positioning flyby camera
+var rng := RandomNumberGenerator.new() # For positioning flyby camera
 const target_close_up_dist:=-30.0 # For positioning target close-up camera
 var target:Node3D # For target close-up and target view cameras
 
