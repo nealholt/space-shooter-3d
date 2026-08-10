@@ -113,6 +113,10 @@ func _process(_delta:float) -> void:
 	if Global.current_camera.is_position_in_frustum(global_position):
 		# If camera does not have line of sight on the object
 		# with the reticle, then abort.
+		# Without the is_instance_valid check there can be an error
+		# when the player dies.
+		if !is_instance_valid(Ship.player):
+			return
 		var obscured:bool = !RayOnDemand.me.line_is_clear_plus(global_position, Global.current_camera.global_position, Ship.player)
 		if obscured:
 			return

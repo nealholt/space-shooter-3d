@@ -23,5 +23,5 @@ func _on_health_component_died() -> void:
 	Callable(queue_free).call_deferred()
 
 # Pass damage along to the hit box component.
-func damage(dat:ShootData):
+func damage(dat:ShootData) -> void:
 	hit_box_component.damage(dat)

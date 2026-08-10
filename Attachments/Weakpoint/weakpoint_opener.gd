@@ -3,7 +3,7 @@ extends Node
 var weakpoint_count := 0
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	# Check for weakpoints under the parent node
 	# https://docs.godotengine.org/en/3.2/classes/class_node.html#class-node-method-get-node-or-null
 	var weakpoint_group:Node3D = get_node_or_null('../WeakpointGroup')
