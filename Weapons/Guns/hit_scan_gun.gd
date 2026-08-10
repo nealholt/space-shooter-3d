@@ -26,7 +26,7 @@ func _ready() -> void:
 func shoot_actual() -> void:
 	ray.force_raycast_update() # Check for collisions
 	if ray.is_colliding():
-		var collider = ray.get_collider()
+		var collider:Node3D = ray.get_collider()
 		if collider.is_in_group("damageable"):
 			# Save more data on the hit. This is for adding damage
 			# effects.

@@ -72,7 +72,7 @@ func steer_around(motion:MovementProfile, orientation_data:TargetOrientationData
 	var adjustments := [20,-20,50,-50,100,-100,200,-200,500,-500]
 	var up:Vector3 = orientation_data.basis.y
 	var new_point:Vector3
-	for adjustment in adjustments:
+	for adjustment:int in adjustments:
 		new_point = midpoint + up*adjustment
 		# Verify that there is a clear path to new_point.
 		# If so, transition to goto on the new position

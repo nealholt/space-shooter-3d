@@ -81,15 +81,15 @@ func set_volume_percent(type:int, percent:float, index:int=0, use_3d:=false) -> 
 		sound_effect_dict[type].set_volume_percent(percent, index)
 
 func stop_everything() -> void:
-	for audio in sound_effect_dict.values():
+	for audio:SoundQueue in sound_effect_dict.values():
 		audio.stop_all()
-	for audio in sound_effect_dict_3d.values():
+	for audio:SoundQueue in sound_effect_dict_3d.values():
 		audio.stop_all()
 
 func print_summary() -> void:
 	print('\nSummary for non-positional audio:')
-	for audio in sound_effect_dict.values():
+	for audio:SoundQueue in sound_effect_dict.values():
 		audio.print_summary()
 	print('Summary for 3d-positional audio:')
-	for audio in sound_effect_dict_3d.values():
+	for audio:SoundQueue in sound_effect_dict_3d.values():
 		audio.print_summary()

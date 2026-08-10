@@ -19,7 +19,7 @@ static func new_sound_queue(my_parent:Node, sf:SoundEffectSetting) -> SoundQueue
 
 func _ready() -> void:
 	for i in sound_effect.limit:
-		var new_audio: AudioStreamPlayer3D = AudioStreamPlayer3D.new()
+		var new_audio:AudioStreamPlayer3D = AudioStreamPlayer3D.new()
 		add_child(new_audio)
 		new_audio.stream = sound_effect.sound_effect
 		new_audio.volume_db = sound_effect.volume

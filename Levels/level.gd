@@ -40,7 +40,7 @@ func _ready() -> void:
 # This function is called when something dies.
 # "something" includes ships and orbs only (if I recall
 # correctly)
-func check_win_loss(dead_thing) -> void:
+func check_win_loss(dead_thing:Ship) -> void:
 	# If there is no end screen or enemy team, return.
 	# There's nothing to do here.
 	if !(end_screen and red_team):

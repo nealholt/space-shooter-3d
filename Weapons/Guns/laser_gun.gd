@@ -131,7 +131,7 @@ func shoot_actual() -> void:
 
 
 func deal_damage(delta:float) -> void:
-	var collider:CollisionObject3D = ray.get_collider()
+	var collider:Node3D = ray.get_collider()
 	# I was getting an error on the line below
 	#     data.damage = damage*delta
 	# because data was null, so I added a condition
@@ -169,7 +169,7 @@ func beam_on(time:float) -> void:
 		tween.kill()
 	tween = create_tween()
 	# Use the smaller of the two times
-	var actual_time = time
+	var actual_time:float = time
 	if progress_time < time:
 		actual_time = progress_time
 	progress_time = 0.0
@@ -207,7 +207,7 @@ func beam_off(time:float) -> void:
 		tween.kill()
 	tween = create_tween()
 	# Use the smaller of the two times
-	var actual_time = time
+	var actual_time:float = time
 	if progress_time < time:
 		actual_time = progress_time
 	progress_time = 0.0

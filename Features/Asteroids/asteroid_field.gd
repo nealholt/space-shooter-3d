@@ -2,7 +2,7 @@ class_name AsteroidField extends Node3D
 
 const ASTEROIDS_FOLDER:String = 'res://Features/Asteroids/'
 
-var asteroids = [
+var asteroids:Array[PackedScene] = [
 	preload(ASTEROIDS_FOLDER+'asteroid_brown.tscn'),
 	preload(ASTEROIDS_FOLDER+'asteroid_gray.tscn'),
 	preload(ASTEROIDS_FOLDER+'asteroid_gray_green.tscn'),
@@ -77,31 +77,31 @@ func create_asteroid(pos:Vector3, grow_in:=true) -> Asteroid:
 	if randf() > DENSITY:
 		return null
 	# Otherwise, create an asteroid
-	var a = asteroids.pick_random()
-	a = a.instantiate()
-	add_child(a)
+	var a:PackedScene = asteroids.pick_random()
+	var asteroid:Asteroid = a.instantiate()
+	add_child(asteroid)
 	# Position the asteroid
-	a.global_position = pos
+	asteroid.global_position = pos
 	#print('    creating asteroid at '+str(a.global_position))
 	# Randomize scale
 	var temp_scale:float = randf_range(MIN_SCALE,MAX_SCALE)
 	# Randomize rotation
-	var rot_x = randf_range(0, TAU)
-	var rot_y = randf_range(0, TAU)
-	var rot_z = randf_range(0, TAU)
-	a.rotation = Vector3(rot_x, rot_y, rot_z)
+	var rot_x:float = randf_range(0, TAU)
+	var rot_y:float = randf_range(0, TAU)
+	var rot_z:float = randf_range(0, TAU)
+	asteroid.rotation = Vector3(rot_x, rot_y, rot_z)
 	# Randomize position, but keep the asteroid within the cell
 	var amount := GRID_SIZE/2.0 - temp_scale + 1
-	var pos_x = randf_range(-amount, amount)
-	var pos_y = randf_range(-amount, amount)
-	var pos_z = randf_range(-amount, amount)
-	a.global_position += Vector3(pos_x, pos_y, pos_z)
+	var pos_x:float = randf_range(-amount, amount)
+	var pos_y:float = randf_range(-amount, amount)
+	var pos_z:float = randf_range(-amount, amount)
+	asteroid.global_position += Vector3(pos_x, pos_y, pos_z)
 	# Grow from small to full size...
 	if grow_in:
-		a.swell_in(temp_scale)
+		asteroid.swell_in(temp_scale)
 	else: # ...or appear instantly at full size
-		a.scale = Vector3(temp_scale, temp_scale, temp_scale)
-	return a
+		asteroid.scale = Vector3(temp_scale, temp_scale, temp_scale)
+	return asteroid
 
 
 func _process(_delta: float) -> void:

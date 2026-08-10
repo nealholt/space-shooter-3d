@@ -19,7 +19,7 @@ static func new_sound_queue(my_parent:Node, sf:SoundEffectSetting) -> SoundQueue
 
 func _ready() -> void:
 	for i in sound_effect.limit:
-		var new_audio: AudioStreamPlayer = AudioStreamPlayer.new()
+		var new_audio:AudioStreamPlayer = AudioStreamPlayer.new()
 		add_child(new_audio)
 		new_audio.stream = sound_effect.sound_effect
 		new_audio.volume_db = sound_effect.volume
@@ -45,7 +45,7 @@ func play(_loc:Vector3) -> int:
 
 
 func stop_all() -> void:
-	for a in audio_players:
+	for a:Node in audio_players:
 		a.stop()
 
 func stop(index:int=0) -> void:
@@ -63,7 +63,7 @@ func set_volume_percent(percent:float, index:int=0) -> void:
 func print_summary() -> void:
 	print("    Summary for ", SoundEffectSetting.SOUND_EFFECT_TYPE.keys()[sound_effect.type])
 	var count:int = 0
-	for player in audio_players:
+	for player:Node in audio_players:
 		if player.playing:
 			count+=1
 	print('        %d playing' % count)
