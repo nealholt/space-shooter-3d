@@ -16,8 +16,10 @@ var lerp_weight:float = 0.0
 func continue_seeking(delta:float, target_onscreen:Vector2,
 		acquiring:TextureRect) -> void:
 	# Lerp reticle toward target
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
 	lerp_weight += delta/lerp_modifier
-	reticle_position = lerp(reticle_position, target_onscreen, lerp_weight)
+	reticle_position = lerp(reticle_position, target_onscreen, 1.0-exp(-lerp_weight))
 	# "acquiring" is the reticle. Position it on screen
 	acquiring.set_global_position(reticle_position - acquiring_offset)
 	# Check if lock acquired

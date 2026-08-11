@@ -7,28 +7,28 @@ class_name InputManager extends Node
 # than one InputManager in a scene.
 static var im:InputManager = null
 
-@export var use_mouse_and_keyboard := true
-@export var use_inverted := false
+@export var use_mouse_and_keyboard :bool= true
+@export var use_inverted :bool= false
 # Use this curve to scale mouse input to make the ship easier
 # to control
 @export var mouse_control_curve : Curve
 
 var inverted := 1.0
 
-var switch_weapons := false
-var retarget_just_pressed := false
-var retarget_just_released := false # Used to fire missile
-var shoot_pressed := false
-var shoot_just_pressed := false
-var brake := false
-var drift := false
-var drift_just_released := false
-var accelerate := false
-var accelerate_just_pressed := false
-var left_right1 := 0.0 # Left stick
-var left_right2 := 0.0 # Right stick
-var up_down1 := 0.0 # Left stick
-var up_down2 := 0.0 # Right stick
+var switch_weapons :bool= false
+var retarget_just_pressed :bool= false
+var retarget_just_released :bool= false # Used to fire missile
+var shoot_pressed :bool= false
+var shoot_just_pressed :bool= false
+var brake :bool= false
+var drift :bool= false
+var drift_just_released :bool= false
+var accelerate :bool= false
+var accelerate_just_pressed :bool= false
+var left_right1 :float= 0.0 # Left stick
+var left_right2 :float= 0.0 # Right stick
+var up_down1 :float= 0.0 # Left stick
+var up_down2 :float= 0.0 # Right stick
 
 var current_viewport:Viewport
 var mouse_pos:Vector2 ## Current mouse position on the viewport

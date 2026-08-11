@@ -125,12 +125,14 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 		current_state.Physics_Update(delta, movement_profile, orientation_data)
 	# Move
 	# Lerp toward desired settings
-	pitch_input = lerp(pitch_input, movement_profile.goal_pitch * stats.pitch, stats.turning_lerp*delta)
-	roll_input = lerp(roll_input, movement_profile.goal_roll * stats.roll, stats.turning_lerp*delta)
-	yaw_input = lerp(yaw_input, movement_profile.goal_yaw * stats.yaw, stats.turning_lerp*delta)
-	impulse = lerp(impulse, movement_profile.goal_speed * stats.impulse, stats.impulse_lerp*delta)
-	x_impulse = lerp(x_impulse, movement_profile.goal_strafe_x * x_speed, stats.impulse_lerp*delta)
-	y_impulse = lerp(y_impulse, movement_profile.goal_strafe_y * y_speed, stats.impulse_lerp*delta)
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
+	pitch_input = lerp(pitch_input, movement_profile.goal_pitch * stats.pitch, 1.0-exp(-delta * stats.turning_lerp))
+	roll_input = lerp(roll_input, movement_profile.goal_roll * stats.roll, 1.0-exp(-delta * stats.turning_lerp))
+	yaw_input = lerp(yaw_input, movement_profile.goal_yaw * stats.yaw, 1.0-exp(-delta * stats.turning_lerp))
+	impulse = lerp(impulse, movement_profile.goal_speed * stats.impulse, 1.0-exp(-delta * stats.impulse_lerp))
+	x_impulse = lerp(x_impulse, movement_profile.goal_strafe_x * x_speed, 1.0-exp(-delta * stats.impulse_lerp))
+	y_impulse = lerp(y_impulse, movement_profile.goal_strafe_y * y_speed, 1.0-exp(-delta * stats.impulse_lerp))
 	
 	# Call parent class method
 	super.move_and_turn(mover, delta)

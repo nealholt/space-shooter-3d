@@ -116,7 +116,9 @@ func rotate_and_elevate_lerp(body:Node3D, head:Node3D, delta:float, current_targ
 	# Goal is to change body.rotation.y by y_angle in
 	# the direction of rotation_sign.
 	# Lerp toward goal angle
-	body.rotation.y = lerp(body.rotation.y, body.rotation.y+rotation_sign*y_angle, delta)
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
+	body.rotation.y = lerp(body.rotation.y, body.rotation.y+rotation_sign*y_angle, 1.0-exp(-delta))
 	# Keep the rotation in the range -PI to PI. Clamp is NOT the solution
 	# because it will prevent rotation across the -180 to 180 edge
 	# of the circle
@@ -151,11 +153,13 @@ func rotate_and_elevate_lerp(body:Node3D, head:Node3D, delta:float, current_targ
 	# There's an extra negative sign because pitching up is negative.
 	var elevation_sign:float = -sign(head.to_local(current_target).y)
 	# Lerp toward goal angle
-	head.rotation.x = lerp(head.rotation.x, head.rotation.x+elevation_sign*x_angle, delta)
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
+	head.rotation.x = lerp(head.rotation.x, head.rotation.x+elevation_sign*x_angle, 1.0-exp(-delta))
 	
 	# The following is INCONSISTENT with how rotation is
 	# calculated above, but weirdly also seems to work?!
-	#head.rotation.x = lerp(head.rotation.x, x_angle, delta)
+	#head.rotation.x = lerp(head.rotation.x, x_angle, 1.0-exp(-delta))
 	
 	# Clamp elevation within limits.
 	# Swap and negate max and min because up is negative and
@@ -196,8 +200,10 @@ func swivel_toward(body:Node3D, rotation_percent:float, delta:float) -> void:
 		if 0 < body.rotation_degrees.y:
 			body.rotation_degrees.y -= 360
 	# Lerp by delta toward the goal angle
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
 	var goal_angle:float = -rotation_sign*180+rotation_percent*ROTATION_LIMIT_DEG
-	body.rotation_degrees.y = lerp(body.rotation_degrees.y, goal_angle, delta)
+	body.rotation_degrees.y = lerp(body.rotation_degrees.y, goal_angle, 1.0-exp(-delta))
 
 
 # Rotate the given body(head) around the x axis toward the goal
@@ -208,4 +214,6 @@ func pitch_toward(head:Node3D, rotation_percent:float, delta:float) -> void:
 	# Get goal angle
 	var goal_angle:float = -rotation_percent*rad_to_deg(max_elevation)
 	# Lerp by delta toward the goal angle
-	head.rotation_degrees.x = lerp(head.rotation_degrees.x, goal_angle, delta)
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
+	head.rotation_degrees.x = lerp(head.rotation_degrees.x, goal_angle, 1.0-exp(-delta))

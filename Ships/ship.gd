@@ -312,6 +312,11 @@ func display_damage(dat:ShootData, health_percent_pre:float, health_percent_post
 	# otherwise you get an error.
 	var up := Vector3.UP
 	var hit_normal := dat.collision_surf_norm
+	# The looking_at function can't look at a hit_normal of 0,0,0
+	# which did occasionally crop up. This if fixes it, though
+	# it's hacky.
+	if hit_normal.is_zero_approx(): # Too close to zero
+		hit_normal = Vector3.RIGHT
 	if abs(hit_normal.dot(up)) > 0.95: # Too close to parallel
 		up = Vector3.RIGHT # use alternate "up"
 	# -Z axis points toward the target.

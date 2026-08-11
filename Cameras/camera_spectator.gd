@@ -146,12 +146,14 @@ func move_forward_backward(delta:float) -> void:
 
 func accelerate(delta:float) -> void:
 	# Speed up or slow down
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
 	if InputManager.im.accelerate:
-		speed = lerp(speed, max_speed, speed_lerp * delta)
+		speed = lerp(speed, max_speed, 1.0 - exp(-delta * speed_lerp))
 	elif InputManager.im.drift: # Reverse
-		speed = lerp(speed, min_speed, speed_lerp * delta)
+		speed = lerp(speed, min_speed, 1.0 - exp(-delta * speed_lerp))
 	elif InputManager.im.brake: # Decelerate
-		speed = lerp(speed, 0.0, brake_lerp * delta)
+		speed = lerp(speed, 0.0, 1.0 - exp(-delta * brake_lerp))
 
 
 func look_behavior(delta:float) -> void:
@@ -166,8 +168,10 @@ func look_behavior(delta:float) -> void:
 	if global_position.distance_squared_to(target.global_position) < 1:
 		speed = -1.0
 	# Get strafe amount
-	strafe_left_right = lerp(strafe_left_right, strafe_strength*InputManager.im.left_right1, strafe_lerp*delta)
-	strafe_up_down = lerp(strafe_up_down, strafe_strength*InputManager.im.up_down1, strafe_lerp*delta)
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
+	strafe_left_right = lerp(strafe_left_right, strafe_strength*InputManager.im.left_right1, 1.0-exp(-delta * strafe_lerp))
+	strafe_up_down = lerp(strafe_up_down, strafe_strength*InputManager.im.up_down1, 1.0-exp(-delta * strafe_lerp))
 	# Strafe left right
 	global_position += -transform.basis.x * strafe_left_right * delta
 	# Before strafing up down, check the following:
@@ -178,7 +182,7 @@ func look_behavior(delta:float) -> void:
 	# south pole above or below and that's bad because side
 	# to side motion at those extremes creates a sickening
 	# spinning effect. Don't let this happen!
-	var proposed_global_position = global_position + transform.basis.y * strafe_up_down * delta
+	var proposed_global_position:Vector3 = global_position + transform.basis.y * strafe_up_down * delta
 	var vertical:Vector3 = (proposed_global_position - target.global_position).normalized()
 	# If below the pole_limit, it's fine to move
 	if pole_limit < (Vector3.UP - abs(vertical)).length_squared():
@@ -203,9 +207,11 @@ func look_attached_behavior(delta:float) -> void:
 	if camera.global_position.distance_squared_to(target.global_position) < 1.0:
 		speed = -1.0
 	# control movement around target by rotating root
-	rotate_left_right = lerp(rotate_left_right, rotate_strength*InputManager.im.left_right1, rotate_lerp*delta)
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
+	rotate_left_right = lerp(rotate_left_right, rotate_strength*InputManager.im.left_right1, 1.0-exp(-delta * rotate_lerp))
 	rotate_y(-rotate_left_right)
-	rotate_up_down = lerp(rotate_up_down, rotate_strength*InputManager.im.up_down1, rotate_lerp*delta)
+	rotate_up_down = lerp(rotate_up_down, rotate_strength*InputManager.im.up_down1, 1.0-exp(-delta * rotate_lerp))
 	rotate_x(-rotate_up_down)
 
 
@@ -220,9 +226,11 @@ func attached_behavior(delta:float) -> void:
 
 func pitch_roll_yaw_me(me:Node3D, delta:float) -> void:
 	# Pitch roll and yaw the camera
-	roll = lerp(roll, roll_strength*InputManager.im.left_right2, roll_lerp*delta)
-	pitch = lerp(pitch, pitch_strength*InputManager.im.up_down1, pitch_lerp*delta)
-	yaw = lerp(yaw, yaw_strength*InputManager.im.left_right1, yaw_lerp*delta)
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
+	roll = lerp(roll, roll_strength*InputManager.im.left_right2, 1.0-exp(-delta * roll_lerp))
+	pitch = lerp(pitch, pitch_strength*InputManager.im.up_down1, 1.0-exp(-delta * pitch_lerp))
+	yaw = lerp(yaw, yaw_strength*InputManager.im.left_right1, 1.0-exp(-delta * yaw_lerp))
 	
 	# Pitch roll and yaw
 	me.transform.basis = me.transform.basis.rotated(me.transform.basis.z, roll)

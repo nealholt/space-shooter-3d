@@ -78,7 +78,7 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 		# Deal collision damage.
 		# Factor in collision angle and speed.
 		var temp:Vector3 = collision.get_normal()
-		var collision_severity:= get_collision_severity(temp.angle_to(mover.velocity), mover.velocity.length())
+		var collision_severity:float = get_collision_severity(temp.angle_to(mover.velocity), mover.velocity.length())
 		mover.collision_occurred(collision_severity)
 		# Collision angles close to 180 are essentially head on.
 		# Collision angles close to 90 are glancing blows.

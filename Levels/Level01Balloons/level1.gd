@@ -12,7 +12,7 @@ const ORBS_PER_CLUSTER:int = 20
 const CLUSTER_RADIUS:int = 100
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	super()
 	# Seed global random number generator for replicable first level
 	seed(123)
@@ -27,7 +27,7 @@ func _ready():
 
 
 func make_orb_at(pos:Vector3) -> void:
-	var orb = Orb.new_orb()
+	var orb:Orb = Orb.new_orb()
 	red_team.add_child(orb)
 	red_team.set_team_properties(orb)
 	# set orb scale, health, and position
@@ -50,10 +50,10 @@ func check_win_loss_alt() -> void:
 func get_random_position(radius:int) -> Vector3:
 	#https://godotengine.org/qa/86921/random-spawning
 	# Get range
-	var coord_range = Vector2(-radius, radius)
+	var coord_range:Vector2 = Vector2(-radius, radius)
 	# Get x, y, and z
-	var random_x = randi() % int(coord_range[1]- coord_range[0]) + 1 + coord_range[0]
-	var random_y =  randi() % int(coord_range[1]) + 1 #Minimum, is zero to not go below ground
-	var random_z =  randi() % int(coord_range[1]- coord_range[0]) + 1 + coord_range[0]
+	var random_x:int = randi() % int(coord_range[1]- coord_range[0]) + 1 + int(coord_range[0])
+	var random_y:int =  randi() % int(coord_range[1]) + 1 #Minimum, is zero to not go below ground
+	var random_z:int =  randi() % int(coord_range[1]- coord_range[0]) + 1 + int(coord_range[0])
 	# Return new position
 	return Vector3(random_x, random_y, random_z)

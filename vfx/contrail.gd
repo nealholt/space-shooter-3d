@@ -103,7 +103,14 @@ func _process(delta:float) -> void:
 	var t1:float
 	for i in range(_points.size()):
 		t = float(i) / (_points.size() - 1.0)
-		currColor = _startColor.lerp(_endColor, 1.0-t)
+		# Old way
+		#currColor = _startColor.lerp(_endColor, 1.0-t)
+		# New way
+		# The exp is for frame rate independent lerp. This is
+		# Freya Holmer lerp smoothing. Normally it would be 1-exp
+		# but this is already supposed to be inverted. See the
+		# "Old way" above.
+		currColor = _startColor.lerp(_endColor, exp(-t))
 		mesh.surface_set_color(currColor)
 		
 		currWidth = _widths[i][0] - pow(1.0-t, _scaleAcceleration) * _widths[i][1]

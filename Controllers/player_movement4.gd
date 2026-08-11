@@ -128,10 +128,10 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 		engineAV.shift2default(2.0)
 	
 	# Lerp current impulse toward goal impulse.
-	# If you lerp more than 100% weird bad behavior occurs.
-	# Use min to avoid this.
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
 	impulse = lerp(impulse, stats.impulse,
-			min(1.0, stats.impulse_lerp*delta))
+			1.0-exp(-delta * stats.impulse_lerp))
 	
 	# Calculate reduced turn rate based on difference
 	# between current speed and default speed.
@@ -146,20 +146,20 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 		roll_modifier /= turn_reduction
 		yaw_modifier /= turn_reduction
 	
-	# If you lerp more than 100% weird bad behavior occurs.
-	# Use min to avoid this.
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
 	# Get pitch. Both left and right stick contribute. Left is primary.
 	pitch_input = lerp(pitch_input,
 		(InputManager.im.up_down1*stats.pitch + InputManager.im.up_down2*pitch_std_right_stick) * pitch_modifier,
-		min(1.0, stats.turning_lerp*delta))
+		1.0-exp(-delta * stats.turning_lerp))
 	# Get roll. Both left and right stick contribute. Left is primary.
 	roll_input = lerp(roll_input,
 		(InputManager.im.left_right1*stats.roll + InputManager.im.left_right2*roll_std_right_stick) * roll_modifier,
-		min(1.0, stats.turning_lerp*delta))
+		1.0-exp(-delta * stats.turning_lerp))
 	# Get yaw using same left stick input as roll
 	yaw_input = lerp(yaw_input,
 		InputManager.im.left_right1*stats.yaw * yaw_modifier,
-		min(1.0, stats.turning_lerp*delta))
+		1.0-exp(-delta * stats.turning_lerp))
 	
 	friction = stats.friction_std
 	
@@ -218,25 +218,25 @@ func move_and_turn_v5(mover:Ship, delta:float) -> void:
 		engineAV.shift2default(2.0)
 	
 	# Lerp current impulse toward goal impulse.
-	# If you lerp more than 100% weird bad behavior occurs.
-	# Use min to avoid this.
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
 	impulse = lerp(impulse, stats.impulse,
-			min(1.0, stats.impulse_lerp*delta))
+			1.0-exp(-delta * stats.impulse_lerp))
 	
-	# If you lerp more than 100% weird bad behavior occurs.
-	# Use min to avoid this.
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
 	# Get pitch
 	pitch_input = lerp(pitch_input,
 		InputManager.im.up_down1 * stats.pitch,
-		min(1.0, stats.turning_lerp*delta))
+		1.0-exp(-delta * stats.turning_lerp))
 	# Get Roll
 	roll_input = lerp(roll_input,
 		InputManager.im.left_right1 * stats.roll,
-		min(1.0, stats.turning_lerp*delta))
+		1.0-exp(-delta * stats.turning_lerp))
 	# Get yaw using same left stick input as roll
 	yaw_input = lerp(yaw_input,
 		InputManager.im.left_right1*stats.yaw,
-		min(1.0, stats.turning_lerp*delta))
+		1.0-exp(-delta * stats.turning_lerp))
 	
 	friction = stats.friction_std
 	

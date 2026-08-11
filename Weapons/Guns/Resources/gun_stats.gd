@@ -12,10 +12,10 @@ class_name GunStats extends Resource
 @export var bullet_speed:float = 1000.0
 @export var bullet_timeout:float = 2.0 ## Seconds
 @export var timeout_vary_percent:float = 0.05 ## Randomly vary the timeout by this percent
-@export var fire_rate:= 1.0 ## Shots per second
+@export var fire_rate:float = 1.0 ## Shots per second
 const INFINITE_AMMO:int = 2**30-1
 @export var magazine_size:int = INFINITE_AMMO ## Default is infinite ammo, no reload
-@export var reload_time:= 1.0 ## seconds
+@export var reload_time:float = 1.0 ## seconds
 # Whether gun is automatic or not. If true then
 # holding the shoot button will fire this weapon
 # as often as possible.
@@ -37,10 +37,10 @@ const INFINITE_AMMO:int = 2**30-1
 @export var muzzle_flash : PackedScene
 @export var reticle:CompressedTexture2D
 
-@export var position:=Vector3(0.0, 0.0, 0.0) ## For adjusting the position where the bullets come out
+@export var position:Vector3 =Vector3(0.0, 0.0, 0.0) ## For adjusting the position where the bullets come out
 
 @export var gun_model:PackedScene
-@export var model_adjust:=Vector3(0.0, 0.0, 0.0) ## For adjusting the position of the gun model
+@export var model_adjust:Vector3 =Vector3(0.0, 0.0, 0.0) ## For adjusting the position of the gun model
 
 
 # The following properties only apply to the

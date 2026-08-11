@@ -6,7 +6,7 @@ class_name HealthComponent
 signal health_lost(me:HealthComponent, amount:float)
 signal died
 
-@export var max_health := 10.0
+@export var max_health :float = 10.0
 @export var weakpoint_damage:float = 1.0 ## health lost per weakpoint destroyed
 @export var weakpoint_group:Node3D
 
@@ -22,7 +22,7 @@ var health: float:
 	# This setter runs whenever current_health is changed,
 	# including basic assignment like in _ready()
 	set(new_health):
-		var amount_lost := health-new_health
+		var amount_lost:float = health-new_health
 		# Change health
 		health = new_health
 		# If health is decreasing, signal

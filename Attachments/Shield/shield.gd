@@ -43,8 +43,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	# Drift fresnel parameters back toward default after being struck
-	fresnel_power_current = lerp(fresnel_power_current, fresnel_power_default, delta * fresnel_power_lerp_speed)
-	fresnel_emission_current = lerp(fresnel_emission_current, fresnel_emission_default, delta * fresnel_emission_lerp_speed)
+	# The 1-exp is for frame rate independent lerp. This is
+	# Freya Holmer lerp smoothing.
+	fresnel_power_current = lerp(fresnel_power_current, fresnel_power_default, 1.0 - exp(-delta * fresnel_power_lerp_speed))
+	fresnel_emission_current = lerp(fresnel_emission_current, fresnel_emission_default, 1.0 - exp(-delta * fresnel_emission_lerp_speed))
 	# https://forum.godotengine.org/t/how-to-access-change-visualshader-uniform-variables-from-within-a-script/19668
 	shader_ref.set("shader_parameter/FresnelPower", fresnel_power_current)
 	shader_ref.set("shader_parameter/EmissionStrength", fresnel_emission_current)
