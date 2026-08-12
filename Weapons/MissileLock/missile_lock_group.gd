@@ -34,9 +34,13 @@ var slower_lock_angle:float = 25.0 # degrees
 # Gun to fire when launch is triggered
 @export var missile_launcher:Gun
 
-@export var missile_range:float = 600.0 ## Range within which missile lock can be acquired.
+@export var missile_range:float = 2000.0 ## Range within which missile lock can be acquired.
 # Calculated from missile_range
 var missile_range_sqd:float ## Squared range within which missile lock can be acquired
+ # Minimum missile range. This is only used by NPCs.
+# I added this so NPCs don't smack the player in the face
+# with a missile at the very last moment.
+var missile_range_min_sqd:float = 200.0 * 200.0
 # Can achieve and maintain missile lock if target is within plus of minus of this angle from center.
 @export_range(0, 90, 0.1, "radians_as_degrees") var missile_lock_max_angle: float = deg_to_rad(35.0)
 
@@ -146,16 +150,18 @@ func npc_update(delta:float) -> void:
 		stop_seeking()
 		return
 	# Also stop seeking if target is out of range or offscreen
-	elif (my_parent.global_position.distance_squared_to(target.global_position) > missile_range_sqd \
-	or Global.get_angle_to_target(my_parent.global_position, target.global_position, -my_parent.global_basis.z) > missile_lock_max_angle):
+	var dist_to_target_sqd:float = my_parent.global_position.distance_squared_to(target.global_position)
+	if missile_range_sqd < dist_to_target_sqd \
+	or dist_to_target_sqd < missile_range_min_sqd \
+	or Global.get_angle_to_target(my_parent.global_position, target.global_position, -my_parent.global_basis.z) > missile_lock_max_angle:
 		stop_seeking()
+		return
 	# Otherwise target is valid and we're either seeking
 	# or locked.
-	else:
-		if seeking:
-			npc_seeking_update(delta)
-		if locked:
-			attempt_to_fire_missile()
+	if seeking:
+		npc_seeking_update(delta)
+	if locked:
+		attempt_to_fire_missile()
 
 
 func player_update(delta:float) -> void:
