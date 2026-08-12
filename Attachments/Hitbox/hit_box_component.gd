@@ -54,8 +54,8 @@ func add_damage_exception(s:Ship) -> void:
 		push_error('Trying to add a damage exception but there is no DamageableArea. HitBox parent is ', get_parent())
 
 
-# This is called when any ship targets this hitbox.
-func set_targeted(value:bool, targeter:Ship) -> void:
+# This is called when any ship or missile targets this hitbox.
+func set_targeted(value:bool, targeter:Node3D) -> void:
 	is_targeted.emit(value, targeter)
 
 

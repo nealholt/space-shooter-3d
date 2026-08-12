@@ -20,6 +20,7 @@ static var player:Ship = null
 @export var burning_trail:BurningTrail # This is a visual effect
 var camera_group:CameraGroup
 @export var controller:CharacterBodyControlParent
+@export var countermeasues:FlareComponent
 @export var hangar:Hangar
 @export var health_component:HealthComponent
 @export var missile_lock:MissileLockGroup
@@ -98,6 +99,8 @@ var collision_exceptions := Array()
 func _ready() -> void:
 	if aim_assist:
 		aim_assist.set_assist_limit(stats.aim_assist_angle)
+	if countermeasues and hit_box_component:
+		hit_box_component.is_targeted.connect(countermeasues.change_targeters)
 	if disable_for_testing:
 		controller = null
 		if hangar:
@@ -345,3 +348,7 @@ func _on_camera_switch(new_cam:CameraGroup.CameraState) -> void:
 	# It just gets in the way.
 	for c in contrails:
 		c.visible = new_cam != CameraGroup.CameraState.THIRDPERSON
+
+func launch_countermeasures() -> void:
+	if !is_instance_valid(countermeasues): return
+	countermeasues.launch_flare(ally_team, get_new_shootdata())

@@ -14,6 +14,7 @@ var scenario:Array[String] = \
 	'Scenario 8: Target facing away on right']
 var index := -1
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Set to windowed, not full screen

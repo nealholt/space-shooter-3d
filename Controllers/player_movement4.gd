@@ -111,10 +111,12 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 		#move_and_turn_v5(mover, delta)
 		#return
 	
-	#Brake
+	#Brake / Countermeasures
 	if InputManager.im.brake:
 		stats = stats_brake
 		engineAV.shift2brake(0.0)
+		# Fire countermeasures
+		mover.launch_countermeasures()
 	#Accelerate
 	elif InputManager.im.accelerate:
 		stats = stats_accel

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://7wtfeo4bk0cq"]
+
+[ext_resource type="Script" uid="uid://bltjhh3hdxdlf" path="res://Attachments/Countermeasures/flare_component.gd" id="1_c3m7u"]
+
+[node name="FlareComponent" type="Node3D" unique_id=438218565]
+script = ExtResource("1_c3m7u")
+
+[node name="Timer" type="Timer" parent="." unique_id=1360550402]
+one_shot = true
+
+[node name="Heading" type="Node3D" parent="." unique_id=2073970730]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)

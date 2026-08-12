@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://hpvkerb8hmkp" path="res://Ships/ModelsBlender/fighter_tri.tscn" id="4_05dih"]
 [ext_resource type="PackedScene" uid="uid://c5a4dsie0n5u6" path="res://Weapons/weapon_handler.tscn" id="4_dhpb0"]
 [ext_resource type="PackedScene" uid="uid://034dpfhar4p4" path="res://Attachments/Health/health_component.tscn" id="5_1xytm"]
+[ext_resource type="PackedScene" uid="uid://7wtfeo4bk0cq" path="res://Attachments/Countermeasures/flare_component.tscn" id="8_uy5hr"]
 [ext_resource type="PackedScene" uid="uid://dc6ukdkam24n" path="res://Attachments/Hitbox/hit_box_component.tscn" id="9_s55gh"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://vfx/DamageEffects/burning_trail.tscn" id="14_4fwow"]
 [ext_resource type="PackedScene" uid="uid://d4bglopp7u44j" path="res://Attachments/ObstacleDetector/obstacle_detector.tscn" id="14_05dih"]
@@ -19,7 +20,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_ydoww"]
 radius = 2.3
 
-[node name="Fighter" type="CharacterBody3D" unique_id=1900985089 node_paths=PackedStringArray("contrails", "aim_assist", "burning_trail", "health_component", "missile_lock", "obstacle_detector", "weapon_handler") groups=["damageable"]]
+[node name="Fighter" type="CharacterBody3D" unique_id=1900985089 node_paths=PackedStringArray("contrails", "aim_assist", "burning_trail", "countermeasues", "health_component", "missile_lock", "obstacle_detector", "weapon_handler") groups=["damageable"]]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 0, 0, 0)
 motion_mode = 1
 script = ExtResource("1_dn8ab")
@@ -27,6 +28,7 @@ contrails = [NodePath("Contrail")]
 stats = ExtResource("2_s55gh")
 aim_assist = NodePath("AimAssist")
 burning_trail = NodePath("BurningTrail")
+countermeasues = NodePath("Countermeasures")
 health_component = NodePath("HealthComponent")
 missile_lock = NodePath("MissileLockGroup")
 obstacle_detector = NodePath("ObstacleDetector")
@@ -55,6 +57,9 @@ shape = SubResource("SphereShape3D_ydoww")
 
 [node name="Contrail" parent="." unique_id=1872205333 instance=ExtResource("20_a8xhu")]
 transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, -5.2564846e-09, -0.12025433, 1.2580556)
+
+[node name="Countermeasures" parent="." unique_id=438218565 instance=ExtResource("8_uy5hr")]
+transform = Transform3D(1, 8.3518774e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="DebugLabel" type="Label3D" parent="." unique_id=1097695612]
 transform = Transform3D(1, 8.35188e-23, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

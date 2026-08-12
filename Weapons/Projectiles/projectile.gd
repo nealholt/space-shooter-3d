@@ -128,7 +128,8 @@ func set_data(dat:ShootData) -> void:
 	# was important... I'm not sure why and I don't
 	# feel like removing it and testing that right now.
 	global_transform = dat.gun.global_transform
-	aim_self.call_deferred()
+	#aim_self.call_deferred() # TODO TESTING
+	aim_self() # TODO TESTING
 	# 'Super powered' doubles turn rate (which is done
 	# in the controller) and 10xs damage
 	if dat.super_powered:
@@ -146,9 +147,6 @@ func set_data(dat:ShootData) -> void:
 		CONTROLLER.FIXED_ROTATION_SEEK:
 			controller = FixedRotationController.new()
 			controller.rotation_speed = steer_strength
-	if controller:
-		controller.is_laser_guided = is_laser_guided
-		controller.set_data(dat)
 	# Make it so a Ship can't shoot their own bullets.
 	# More often this is making a shooter not shoot down
 	# their own missiles, because most projectiles don't
@@ -162,6 +160,10 @@ func set_data(dat:ShootData) -> void:
 			dat.target = Global.get_center_most_from_group("blue team",self)
 		else:
 			dat.target = Global.get_center_most_from_group("red team",self)
+	# Setup controller after altering data target
+	if controller:
+		controller.is_laser_guided = is_laser_guided
+		controller.set_data(dat)
 	# Set up timed fuse explosions and generally deal with timeout
 	if explode_on_timeout:
 		# Add in a random +- to the timeout.
@@ -174,6 +176,12 @@ func set_data(dat:ShootData) -> void:
 	# reticle based on distance to target
 	if controller and hit_box_component and is_instance_valid(data.target) and data.target.owner == Ship.player and reticle:
 		MissileOnPlayerReticle.new_missile_on_player(self, reticle)
+	# This next bit is important to register self with anyone
+	# paying attention to who is targeting the dat.target hitbox.
+	# For example, countermeasures want to know about this so
+	# they can mess with targeting.
+	if is_instance_valid(dat.target):
+		dat.target.set_targeted(true, self)
 
 
 # Randomize heading of this bullet based on ShootData
@@ -532,3 +540,18 @@ func explode_with_damage() -> void:
 	explosion.global_position = global_position
 	# Pass forward shoot data
 	explosion.set_shoot_data(data)
+
+
+# This is used by countermeasures
+func set_target(new_target:HitBoxComponent) -> void:
+	# Tell previous target, if any, that they are no
+	# longer targeted
+	if is_instance_valid(data.target):
+		data.target.set_targeted(false, self)
+	# Set the new target
+	data.target = new_target
+	# Update the controller
+	if controller:
+		controller.set_data(data)
+	# Tell new target that it is targeted
+	data.target.set_targeted(true, self)
