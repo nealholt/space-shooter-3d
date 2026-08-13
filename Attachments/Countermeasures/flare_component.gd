@@ -1,4 +1,4 @@
-class_name FlareComponent extends Node3D
+class_name FlareComponent extends Countermeasure
 
 # Fires off a flare.
 # Flare is just a projectile.
@@ -14,14 +14,10 @@ class_name FlareComponent extends Node3D
 # Cooldown between flare uses
 @export var cooldown:float = 1.0 ## Seconds
 
-# Keep track of all the ships or whatever is targeting
-# attached ship.
-var targeters:Array[Node3D]
-
 
 # Since flares are projectiles, we need to know ally team
 # and shoot data.
-func launch_flare(ally_team:String, data:ShootData) -> void:
+func activate_countermeasure(ally_team:String, data:ShootData) -> void:
 	# Can't fire if out of ammo
 	if ammo <= 0: return
 	# Can't fire if on cooldown
@@ -49,39 +45,12 @@ func launch_flare(ally_team:String, data:ShootData) -> void:
 
 
 func all_missiles_target_flare(flare:Projectile) -> void:
+	remove_invalid_targeters()
 	# Loop backwards through targeters for safe removal.
 	var i:int = targeters.size()-1
 	while 0 <= i:
-		# Remove invalid references.
-		if !is_instance_valid(targeters[i]):
-			#print('removed invalid targeter')
-			targeters.remove_at(i)
 		# Make any missiles target the flare
-		elif targeters[i] is Projectile:
+		if targeters[i] is Projectile:
 			targeters[i].set_target(flare.hit_box_component)
 			#print('altering projectile target')
 		i -= 1
-
-
-func change_targeters(is_targeting:bool, targeter:Node3D) -> void:
-	# Loop backwards through targeters for safe removal.
-	var i:int = targeters.size()-1
-	while 0 <= i:
-		# Remove invalid references.
-		if !is_instance_valid(targeters[i]):
-			#print('removed invalid targeter')
-			targeters.remove_at(i)
-		# Check for the targeter
-		elif targeters[i] == targeter:
-			# If already in the array, return. We already knew
-			# about this targeter.
-			# If targeter is in the array but is_targeting is false,
-			# then remove targeter and return.
-			if !is_targeting:
-				#print('removed live targeter')
-				targeters.remove_at(i)
-			return
-		i -= 1
-	# Otherwise add targeter to array
-	targeters.append(targeter)
-	#print('added targeter')
