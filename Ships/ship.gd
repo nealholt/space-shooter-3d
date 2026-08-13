@@ -20,7 +20,7 @@ static var player:Ship = null
 @export var burning_trail:BurningTrail # This is a visual effect
 var camera_group:CameraGroup
 @export var controller:CharacterBodyControlParent
-@export var countermeasure:Countermeasure
+var countermeasure:Countermeasure
 @export var hangar:Hangar
 @export var health_component:HealthComponent
 @export var missile_lock:MissileLockGroup
@@ -99,7 +99,9 @@ var collision_exceptions := Array()
 func _ready() -> void:
 	if aim_assist:
 		aim_assist.set_assist_limit(stats.aim_assist_angle)
-	if countermeasure and hit_box_component:
+	if hit_box_component and stats.countermeasure != Countermeasure.CM_TYPE.NONE:
+		countermeasure = Countermeasure.new_countermeasure(stats.countermeasure)
+		add_child(countermeasure)
 		hit_box_component.is_targeted.connect(countermeasure.change_targeters)
 	if disable_for_testing:
 		controller = null

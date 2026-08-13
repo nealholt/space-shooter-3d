@@ -129,7 +129,7 @@ func set_data(dat:ShootData) -> void:
 	# the deferred mucked with flares and made them
 	# fire out the front. I'm not getting any issues
 	# with NOT using call_deferred on aim_self, so keep it.
-	global_transform = dat.transform #TODO TESTING Isn't this redundant with the code that does the same in aim_self
+	global_transform = dat.transform
 	aim_self()
 	# 'Super powered' doubles turn rate (which is done
 	# in the controller) and 10xs damage

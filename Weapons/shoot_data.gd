@@ -52,7 +52,7 @@ func set_shooter(_shooter:Node3D) -> void:
 
 func set_gun(g:Gun) -> void:
 	gun = g
-	transform = g.transform
+	transform = g.global_transform
 	damage = g.damage
 	bullet_speed = g.bullet_speed
 	bullet_timeout = g.bullet_timeout

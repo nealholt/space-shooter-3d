@@ -10,7 +10,7 @@ class_name Countermeasure extends Node3D
 
 enum CM_TYPE {NONE, FLARE, CHAFF, INTERCEPTOR}
 
-var flare_scene:PackedScene = load('res://Attachments/Countermeasures/flare_component.tscn')
+const FLARE_SCENE:PackedScene = preload('res://Attachments/Countermeasures/flare_component.tscn')
 
 # Keep track of all the ships or missiles or whatever is
 # targeting attached ship.
@@ -18,13 +18,11 @@ var targeters:Array[Node3D]
 
 
 # Ships call this to get a made-to-order countermeasure component
-func new_countermeasure(t:CM_TYPE) -> Countermeasure:
+static func new_countermeasure(t:CM_TYPE) -> Countermeasure:
 	var c : Countermeasure
 	match t:
-		CM_TYPE.NONE:
-			pass # TODO
 		CM_TYPE.FLARE:
-			c = flare_scene.instantiate()
+			c = FLARE_SCENE.instantiate()
 		CM_TYPE.CHAFF:
 			pass # TODO
 		CM_TYPE.INTERCEPTOR:

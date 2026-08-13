@@ -1,6 +1,14 @@
 class_name Orb extends StaticBody3D
 
-const ORB_SCENE:PackedScene = preload("res://Features/Orbs/orb.tscn")
+# I've been ripping my fucking hair out over a 
+# "parse error referenced non-existent resource"
+# that cropped up whenever orbs were dropped directly
+# into a scene. No combination of const, static, preload,
+# or load would make it work. Finally I put the load
+# into the new_orb function below and the error went
+# away. DO NOT try to bring back either of the following.
+#const ORB_SCENE:PackedScene = preload("res://Features/Orbs/orb.tscn")
+#static var ORB_SCENE:PackedScene = load("res://Features/Orbs/orb.tscn")
 
 signal destroyed
 
@@ -13,7 +21,10 @@ const MAX_COORD: int = 200
 # Orb more self-contained.
 # Idea from here: youtube.com/watch?v=u9aMR50yjCE
 static func new_orb() -> Orb:
-	return ORB_SCENE.instantiate()
+	# Does this seem inefficient? Fuck you, too bad.
+	# See the comment above about the PackedScenes.
+	var orb_scene:PackedScene = load("res://Features/Orbs/orb.tscn")
+	return orb_scene.instantiate()
 
 func _on_health_component_died() -> void:
 	destroyed.emit()

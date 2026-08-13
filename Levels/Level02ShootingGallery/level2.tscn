@@ -156,51 +156,6 @@ max_health = 100
 transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 300, 233.74513, 32.9984, -310.259)
 recharge_delay = 5
 
-[node name="Orb" parent="RedTeam" unique_id=2113066051 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 11.1917, 71.8786, -123.983)
-
-[node name="Orb2" parent="RedTeam" unique_id=671536009 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 108.314, 71.8786, 160.474)
-
-[node name="Orb3" parent="RedTeam" unique_id=1819408163 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 190.249, 2.92939, 160.474)
-
-[node name="Orb4" parent="RedTeam" unique_id=1549114411 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 211.075, 71.2348, 90.0709)
-
-[node name="Orb5" parent="RedTeam" unique_id=515920845 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 159.629, 3.19859, -123.983)
-
-[node name="Orb6" parent="RedTeam" unique_id=1895433650 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 138.886, 3.19859, -168.45)
-
-[node name="Orb7" parent="RedTeam" unique_id=472082389 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 184.256, 3.19859, -164.032)
-
-[node name="Orb8" parent="RedTeam" unique_id=229561732 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -118.287, 35.5529, -4.67925)
-
-[node name="Orb9" parent="RedTeam" unique_id=1676745946 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -139.03, 62.182, -49.1457)
-
-[node name="Orb11" parent="RedTeam" unique_id=2077668895 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -139.03, 62.182, -121.166)
-
-[node name="Orb12" parent="RedTeam" unique_id=355117069 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -111.825, 95.7376, -82.0041)
-
-[node name="Orb13" parent="RedTeam" unique_id=950438269 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 24.6039, 169.802, 45.1033)
-
-[node name="Orb14" parent="RedTeam" unique_id=1169766349 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 3.86089, 169.802, 0.636871)
-
-[node name="Orb15" parent="RedTeam" unique_id=360870756 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 49.2309, 202.131, 5.05472)
-
-[node name="Orb16" parent="RedTeam" unique_id=1264794447 instance=ExtResource("7_yxjtr")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 143.357, 98.8829, 136.363)
-
 [node name="Fighter" parent="RedTeam" unique_id=190729509 instance=ExtResource("4_s6g67")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -55.1471, 50.2299, -241.805)
 
@@ -229,6 +184,20 @@ disable_for_testing = true
 [node name="CapitalShipFrigate" parent="RedTeam" unique_id=643016632 instance=ExtResource("11_c40xb")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -83.53566, 0, -490.16235)
 disable_for_testing = true
+
+[node name="Orb" parent="RedTeam" unique_id=776008870 instance=ExtResource("7_yxjtr")]
+
+[node name="Orb2" parent="RedTeam" unique_id=1564914106 instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 139.51807, 0, -142.31253)
+
+[node name="Orb3" parent="RedTeam" unique_id=1943895634 instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 191.87968, 0, -107.65309)
+
+[node name="Orb4" parent="RedTeam" unique_id=1868158375 instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -112.06266, 59.527115, -69.714264)
+
+[node name="Orb5" parent="RedTeam" unique_id=898939105 instance=ExtResource("7_yxjtr")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -120.2888, 67.77972, 0)
 
 [node name="BlueTeam" type="Node3D" parent="." unique_id=126329178]
 script = ExtResource("1_nau7t")

@@ -8,3 +8,5 @@ class_name ShipStats extends Resource
 @export var guns:Array[GunStats]
 
 @export var missile_launcher:GunStats
+
+@export var countermeasure:Countermeasure.CM_TYPE = Countermeasure.CM_TYPE.NONE
