@@ -5,15 +5,22 @@ class_name FlareComponent extends Node3D
 # Makes flare the target of all currently incoming missiles.
 
 @onready var cooldown_timer: Timer = $Timer
+# Heading is just a Node3D turned around backwards so that
+# flares come out the back.
 @onready var heading: Node3D = $Heading
 
+# Total number of flares available
 @export var ammo:int = 50
-@export var cooldown:float = 1.0
+# Cooldown between flare uses
+@export var cooldown:float = 1.0 ## Seconds
 
-# Keep track of all the ships or whatever targeting us
+# Keep track of all the ships or whatever is targeting
+# attached ship.
 var targeters:Array[Node3D]
 
 
+# Since flares are projectiles, we need to know ally team
+# and shoot data.
 func launch_flare(ally_team:String, data:ShootData) -> void:
 	# Can't fire if out of ammo
 	if ammo <= 0: return
@@ -22,11 +29,16 @@ func launch_flare(ally_team:String, data:ShootData) -> void:
 	# Decrement ammo and start timer
 	ammo -= 1
 	cooldown_timer.start(cooldown)
-	# For starters just make a basic projectile be the flare
+	# For now just make a basic missile be the flare
 	var flare:Projectile = BulletSpawner.new_bullet(BulletSpawner.BULLET_TYPE.MISSILE)
+	# Put the flare in the world
 	Global.add_to_team_group(flare, ally_team)
+	# Alter the transform before setting data
+	data.transform = heading.global_transform
 	flare.set_data(data)
 	
+	# TODO TESTING delete this?
+	# Why can't I delete this hacky transform setting?
 	# Shoot the projectile out the rear instead of straight ahead
 	# This is hacky as fuck
 	flare.global_transform = heading.global_transform

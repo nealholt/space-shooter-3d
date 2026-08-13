@@ -123,13 +123,14 @@ func set_data(dat:ShootData) -> void:
 	data.bullet_type = bullet_type
 	speed = dat.bullet_speed
 	time_out = dat.bullet_timeout
-	# Position projectile, but defer aiming.
-	# ...I had an old comment saying that the deferred
-	# was important... I'm not sure why and I don't
-	# feel like removing it and testing that right now.
-	global_transform = dat.gun.global_transform
-	#aim_self.call_deferred() # TODO TESTING
-	aim_self() # TODO TESTING
+	# Position projectile and aim it.
+	# Previously the aim_self was deferred, but since
+	# flare countermeasures need to override aiming,
+	# the deferred mucked with flares and made them
+	# fire out the front. I'm not getting any issues
+	# with NOT using call_deferred on aim_self, so keep it.
+	global_transform = dat.transform #TODO TESTING Isn't this redundant with the code that does the same in aim_self
+	aim_self()
 	# 'Super powered' doubles turn rate (which is done
 	# in the controller) and 10xs damage
 	if dat.super_powered:
@@ -242,7 +243,7 @@ func aim_self() -> void:
 		# Point the projectile in the direction faced
 		# by the gun and give the bullet the global
 		# position of the gun
-		global_transform = data.gun.global_transform
+		global_transform = data.transform
 	# Apply spread and set velocity
 	apply_spread(data)
 	velocity = -global_transform.basis.z * speed

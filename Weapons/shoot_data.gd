@@ -1,7 +1,8 @@
 class_name ShootData
 
 var target:Node3D # Used for seeking missiles
-var gun:Gun # For use positioning and orienting the bullet
+var gun:Gun
+var transform:Transform3D # For use positioning and orienting the bullet
 var shooter:Node3D # Identifies shooter for kill attribution. Could be a ship or a turret
 var super_powered:bool # True, for example, if a missile is quick launched
 var ray:RayCast3D # Used for laser-guided bullets
@@ -51,6 +52,7 @@ func set_shooter(_shooter:Node3D) -> void:
 
 func set_gun(g:Gun) -> void:
 	gun = g
+	transform = g.transform
 	damage = g.damage
 	bullet_speed = g.bullet_speed
 	bullet_timeout = g.bullet_timeout
