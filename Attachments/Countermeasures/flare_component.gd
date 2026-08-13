@@ -1,49 +1,24 @@
 class_name FlareComponent extends Countermeasure
 
 # Fires off a flare.
-# Flare is just a projectile.
-# Makes flare the target of all currently incoming missiles.
+# Flare is just a projectile that gets targeted by
+# incoming missiles. So we fire it from a backward-facing
+# gun like any other projectile
+@onready var gun: Gun = $Gun
 
-@onready var cooldown_timer: Timer = $Timer
-# Heading is just a Node3D turned around backwards so that
-# flares come out the back.
-@onready var heading: Node3D = $Heading
+# Since flares are projectiles, we need to know shoot data.
+func activate_countermeasure(data:ShootData) -> void:
+	# Set the gun to be the flare gun
+	data.set_gun(gun)
+	# Shoot gun. This may return null if out of ammo, or still
+	# on cooldown, or if it's set up incorrectly.
+	var flare:Projectile = data.shoot()
+	# Only proceed if the flare is valid
+	if is_instance_valid(flare):
+		# Force all missiles to target the flare
+		all_missiles_target_flare(flare)
 
-# Total number of flares available
-@export var ammo:int = 50
-# Cooldown between flare uses
-@export var cooldown:float = 1.0 ## Seconds
-
-
-# Since flares are projectiles, we need to know ally team
-# and shoot data.
-func activate_countermeasure(ally_team:String, data:ShootData) -> void:
-	# Can't fire if out of ammo
-	if ammo <= 0: return
-	# Can't fire if on cooldown
-	if !cooldown_timer.is_stopped(): return
-	# Decrement ammo and start timer
-	ammo -= 1
-	cooldown_timer.start(cooldown)
-	# For now just make a basic missile be the flare
-	var flare:Projectile = BulletSpawner.new_bullet(BulletSpawner.BULLET_TYPE.MISSILE)
-	# Put the flare in the world
-	Global.add_to_team_group(flare, ally_team)
-	# Alter the transform before setting data
-	data.transform = heading.global_transform
-	flare.set_data(data)
-	
-	# TODO TESTING delete this?
-	# Why can't I delete this hacky transform setting?
-	# Shoot the projectile out the rear instead of straight ahead
-	# This is hacky as fuck
-	flare.global_transform = heading.global_transform
-	flare.velocity = -flare.global_transform.basis.z * flare.speed
-	
-	# Force all missiles to target the flare
-	all_missiles_target_flare(flare)
-
-
+# Set all incoming, seeking projectiles to target the flare.
 func all_missiles_target_flare(flare:Projectile) -> void:
 	remove_invalid_targeters()
 	# Loop backwards through targeters for safe removal.

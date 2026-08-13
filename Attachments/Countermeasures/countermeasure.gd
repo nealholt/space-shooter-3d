@@ -3,6 +3,8 @@ class_name Countermeasure extends Node3D
 
 # Later this signal could be used to help alert the player
 # when they are out of countermeasures.
+# HOWEVER, when I wrote this, guns all had infinite ammo,
+# so that would need to change first.
 # Added so the debugger stops nagging me.
 # This signal is emitted by the attack state.
 #@warning_ignore("unused_signal")
@@ -32,7 +34,7 @@ static func new_countermeasure(t:CM_TYPE) -> Countermeasure:
 	return c
 
 
-@abstract func activate_countermeasure(ally_team:String, data:ShootData) -> void
+@abstract func activate_countermeasure(data:ShootData) -> void
 
 
 # If is_targeting is true then targeter just started targeting

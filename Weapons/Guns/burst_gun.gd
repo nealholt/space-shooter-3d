@@ -23,8 +23,8 @@ func ready_to_fire() -> bool:
 
 
 # Override parent function
-func shoot_actual() -> void:
-	super.shoot_actual()
+func shoot_actual() -> Projectile:
+	var p:Projectile = super.shoot_actual()
 	firing = true
 	# Start countdown to next burst
 	burst_timer.start(1.0/burst_rate)
@@ -43,6 +43,7 @@ func shoot_actual() -> void:
 		# Reset can_burst to true so that it doesn't
 		# interfere with the firing rate
 		burst_timer.stop()
+	return p
 
 
 # Override parent function

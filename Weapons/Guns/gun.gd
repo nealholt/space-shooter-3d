@@ -159,9 +159,12 @@ func ready_to_fire() -> bool:
 	return (!firing_rate_timer or firing_rate_timer.is_stopped()) and current_mag > 0
 
 
-func shoot(shootDat:ShootData) -> void:
+# This was modified to return the shot projectile (if any)
+# so that flare countermeasure could assign missiles to
+# target the projectile.
+func shoot(shootDat:ShootData) -> Projectile:
 	if !ready_to_fire():
-		return
+		return null
 	# Animate 'em if you got 'em
 	if gun_model:
 		gun_model.shoot()
@@ -183,7 +186,7 @@ func shoot(shootDat:ShootData) -> void:
 	# Add in collision exceptions
 	data.collision_exceptions = data.collision_exceptions + collision_exceptions
 	# Actually shoot
-	shoot_actual()
+	return shoot_actual()
 
 
 # Firing rate is shots per seconds, so the seconds per shot
@@ -193,10 +196,14 @@ func restart_timer() -> void:
 		firing_rate_timer.start(1.0/fire_rate)
 
 
-func shoot_actual() -> void:
+# This was modified to return the last fired projectile
+# so that flare countermeasure could assign missiles to
+# target the projectile.
+func shoot_actual() -> Projectile:
+	var b:Projectile
 	for i in range(simultaneous_shots):
 		# Create and fire bullet(s)
-		var b:Projectile = BulletSpawner.new_bullet(bullet_type)
+		b = BulletSpawner.new_bullet(bullet_type)
 		# Add to team group
 		Global.add_to_team_group(b, ally_team)
 		# Pass the bullet the data about the shooter,
@@ -208,6 +215,7 @@ func shoot_actual() -> void:
 		# Begin reload
 		if current_mag <= 0:
 			reload()
+	return b
 
 
 # Called by weapon handler when switching to a

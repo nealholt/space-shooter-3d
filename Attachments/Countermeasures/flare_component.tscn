@@ -1,12 +1,18 @@
 [gd_scene format=3 uid="uid://7wtfeo4bk0cq"]
 
 [ext_resource type="Script" uid="uid://bltjhh3hdxdlf" path="res://Attachments/Countermeasures/flare_component.gd" id="1_c3m7u"]
+[ext_resource type="PackedScene" uid="uid://b5exo1u3hem8p" path="res://Weapons/Guns/gun.tscn" id="2_ah15r"]
 
 [node name="FlareComponent" type="Node3D" unique_id=438218565]
 script = ExtResource("1_c3m7u")
 
-[node name="Timer" type="Timer" parent="." unique_id=1360550402]
-one_shot = true
-
-[node name="Heading" type="Node3D" parent="." unique_id=2073970730]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+[node name="Gun" parent="." unique_id=1609728349 instance=ExtResource("2_ah15r")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+bullet_type = 0
+bullet_speed = 300.0
+bullet_timeout = 3.0
+automatic = false
+fire_sound = 9
+reload_sound = 1
+magazine_size = 1
+reload_time = 3.0

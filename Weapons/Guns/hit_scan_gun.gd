@@ -23,7 +23,7 @@ func _ready() -> void:
 	ray.enabled = false
 
 # Override parent class's shoot_actual
-func shoot_actual() -> void:
+func shoot_actual() -> Projectile:
 	ray.force_raycast_update() # Check for collisions
 	if ray.is_colliding():
 		var collider:Node3D = ray.get_collider()
@@ -44,6 +44,7 @@ func shoot_actual() -> void:
 		# Play feedback for player if relevant
 		Global.player_feedback(collider, data)
 	position_laser()
+	return null
 
 
 func position_laser() -> void:

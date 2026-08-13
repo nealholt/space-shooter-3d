@@ -41,8 +41,8 @@ var collision_surf_norm:Vector3
 func can_shoot() -> bool:
 	return is_instance_valid(gun) and is_instance_valid(target)
 
-func shoot() -> void:
-	gun.shoot(self)
+func shoot() -> Projectile:
+	return gun.shoot(self)
 
 func set_shooter(_shooter:Node3D) -> void:
 	shooter = _shooter

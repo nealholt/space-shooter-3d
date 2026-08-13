@@ -352,5 +352,5 @@ func _on_camera_switch(new_cam:CameraGroup.CameraState) -> void:
 		c.visible = new_cam != CameraGroup.CameraState.THIRDPERSON
 
 func launch_countermeasures() -> void:
-	if !is_instance_valid(countermeasure): return
-	countermeasure.activate_countermeasure(ally_team, get_new_shootdata())
+	if is_instance_valid(countermeasure):
+		countermeasure.activate_countermeasure(get_new_shootdata())
