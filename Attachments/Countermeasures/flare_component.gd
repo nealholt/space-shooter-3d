@@ -6,6 +6,12 @@ class_name FlareComponent extends Countermeasure
 # gun like any other projectile
 @onready var gun: Gun = $Gun
 
+func _ready() -> void:
+	# Force all missiles to target whatever projectile the
+	# gun fires off
+	gun.fired_projectile.connect(all_missiles_target_flare)
+
+
 # Since flares are projectiles, we need to know shoot data.
 func activate_countermeasure(data:ShootData) -> void:
 	# If you don't do this next bit then flares will fire
@@ -15,14 +21,12 @@ func activate_countermeasure(data:ShootData) -> void:
 	data.set_gun(gun)
 	# Shoot gun. This may return null if out of ammo, or still
 	# on cooldown, or if it's set up incorrectly.
-	var flare:Projectile = data.shoot()
-	# Only proceed if the flare is valid
-	if is_instance_valid(flare):
-		# Force all missiles to target the flare
-		all_missiles_target_flare(flare)
+	data.shoot()
 
 # Set all incoming, seeking projectiles to target the flare.
 func all_missiles_target_flare(flare:Projectile) -> void:
+	# Only proceed if the flare is valid
+	if !is_instance_valid(flare): return
 	remove_invalid_targeters()
 	# Make any missiles target the flare
 	for targeter:Node3D in targeters:

@@ -25,5 +25,5 @@ script = ExtResource("1_stmd2")
 max_health = 100.0
 guns = Array[ExtResource("1_ttnv4")]([ExtResource("2_6xahi"), SubResource("Resource_6xahi"), ExtResource("3_dggup")])
 missile_launcher = ExtResource("4_epurg")
-countermeasure = 4
+countermeasure = 1
 metadata/_custom_type_script = "uid://llcl4ev3hi63"

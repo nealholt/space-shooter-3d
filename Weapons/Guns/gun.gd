@@ -1,5 +1,15 @@
 class_name Gun extends Node3D
 
+# I added this signal so flare countermeasure can get hold of
+# the projectile that was just fired. Flare needs the
+# projectile so it can tell all incoming missiles to target
+# the projectile. The alternative is to have all shoot and
+# shoot_actual functions return the Projectile, but then
+# laser guns just return null and none of the code uses the
+# returned value except for the flare. This signal approach
+# seems better.
+signal fired_projectile(p:Projectile)
+
 # Detects shields that this gun has entered
 # in order to exempt them from collisions.
 # In short, let this gun fire from within shields.
@@ -162,9 +172,9 @@ func ready_to_fire() -> bool:
 # This was modified to return the shot projectile (if any)
 # so that flare countermeasure could assign missiles to
 # target the projectile.
-func shoot(shootDat:ShootData) -> Projectile:
+func shoot(shootDat:ShootData) -> void:
 	if !ready_to_fire():
-		return null
+		return
 	# Animate 'em if you got 'em
 	if gun_model:
 		gun_model.shoot()
@@ -186,7 +196,7 @@ func shoot(shootDat:ShootData) -> Projectile:
 	# Add in collision exceptions
 	data.collision_exceptions = data.collision_exceptions + collision_exceptions
 	# Actually shoot
-	return shoot_actual()
+	shoot_actual()
 
 
 # Firing rate is shots per seconds, so the seconds per shot
@@ -199,7 +209,7 @@ func restart_timer() -> void:
 # This was modified to return the last fired projectile
 # so that flare countermeasure could assign missiles to
 # target the projectile.
-func shoot_actual() -> Projectile:
+func shoot_actual() -> void:
 	var b:Projectile
 	for i in range(simultaneous_shots):
 		# Create and fire bullet(s)
@@ -209,13 +219,14 @@ func shoot_actual() -> Projectile:
 		# Pass the bullet the data about the shooter,
 		# initial velocity, etcetera
 		b.set_data(data)
+		# Announce projectile fired
+		fired_projectile.emit(b)
 	# Spend bullets unless they are supposed to be infinite
 	if magazine_size != INFINITE_AMMO:
 		current_mag -= simultaneous_shots
 		# Begin reload
 		if current_mag <= 0:
 			reload()
-	return b
 
 
 # Called by weapon handler when switching to a

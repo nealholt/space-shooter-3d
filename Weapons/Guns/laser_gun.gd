@@ -124,11 +124,10 @@ func setup_from_resource(gun_stats:GunStats, is_player:bool) -> void:
 
 
 # Override parent class's shoot_actual
-func shoot_actual() -> Projectile:
+func shoot_actual() -> void:
 	# Activate the beam if it's not already on
 	beam_on(power_on_time)
 	stay_on = true
-	return null
 
 
 func deal_damage(delta:float) -> void:
