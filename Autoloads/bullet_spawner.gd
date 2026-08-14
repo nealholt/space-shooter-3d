@@ -43,7 +43,8 @@ func new_bullet(bt:BULLET_TYPE) -> Projectile:
 	match bt:
 		BULLET_TYPE.MISSILE:
 			projectile = missile_scene.instantiate()
-			projectile.control_type = Projectile.CONTROLLER.PHYSICS_SEEK
+			projectile.control_type = Projectile.CONTROLLER.FIXED_ROTATION_SEEK
+			projectile.steer_strength = deg_to_rad(180) # Degrees of rotation per second
 		BULLET_TYPE.DUMMY_PLACEHOLDER: # Replace me when you have a chance
 			projectile = null
 		BULLET_TYPE.BASIC_RAY:
@@ -100,9 +101,9 @@ func _get_seeking_contrail(bt:BULLET_TYPE) -> Projectile:
 	var projectile := generic_projectile.instantiate()
 	var contra := contrail.instantiate()
 	# Set up projectile controller
-	projectile.control_type = Projectile.CONTROLLER.PHYSICS_SEEK
+	projectile.control_type = Projectile.CONTROLLER.FIXED_ROTATION_SEEK
+	projectile.steer_strength = deg_to_rad(180) # Degrees of rotation per second
 	projectile.is_laser_guided = bt == BULLET_TYPE.LASER_GUIDED_MISSILE
-	projectile.steer_strength = 300.0 # Acceleration
 	# Attach contrail
 	projectile.add_child(contra)
 	# Parameterize projectile

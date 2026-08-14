@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://con45lbnlkn1q"]
+
+[ext_resource type="Script" uid="uid://uwod8nslgu38" path="res://Attachments/Countermeasures/return_to_sender.gd" id="1_quyoo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nni0d"]
+shading_mode = 0
+specular_mode = 2
+vertex_color_use_as_albedo = true
+disable_receive_shadows = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o7ind"]
+direction = Vector3(0, 0, 1)
+spread = 15.0
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qdwv7"]
+
+[node name="ReturnToSender" type="Node3D" unique_id=957549011]
+script = ExtResource("1_quyoo")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=181907974]
+material_override = SubResource("StandardMaterial3D_nni0d")
+cast_shadow = 0
+emitting = false
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_o7ind")
+draw_pass_1 = SubResource("SphereMesh_qdwv7")

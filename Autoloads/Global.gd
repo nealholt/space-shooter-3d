@@ -151,7 +151,7 @@ func interp_face_target(seeker:Node3D, target_pos:Vector3, percent:float) -> Tra
 	# https://kidscancode.org/godot_recipes/4.x/3d/rotate_interpolate/index.html
 	# I use transform.basis.y as relative "up" rather than Vector3.UP
 	# So the object doesn't roll over when the target crosses past high noon
-	var new_transform:Transform3D = seeker.transform.looking_at(target_pos,seeker.global_transform.basis.y)
+	var new_transform:Transform3D = seeker.transform.looking_at(target_pos, seeker.global_transform.basis.y)
 	return seeker.transform.interpolate_with(new_transform, percent)
 
 

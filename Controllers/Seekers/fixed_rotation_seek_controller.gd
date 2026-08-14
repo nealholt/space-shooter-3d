@@ -5,12 +5,17 @@ class_name FixedRotationController extends Controller
 
 var rotation_speed: float = deg_to_rad(90.0)
 
+
 # Override parent class
 func set_data(shoot_data:ShootData) -> void:
 	super.set_data(shoot_data)
 	# 'Super powered' doubles turn rate and 10xs damage
 	if shoot_data.super_powered:
 		rotation_speed *= 2.0
+	# Sanity check
+	if rotation_speed <= 0 or 6*PI < rotation_speed:
+		push_error('rotation_speed of ',rotation_speed,' radians in FixedRotationController is unreasonably large or small')
+
 
 # Override parent class
 func move_me(body:Node3D, delta:float) -> void:
@@ -24,6 +29,10 @@ func move_me(body:Node3D, delta:float) -> void:
 	var percent:float = 1.0
 	if angle_to != 0.0: # Avoid divide by zero
 		percent = clampf(rotation_speed * delta / angle_to, 0.0, 1.0)
+		print()
+		print('rotation speed (rad) ', rotation_speed)
+		print('angle to (rad) ', angle_to)
+		print('% rotation to cover this frame ', percent)
 	# Rotate
 	body.transform = Global.interp_face_target(body, target.global_position, percent)
 	

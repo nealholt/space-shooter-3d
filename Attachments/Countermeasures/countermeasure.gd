@@ -10,9 +10,15 @@ class_name Countermeasure extends Node3D
 #@warning_ignore("unused_signal")
 #signal ammo_used_up
 
-enum CM_TYPE {NONE, FLARE, CHAFF, INTERCEPTOR}
+enum CM_TYPE {NONE, FLARE, CHAFF, INTERCEPTOR, RTS}
 
-const FLARE_SCENE:PackedScene = preload('res://Attachments/Countermeasures/flare_component.tscn')
+# The following did not work, but only for RTS. Makes no sense.
+# Gave error:
+# Parser Error: Could not resolve class "Countermeasure".
+# Very strange, but now I just load the scenes in the
+# new_countermeasure function below.
+#const FLARE_SCENE:PackedScene = preload('res://Attachments/Countermeasures/flare_component.tscn')
+#const RTS_SCENE:PackedScene = preload('res://Attachments/Countermeasures/return_to_sender.tscn')
 
 # Keep track of all the ships or missiles or whatever is
 # targeting attached ship.
@@ -24,11 +30,15 @@ static func new_countermeasure(t:CM_TYPE) -> Countermeasure:
 	var c : Countermeasure
 	match t:
 		CM_TYPE.FLARE:
-			c = FLARE_SCENE.instantiate()
+			var flare_scene:PackedScene = load('res://Attachments/Countermeasures/flare_component.tscn')
+			c = flare_scene.instantiate()
 		CM_TYPE.CHAFF:
 			pass # TODO
 		CM_TYPE.INTERCEPTOR:
 			pass # TODO
+		CM_TYPE.RTS:
+			var rts_scene:PackedScene = load('res://Attachments/Countermeasures/return_to_sender.tscn')
+			c = rts_scene.instantiate()
 		_: # Default / Otherwise
 			push_error('Unrecognized countermeasure type ',t)
 	return c

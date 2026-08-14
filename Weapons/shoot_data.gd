@@ -3,6 +3,7 @@ class_name ShootData
 var target:Node3D # Used for seeking missiles
 var gun:Gun
 var transform:Transform3D # For use positioning and orienting the bullet
+var force_use_transform:bool = false # If false, may aim toward where player is looking.
 var shooter:Node3D # Identifies shooter for kill attribution. Could be a ship or a turret
 var super_powered:bool # True, for example, if a missile is quick launched
 var ray:RayCast3D # Used for laser-guided bullets
@@ -19,7 +20,7 @@ var aim_assist:bool = false
 var aim_assist_obj:AimAssist
 # This projectile should ignore collisions with anything
 # in this array
-var collision_exceptions := Array()
+var collision_exceptions :Array = []
 
 # The following are for record keeping:
 var shooter_name:String = ''

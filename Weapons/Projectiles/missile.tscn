@@ -38,9 +38,8 @@ disable_receive_shadows = true
 billboard_mode = 1
 billboard_keep_scale = true
 
-[node name="Missile" unique_id=294693303 node_paths=PackedStringArray("controller", "health_component", "hit_box_component", "proxy_fuse_area", "reticle") instance=ExtResource("1_g37v4")]
+[node name="Missile" unique_id=294693303 node_paths=PackedStringArray("health_component", "hit_box_component", "proxy_fuse_area", "reticle") instance=ExtResource("1_g37v4")]
 speed = 0.0
-controller = NodePath("")
 health_component = NodePath("HealthComponent")
 hit_box_component = NodePath("HitBoxComponent")
 proxy_fuse_area = NodePath("Area3D")

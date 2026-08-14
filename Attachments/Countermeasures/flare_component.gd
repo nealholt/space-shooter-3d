@@ -8,6 +8,9 @@ class_name FlareComponent extends Countermeasure
 
 # Since flares are projectiles, we need to know shoot data.
 func activate_countermeasure(data:ShootData) -> void:
+	# If you don't do this next bit then flares will fire
+	# toward mouse when in first person mode for the player
+	data.force_use_transform = true
 	# Set the gun to be the flare gun
 	data.set_gun(gun)
 	# Shoot gun. This may return null if out of ammo, or still
@@ -21,11 +24,8 @@ func activate_countermeasure(data:ShootData) -> void:
 # Set all incoming, seeking projectiles to target the flare.
 func all_missiles_target_flare(flare:Projectile) -> void:
 	remove_invalid_targeters()
-	# Loop backwards through targeters for safe removal.
-	var i:int = targeters.size()-1
-	while 0 <= i:
-		# Make any missiles target the flare
-		if targeters[i] is Projectile:
-			targeters[i].set_target(flare.hit_box_component)
+	# Make any missiles target the flare
+	for targeter:Node3D in targeters:
+		if targeter is Projectile:
+			targeter.set_target(flare.hit_box_component)
 			#print('altering projectile target')
-		i -= 1

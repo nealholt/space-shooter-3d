@@ -12,15 +12,14 @@ var velocity : Vector3
 
 # This is for guided projectiles
 var controller:Controller
-enum CONTROLLER {NONE, SIMPLE_SEEK, PHYSICS_SEEK, FIXED_ROTATION_SEEK}
+enum CONTROLLER {NONE, SIMPLE_SEEK, FIXED_ROTATION_SEEK}
 var control_type:CONTROLLER = CONTROLLER.NONE
 # Parameters for controllers START
 var is_laser_guided:bool = false
-# Physics seek controller uses steer strength as acceleration
 # Fixed rotation controller uses steer strength as a literal
 # turning rate in radians per second with a recommended range
 # of pi to 6pi.
-var steer_strength:float = 300.0
+var steer_strength:float = PI
 # Parameters for controllers END
 
 # These next two are for projectiles that can be shot
@@ -142,9 +141,6 @@ func set_data(dat:ShootData) -> void:
 			controller = null
 		CONTROLLER.SIMPLE_SEEK:
 			controller = Controller.new()
-		CONTROLLER.PHYSICS_SEEK:
-			controller = PhysicsController.new()
-			controller.steer_force = steer_strength
 		CONTROLLER.FIXED_ROTATION_SEEK:
 			controller = FixedRotationController.new()
 			controller.rotation_speed = steer_strength
@@ -224,7 +220,7 @@ func _physics_process(delta: float) -> void:
 func aim_self() -> void:
 	# If aim assist is on and the target is valid, intercept
 	# the target.
-	if data.aim_assist and is_instance_valid(data.target):
+	if !data.force_use_transform and data.aim_assist and is_instance_valid(data.target):
 		var intercept:Vector3 = Global.get_intercept(
 			global_position, speed, data.target)
 		look_at(intercept, Vector3.UP)
@@ -236,7 +232,7 @@ func aim_self() -> void:
 	# three conditions here are true. I think it can occur
 	# because null==null is true in Godot, so hopefully
 	# this fixes it.)
-	elif Ship.player and data.shooter == Ship.player and InputManager.im.use_mouse_and_keyboard and Ship.player.camera_group.is_first_or_third():
+	elif !data.force_use_transform and Ship.player and data.shooter == Ship.player and InputManager.im.use_mouse_and_keyboard and Ship.player.camera_group.is_first_or_third():
 		#shoot at mouse / cursor
 		aim_self_at_cursor()
 	else:
