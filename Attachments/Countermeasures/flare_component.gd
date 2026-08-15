@@ -11,16 +11,13 @@ func _ready() -> void:
 	# gun fires off
 	gun.fired_projectile.connect(all_missiles_target_flare)
 
-
 # Since flares are projectiles, we need to know shoot data.
 func activate_countermeasure(data:ShootData) -> void:
 	# If you don't do this next bit then flares will fire
 	# toward mouse when in first person mode for the player
 	data.force_use_transform = true
-	# Set the gun to be the flare gun
+	# Set the gun to be the flare gun and shoot
 	data.set_gun(gun)
-	# Shoot gun. This may return null if out of ammo, or still
-	# on cooldown, or if it's set up incorrectly.
 	data.shoot()
 
 # Set all incoming, seeking projectiles to target the flare.

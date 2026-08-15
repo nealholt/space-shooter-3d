@@ -35,7 +35,8 @@ static func new_countermeasure(t:CM_TYPE) -> Countermeasure:
 		CM_TYPE.CHAFF:
 			pass # TODO
 		CM_TYPE.INTERCEPTOR:
-			pass # TODO
+			var interceptor_scene:PackedScene = load('res://Attachments/Countermeasures/interceptor_countermeasure.tscn')
+			c = interceptor_scene.instantiate()
 		CM_TYPE.RTS:
 			var rts_scene:PackedScene = load('res://Attachments/Countermeasures/return_to_sender.tscn')
 			c = rts_scene.instantiate()

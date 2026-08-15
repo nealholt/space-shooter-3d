@@ -6,7 +6,7 @@ extends Node
 # dummy variable.
 enum BULLET_TYPE {MISSILE, DUMMY_PLACEHOLDER, BASIC_RAY, SEEKING_MISSILE, 
 	LASER_GUIDED_MISSILE, PROXY_FUSE, TIMED_FUSE,
-	GIANT_RAY, SPARKLE}
+	GIANT_RAY, SPARKLE, INTERCEPTOR}
 
 # According to this: https://forum.godotengine.org/t/parse-error-referenced-non-existent-resource/95356/5
 # "you shouldn’t use preload in autoload script because there will
@@ -61,6 +61,14 @@ func new_bullet(bt:BULLET_TYPE) -> Projectile:
 			projectile = _get_timed_fuse()
 		BULLET_TYPE.SPARKLE:
 			projectile = _get_sparkle_trail()
+		BULLET_TYPE.INTERCEPTOR:
+			# For now this is used exclusively by the interceptor
+			# countermeasure
+			projectile = _get_seeking_contrail(bt)
+			projectile.steer_strength = 5 * PI
+			projectile.speed = 700.0
+			projectile.autotarget = false
+			projectile.roll_amount = 0.0
 		_: # Default / Otherwise
 			push_error('Unrecognized bullet type ',bt)
 	projectile.bullet_type = BULLET_TYPE.keys()[bt]
