@@ -21,6 +21,7 @@ func _ready() -> void:
 # Emit a particle effect just to give feedback that the
 # countermeasure activated.
 func activate_countermeasure(_data:ShootData) -> void:
+	#print_targeter_summary() # Testing
 	# Can't reactivate until previous activation concludes
 	if !timer.is_stopped(): return
 	# Otherwise activate chaff
@@ -33,10 +34,6 @@ func activate_countermeasure(_data:ShootData) -> void:
 		if targeter is Projectile:
 			var p:Projectile = (targeter as Projectile)
 			p.data.target = null
-			print('targeter is projectile') # TODO TESTING
 		elif targeter is Ship:
 			var s:Ship = (targeter as Ship)
 			s.reset_target()
-			print('targeter is ship') # TODO TESTING
-		else:
-			print('targeter is some unexpected thing') # TODO TESTING

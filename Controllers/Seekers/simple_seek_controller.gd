@@ -4,20 +4,17 @@ class_name Controller extends Node
 # This class uses look_at to head straight for the target.
 
 var is_laser_guided:bool = false
-var target:Node3D
 var data:ShootData
 
 
 func set_data(shoot_data:ShootData) -> void:
 	data = shoot_data
-	if is_instance_valid(data.target):
-		target = data.target
 
 
 func move_me(body:Node3D, _delta:float) -> void:
 	# Check if there is a target or guidance laser,
 	# if not, do nothing.
-	if !is_instance_valid(target) and !is_laser_guided:
+	if !is_instance_valid(data.target) and !is_laser_guided:
 		return
 	# Seek target using look_at and constant speed.
 	# Change direction on a dime. No vector addition
@@ -45,9 +42,9 @@ func get_target_pos(body:Node3D) -> Vector3:
 	# This if fixes an error that can otherwise
 	# occur when a seeking missile is still live
 	# and we try to switch from one level to another.
-	if !target:
+	if !is_instance_valid(data.target):
 		return Vector3.ZERO
 	# Lead the target by getting the position where we
 	# can intercept it from the current position at speed.
 	return Global.get_intercept(
-		body.global_position, body.speed, target)
+		body.global_position, body.speed, data.target)

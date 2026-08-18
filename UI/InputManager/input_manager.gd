@@ -21,6 +21,7 @@ var retarget_just_released :bool= false # Used to fire missile
 var shoot_pressed :bool= false
 var shoot_just_pressed :bool= false
 var brake :bool= false
+var brake_just_pressed :bool= false
 var drift :bool= false
 var drift_just_released :bool= false
 var accelerate :bool= false
@@ -73,6 +74,7 @@ func update() -> void:
 	shoot_pressed = Input.is_action_pressed("shoot")
 	shoot_just_pressed = Input.is_action_just_pressed("shoot")
 	brake = Input.is_action_pressed("brake")
+	brake_just_pressed = Input.is_action_just_pressed("brake")
 	drift = Input.is_action_pressed("drift")
 	drift_just_released = Input.is_action_just_released("drift")
 	accelerate = Input.is_action_pressed("accelerate")

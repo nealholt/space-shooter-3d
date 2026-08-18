@@ -21,10 +21,10 @@ func set_data(shoot_data:ShootData) -> void:
 func move_me(body:Node3D, delta:float) -> void:
 	# Check if there is a target or guidance laser,
 	# if not, do nothing.
-	if !is_instance_valid(target) and !is_laser_guided:
+	if !is_instance_valid(data.target) and !is_laser_guided:
 		return
 	# Get angle to target in radians
-	var angle_to:float = Global.get_angle_to_target(body.global_position, target.global_position, -body.global_transform.basis.z)
+	var angle_to:float = Global.get_angle_to_target(body.global_position, data.target.global_position, -body.global_transform.basis.z)
 	# Get percentage of that angle we will rotate through on this time step
 	var percent:float = 1.0
 	if angle_to != 0.0: # Avoid divide by zero
@@ -34,7 +34,7 @@ func move_me(body:Node3D, delta:float) -> void:
 		#print('angle to (rad) ', angle_to)
 		#print('% rotation to cover this frame ', percent)
 	# Rotate
-	body.transform = Global.interp_face_target(body, target.global_position, percent)
+	body.transform = Global.interp_face_target(body, data.target.global_position, percent)
 	
 	# In 2 dimensions it would be something like this:
 	#var target_angle:float = body.global_position.angle_to(get_target_pos(body))

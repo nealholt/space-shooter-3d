@@ -88,3 +88,18 @@ func remove_invalid_targeters() -> void:
 			#print('removed invalid targeter')
 			targeters.remove_at(i)
 		i -= 1
+
+
+# This is useful for testing. I used it to debug chaff
+# in particular.
+func print_targeter_summary() -> void:
+	remove_invalid_targeters()
+	print('targeters size: ',targeters.size())
+	# Print targeter types
+	for targeter:Node3D in targeters:
+		if targeter is Projectile:
+			print('    projectile')
+		elif targeter is Ship:
+			print('    ship')
+		else:
+			print('    targeter is some unexpected thing')

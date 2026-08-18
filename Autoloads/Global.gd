@@ -29,7 +29,7 @@ var targeting_hud_on : bool = true
 # If there are no members of all the requested groups,
 # then fewer groups will be required until a member
 # is found or we run out of groups.
-func get_center_most_from_groups(group_array:Array[String], looker:Node3D) -> Node3D:
+func get_center_most_from_groups(group_array:Array[String], looker:Node3D) -> HitBoxComponent:
 	# Get a list of members of the groups
 	var targets :Array[HitBoxComponent] = []
 	# The following is the closest gdscript has to dowhile
@@ -63,7 +63,7 @@ func get_center_most_from_groups(group_array:Array[String], looker:Node3D) -> No
 # the center of the looker's view.
 # This is initially used by seeking missiles and
 # NPCs.
-func get_center_most_from_group(group:String, looker:Node3D) -> Node3D:
+func get_center_most_from_group(group:String, looker:Node3D) -> HitBoxComponent:
 	# Identify target from group with smallest angle to
 	var targets:Array[HitBoxComponent] = get_targetable_hitboxes_in_group(group)
 	return get_center_most(looker, targets)
@@ -72,7 +72,7 @@ func get_center_most_from_group(group:String, looker:Node3D) -> Node3D:
 # Get the member of the given group who has lowest
 # angle from source and direction.
 # This is used for selecting targets with the mouse.
-func get_lowest_angleto_from_group(group:String, source:Vector3, direction:Vector3) -> Node3D:
+func get_lowest_angleto_from_group(group:String, source:Vector3, direction:Vector3) -> HitBoxComponent:
 	# Identify target from group with smallest angle to
 	var targets:Array[HitBoxComponent] = get_targetable_hitboxes_in_group(group)
 	return get_center_most_from_angle(targets, source, direction)
@@ -97,13 +97,11 @@ func get_targetable_hitboxes_in_group(group:String) -> Array[HitBoxComponent]:
 
 # Get item from array targets that is most centered
 # from looker's perspective.
-func get_center_most(looker:Node3D, targets:Array[HitBoxComponent]) -> Node3D:
-	var most_centered:Node3D # This is a target-type variable
+func get_center_most(looker:Node3D, targets:Array[HitBoxComponent]) -> HitBoxComponent:
+	var most_centered:HitBoxComponent # This is a target-type variable
 	var smallest_angle_to :float = 7.0 # Start off with any upper limit over 2pi
 	var temp_angle_to : float
-	for target:Node3D in targets:
-		if !(target is HitBoxComponent): # TODO TESTING TODO LEFT OFF HERE
-			print('target is not a hitbox')
+	for target:HitBoxComponent in targets:
 		temp_angle_to = Global.get_angle_to_target(looker.global_position, target.global_position, -looker.global_transform.basis.z)
 		if temp_angle_to < smallest_angle_to:
 			smallest_angle_to = temp_angle_to
@@ -113,11 +111,11 @@ func get_center_most(looker:Node3D, targets:Array[HitBoxComponent]) -> Node3D:
 
 # Get item from array targets that is lowest angle from
 # source and direction.
-func get_center_most_from_angle(targets:Array, source:Vector3, direction:Vector3) -> Node3D:
-	var most_centered:Node3D # This is a target-type variable
+func get_center_most_from_angle(targets:Array[HitBoxComponent], source:Vector3, direction:Vector3) -> HitBoxComponent:
+	var most_centered:HitBoxComponent # This is a target-type variable
 	var smallest_angle_to :float = 7.0 # Start off with any upper limit over 2pi
 	var temp_angle_to : float
-	for target:Node3D in targets:
+	for target:HitBoxComponent in targets:
 		temp_angle_to = Global.get_angle_to_target(source, target.global_position, direction)
 		if temp_angle_to < smallest_angle_to:
 			smallest_angle_to = temp_angle_to
