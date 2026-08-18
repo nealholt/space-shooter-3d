@@ -29,22 +29,22 @@ var targeting_hud_on : bool = true
 # If there are no members of all the requested groups,
 # then fewer groups will be required until a member
 # is found or we run out of groups.
-func get_center_most_from_groups(group_array:Array, looker:Node3D) -> Node3D:
+func get_center_most_from_groups(group_array:Array[String], looker:Node3D) -> Node3D:
 	# Get a list of members of the groups
-	var targets := Array()
+	var targets :Array[HitBoxComponent] = []
 	# The following is the closest gdscript has to dowhile
 	while true:
-		targets = get_tree().get_nodes_in_group(group_array[0])
+		targets = get_targetable_hitboxes_in_group(group_array[0])
 		# If there are one or zero, quit now
 		if targets.size() == 0:
 			return null
 		elif targets.size() == 1:
 			return targets[0]
 		# Loop over the remaining groups
-		for i in range(1,group_array.size()):
+		for i:int in range(1,group_array.size()):
 			# Loop over the targets in reverse order,
 			# removing targets that aren't in the group.
-			for j in range(targets.size()-1, 0, -1):
+			for j:int in range(targets.size()-1, 0, -1):
 				if !targets[j].is_in_group(group_array[i]):
 					targets.remove_at(j)
 		# If no targets remain, remove a group and try again
@@ -65,7 +65,7 @@ func get_center_most_from_groups(group_array:Array, looker:Node3D) -> Node3D:
 # NPCs.
 func get_center_most_from_group(group:String, looker:Node3D) -> Node3D:
 	# Identify target from group with smallest angle to
-	var targets:Array = get_tree().get_nodes_in_group(group)
+	var targets:Array[HitBoxComponent] = get_targetable_hitboxes_in_group(group)
 	return get_center_most(looker, targets)
 
 
@@ -74,17 +74,36 @@ func get_center_most_from_group(group:String, looker:Node3D) -> Node3D:
 # This is used for selecting targets with the mouse.
 func get_lowest_angleto_from_group(group:String, source:Vector3, direction:Vector3) -> Node3D:
 	# Identify target from group with smallest angle to
-	var targets:Array = get_tree().get_nodes_in_group(group)
+	var targets:Array[HitBoxComponent] = get_targetable_hitboxes_in_group(group)
 	return get_center_most_from_angle(targets, source, direction)
+
+
+func get_targetable_hitboxes_in_group(group:String) -> Array[HitBoxComponent]:
+	var targets:Array[HitBoxComponent]
+	# Assign is good for converting one array to another type.
+	# get_tree().get_nodes_in_group(group) returns Array[Node]
+	# But I want to be good about types, so I assign those
+	# values into a typed array named targets.
+	# https://docs.godotengine.org/en/stable/classes/class_array.html#class-array-method-assign
+	targets.assign(get_tree().get_nodes_in_group(group))
+	# Remove all untargetable elements
+	var i:int = targets.size()-1
+	while 0 <= i:
+		if !targets[i].can_be_targeted:
+			targets.remove_at(i)
+		i -= 1
+	return targets
 
 
 # Get item from array targets that is most centered
 # from looker's perspective.
-func get_center_most(looker:Node3D, targets:Array) -> Node3D:
+func get_center_most(looker:Node3D, targets:Array[HitBoxComponent]) -> Node3D:
 	var most_centered:Node3D # This is a target-type variable
-	var smallest_angle_to := 7.0 # Start off with any upper limit over 2pi
+	var smallest_angle_to :float = 7.0 # Start off with any upper limit over 2pi
 	var temp_angle_to : float
 	for target:Node3D in targets:
+		if !(target is HitBoxComponent): # TODO TESTING TODO LEFT OFF HERE
+			print('target is not a hitbox')
 		temp_angle_to = Global.get_angle_to_target(looker.global_position, target.global_position, -looker.global_transform.basis.z)
 		if temp_angle_to < smallest_angle_to:
 			smallest_angle_to = temp_angle_to
@@ -96,7 +115,7 @@ func get_center_most(looker:Node3D, targets:Array) -> Node3D:
 # source and direction.
 func get_center_most_from_angle(targets:Array, source:Vector3, direction:Vector3) -> Node3D:
 	var most_centered:Node3D # This is a target-type variable
-	var smallest_angle_to := 7.0 # Start off with any upper limit over 2pi
+	var smallest_angle_to :float = 7.0 # Start off with any upper limit over 2pi
 	var temp_angle_to : float
 	for target:Node3D in targets:
 		temp_angle_to = Global.get_angle_to_target(source, target.global_position, direction)

@@ -102,7 +102,10 @@ func _ready() -> void:
 	if hit_box_component and stats.countermeasure != Countermeasure.CM_TYPE.NONE:
 		countermeasure = Countermeasure.new_countermeasure(stats.countermeasure)
 		add_child(countermeasure)
+		# Connect up signals
 		hit_box_component.is_targeted.connect(countermeasure.change_targeters)
+		countermeasure.target_block_activated.connect(hit_box_component.set_untargetable)
+		countermeasure.target_block_deactivated.connect(hit_box_component.set_targetable)
 	if disable_for_testing:
 		controller = null
 		if hangar:
@@ -354,3 +357,8 @@ func _on_camera_switch(new_cam:CameraGroup.CameraState) -> void:
 func launch_countermeasures() -> void:
 	if is_instance_valid(countermeasure):
 		countermeasure.activate_countermeasure(get_new_shootdata())
+
+func reset_target() -> void:
+	if controller:
+		controller.target_update_requested = true
+		controller.select_target(self)

@@ -51,13 +51,9 @@ func check_win_loss(dead_thing:Ship) -> void:
 		end_screen.defeat()
 		# Prevent reactivation of end_screen.
 		EventsBus.ship_died.disconnect(check_win_loss)
-		# Display damage data
-		damage_tracker.display_data()
 	# This assumes the red team is always the enemy.
 	elif red_team.get_child_count() == 0:
 		end_screen.victory(Array())
-		# Display damage data
-		damage_tracker.display_data()
 	# Unfortunately since the signal is emitted from the
 	# ship that died, the red_team won't actually have
 	# no children yet, so we also check if there is one
@@ -66,8 +62,6 @@ func check_win_loss(dead_thing:Ship) -> void:
 		var child:HealthComponent = red_team.get_child(0).health_component
 		if child.is_dead():
 			end_screen.victory(Array())
-			# Display damage data
-			damage_tracker.display_data()
 
 
 func center_the_mouse() -> void:

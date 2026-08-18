@@ -15,7 +15,7 @@ static var main_scene:MainScene = null
 @onready var main_3d: Node3D = $Main3D
 # Currently loaded level
 var level_instance: Node
-var fullscreen:=true
+var fullscreen:bool = true
 var level_string:String ## String used to load current level
 
 
@@ -71,7 +71,7 @@ func to_main_menu() -> void:
 	menu.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	# Reset focus to load level 1 button. This lets you
-	# use arrow keys and enter to nabigate the menus.
+	# use arrow keys and enter to navigate the menus.
 	# After completing a level, you might want to default
 	# the next level to be in focus.
 	$Menu/HBoxContainer/SceneOptions/Load1Balloons.grab_focus()
@@ -92,7 +92,8 @@ func unload_level() -> void:
 	# Free reference to the level after printing damage
 	# data
 	if(is_instance_valid(level_instance)):
-		level_instance.print_damage_data()
+		# Uncomment this to display damage data
+		#level_instance.print_damage_data()
 		level_instance.queue_free()
 	level_instance = null
 	# Queue free every child of main_3d

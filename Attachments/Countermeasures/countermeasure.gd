@@ -5,10 +5,17 @@ class_name Countermeasure extends Node3D
 # when they are out of countermeasures.
 # HOWEVER, when I wrote this, guns all had infinite ammo,
 # so that would need to change first.
-# Added so the debugger stops nagging me.
-# This signal is emitted by the attack state.
 #@warning_ignore("unused_signal")
 #signal ammo_used_up
+
+# "warning_ignore" added so the debugger stops nagging me.
+# The following signals are currently only used by chaff
+# since that countermeasure prevents anyone from targeting
+# the chaff-using ship.
+@warning_ignore("unused_signal")
+signal target_block_activated
+@warning_ignore("unused_signal")
+signal target_block_deactivated
 
 enum CM_TYPE {NONE, FLARE, CHAFF, INTERCEPTOR, RTS}
 
@@ -27,22 +34,19 @@ var targeters:Array[Node3D]
 
 # Ships call this to get a made-to-order countermeasure component
 static func new_countermeasure(t:CM_TYPE) -> Countermeasure:
-	var c : Countermeasure
+	var packed:PackedScene
 	match t:
 		CM_TYPE.FLARE:
-			var flare_scene:PackedScene = load('res://Attachments/Countermeasures/flare_component.tscn')
-			c = flare_scene.instantiate()
+			packed = load('res://Attachments/Countermeasures/flare_component.tscn')
 		CM_TYPE.CHAFF:
-			pass # TODO
+			packed = load('res://Attachments/Countermeasures/chaff.tscn')
 		CM_TYPE.INTERCEPTOR:
-			var interceptor_scene:PackedScene = load('res://Attachments/Countermeasures/interceptor_countermeasure.tscn')
-			c = interceptor_scene.instantiate()
+			packed = load('res://Attachments/Countermeasures/interceptor_countermeasure.tscn')
 		CM_TYPE.RTS:
-			var rts_scene:PackedScene = load('res://Attachments/Countermeasures/return_to_sender.tscn')
-			c = rts_scene.instantiate()
+			packed = load('res://Attachments/Countermeasures/return_to_sender.tscn')
 		_: # Default / Otherwise
 			push_error('Unrecognized countermeasure type ',t)
-	return c
+	return packed.instantiate()
 
 
 @abstract func activate_countermeasure(data:ShootData) -> void

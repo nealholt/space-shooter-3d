@@ -29,10 +29,10 @@ func move_me(body:Node3D, delta:float) -> void:
 	var percent:float = 1.0
 	if angle_to != 0.0: # Avoid divide by zero
 		percent = clampf(rotation_speed * delta / angle_to, 0.0, 1.0)
-		print()
-		print('rotation speed (rad) ', rotation_speed)
-		print('angle to (rad) ', angle_to)
-		print('% rotation to cover this frame ', percent)
+		#print()
+		#print('rotation speed (rad) ', rotation_speed)
+		#print('angle to (rad) ', angle_to)
+		#print('% rotation to cover this frame ', percent)
 	# Rotate
 	body.transform = Global.interp_face_target(body, target.global_position, percent)
 	

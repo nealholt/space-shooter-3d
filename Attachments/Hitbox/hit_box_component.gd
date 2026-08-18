@@ -1,7 +1,7 @@
 class_name HitBoxComponent extends Node3D
 
-signal missile_locked # Emitted when an enemy acquires missile lock on this ship
-signal missile_fired_inbound # Emitted when a missile is fired at this ship
+signal missile_locked # Emitted when an enemy acquires missile lock on this hitbox
+signal missile_fired_inbound # Emitted when a missile is fired at this hitbox
 signal is_targeted(tf:bool, targeter:Node3D) # Emitted when this hitbox starts or stops being targeted
 
 # collidable will only be set if the hit box component
@@ -13,6 +13,11 @@ signal is_targeted(tf:bool, targeter:Node3D) # Emitted when this hitbox starts o
 # The hit box triggers various audio visual feeback when hit
 @export var got_hit_audio:AudioStreamPlayer
 @export var hit_feedback:HitFeedback
+
+# Some hitboxes cannot be targeted for limited periods
+# of time. For example, the chaff countermeasure prevents
+# targeting while active.
+var can_be_targeted:bool = true
 
 
 func _ready() -> void:
@@ -128,3 +133,8 @@ func has_collidable() -> bool:
 
 func get_collidable() -> DamageableArea:
 	return collidable
+
+func set_untargetable() -> void:
+	can_be_targeted = false
+func set_targetable() -> void:
+	can_be_targeted = true
