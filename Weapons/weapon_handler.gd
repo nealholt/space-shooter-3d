@@ -4,7 +4,7 @@ class_name WeaponHandler
 # Source
 # https://www.udemy.com/course/complete-godot-3d/learn/lecture/41204698#questions
 
-var index := -1
+var index :int = -1
 
 var current_weapon: Gun
 

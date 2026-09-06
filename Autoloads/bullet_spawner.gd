@@ -79,7 +79,7 @@ func new_bullet(bt:BULLET_TYPE) -> Projectile:
 # difference is the mesh that is used, but the meshes come
 # in different sizes, which in turn effects the ray cast size.
 func _get_ray_bolt(bt:BULLET_TYPE) -> Projectile:
-	var projectile := generic_projectile.instantiate()
+	var projectile :Projectile = generic_projectile.instantiate()
 	# Choose the mesh
 	var mesh:MeshInstance3D
 	match bt:
@@ -106,8 +106,8 @@ func _get_ray_bolt(bt:BULLET_TYPE) -> Projectile:
 # difference is that one auto-seeks a target and the other is
 # laser guided.
 func _get_seeking_contrail(bt:BULLET_TYPE) -> Projectile:
-	var projectile := generic_projectile.instantiate()
-	var contra := contrail.instantiate()
+	var projectile :Projectile = generic_projectile.instantiate()
+	var contra :Contrail = contrail.instantiate()
 	# Set up projectile controller
 	projectile.control_type = Projectile.CONTROLLER.FIXED_ROTATION_SEEK
 	projectile.steer_strength = deg_to_rad(180) # Degrees of rotation per second
@@ -126,7 +126,7 @@ func _get_seeking_contrail(bt:BULLET_TYPE) -> Projectile:
 
 
 func _get_timed_fuse() -> Projectile:
-	var projectile := generic_projectile.instantiate()
+	var projectile :Projectile = generic_projectile.instantiate()
 	var mesh := pellet_red.instantiate()
 	projectile.does_ricochet = false
 	# Attach mesh
@@ -140,11 +140,11 @@ func _get_timed_fuse() -> Projectile:
 
 
 func _get_proxy_fuse() -> Projectile:
-	var projectile := generic_projectile.instantiate()
+	var projectile :Projectile = generic_projectile.instantiate()
 	# Create area with collision shape
-	var collision_shape := CollisionShape3D.new()
+	var collision_shape :CollisionShape3D = CollisionShape3D.new()
 	collision_shape.shape = SphereShape3D.new()
-	var a := Area3D.new()
+	var a :Area3D = Area3D.new()
 	a.add_child(collision_shape)
 	a.monitorable = false # The area monitors, it doesn't need others monitoring it
 	a.collision_layer = 0 # I am
@@ -165,8 +165,8 @@ func _get_proxy_fuse() -> Projectile:
 
 
 func _get_sparkle_trail() -> Projectile:
-	var projectile := generic_projectile.instantiate()
-	var visuals := sparkle_trail.instantiate()
+	var projectile :Projectile = generic_projectile.instantiate()
+	var visuals :SparkleTrailVisual = sparkle_trail.instantiate()
 	# Set up seeking projectile controls
 	projectile.control_type = Projectile.CONTROLLER.FIXED_ROTATION_SEEK
 	projectile.steer_strength = deg_to_rad(180) # Degrees of rotation per second

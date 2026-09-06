@@ -41,7 +41,7 @@ func _ready() -> void:
 	# Check for weakpoints
 	if weakpoint_group:
 		# Connect to weakpoint destroyed signal
-		for wp in weakpoint_group.get_children():
+		for wp:Node in weakpoint_group.get_children():
 			wp.connect('destroyed', _on_weakpoint_destroyed)
 
 
