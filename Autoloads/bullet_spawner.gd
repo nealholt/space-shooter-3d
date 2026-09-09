@@ -127,7 +127,7 @@ func _get_seeking_contrail(bt:BULLET_TYPE) -> Projectile:
 
 func _get_timed_fuse() -> Projectile:
 	var projectile :Projectile = generic_projectile.instantiate()
-	var mesh := pellet_red.instantiate()
+	var mesh :MeshInstance3D = pellet_red.instantiate()
 	projectile.does_ricochet = false
 	# Attach mesh
 	projectile.add_child(mesh)
@@ -154,7 +154,7 @@ func _get_proxy_fuse() -> Projectile:
 	projectile.proxy_fuse_area = a
 	projectile.does_ricochet = false
 	# Create mesh
-	var mesh := pellet_red.instantiate()
+	var mesh :MeshInstance3D = pellet_red.instantiate()
 	projectile.add_child(mesh)
 	# Parameterize projectile
 	projectile.sparks = VisualEffectSetting.VISUAL_EFFECT_TYPE.NO_EFFECT

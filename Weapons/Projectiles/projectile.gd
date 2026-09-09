@@ -56,7 +56,7 @@ var wrap_up_timer:Timer
 
 # Ray length should be distance traveled plus
 # projectile_length
-@export var projectile_length := 1.0
+@export var projectile_length :float = 1.0
 @export var does_ricochet:bool = false
 
 # Flag for whether this projectile automatically finds a target
@@ -262,13 +262,13 @@ func aim_self_at_cursor() -> void:
 		var y_rel_center:float = half_size.y - mouse_pos.y
 		mouse_pos = Vector2(x_rel_center, y_rel_center)
 		var aim_radius:float = data.shooter.get_mouse_center_radius()
-		var vect_length := mouse_pos.length()
+		var vect_length :float = mouse_pos.length()
 		# Shrink vector to length and subtract it off of screen center
 		mouse_pos = half_size - mouse_pos*(aim_radius / vect_length)
 		#print(mouse_position)
-	var camera := InputManager.im.current_viewport.get_camera_3d()
+	var camera :Camera3D = InputManager.im.current_viewport.get_camera_3d()
 	# Go to camera position + camera direction times 100000
-	var go_to_point := camera.project_ray_origin(mouse_pos) + camera.project_ray_normal(mouse_pos) * 100000
+	var go_to_point :Vector3 = camera.project_ray_origin(mouse_pos) + camera.project_ray_normal(mouse_pos) * 100000
 	look_at(go_to_point, Vector3.UP)
 
 
@@ -454,7 +454,7 @@ func wrap_up() -> void:
 	if reticle:
 		reticle.hide_all()
 		reticle.die.call_deferred()
-	for child in get_children():
+	for child:Node in get_children():
 		if child is Contrail:
 			child.fade_out_fast()
 		elif child is SparkleTrailVisual:
@@ -509,7 +509,7 @@ func ricochet(delta:float) -> void:
 	#speed = clampf(speed - speed*0.2, 0.0, 100000.0)
 	#velocity = -transform.basis.z * speed
 	# Bounce
-	var norm := ray.get_collision_normal()
+	var norm :Vector3 = ray.get_collision_normal()
 	velocity = velocity.bounce(norm)
 	# In the video, the creator uses Global.safe_look_at
 	# which I assume is something he created after

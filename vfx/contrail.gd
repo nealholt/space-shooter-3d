@@ -101,7 +101,7 @@ func _process(delta:float) -> void:
 	var currWidth:Vector3
 	var t0:float
 	var t1:float
-	for i in range(_points.size()):
+	for i:int in range(_points.size()):
 		t = float(i) / (_points.size() - 1.0)
 		# Old way
 		#currColor = _startColor.lerp(_endColor, 1.0-t)

@@ -8,8 +8,8 @@ class_name Hangar extends Node3D
 var ally_team:String
 
 # How many ships to spawn per flight.
-@export var ships_per_flight := 3
-var ships_launched := 0
+@export var ships_per_flight :int = 3
+var ships_launched :int = 0
 
 func _on_timermacro_timeout() -> void:
 	# Reset cound of ships launched with this flight

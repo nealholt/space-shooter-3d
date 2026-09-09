@@ -16,7 +16,7 @@ signal fired_projectile(p:Projectile)
 @onready var shield_detector: Area3D = $ShieldDetector
 # Bullets fired by this gun should ignore collisions
 # with anything in this array
-var collision_exceptions := Array()
+var collision_exceptions :Array = []
 
 # What sort of bullet to fire:
 @export var bullet_type:BulletSpawner.BULLET_TYPE
@@ -26,8 +26,8 @@ var collision_exceptions := Array()
 @export var bullet_timeout:float = 2.0 ## Seconds
 @export var timeout_vary_percent:float = 0.05 ## Randomly vary the timeout by this percent
 
-@export var fire_rate:= 1.0 ## Shots per second
-var firing_rate_timer: Timer
+@export var fire_rate :float = 1.0 ## Shots per second
+var firing_rate_timer :Timer
 
 # Whether gun is automatic or not. If true then
 # holding the shoot button will fire this weapon
@@ -60,7 +60,7 @@ var fire_sound_active:SoundEffectSetting.SOUND_EFFECT_TYPE = SoundEffectSetting.
 const INFINITE_AMMO:int = 2**30-1
 @export var magazine_size:int = INFINITE_AMMO ## Default is infinite ammo, no reload
 var current_mag:int
-@export var reload_time:= 1.0 ## seconds
+@export var reload_time :float = 1.0 ## seconds
 var reload_timer:Timer
 
 # Gun visual components
@@ -169,9 +169,6 @@ func ready_to_fire() -> bool:
 	return (!firing_rate_timer or firing_rate_timer.is_stopped()) and current_mag > 0
 
 
-# This was modified to return the shot projectile (if any)
-# so that flare countermeasure could assign missiles to
-# target the projectile.
 func shoot(shootDat:ShootData) -> void:
 	if !ready_to_fire():
 		return
@@ -183,7 +180,7 @@ func shoot(shootDat:ShootData) -> void:
 		muzzle_flash.play()
 	# create fire audio stream
 	if fire_sound != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
-		fire_sound_active = AudioManager.play_remote_transform(fire_sound, self)
+		fire_sound_active = AudioManager.play_remote_transform(fire_sound, self) as SoundEffectSetting.SOUND_EFFECT_TYPE
 	restart_timer()
 	# Copy ShootData reference and further populate it
 	data = shootDat
@@ -206,12 +203,9 @@ func restart_timer() -> void:
 		firing_rate_timer.start(1.0/fire_rate)
 
 
-# This was modified to return the last fired projectile
-# so that flare countermeasure could assign missiles to
-# target the projectile.
 func shoot_actual() -> void:
 	var b:Projectile
-	for i in range(simultaneous_shots):
+	for i:int in range(simultaneous_shots):
 		# Create and fire bullet(s)
 		b = BulletSpawner.new_bullet(bullet_type)
 		# Add to team group

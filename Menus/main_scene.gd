@@ -97,21 +97,21 @@ func unload_level() -> void:
 		level_instance.queue_free()
 	level_instance = null
 	# Queue free every child of main_3d
-	for c in main_3d.get_children():
+	for c:Node in main_3d.get_children():
 		c.queue_free()
 
 
 func load_level(level_name:String) -> void:
 	unload_level()
 	level_string = level_name # Used for retrying current level
-	var level_path := "res://Levels/%s.tscn" % level_name
+	var level_path :String = "res://Levels/%s.tscn" % level_name
 	
 	# OLD WAY
 	#var level_resource := load(level_path)
 	# NEW WAY
 	SceneLoader.load_scene(level_path)
 	await SceneLoader.load_finished
-	var level_resource := SceneLoader.get_loaded_scene()
+	var level_resource :PackedScene = SceneLoader.get_loaded_scene()
 	
 	level_instance = level_resource.instantiate()
 	main_3d.add_child(level_instance)

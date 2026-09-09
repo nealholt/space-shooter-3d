@@ -33,7 +33,7 @@ var countermeasure:Countermeasure
 # Ship for the player. I'd like to not do that. Setting
 # this variable to true should be all you need to make
 # this ship player-controlled.
-@export var is_player := false
+@export var is_player :bool = false
 
 # For testing purposes, I want some ships to just sit there
 # and do nothing. This is easy for fighters and corvettes
@@ -41,14 +41,14 @@ var countermeasure:Countermeasure
 # to them because they could be player or NPC controlled.
 # However, capital ships DO have controllers attached so
 # this bool here disables them.
-@export var disable_for_testing := false
+@export var disable_for_testing :bool = false
 
 # The following is so different ships can have different
 # camera positions.
-@export var fps_cam_position := Vector3(0, 0, 0)
-@export var fps_cam_rotation_deg := Vector3(0, 180, 0) # 180 is straight ahead
-@export var side_cam_position := Vector3(0, 0, 0)
-@export var side_cam_rotation_deg := Vector3(0, -135, 0)
+@export var fps_cam_position :Vector3 = Vector3(0, 0, 0)
+@export var fps_cam_rotation_deg :Vector3 = Vector3(0, 180, 0) # 180 is straight ahead
+@export var side_cam_position :Vector3 = Vector3(0, 0, 0)
+@export var side_cam_rotation_deg :Vector3 = Vector3(0, -135, 0)
 
 # Maximum collision damage is received at 180 degree
 # collisions (head on). Collision damage drops off
@@ -78,7 +78,7 @@ var enemy_team:String
 
 # Bullets fired by this ship should ignore collisions
 # with anything in this array
-var collision_exceptions := Array()
+var collision_exceptions :Array = []
 
 
 #I really like the idea of _ready functions
@@ -127,7 +127,7 @@ func _ready() -> void:
 	# Loop through gun resources and add new guns to the
 	# weapon handler then reset the weapon handler
 	if weapon_handler:
-		for gun_res in stats.guns:
+		for gun_res:GunStats in stats.guns:
 			GunSpawner.new_gun_from_resource(gun_res, weapon_handler, is_player)
 		weapon_handler.reset_weapon_handler()
 	# Set up missile launcher, if any
@@ -225,7 +225,7 @@ func _on_health_component_died() -> void:
 		target_reticles.die()
 		target_reticles = null
 	# Fade out the contrails
-	for contrail in contrails:
+	for contrail:Contrail in contrails:
 		contrail.fade_out_fast()
 	# Stop the burning trail
 	if burning_trail:
@@ -289,9 +289,9 @@ func get_mouse_center_radius() -> float:
 # But also get the before and after percent health for
 # potentially displaying damage effects.
 func damage(dat:ShootData) -> void:
-	var health_percent_pre := health_component.get_percent_health()
+	var health_percent_pre :float = health_component.get_percent_health()
 	hit_box_component.damage(dat)
-	var health_percent_post := health_component.get_percent_health()
+	var health_percent_post :float = health_component.get_percent_health()
 	display_damage(dat, health_percent_pre, health_percent_post)
 
 
@@ -318,8 +318,8 @@ func display_damage(dat:ShootData, health_percent_pre:float, health_percent_post
 	# Rotate the effect so its Z axis points along the surface normal.
 	# Pick an "up" direction that isn't parallel to the normal,
 	# otherwise you get an error.
-	var up := Vector3.UP
-	var hit_normal := dat.collision_surf_norm
+	var up :Vector3 = Vector3.UP
+	var hit_normal :Vector3 = dat.collision_surf_norm
 	# The looking_at function can't look at a hit_normal of 0,0,0
 	# which did occasionally crop up. This if fixes it, though
 	# it's hacky.
@@ -340,7 +340,7 @@ func get_hitbox() -> HitBoxComponent:
 	return hit_box_component
 
 func get_new_shootdata() -> ShootData:
-	var sd:=ShootData.new()
+	var sd:ShootData =ShootData.new()
 	sd.set_shooter(self)
 	if weapon_handler:
 		sd.set_gun(weapon_handler.current_weapon)
@@ -351,7 +351,7 @@ func get_new_shootdata() -> ShootData:
 func _on_camera_switch(new_cam:CameraGroup.CameraState) -> void:
 	# Toggle contrail visibility off when in third person.
 	# It just gets in the way.
-	for c in contrails:
+	for c:Contrail in contrails:
 		c.visible = new_cam != CameraGroup.CameraState.THIRDPERSON
 
 func launch_countermeasures() -> void:

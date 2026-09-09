@@ -56,5 +56,15 @@ func deactivate() -> void:
 
 
 func _on_burst_timer_timeout() -> void:
-	if firing:
+	if !firing: return
+	# You have to refresh the ShootData, otherwise it's
+	# going to have outdated info copied from the
+	# previous bullet.
+	# This feels like a bit of a hack, but it's worse
+	# without it (bullets stray from their starting
+	# firing position over the course of the burst),
+	# so this is the solution until I find something
+	# better.
+	if is_instance_valid(data) and is_instance_valid(data.shooter):
+		data = data.shooter.get_new_shootdata()
 		shoot_actual()

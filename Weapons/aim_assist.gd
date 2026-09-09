@@ -30,7 +30,7 @@ static func new_aim_assist(my_parent:Node3D, angle_assist_lim:float) -> AimAssis
 
 
 func _ready() -> void:
-	for c in get_children():
+	for c:Node in get_children():
 		if c is AudioStreamPlayer:
 			audio = c
 		else:
