@@ -11,14 +11,14 @@ var sound_effect : SoundEffectSetting
 
 
 static func new_sound_queue(my_parent:Node, sf:SoundEffectSetting) -> SoundQueue:
-	var sq := SOUNDQUEUE_SCENE.instantiate()
+	var sq :SoundQueue = SOUNDQUEUE_SCENE.instantiate()
 	sq.sound_effect = sf
 	my_parent.add_child(sq)
 	return sq
 
 
 func _ready() -> void:
-	for i in sound_effect.limit:
+	for i:int in sound_effect.limit:
 		var new_audio:AudioStreamPlayer = AudioStreamPlayer.new()
 		add_child(new_audio)
 		new_audio.stream = sound_effect.sound_effect
@@ -29,7 +29,7 @@ func _ready() -> void:
 # Play next audio and return index of the audio player
 # for possibly later reference
 func play(_loc:Vector3) -> int:
-	var index := next
+	var index :int = next
 	# If the current audio is playing then we're maxed
 	# out on this sound. Prefer to skip than to interrupt
 	# and replay a currently playing sound

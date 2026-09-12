@@ -5,9 +5,9 @@ class_name LaserGun extends Gun
 # Godot 4: 3D Laser Tutorial
 # by ConnorFoo
 # With modifications and comments by Neal Holtschulte
-@onready var beam_mesh := $BeamMesh
-@onready var end_particles := $EndParticles
-@onready var beam_particles := $BeamParticles
+@onready var beam_mesh :MeshInstance3D = $BeamMesh
+@onready var end_particles :GPUParticles3D = $EndParticles
+@onready var beam_particles :GPUParticles3D = $BeamParticles
 
 # Damage per second when the beam is at full radius
 @export var damage_max:float = 20.0
@@ -30,13 +30,13 @@ var beam_radius:float = 0.5
 
 var stay_on:bool = false
 
-var state := LaserState.OFF
 enum LaserState {
 	OFF,
 	ON,
 	POWERING_OFF,
 	POWERING_ON
 }
+var state :LaserState = LaserState.OFF
 
 
 func _ready() -> void:

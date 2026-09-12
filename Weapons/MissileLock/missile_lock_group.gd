@@ -45,11 +45,11 @@ var missile_range_min_sqd:float = 200.0 * 200.0
 @export_range(0, 90, 0.1, "radians_as_degrees") var missile_lock_max_angle: float = deg_to_rad(35.0)
 
 # Track time since missile lock acquired
-var time_since_lock:float = 0.0
+var time_since_lock :float = 0.0
 # Then if missile is fired within this interval,
 # give the missile more damage or better
 # tracking or something
-@export var quick_launch_interval := 0.1 # seconds
+@export var quick_launch_interval :float = 0.1 # seconds
 
 # Reference to the target so we can track it
 var target:HitBoxComponent

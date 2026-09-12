@@ -8,27 +8,27 @@ const SHIELD_SCENE:PackedScene = preload("res://Attachments/Shield/shield.tscn")
 # shields to flicker.
 
 @export var explosion:VisualEffectSetting.VISUAL_EFFECT_TYPE
-@export var max_health := 10
-@export var recharge_delay := 15 ## seconds
+@export var max_health :float = 10.0
+@export var recharge_delay :float = 15.0 ## seconds
 
 @onready var hit_box_component: HitBoxComponent = $HitBoxComponent
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var fresnel_aura: MeshInstance3D = $FresnelAura
 @onready var timer: Timer = $Timer
 @onready var shader_ref : ShaderMaterial = $FresnelAura.mesh.surface_get_material(0)
-var fresnel_power_current := 2.0
-var fresnel_power_default := 2.0
-var fresnel_power_when_struck := 0.05
-var fresnel_power_lerp_speed := 30.0
+var fresnel_power_current :float = 2.0
+var fresnel_power_default :float = 2.0
+var fresnel_power_when_struck :float = 0.05
+var fresnel_power_lerp_speed :float = 30.0
 
-var fresnel_emission_current := 1.0
-var fresnel_emission_default := 1.0
-var fresnel_emission_when_struck := 100.0
-var fresnel_emission_lerp_speed := 10.0
+var fresnel_emission_current :float = 1.0
+var fresnel_emission_default :float = 1.0
+var fresnel_emission_when_struck :float = 100.0
+var fresnel_emission_lerp_speed :float = 10.0
 
 
 static func new_shield(my_parent:Node3D, scal:float) -> Shield:
-	var s := SHIELD_SCENE.instantiate()
+	var s :Shield = SHIELD_SCENE.instantiate()
 	# Order matters for these next three lines of code
 	my_parent.add_child(s)
 	s.scale = Vector3(scal,scal,scal)

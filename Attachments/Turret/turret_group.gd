@@ -7,7 +7,7 @@ func _ready() -> void:
 	# and later on we might want to put turrets out on
 	# asteroids or where ever
 	var p:Node3D = get_parent()
-	for child in get_children():
+	for child:Node in get_children():
 		if child is TurretData:
 			# Pass along the ship reference to the new turret.
 			Turret.new_turret(child, p)
@@ -15,7 +15,7 @@ func _ready() -> void:
 
 # Disable turret movement while testing
 func disable_for_testing() -> void:
-	for child in get_children():
+	for child:Node in get_children():
 		if child is TurretData:
 			var t:Turret = child.get_child(0)
 			t.set_physics_process(false)

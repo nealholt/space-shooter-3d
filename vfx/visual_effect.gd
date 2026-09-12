@@ -79,7 +79,7 @@ func stop() -> void:
 	# every time I loaded or unloaded a level, so I added this.
 	anim.play("RESET")
 
-func _on_animation_finished(_anim_name:='') -> void:
+func _on_animation_finished(_anim_name:String='') -> void:
 	# Free any remote transform
 	if is_instance_valid(remote_transform):
 		remote_transform.queue_free()

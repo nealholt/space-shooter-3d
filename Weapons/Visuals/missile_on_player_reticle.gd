@@ -21,12 +21,12 @@ var projectile:Projectile
 
 # These distances determine how to modify the
 # reticle based on projectile distance to target.
-const far_sqd := 500.0 * 500.0 # Squared for efficiency
-const close_sqd := 250.0 * 250.0 # Squared for efficiency
+const far_sqd :float = 500.0 * 500.0 # Squared for efficiency
+const close_sqd :float = 250.0 * 250.0 # Squared for efficiency
 
 
 static func new_missile_on_player(proj:Projectile, ret:TargetReticles) -> void:
-	var mops := MISSILE_ON_PLAYER_SCENE.instantiate()
+	var mops :MissileOnPlayerReticle = MISSILE_ON_PLAYER_SCENE.instantiate()
 	proj.add_child(mops)
 	mops.projectile = proj
 	mops.reticle = ret

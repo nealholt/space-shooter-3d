@@ -28,7 +28,7 @@ static var me:EnvironmentTweener = null
 
 
 static func new_environment_tweener(my_parent:Node3D) -> EnvironmentTweener:
-	var et := ENVIRONMENTTWEENER_SCENE.instantiate()
+	var et :EnvironmentTweener = ENVIRONMENTTWEENER_SCENE.instantiate()
 	my_parent.add_child(et)
 	return et
 

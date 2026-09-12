@@ -43,7 +43,7 @@ var state : CameraState
 
 var current_camera:CustomCamera
 var turret_motion:TurretMotionComponent
-var target_lead_visible := false
+var target_lead_visible :bool = false
 enum HIT_TYPE {STANDARD, STRONG, SHIELD}
 
 var target:Node3D
@@ -60,19 +60,19 @@ var near_center:Sprite2D
 var beyond_center:Sprite2D
 # Radius (squared)  from the center of the screen within which
 # guns aim at the mouse rather than straight ahead
-const MOUSE_CENTER_RADIUS := 200.0*200.0
+const MOUSE_CENTER_RADIUS :float = 200.0*200.0
 # Radius (squared)  from the center of the screen within which
 # the mouse guide is hidden
-const MOUSE_HIDE_RADIUS := 100.0*100.0
+const MOUSE_HIDE_RADIUS :float = 100.0*100.0
 
-var quick_release_timer := 0.0
-const QUICK_RELEASE_LIMIT := 0.2 # seconds
+var quick_release_timer :float = 0.0
+const QUICK_RELEASE_LIMIT :float = 0.2 # seconds
 
 
 # These are used to control a camera indpendent of any ship.
-const SPEED = 50.0
-var mouse_motion:=Vector2.ZERO
-var velocity:=Vector3.ZERO
+const SPEED :float = 50.0
+var mouse_motion :Vector2= Vector2.ZERO
+var velocity :Vector3= Vector3.ZERO
 
 
 func _ready() -> void:
@@ -100,7 +100,7 @@ func _ready() -> void:
 	mouse_guide = Line2D.new()
 	add_child(mouse_guide)
 	mouse_guide.width = 1.0
-	var center_screen := Vector2(get_viewport().size) / 2.0
+	var center_screen :Vector2 = Vector2(get_viewport().size) / 2.0
 	mouse_guide.add_point(center_screen)
 	mouse_guide.add_point(center_screen)
 	mouse_guide.visible = false

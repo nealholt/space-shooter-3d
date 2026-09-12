@@ -10,14 +10,14 @@ var vfx_setting : VisualEffectSetting
 
 static func new_vfx_queue(my_parent:Node,
 				my_vfx_setting:VisualEffectSetting) -> VfxQueue:
-	var vfx := VFXQUEUE_SCENE.instantiate()
+	var vfx :VfxQueue = VFXQUEUE_SCENE.instantiate()
 	vfx.vfx_setting = my_vfx_setting
 	my_parent.add_child(vfx)
 	return vfx
 
 
 func _ready() -> void:
-	for i in vfx_setting.limit:
+	for i:int in vfx_setting.limit:
 		var new_vfx:VisualEffect = vfx_setting.visual_effect.instantiate()
 		add_child(new_vfx)
 		vfx_players.push_back(new_vfx)
@@ -26,7 +26,7 @@ func _ready() -> void:
 # Play next effect and return index of the effect
 # for possible later reference
 func play(loc:Vector3) -> int:
-	var index := next
+	var index :int = next
 	# If the current effect is playing then we're maxed
 	# out. Prefer to skip than to interrupt
 	if vfx_players[next].is_playing():
@@ -39,7 +39,7 @@ func play(loc:Vector3) -> int:
 
 
 func play_at_angle(loc:Vector3, angle:Vector3) -> int:
-	var index := next
+	var index :int = next
 	# If the current effect is playing then we're maxed
 	# out. Prefer to skip than to interrupt
 	if vfx_players[next].is_playing():
@@ -52,7 +52,7 @@ func play_at_angle(loc:Vector3, angle:Vector3) -> int:
 
 
 func face_and_play(loc:Vector3, to_face:Vector3) -> int:
-	var index := next
+	var index :int = next
 	# If the current effect is playing then we're maxed
 	# out. Prefer to skip than to interrupt
 	if vfx_players[next].is_playing():
@@ -65,7 +65,7 @@ func face_and_play(loc:Vector3, to_face:Vector3) -> int:
 
 
 func play_with_transform(loc:Vector3, tf:Transform3D) -> int:
-	var index := next
+	var index :int = next
 	# If the current effect is playing then we're maxed
 	# out. Prefer to skip than to interrupt
 	if vfx_players[next].is_playing():
@@ -78,7 +78,7 @@ func play_with_transform(loc:Vector3, tf:Transform3D) -> int:
 
 # Second argument is optional adjusmtent to effect position.
 func play_remote_transform(remote_mover:Node3D, adjust:Vector3=Vector3.INF) -> int:
-	var index := next
+	var index :int = next
 	# If the current effect is playing then we're maxed
 	# out. Prefer to skip than to interrupt
 	if vfx_players[next].is_playing():
@@ -91,7 +91,7 @@ func play_remote_transform(remote_mover:Node3D, adjust:Vector3=Vector3.INF) -> i
 
 
 func stop_all() -> void:
-	for vfx in vfx_players:
+	for vfx:VisualEffect in vfx_players:
 		vfx.stop()
 
 

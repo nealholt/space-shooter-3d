@@ -2,9 +2,9 @@ class_name ObstacleDetector extends Node
 # Detect imminent collisions and provide information
 # about how to avoid them
 
-@onready var above := $RayAbove
-@onready var ahead := $RayAhead
-@onready var below := $RayBelow
+@onready var above :RayCast3D = $RayAbove
+@onready var ahead :RayCast3D = $RayAhead
+@onready var below :RayCast3D = $RayBelow
 
 var obstacle_ahead:CollisionObject3D
 

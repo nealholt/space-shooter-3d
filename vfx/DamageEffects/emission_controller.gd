@@ -7,14 +7,14 @@ extends Node3D
 # And: https://forum.godotengine.org/t/regarding-off-camera-particle-emision/27366
 
 func start_emitting() -> void:
-	for n in get_children():
+	for n:GPUParticles3D in get_children():
 		n.set_emitting(true)
 
 func stop_emitting() -> void:
-	for n in get_children():
+	for n:GPUParticles3D in get_children():
 		n.set_emitting(false)
 
 # Turn on one_shot
 func last_time() -> void:
-	for n in get_children():
+	for n:GPUParticles3D in get_children():
 		n.one_shot = true

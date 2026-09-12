@@ -1,6 +1,6 @@
 extends Node
 
-@onready var pause_layer := $".."
+@onready var pause_layer :Node = $".."
 
 # Everything pause related is courtesy of this:
 # https://www.youtube.com/watch?v=kn8yOGEvCo0

@@ -1,13 +1,13 @@
 class_name StateWave extends State
 # Transition to this state with a random chance when taking fire.
 
-var wave_count := 0
-var wave_limit := 0
-var wave_limit_min := 1
-var wave_limit_max := 6
+var wave_count :int = 0
+var wave_limit :int = 0
+var wave_limit_min :int = 1
+var wave_limit_max :int = 6
 
-var minimum_wave_duration := 1.0 # seconds
-var maximum_wave_duration := 3.0 # seconds
+var minimum_wave_duration :float = 1.0 # seconds
+var maximum_wave_duration :float = 3.0 # seconds
 
 # This function should contain code to be
 # executed at the start of the state,

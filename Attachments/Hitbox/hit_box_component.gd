@@ -33,7 +33,7 @@ func _ready() -> void:
 # or is called by a signal from the collidable Area3D when
 # damage is taken.
 func damage(dat:ShootData) -> void:
-	var previous_health := health_component.health
+	var previous_health :float = health_component.health
 	health_component.health -= dat.damage
 	if health_component.is_dead():
 		is_targeted.emit(false, dat.shooter) # Can't be targeted if you're dead

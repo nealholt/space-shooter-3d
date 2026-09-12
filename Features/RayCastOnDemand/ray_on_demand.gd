@@ -31,7 +31,7 @@ var blockage:Node3D
 
 
 static func new_ray(my_parent:Node3D) -> RayOnDemand:
-	var rod := RAYONDEMAND_SCENE.instantiate()
+	var rod :RayOnDemand = RAYONDEMAND_SCENE.instantiate()
 	my_parent.add_child(rod)
 	return rod
 
@@ -84,7 +84,7 @@ func line_is_clear_back_faces(startpoint:Vector3, endpoint:Vector3, ignorebodies
 	#ray.hit_from_inside = true
 	ray.hit_back_faces = true
 	# Add collision exceptions
-	for bod in ignorebodies:
+	for bod:Node3D in ignorebodies:
 		ray.add_exception(bod)
 	# Force raycast update because ray is not enabled by default.
 	ray.force_raycast_update()

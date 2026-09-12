@@ -6,7 +6,7 @@ class_name StateGoto extends State
 # Distance at which to peel off, flee, before
 # coming back around for another pass.
 # This value is over-written by the npc_controller
-var too_close_sqd := 0.0
+var too_close_sqd :float = 0.0
 
 # This function should contain code to be
 # executed at the start of the state,

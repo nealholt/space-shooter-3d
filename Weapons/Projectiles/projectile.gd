@@ -284,7 +284,7 @@ func did_collide(delta:float) -> bool:
 	# Check for and handle collisions.
 	if !ray.is_colliding():
 		return false
-	var body := ray.get_collider()
+	var body :Node3D = ray.get_collider()
 	# If we hit a near-miss detector
 	if body.is_in_group("near-miss detector"):
 		start_near_miss_audio()

@@ -25,7 +25,7 @@ var acquiring_offset:Vector2
 # Onscreen distance between reticle and target
 var dist_tween_reticles:float
 # Scale time between beeps with reticle distance to target
-var distance_scaling: = 70.0**2
+var distance_scaling :float = 70.0**2
 
 
 # Takes on-screen position of target as input

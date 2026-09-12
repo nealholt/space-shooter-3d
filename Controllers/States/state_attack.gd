@@ -10,7 +10,7 @@ class_name StateAttack extends State
 # Distance at which to peel off, flee, before
 # coming back around for another pass.
 # This value is over-written by the npc_controller
-var too_close_sqd := 0.0
+var too_close_sqd :float = 0.0
 
 # This function should contain code to be
 # executed at the start of the state,
@@ -62,14 +62,14 @@ func Physics_Update(_delta:float, motion:MovementProfile, orientation_data:Targe
 
 func steer_around(motion:MovementProfile, orientation_data:TargetOrientationData) -> void:
 	# Get a more convenient variable for my position
-	var my_pos := orientation_data.my_pos
+	var my_pos :Vector3 = orientation_data.my_pos
 	# Get my target's body. Ignore raycast collisions with this
 	var target_body:Node3D = orientation_data.target.get_parent()
 	# Get the point in space midway between self and target
 	var midpoint:Vector3 = my_pos + (orientation_data.target_pos - my_pos)/2
 	# Move the point up or down until a clear space is reached
 	# or all the adjustments have been exhausted.
-	var adjustments := [20,-20,50,-50,100,-100,200,-200,500,-500]
+	var adjustments :Array[int] = [20,-20,50,-50,100,-100,200,-200,500,-500]
 	var up:Vector3 = orientation_data.basis.y
 	var new_point:Vector3
 	for adjustment:int in adjustments:

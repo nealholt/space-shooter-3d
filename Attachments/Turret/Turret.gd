@@ -24,7 +24,7 @@ var enemy_team:String
 
 # Bullets fired by this turret should ignore collisions
 # with anything in this array
-var collision_exceptions := Array()
+var collision_exceptions :Array = []
 
 # Reference to the object this turret is attached to.
 # It is usually a ship, but not always (as in a testing
@@ -39,7 +39,7 @@ var parent_ship:Node3D
 # but sometimes we want to test a turret all by itself
 # or even attach a turret to things other than a ship.
 static func new_turret(my_parent:TurretData, maybe_ship:Node3D) -> Turret:
-	var t := TURRET_SCENE.instantiate()
+	var t :Turret = TURRET_SCENE.instantiate()
 	# Order matters for these next three lines of code
 	t.gun_stats = my_parent.gun
 	my_parent.add_child(t)
@@ -74,7 +74,7 @@ func _ready() -> void:
 	
 	# Otherwise, attach guns as children of all the hardpoints
 	var gun_hardpoints:Array = Global.get_group_nodes_on_branch("gun hardpoint", self)
-	for i in range(gun_hardpoints.size()):
+	for i:int in range(gun_hardpoints.size()):
 		var g:Gun = GunSpawner.new_gun_from_resource(gun_stats, gun_hardpoints[i], false)
 		guns.append(g)
 	
@@ -146,7 +146,7 @@ func _physics_process(delta: float) -> void:
 		exempt_colliders = collision_exceptions+parent_ship.collision_exceptions
 	# Fire ze guns!
 	for gun:Gun in guns:
-		var sd := ShootData.new()
+		var sd :ShootData = ShootData.new()
 		sd.set_shooter(self)
 		sd.set_gun(gun)
 		sd.target = target

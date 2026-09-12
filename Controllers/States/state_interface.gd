@@ -10,7 +10,7 @@ signal Transitioned(s:State, str:String)
 signal NewTargetRequested
 
 # Random number generator
-var random := RandomNumberGenerator.new()
+var random :RandomNumberGenerator = RandomNumberGenerator.new()
 
 # Elapsed time in this state (Not used by all states)
 var elapsed_time:float
@@ -56,7 +56,7 @@ func transition_to_evasion() -> void:
 	# If not in the death animation...
 	if !in_death_animation:
 		# ...then switch into evasion state.
-		var x := random.randi() % 3
+		var x :int = random.randi() % 3
 		if x == 0:
 			Transitioned.emit(self, 'jink')
 		elif x == 1:

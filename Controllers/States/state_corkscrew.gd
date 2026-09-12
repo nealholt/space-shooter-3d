@@ -1,8 +1,8 @@
 class_name StateCorkscrew extends State
 # Transition to this state with a random chance when taking fire.
 
-var min_duration := 3.5 # seconds
-var max_duration := 8.0 # seconds
+var min_duration :float = 3.5 # seconds
+var max_duration :float = 8.0 # seconds
 
 
 # This function should contain code to be

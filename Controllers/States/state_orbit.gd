@@ -5,10 +5,10 @@ class_name StateOrbit extends State
 var keep_target_above:bool = false # Whether to orient so target is ahead (default) or above
 
 # Ideal attack distance squared
-var ideal_distance_sqd := 450.0**2 # Squared for efficiency
+var ideal_distance_sqd :float = 450.0**2 # Squared for efficiency
 # Distance at which to reduce speed as we ease toward
 # ideal attack distance
-var ease_dist_sqd := 300.0**2 # Squared for efficiency
+var ease_dist_sqd :float = 300.0**2 # Squared for efficiency
 
 
 func Enter(motion:MovementProfile) -> void:
@@ -20,7 +20,7 @@ func Enter(motion:MovementProfile) -> void:
 # This function should be called on each
 # physics update frame.
 func Physics_Update(_delta:float, motion:MovementProfile, orientation_data:TargetOrientationData) -> void:
-	var diff := orientation_data.dist_sqd - ideal_distance_sqd
+	var diff :float = orientation_data.dist_sqd - ideal_distance_sqd
 	# Seek target if too far away
 	if orientation_data.dist_sqd > ideal_distance_sqd + ease_dist_sqd:
 		motion.pitch_target_ahead(orientation_data, obstacle_detector)

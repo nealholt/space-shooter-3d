@@ -47,7 +47,7 @@ func set_team_properties(parent_node:Node3D) -> void:
 		# This may be outdated and not needed now
 		# that I have the BlenderModel class (see below)
 		if child.is_in_group("team color"):
-			var newMaterial := StandardMaterial3D.new()
+			var newMaterial :StandardMaterial3D = StandardMaterial3D.new()
 			# Set color of new material
 			newMaterial.albedo_color = color
 			# Assign new material to material overrride

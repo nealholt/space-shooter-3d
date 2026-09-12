@@ -21,18 +21,18 @@ class_name EngineAV extends Node3D
 @export var brake_volume:float = -30 # dB
 @export var brake_pitch:float = 0.3
 
-@onready var engine_audio := $AudioStreamPlayer3D
+@onready var engine_audio :AudioStreamPlayer3D = $AudioStreamPlayer3D
 var tween:Tween
 
 # Use state to control whether or not a shift
 # to different audio executes.
-var state := EngineState.DEFAULT
 enum EngineState {
 	DEFAULT,
 	AFTERBURNER,
 	DRIFT,
 	BRAKE
 }
+var state :EngineState = EngineState.DEFAULT
 
 
 func _ready() -> void:

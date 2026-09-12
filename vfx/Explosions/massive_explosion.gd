@@ -29,29 +29,29 @@ extends VisualEffect
 # active and keeps the explosion sprites positioned
 # relative to the camera.
 
-@onready var timer:=$Timer
-@onready var ring_sprite:=$RingSprite3D
-@onready var flare_explosion: GPUParticles3D = $FlareExplosion
+@onready var timer :Timer =$Timer
+@onready var ring_sprite :Sprite3D =$RingSprite3D
+@onready var flare_explosion :GPUParticles3D = $FlareExplosion
 
-var explosion_alpha_duration := 2.0 ## Tween duration for changing explosion image's alpha
+var explosion_alpha_duration :float = 2.0 ## Tween duration for changing explosion image's alpha
 
-var ring_alpha_duration := 1.5 ## Tween duration for changing ring image's alpha
-var ring_alpha_target := 0.3 ## Alpha value we are tweening to
-var ring_scale_duration := 1.5 ## Tween duration for changing ring image's scale
-var ring_scale_target := 1.6 ## Scale value we are tweening to
-var ring_scale_start := 0.1 ## Scale value we are starting at
+var ring_alpha_duration :float = 1.5 ## Tween duration for changing ring image's alpha
+var ring_alpha_target :float = 0.3 ## Alpha value we are tweening to
+var ring_scale_duration :float = 1.5 ## Tween duration for changing ring image's scale
+var ring_scale_target :float = 1.6 ## Scale value we are tweening to
+var ring_scale_start :float = 0.1 ## Scale value we are starting at
 
 # How far ring image will be placed from the camera
-var ring_distance_min_actual := 1.0
-var ring_distance_max_actual := 5.0
+var ring_distance_min_actual :float = 1.0
+var ring_distance_max_actual :float = 5.0
 # Camera range from explosion which will be linearly mapped
 # to the above two values, the "actual" values.
 # These were experimentally determined.
-var ring_distance_camera_min := 350.0
-var ring_distance_camera_max := 1600.0
+var ring_distance_camera_min :float = 350.0
+var ring_distance_camera_max :float = 1600.0
 
 # bool for whether or not this effect is still animating.
-var effect_is_live := false
+var effect_is_live :bool = false
 
 # Reference to current camera
 var camera:Camera3D
@@ -88,7 +88,7 @@ func _process(_delta: float) -> void:
 		return
 	# Figure out where to put sprite so it's between
 	# camera and ship.
-	var direction := camera.global_position.direction_to(global_position)
+	var direction :Vector3 = camera.global_position.direction_to(global_position)
 	# Get distance to the camera
 	var cam_distance:float = global_position.distance_to(camera.global_position)
 	# Determine how far away to place the sprite
@@ -127,7 +127,7 @@ func stop() -> void:
 	timer.stop()
 
 
-func _on_animation_finished(anim_name:='') -> void:
+func _on_animation_finished(anim_name:String='') -> void:
 	super(anim_name)
 	effect_is_live = false
 	ring_sprite.visible = false

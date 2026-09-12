@@ -4,23 +4,23 @@ class_name StateJink extends State
 # With a short roll thrown in for good measure
 
 # The jink behavior resets up to jink_limit_max times.
-var jink_count := 0
-var jink_limit := 0
-var jink_limit_min := 0
-var jink_limit_max := 4
+var jink_count :int = 0
+var jink_limit :int = 0
+var jink_limit_min :int = 0
+var jink_limit_max :int = 4
 
 # A single jink behavior lasts between these intervals
-var min_jink_duration := 1.5 # seconds
-var max_jink_duration := 4.0 # seconds
+var min_jink_duration :float = 1.5 # seconds
+var max_jink_duration :float = 4.0 # seconds
 
 # Each jink starts with a shorter duration of roll
-var min_roll_duration := 0.0 # seconds
-var max_roll_duration := 2.0 # seconds
+var min_roll_duration :float = 0.0 # seconds
+var max_roll_duration :float = 2.0 # seconds
 var roll_duration : float # seconds
 
 
-var min_speed := 0.7
-var max_speed := 1.0
+var min_speed :float = 0.7
+var max_speed :float = 1.0
 
 # This function should contain code to be
 # executed at the start of the state,

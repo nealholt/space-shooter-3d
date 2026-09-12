@@ -23,7 +23,7 @@ var audio:AudioStreamPlayer
 
 
 static func new_aim_assist(my_parent:Node3D, angle_assist_lim:float) -> AimAssist:
-	var t := AIMASSIST_SCENE.instantiate()
+	var t :AimAssist = AIMASSIST_SCENE.instantiate()
 	my_parent.add_child(t)
 	t.set_assist_limit(angle_assist_lim)
 	return t
@@ -77,11 +77,11 @@ func use_aim_assist_mouse(intercept:Vector3) -> bool:
 	# be to make sure "looking" takes place from the
 	# shooter (ship or gun) perspective, not the camera
 	# perspective.
-	var camera := CameraGroup.cg.get_look_camera()
-	var vect_to_cursor := camera.project_ray_normal(InputManager.im.mouse_pos)
-	var vect_to_intercept := intercept - camera.global_position
-	var angle_to:float = vect_to_cursor.angle_to(vect_to_intercept)
-	var do_use_aim_assist:bool = angle_to < angle_assist_limit
+	var camera :Camera3D = CameraGroup.cg.get_look_camera()
+	var vect_to_cursor :Vector3 = camera.project_ray_normal(InputManager.im.mouse_pos)
+	var vect_to_intercept :Vector3 = intercept - camera.global_position
+	var angle_to :float = vect_to_cursor.angle_to(vect_to_intercept)
+	var do_use_aim_assist :bool = angle_to < angle_assist_limit
 	return do_use_aim_assist
 
 # Play audio cue only if target it near enough in our sights.

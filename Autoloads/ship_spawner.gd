@@ -12,9 +12,9 @@ var NPC_CONTROLLER_SCENE:PackedScene = load("res://Controllers/npc_controller.ts
 
 func new_npc_fighter(team:String, pos:Vector3, direction:Vector3) -> Ship:
 	# Create a new fighter
-	var f := FIGHTER_SCENE.instantiate()
+	var f :Ship = FIGHTER_SCENE.instantiate()
 	# Attach an NPC controller
-	var controller := NPC_CONTROLLER_SCENE.instantiate()
+	var controller :CharacterBodyControlParent = NPC_CONTROLLER_SCENE.instantiate()
 	f.add_child(controller)
 	f.controller = controller
 	# Attach new fighter to a particular team node

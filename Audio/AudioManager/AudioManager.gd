@@ -50,31 +50,31 @@ func play_remote_transform(type:int, remote_mover:Node3D, loc:Vector3=Vector3.ZE
 	#print("Playing remote ", SoundEffectSetting.SOUND_EFFECT_TYPE.keys()[type])
 	return sound_effect_dict_3d[type].play_remote_transform(remote_mover, loc)
 
-func stop_all(type:int, use_3d:=false) -> void:
+func stop_all(type:int, use_3d:bool=false) -> void:
 	if use_3d:
 		sound_effect_dict_3d[type].stop_all()
 	else:
 		sound_effect_dict[type].stop_all()
 
-func stop(type:int, index:int=0, use_3d:=false) -> void:
+func stop(type:int, index:int=0, use_3d:bool=false) -> void:
 	if use_3d:
 		sound_effect_dict_3d[type].stop(index)
 	else:
 		sound_effect_dict[type].stop(index)
 
-func get_volume(type:int, index:int=0, use_3d:=false) -> float:
+func get_volume(type:int, index:int=0, use_3d:bool=false) -> float:
 	if use_3d:
 		return sound_effect_dict_3d[type].get_volume(index)
 	else:
 		return sound_effect_dict[type].get_volume(index)
 
-func set_volume(type:int, new_volume:float, index:int=0, use_3d:=false) -> void:
+func set_volume(type:int, new_volume:float, index:int=0, use_3d:bool=false) -> void:
 	if use_3d:
 		sound_effect_dict_3d[type].set_volume(new_volume, index)
 	else:
 		sound_effect_dict[type].set_volume(new_volume, index)
 
-func set_volume_percent(type:int, percent:float, index:int=0, use_3d:=false) -> void:
+func set_volume_percent(type:int, percent:float, index:int=0, use_3d:bool=false) -> void:
 	if use_3d:
 		sound_effect_dict_3d[type].set_volume_percent(percent, index)
 	else:

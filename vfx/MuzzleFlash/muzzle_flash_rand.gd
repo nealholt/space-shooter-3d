@@ -16,7 +16,7 @@ var cones_count : int
 func _ready() -> void:
 	# Add all GPU Particles children to the
 	# emitter list.
-	for c in get_children():
+	for c:Node in get_children():
 		if c is GPUParticles3D:
 			emitter_list.push_back(c)
 	# Count children of planes and cones

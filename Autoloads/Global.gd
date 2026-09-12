@@ -330,7 +330,7 @@ func get_intercept(shooter_pos:Vector3,
 	var a:float = bullet_speed*bullet_speed - target_velocity.dot(target_velocity)
 	var b:float = 2*target_velocity.dot(target_position-shooter_pos)
 	var c:float = (target_position-shooter_pos).dot(target_position-shooter_pos)
-	var time := (b+sqrt(b*b+4*a*c)) / (2*a)
+	var time :float = (b+sqrt(b*b+4*a*c)) / (2*a)
 	return target_position+time*target_velocity
 
 
@@ -354,8 +354,8 @@ func get_all_children(node:Node) -> Array[Node]:
 # https://www.reddit.com/r/godot/comments/o90vpv/comment/h38fvzg/
 # Fixed and modified by Neal Holtschulte
 func get_group_nodes_on_branch(group: String, branch: Node) -> Array:
-	var group_nodes_on_branch := Array()
-	for child in branch.get_children():
+	var group_nodes_on_branch :Array = []
+	for child:Node in branch.get_children():
 		if child.is_in_group(group):
 			group_nodes_on_branch.append(child)
 		if child.get_child_count() > 0:

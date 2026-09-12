@@ -1,18 +1,18 @@
 class_name DynamicPanel extends Node2D
 
-@onready var panel_container := $PanelContainer
-@onready var line := $Line2D
-@onready var d2t_label := $PanelContainer/VBoxContainer/DistanceLabel
+@onready var panel_container :PanelContainer = $PanelContainer
+@onready var line :Line2D = $Line2D
+@onready var d2t_label :Label = $PanelContainer/VBoxContainer/DistanceLabel
 
-const LINE_LENGTH := 200
-const DIAGONAL_LENGTH := sqrt((LINE_LENGTH*LINE_LENGTH)/2.0)
+const LINE_LENGTH :float = 200.0
+const DIAGONAL_LENGTH :float = sqrt((LINE_LENGTH*LINE_LENGTH)/2.0)
 var Y_ADJUST:int # This must be no less than half the line width
 var midpoint:Vector2 # viewport midpoint
 # Current position
-var on_left := true
-var on_top := true
+var on_left :bool = true
+var on_top :bool = true
 # Distance beyond which panel changes position
-var flex_distance := 150 # pixels
+var flex_distance :float = 150.0 # pixels
 
 
 func _ready() -> void:

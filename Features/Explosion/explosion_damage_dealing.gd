@@ -20,12 +20,12 @@ func _process(_delta: float) -> void:
 	if !delete_me:
 		VfxManager.play_with_transform(explosion_vfx, global_position, transform)
 	# Damage all overlapping bodies
-	for body in area_3d.get_overlapping_bodies():
+	for body:Node3D in area_3d.get_overlapping_bodies():
 		if body.is_in_group("damageable"):
 			body.damage(shoot_data)
 			delete_me = true
 	# Damage all overlapping areas
-	for area in area_3d.get_overlapping_areas():
+	for area:Node3D in area_3d.get_overlapping_areas():
 		if area.is_in_group("damageable"):
 			area.damage(shoot_data)
 			delete_me = true

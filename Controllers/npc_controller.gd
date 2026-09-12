@@ -7,11 +7,11 @@ class_name NPCController extends CharacterBodyControlParent
 # Source:
 # https://www.youtube.com/watch?v=ow_Lum-Agbs&t=300s
 
-@onready var target_selector := $TargetSelector
+@onready var target_selector :TargetSelector = $TargetSelector
 
 # Reference to an intermediate script through which
 # states and the npc moved by the state can communicate.
-@onready var movement_profile := $MovementProfile
+@onready var movement_profile :MovementProfile = $MovementProfile
 
 @export var initial_state : State
 var current_state : State
@@ -46,7 +46,7 @@ var debug_label:Label3D
 # Distance at which to reduce speed as we ease toward
 # ideal attack distance. This is currently only used
 # by capital ships.
-@export var ease_dist := 300.0 # Squared for efficiency
+@export var ease_dist :float = 300.0 # Squared for efficiency
 
 # When this flag is set, update to a new target at the
 # first opportunity. The new target might be the same
@@ -66,7 +66,7 @@ func _ready() -> void:
 	# Tell target selector to prefer capital ships
 	target_selector.prefer_capital_ships = target_capital_ships
 	#print('In StateMachine _ready adding children:')
-	for child in $States.get_children():
+	for child:Node in $States.get_children():
 		if child is State:
 			#print(child.name.to_lower())
 			states[child.name.to_lower()] = child
@@ -89,7 +89,7 @@ func _ready() -> void:
 	#TESTING
 	if DEBUG:
 		var p:Node3D = get_parent()
-		for c in p.get_children():
+		for c:Node in p.get_children():
 			if c is Label3D:
 				debug_label = c
 				c.visible = true

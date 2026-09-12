@@ -13,7 +13,7 @@ static var im:InputManager = null
 # to control
 @export var mouse_control_curve : Curve
 
-var inverted := 1.0
+var inverted :float = 1.0
 
 var switch_weapons :bool= false
 var retarget_just_pressed :bool= false

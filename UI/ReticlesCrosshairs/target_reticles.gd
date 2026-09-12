@@ -41,8 +41,8 @@ class_name TargetReticles extends Node3D
 
 const RETICLE_FOLDER:String = 'res://UI/ReticlesCrosshairs/Images/'
 
-@onready var animation_player := $AnimationPlayer
-@onready var dynamic_panel := $DynamicPanel
+@onready var animation_player :AnimationPlayer = $AnimationPlayer
+@onready var dynamic_panel :DynamicPanel = $DynamicPanel
 
 @export var target_text : String = '' ## Text label for this target when it is directly targeted by the player
 
@@ -51,17 +51,17 @@ enum ReticleSet {FIGHTER, TURRET, WEAKPOINT, REACTOR, MISSILE, NONE}
 @export var reticle_set:ReticleSet
 
 # Squared distance at which to use smaller reticle
-@export var distance_cutoff := 250.0
+@export var distance_cutoff :float = 250.0
 var distance_cutoff_sqd : float
 
 # Squared distance to camera
 var cam_distance:float
 
 # Node2Ds containing TextureRects for the reticles
-@onready var target_reticle := $TargetNode2D
-@onready var offscreen_reticle := $OffscreenNode2D
-@onready var distant_reticle := $DistantNode2D
-@onready var targeted_reticle := $TargetedNode2D
+@onready var target_reticle :Node2D = $TargetNode2D
+@onready var offscreen_reticle :Node2D = $OffscreenNode2D
+@onready var distant_reticle :Node2D = $DistantNode2D
+@onready var targeted_reticle :Node2D = $TargetedNode2D
 
 # reticle_offset is half the reticle width and height so
 # they can more easily be displayed centered.
@@ -229,7 +229,7 @@ func set_target_text(s:String) -> void:
 
 
 func set_reticle_scale(percent:float) -> void:
-	var scl := Vector2(percent, percent)
+	var scl :Vector2 = Vector2(percent, percent)
 	target_reticle.scale = scl
 	offscreen_reticle.scale = scl
 	distant_reticle.scale = scl

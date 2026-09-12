@@ -23,7 +23,7 @@ enum GUN_TYPE {GUN, BURST, HITSCAN, LASER, NO_GUN}
 
 func new_gun_from_resource(gun_stats:GunStats, my_parent:Node3D, is_player:bool) -> Gun:
 	# Create a new gun
-	var g := gun_array[int(gun_stats.gun_type)].instantiate()
+	var g :Gun = gun_array[int(gun_stats.gun_type)].instantiate()
 	# initiate a gun from the resource
 	g.setup_from_resource(gun_stats, is_player)
 	# Attach it to parent
