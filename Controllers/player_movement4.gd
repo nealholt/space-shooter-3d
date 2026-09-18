@@ -81,7 +81,7 @@ var pitch_std_right_stick: float = 0.4
 # where the best turn rate is at 1/3 max velocity.
 @export_range(1,5000, 10) var turn_reduction_factor:float = 100.0
 
-var is_dead := false
+var is_dead :bool = false
 
 # Reference to engine audiovisuals. ship.gd is responsible for
 # setting up this reference.
@@ -173,8 +173,8 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 	CameraGroup.cg.set_fp_manual_override(lean_in)
 	# Lean into turns
 	if lean_in:
-		var horz_lean:=InputManager.im.left_right1*lean_left_right
-		var vert_lean:=InputManager.im.up_down1*lean_up_down
+		var horz_lean:float =InputManager.im.left_right1*lean_left_right
+		var vert_lean:float =InputManager.im.up_down1*lean_up_down
 		CameraGroup.cg.rotate_fp_cam(horz_lean, vert_lean, delta)
 	
 	super.move_and_turn(mover, delta)
@@ -259,8 +259,8 @@ func move_and_turn_v5(mover:Ship, delta:float) -> void:
 		CameraGroup.cg.set_fp_manual_override(lean_in)
 		# Lean into turns
 		if lean_in:
-			var horz_lean:=InputManager.im.left_right1*lean_left_right
-			var vert_lean:=InputManager.im.up_down1*lean_up_down
+			var horz_lean:float =InputManager.im.left_right1*lean_left_right
+			var vert_lean:float =InputManager.im.up_down1*lean_up_down
 			CameraGroup.cg.rotate_fp_cam(horz_lean, vert_lean, delta)
 	
 	super.move_and_turn(mover, delta)

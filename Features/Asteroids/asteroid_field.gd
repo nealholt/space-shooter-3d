@@ -11,7 +11,7 @@ var asteroids:Array[PackedScene] = [
 	preload(ASTEROIDS_FOLDER+'asteroid_green_purple.tscn')]
 
 const RADIUS:int = 25 # The grid "radius." aka: Half the number of grid cells minus 1. Use an odd number so that a middle exists.
-var WIDTH := 2*RADIUS+1 # Width (in cells) of the cube
+var WIDTH:int = 2*RADIUS+1 # Width (in cells) of the cube
 const GRID_SIZE:int = 800 # Width in meters of a sub-cube
 const DENSITY:float = 0.08 # percentage of grid cells containing asteroids
 const MIN_SCALE:float = 50.0 # Minimum scale of the asteroids
@@ -19,8 +19,8 @@ const MAX_SCALE:float = 1200.0 # Maximum scale of the asteroids
 
 var asteroid_array:Array # Array of asteroids in each cell (if any).
 var position_array:Array # Array of positions at the center of each cell.
-var center := Vector3i.ZERO # Possibly previous (or current) cell index of the player
-var player_center := Vector3i.ZERO # Current cell index of the player
+var center :Vector3i = Vector3i.ZERO # Possibly previous (or current) cell index of the player
+var player_center :Vector3i = Vector3i.ZERO # Current cell index of the player
 
 # This function is used instead of the _ready function
 # because the Global player reference needs to be set before the
@@ -50,13 +50,13 @@ func generate_field() -> void:
 	seed(83833)
 	# Create the cube of asteroids around the player
 	var pos:Vector3
-	for i in WIDTH:
-		var matrix:=Array()
-		var matrix2:=Array()
-		for j in WIDTH:
-			var row:=Array()
-			var row2:=Array()
-			for k in WIDTH:
+	for i:int in WIDTH:
+		var matrix:Array = Array()
+		var matrix2:Array = Array()
+		for j:int in WIDTH:
+			var row:Array = Array()
+			var row2:Array = Array()
+			for k:int in WIDTH:
 				pos = Vector3(i+0.5,j+0.5,k+0.5) * GRID_SIZE
 				row.push_back(create_asteroid(pos, false))
 				row2.push_back(pos)
@@ -73,7 +73,7 @@ func generate_field() -> void:
 
 # Randomly create an asteroid (or not) at the given position.
 # Returns the new asteroid or null.
-func create_asteroid(pos:Vector3, grow_in:=true) -> Asteroid:
+func create_asteroid(pos:Vector3, grow_in:bool=true) -> Asteroid:
 	if randf() > DENSITY:
 		return null
 	# Otherwise, create an asteroid
@@ -91,7 +91,7 @@ func create_asteroid(pos:Vector3, grow_in:=true) -> Asteroid:
 	var rot_z:float = randf_range(0, TAU)
 	asteroid.rotation = Vector3(rot_x, rot_y, rot_z)
 	# Randomize position, but keep the asteroid within the cell
-	var amount := GRID_SIZE/2.0 - temp_scale + 1
+	var amount :float = GRID_SIZE/2.0 - temp_scale + 1
 	var pos_x:float = randf_range(-amount, amount)
 	var pos_y:float = randf_range(-amount, amount)
 	var pos_z:float = randf_range(-amount, amount)
@@ -154,8 +154,8 @@ func update_x(x_diff:int) -> void:
 	var slice_to_update:int = wrap_index(center.x - x_diff*RADIUS)
 	# Update all asteroids in that slice
 	#print('    replacing asteroids in '+str(slice_to_update)+', *, *')
-	for y in WIDTH:
-		for z in WIDTH:
+	for y:int in WIDTH:
+		for z:int in WIDTH:
 			# If there's an asteroid in the old position, remove it.
 			if asteroid_array[slice_to_update][y][z]:
 				#print('    removing asteroid at '+str(backup_pos))
@@ -172,8 +172,8 @@ func update_y(y_diff:int) -> void:
 	var slice_to_update:int = wrap_index(center.y - y_diff*RADIUS)
 	# Update all asteroids in that slice
 	#print('    replacing asteroids in *, '+str(slice_to_update)+', *')
-	for x in WIDTH:
-		for z in WIDTH:
+	for x:int in WIDTH:
+		for z:int in WIDTH:
 			# If there's an asteroid in the old position, remove it.
 			if asteroid_array[x][slice_to_update][z]:
 				#print('    removing asteroid at '+str(backup_pos))
@@ -190,8 +190,8 @@ func update_z(z_diff:int) -> void:
 	var slice_to_update:int = wrap_index(center.z - z_diff*RADIUS)
 	# Update all asteroids in that slice
 	#print('    replacing asteroids in *, *, '+str(slice_to_update))
-	for x in WIDTH:
-		for y in WIDTH:
+	for x:int in WIDTH:
+		for y:int in WIDTH:
 			# If there's an asteroid in the old position, remove it.
 			if asteroid_array[x][y][slice_to_update]:
 				#print('    removing asteroid at '+str(backup_pos))

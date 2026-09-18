@@ -7,7 +7,7 @@ var damage_data:Array[DamageDatum]
 
 
 static func new_damage_tracker(my_parent:Node3D) -> DamageTracker:
-	var dt := DAMAGE_TRACKER_SCENE.instantiate()
+	var dt :DamageTracker = DAMAGE_TRACKER_SCENE.instantiate()
 	my_parent.add_child(dt)
 	return dt
 
@@ -31,7 +31,7 @@ func track_damage_data(dat:ShootData) -> void:
 	if damage_data.size() < 3:
 		damage_data.push_back(datum)
 		return
-	for i in range(length-1, length-4, -1):
+	for i:int in range(length-1, length-4, -1):
 		if damage_data[i].consolidate_maybe(datum):
 			return
 	# Couldn't consolidate so just add in new data.
@@ -41,5 +41,5 @@ func track_damage_data(dat:ShootData) -> void:
 # Display every DamageDatum in the array.
 func display_data() -> void:
 	print('shooter,shooter_team,bullet_type,damage_dealt,thing_hit,thing_team,friendly_fire,undamageable_hit,timed_out,count')
-	for d in damage_data:
+	for d:DamageDatum in damage_data:
 		d.print_data()

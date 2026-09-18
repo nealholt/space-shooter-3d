@@ -17,12 +17,12 @@ func _ready() -> void:
 	# Seed global random number generator for replicable first level
 	seed(123)
 	# Create individual scattered orbs
-	for x in range(INDIVIDUAL_ORB_COUNT):
+	for x:int in range(INDIVIDUAL_ORB_COUNT):
 		make_orb_at(get_random_position(WORLD_RADIUS))
 	# Create orb clusters
-	for x in range(CLUSTER_COUNT):
+	for x:int in range(CLUSTER_COUNT):
 		var cluster_center:Vector3 = get_random_position(WORLD_RADIUS)
-		for y in range(ORBS_PER_CLUSTER):
+		for y:int in range(ORBS_PER_CLUSTER):
 			make_orb_at(cluster_center+get_random_position(CLUSTER_RADIUS))
 
 

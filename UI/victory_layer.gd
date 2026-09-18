@@ -6,7 +6,7 @@ class_name EndScreen extends CanvasLayer
 # Created by GameDev.tv Team, Bram Williams
 # Neal Holtschulte has since modified it.
 
-@onready var outcome_label := $CenterContainer/PanelContainer/VBoxContainer/Label
+@onready var outcome_label :Label = $CenterContainer/PanelContainer/VBoxContainer/Label
 
 #@onready var star_1: TextureRect = %Star1
 #@onready var star_2: TextureRect = %Star2

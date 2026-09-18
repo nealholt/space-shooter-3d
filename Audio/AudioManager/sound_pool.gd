@@ -29,7 +29,7 @@ var m_CurrentPlayerIndex : int = NO_STREAM_PLAYER
 
 # Connect all AudioStreamPlayer children to the 'finished' signal
 func _ConnectStreamSignals() -> void:
-	for child in get_children():
+	for child:Node in get_children():
 		# Connect all AudioStreamPlayer children to the 'finished' signal to allow audio continuity
 		var audioStreamPlayer : AudioStreamPlayer = child as AudioStreamPlayer
 		audioStreamPlayer.finished.connect(_OnAudioStreamFinished)
@@ -68,7 +68,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 		# The AudioCollection node does not contain any children
 		return ["The audio collection must contain at least one AudioStreamPlayer node"]
 	else:
-		for child in get_children():
+		for child:Node in get_children():
 			if (not (child is AudioStreamPlayer)):
 				# At least one of the AudioCollection's child nodes has an incompatible type
 				return ["Audio collection's child nodes must be of type AudioStreamPlayer"]

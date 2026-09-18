@@ -15,7 +15,7 @@ func _ready() -> void:
 	# This is done instead of using the _ready function
 	# in asteroid_field.gd because the player needs
 	# to be instantiated before the asteroid field.
-	for c in get_children():
+	for c:Node in get_children():
 		if c is AsteroidField:
 			c.generate_field()
 		elif c is EndScreen:
@@ -33,7 +33,7 @@ func _ready() -> void:
 	RayOnDemand.new_ray(self)
 	# Create an environment tweener, attach it as a child,
 	# and tell it to copy baseline environment values
-	var envt := EnvironmentTweener.new_environment_tweener(self)
+	var envt :EnvironmentTweener = EnvironmentTweener.new_environment_tweener(self)
 	envt.backup_environment_baselines.call_deferred($WorldEnvironment.environment)
 
 
@@ -65,7 +65,7 @@ func check_win_loss(dead_thing:Ship) -> void:
 
 
 func center_the_mouse() -> void:
-	var center_screen := Vector2(get_viewport().size) / 2.0
+	var center_screen :Vector2 = Vector2(get_viewport().size) / 2.0
 	get_viewport().warp_mouse(center_screen)
 
 
