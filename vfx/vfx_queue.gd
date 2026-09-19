@@ -35,6 +35,9 @@ func play(loc:Vector3) -> int:
 	vfx_players[next].play_at(loc)
 	# Increment next
 	next = (next+1) % vfx_players.size()
+	# Play audio, if any
+	if vfx_setting.audio_effect != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
+		AudioManager.play(vfx_setting.audio_effect, loc)
 	return index
 
 
@@ -48,6 +51,9 @@ func play_at_angle(loc:Vector3, angle:Vector3) -> int:
 	vfx_players[next].play_at_angle(loc, angle)
 	# Increment next
 	next = (next+1) % vfx_players.size()
+	# Play audio, if any
+	if vfx_setting.audio_effect != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
+		AudioManager.play(vfx_setting.audio_effect, loc)
 	return index
 
 
@@ -61,6 +67,9 @@ func face_and_play(loc:Vector3, to_face:Vector3) -> int:
 	vfx_players[next].face_and_play(loc, to_face)
 	# Increment next
 	next = (next+1) % vfx_players.size()
+	# Play audio, if any
+	if vfx_setting.audio_effect != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
+		AudioManager.play(vfx_setting.audio_effect, loc)
 	return index
 
 
@@ -74,6 +83,9 @@ func play_with_transform(loc:Vector3, tf:Transform3D) -> int:
 	vfx_players[next].play_with_transform(loc, tf)
 	# Increment next
 	next = (next+1) % vfx_players.size()
+	# Play audio, if any
+	if vfx_setting.audio_effect != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
+		AudioManager.play(vfx_setting.audio_effect, loc)
 	return index
 
 # Second argument is optional adjusmtent to effect position.
@@ -87,6 +99,9 @@ func play_remote_transform(remote_mover:Node3D, adjust:Vector3=Vector3.INF) -> i
 	vfx_players[next].play_remote_transform(remote_mover, adjust)
 	# Increment next
 	next = (next+1) % vfx_players.size()
+	# Play audio, if any
+	if vfx_setting.audio_effect != SoundEffectSetting.SOUND_EFFECT_TYPE.NONE:
+		AudioManager.play_remote_transform(vfx_setting.audio_effect, remote_mover)
 	return index
 
 

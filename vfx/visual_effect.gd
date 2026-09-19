@@ -19,7 +19,6 @@ func play() -> void:
 	if world_env_mods:
 		EnvironmentTweener.me.play(global_position, world_env_mods)
 
-
 func is_playing() -> bool:
 	return anim.is_playing()
 

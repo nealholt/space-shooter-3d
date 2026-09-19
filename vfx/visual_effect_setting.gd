@@ -24,3 +24,4 @@ enum VISUAL_EFFECT_TYPE {
 @export var limit: int = 50 ## Maximum number of this VisualEffect to play simultaneously before culled.
 @export var type: VISUAL_EFFECT_TYPE ## The unique visual effect in the [enum VISUAL_EFFECT_TYPE] to associate with this effect. Each VisualEffect resource should have it's own unique [enum VISUAL_EFFECT_TYPE] setting.
 @export var visual_effect:PackedScene
+@export var audio_effect:SoundEffectSetting.SOUND_EFFECT_TYPE = SoundEffectSetting.SOUND_EFFECT_TYPE.NONE
