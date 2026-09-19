@@ -1,6 +1,6 @@
 extends Node
 
-var weakpoint_count := 0
+var weakpoint_count :int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,7 +10,7 @@ func _ready() -> void:
 	if weakpoint_group:
 		weakpoint_count = weakpoint_group.get_child_count()
 		# Connect to weakpoint destroyed signal
-		for wp in weakpoint_group.get_children():
+		for wp:Node in weakpoint_group.get_children():
 			wp.connect('destroyed', _on_weakpoint_destroyed)
 
 # Once the weakpoints are all gone, open the reactor shields

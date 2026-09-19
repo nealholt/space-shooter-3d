@@ -74,6 +74,8 @@ func _on_health_component_died() -> void:
 	set_physics_process(false)
 	# Start the fireworks
 	VfxManager.play(explosion, global_position)
+	# Play the audio
+	AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.SHIELD_EXPLOSION, global_position)
 	# Start a timer for shield to recharge
 	timer.start(recharge_delay)
 

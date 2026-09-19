@@ -62,24 +62,6 @@ func stop(type:int, index:int=0, use_3d:bool=false) -> void:
 	else:
 		sound_effect_dict[type].stop(index)
 
-func get_volume(type:int, index:int=0, use_3d:bool=false) -> float:
-	if use_3d:
-		return sound_effect_dict_3d[type].get_volume(index)
-	else:
-		return sound_effect_dict[type].get_volume(index)
-
-func set_volume(type:int, new_volume:float, index:int=0, use_3d:bool=false) -> void:
-	if use_3d:
-		sound_effect_dict_3d[type].set_volume(new_volume, index)
-	else:
-		sound_effect_dict[type].set_volume(new_volume, index)
-
-func set_volume_percent(type:int, percent:float, index:int=0, use_3d:bool=false) -> void:
-	if use_3d:
-		sound_effect_dict_3d[type].set_volume_percent(percent, index)
-	else:
-		sound_effect_dict[type].set_volume_percent(percent, index)
-
 func stop_everything() -> void:
 	for audio:SoundQueue in sound_effect_dict.values():
 		audio.stop_all()

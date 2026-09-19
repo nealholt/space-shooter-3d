@@ -6,7 +6,7 @@ const SOUNDQUEUE_SCENE:PackedScene = preload("res://Audio/AudioManager/sound_que
 
 
 var next:int = 0
-var audio_players : Array
+var audio_players :Array
 var sound_effect : SoundEffectSetting
 
 
@@ -50,15 +50,6 @@ func stop_all() -> void:
 
 func stop(index:int=0) -> void:
 	audio_players[index].stop()
-
-func get_volume(index:int=0) -> float:
-	return audio_players[index].volume_db
-
-func set_volume(new_volume:float, index:int=0) -> void:
-	audio_players[index].volume_db = new_volume
-
-func set_volume_percent(percent:float, index:int=0) -> void:
-	audio_players[index].volume_db = percent * (sound_effect.volume_max-sound_effect.volume_min) + sound_effect.volume_min
 
 func print_summary() -> void:
 	print("    Summary for ", SoundEffectSetting.SOUND_EFFECT_TYPE.keys()[sound_effect.type])

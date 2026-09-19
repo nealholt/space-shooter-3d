@@ -16,6 +16,7 @@ enum SOUND_EFFECT_TYPE {
 	HIT_ON_SHIELD,
 	GAIN,
 	POP,
+	SHIELD_EXPLOSION,
 	NONE
 }
 
@@ -23,7 +24,7 @@ enum SOUND_EFFECT_TYPE {
 @export var type: SOUND_EFFECT_TYPE ## The unique sound effect in the [enum SOUND_EFFECT_TYPE] to associate with this effect. Each SoundEffect resource should have it's own unique [enum SOUND_EFFECT_TYPE] setting.
 @export var sound_effect: AudioStreamWAV ## The [AudioStreamWAV] audio resource to play.
 @export_range(-40, 20) var volume: float = 0 ## The volume of the [member sound_effect].
-@export var volume_min: float = -40.0
-@export var volume_max: float = 20.0
+@export var unit_size: float = 10.0 ## (3D only) The factor for the attenuation effect. Higher values make the sound audible over a larger distance.
+@export var volume_max: float = 20.0 ## (3D only) Maximum volume this audio will play at
 @export_range(0.0, 4.0,.01) var pitch_scale: float = 1.0 ## The pitch scale of the [member sound_effect].
 @export_range(0.0, 1.0,.01) var pitch_randomness: float = 0.0 ## The pitch randomness setting of the [member sound_effect].

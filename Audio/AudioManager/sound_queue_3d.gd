@@ -8,7 +8,7 @@ const SOUNDQUEUE3D_SCENE:PackedScene = preload("res://Audio/AudioManager/sound_q
 # that need to follow an object rather than play briefly
 # at a position, for instance the machine gun sound or
 # the reload noise.
-var remote_ts : Array
+var remote_ts :Array
 
 static func new_sound_queue(my_parent:Node, sf:SoundEffectSetting) -> SoundQueue3D:
 	var sq :SoundQueue3D = SOUNDQUEUE3D_SCENE.instantiate()
@@ -23,6 +23,8 @@ func _ready() -> void:
 		add_child(new_audio)
 		new_audio.stream = sound_effect.sound_effect
 		new_audio.volume_db = sound_effect.volume
+		new_audio.max_db = sound_effect.volume_max
+		new_audio.unit_size = sound_effect.unit_size
 		audio_players.push_back(new_audio)
 		# Connect to finished signal in case there's a transform to clean up
 		new_audio.finished.connect(_on_audio_finished.bind(i))
