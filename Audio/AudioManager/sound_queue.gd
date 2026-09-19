@@ -22,13 +22,15 @@ func _ready() -> void:
 		var new_audio:AudioStreamPlayer = AudioStreamPlayer.new()
 		add_child(new_audio)
 		new_audio.stream = sound_effect.sound_effect
-		new_audio.volume_db = sound_effect.volume
 		audio_players.push_back(new_audio)
 
 
 # Play next audio and return index of the audio player
-# for possibly later reference
-func play(_loc:Vector3) -> int:
+# for possibly later reference.
+# volume_percent sets the volume to a value in the range
+# from volume_min to volume (or more if percent is greater
+# than 1).
+func play(_loc:Vector3, volume_percent:float) -> int:
 	var index :int = next
 	# If the current audio is playing then we're maxed
 	# out on this sound. Prefer to skip than to interrupt
@@ -38,6 +40,7 @@ func play(_loc:Vector3) -> int:
 	# Set up and play the audio
 	audio_players[next].pitch_scale = sound_effect.pitch_scale
 	audio_players[next].pitch_scale += randf_range(-sound_effect.pitch_randomness, sound_effect.pitch_randomness )
+	audio_players[next].volume_db = sound_effect.get_volume_db(volume_percent)
 	audio_players[next].play()
 	# Increment next
 	next = (next+1) % audio_players.size()

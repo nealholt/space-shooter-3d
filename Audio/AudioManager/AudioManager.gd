@@ -37,18 +37,28 @@ func _ready() -> void:
 		sound_effect_dict_3d[sound_effect.type] = SoundQueue3D.new_sound_queue(self,sound_effect)
 
 
-## Plays a sound effect if the limit has not been reached. Otherwise does nothing. Returns index of audio stream played.
-func play(type:int, loc:Vector3=Vector3.INF) -> int:
+# Plays a sound effect if the limit has not been reached.
+# Otherwise does nothing. Returns index of audio stream
+# played.
+# volume_percent sets the volume to a value in the range
+# from volume_min to volume (or more if percent is greater
+# than 1).
+func play(type:int, loc:Vector3=Vector3.INF, volume_percent:float=1.0) -> int:
 	#print("Playing ", SoundEffectSetting.SOUND_EFFECT_TYPE.keys()[type])
 	if loc != Vector3.INF:
-		return sound_effect_dict_3d[type].play(loc)
+		return sound_effect_dict_3d[type].play(loc, volume_percent)
 	else:
-		return sound_effect_dict[type].play(loc)
+		return sound_effect_dict[type].play(loc, volume_percent)
 
-## Plays a sound effect if the limit has not been reached. Otherwise does nothing. Returns index of audio stream played.
-func play_remote_transform(type:int, remote_mover:Node3D, loc:Vector3=Vector3.ZERO) -> int:
+# Plays a sound effect if the limit has not been reached.
+# Otherwise does nothing. Returns index of audio stream
+# played.
+# volume_percent sets the volume to a value in the range
+# from volume_min to volume (or more if percent is greater
+# than 1).
+func play_remote_transform(type:int, remote_mover:Node3D, loc:Vector3=Vector3.ZERO, volume_percent:float=1.0) -> int:
 	#print("Playing remote ", SoundEffectSetting.SOUND_EFFECT_TYPE.keys()[type])
-	return sound_effect_dict_3d[type].play_remote_transform(remote_mover, loc)
+	return sound_effect_dict_3d[type].play_remote_transform(remote_mover, loc, volume_percent)
 
 func stop_all(type:int, use_3d:bool=false) -> void:
 	if use_3d:

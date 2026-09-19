@@ -25,6 +25,16 @@ enum SOUND_EFFECT_TYPE {
 @export var sound_effect: AudioStreamWAV ## The [AudioStreamWAV] audio resource to play.
 @export_range(-40, 20) var volume: float = 0 ## The volume of the [member sound_effect].
 @export var unit_size: float = 10.0 ## (3D only) The factor for the attenuation effect. Higher values make the sound audible over a larger distance.
+@export var volume_min: float = -40.0 ## Minimum volume. This ONLY applies when the play function sets the audio volume percentage.
 @export var volume_max: float = 20.0 ## (3D only) Maximum volume this audio will play at
 @export_range(0.0, 4.0,.01) var pitch_scale: float = 1.0 ## The pitch scale of the [member sound_effect].
 @export_range(0.0, 1.0,.01) var pitch_randomness: float = 0.0 ## The pitch randomness setting of the [member sound_effect].
+
+# Yes, it is correct that volume is the upper limit,
+# NOT volume_max. volume_max is the global max to not
+# blow out anyone's eardrums. volume is the standard
+# decibel level at percent=1.0. volume_min is the
+# minimum for when a custom volume is requested.
+# volume x2 could be requested with a percent of 2.0.
+func get_volume_db(percent:float) -> float:
+	return (volume - volume_min) * percent + volume_min

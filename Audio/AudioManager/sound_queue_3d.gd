@@ -35,7 +35,7 @@ func _ready() -> void:
 
 # Play next audio and return index of the audio player
 # for possibly later reference
-func play(location:Vector3 = Vector3.ZERO) -> int:
+func play(location:Vector3, volume_percent:float) -> int:
 	var index :int = next
 	# If the current audio is playing then we're maxed
 	# out on this sound. Prefer to skip than to interrupt
@@ -46,15 +46,16 @@ func play(location:Vector3 = Vector3.ZERO) -> int:
 	audio_players[next].global_position = location
 	audio_players[next].pitch_scale = sound_effect.pitch_scale
 	audio_players[next].pitch_scale += randf_range(-sound_effect.pitch_randomness, sound_effect.pitch_randomness )
+	audio_players[next].volume_db = sound_effect.get_volume_db(volume_percent)
 	audio_players[next].play()
 	# Increment next
 	next = (next+1) % audio_players.size()
 	return index
 
 
-func play_remote_transform(remote_mover:Node3D, location:Vector3 = Vector3.ZERO) -> int:
+func play_remote_transform(remote_mover:Node3D, location:Vector3, volume_percent:float) -> int:
 	# Play the effect
-	var i :int = play(location)
+	var i :int = play(location, volume_percent)
 	#print('Playing index %d remote' % i)
 	# If nothing played, then abort
 	if i == -1: return -1
