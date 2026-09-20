@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bvmwhl62ighly" path="res://vfx/visual_effect.gd" id="1_6d5r7"]
 [ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/Textures/kenney_particle-pack/star_04.png" id="1_xdx7c"]
 [ext_resource type="Material" uid="uid://covsu58qwnqru" path="res://Assets/Materials/flare00.tres" id="2_l105u"]
-[ext_resource type="AudioStream" uid="uid://drwbhql0pjblr" path="res://Audio/SoundEffects/shield_strike.wav" id="3_30u2s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46d27"]
 transparency = 1
@@ -146,18 +145,6 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_twp0c"]
 length = 0.001
@@ -192,18 +179,6 @@ tracks/2/path = NodePath("Fire:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -253,14 +228,9 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_ywo5y")
 draw_pass_1 = SubResource("QuadMesh_pnf0b")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1409088748]
-stream = ExtResource("3_30u2s")
-volume_db = 2.0
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1796490530]
 libraries/ = SubResource("AnimationLibrary_hxaxm")
 
 [connection signal="finished" from="Sparks" to="." method="_on_part_finished"]
 [connection signal="finished" from="Flash" to="." method="_on_part_finished"]
 [connection signal="finished" from="Fire" to="." method="_on_part_finished"]
-[connection signal="finished" from="AudioStreamPlayer3D" to="." method="_on_part_finished"]

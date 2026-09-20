@@ -14,6 +14,10 @@
 [ext_resource type="AudioStream" uid="uid://djeyrkdc4qrxe" path="res://Audio/SoundEffects/mixkit-hard-pop-click-2364.wav" id="12_u6uwd"]
 [ext_resource type="AudioStream" uid="uid://bt2ywlugnn3ji" path="res://Audio/SoundEffects/shield_explosion.wav" id="13_lapax"]
 [ext_resource type="AudioStream" uid="uid://wqqcngisdu7g" path="res://Audio/SoundEffects/explosion_audio_deep.wav" id="14_ddak6"]
+[ext_resource type="AudioStream" uid="uid://cdvuqhwbklq3c" path="res://Audio/SoundEffects/explosion_pow.wav" id="15_dyort"]
+[ext_resource type="AudioStream" uid="uid://863tnwrqn116" path="res://Audio/SoundEffects/frigate_explosion.wav" id="16_75go4"]
+[ext_resource type="AudioStream" uid="uid://bf7kbki88ftmw" path="res://Audio/SoundEffects/flak_explosion.wav" id="17_plpy0"]
+[ext_resource type="AudioStream" uid="uid://brqwmtyhgmx5h" path="res://Audio/SoundEffects/massive_explosion.wav" id="18_5wi6k"]
 
 [sub_resource type="Resource" id="Resource_omf2n"]
 script = ExtResource("2_lu82t")
@@ -57,7 +61,9 @@ metadata/_custom_type_script = "uid://cr1an6d85yksa"
 script = ExtResource("2_lu82t")
 type = 5
 sound_effect = ExtResource("8_ieupc")
-volume = -12.0
+unit_size = 80.0
+volume_min = -10.0
+volume_max = 5.0
 pitch_randomness = 0.2
 metadata/_custom_type_script = "uid://cr1an6d85yksa"
 
@@ -73,7 +79,9 @@ metadata/_custom_type_script = "uid://cr1an6d85yksa"
 script = ExtResource("2_lu82t")
 type = 7
 sound_effect = ExtResource("10_nmqn7")
-volume = -12.0
+unit_size = 80.0
+volume_min = -20.0
+volume_max = 0.0
 pitch_randomness = 0.2
 metadata/_custom_type_script = "uid://cr1an6d85yksa"
 
@@ -107,13 +115,58 @@ script = ExtResource("2_lu82t")
 limit = 8
 type = 11
 sound_effect = ExtResource("14_ddak6")
-volume = 4.0
+volume = 3.0
 unit_size = 50.0
 volume_min = 0.0
 volume_max = 10.0
 pitch_randomness = 0.05
 metadata/_custom_type_script = "uid://cr1an6d85yksa"
 
+[sub_resource type="Resource" id="Resource_ddak6"]
+script = ExtResource("2_lu82t")
+limit = 10
+type = 12
+sound_effect = ExtResource("15_dyort")
+volume = 3.0
+unit_size = 70.0
+volume_min = -10.0
+volume_max = 5.0
+pitch_randomness = 0.05
+metadata/_custom_type_script = "uid://cr1an6d85yksa"
+
+[sub_resource type="Resource" id="Resource_plpy0"]
+script = ExtResource("2_lu82t")
+type = 13
+sound_effect = ExtResource("16_75go4")
+volume = 4.0
+unit_size = 100.0
+volume_min = -10.0
+volume_max = 6.0
+pitch_randomness = 0.05
+metadata/_custom_type_script = "uid://cr1an6d85yksa"
+
+[sub_resource type="Resource" id="Resource_75go4"]
+script = ExtResource("2_lu82t")
+limit = 10
+type = 14
+sound_effect = ExtResource("17_plpy0")
+volume = 5.0
+unit_size = 50.0
+volume_min = -10.0
+volume_max = 5.0
+pitch_randomness = 0.1
+metadata/_custom_type_script = "uid://cr1an6d85yksa"
+
+[sub_resource type="Resource" id="Resource_b3pw4"]
+script = ExtResource("2_lu82t")
+limit = 2
+type = 15
+sound_effect = ExtResource("18_5wi6k")
+volume = 20.0
+unit_size = 100.0
+volume_min = -5.0
+metadata/_custom_type_script = "uid://cr1an6d85yksa"
+
 [node name="AudioManager" type="Node3D" unique_id=1017980380]
 script = ExtResource("1_7o6mq")
-sound_effects = Array[ExtResource("2_lu82t")]([SubResource("Resource_omf2n"), SubResource("Resource_dpp4s"), SubResource("Resource_ieupc"), SubResource("Resource_2wtmb"), SubResource("Resource_ca3r6"), SubResource("Resource_frebe"), SubResource("Resource_5g1tu"), SubResource("Resource_7xao4"), SubResource("Resource_b8e2d"), SubResource("Resource_lapax"), SubResource("Resource_uh5gp"), SubResource("Resource_dyort")])
+sound_effects = Array[ExtResource("2_lu82t")]([SubResource("Resource_omf2n"), SubResource("Resource_dpp4s"), SubResource("Resource_ieupc"), SubResource("Resource_2wtmb"), SubResource("Resource_ca3r6"), SubResource("Resource_frebe"), SubResource("Resource_5g1tu"), SubResource("Resource_7xao4"), SubResource("Resource_b8e2d"), SubResource("Resource_lapax"), SubResource("Resource_uh5gp"), SubResource("Resource_dyort"), SubResource("Resource_ddak6"), SubResource("Resource_plpy0"), SubResource("Resource_75go4"), SubResource("Resource_b3pw4")])

@@ -23,18 +23,21 @@ script = ExtResource("1_4hukn")
 [node name="ShieldStrikeSetting" parent="all_vfx_settings" unique_id=1547821570 instance=ExtResource("2_kqin3")]
 type = 1
 visual_effect = ExtResource("3_8do65")
+audio_effect = 7
 
 [node name="ShieldExplosionEffectSetting" type="Node" parent="all_vfx_settings" unique_id=334466268]
 script = ExtResource("4_vbg6y")
 limit = 15
 type = 2
 visual_effect = ExtResource("4_levs1")
+audio_effect = 10
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
 [node name="ShipStrikeSetting" type="Node" parent="all_vfx_settings" unique_id=86356444]
 script = ExtResource("4_vbg6y")
 type = 3
 visual_effect = ExtResource("6_fdgtq")
+audio_effect = 5
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
 [node name="BulletHoleSetting" type="Node" parent="all_vfx_settings" unique_id=733613282]
@@ -48,6 +51,7 @@ metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 script = ExtResource("4_vbg6y")
 type = 5
 visual_effect = ExtResource("8_le2sy")
+audio_effect = 14
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
 [node name="SingleExplosionSetting" type="Node" parent="all_vfx_settings" unique_id=1483340351]
@@ -55,6 +59,7 @@ script = ExtResource("4_vbg6y")
 limit = 40
 type = 6
 visual_effect = ExtResource("10_ptu8o")
+audio_effect = 12
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
 [node name="SingleExplosion8xSetting" type="Node" parent="all_vfx_settings" unique_id=1698029398]
@@ -77,14 +82,17 @@ script = ExtResource("4_vbg6y")
 limit = 2
 type = 9
 visual_effect = ExtResource("13_71nip")
+audio_effect = 15
 metadata/_custom_type_script = "uid://dxavjpjg06j5w"
 
 [node name="FrigateExplosion" parent="all_vfx_settings" unique_id=1377271947 instance=ExtResource("2_kqin3")]
 limit = 5
 type = 10
 visual_effect = ExtResource("13_fdgtq")
+audio_effect = 13
 
 [node name="ExplosionHotDS" parent="all_vfx_settings" unique_id=877466162 instance=ExtResource("2_kqin3")]
 limit = 10
 type = 11
 visual_effect = ExtResource("14_gwvbw")
+audio_effect = 12

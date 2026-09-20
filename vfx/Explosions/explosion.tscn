@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bvmwhl62ighly" path="res://vfx/visual_effect.gd" id="1_ukt7p"]
 [ext_resource type="Texture2D" uid="uid://g5oi2fgvy1t8" path="res://Assets/Textures/kenney_particle-pack/star_04.png" id="1_xbms3"]
 [ext_resource type="Material" uid="uid://covsu58qwnqru" path="res://Assets/Materials/flare00.tres" id="2_ggp7v"]
-[ext_resource type="AudioStream" uid="uid://cdvuqhwbklq3c" path="res://Audio/SoundEffects/explosion_pow.wav" id="3_ehf7x"]
 [ext_resource type="Texture2D" uid="uid://c1ypofba856h2" path="res://Assets/Textures/kenney_particle-pack/star_05.png" id="4_rlc4s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46d27"]
@@ -178,18 +177,6 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_44uyp"]
 length = 0.001
@@ -236,18 +223,6 @@ tracks/3/path = NodePath("Sparks:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AudioStreamPlayer3D:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -314,7 +289,3 @@ draw_pass_1 = SubResource("QuadMesh_m3584")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=129211659]
 libraries/ = SubResource("AnimationLibrary_h4ga4")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=604360556]
-stream = ExtResource("3_ehf7x")
-volume_db = 2.0

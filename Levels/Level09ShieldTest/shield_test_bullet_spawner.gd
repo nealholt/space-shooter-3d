@@ -6,7 +6,7 @@ func _ready() -> void:
 	b.speed = 5.0
 	b.time_out = 40.0
 	b.position = Vector3(0.326, 0.0, 10.85)
-	var sd:=ShootData.new()
+	var sd :ShootData =ShootData.new()
 	sd.shooter = self
 	b.data = sd
 	add_child(b)

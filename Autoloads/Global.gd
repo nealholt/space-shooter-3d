@@ -424,11 +424,19 @@ func player_feedback(collider:Node3D, shoot_data:ShootData) -> void:
 			CameraGroup.cg.visualize_hit(CameraGroup.HIT_TYPE.STRONG)
 		elif collider.is_in_group("shield"):
 			#print('damage to shield') # shield_hit.wav
-			AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.HIT_ON_SHIELD)
+			# I commented this out because now there is a
+			# sufficiently loud shield hit sound that can
+			# be heard at a distance, associated with the
+			# shield hit visual effect.
+			#AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.HIT_ON_SHIELD)
 			CameraGroup.cg.visualize_hit(CameraGroup.HIT_TYPE.SHIELD)
 		else:
 			#print('damage') # standard_hit.wav
-			AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.HIT_STANDARD)
+			# I commented this out because now there is a
+			# sufficiently loud hit sound that can
+			# be heard at a distance, associated with the
+			# hit visual effect.
+			#AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.HIT_STANDARD)
 			CameraGroup.cg.visualize_hit(CameraGroup.HIT_TYPE.STANDARD)
 	else:
 		#print('hit but no damage') # bad_hit.wav

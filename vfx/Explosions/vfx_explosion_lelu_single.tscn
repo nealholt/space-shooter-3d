@@ -2,7 +2,6 @@
 
 [ext_resource type="Material" uid="uid://ck6a2ts7de74c" path="res://Assets/Shaders/material_explosion_cloud.tres" id="1_iyipg"]
 [ext_resource type="Script" uid="uid://bvmwhl62ighly" path="res://vfx/visual_effect.gd" id="1_nu2wl"]
-[ext_resource type="AudioStream" uid="uid://bf7kbki88ftmw" path="res://Audio/SoundEffects/flak_explosion.wav" id="2_kbmoq"]
 
 [sub_resource type="Curve" id="Curve_0j7rd"]
 _data = [Vector2(0.639175, 0.0219779), 0.0, 0.261045, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -49,18 +48,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_3pu4n"]
 length = 0.001
@@ -71,18 +58,6 @@ tracks/0/path = NodePath("VFX_SmokeClouds:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -109,10 +84,6 @@ explosiveness = 0.8
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_ev6r4")
 draw_pass_1 = SubResource("SphereMesh_a01sr")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=504636496]
-stream = ExtResource("2_kbmoq")
-volume_db = -10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1596161601]
 libraries/ = SubResource("AnimationLibrary_3rjf6")
