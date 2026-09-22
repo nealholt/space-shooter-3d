@@ -18,6 +18,9 @@
 [ext_resource type="AudioStream" uid="uid://863tnwrqn116" path="res://Audio/SoundEffects/frigate_explosion.wav" id="16_75go4"]
 [ext_resource type="AudioStream" uid="uid://bf7kbki88ftmw" path="res://Audio/SoundEffects/flak_explosion.wav" id="17_plpy0"]
 [ext_resource type="AudioStream" uid="uid://brqwmtyhgmx5h" path="res://Audio/SoundEffects/massive_explosion.wav" id="18_5wi6k"]
+[ext_resource type="AudioStream" uid="uid://nyq82hv3blqd" path="res://Audio/SoundEffects/rescopicsound-sci-fi-weapon-shoot-firing-pulse-tm-01-233821.wav" id="19_8oijo"]
+[ext_resource type="AudioStream" uid="uid://b0hrcx2frc82x" path="res://Audio/SoundEffects/mixkit-space-shot-whoosh-3001.wav" id="20_bgv2y"]
+[ext_resource type="AudioStream" uid="uid://b1ahldopkywh4" path="res://Audio/SoundEffects/mixkit-falling-hit-757.wav" id="21_0wu81"]
 
 [sub_resource type="Resource" id="Resource_omf2n"]
 script = ExtResource("2_lu82t")
@@ -46,6 +49,7 @@ script = ExtResource("2_lu82t")
 limit = 3
 type = 3
 sound_effect = ExtResource("6_ft5o5")
+volume_max = 0.0
 pitch_randomness = 0.5
 metadata/_custom_type_script = "uid://cr1an6d85yksa"
 
@@ -167,6 +171,39 @@ unit_size = 100.0
 volume_min = -5.0
 metadata/_custom_type_script = "uid://cr1an6d85yksa"
 
+[sub_resource type="Resource" id="Resource_pjwh6"]
+script = ExtResource("2_lu82t")
+limit = 10
+type = 16
+sound_effect = ExtResource("19_8oijo")
+volume = 5.0
+unit_size = 75.0
+volume_min = -10.0
+volume_max = 5.0
+pitch_randomness = 0.1
+metadata/_custom_type_script = "uid://cr1an6d85yksa"
+
+[sub_resource type="Resource" id="Resource_bgv2y"]
+script = ExtResource("2_lu82t")
+type = 17
+sound_effect = ExtResource("20_bgv2y")
+unit_size = 30.0
+volume_min = -10.0
+volume_max = 5.0
+pitch_randomness = 0.1
+metadata/_custom_type_script = "uid://cr1an6d85yksa"
+
+[sub_resource type="Resource" id="Resource_0wu81"]
+script = ExtResource("2_lu82t")
+type = 18
+sound_effect = ExtResource("21_0wu81")
+volume = 3.0
+unit_size = 100.0
+volume_min = -10.0
+volume_max = 3.0
+pitch_randomness = 0.3
+metadata/_custom_type_script = "uid://cr1an6d85yksa"
+
 [node name="AudioManager" type="Node3D" unique_id=1017980380]
 script = ExtResource("1_7o6mq")
-sound_effects = Array[ExtResource("2_lu82t")]([SubResource("Resource_omf2n"), SubResource("Resource_dpp4s"), SubResource("Resource_ieupc"), SubResource("Resource_2wtmb"), SubResource("Resource_ca3r6"), SubResource("Resource_frebe"), SubResource("Resource_5g1tu"), SubResource("Resource_7xao4"), SubResource("Resource_b8e2d"), SubResource("Resource_lapax"), SubResource("Resource_uh5gp"), SubResource("Resource_dyort"), SubResource("Resource_ddak6"), SubResource("Resource_plpy0"), SubResource("Resource_75go4"), SubResource("Resource_b3pw4")])
+sound_effects = Array[ExtResource("2_lu82t")]([SubResource("Resource_omf2n"), SubResource("Resource_dpp4s"), SubResource("Resource_ieupc"), SubResource("Resource_2wtmb"), SubResource("Resource_ca3r6"), SubResource("Resource_frebe"), SubResource("Resource_5g1tu"), SubResource("Resource_7xao4"), SubResource("Resource_b8e2d"), SubResource("Resource_lapax"), SubResource("Resource_uh5gp"), SubResource("Resource_dyort"), SubResource("Resource_ddak6"), SubResource("Resource_plpy0"), SubResource("Resource_75go4"), SubResource("Resource_b3pw4"), SubResource("Resource_pjwh6"), SubResource("Resource_bgv2y"), SubResource("Resource_0wu81")])

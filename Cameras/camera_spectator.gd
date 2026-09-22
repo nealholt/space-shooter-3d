@@ -57,7 +57,7 @@ var rotate_up_down:float = 0.0
 ######## OTHER VARIABLES AND PARAMETERS ########
 @export var mouse_deadzone:float = 0.15 ## Range 0 to 1
 
-var current_mode := CameraMode.FREE
+var current_mode :CameraMode = CameraMode.FREE
 var target:Node3D
 
 
@@ -102,10 +102,10 @@ func _process(delta: float) -> void:
 	
 	# Grab a target from either team (left mouse click)
 	if InputManager.im.shoot_just_pressed:
-		var all_targets:= Array()
-		for c in TeamSetup.red_team.get_children():
+		var all_targets:Array = []
+		for c:Node in TeamSetup.red_team.get_children():
 			all_targets.append(c)
-		for c in TeamSetup.blue_team.get_children():
+		for c:Node in TeamSetup.blue_team.get_children():
 			all_targets.append(c)
 		target = Global.get_center_most(self, all_targets)
 	

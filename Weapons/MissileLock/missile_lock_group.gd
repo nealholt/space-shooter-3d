@@ -32,7 +32,7 @@ var faster_lock_angle:float = 5.0 # degrees
 var slower_lock_angle:float = 25.0 # degrees
 
 # Gun to fire when launch is triggered
-@export var missile_launcher:Gun
+var missile_launcher:Gun
 
 @export var missile_range:float = 2000.0 ## Range within which missile lock can be acquired.
 # Calculated from missile_range

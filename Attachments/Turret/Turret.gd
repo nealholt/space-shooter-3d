@@ -153,6 +153,8 @@ func _physics_process(delta: float) -> void:
 		sd.aim_assist_obj = aim_assist
 		sd.collision_exceptions = exempt_colliders
 		sd.shoot()
+	# Play one sound effect even if both barrels fired
+	AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.BIG_GUN_BLAST, global_position)
 
 
 # amount is the amount of health lost.

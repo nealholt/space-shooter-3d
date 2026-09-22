@@ -9,6 +9,7 @@ func _ready() -> void:
 
 func _on_health_component_died() -> void:
 	destroyed.emit()
-	VfxManager.play(VisualEffectSetting.VISUAL_EFFECT_TYPE.SHIELD_EXPLOSION, global_position)
-	AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.POP, global_position)
+	#VfxManager.play(VisualEffectSetting.VISUAL_EFFECT_TYPE.SHIELD_EXPLOSION, global_position)
+	#AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.POP, global_position)
+	AudioManager.play(SoundEffectSetting.SOUND_EFFECT_TYPE.FALLING_HIT, global_position)
 	Callable(queue_free).call_deferred()
