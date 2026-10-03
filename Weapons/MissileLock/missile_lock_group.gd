@@ -79,6 +79,8 @@ var locked:bool = false
 @onready var locked_audio: AudioStreamPlayer = $LockedAudio
 @onready var launch_audio: AudioStreamPlayer = $LaunchAudio
 @onready var quick_launch_audio: AudioStreamPlayer = $QuickLaunchAudio
+@onready var quick_launch_audio_alt: AudioStreamPlayer = $QuickLaunchAudioAlt
+
 # There's got to be a better way to repeat the seeking tone
 var repeat_tone_max_time:float = 0.5 # seconds
 var repeat_tone_min_time:float = 0.05 # seconds
@@ -325,11 +327,13 @@ func launch() -> void:
 	# If the is not an npc missile lock then play audio
 	if !npc_missile_lock:
 		if is_quick_launch:
-			quick_launch_audio.play()
+			quick_launch_audio_alt.play()
+			#quick_launch_audio.play()
 			# Don't let NPCs use quick launch since it's supposed to be skill-based
 			sd.super_powered = true
 		else:
-			launch_audio.play()
+			quick_launch_audio.play()
+			#launch_audio.play()
 	# Replace the default weapon handler gun with the
 	# missile launcher.
 	sd.set_gun(missile_launcher)

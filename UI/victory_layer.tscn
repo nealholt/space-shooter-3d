@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://cb00fex7moxp5"]
 
 [ext_resource type="Script" uid="uid://btljtjs0t0fkx" path="res://UI/victory_layer.gd" id="1_mrbas"]
+[ext_resource type="Texture2D" uid="uid://coyumebgs5gl8" path="res://Assets/Textures/kenney_simple_space/ship_sidesA.png" id="2_eu0p7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_w75yu"]
 font_size = 96
+
+[sub_resource type="LabelSettings" id="LabelSettings_4etjl"]
+font_size = 40
 
 [node name="VictoryLayer" type="CanvasLayer" unique_id=281904847]
 script = ExtResource("1_mrbas")
@@ -36,8 +40,13 @@ text = "VICTORY"
 label_settings = SubResource("LabelSettings_w75yu")
 horizontal_alignment = 1
 
+[node name="TimeLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1854898440]
+layout_mode = 2
+text = "Elapsed Time 00:00"
+label_settings = SubResource("LabelSettings_4etjl")
+horizontal_alignment = 1
+
 [node name="StarContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=444901722]
-visible = false
 layout_mode = 2
 
 [node name="Star1" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/StarContainer" unique_id=1756643366]
@@ -46,6 +55,7 @@ modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
+texture = ExtResource("2_eu0p7")
 expand_mode = 2
 stretch_mode = 5
 
@@ -55,6 +65,7 @@ modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
+texture = ExtResource("2_eu0p7")
 expand_mode = 2
 stretch_mode = 5
 
@@ -64,6 +75,7 @@ modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
+texture = ExtResource("2_eu0p7")
 expand_mode = 2
 stretch_mode = 5
 

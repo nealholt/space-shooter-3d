@@ -1,5 +1,12 @@
 extends Level
 
+# Win conditions
+var kill_count:int = 0
+var kills_to_win:int = 15
+var time_to_3_stars:float = 60.0
+var time_to_2_stars:float = 90.0
+var time_to_1_star:float = 120.0
+
 # Orb properties
 const ORB_HEALTH:int = 5
 const ORB_SCALE:Vector3 = Vector3(10,10,10)
@@ -38,13 +45,21 @@ func make_orb_at(pos:Vector3) -> void:
 	orb.destroyed.connect(check_win_loss_alt)
 
 
-# Awful hack, but I want to use the inherited
-# check_win_loss function, but the orb's destroyed
-# signal passes no input and the check_win_loss function
-# demands an input. There's definitely a better way to
-# do this.
+# The superclass Level has a check_win_loss function but
+# that one takes an input, that orb.destroyed doesn't give.
+# Use this custom check for level 1.
 func check_win_loss_alt() -> void:
-	check_win_loss(null)
+	kill_count += 1
+	if kills_to_win <= kill_count:
+		# Update elapsed time
+		end_screen.time_label.text = 'Elapsed Time '+get_elapsed_time()
+		# Award stars
+		var awards:Array[bool] = [
+			elapsed_time < time_to_1_star,
+			elapsed_time < time_to_2_stars,
+			elapsed_time < time_to_3_stars
+		]
+		end_screen.victory(awards)
 
 
 func get_random_position(radius:int) -> Vector3:
