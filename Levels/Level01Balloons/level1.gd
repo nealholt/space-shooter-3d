@@ -51,7 +51,7 @@ func make_orb_at(pos:Vector3) -> void:
 func check_win_loss_alt() -> void:
 	kill_count += 1
 	if kills_to_win <= kill_count:
-		# Update elapsed time
+		# Update elapsed time on the end screen / Victory Layer
 		end_screen.time_label.text = 'Elapsed Time '+get_elapsed_time()
 		# Award stars
 		var awards:Array[bool] = [

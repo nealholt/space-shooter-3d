@@ -63,10 +63,9 @@ func get_elapsed_time() -> String:
 # "something" includes ships and orbs only (if I recall
 # correctly)
 func check_win_loss(dead_thing:Ship) -> void:
-	# If there is no end screen or enemy team, return.
+	# If there is no end screen, return.
 	# There's nothing to do here.
-	if !(end_screen and red_team):
-		return
+	if !end_screen: return
 	# Update elapsed time
 	end_screen.time_label.text = 'Elapsed Time '+get_elapsed_time()
 	# If the player died. Show defeat.
@@ -75,9 +74,14 @@ func check_win_loss(dead_thing:Ship) -> void:
 		end_screen.defeat()
 		# Prevent reactivation of end_screen.
 		EventsBus.ship_died.disconnect(check_win_loss)
+	# Verify that there is a red team
+	elif !is_instance_valid(red_team):
+		return
 	# This assumes the red team is always the enemy.
 	elif red_team.get_child_count() == 0:
 		end_screen.victory([false, false, false])
+		# Prevent reactivation of end_screen.
+		EventsBus.ship_died.disconnect(check_win_loss)
 	# Unfortunately since the signal is emitted from the
 	# ship that died, the red_team won't actually have
 	# no children yet, so we also check if there is one
@@ -86,6 +90,8 @@ func check_win_loss(dead_thing:Ship) -> void:
 		var child:HealthComponent = red_team.get_child(0).health_component
 		if child.is_dead():
 			end_screen.victory([false, false, false])
+			# Prevent reactivation of end_screen.
+			EventsBus.ship_died.disconnect(check_win_loss)
 
 
 func center_the_mouse() -> void:

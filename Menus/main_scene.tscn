@@ -53,10 +53,25 @@ size_flags_horizontal = 6
 theme_override_constants/separation = 10
 alignment = 1
 
+[node name="LevelsLabel" type="Label" parent="Menu/HBoxContainer/SceneOptions" unique_id=211129961]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Levels:"
+
 [node name="Load1Balloons" type="Button" parent="Menu/HBoxContainer/SceneOptions" unique_id=1578858341]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
-text = "Level: Shooting Gallery"
+text = "Shooting Gallery"
+
+[node name="Load12RaceCourse" type="Button" parent="Menu/HBoxContainer/SceneOptions" unique_id=1231827328]
+layout_mode = 2
+theme = ExtResource("3_iacmt")
+text = "Time Trials"
+
+[node name="TestsLabel" type="Label" parent="Menu/HBoxContainer/SceneOptions" unique_id=418423955]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Tests:"
 
 [node name="Load2ShootingGallery" type="Button" parent="Menu/HBoxContainer/SceneOptions" unique_id=1649228496]
 layout_mode = 2
@@ -109,21 +124,10 @@ theme = ExtResource("3_iacmt")
 text = "Level: Space Station Defense
 (Uses Controller V5)"
 
-[node name="Load12RaceCourse" type="Button" parent="Menu/HBoxContainer/SceneOptions" unique_id=1231827328]
-layout_mode = 2
-theme = ExtResource("3_iacmt")
-text = "Level: Race Course"
-
 [node name="Load13CollisionAvoid" type="Button" parent="Menu/HBoxContainer/SceneOptions" unique_id=1341932190]
 layout_mode = 2
 theme = ExtResource("3_iacmt")
 text = "Test: Collision Avoid"
-
-[node name="Load14RaceCourseAlt" type="Button" parent="Menu/HBoxContainer/SceneOptions" unique_id=1793509139]
-layout_mode = 2
-theme = ExtResource("3_iacmt")
-text = "Level: Race Course Alt
-(Uses Controller V5)"
 
 [node name="Settings" type="VBoxContainer" parent="Menu/HBoxContainer" unique_id=812709221]
 layout_mode = 2
@@ -546,6 +550,7 @@ process_mode = 2
 script = ExtResource("3_jv6wh")
 
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load1Balloons" to="." method="_on_load_1_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load12RaceCourse" to="." method="_on_load_12_race_course_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load2ShootingGallery" to="." method="_on_load_2_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load31v5" to="." method="_on_load_3_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load4CapitalShipBattle" to="." method="_on_load_4_pressed"]
@@ -556,9 +561,7 @@ script = ExtResource("3_jv6wh")
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load9Shield" to="." method="_on_load_9_shield_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load10Asteroids" to="." method="_on_load_10_asteroids_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load11SpaceStationDefense" to="." method="_on_load_11_space_station_defense_pressed"]
-[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load12RaceCourse" to="." method="_on_load_12_race_course_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load13CollisionAvoid" to="." method="_on_load_13_collision_avoid_pressed"]
-[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load14RaceCourseAlt" to="." method="_on_load_14_race_course_alt_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/Settings/ToggleFullscreen" to="." method="_on_toggle_fullscreen_pressed"]
 [connection signal="toggled" from="Menu/HBoxContainer/Settings/ToggleControls" to="." method="_on_toggle_controls_toggled"]
 [connection signal="toggled" from="Menu/HBoxContainer/Settings/ToggleInverted" to="." method="_on_toggle_inverted_toggled"]

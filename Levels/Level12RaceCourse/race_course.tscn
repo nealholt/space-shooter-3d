@@ -27,7 +27,7 @@ tonemap_exposure = 0.5
 tonemap_white = 3.0
 glow_enabled = true
 
-[node name="Node3D" type="Node3D" unique_id=1379621601]
+[node name="RaceCourse" type="Node3D" unique_id=1379621601]
 script = ExtResource("1_56dt1")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=233786208]
