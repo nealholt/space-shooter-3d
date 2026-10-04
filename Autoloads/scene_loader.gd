@@ -27,6 +27,7 @@ var loaded_resource:PackedScene
 var scene_path:String
 var progress:Array = []
 var use_sub_threads:bool = true
+var new_load_screen:LoadingScreen
 
 
 func _ready() -> void:
@@ -36,7 +37,7 @@ func _ready() -> void:
 func load_scene(_scene_path:String) -> void:
 	scene_path = _scene_path
 	
-	var new_load_screen:LoadingScreen = loading_screen.instantiate()
+	new_load_screen = loading_screen.instantiate()
 	add_child(new_load_screen)
 	progress_changed.connect(new_load_screen._on_progress_changed)
 	load_finished.connect(new_load_screen._on_load_finished)
@@ -73,3 +74,7 @@ func _process(_delta: float) -> void:
 # Don't call this until the scene is fully loaded!
 func get_loaded_scene() -> PackedScene:
 	return loaded_resource
+
+
+func get_load_screen() -> LoadingScreen:
+	return new_load_screen

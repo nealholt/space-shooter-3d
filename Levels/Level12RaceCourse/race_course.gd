@@ -33,3 +33,11 @@ func checkpoint_reached() -> void:
 	gate.activate_checkpoint.call_deferred()
 	# Connect to signal from next gate
 	gate.reached.connect(checkpoint_reached)	
+
+
+# Override parent class function
+func get_level_description() -> String:
+	return 'Fly through the rings to win.\nComplete the course in\n'+\
+	str(int(time_to_3_stars))+' seconds for 3 ships,\n'+\
+	str(int(time_to_2_stars))+' seconds for 2 ships,\n'+\
+	str(int(time_to_1_star))+' seconds for 1 ship.'

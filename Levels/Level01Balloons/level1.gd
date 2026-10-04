@@ -72,3 +72,11 @@ func get_random_position(radius:int) -> Vector3:
 	var random_z:int =  randi() % int(coord_range[1]- coord_range[0]) + 1 + int(coord_range[0])
 	# Return new position
 	return Vector3(random_x, random_y, random_z)
+
+
+# Override parent class function
+func get_level_description() -> String:
+	return 'Pop '+str(kills_to_win)+' balloons to win.\n'+\
+	str(int(time_to_3_stars))+' seconds for 3 ships.\n'+\
+	str(int(time_to_2_stars))+' seconds for 2 ships.\n'+\
+	str(int(time_to_1_star))+' seconds for 1 ship.'

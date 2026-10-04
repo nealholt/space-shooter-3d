@@ -13,6 +13,8 @@ static var main_scene:MainScene = null
 @onready var hud: Control = $HUD
 @onready var menu: Control = $Menu
 @onready var main_3d: Node3D = $Main3D
+@onready var pause_canvas_layer: CanvasLayer = $PauseCanvasLayer
+
 # Currently loaded level
 var level_instance: Node
 var fullscreen:bool = true
@@ -61,9 +63,12 @@ func _input(_event: InputEvent) -> void:
 			to_main_menu()
 	# "p" to pause the game, but not from the main menu
 	elif Input.is_action_just_pressed('pause') and !menu.visible:
-		$PauseCanvasLayer.visible = true
-		get_tree().paused = true
+		pause_game()
 
+
+func pause_game() -> void:
+	pause_canvas_layer.visible = true
+	get_tree().paused = true
 
 
 func to_main_menu() -> void:
@@ -112,13 +117,18 @@ func load_level(level_name:String) -> void:
 	SceneLoader.load_scene(level_path)
 	await SceneLoader.load_finished
 	var level_resource :PackedScene = SceneLoader.get_loaded_scene()
-	
+	# Instantiate loaded level
 	level_instance = level_resource.instantiate()
+	# Display out level instructions on the loading screen.
+	# This feels like spahgetti code.
+	var load_screen:LoadingScreen = SceneLoader.get_load_screen()
+	load_screen.level_description_label.text = level_instance.get_level_description()
+	pause_game() # Pause to read level description
+	# Attach level as child of main
 	main_3d.add_child(level_instance)
 	menu.visible = false
 	hud.visible = true
 	InputManager.im.refresh()
-
 
 func _on_load_1_pressed() -> void:
 	load_level("Level01Balloons/level1")

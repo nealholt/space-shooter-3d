@@ -101,4 +101,8 @@ func center_the_mouse() -> void:
 
 func print_damage_data() -> void:
 	damage_tracker.display_data()
-	
+
+
+# This should be overridden
+func get_level_description() -> String:
+	return 'This should be overridden'
