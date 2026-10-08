@@ -2,14 +2,15 @@
 
 [ext_resource type="Script" uid="uid://d1hwpigxm8im7" path="res://Attachments/Hangar/hangar.gd" id="1_nbb7t"]
 
-[node name="Hangar" type="Node3D"]
+[node name="Hangar" type="Node3D" unique_id=1496323931]
 script = ExtResource("1_nbb7t")
 
-[node name="TimerMacro" type="Timer" parent="."]
-wait_time = 30.0
+[node name="TimerMacro" type="Timer" parent="." unique_id=312988833]
+wait_time = 45.0
 autostart = true
 
-[node name="TimerMicro" type="Timer" parent="."]
+[node name="TimerMicro" type="Timer" parent="." unique_id=1942684360]
+wait_time = 2.5
 one_shot = true
 
 [connection signal="timeout" from="TimerMacro" to="." method="_on_timermacro_timeout"]

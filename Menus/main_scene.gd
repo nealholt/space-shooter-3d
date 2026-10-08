@@ -136,6 +136,10 @@ func _on_load_1_pressed() -> void:
 func _on_load_12_race_course_pressed() -> void:
 	load_level("Level12RaceCourse/race_course")
 
+func _on_load_03_finite_furball_pressed() -> void:
+	load_level("Level03FiniteFurball/finite_furball")
+
+
 func _on_load_2_pressed() -> void:
 	load_level("Level02ShootingGallery/level2")
 

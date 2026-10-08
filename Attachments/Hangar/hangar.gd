@@ -4,6 +4,8 @@ class_name Hangar extends Node3D
 # For now it spawns NPC fighters and is
 # attached to the carrier.
 
+@onready var timer_micro: Timer = $TimerMicro
+
 # The hanger will spawn ships for this team
 var ally_team:String
 
@@ -14,10 +16,8 @@ var ships_launched :int = 0
 func _on_timermacro_timeout() -> void:
 	# Reset cound of ships launched with this flight
 	ships_launched = 0
-	# Launch first ship
+	# Launch first ship and start timer to launch more
 	_on_timermicro_timeout()
-	# Start timer to launch subsequent ships
-	$TimerMicro.start()
 
 
 func _on_timermicro_timeout() -> void:
@@ -30,4 +30,4 @@ func _on_timermicro_timeout() -> void:
 	ships_launched += 1
 	# If we're not finished with this flight, start the timer to launch another
 	if ships_launched < ships_per_flight:
-		$TimerMicro.start()
+		timer_micro.start()

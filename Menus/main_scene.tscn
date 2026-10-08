@@ -68,6 +68,11 @@ layout_mode = 2
 theme = ExtResource("3_iacmt")
 text = "Time Trials"
 
+[node name="Load03FiniteFurball" type="Button" parent="Menu/HBoxContainer/SceneOptions" unique_id=1632438253]
+layout_mode = 2
+theme = ExtResource("3_iacmt")
+text = "Furball Wave Survival"
+
 [node name="TestsLabel" type="Label" parent="Menu/HBoxContainer/SceneOptions" unique_id=418423955]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
@@ -569,6 +574,7 @@ script = ExtResource("3_jv6wh")
 
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load1Balloons" to="." method="_on_load_1_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load12RaceCourse" to="." method="_on_load_12_race_course_pressed"]
+[connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load03FiniteFurball" to="." method="_on_load_03_finite_furball_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load2ShootingGallery" to="." method="_on_load_2_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load31v5" to="." method="_on_load_3_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load4CapitalShipBattle" to="." method="_on_load_4_pressed"]
