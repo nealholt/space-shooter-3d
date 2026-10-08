@@ -185,6 +185,9 @@ func _ready() -> void:
 	# Add self (CharacterBody3D) to collision exceptions so
 	# bullets don't hit self.
 	collision_exceptions.push_back(self)
+	# Add shield, if any, to collision exceptions
+	if shield:
+		collision_exceptions.push_back(shield.get_damageable_area())
 	# If there's no controller, then don't use physics process
 	if !controller:
 		set_physics_process(false)

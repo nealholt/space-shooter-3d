@@ -18,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://yp51kcujfd4s" path="res://Audio/ShieldTransitAudio/shield_transit_audio.tscn" id="29_f4jgf"]
 [ext_resource type="PackedScene" uid="uid://dp3ouf5e4fqhk" path="res://UI/ReticlesCrosshairs/target_reticles.tscn" id="29_mamsf"]
 [ext_resource type="PackedScene" uid="uid://6uc35sikpbpq" path="res://vfx/DamageEffects/burning_trail.tscn" id="29_w78kn"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Attachments/Shield/FresnelAura.tres" id="34_80okc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyjhj"]
 albedo_color = Color(0.282353, 0.282353, 0.282353, 1)
@@ -41,17 +40,6 @@ radial_segments = 16
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qx57m"]
 size = Vector3(6, 2.3, 10.5)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g7rkc"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("34_80okc")
-shader_parameter/FresnelPower = 2.0
-shader_parameter/EmissionStrength = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_egehn"]
-resource_local_to_scene = true
-material = SubResource("ShaderMaterial_g7rkc")
 
 [node name="Corvette" type="CharacterBody3D" unique_id=1134075911 node_paths=PackedStringArray("contrails", "aim_assist", "burning_trail", "health_component", "missile_lock", "obstacle_detector", "shield", "weapon_handler") groups=["damageable"]]
 motion_mode = 1
@@ -148,9 +136,6 @@ lock_style = 1
 [node name="Shield" parent="." unique_id=2025902563 instance=ExtResource("21_5ow11")]
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
-[node name="FresnelAura" parent="Shield" index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_egehn")
-
 [node name="WeaponHandler" parent="." unique_id=370825666 instance=ExtResource("9_1xly7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.455)
 
@@ -163,5 +148,3 @@ shield_to_ignore = NodePath("../Shield")
 [node name="TargetReticles" parent="." unique_id=2083337324 node_paths=PackedStringArray("hitbox") instance=ExtResource("29_mamsf")]
 target_text = "Corvette"
 hitbox = NodePath("../HitBoxComponent")
-
-[editable path="Shield"]

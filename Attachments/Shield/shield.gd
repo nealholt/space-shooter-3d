@@ -11,6 +11,7 @@ const SHIELD_SCENE:PackedScene = preload("res://Attachments/Shield/shield.tscn")
 @export var max_health :float = 10.0
 @export var recharge_delay :float = 15.0 ## seconds
 
+@onready var damageable_area: DamageableArea = $HitBoxComponent/DamageableArea
 @onready var hit_box_component: HitBoxComponent = $HitBoxComponent
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var fresnel_aura: MeshInstance3D = $FresnelAura
@@ -37,7 +38,7 @@ static func new_shield(my_parent:Node3D, scal:float) -> Shield:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$HealthComponent.set_max_health(max_health)
+	health_component.set_max_health(max_health)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -111,3 +112,7 @@ func permanently_destroy() -> void:
 	VfxManager.play(explosion, global_position)
 	# Self delete
 	queue_free.call_deferred()
+
+
+func get_damageable_area() -> DamageableArea:
+	return damageable_area

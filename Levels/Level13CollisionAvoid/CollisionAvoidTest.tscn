@@ -77,6 +77,7 @@ script = ExtResource("4_ero3n")
 
 [node name="Carrier" parent="RedTeam" unique_id=1242002367 instance=ExtResource("13_1u6j8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 729.95)
+disable_for_testing = true
 
 [node name="Fighter" parent="RedTeam" unique_id=1906494811 node_paths=PackedStringArray("controller") instance=ExtResource("7_p5kkl")]
 transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -102.170906, 11.04957, 1680.9513)

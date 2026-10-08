@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://c4rebesbspn8" path="res://Controllers/Resources/controller_stats.gd" id="14_1bvmw"]
 [ext_resource type="Resource" uid="uid://coa1jlc52fxuo" path="res://Weapons/Guns/Resources/BlasterMKI.tres" id="14_gxevk"]
 [ext_resource type="Resource" uid="uid://cwbihjofcpss8" path="res://Weapons/Guns/Resources/MissileStandardMKI.tres" id="15_pok8p"]
+[ext_resource type="Resource" uid="uid://b4hei1boxoqir" path="res://Weapons/Guns/Resources/GatlingGunMKI.tres" id="16_pok8p"]
 [ext_resource type="Script" uid="uid://llcl4ev3hi63" path="res://Ships/Resources/ship_stats.gd" id="16_prps4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1bvmw"]
@@ -52,7 +53,7 @@ metadata/_custom_type_script = "uid://bflupvkh65uf"
 
 [sub_resource type="Resource" id="Resource_txjoc"]
 script = ExtResource("16_prps4")
-guns = Array[ExtResource("13_34l5u")]([ExtResource("14_gxevk"), SubResource("Resource_38se8")])
+guns = Array[ExtResource("13_34l5u")]([ExtResource("14_gxevk"), SubResource("Resource_38se8"), ExtResource("16_pok8p")])
 missile_launcher = ExtResource("15_pok8p")
 metadata/_custom_type_script = "uid://llcl4ev3hi63"
 
@@ -142,19 +143,15 @@ script = ExtResource("1_nau7t")
 
 [node name="Shield" parent="RedTeam" unique_id=1675968972 instance=ExtResource("3_6nm7s")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 32.9984, -310.259)
-max_health = 100
 
 [node name="Shield2" parent="RedTeam" unique_id=994214558 instance=ExtResource("3_6nm7s")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 16.644108, 32.9984, -310.259)
-max_health = 100
 
 [node name="Shield3" parent="RedTeam" unique_id=1508946388 instance=ExtResource("3_6nm7s")]
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 50.64336, 32.9984, -310.259)
-max_health = 100
 
 [node name="Shield4" parent="RedTeam" unique_id=1315007266 instance=ExtResource("3_6nm7s")]
 transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 300, 233.74513, 32.9984, -310.259)
-recharge_delay = 5
 
 [node name="Fighter" parent="RedTeam" unique_id=190729509 instance=ExtResource("4_s6g67")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -55.1471, 50.2299, -241.805)
@@ -203,19 +200,15 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, -120.2888, 67.77972, 0)
 script = ExtResource("1_nau7t")
 team = "blue team"
 
-[node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller") instance=ExtResource("4_s6g67")]
+[node name="Fighter" parent="BlueTeam" unique_id=1900985089 node_paths=PackedStringArray("controller", "shield") instance=ExtResource("4_s6g67")]
 transform = Transform3D(0.19537577, 0.7544654, 0.6265862, -0.9803523, 0.1325488, 0.14608303, 0.027161345, -0.64281625, 0.7655387, 38.351, 65.318, 0)
 stats = SubResource("Resource_txjoc")
 controller = NodePath("PlayerMovementV4")
+shield = NodePath("Shield")
 is_player = true
-
-[node name="HealthComponent" parent="BlueTeam/Fighter" index="6" unique_id=535388883]
-max_health = 10.0
-
-[node name="MissileLockGroup" parent="BlueTeam/Fighter" index="8" unique_id=756556192]
-quick_launch_interval = 0.01
 
 [node name="PlayerMovementV4" parent="BlueTeam/Fighter" unique_id=396859238 instance=ExtResource("13_qb1ff")]
 stats = SubResource("Resource_3xvk7")
 
-[editable path="BlueTeam/Fighter"]
+[node name="Shield" parent="BlueTeam/Fighter" unique_id=1992904425 instance=ExtResource("3_6nm7s")]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)

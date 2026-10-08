@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="5_gy8tb"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Attachments/Shield/shield.tscn" id="6_b8jqg"]
 [ext_resource type="PackedScene" uid="uid://8dxylurtfwp1" path="res://Ships/corvette.tscn" id="7_fseyv"]
-[ext_resource type="Shader" uid="uid://bm3gcg5xbsv0" path="res://Attachments/Shield/FresnelAura.tres" id="8_6vaj5"]
 [ext_resource type="PackedScene" uid="uid://gmbtqjscbh5w" path="res://Controllers/player_movement_v_4.tscn" id="9_gkskc"]
 [ext_resource type="PackedScene" uid="uid://cb00fex7moxp5" path="res://UI/victory_layer.tscn" id="10_e7r6c"]
 
@@ -30,17 +29,6 @@ adjustment_enabled = true
 adjustment_brightness = 0.9
 adjustment_contrast = 1.1
 adjustment_saturation = 1.3
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l6vaf"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("8_6vaj5")
-shader_parameter/FresnelPower = 2.0
-shader_parameter/EmissionStrength = 1.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_efo7r"]
-resource_local_to_scene = true
-material = SubResource("ShaderMaterial_l6vaf")
 
 [node name="FiniteFurball" type="Node3D" unique_id=781614166]
 script = ExtResource("1_efo7r")
@@ -120,9 +108,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 921.9039)
 controller = NodePath("PlayerMovementV4")
 is_player = true
 
-[node name="FresnelAura" parent="BlueTeam/PlayerCorvette/Shield" parent_id_path=PackedInt32Array(1134075911, 2025902563) index="0" unique_id=556348261]
-mesh = SubResource("SphereMesh_efo7r")
-
 [node name="PlayerMovementV4" parent="BlueTeam/PlayerCorvette" unique_id=1908608534 instance=ExtResource("9_gkskc")]
 
 [node name="VictoryLayer" parent="." unique_id=1967853426 instance=ExtResource("10_e7r6c")]
@@ -132,6 +117,3 @@ visible = false
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-
-[editable path="BlueTeam/PlayerCorvette"]
-[editable path="BlueTeam/PlayerCorvette/Shield"]

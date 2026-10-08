@@ -21,7 +21,7 @@ func set_data(shoot_data:ShootData) -> void:
 func move_me(body:Node3D, delta:float) -> void:
 	# Check if there is a target or guidance laser,
 	# if not, do nothing.
-	if !is_instance_valid(data.target) and !is_laser_guided:
+	if !is_instance_valid(data.target) or is_laser_guided:
 		return
 	# Get angle to target in radians
 	var angle_to:float = Global.get_angle_to_target(body.global_position, data.target.global_position, -body.global_transform.basis.z)
