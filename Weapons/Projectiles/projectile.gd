@@ -467,6 +467,8 @@ func wrap_up() -> void:
 			child.emitting = false
 		elif child is RayCast3D:
 			child.queue_free.call_deferred()
+		elif child is AudioStreamPlayer3D or child is AudioStreamPlayer:
+			child.stop()
 		elif child.get('visible'):
 			child.hide()
 	# Start up a timer and queue_free all the rest when it goes off
