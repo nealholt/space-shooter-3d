@@ -224,12 +224,12 @@ text = "A"
 [node name="Brake" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=1798512477]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "Brake / Countermeasures"
+text = "Brake / Decelerate"
 
 [node name="Label5" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=909243603]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "B"
+text = "Left Shoulder"
 
 [node name="Shoot" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=818968340]
 layout_mode = 2
@@ -261,6 +261,16 @@ Missile Lock"
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
 text = "Right Shoulder"
+
+[node name="Countermeasures" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=1458408995]
+layout_mode = 2
+theme = ExtResource("4_6ev3c")
+text = "Countermeasures"
+
+[node name="Label17" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=1528228140]
+layout_mode = 2
+theme = ExtResource("4_6ev3c")
+text = "B"
 
 [node name="TargetCam" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=506037209]
 layout_mode = 2
@@ -401,12 +411,12 @@ text = "V"
 [node name="Brake" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=242262113]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "Brake / Countermeasures"
+text = "Brake / Decelerate"
 
 [node name="Label5" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=1858044310]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "B"
+text = "S"
 
 [node name="Shoot" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=2023059614]
 layout_mode = 2
@@ -438,6 +448,16 @@ Missile Lock"
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
 text = "Right Mouse Click"
+
+[node name="Countermeasures" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=1087725370]
+layout_mode = 2
+theme = ExtResource("4_6ev3c")
+text = "Countermeasures"
+
+[node name="Label17" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=690235150]
+layout_mode = 2
+theme = ExtResource("4_6ev3c")
+text = "B"
 
 [node name="ProfileCam" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=144682832]
 layout_mode = 2

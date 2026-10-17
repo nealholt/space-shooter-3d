@@ -112,7 +112,7 @@ func move_and_turn(mover:Ship, delta:float) -> void:
 		#return
 	
 	# Countermeasures
-	if InputManager.im.brake_just_pressed:
+	if InputManager.im.countermeasures_just_pressed:
 		# Fire countermeasures
 		mover.launch_countermeasures()
 	
