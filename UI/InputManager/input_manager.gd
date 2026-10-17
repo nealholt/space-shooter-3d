@@ -23,7 +23,7 @@ var shoot_just_pressed :bool= false
 var brake :bool= false
 var brake_just_pressed :bool= false
 var drift :bool= false
-var drift_just_released :bool= false
+#var drift_just_released :bool= false # Testing
 var accelerate :bool= false
 var accelerate_just_pressed :bool= false
 var left_right1 :float= 0.0 # Left stick
@@ -75,10 +75,14 @@ func update() -> void:
 	shoot_just_pressed = Input.is_action_just_pressed("shoot")
 	brake = Input.is_action_pressed("brake")
 	brake_just_pressed = Input.is_action_just_pressed("brake")
-	drift = Input.is_action_pressed("drift")
-	drift_just_released = Input.is_action_just_released("drift")
 	accelerate = Input.is_action_pressed("accelerate")
 	accelerate_just_pressed = Input.is_action_just_pressed("accelerate")
+	
+	# Testing. I'm trying drift as a toggle
+	#drift = Input.is_action_pressed("drift")
+	#drift_just_released = Input.is_action_just_released("drift")
+	if Input.is_action_just_pressed("drift"):
+		drift = !drift
 	
 	if use_mouse_and_keyboard:
 		update_mouse_keyboard_input()

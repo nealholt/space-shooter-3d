@@ -214,12 +214,12 @@ text = "Left trigger"
 [node name="Drift" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=1886008772]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "Drift"
+text = "Drift toggle"
 
 [node name="Label4" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=535476669]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "Left Shoulder"
+text = "A"
 
 [node name="Brake" type="Label" parent="Menu/HBoxContainer/ControllerControls/GridContainer" unique_id=1798512477]
 layout_mode = 2
@@ -391,12 +391,12 @@ text = "W"
 [node name="Drift" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=1173186666]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "Drift"
+text = "Drift toggle"
 
 [node name="Label4" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=438567363]
 layout_mode = 2
 theme = ExtResource("4_6ev3c")
-text = "S"
+text = "V"
 
 [node name="Brake" type="Label" parent="Menu/HBoxContainer/MouseKeyboardControls/GridContainer" unique_id=242262113]
 layout_mode = 2
