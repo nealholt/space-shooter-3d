@@ -1,51 +1,9 @@
 class_name PlayerMovement4 extends CharacterBodyControlParent
 
-# Differences between this and Version 3
-#     Tighter pitch radius: pitch_std from 1 -> 1.8
-#     Reduced pitch, roll, yaw while accelerating: 0.9 -> 0.3
-#     Reduced pitch, roll, yaw while drifting: 1.3 -> 0.7
-#     More roll on right stick: 1.2 -> 2
-#     Mild "fine-grained" pitch on right stick: 0.4
-#     Stronger impulse acceleration: 100 -> 6500
-#     This stronger accel is offset by use of impulse_lerp
-# such that the impulse isn't instantaneous, but has to be
-# lerped up to and back down from, meanwhile, turn rate is
-# reduced.
-#     Slower impulse lerp: 0.2 -> 1.0
-#     Pitch, roll, yaw maxes out at default speed.
-#     I lowered friction from 0.99 (which was misleading because
-# it's also getting multiplied by delta which is typically 1/60)
-# to 0.8 to get a "driftier" feel. Zero is full ballistic
-# "asteroids" controls.
-#     No brakes (EXCEPT WE KEPT THEM IN FOR TESTING PURPOSES)
-
-
-
-# It turns out I don't like the following, so I'm commenting it
-# out for now. Maybe there is a different way to limit abuse
-# of drift, like make it a powerup akin to gap 
-# drive and put something else on the drift button?
-# Alternatively, let the player abuse drift.
-# If enemies shoot more accurately it might not
-# even be an abusable feature.
-# When I say "abuse drift" what I mean is, the player can use
-# drift, reversing direction, and then thrusting to counter
-# velocity and come to a nearly complete stop and I don't really
-# want that. I want the game to be always moving.
-#    -Maybe do put a brake on the current drift button, but it only slows you down a little while increasing turn rate.
-#    -Maybe allow the player to drift, but the turn rate is sluggish
-#    -Maybe allow the player to drift, but emerging out of it is sluggish
-# When drift is just released, lerp heading
-# toward velocity for this duration.
-#@export var heading_reset_duration:float = 0.7 ## Seconds
-#var heading_reset_countdown:float = 0.0
-#@export var heading_reset_strength:float = 5.0
-
 # Amount to lean into turns. This makes the camera rotate in the
 # direction of the turn.
 @export var lean_up_down:float = 0.2 ## Percent
 @export var lean_left_right:float = 0.3 ## Percent
-
 
 
 # There's another draft of the controls in this script.
