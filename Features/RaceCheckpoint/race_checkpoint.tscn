@@ -45,8 +45,9 @@ scale_curve = SubResource("CurveTexture_rikje")
 [sub_resource type="QuadMesh" id="QuadMesh_rikje"]
 size = Vector2(10, 10)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_3b3r2"]
-radius = 6.0
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wit6w"]
+height = 4.0
+radius = 11.0
 
 [node name="RaceCheckpoint" type="StaticBody3D" unique_id=223205201]
 script = ExtResource("1_rikje")
@@ -69,7 +70,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=262871293]
-shape = SubResource("SphereShape3D_3b3r2")
+shape = SubResource("CylinderShape3D_wit6w")
 
 [node name="TargetReticles" parent="." unique_id=481146593 instance=ExtResource("4_flrl7")]
 visible = false

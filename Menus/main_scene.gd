@@ -174,6 +174,9 @@ func _on_load_13_collision_avoid_pressed() -> void:
 	load_level("Level13CollisionAvoid/CollisionAvoidTest")
 
 
+# Under Project Settings -> Display -> Window
+# Set Mode to "Exclusive Fullscreen"
+# Set Borderless on
 func _on_toggle_fullscreen_pressed() -> void:
 	fullscreen = !fullscreen
 	if fullscreen:
