@@ -12,3 +12,12 @@ https://mixkit.co/free-sound-effects/space-shooter/
 rescopicsound-sci-fi-weapon-shoot-firing-pulse-tm-01-233821.wav
 Source:
 https://pixabay.com/sound-effects/film-special-effects-sci-fi-weapon-shoot-firing-pulse-tm-01-233821/
+
+warp_pending.wav
+Original linked below was subsequently edited in Audacity to sand down the harshness:
+Permalink: https://sfxr.me/#5KwLYZ2JRdz7ATnSyC3iyaTd8j1hdrfcH9Bd7AcKEXhz4tZ7u4ux3UFCNtQbJhSUkTwC4yEbhtd5PPVSrUofLymdPBwDs4Le8oUEGx3hP7y4A7bbqE4To8eYC
+Code: 5KwLYZ2JRdz7ATnSyC3iyaTd8j1hdrfcH9Bd7AcKEXhz4tZ7u4ux3UFCNtQbJhSUkTwC4yEbhtd5PPVSrUofLymdPBwDs4Le8oUEGx3hP7y4A7bbqE4To8eYC
+
+warp_in.wav
+Permalink: https://sfxr.me/#7EJYbwHE1Kc719yPTBJoH6erDuxwqUkDeNLfWXpWdThwaoLa7EfqvzRT8kDpfcNsAmNSKGksNbnBt5B6hnxFWcPa8GRCqNLQwBd2vZr146Qy6ZBpdqLd2Aq4Q
+Code: 7EJYbwHE1Kc719yPTBJoH6erDuxwqUkDeNLfWXpWdThwaoLa7EfqvzRT8kDpfcNsAmNSKGksNbnBt5B6hnxFWcPa8GRCqNLQwBd2vZr146Qy6ZBpdqLd2Aq4Q

@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://nyq82hv3blqd" path="res://Audio/SoundEffects/rescopicsound-sci-fi-weapon-shoot-firing-pulse-tm-01-233821.wav" id="19_8oijo"]
 [ext_resource type="AudioStream" uid="uid://b0hrcx2frc82x" path="res://Audio/SoundEffects/mixkit-space-shot-whoosh-3001.wav" id="20_bgv2y"]
 [ext_resource type="AudioStream" uid="uid://b1ahldopkywh4" path="res://Audio/SoundEffects/mixkit-falling-hit-757.wav" id="21_0wu81"]
+[ext_resource type="AudioStream" uid="uid://bq7538mdanldk" path="res://Audio/SoundEffects/warp_in.wav" id="22_8w1hl"]
 
 [sub_resource type="Resource" id="Resource_omf2n"]
 script = ExtResource("2_lu82t")
@@ -204,6 +205,15 @@ volume_max = 3.0
 pitch_randomness = 0.3
 metadata/_custom_type_script = "uid://cr1an6d85yksa"
 
+[sub_resource type="Resource" id="Resource_w71qt"]
+script = ExtResource("2_lu82t")
+limit = 10
+type = 19
+sound_effect = ExtResource("22_8w1hl")
+unit_size = 70.0
+pitch_randomness = 0.2
+metadata/_custom_type_script = "uid://cr1an6d85yksa"
+
 [node name="AudioManager" type="Node3D" unique_id=1017980380]
 script = ExtResource("1_7o6mq")
-sound_effects = Array[ExtResource("2_lu82t")]([SubResource("Resource_omf2n"), SubResource("Resource_dpp4s"), SubResource("Resource_ieupc"), SubResource("Resource_2wtmb"), SubResource("Resource_ca3r6"), SubResource("Resource_frebe"), SubResource("Resource_5g1tu"), SubResource("Resource_7xao4"), SubResource("Resource_b8e2d"), SubResource("Resource_lapax"), SubResource("Resource_uh5gp"), SubResource("Resource_dyort"), SubResource("Resource_ddak6"), SubResource("Resource_plpy0"), SubResource("Resource_75go4"), SubResource("Resource_b3pw4"), SubResource("Resource_pjwh6"), SubResource("Resource_bgv2y"), SubResource("Resource_0wu81")])
+sound_effects = Array[ExtResource("2_lu82t")]([SubResource("Resource_omf2n"), SubResource("Resource_dpp4s"), SubResource("Resource_ieupc"), SubResource("Resource_2wtmb"), SubResource("Resource_ca3r6"), SubResource("Resource_frebe"), SubResource("Resource_5g1tu"), SubResource("Resource_7xao4"), SubResource("Resource_b8e2d"), SubResource("Resource_lapax"), SubResource("Resource_uh5gp"), SubResource("Resource_dyort"), SubResource("Resource_ddak6"), SubResource("Resource_plpy0"), SubResource("Resource_75go4"), SubResource("Resource_b3pw4"), SubResource("Resource_pjwh6"), SubResource("Resource_bgv2y"), SubResource("Resource_0wu81"), SubResource("Resource_w71qt")])

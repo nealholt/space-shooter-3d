@@ -1,0 +1,168 @@
+[gd_scene format=3 uid="uid://bmpdvn74ge45l"]
+
+[ext_resource type="Script" uid="uid://d1vxb7lsmy8mv" path="res://Features/Warp/warp_in.gd" id="1_h54ir"]
+[ext_resource type="Texture2D" uid="uid://doe5cj2wsyysc" path="res://Assets/Textures/kenney_particle-pack/spark_01.png" id="2_umvo4"]
+[ext_resource type="Texture2D" uid="uid://bwfyyi3q8raw4" path="res://Assets/Textures/kenney_particle-pack/spark_02.png" id="4_ehspa"]
+[ext_resource type="AudioStream" uid="uid://cy18icdch0e6i" path="res://Audio/SoundEffects/warp_pending.wav" id="4_va73p"]
+[ext_resource type="Texture2D" uid="uid://b3jmfr1c4ptg2" path="res://Assets/Textures/kenney_particle-pack/star_01.png" id="5_cjwpc"]
+[ext_resource type="Texture2D" uid="uid://pa25y2mrbjiq" path="res://Assets/Textures/kenney_particle-pack/spark_03.png" id="5_kf4lt"]
+[ext_resource type="Texture2D" uid="uid://cexs1xykv11rj" path="res://Assets/Textures/kenney_particle-pack/spark_04.png" id="6_r17ml"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_erp8q"]
+transparency = 1
+cull_mode = 1
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_umvo4")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.3
+disable_receive_shadows = true
+
+[sub_resource type="Animation" id="Animation_cjwpc"]
+resource_name = "FinalFlash"
+length = 0.52
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WarpFinalSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WarpFinalSprite:material_override:emission_energy_multiplier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.29, 0.51),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_va73p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spark1:material_override:emission_energy_multiplier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WarpFinalSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WarpFinalSprite:material_override:emission_energy_multiplier")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cjwpc"]
+_data = {
+&"FinalFlash": SubResource("Animation_cjwpc"),
+&"RESET": SubResource("Animation_va73p")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5feyy"]
+transparency = 1
+cull_mode = 1
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("5_cjwpc")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+disable_receive_shadows = true
+
+[node name="WarpIn" type="Node3D" unique_id=1751447761]
+script = ExtResource("1_h54ir")
+
+[node name="Timer" type="Timer" parent="." unique_id=416783758]
+one_shot = true
+
+[node name="Spark1" type="Sprite3D" parent="." unique_id=1812124045]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_erp8q")
+cast_shadow = 0
+billboard = 1
+double_sided = false
+texture = ExtResource("2_umvo4")
+
+[node name="Spark2" type="Sprite3D" parent="." unique_id=2119111848]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_erp8q")
+cast_shadow = 0
+billboard = 1
+double_sided = false
+texture = ExtResource("4_ehspa")
+
+[node name="Spark3" type="Sprite3D" parent="." unique_id=838785524]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_erp8q")
+cast_shadow = 0
+billboard = 1
+double_sided = false
+texture = ExtResource("5_kf4lt")
+
+[node name="Spark4" type="Sprite3D" parent="." unique_id=330847228]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_erp8q")
+cast_shadow = 0
+billboard = 1
+double_sided = false
+texture = ExtResource("6_r17ml")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=784324350]
+libraries/ = SubResource("AnimationLibrary_cjwpc")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1148711752]
+stream = ExtResource("4_va73p")
+unit_size = 70.0
+
+[node name="WarpFinalSprite" type="Sprite3D" parent="." unique_id=1002565628]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_5feyy")
+cast_shadow = 0
+billboard = 1
+double_sided = false
+texture = ExtResource("5_cjwpc")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
