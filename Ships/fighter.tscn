@@ -75,6 +75,7 @@ stream = ExtResource("16_uh0vy")
 
 [node name="MissileLockGroup" parent="." unique_id=756556192 instance=ExtResource("17_563f5")]
 lock_style = 2
+lock_timeout = 6.0
 missile_range = 4000.0
 
 [node name="WeaponHandler" parent="." unique_id=1131696451 instance=ExtResource("4_dhpb0")]

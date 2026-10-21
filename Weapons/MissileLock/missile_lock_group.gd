@@ -26,10 +26,12 @@ var npc_seeking_began:bool = false
 @export var lock_timeout:float = 4.0 ## Time in seconds needed to acquire lock
 # Used to count down time to lock
 var lock_timer:float = 0.0
-# angle within which lock timer goes twice as fast
-var faster_lock_angle:float = 5.0 # degrees
-# angle beyond which which lock timer increases rather than decreases
-var slower_lock_angle:float = 25.0 # degrees
+# angle within which lock is possible at all
+var lock_angle:float = 45.0 # degrees
+## angle within which lock timer goes twice as fast
+#var faster_lock_angle:float = 5.0 # degrees
+## angle beyond which which lock timer increases rather than decreases
+#var slower_lock_angle:float = 25.0 # degrees
 
 # Gun to fire when launch is triggered
 var missile_launcher:Gun
@@ -196,29 +198,46 @@ func player_update(delta:float) -> void:
 			lock.set_global_position(target_onscreen - lock_offset)
 
 
+# An alternative implementation of this method is found below.
 func npc_seeking_update(delta:float) -> void:
 	var angle_to:float = rad_to_deg(Global.get_angle_to_target(my_parent.global_position, target.global_position, -my_parent.global_basis.z))
 	# Target is at a bad angle
-	if slower_lock_angle < angle_to:
-		# lock timer increases rather than decreases
-		# up to the lock_timeout amount
-		lock_timer = min(lock_timer+delta, lock_timeout)
-	else:
+	if angle_to < lock_angle:
 		# If seeking had not already begun, alert target
 		if !npc_seeking_began:
 			target.seeking_lock(my_parent)
 			npc_seeking_began = true
-		# Target is at an okay angle
-		if faster_lock_angle < angle_to:
-			# Normal amount of time passes
-			lock_timer -= delta
-		# Target is at a great angle
-		else:
-			# lock timer goes twice as fast
-			lock_timer -= 2.0*delta
+		# Decrease lock timer countdown
+		lock_timer -= delta
 	# Check for lock on
 	if lock_timer < 0.0:
 		acquire_lock()
+# I have decided that this is too complex. I'm keeping it
+# in a comment, but for now let's just have a fixed lock
+# on time.
+#func npc_seeking_update(delta:float) -> void:
+	#var angle_to:float = rad_to_deg(Global.get_angle_to_target(my_parent.global_position, target.global_position, -my_parent.global_basis.z))
+	## Target is at a bad angle
+	#if slower_lock_angle < angle_to:
+		## lock timer increases rather than decreases
+		## up to the lock_timeout amount
+		#lock_timer = min(lock_timer+delta, lock_timeout)
+	#else:
+		## If seeking had not already begun, alert target
+		#if !npc_seeking_began:
+			#target.seeking_lock(my_parent)
+			#npc_seeking_began = true
+		## Target is at an okay angle
+		#if faster_lock_angle < angle_to:
+			## Normal amount of time passes
+			#lock_timer -= delta
+		## Target is at a great angle
+		#else:
+			## lock timer goes twice as fast
+			#lock_timer -= 2.0*delta
+	## Check for lock on
+	#if lock_timer < 0.0:
+		#acquire_lock()
 
 
 # Try to begin seeking target as long as

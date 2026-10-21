@@ -36,7 +36,18 @@ func damage(dat:ShootData) -> void:
 	var previous_health :float = health_component.health
 	health_component.health -= dat.damage
 	if health_component.is_dead():
-		is_targeted.emit(false, dat.shooter) # Can't be targeted if you're dead
+		# I'm getting a weird error on this next line:
+		# "Cannot convert argument 2 from Object to Object."
+		# Maybe it will go away if I do a null check?
+		# It's a rare error associated (I think) with the
+		# shoot data given from the explosion_damage_dealing
+		# from explosive bullets.
+		# I added in the null check is_instance_valid
+		#print("Argument 2: ", dat.shooter)
+		#print("Class: ", dat.shooter.get_class())
+		#print("Script: ", dat.shooter.get_script())
+		if is_instance_valid(dat.shooter):
+			is_targeted.emit(false, dat.shooter) # Can't be targeted if you're dead
 	if hit_feedback:
 		hit_feedback.hit()
 	if got_hit_audio:
