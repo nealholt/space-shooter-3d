@@ -2,12 +2,14 @@
 
 [ext_resource type="Script" uid="uid://ccx6vy4ddn6wf" path="res://Levels/level.gd" id="1_6xial"]
 [ext_resource type="Script" uid="uid://i1dbvqbx17t" path="res://Features/TeamSetup/team_setup.gd" id="2_0liob"]
-[ext_resource type="PackedScene" uid="uid://dtxyvqvpd4khl" path="res://Cameras/camera_spectator.tscn" id="2_25llv"]
 [ext_resource type="Texture2D" uid="uid://creoqhif83mdb" path="res://Features/Skyboxes/moon_with_stars.png" id="2_ci3xu"]
+[ext_resource type="Script" uid="uid://biowcul17exqt" path="res://Cameras/minimal_camera.gd" id="3_3dyh5"]
 [ext_resource type="PackedScene" uid="uid://byb8ya6fryjw0" path="res://Ships/frigate.tscn" id="5_cn33r"]
 [ext_resource type="PackedScene" uid="uid://cjtrd5ktq5ypj" path="res://Ships/destroyer.tscn" id="6_8xsvq"]
 [ext_resource type="PackedScene" uid="uid://cruqo01kbn3ab" path="res://Attachments/Shield/shield.tscn" id="7_3dyh5"]
 [ext_resource type="PackedScene" uid="uid://i7qxmq7hwdhc" path="res://Attachments/Shield/shield_generator.tscn" id="8_hv5oy"]
+[ext_resource type="PackedScene" uid="uid://juku72fh3dl0" path="res://Ships/fighter.tscn" id="9_n3181"]
+[ext_resource type="PackedScene" uid="uid://dpv3fsfu1trkj" path="res://Controllers/npc_controller.tscn" id="10_smt0k"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qcl2j"]
 panorama = ExtResource("2_ci3xu")
@@ -36,8 +38,10 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1598248207]
 environment = SubResource("Environment_1pi3i")
 
-[node name="CameraSpectator" parent="." unique_id=1932519871 instance=ExtResource("2_25llv")]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1310133794]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150, 0, 600)
+current = true
+script = ExtResource("3_3dyh5")
 
 [node name="RedTeam" type="Node3D" parent="." unique_id=1393952693]
 script = ExtResource("2_0liob")
@@ -82,6 +86,21 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -620
 [node name="Destroyer8" parent="RedTeam" unique_id=1354791609 instance=ExtResource("6_8xsvq")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -641.481, 124.244, -176.586)
 
+[node name="Fighter" parent="RedTeam" unique_id=1900985089 instance=ExtResource("9_n3181")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -150, -29.236921, -800)
+
+[node name="NPCController" parent="RedTeam/Fighter" unique_id=1852644041 instance=ExtResource("10_smt0k")]
+
+[node name="Fighter2" parent="RedTeam" unique_id=790933306 instance=ExtResource("9_n3181")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -56.911434, 51.03215, -800)
+
+[node name="NPCController" parent="RedTeam/Fighter2" unique_id=960970959 instance=ExtResource("10_smt0k")]
+
+[node name="Fighter3" parent="RedTeam" unique_id=130298429 instance=ExtResource("9_n3181")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -234.72705, 9.404083, -800)
+
+[node name="NPCController" parent="RedTeam/Fighter3" unique_id=1423704217 instance=ExtResource("10_smt0k")]
+
 [node name="BlueTeam" type="Node3D" parent="." unique_id=838922433]
 script = ExtResource("2_0liob")
 team = "blue team"
@@ -118,3 +137,21 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 334.
 
 [node name="Destroyer8" parent="BlueTeam" unique_id=821409657 instance=ExtResource("6_8xsvq")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 444.41663, -111.990326, -325.8917)
+
+[node name="Fighter" parent="BlueTeam" unique_id=552902072 node_paths=PackedStringArray("controller") instance=ExtResource("9_n3181")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -150, -7.1957436, 750)
+controller = NodePath("NPCController")
+
+[node name="NPCController" parent="BlueTeam/Fighter" unique_id=455987425 instance=ExtResource("10_smt0k")]
+
+[node name="Fighter2" parent="BlueTeam" unique_id=1690634912 node_paths=PackedStringArray("controller") instance=ExtResource("9_n3181")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -121.4544, 8.522615, 750)
+controller = NodePath("NPCController")
+
+[node name="NPCController" parent="BlueTeam/Fighter2" unique_id=1102353931 instance=ExtResource("10_smt0k")]
+
+[node name="Fighter3" parent="BlueTeam" unique_id=186334238 node_paths=PackedStringArray("controller") instance=ExtResource("9_n3181")]
+transform = Transform3D(1, -4.37114e-08, 0, 4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, -162.41122, 14.841888, 750)
+controller = NodePath("NPCController")
+
+[node name="NPCController" parent="BlueTeam/Fighter3" unique_id=1783900652 instance=ExtResource("10_smt0k")]

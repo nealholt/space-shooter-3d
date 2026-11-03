@@ -12,6 +12,7 @@ static var main_scene:MainScene = null
 
 @onready var hud: Control = $HUD
 @onready var menu: Control = $Menu
+@onready var background_image: TextureRect = $Menu/BackgroundImage
 @onready var main_3d: Node3D = $Main3D
 @onready var pause_canvas_layer: CanvasLayer = $PauseCanvasLayer
 
@@ -39,6 +40,9 @@ func _ready() -> void:
 	# input manager settings.
 	_on_toggle_inverted_toggled(InputManager.im.use_inverted)
 	_on_toggle_controls_toggled(InputManager.im.use_mouse_and_keyboard)
+	
+	# TODO TESTING
+	cache_vfx()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -201,3 +205,56 @@ func _on_toggle_controls_toggled(toggled_on: bool) -> void:
 
 func add_to_scene(n:Node) -> void:
 	main_3d.add_child(n)
+
+
+# TODO TESTING
+func cache_vfx() -> void:
+	# Mute so the visual effects don't make noise
+	mute_master()
+	
+	var level_path :String = 'res://vfx/vfx_cacher/vfx_cacher.tscn'
+	SceneLoader.load_scene(level_path)
+	await SceneLoader.load_finished
+	var level_resource :PackedScene = SceneLoader.get_loaded_scene()
+	level_instance = level_resource.instantiate()
+	main_3d.add_child(level_instance)
+	hud.visible = false
+	await level_instance.caching_completed
+	
+	# Restore audio
+	restore_master()
+	
+	unload_level()
+	# Load in a new, for-fun, background level behind
+	# the main menu
+	level_path = 'res://Levels/Level04CapitalShipBattle/level04.tscn'
+	SceneLoader.load_scene(level_path)
+	await SceneLoader.load_finished
+	level_resource = SceneLoader.get_loaded_scene()
+	level_instance = level_resource.instantiate()
+	main_3d.add_child(level_instance)
+	hud.visible = false
+	background_image.visible = false
+
+
+# Mute the master bus. -80 db is effectively silence
+func mute_master() -> void:
+	AudioServer.set_bus_volume_db(
+		AudioServer.get_bus_index("Master"),
+		-80.0
+	)
+
+
+# Gradually restore master volume.
+# -80 db is effectively silence.
+# This assumes that 0.0 is the master bus's default volume.
+func restore_master(duration:float=1.0) -> void:
+	var master_index:int = AudioServer.get_bus_index("Master")
+	var tween:Tween = create_tween()
+	tween.tween_method(
+		func(volume:float) -> void:
+			AudioServer.set_bus_volume_db(master_index, volume),
+		-80.0,
+		0.0,
+		duration
+	)

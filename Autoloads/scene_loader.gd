@@ -26,7 +26,15 @@ var loading_screen:PackedScene = load('uid://dclw1gwerq6n') # Reference to loadi
 var loaded_resource:PackedScene
 var scene_path:String
 var progress:Array = []
-var use_sub_threads:bool = true
+# I was getting a nasty (near impossible to track down) bug when
+# use_sub_threads was set to true in the Platformer3D project.
+# The error message said:
+#     The caller thread can't call the function get_script() on
+#     this node. Use call_deferred() or
+#     call_deferred_thread_group() instead.
+# but didn't say where the issue was coming from. For now, I'm
+# not using sub threads.
+var use_sub_threads:bool = false
 var new_load_screen:LoadingScreen
 
 

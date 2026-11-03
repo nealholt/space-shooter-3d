@@ -80,7 +80,9 @@ func _process(_delta: float) -> void:
 	# Ray cast from explosion source to camera to see
 	# whether the sprites should be visible or not.
 	# Ignore collisions with the player.
-	var obscured:bool = !RayOnDemand.me.line_is_clear(global_position, camera.global_position, Ship.player)
+	var obscured:bool = true
+	if is_instance_valid(RayOnDemand.me):
+		obscured = !RayOnDemand.me.line_is_clear(global_position, camera.global_position, Ship.player)
 	# Show or hide sprites
 	ring_sprite.visible = !obscured
 	# No need for the following if the sprites are invisible

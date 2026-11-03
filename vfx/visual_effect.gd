@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func play() -> void:
 	anim.play("Explosion")
-	if world_env_mods:
+	if world_env_mods and is_instance_valid(EnvironmentTweener.me):
 		EnvironmentTweener.me.play(global_position, world_env_mods)
 
 func is_playing() -> bool:
