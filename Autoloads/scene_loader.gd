@@ -42,15 +42,16 @@ func _ready() -> void:
 	set_process(false)
 
 
-func load_scene(_scene_path:String) -> void:
+func load_scene(_scene_path:String, skip_screen:bool=false) -> void:
 	scene_path = _scene_path
 	
-	new_load_screen = loading_screen.instantiate()
-	add_child(new_load_screen)
-	progress_changed.connect(new_load_screen._on_progress_changed)
-	load_finished.connect(new_load_screen._on_load_finished)
-	
-	await new_load_screen.loading_screen_ready
+	if !skip_screen:
+		new_load_screen = loading_screen.instantiate()
+		add_child(new_load_screen)
+		progress_changed.connect(new_load_screen._on_progress_changed)
+		load_finished.connect(new_load_screen._on_load_finished)
+		
+		await new_load_screen.loading_screen_ready
 	
 	start_load()
 

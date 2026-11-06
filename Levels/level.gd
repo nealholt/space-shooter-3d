@@ -105,4 +105,4 @@ func print_damage_data() -> void:
 
 # This should be overridden
 func get_level_description() -> String:
-	return 'This should be overridden'
+	return 'This text should be over written'

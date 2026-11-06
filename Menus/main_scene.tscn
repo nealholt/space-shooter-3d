@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://csj0vmdw4ljl8" path="res://UI/pause_script.gd" id="3_jv6wh"]
 [ext_resource type="Theme" uid="uid://cgxfk4t3qm477" path="res://Assets/Themes/label_theme.tres" id="4_6ev3c"]
 [ext_resource type="PackedScene" uid="uid://dlvbwry0kyq35" path="res://Audio/MissileCues/missile_cues.tscn" id="5_3noim"]
+[ext_resource type="PackedScene" uid="uid://dclw1gwerq6n" path="res://UI/LoadingScreen/loading_screen.tscn" id="8_r47rb"]
 
 [node name="MainScene" type="Node" unique_id=2077342344]
 script = ExtResource("1_ke176")
@@ -591,6 +592,9 @@ text = "Press any key to continue"
 [node name="PauseNode" type="Node" parent="PauseCanvasLayer" unique_id=1955701188]
 process_mode = 2
 script = ExtResource("3_jv6wh")
+
+[node name="LoadingScreen" parent="." unique_id=760684839 instance=ExtResource("8_r47rb")]
+skip_fade_in = true
 
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load1Balloons" to="." method="_on_load_1_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load12RaceCourse" to="." method="_on_load_12_race_course_pressed"]

@@ -15,6 +15,7 @@ static var main_scene:MainScene = null
 @onready var background_image: TextureRect = $Menu/BackgroundImage
 @onready var main_3d: Node3D = $Main3D
 @onready var pause_canvas_layer: CanvasLayer = $PauseCanvasLayer
+@onready var loading_screen: LoadingScreen = $LoadingScreen
 
 # Currently loaded level
 var level_instance: Node
@@ -78,6 +79,7 @@ func pause_game() -> void:
 func to_main_menu() -> void:
 	unload_level()
 	menu.visible = true
+	background_image.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	# Reset focus to load level 1 button. This lets you
 	# use arrow keys and enter to navigate the menus.
@@ -212,13 +214,18 @@ func cache_vfx() -> void:
 	# Mute so the visual effects don't make noise
 	mute_master()
 	
+	# Create the vfx caching scene
 	var level_path :String = 'res://vfx/vfx_cacher/vfx_cacher.tscn'
-	SceneLoader.load_scene(level_path)
+	var skip_loading_screen:bool = true
+	SceneLoader.load_scene(level_path, skip_loading_screen)
 	await SceneLoader.load_finished
 	var level_resource :PackedScene = SceneLoader.get_loaded_scene()
 	level_instance = level_resource.instantiate()
 	main_3d.add_child(level_instance)
 	hud.visible = false
+	# Display progress on loading screen
+	level_instance.caching_progress.connect(loading_screen._on_progress_changed)
+	# Wait on caching to complete
 	await level_instance.caching_completed
 	
 	# Restore audio
@@ -228,13 +235,16 @@ func cache_vfx() -> void:
 	# Load in a new, for-fun, background level behind
 	# the main menu
 	level_path = 'res://Levels/Level04CapitalShipBattle/level04.tscn'
-	SceneLoader.load_scene(level_path)
+	SceneLoader.load_scene(level_path, skip_loading_screen)
 	await SceneLoader.load_finished
 	level_resource = SceneLoader.get_loaded_scene()
 	level_instance = level_resource.instantiate()
 	main_3d.add_child(level_instance)
 	hud.visible = false
 	background_image.visible = false
+	
+	menu.visible = true
+	loading_screen.queue_free()
 
 
 # Mute the master bus. -80 db is effectively silence

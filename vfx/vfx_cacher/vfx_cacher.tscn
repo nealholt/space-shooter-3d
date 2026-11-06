@@ -9,9 +9,3 @@ script = ExtResource("1_6tp6c")
 
 [node name="StartNode" type="Node3D" parent="." unique_id=675534179]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -60)
-
-[node name="Timer" type="Timer" parent="." unique_id=192629997]
-wait_time = 2.0
-one_shot = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

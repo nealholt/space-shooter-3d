@@ -17,12 +17,19 @@ class_name LoadingScreen extends CanvasLayer
 
 signal loading_screen_ready
 
+@export var skip_fade_in:bool = false
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var level_description_label: Label = $CenterContainer/VBoxContainer/LevelDescriptionLabel
 @onready var progress_label: Label = $CenterContainer/VBoxContainer/ProgressLabel
 
 func _ready() -> void:
-	await animation_player.animation_finished
+	if skip_fade_in:
+		# Skip to the end of the fade-in immediately.
+		animation_player.seek(0.5,true)
+	else:
+		# Wait for the fade-in animation
+		await animation_player.animation_finished
 	loading_screen_ready.emit()
 
 func _on_progress_changed(new_value:float) -> void:
