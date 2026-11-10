@@ -128,3 +128,6 @@ func reset_on_intermediate() -> void:
 	percent_behind = amt_ahead_behind / PI
 	percent_above = amt_above_below / (PI/2)
 	percent_right = amt_right_left / (PI/2)
+
+func has_target() -> bool:
+	return is_instance_valid(target)

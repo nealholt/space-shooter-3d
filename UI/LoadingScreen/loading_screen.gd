@@ -18,6 +18,7 @@ class_name LoadingScreen extends CanvasLayer
 signal loading_screen_ready
 
 @export var skip_fade_in:bool = false
+@export var progress_label_pre_text:String = 'Loading Level: '
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var level_description_label: Label = $CenterContainer/VBoxContainer/LevelDescriptionLabel
@@ -33,7 +34,7 @@ func _ready() -> void:
 	loading_screen_ready.emit()
 
 func _on_progress_changed(new_value:float) -> void:
-	progress_label.text = 'Loading Level: '+str(int(100*new_value))+'%'
+	progress_label.text = progress_label_pre_text+str(int(100*new_value))+'%'
 	
 	pass # progress bar could be updated here
 

@@ -595,6 +595,7 @@ script = ExtResource("3_jv6wh")
 
 [node name="LoadingScreen" parent="." unique_id=760684839 instance=ExtResource("8_r47rb")]
 skip_fade_in = true
+progress_label_pre_text = "Loading: "
 
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load1Balloons" to="." method="_on_load_1_pressed"]
 [connection signal="pressed" from="Menu/HBoxContainer/SceneOptions/Load12RaceCourse" to="." method="_on_load_12_race_course_pressed"]

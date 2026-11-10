@@ -3,6 +3,10 @@ extends Node3D
 # The goal is to cache every single vfx by playing it once
 # in front of a camera.
 # https://www.reddit.com/r/godot/comments/1xi8ol4/how_best_to_cache_particle_materials_to_avoid_lag/
+# Otherwise the frame rate will sometimes plummet the first time
+# a visual effect (such as an explosion) plays.
+# This is related to code in Platformer3D at the bottom of Player
+# except that code doesn't work and I'm not sure why.
 
 signal caching_progress(percent:float) # percent will be 0 to 1
 signal caching_completed

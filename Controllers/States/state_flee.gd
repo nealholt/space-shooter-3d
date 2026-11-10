@@ -50,8 +50,9 @@ func Physics_Update(delta:float, motion:MovementProfile, orientation_data:Target
 		motion.goal_speed = 0.9
 		motion.pitch_target_above(orientation_data, obstacle_detector)
 	
-	# Otherwise pitch to put target behind us at top speed
-	else:
+	# Otherwise if there is a target, pitch to put target
+	# behind us at top speed
+	elif orientation_data.has_target():
 		motion.goal_speed = 1.0 # Top speed
 		#pitch_target_behind()
 		motion.pitch_target_behind_serious(orientation_data) # ignore obstacle detector
@@ -61,3 +62,7 @@ func Physics_Update(delta:float, motion:MovementProfile, orientation_data:Target
 		# detector can suppress pitching in BOTH directions
 		# resulting in a head-on collision with the very
 		# object we're trying to avoid.
+	
+	# Otherwise there is no target, so transition to loop
+	else:
+		Transitioned.emit(self,'loop')
