@@ -50,14 +50,17 @@ func Physics_Update(_delta:float, motion:MovementProfile, orientation_data:Targe
 	is_instance_valid(orientation_data.target) and \
 	!RayOnDemand.me.line_is_clear(orientation_data.my_pos, orientation_data.target_pos, orientation_data.target.get_parent()):
 		steer_around(motion, orientation_data)
-	# otherwise steer to face target and attack
-	else:
+	# Otherwise if there is a target, steer to face target and attack
+	elif orientation_data.has_target():
 		# Roll to get target above us.
 		motion.roll_target_above(orientation_data)
 		# Pitch toward target.
 		motion.pitch_target_ahead(orientation_data, obstacle_detector)
 		# Yaw to get target ahead
 		motion.yaw_target_ahead(orientation_data)
+	# Otherwise there is no target, so transition to loop
+	else:
+		Transitioned.emit(self,'loop')
 
 
 func steer_around(motion:MovementProfile, orientation_data:TargetOrientationData) -> void:

@@ -26,7 +26,10 @@ func _on_timermicro_timeout() -> void:
 	# Spawn a new ship on the hangar's team, at the
 	# hangar's location, facing the direction the
 	# hangar's -z axis is facing.
-	ShipSpawner.new_npc_fighter(ally_team, global_position, -global_transform.basis.z)
+	# false for no shield.
+	ShipSpawner.new_npc_fighter(ShipSpawner.SHIP_TYPE.FIGHTER,
+			ally_team, global_position,
+			-global_transform.basis.z, false)
 	ships_launched += 1
 	# If we're not finished with this flight, start the timer to launch another
 	if ships_launched < ships_per_flight:

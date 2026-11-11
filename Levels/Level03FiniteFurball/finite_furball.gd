@@ -26,5 +26,7 @@ func spawn_wave1() -> void:
 		# pos is position of warp in
 		# Vector3(0,0,1) is direction of warp in
 		# 0.2 is random percent that time_to_wave1 might be decreased
-		WarpIn.new_warpin(self, 'red team', pos,
-				Vector3(0,0,1), time_to_wave1, 0.2)
+		# false for no shield
+		WarpIn.new_warpin(ShipSpawner.SHIP_TYPE.FIGHTER,
+				self, 'red team', pos,
+				Vector3(0,0,1), time_to_wave1, 0.2, false)

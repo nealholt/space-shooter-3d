@@ -37,23 +37,28 @@ var _time_to_arrival:float ## Seconds
 
 # Spawn in a new ship on the given team,
 # facing the given direction
+var _ship_type:ShipSpawner.SHIP_TYPE
 var _team:String
 var _direction:Vector3
+var _with_shield:bool
 
 
 # rand_percent_time_decrease is a random percent decrease in
 # time_to_arrival. This is meant to stagger the warp in
 # by a small random amount to make it feel more organic.
-static func new_warpin(my_parent:Node3D, team:String,
-pos:Vector3, direction:Vector3, time_to_arrival:float,
-rand_percent_time_decrease:float) -> WarpIn:
+static func new_warpin(typ:ShipSpawner.SHIP_TYPE, 
+my_parent:Node3D, team:String, pos:Vector3, direction:Vector3,
+time_to_arrival:float, rand_percent_time_decrease:float,
+with_shield:bool=false) -> WarpIn:
 	var w :WarpIn = WARPIN_SCENE.instantiate()
 	# _time_to_arrival must be set before adding scene
 	# to the scene tree since the timer will use this
 	# value in _ready
 	w._time_to_arrival = time_to_arrival - randf_range(0.0, rand_percent_time_decrease*time_to_arrival)
+	w._ship_type = typ
 	w._team = team
 	w._direction = direction
+	w._with_shield = with_shield
 	my_parent.add_child(w)
 	w.global_position = pos
 	return w
@@ -115,7 +120,8 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	# Spawn in a ship
-	ShipSpawner.new_npc_fighter(_team, global_position, _direction)
+	ShipSpawner.new_npc_fighter(_ship_type,
+			_team, global_position, _direction, _with_shield)
 	
 	# Stop the audio visuals for a pending warp
 	warp_pending_audio.stop()
