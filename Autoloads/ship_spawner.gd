@@ -14,14 +14,13 @@ var CAPSHIP_FRIGATE_SCENE:PackedScene = load("res://Ships/capital_ship_frigate.t
 var NPC_CONTROLLER_SCENE:PackedScene = load("res://Controllers/npc_controller.tscn")
 
 
-func new_npc_fighter(typ:SHIP_TYPE, team:String, pos:Vector3, direction:Vector3,
-add_shield:bool) -> Ship:
+func new_npc_fighter(ship_spawn_res:ShipSpawnResource) -> Ship:
 	# Create a new fighter
 	var f:Ship
 	# Different sized ships have different shield sizes
 	var shield_scale:float = 100.0
 	
-	match typ:
+	match ship_spawn_res.ship_type:
 		SHIP_TYPE.FIGHTER:
 			f = FIGHTER_SCENE.instantiate()
 			shield_scale = 20.0
@@ -32,23 +31,23 @@ add_shield:bool) -> Ship:
 			f = CAPSHIP_FRIGATE_SCENE.instantiate()
 			shield_scale = 150.0 # TODO TESTING ???
 		_: # Default / Otherwise
-			push_error('Unrecognized ship type ',typ)
+			push_error('Unrecognized ship type ',ship_spawn_res.ship_type)
 	
 	# Attach an NPC controller
 	var controller :CharacterBodyControlParent = NPC_CONTROLLER_SCENE.instantiate()
 	f.add_child(controller)
 	f.controller = controller
 	# Attach a shield
-	if add_shield:
+	if ship_spawn_res.with_shield:
 		Shield.new_shield(f, shield_scale)
 	# Attach new fighter to a particular team node
-	Global.add_to_team_group(f, team)
+	Global.add_to_team_group(f, ship_spawn_res.team)
 	# Position and orient the fighter
-	f.global_position = pos
+	f.global_position = ship_spawn_res.pos
 	# I added 
 	# direction.rotated(Vector3.RIGHT, PI/2.0)
 	# on the next line to avoid the warning:
 	# "look_at target and up vectors are colinear" but I'm concerned
 	# that colinearity can still occur at certain orientations.
-	f.look_at(pos + direction, direction.rotated(Vector3.RIGHT, PI/2.0))
+	f.look_at(ship_spawn_res.pos + ship_spawn_res.direction, ship_spawn_res.direction.rotated(Vector3.RIGHT, PI/2.0))
 	return f

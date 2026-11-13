@@ -42,7 +42,6 @@ func _ready() -> void:
 	_on_toggle_inverted_toggled(InputManager.im.use_inverted)
 	_on_toggle_controls_toggled(InputManager.im.use_mouse_and_keyboard)
 	
-	# TODO TESTING
 	cache_vfx()
 
 
@@ -209,7 +208,6 @@ func add_to_scene(n:Node) -> void:
 	main_3d.add_child(n)
 
 
-# TODO TESTING
 func cache_vfx() -> void:
 	# Mute so the visual effects don't make noise
 	mute_master()
