@@ -13,28 +13,58 @@
 
 [sub_resource type="Resource" id="Resource_l6vaf"]
 script = ExtResource("2_efo7r")
+pos = Vector3(-400, 0, -400)
 metadata/_custom_type_script = "uid://brtcagxxyp2up"
 
 [sub_resource type="Resource" id="Resource_efo7r"]
 script = ExtResource("2_efo7r")
-ship_type = 1
-pos = Vector3(30, 0, 0)
+pos = Vector3(-350, 0, -400)
 metadata/_custom_type_script = "uid://brtcagxxyp2up"
 
 [sub_resource type="Resource" id="Resource_hodok"]
 script = ExtResource("2_efo7r")
-pos = Vector3(60, 0, 0)
-with_shield = true
+ship_type = 1
+pos = Vector3(-300, 0, -400)
 metadata/_custom_type_script = "uid://brtcagxxyp2up"
 
 [sub_resource type="Resource" id="Resource_u6pye"]
 script = ExtResource("2_efo7r")
-pos = Vector3(90, 0, 0)
+pos = Vector3(-250, 0, -400)
 metadata/_custom_type_script = "uid://brtcagxxyp2up"
 
 [sub_resource type="Resource" id="Resource_5sq2g"]
 script = ExtResource("2_efo7r")
-pos = Vector3(120, 0, 0)
+pos = Vector3(-200, 0, -400)
+metadata/_custom_type_script = "uid://brtcagxxyp2up"
+
+[sub_resource type="Resource" id="Resource_a6i4m"]
+script = ExtResource("2_efo7r")
+pos = Vector3(0, -30, -10)
+with_shield = true
+metadata/_custom_type_script = "uid://brtcagxxyp2up"
+
+[sub_resource type="Resource" id="Resource_tw28n"]
+script = ExtResource("2_efo7r")
+pos = Vector3(-30, -30, 0)
+with_shield = true
+metadata/_custom_type_script = "uid://brtcagxxyp2up"
+
+[sub_resource type="Resource" id="Resource_bxoul"]
+script = ExtResource("2_efo7r")
+ship_type = 1
+with_shield = true
+metadata/_custom_type_script = "uid://brtcagxxyp2up"
+
+[sub_resource type="Resource" id="Resource_idvqa"]
+script = ExtResource("2_efo7r")
+pos = Vector3(30, 30, 0)
+with_shield = true
+metadata/_custom_type_script = "uid://brtcagxxyp2up"
+
+[sub_resource type="Resource" id="Resource_asa3q"]
+script = ExtResource("2_efo7r")
+pos = Vector3(0, 30, -20)
+with_shield = true
 metadata/_custom_type_script = "uid://brtcagxxyp2up"
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hrnrq"]
@@ -60,6 +90,7 @@ adjustment_saturation = 1.3
 [node name="FiniteFurball" type="Node3D" unique_id=781614166]
 script = ExtResource("1_efo7r")
 wave1 = Array[ExtResource("2_efo7r")]([SubResource("Resource_l6vaf"), SubResource("Resource_efo7r"), SubResource("Resource_hodok"), SubResource("Resource_u6pye"), SubResource("Resource_5sq2g")])
+wave2 = Array[ExtResource("2_efo7r")]([SubResource("Resource_a6i4m"), SubResource("Resource_tw28n"), SubResource("Resource_bxoul"), SubResource("Resource_idvqa"), SubResource("Resource_asa3q")])
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=500347851]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
@@ -140,8 +171,3 @@ is_player = true
 
 [node name="VictoryLayer" parent="." unique_id=1967853426 instance=ExtResource("10_e7r6c")]
 visible = false
-
-[node name="Timer" type="Timer" parent="." unique_id=391016038]
-one_shot = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
